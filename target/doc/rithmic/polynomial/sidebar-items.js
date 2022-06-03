@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["lagrange_interpolation","O(n²)"],["polynomial_add","O(n)"],["polynomial_div","O(n²)"],["polynomial_div_exact",""],["polynomial_mul","Note: This runs in O(n²), so DFT convolution in O(n log n) should be used instead when possible"]]});

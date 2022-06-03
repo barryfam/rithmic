@@ -1,0 +1,1 @@
+initSidebarItems({"constant":[["ACYCLIC",""],["CONNECTED",""],["FOREST",""],["NONE",""],["SIMPLE",""],["TREE",""],["UNDIRECTED",""]],"fn":[["path_from_pred",""]],"struct":[["Graph",""]],"type":[["Dag",""],["DirGraph",""],["Forest",""],["SimpDirGraph",""],["SimpUndirGraph",""],["Tree",""],["UndirGraph",""]]});

@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["SegTree",""],["Sum",""]],"trait":[["MonoidOps",""]]});

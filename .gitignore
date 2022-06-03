@@ -1,9 +1,16 @@
 *
 
-!rithmic/
-
 !.gitignore
 !Cargo.toml
 !*.rs
 !*.py
+!*.sh
 !*.md
+
+!/rithmic/
+!/rithmic/**/
+
+!/target/
+/target/*
+!/target/doc/
+!/target/doc/**

@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["TwoSat","A 2-SAT Solver."]]});
