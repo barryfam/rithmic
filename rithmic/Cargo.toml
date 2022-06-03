@@ -4,5 +4,15 @@
 name = "rithmic"
 version = "0.0.0"
 edition = "2021"
+rust-version = "1.63"
+authors = ["Barry Fam <contact@barryfam.io>"]
+license = "MIT"
+description = "Odds & ends: Algorithms, data structures, helpers"
+categories = ["algorithms", "data-structures", "rust-patterns"]
+# keywords =
+# readme =
+# documentation =
+# homepage =
+# repository =
 
 [dependencies]
