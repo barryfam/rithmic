@@ -15,7 +15,7 @@ pub enum MoStep {
 /**
 [Mo's Algorithm](https://cp-algorithms.com/data_structures/sqrt_decomposition.html#mos-algorithm)
 
-Given a list of _Q_ range queries about a sequence of length *N*, produce an iterator of instructions [`MoStep::`](MoStep)[`Add`](MoStep::Add), [`Remove`](MoStep::Remove), [`Answer`](MoStep::Answer) that answers all queries in *O*((*N*+*Q*) √*N*) steps
+Given a list of *q* range queries about a sequence of length *n*, produce an iterator of instructions [`MoStep::`](MoStep)[`Add`](MoStep::Add), [`Remove`](MoStep::Remove), [`Answer`](MoStep::Answer) that answers all queries in *O*((*n*+*q*) √*n*) steps
 
 # Examples
 ```

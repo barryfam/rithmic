@@ -1,5 +1,5 @@
 /*!
-Given a set of binary integers, determine if some other integer can be created by the XOR of a subset (is "independent" of the set). `insert` and `contains` are both *O*(*d*) operations, where *d* is the bit length of the integers
+Given a set of binary integers, determine if some other integer can be created by the XOR of any subset. `insert` and `contains` are both *O*(*d*) operations, where *d* is the bit length of the integers
 
 # Examples
 ```

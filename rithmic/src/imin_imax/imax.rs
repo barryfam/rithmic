@@ -1,20 +1,19 @@
 /**
-"Incremental maximization" for `max` analagous to "incremental addition" `+=` for `+`.
+Incremental maximization
 
-In other words,
 ```
 # use rithmic::imax;
-# let (mut a, x, y, z) = (1, 2, 3, 4);
-imax!(a, x, y, z);
+# let (mut a, b) = (0, 0);
+imax!(a, b);
 
-// is effectively
-a = a.max(x).max(y).max(z);
+// effectively
+a = a.max(b);
 ```
 
 with some advantages:
 - Each expression is evaluated separately, avoiding borrow conflicts
-- No code duplication of the left-hand expression
-- The left-hand expression is evaluated only once
+- No code duplication of the left-hand expression, and it is evaluated only once
+- Multiple right-hand expressions are allowed
 
 # Examples
 ```
