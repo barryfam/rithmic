@@ -1,0 +1,9 @@
+*
+
+!rithmic/
+
+!.gitignore
+!Cargo.toml
+!*.rs
+!*.py
+!*.md
