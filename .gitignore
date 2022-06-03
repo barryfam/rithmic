@@ -1,6 +1,7 @@
 *
 
 !.gitignore
+!.gitattributes
 !Cargo.toml
 !*.rs
 !*.py
