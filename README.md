@@ -1,4 +1,6 @@
-![Ferris the crab playing the bongos](https://barryfam.io/rithmic.png)
+![Ferris the crab playing the bongos](https://barryfam.io/rithmic/rithmic.png)
+
+![CI](https://github.com/barryfam/rithmic/workflows/ci/badge.svg)
 
 `#![forbid(unsafe_code)]`
 
@@ -6,50 +8,50 @@
 Odds & ends: Algorithms, data structures, helpers
 
 ### Utility
-- [Print methods](PrintMethods)
-- Incremental [min](imin)/[max](imax)
-- [Ordered pair](OrdPair)
-- [Option merge](OptionMerge)
-- [Result unwrap-any](UnwrapAny)
-- [Slice simultaneous mutable borrow](PairMut)
-- [`Rangelike`], a trait accepting integers and integer ranges *(no doc yet)*
-- [Unsigned integers as bitsets](IntBitOps) *(no doc yet)*
-- [Mixed-radix counter](OdometerLE)
+- [Print methods](https://www.barryfam.io/rithmic/doc/rithmic/trait.PrintMethods.html)
+- Incremental [min](https://www.barryfam.io/rithmic/doc/rithmic/macro.imin.html)/[max](https://www.barryfam.io/rithmic/doc/rithmic/macro.imax.html)
+- [Ordered pair](https://www.barryfam.io/rithmic/doc/rithmic/trait.OrdPair.html)
+- [Option merge](https://www.barryfam.io/rithmic/doc/rithmic/trait.OptionMerge.html)
+- [Result unwrap-any](https://www.barryfam.io/rithmic/doc/rithmic/trait.UnwrapAny.html)
+- [Slice simultaneous mutable borrow](https://www.barryfam.io/rithmic/doc/rithmic/trait.PairMut.html)
+- [`Rangelike`](https://www.barryfam.io/rithmic/doc/rithmic/trait.Rangelike.html), a trait accepting integers and integer ranges *(no doc yet)*
+- [Unsigned integers as bitsets](https://www.barryfam.io/rithmic/doc/rithmic/trait.IntBitOps.html) *(no doc yet)*
+- [Mixed-radix counter](https://www.barryfam.io/rithmic/doc/rithmic/type.OdometerLE.html)
 
 ### Algorithms
-- [Binary search](binary_search())
-- [Ternary search](ternary_search())
-- [Index compression](IndexCompress)
-- [Prefix sums](PrefixSums)
-- [Graph](graph::Graph) *(no doc yet)*
+- [Binary search](https://www.barryfam.io/rithmic/doc/rithmic/fn.binary_search.html)
+- [Ternary search](https://www.barryfam.io/rithmic/doc/rithmic/fn.ternary_search.html)
+- [Index compression](https://www.barryfam.io/rithmic/doc/rithmic/trait.IndexCompress.html)
+- [Prefix sums](https://www.barryfam.io/rithmic/doc/rithmic/trait.PrefixSums.html)
+- [Graph](https://www.barryfam.io/rithmic/doc/rithmic/graph/prelude/struct.Graph.html) *(no doc yet)*
     - Dijkstra, 0-1 Dijkstra, BFS
     - Floyd-Warshall
     - DFS
     - Tarjan SCC
     - Rooted subtrees
-- [Mo's algorithm](mo_algorithm())
-- [Inversion counting](CountInversions) *(no doc yet)*
+- [Mo's algorithm](https://www.barryfam.io/rithmic/doc/rithmic/fn.mo_algorithm.html)
+- [Inversion counting](https://www.barryfam.io/rithmic/doc/rithmic/trait.CountInversions.html) *(no doc yet)*
 
 ### Data Structures
-- [Tensor](NdVec) ("*n*-dimensional vector") *(no doc yet)*
-- [Boolean/bit vector](BVec)
-- [Meldable heap](MeldHeap)
-- [Generic augmented treap](aug_treap::AugTreap) *(no doc yet)*
-    - [Generic order-statistic treap](aug_treap::order_treap::OrderTreap) *(no doc yet)*
-        - [`List`], a sequence with *O*(log *n*) insert/delete *(no doc yet)*
-        - [`SortedList`], with rank- and order-statistics *(no doc yet)*
-- [Generic sparse table](SparseTable) *(no doc yet)*
-- [Generic segment tree](SegTree) supports lazy updates and "segtree beats" *(no doc yet)*
-- [Union-find](UnionFind)
-- [XOR basis](xor_basis)
+- [Tensor](https://www.barryfam.io/rithmic/doc/rithmic/struct.NdVec.html) ("*n*-dimensional vector") *(no doc yet)*
+- [Boolean/bit vector](https://www.barryfam.io/rithmic/doc/rithmic/struct.BVec.html)
+- [Meldable heap](https://www.barryfam.io/rithmic/doc/rithmic/struct.MeldHeap.html)
+- [Generic augmented treap](https://www.barryfam.io/rithmic/doc/rithmic/aug_treap/struct.AugTreap.html) *(no doc yet)*
+    - [Generic order-statistic treap](https://www.barryfam.io/rithmic/doc/rithmic/aug_treap/order_treap/struct.OrderTreap.html) *(no doc yet)*
+        - [`List`](https://www.barryfam.io/rithmic/doc/rithmic/aug_treap/order_treap/struct.List.html), a sequence with *O*(log *n*) insert/delete *(no doc yet)*
+        - [`SortedList`](https://www.barryfam.io/rithmic/doc/rithmic/aug_treap/order_treap/struct.SortedList.html), with rank- and order-statistics *(no doc yet)*
+- [Generic sparse table](https://www.barryfam.io/rithmic/doc/rithmic/struct.SparseTable.html) *(no doc yet)*
+- [Generic segment tree](https://www.barryfam.io/rithmic/doc/rithmic/monoid_ds/struct.SegTree.html) supports lazy updates and "segtree beats" *(no doc yet)*
+- [Union-find](https://www.barryfam.io/rithmic/doc/rithmic/struct.UnionFind.html)
+- [XOR basis](https://www.barryfam.io/rithmic/doc/rithmic/xor_basis/index.html)
 
 ### Math
-- [Triangular numbers](mod@triangular_n)
-- [All divisors of an integer](Divisors::divisors) using [`::primal::Sieve`](https://docs.rs/primal/latest/primal/struct.Sieve.html)
-- [Factorials mod *n*](FactorialTable) using [`::ac_library_rs::modint`] *(no doc yet)*
-- [Polynomial arithmetic](polynomial) *(no doc yet)*
-    - [Lagrange interpolation](lagrange_interpolation) *(no doc yet)*
-- [A few extra methods](Vector2DMore) for [`::euclid::Vector2D`](https://docs.rs/euclid/latest/euclid/struct.Vector2D.html) *(no doc yet)*
+- [Triangular numbers](https://www.barryfam.io/rithmic/doc/rithmic/triangular_n/index.html)
+- [All divisors of an integer](https://www.barryfam.io/rithmic/doc/rithmic/trait.Divisors.html#tymethod.divisors) using [`::primal::Sieve`](https://docs.rs/primal/latest/primal/struct.Sieve.html)
+- [Factorials mod *n*](https://www.barryfam.io/rithmic/doc/rithmic/struct.FactorialTable.html) using [`::ac_library_rs::modint`](https://www.barryfam.io/rithmic/doc/ac_library_rs/modint/index.html) *(no doc yet)*
+- [Polynomial arithmetic](https://www.barryfam.io/rithmic/doc/rithmic/polynomial/index.html) *(no doc yet)*
+    - [Lagrange interpolation](https://www.barryfam.io/rithmic/doc/rithmic/polynomial/fn.lagrange_interpolation.html) *(no doc yet)*
+- [A few extra methods](https://www.barryfam.io/rithmic/doc/rithmic/trait.Vector2DMore.html) for [`::euclid::Vector2D`](https://docs.rs/euclid/latest/euclid/struct.Vector2D.html) *(no doc yet)*
 
 ### Misc
-- [`Gameboard`]
+- [`Gameboard`](https://www.barryfam.io/rithmic/doc/rithmic/gameboard/struct.Gameboard.html)
