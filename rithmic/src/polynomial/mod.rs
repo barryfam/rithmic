@@ -1,3 +1,5 @@
+#[cfg(test)] mod tests;
+
 use std::ops::{Add, Div, Mul, Sub, Neg};
 
 /// _O(n)_
@@ -90,7 +92,3 @@ where
     })
     .reduce(|f, g| polynomial_add(&f, &g)).unwrap()
 }
-
-
-
-#[cfg(test)] mod tests;

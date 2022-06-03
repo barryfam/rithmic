@@ -1,3 +1,5 @@
+#[cfg(test)] mod tests;
+
 use crate::Rangelike;
 
 /**
@@ -45,7 +47,3 @@ pub fn triangular_steps(range: impl Rangelike<usize>, step: usize) -> usize
     let d = step * steps;
     (i + i+d) * (steps + 1) / 2
 }
-
-
-
-#[cfg(test)] mod tests;
