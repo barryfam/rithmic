@@ -1,6 +1,6 @@
 ![Ferris the crab playing the bongos](https://barryfam.io/rithmic/rithmic.png)
 
-![CI](https://github.com/barryfam/rithmic/workflows/ci/badge.svg)
+![CI](https://img.shields.io/github/workflow/status/barryfam/rithmic/CI/master)
 
 `#![forbid(unsafe_code)]`
 
