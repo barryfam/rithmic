@@ -336,7 +336,7 @@ impl Not for BVec {
     }
 }
 
-macro_rules! impl_bitops {
+macro impl_bitops {
     ($trait:ident, $method:ident, $op:tt, $a_trait:ident, $a_method:ident, $a_op:tt) => {
         impl $trait for BVec {
             type Output = Self;

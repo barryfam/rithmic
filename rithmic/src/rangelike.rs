@@ -52,7 +52,7 @@ macro impl_for_all_rangebounds($bounds_type: ty) {
     impl_for_rangebounds!($bounds_type, RangeToInclusive<$bounds_type>);
 }
 
-macro_rules! impl_rangelike {
+macro impl_rangelike {
     ($bounds_type: ty) =>
     {
         impl_for_all_rangebounds!($bounds_type);
@@ -95,11 +95,11 @@ macro_rules! impl_rangelike {
                 (Some(self[0]), Some(self[1]))
             }
         }
-    };
+    },
 
     ( $($bounds_type: ty),+ ) => {
         $( impl_rangelike!($bounds_type); )*
-    };
+    },
 }
 
 impl_rangelike!(usize, u128, u64, u32, u16, u8);

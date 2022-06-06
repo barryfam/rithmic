@@ -44,7 +44,7 @@ pub struct IterAddOne<T> {
     used: T,
 }
 
-macro_rules! impl_bitops {
+macro impl_bitops {
     ($type:ty) =>
     {
         impl IntBitOps for $type
@@ -185,11 +185,11 @@ macro_rules! impl_bitops {
                 Some(w)
             }
         }
-    };
+    },
 
     ( $( $type:ty ),+ ) => {
         $( impl_bitops!($type); )*
-    };
+    },
 }
 
 impl_bitops!(usize, u128, u64, u32, u16, u8);

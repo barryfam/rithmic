@@ -9,7 +9,7 @@ pub trait IntOrFloat: Copy + PartialEq
     fn midpoint(self, other: Self) -> Self;  // must round towards self, i.e. never return other
 }
 
-macro_rules! impl_for_int {
+macro impl_for_int {
     ($type:ty) => {
         impl IntOrFloat for $type
         {
@@ -31,17 +31,17 @@ macro_rules! impl_for_int {
                 carry + (xor >> 1) + (xor & ceil)
             }
         }
-    };
+    },
 
     ( $( $type:ty ),+ ) => {
         $( impl_for_int!($type); )*
-    };
+    },
 }
 
 impl_for_int!(usize, u128, u64, u32, u16, u8);
 impl_for_int!(isize, i128, i64, i32, i16, i8);
 
-macro_rules! impl_for_float {
+macro impl_for_float {
     ($type:ty, $nextafter:expr) => {
         impl IntOrFloat for $type
         {
@@ -69,7 +69,7 @@ macro_rules! impl_for_float {
                 else { m }
             }
         }
-    };
+    },
 }
 
 impl_for_float!(f64, libm::nextafter);

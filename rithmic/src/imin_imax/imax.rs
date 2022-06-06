@@ -27,8 +27,7 @@ assert_eq!(x, [8, 7, 1, 8]);
 # Notes
 The first argument may be separated from the others by `,` or `;` for clarity
 */
-#[macro_export]
-macro_rules! imax {
+pub macro imax {
     ($lhs:expr, $rhs0:expr $(, $rhs:expr )* $(,)?) =>
     {
         #[allow(unused_mut)]
@@ -39,7 +38,7 @@ macro_rules! imax {
         )*
         let dest = &mut $lhs;
         if x0 > *dest { *dest = x0; }
-    };
+    },
 
-    ($lhs:expr; $($tail:tt)*) => { imax!($lhs, $($tail)*); };
+    ($lhs:expr; $($tail:tt)*) => { imax!($lhs, $($tail)*); },
 }

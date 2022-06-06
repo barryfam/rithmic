@@ -43,8 +43,7 @@ assert_eq!(x, [@example0, 7, 1, 8]);
 # Notes
 The first argument may be separated from the others by `,` or `;` for clarity
 */
-#[macro_export]
-macro_rules! i@min {
+pub macro i@min {
     ($lhs:expr, $rhs0:expr $(, $rhs:expr )* $(,)?) =>
     {
         #[allow(unused_mut)]
@@ -55,9 +54,9 @@ macro_rules! i@min {
         )*
         let dest = &mut $lhs;
         if x0 @op *dest { *dest = x0; }
-    };
+    },
 
-    ($lhs:expr; $($tail:tt)*) => { i@min!($lhs, $($tail)*); };
+    ($lhs:expr; $($tail:tt)*) => { i@min!($lhs, $($tail)*); },
 }
 '''[1:]
         ).substitute(d))

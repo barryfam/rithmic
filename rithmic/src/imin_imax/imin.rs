@@ -27,8 +27,7 @@ assert_eq!(x, [1, 7, 1, 8]);
 # Notes
 The first argument may be separated from the others by `,` or `;` for clarity
 */
-#[macro_export]
-macro_rules! imin {
+pub macro imin {
     ($lhs:expr, $rhs0:expr $(, $rhs:expr )* $(,)?) =>
     {
         #[allow(unused_mut)]
@@ -39,7 +38,7 @@ macro_rules! imin {
         )*
         let dest = &mut $lhs;
         if x0 < *dest { *dest = x0; }
-    };
+    },
 
-    ($lhs:expr; $($tail:tt)*) => { imin!($lhs, $($tail)*); };
+    ($lhs:expr; $($tail:tt)*) => { imin!($lhs, $($tail)*); },
 }

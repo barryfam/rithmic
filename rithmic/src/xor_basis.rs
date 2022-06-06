@@ -19,7 +19,7 @@ assert!(!basis.contains(0b0000_0010));
 ```
 */
 
-#[rustc_macro_transparency = "transparent"]
+#[rustc_macro_transparency = "semitransparent"]
 macro impl_xor_basis($name:ident, $t:ty, $n:literal)
 {
     /// See [`module-level documentation`](crate::xor_basis) for more information

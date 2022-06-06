@@ -68,6 +68,7 @@ pub use binary_search::binary_search;
 pub use bvec::BVec;
 pub use gameboard::Gameboard;
 pub use geometry::Vector2DMore;
+pub use imin_imax::{imax, imin};
 pub use index_compress::{IndexCompress, IndexCompressed};
 pub use insort::Insort;
 pub use int_bitops::IntBitOps;
