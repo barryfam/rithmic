@@ -16,8 +16,10 @@ use proconio::marker::Usize1;
 use proconio::input;
 use rithmic::graph::prelude::*;
 
+#[test] fn abc248_g() { main() }
+
 fn main() {
-    for (input, output) in helper::dir_io_pairs("examples/abc248-g") {
+    for (input, output) in helper::dir_io_pairs("tests/abc248-g") {
         testcase(input, output);
     }
 }

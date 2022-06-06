@@ -7,8 +7,10 @@ use std::path::Path;
 use proconio::input;
 use rithmic::{NdVec, imax, imin};
 
+#[test] fn abc192_f() { main() }
+
 fn main() {
-    for (input, output) in helper::dir_io_pairs("examples/abc192-f") {
+    for (input, output) in helper::dir_io_pairs("tests/abc192-f") {
         testcase(input, output);
     }
 }

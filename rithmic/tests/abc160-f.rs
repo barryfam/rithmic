@@ -10,8 +10,10 @@ use proconio::marker::Usize1;
 use rithmic::FactorialTable;
 use rithmic::graph::prelude::*;
 
+#[test] fn abc160_f() { main() }
+
 fn main() {
-    for (input, output) in helper::dir_io_pairs("examples/abc160-f") {
+    for (input, output) in helper::dir_io_pairs("tests/abc160-f") {
         testcase(input, output);
     }
 }

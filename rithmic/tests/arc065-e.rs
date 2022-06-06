@@ -9,8 +9,10 @@ use proconio::marker::Usize1;
 use proconio::input;
 use rithmic::SortedList;
 
+#[test] fn arc065_e() { main() }
+
 fn main() {
-    for (input, output) in helper::dir_io_pairs("examples/arc065-e") {
+    for (input, output) in helper::dir_io_pairs("tests/arc065-e") {
         testcase(input, output);
     }
 }

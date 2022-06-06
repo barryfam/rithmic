@@ -10,8 +10,8 @@
 
 !/rithmic/
 !/rithmic/**/
-!/rithmic/examples/*/in/*.txt
-!/rithmic/examples/*/out/*.txt
+!/rithmic/tests/*/in/*.txt
+!/rithmic/tests/*/out/*.txt
 
 !/target/
 /target/*

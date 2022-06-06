@@ -6,8 +6,10 @@ use proconio::input;
 use proconio::marker::Usize1;
 use rithmic::graph::prelude::*;
 
+#[test] fn abc163_f() { main() }
+
 fn main() {
-    for (input, output) in helper::dir_io_pairs("examples/abc163-f") {
+    for (input, output) in helper::dir_io_pairs("tests/abc163-f") {
         testcase(input, output);
     }
 }
