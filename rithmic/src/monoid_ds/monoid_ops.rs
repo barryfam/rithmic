@@ -34,3 +34,61 @@ where
     }
     fn update_composition(a: &T, b: &T) -> T { a + b }
 }
+
+#[macro_export]
+macro_rules! monoid_ops {
+    ($v:vis $name:ident<$t:ty, $u:ty> $($tail:tt)*) => {
+        $v struct $name;
+        impl MonoidOps<$t, $u> for $name {
+            monoid_ops!(@ $name<$t, $u> @ $($tail)*);
+        }
+    };
+
+    (@ $name:ident<$t:ty, $u:ty> @ operator($x:pat, $y:pat) $f:block $($tail:tt)*) => {
+        fn operator($x: &$t, $y: &$t) -> $t $f
+        monoid_ops!(@ $name<$t, $u> @ $($tail)*);
+    };
+    (@ $name:ident<$t:ty, $u:ty> @ operator_identity() $f:block $($tail:tt)*) => {
+        fn operator_identity() -> $t $f
+        monoid_ops!(@ $name<$t, $u> @ $($tail)*);
+    };
+    (@ $name:ident<$t:ty, $u:ty> @ operator_inverse($x:pat, $y:pat) $f:block $($tail:tt)*) => {
+        const INVERTIBLE: bool = true;
+        fn operator_inverse($x: &$t, $y: &$t) -> $t $f
+        monoid_ops!(@ $name<$t, $u> @ $($tail)*);
+    };
+
+    (@ $name:ident<$t:ty, $u:ty> @ update($x:pat, $a:pat) $f:block $($tail:tt)*) => {
+        fn update($x: &$t, $a: &$u) -> $t $f
+        monoid_ops!(@ $name<$t, $u> @ $($tail)*);
+    };
+    (@ $name:ident<$t:ty, $u:ty> @ update_identity() $f:block $($tail:tt)*) => {
+        fn update_identity() -> $u $f
+        monoid_ops!(@ $name<$t, $u> @ $($tail)*);
+    };
+    (@ $name:ident<$t:ty, $u:ty> @ update_distributive($span:pat, $x:pat, $a:pat) $f:block $($tail:tt)*) => {
+        const LAZY: bool = true;
+        fn update_distributive($span: (usize, usize), $x: &$t, $a: &$u) -> Option<$t> $f
+        monoid_ops!(@ $name<$t, $u> @ $($tail)*);
+    };
+    (@ $name:ident<$t:ty, $u:ty> @ update_composition($a:pat, $b:pat) $f:block $($tail:tt)*) => {
+        fn update_composition($a: &$u, $b: &$u) -> $u $f
+        monoid_ops!(@ $name<$t, $u> @ $($tail)*);
+    };
+
+    (@ $name:ident<$t:ty, $u:ty> @) => {}
+}
+
+
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    monoid_ops! {
+        Test<usize, usize>
+        operator(x, y) { x+y }
+        update_distributive((i, j), _x, a) { Some((j-i)*a) }
+        update_composition(_a, b) { *b }
+    }
+}
