@@ -745,7 +745,7 @@ assert_eq!(twins2.iter_ones().collect::&lt;Vec&lt;_&gt;&gt;(), vec![5, 7, 13, 19
     }
 }
 
-<span class="macro">macro_rules!</span> <span class="ident">impl_bitops</span> {
+<span class="kw">macro</span> <span class="ident">impl_bitops</span> {
     (<span class="macro-nonterminal">$</span><span class="kw">trait</span>:<span class="macro-nonterminal">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">method</span>:<span class="ident">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">op</span>:<span class="ident">tt</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">a_trait</span>:<span class="ident">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">a_method</span>:<span class="ident">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">a_op</span>:<span class="ident">tt</span>) =&gt; {
         <span class="kw">impl</span> <span class="macro-nonterminal">$</span><span class="kw">trait</span> <span class="kw">for</span> <span class="macro-nonterminal">BVec</span> {
             <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;

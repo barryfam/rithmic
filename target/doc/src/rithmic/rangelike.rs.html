@@ -165,7 +165,7 @@
     <span class="macro">impl_for_rangebounds!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">bounds_type</span>, <span class="ident">RangeToInclusive</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">bounds_type</span><span class="op">&gt;</span>);
 }
 
-<span class="macro">macro_rules!</span> <span class="ident">impl_rangelike</span> {
+<span class="kw">macro</span> <span class="ident">impl_rangelike</span> {
     (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">bounds_type</span>: <span class="ident">ty</span>) =&gt;
     {
         <span class="macro">impl_for_all_rangebounds!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">bounds_type</span>);
@@ -208,11 +208,11 @@
                 (<span class="prelude-val">Some</span>(<span class="self">self</span>[<span class="number">0</span>]), <span class="prelude-val">Some</span>(<span class="self">self</span>[<span class="number">1</span>]))
             }
         }
-    };
+    },
 
     ( $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">bounds_type</span>: <span class="ident">ty</span>),<span class="op">+</span> ) =&gt; {
         $( <span class="macro">impl_rangelike!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">bounds_type</span>); )<span class="op">*</span>
-    };
+    },
 }
 
 <span class="macro">impl_rangelike!</span>(<span class="ident">usize</span>, <span class="ident">u128</span>, <span class="ident">u64</span>, <span class="ident">u32</span>, <span class="ident">u16</span>, <span class="ident">u8</span>);

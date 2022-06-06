@@ -3,7 +3,7 @@ use std::ops::Deref;
 use itertools::Itertools;
 
 /**
-Index compress a sequence of length *N* by mapping every value to its ordered rank. The compressed sequence is therefore guaranteed to have all its elements be integers less than *N*
+Index compress a sequence of length *n* by mapping every value to its ordered rank. The compressed sequence is therefore guaranteed to have all its elements be integers less than *n*
 
 The returned [`IndexCompressed`] implements
 - `Deref<Target=[usize]>` to access the compressed sequence

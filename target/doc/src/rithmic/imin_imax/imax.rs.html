@@ -49,7 +49,6 @@
 <span id="42">42</span>
 <span id="43">43</span>
 <span id="44">44</span>
-<span id="45">45</span>
 </pre><pre class="rust"><code><span class="doccomment">/**
 Incremental maximization
 
@@ -79,8 +78,7 @@ assert_eq!(x, [8, 7, 1, 8]);
 # Notes
 The first argument may be separated from the others by `,` or `;` for clarity
 */</span>
-<span class="attribute">#[<span class="ident">macro_export</span>]</span>
-<span class="macro">macro_rules!</span> <span class="ident">imax</span> {
+<span class="kw">pub</span> <span class="kw">macro</span> <span class="ident">imax</span> {
     (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">lhs</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">rhs0</span>:<span class="ident">expr</span> $(, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">rhs</span>:<span class="ident">expr</span> )<span class="op">*</span> $(,)<span class="question-mark">?</span>) =&gt;
     {
         <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_mut</span>)]</span>
@@ -91,9 +89,9 @@ The first argument may be separated from the others by `,` or `;` for clarity
         )<span class="op">*</span>
         <span class="kw">let</span> <span class="ident">dest</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">lhs</span>;
         <span class="kw">if</span> <span class="ident">x0</span> <span class="op">&gt;</span> <span class="kw-2">*</span><span class="ident">dest</span> { <span class="kw-2">*</span><span class="ident">dest</span> <span class="op">=</span> <span class="ident">x0</span>; }
-    };
+    },
 
-    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">lhs</span>:<span class="ident">expr</span>; $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">tail</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) =&gt; { <span class="macro">imax!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">lhs</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">tail</span>)<span class="kw-2">*</span>); };
+    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">lhs</span>:<span class="ident">expr</span>; $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">tail</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) =&gt; { <span class="macro">imax!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">lhs</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">tail</span>)<span class="kw-2">*</span>); },
 }
 </code></pre></div>
 </section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="rithmic" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0-nightly (12cd71f4d 2022-06-01)" ></div>

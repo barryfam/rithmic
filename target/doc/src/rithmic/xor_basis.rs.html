@@ -105,7 +105,7 @@ assert!(!basis.contains(0b0000_0010));
 ```
 */</span>
 
-<span class="attribute">#[<span class="ident">rustc_macro_transparency</span> <span class="op">=</span> <span class="string">&quot;transparent&quot;</span>]</span>
+<span class="attribute">#[<span class="ident">rustc_macro_transparency</span> <span class="op">=</span> <span class="string">&quot;semitransparent&quot;</span>]</span>
 <span class="kw">macro</span> <span class="ident">impl_xor_basis</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>:<span class="ident">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>:<span class="ident">ty</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">n</span>:<span class="ident">literal</span>)
 {
     <span class="doccomment">/// See [`module-level documentation`](crate::xor_basis) for more information</span>
