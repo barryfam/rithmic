@@ -61,7 +61,7 @@ macro_rules! impl_bitops {
 
             #[inline]
             fn mask(len: u32) -> Self {
-                debug_assert_ne!(len, 0);
+                if len == 0 { return 0 }
                 !0 >> Self::BITS - len
             }
 
@@ -77,7 +77,7 @@ macro_rules! impl_bitops {
 
             #[inline]
             fn msb(self) -> Self {
-                debug_assert_ne!(self, 0);
+                if self == 0 { return 0 }
                 1 << Self::BITS - 1 >> self.leading_zeros()
             }
 
