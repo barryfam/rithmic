@@ -4,10 +4,10 @@
 name = "rithmic"
 version = "1.0.0-pre"
 edition = "2021"
-rust-version = "1.63"
+rust-version = "1.65"
 authors = ["Barry Fam <contact@barryfam.io>"]
 license = "MIT"
-description = "Odds & ends: Algorithms, data structures, helpers"
+description = "Odds & ends: Algorithms, data structures, ease-of-use"
 categories = ["algorithms", "data-structures", "rust-patterns"]
 # keywords =
 # readme =
@@ -15,23 +15,31 @@ categories = ["algorithms", "data-structures", "rust-patterns"]
 # homepage =
 # repository =
 
+[features]
+unsafe = []
+
 [dependencies]
-num = "0.4.0"
-itertools = "0.10.3"
-libm = "0.2.2"
-ahash = "0.7.6"
-rand = "0.8.5"
-primal = "0.3.0"
+rithmic-impl = { path = "../rithmic-impl" }
+
 ac-library-rs = { git = "https://github.com/rust-lang-ja/ac-library-rs.git" }
+ahash = "0.8.0"
+aquamarine = "0.1.12"
+delegate = "0.8.0"
+derive_more = "0.99.17"
 euclid = "0.22.7"
+itertools = "0.10.4"
+libm = "0.2.5"
+num = "0.4.0"
+primal = "0.3.1"
+proconio = "0.4.3"
+rand = "0.8.5"
 tinyvec = "1.6.0"
-delegate = "0.6.2"
+
+
 
 [dev-dependencies]
-proconio = "0.4.3"
 approx = "0.5.1"
-ndarray = "0.15.4"
+indoc = "1.0.7"
+ndarray = "0.15.6"
+paste = "1.0.9"
 rand = { version = "0.8.5", features = ["nightly", "small_rng", "min_const_gen"] }
-derive_more = "0.99.17"
-indoc = "1.0.4"
-paste = "1.0.7"
