@@ -1,0 +1,21 @@
+[package]
+name = "rithmic-impl"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+proc-macro = true
+
+[features]
+unsafe = []
+
+[dependencies]
+proc-macro2 = "1.0.43"
+quote = "1.0.21"
+syn = { version = "1.0.99", features = ["full", "extra-traits"] }
+
+[dev-dependencies]
+rithmic = { path = "../rithmic" }
+
+ahash = "0.8.0"
+proconio = "0.4.3"

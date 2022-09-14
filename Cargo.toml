@@ -1,6 +1,7 @@
 [workspace]
 members = [
     "rithmic",
+    "rithmic-impl",
 ]
 
 [profile.dev]
