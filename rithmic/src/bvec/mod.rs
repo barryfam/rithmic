@@ -20,7 +20,7 @@ fn minor(index: usize) -> usize {
 /**
 A compact boolean (bitset) vector with efficient `<<` `>>` shifting and `|` `^` `&` logical operators
 
-8x smaller and ~20x faster for those operations than `Vec<bool>`
+8x smaller and ~20-500x faster for those operations than `Vec<bool>`
 
 # Examples
 Finding the [twin primes](https://en.wikipedia.org/wiki/Twin_prime) under 100:
@@ -49,7 +49,7 @@ assert_eq!(primes.iter_ones().take(5).collect::<Vec<_>>(), vec![2, 3, 5, 7, 11])
 # assert_eq!(primes.iter_zeros().take(5).collect::<Vec<_>>(), vec![0, 1, 4, 6, 8]);
 
 let twins1 = primes.clone() & (primes >> 2);
-let twins2 = twins1.clone() << 2;
+let twins2 = &twins1 << 2;
 
 assert_eq!(twins1.iter_ones().collect::<Vec<_>>(), vec![3, 5, 11, 17, 29, 41, 59, 71]);
 assert_eq!(twins2.iter_ones().collect::<Vec<_>>(), vec![5, 7, 13, 19, 31, 43, 61, 73]);
@@ -101,12 +101,31 @@ impl BVec {
     #[inline]
     pub fn set(&mut self, index: usize, b: bool)
     {
-        debug_assert!(index < self.len, INDEX_RANGE!());
+        assert!(index < self.len, INDEX_RANGE!());
+
+        #[cfg(not(feature = "unsafe"))]
         if b {
             self.vec[major(index)] |= 1 << minor(index);
         } else {
             self.vec[major(index)] &= !(1 << minor(index));
         }
+
+        #[cfg(feature = "unsafe")]
+        // SAFETY: Asserted index < self.len. Invariant self.vec.len = self.len.div_ceil(U_BITS)
+        unsafe {
+            if b {
+                *self.vec.get_unchecked_mut(major(index)) |= 1 << minor(index);
+            } else {
+                *self.vec.get_unchecked_mut(major(index)) &= !(1 << minor(index));
+            }
+        }
+    }
+
+    #[inline]
+    pub fn replace(&mut self, index: usize, b: bool) -> bool {
+        let ret = self[index];
+        self.set(index, b);
+        ret
     }
 
     #[inline]
@@ -216,12 +235,16 @@ impl BVec {
         self.len - self.count_ones()
     }
 
-    pub fn iter_ones(&self) -> Iter {
-        Iter{bvec: self, i: 0, predicate: true}
+    pub fn iter_ones(&self) -> Iter<true> {
+        Iter::new(self)
     }
 
-    pub fn iter_zeros(&self) -> Iter {
-        Iter{bvec: self, i: 0, predicate: false}
+    pub fn iter_zeros(&self) -> Iter<false> {
+        Iter::new(self)
+    }
+
+    pub fn iter_usize(&self) -> impl Iterator<Item=usize> + '_ {
+        self.vec.iter().copied()
     }
 
     pub fn raw_vec(&self) -> &Vec<usize> {
@@ -236,24 +259,41 @@ impl BVec {
     }
 }
 
-pub struct Iter<'a> {
-    bvec: &'a BVec,
-    i: usize,
-    predicate: bool
+pub struct Iter<'me, const P: bool> {
+    bvec: &'me BVec,
+    vec_i: usize,
+    sub_iter: usize,
 }
-impl<'a> Iterator for Iter<'a> {
+impl<'me, const P: bool> Iter<'me, P> {
+    fn new(bvec: &'me BVec) -> Self {
+        Iter::<P> {
+            bvec,
+            vec_i: 0,
+            sub_iter: *bvec.vec.first().unwrap_or(&0) ^ if P {0} else {!0},
+        }
+    }
+}
+impl<'me, const P: bool> Iterator for Iter<'me, P> {
     type Item = usize;
 
     #[inline]
-    fn next(&mut self) -> Option<Self::Item> {
-        while self.i < self.bvec.len {
-            let i = self.i;
-            self.i += 1;
-            if self.bvec.get(i) == Some(self.predicate) {
-                return Some(i);
+    fn next(&mut self) -> Option<Self::Item>
+    {
+        while self.sub_iter == 0 {
+            if self.vec_i + 1 < self.bvec.vec.len() {
+                self.vec_i += 1;
+                self.sub_iter = self.bvec.vec[self.vec_i] ^ if P {0} else {!0};
+            }
+            else {
+                return None
             }
         }
-        None
+        let tz = self.sub_iter.trailing_zeros();
+        self.sub_iter ^= 1 << tz;
+
+        let i = tz as usize + self.vec_i * U_BITS;
+        if !P && i >= self.bvec.len { return None }
+        Some(i)
     }
 }
 
@@ -263,20 +303,18 @@ impl Index<usize> for BVec {
     #[inline]
     fn index(&self, index: usize) -> &Self::Output
     {
-        debug_assert!(index < self.len, INDEX_RANGE!());
-        match self.vec[major(index)] >> minor(index) &1==1 {
+        assert!(index < self.len, INDEX_RANGE!());
+
+        let u;
+        { #![cfg(not(feature = "unsafe"))] u = self.vec[major(index)]; }
+
+        // SAFETY: Asserted index < self.len. Invariant self.vec.len = self.len.div_ceil(U_BITS)
+        { #![cfg(feature = "unsafe")] unsafe { u = self.vec.get_unchecked(major(index)); }}
+
+        match u >> minor(index) &1==1 {
             true => &true,
             false => &false
         }
-    }
-}
-
-impl Shr<usize> for BVec {
-    type Output = Self;
-
-    fn shr(mut self, rhs: usize) -> Self::Output {
-        self >>= rhs;
-        self
     }
 }
 
@@ -291,20 +329,43 @@ impl ShrAssign<usize> for BVec {
             self.vec.copy_within(offset..v_len, 0);
         }
         else {
+            #[cfg(not(feature = "unsafe"))]
             for i in offset..v_len {
                 self.vec[i - offset] = (self.vec[i] >> sr0) + (self.vec.get(i+1).unwrap_or(&0) << sl1);
+            }
+
+            #[cfg(feature = "unsafe")]
+            // SAFETY: offset <= i < v_len-1
+            unsafe {
+                let u = self.vec.as_mut_ptr();
+                for i in offset..v_len-1 {
+                    *u.add(i - offset) =
+                        ((*u.add(i)) >> sr0) +
+                        ((*u.add(i+1)) << (sl1));
+                }
+                if v_len > 0 {
+                    (*u.add(v_len-1) = (*u.add(v_len-1)) >> sr0);
+                }
             }
         }
         self.vec[v_len - offset ..].fill(0);
     }
 }
 
-impl Shl<usize> for BVec {
-    type Output = Self;
+impl Shr<usize> for BVec {
+    type Output = BVec;
 
-    fn shl(mut self, rhs: usize) -> Self::Output {
-        self <<= rhs;
+    fn shr(mut self, rhs: usize) -> Self::Output {
+        self >>= rhs;
         self
+    }
+}
+
+impl Shr<usize> for &BVec {
+    type Output = BVec;
+
+    fn shr(self, rhs: usize) -> Self::Output {
+        self.clone() >> rhs
     }
 }
 
@@ -319,16 +380,48 @@ impl ShlAssign<usize> for BVec {
             self.vec.copy_within(0..(v_len - offset), offset)
         }
         else {
+            #[cfg(not(feature = "unsafe"))]
             for i in (0..(v_len - offset)).rev() {
                 self.vec[i + offset] = (self.vec[i] << sl0) + if i > 0 { self.vec[i-1] >> sr1 } else { 0 };
+            }
+
+            #[cfg(feature = "unsafe")]
+            // SAFETY: 1 <= i < v_len - offset
+            unsafe {
+                let u = self.vec.as_mut_ptr();
+                for i in (1..(v_len - offset)).rev() {
+                    *u.add(i + offset) =
+                        ((*u.add(i)) << sl0) +
+                        ((*u.add(i-1)) >> sr1);
+                }
+                if v_len - offset > 0 {
+                    *u = (*u) << sl0;
+                }
             }
         }
         self.vec[..offset].fill(0);
     }
 }
 
+impl Shl<usize> for BVec {
+    type Output = BVec;
+
+    fn shl(mut self, rhs: usize) -> Self::Output {
+        self <<= rhs;
+        self
+    }
+}
+
+impl Shl<usize> for &BVec {
+    type Output = BVec;
+
+    fn shl(self, rhs: usize) -> Self::Output {
+        self.clone() << rhs
+    }
+}
+
 impl Not for BVec {
-    type Output = Self;
+    type Output = BVec;
 
     fn not(mut self) -> Self::Output {
         self.flip();
@@ -336,38 +429,117 @@ impl Not for BVec {
     }
 }
 
+impl Not for &BVec {
+    type Output = BVec;
+
+    fn not(self) -> Self::Output {
+        !self.clone()
+    }
+}
+
 macro impl_bitops {
     ($trait:ident, $method:ident, $op:tt, $a_trait:ident, $a_method:ident, $a_op:tt) => {
-        impl $trait for BVec {
-            type Output = Self;
+        impl $trait<BVec> for BVec {
+            type Output = BVec;
 
-            fn $method(mut self, rhs: Self) -> Self::Output {
+            #[inline]
+            fn $method(mut self, rhs: BVec) -> Self::Output {
                 self $a_op rhs;
                 self
             }
         }
 
-        impl $trait<&Self> for BVec {
-            type Output = Self;
+        impl $trait<&BVec> for BVec {
+            type Output = BVec;
 
-            fn $method(mut self, rhs: &Self) -> Self::Output {
+            #[inline]
+            fn $method(mut self, rhs: &BVec) -> Self::Output {
                 self $a_op rhs;
                 self
             }
         }
 
-        impl $a_trait for BVec {
-            fn $a_method(&mut self, rhs: Self) {
+        impl $trait<BVec> for &BVec {
+            type Output = BVec;
+
+            #[inline]
+            fn $method(self, mut rhs: BVec) -> Self::Output {
+                rhs $a_op self;
+                rhs
+            }
+        }
+
+        impl $trait<&BVec> for &BVec {
+            type Output = BVec;
+
+            #[inline]
+            fn $method(self, rhs: &BVec) -> Self::Output
+            {
+                assert_eq!(self.len, rhs.len, UNEQUAL_LEN!());
+
+                #[cfg(not(feature = "unsafe"))]
+                {
+                    let mut vec = Vec::with_capacity(self.vec.len());
+                    let mut i = 0;
+                    vec.resize_with(self.vec.len(), || {
+                        let u = self.vec[i] $op rhs.vec[i];
+                        i += 1;
+                        u
+                    });
+                    BVec { vec, len: self.len }
+                }
+                #[cfg(feature = "unsafe")]
+                {
+                    let n = self.vec.len();
+                    let mut vec = Vec::<usize>::with_capacity(n);
+                    let u = self.vec.as_ptr();
+                    let v = rhs.vec.as_ptr();
+                    let w = vec.as_mut_ptr();
+
+                    // SAFETY: Asserted self.len == rhs.len. Invariant BVec.vec.len == self.len.div_ceil(U_BITS)
+                    // SAFETY: Created `w` with `n` capacity
+                    unsafe {
+                        for i in 0..n {
+                            *w.add(i) = *u.add(i) $op *v.add(i);
+                        }
+                        vec.set_len(n);
+                    }
+                    BVec { vec, len: self.len }
+                }
+            }
+        }
+
+        impl $a_trait<BVec> for BVec {
+            #[inline]
+            fn $a_method(&mut self, rhs: BVec) {
                 self.$a_method(&rhs)
             }
         }
 
-        impl $a_trait<&Self> for BVec {
-            fn $a_method(&mut self, rhs: &Self) {
+        impl $a_trait<&BVec> for BVec {
+            #[inline]
+            fn $a_method(&mut self, rhs: &BVec)
+            {
                 assert_eq!(self.len, rhs.len, UNEQUAL_LEN!());
 
-                for (u, &v) in self.vec.iter_mut().zip(rhs.vec.iter()) {
-                    *u $a_op v;
+                #[cfg(not(feature = "unsafe"))]
+                {
+                    for (u, &v) in self.vec.iter_mut().zip(rhs.vec.iter()) {
+                        *u $a_op v;
+                    }
+                }
+                #[cfg(feature = "unsafe")]
+                {
+                    let n = self.vec.len();
+                    let u = self.vec.as_mut_ptr();
+                    let v = rhs.vec.as_ptr();
+
+                    // SAFETY: Asserted self.len == rhs.len. Invariant BVec.vec.len == self.len.div_ceil(U_BITS)
+                    unsafe {
+                        for i in 0..n {
+                            *u.add(i) $a_op *v.add(i);
+                        }
+                    }
                 }
             }
         }

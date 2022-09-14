@@ -51,6 +51,21 @@ impl Adapter for ndarray::Array2<usize> {
     }
 }
 
+#[cfg(feature = "unsafe")]
+struct NdVecUnchecked(NdVec<2, usize>);
+#[cfg(feature = "unsafe")]
+impl Adapter for NdVecUnchecked {
+    #[inline]
+    fn set_ij(&mut self, i: usize, j: usize, x: usize) {
+        unsafe { *self.0.get_unchecked_mut([i, j]) = x; }
+    }
+    #[inline]
+    fn get_ij(&self, i: usize, j: usize) -> usize {
+        unsafe { *self.0.get_unchecked([i, j]) }
+    }
+}
+
+
 fn set_get_m(u: &mut impl Adapter, seeds: (u64, u64)) -> usize
 {
     let mut rng = StepRng::new(seeds.0, seeds.1);
@@ -82,3 +97,6 @@ macro bench($name:ident, $new:expr) {
 bench!(ndvec, NdVec::<2, usize>::new([N, N]));
 bench!(vec_vec, vec![vec![0_usize; N]; N]);
 bench!(ndarray, ndarray::Array2::<usize>::zeros((N, N)));
+
+#[cfg(feature = "unsafe")]
+bench!(ndvec_unchecked, NdVecUnchecked(NdVec::<2, usize>::new([N, N])));

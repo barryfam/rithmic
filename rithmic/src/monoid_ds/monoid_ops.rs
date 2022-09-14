@@ -16,27 +16,28 @@ pub trait MonoidOps<T: Default, U: Default>
     fn update_composition(a: &U, b: &U) -> U { unimplemented!() }
 }
 
-pub struct Sum;
-impl<T> MonoidOps<T, T> for Sum
+pub struct USumQSum;
+impl<T> MonoidOps<T, T> for USumQSum
 where
     T: Default + TryFrom<usize>,
     <T as TryFrom<usize>>::Error: Debug,
     for<'a> &'a T: Add<Output=T> + Sub<Output=T> + Mul<Output=T>,
 {
-    fn operator(x: &T, y: &T) -> T { x + y }
+    #[inline] fn operator(x: &T, y: &T) -> T { x + y }
     const INVERTIBLE: bool = true;
-    fn operator_inverse(x: &T, y: &T) -> T { x - y }
+    #[inline] fn operator_inverse(x: &T, y: &T) -> T { x - y }
 
-    fn update(x: &T, a: &T) -> T { x + a }
+    #[inline] fn update(x: &T, a: &T) -> T { x + a }
     const LAZY: bool = true;
-    fn update_distributive((i, j): (usize, usize), x: &T, a: &T) -> Option<T> {
+    #[inline] fn update_distributive((i, j): (usize, usize), x: &T, a: &T) -> Option<T> {
         Some(x + &(a * &(j-i).try_into().unwrap()))
     }
-    fn update_composition(a: &T, b: &T) -> T { a + b }
+    #[inline] fn update_composition(a: &T, b: &T) -> T { a + b }
 }
 
 pub macro monoid_ops {
-    ($v:vis $name:ident<$t:ty, $u:ty> $($tail:tt)*) => {
+    ($v:vis $name:ident<$t:ty, $u:ty> = $($tail:tt)*) => {
+        #[derive(Default, Clone, Copy)]
         $v struct $name;
         impl MonoidOps<$t, $u> for $name {
             monoid_ops!(@ $name<$t, $u> @ $($tail)*);
@@ -44,34 +45,34 @@ pub macro monoid_ops {
     },
 
     (@ $name:ident<$t:ty, $u:ty> @ operator($x:pat, $y:pat) $f:block $($tail:tt)*) => {
-        fn operator($x: &$t, $y: &$t) -> $t $f
+        #[inline] fn operator($x: &$t, $y: &$t) -> $t $f
         monoid_ops!(@ $name<$t, $u> @ $($tail)*);
     },
     (@ $name:ident<$t:ty, $u:ty> @ operator_identity() $f:block $($tail:tt)*) => {
-        fn operator_identity() -> $t $f
+        #[inline] fn operator_identity() -> $t $f
         monoid_ops!(@ $name<$t, $u> @ $($tail)*);
     },
     (@ $name:ident<$t:ty, $u:ty> @ operator_inverse($x:pat, $y:pat) $f:block $($tail:tt)*) => {
         const INVERTIBLE: bool = true;
-        fn operator_inverse($x: &$t, $y: &$t) -> $t $f
+        #[inline] fn operator_inverse($x: &$t, $y: &$t) -> $t $f
         monoid_ops!(@ $name<$t, $u> @ $($tail)*);
     },
 
     (@ $name:ident<$t:ty, $u:ty> @ update($x:pat, $a:pat) $f:block $($tail:tt)*) => {
-        fn update($x: &$t, $a: &$u) -> $t $f
+        #[inline] fn update($x: &$t, $a: &$u) -> $t $f
         monoid_ops!(@ $name<$t, $u> @ $($tail)*);
     },
     (@ $name:ident<$t:ty, $u:ty> @ update_identity() $f:block $($tail:tt)*) => {
-        fn update_identity() -> $u $f
+        #[inline] fn update_identity() -> $u $f
         monoid_ops!(@ $name<$t, $u> @ $($tail)*);
     },
     (@ $name:ident<$t:ty, $u:ty> @ update_distributive($span:pat, $x:pat, $a:pat) $f:block $($tail:tt)*) => {
         const LAZY: bool = true;
-        fn update_distributive($span: (usize, usize), $x: &$t, $a: &$u) -> Option<$t> $f
+        #[inline] fn update_distributive($span: (usize, usize), $x: &$t, $a: &$u) -> Option<$t> $f
         monoid_ops!(@ $name<$t, $u> @ $($tail)*);
     },
     (@ $name:ident<$t:ty, $u:ty> @ update_composition($a:pat, $b:pat) $f:block $($tail:tt)*) => {
-        fn update_composition($a: &$u, $b: &$u) -> $u $f
+        #[inline] fn update_composition($a: &$u, $b: &$u) -> $u $f
         monoid_ops!(@ $name<$t, $u> @ $($tail)*);
     },
 
@@ -85,7 +86,7 @@ mod tests {
     use super::*;
 
     monoid_ops! {
-        Test<usize, usize>
+        Test<usize, usize> =
         operator(x, y) { x+y }
         update_distributive((i, j), _x, a) { Some((j-i)*a) }
         update_composition(_a, b) { *b }

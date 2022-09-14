@@ -12,14 +12,14 @@ use delegate::delegate;
 use itertools::Itertools;
 
 #[inline]
-fn size_of<const D: usize>(shape: [usize; D]) -> usize {
+pub(crate) fn size_of<const D: usize>(shape: [usize; D]) -> usize {
     shape.into_iter().product()
 }
 
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct NdVec<const D: usize, T> {
-    shape: [usize; D],
-    vec: Vec<T>
+    pub(crate) shape: [usize; D],
+    pub(crate) vec: Vec<T>
 }
 
 impl<const D: usize, T> NdVec<D, T>
@@ -65,19 +65,44 @@ impl<const D: usize, T> NdVec<D, T>
 
     #[inline]
     pub fn get(&self, index: [usize; D]) -> Option<&T> {
-        self.inbounds(index).then(|| &self.vec[self.ravel(index)])
-    }
-
-    #[inline]
-    pub fn get_mut(&mut self, index: [usize; D]) -> Option<&mut T> {
-        self.inbounds(index).then(|| {
-            let i = self.ravel(index);
-            &mut self.vec[i]
+        self.inbounds(index).then( ||
+        {
+            #[cfg(not(feature = "unsafe"))]
+            { &self.vec[self.ravel(index)] }
+            #[cfg(feature = "unsafe")]
+            // SAFETY: self.inbounds(index) implies self.ravel(index) < self.vec.len
+            unsafe { self.vec.get_unchecked(self.ravel(index)) }
         })
     }
 
     #[inline]
-    fn inbounds(&self, index: [usize; D]) -> bool {
+    pub fn get_mut(&mut self, index: [usize; D]) -> Option<&mut T> {
+        self.inbounds(index).then(||
+        {
+            let i = self.ravel(index);
+            #[cfg(not(feature = "unsafe"))]
+            { &mut self.vec[i] }
+            #[cfg(feature = "unsafe")]
+            // SAFETY: self.inbounds(index) implies self.ravel(index) < self.vec.len
+            unsafe { self.vec.get_unchecked_mut(i) }
+        })
+    }
+
+    #[cfg(feature = "unsafe")]
+    #[inline]
+    pub unsafe fn get_unchecked(&self, index: [usize; D]) -> &T {
+        self.vec.get_unchecked(self.ravel(index))
+    }
+
+    #[cfg(feature = "unsafe")]
+    #[inline]
+    pub unsafe fn get_unchecked_mut(&mut self, index: [usize; D]) -> &mut T {
+        let i = self.ravel(index);
+        self.vec.get_unchecked_mut(i)
+    }
+
+    #[inline]
+    pub(crate) fn inbounds(&self, index: [usize; D]) -> bool {
         index.iter().zip(self.shape.iter())
             .all(|(i, n)| i < n)
     }

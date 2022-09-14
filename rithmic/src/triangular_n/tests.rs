@@ -12,3 +12,9 @@ fn test_brute() {
         }
     }
 }
+
+#[test]
+fn test_u128() {
+    assert_eq!(triangular_n(100_u128), 5050_u128);
+    assert_eq!(triangular_n(1_u128 << 63), (1<<125) + (1<<62));
+}

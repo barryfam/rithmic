@@ -92,3 +92,10 @@ fn test_moves() {
         [2, 2],
     ]);
 }
+
+#[test]
+fn test_single() {
+    let b = Gameboard::new(1, 1);
+    assert!(b.dpad4([0, 0]).is_empty());
+    assert!(b.dpad8([0, 0]).is_empty());
+}

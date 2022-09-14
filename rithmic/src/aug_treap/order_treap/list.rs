@@ -1,5 +1,5 @@
 use std::iter::FusedIterator;
-use std::ops::{Index, self};
+use std::ops::Index;
 
 use delegate::delegate;
 
@@ -50,7 +50,7 @@ impl<T: Ord> List<T> {
 
     pub fn replace_slice(&mut self, range: impl Rangelike<usize>, slice: impl IntoIterator<Item=T>) -> usize
     {
-        let ops::Range{start: i, end: j} = range.clamp(0..self.len()).expect("range must be within current length");
+        let (i, j) = range.clamp(0..self.len()).expect("range must be within current length");
 
         let r = self.0.0.root.take();
         let (u, v0, w) = self.0.split3_at(r, i, j);

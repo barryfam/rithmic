@@ -52,9 +52,8 @@ pub trait Finger<'n, K, V, A>
 
 impl<'n, K, V, A> Finger<'n, K, V, A> for Vec<&'n Node<K, V, A>>
 {
+    #[inline]
     fn tip(&self) -> &'n Node<K, V, A> {
-        debug_assert!(!self.is_empty());
-
         self.last().unwrap()
     }
 

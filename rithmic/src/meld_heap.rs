@@ -20,22 +20,23 @@ impl<T> Node<T> {
     }
 }
 
-fn link<T: Ord>(u: OptNode<T>, v: OptNode<T>) -> OptNode<T> {
+#[inline]
+fn link<T: Ord>(u: OptNode<T>, v: OptNode<T>, rev: bool) -> OptNode<T> {
     u.merge(v, |mut u, mut v| {
-        if u.item < v.item {
+        if (u.item < v.item) ^ rev {
             mem::swap(&mut u, &mut v)
         }
         if rand::random() {
-            u.left = link(u.left, Some(v));
+            u.left = link(u.left, Some(v), rev);
         } else {
-            u.right = link(u.right, Some(v));
+            u.right = link(u.right, Some(v), rev);
         }
         u
     })
 }
 
 /**
-A [priority max-queue](https://en.wikipedia.org/wiki/Priority_queue)
+A [priority queue](https://en.wikipedia.org/wiki/Priority_queue)
 
 `MeldHeap`'s interface is similar to [`std::collections::BinaryHeap`], but [`MeldHeap::meld`] runs in *O*(log *n*) time versus [`BinaryHeap::append`](`std::collections::BinaryHeap::append)'s *O*(*n*)
 ```
@@ -50,21 +51,26 @@ assert_eq!(q.pop(), Some(4));
 ```
 */
 #[derive(Clone)]
-pub struct MeldHeap<T> {
+pub struct MeldHeapWithDir<T, const REV: bool = false> {
     root: OptNode<T>,
     len: usize,
 }
+pub type MeldMaxHeap<T> = MeldHeapWithDir<T, false>;
+pub type MeldMinHeap<T> = MeldHeapWithDir<T, true>;
+pub type MeldHeap<T> = MeldMaxHeap<T>;
 
-impl<T: Ord> MeldHeap<T>
+impl<T: Ord, const REV: bool> MeldHeapWithDir<T, REV>
 {
     pub fn new() -> Self {
         Self { root: None, len: 0 }
     }
 
+    #[inline]
     pub fn len(&self) -> usize {
         self.len
     }
 
+    #[inline]
     pub fn is_empty(&self) -> bool {
         self.root.is_none()
     }
@@ -72,19 +78,20 @@ impl<T: Ord> MeldHeap<T>
     /// Add an item to the heap
     pub fn push(&mut self, item: T) {
         let r = self.root.take();
-        self.root = link(r, Some(box Node::new(item)));
+        self.root = link(r, Some(box Node::new(item)), REV);
         self.len += 1;
     }
 
     /// Remove and return the maximum item in the heap. See [`MeldHeap`] for an example
     pub fn pop(&mut self) -> Option<T> {
         let r = self.root.take()?;
-        self.root = link(r.left, r.right);
+        self.root = link(r.left, r.right, REV);
         self.len -= 1;
         Some(r.item)
     }
 
     /// Return but do not remove the maximum item in the heap
+    #[inline]
     pub fn peek(&self) -> Option<&T> {
         self.root.as_ref().map(|r| &r.item)
     }
@@ -92,19 +99,19 @@ impl<T: Ord> MeldHeap<T>
     /// Combine two heaps. See [`MeldHeap`] for an example
     pub fn meld(self, other: Self) -> Self {
         Self {
-            root: link(self.root, other.root),
+            root: link(self.root, other.root, REV),
             len: self.len + other.len
         }
     }
 }
 
-impl<T: Ord> Default for MeldHeap<T> {
+impl<T: Ord, const REV: bool> Default for MeldHeapWithDir<T, REV> {
     fn default() -> Self {
         Self::new()
     }
 }
 
-impl<T: Ord> FromIterator<T> for MeldHeap<T> {
+impl<T: Ord, const REV: bool> FromIterator<T> for MeldHeapWithDir<T, REV> {
     fn from_iter<I: IntoIterator<Item=T>>(iter: I) -> Self {
         let mut heap = Self::new();
         for item in iter {

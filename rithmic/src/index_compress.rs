@@ -1,5 +1,4 @@
-use std::ops::Deref;
-
+use derive_more::Deref;
 use itertools::Itertools;
 
 /**
@@ -18,6 +17,7 @@ let x = [777, 9001, -40, -40, 777, -273];
 let y = x.index_compress();
 
 assert_eq!(&*y, &[2, 3, 1, 1, 2, 0]);
+# assert_eq!(y[0], 2);
 assert_eq!(y.compress(&-40), 1);
 assert_eq!(y.decompress(2), &777)
 ```
@@ -37,32 +37,33 @@ impl<T: Ord> IndexCompress for [T] {
             if yx.last() != Some(&x) {
                 yx.push(x);
             }
-            y[i] = yx.len()-1;
+            y[i] = yx.len() - 1;
         }
         IndexCompressed { y, yx }
     }
 }
 
 /// This `struct` is created by [`IndexCompress::index_compress()`](IndexCompress). See its documentation for more
-pub struct IndexCompressed<'me, T> {
-    y: Vec<usize>,
+#[derive(Default, Clone, Deref, Debug)]
+pub struct IndexCompressed<'me, T>
+{
+    #[deref] y: Vec<usize>,
     yx: Vec<&'me T>,
-}
-
-impl<'me, T> Deref for IndexCompressed<'me, T> {
-    type Target = [usize];
-    fn deref(&self) -> &Self::Target {
-        &self.y
-    }
 }
 
 impl<'me, T: Ord> IndexCompressed<'me, T>
 {
+    #[inline]
     pub fn compress(&self, x: &T) -> usize {
-        self.yx.binary_search(&x).expect("Value was not present during compression")
+        self.yx.binary_search(&x).expect("value was not present during compression")
     }
+    #[inline]
     pub fn decompress(&self, y: usize) -> &T {
         self.yx[y]
+    }
+    #[inline]
+    pub fn unique_count(&self) -> usize {
+        self.yx.len()
     }
 }
 

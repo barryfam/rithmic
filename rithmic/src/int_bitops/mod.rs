@@ -14,6 +14,8 @@ where Self: Sized
     fn iter_ones(self) -> IterOnes<Self>;
     fn iter_subsets(self) -> IterSubsets<Self>;
     fn iter_add_one(self, n: u32) -> IterAddOne<Self>;
+    fn iter_gosper(n: u32, k: u32) -> IterGosper<Self>;
+    fn iter_gosper_subsets(self, k: u32) -> IterGosperSubsets<Self>;
 }
 
 #[derive(Clone, Copy, Debug)]
@@ -35,6 +37,7 @@ pub struct IterOnes<T> {
 pub struct IterSubsets<T> {
     set: T,
     next: T,
+    fused: bool,
 }
 
 #[derive(Clone, Copy, Debug)]
@@ -42,6 +45,18 @@ pub struct IterAddOne<T> {
     set: T,
     subset: T,
     used: T,
+}
+
+#[derive(Clone, Copy, Debug)]
+pub struct IterGosper<T> {
+    last: T,
+    next: T,
+    fused: bool,
+}
+
+pub struct IterGosperSubsets<T> {
+    set: T,
+    gosper: IterGosper<T>,
 }
 
 macro impl_bitops {
@@ -96,7 +111,8 @@ macro impl_bitops {
             fn iter_subsets(self) -> IterSubsets<Self> {
                 IterSubsets {
                     set: self,
-                    next: self.lsb()
+                    next: 0,
+                    fused: false,
                 }
             }
 
@@ -108,6 +124,28 @@ macro impl_bitops {
                     set: Self::mask(n),
                     subset: self,
                     used: self
+                }
+            }
+
+            fn iter_gosper(n: u32, k: u32) -> IterGosper<Self> {
+                debug_assert_ne!(k, 0);
+                debug_assert!(k <= n);
+                debug_assert!(n <= Self::BITS);
+
+                IterGosper {
+                    last: Self::mask(k) << (n-k),
+                    next: Self::mask(k),
+                    fused: false,
+                }
+            }
+
+            fn iter_gosper_subsets(self, k: u32) -> IterGosperSubsets<Self> {
+                debug_assert_ne!(k, 0);
+                debug_assert!(k <= self.count_ones());
+
+                IterGosperSubsets {
+                    set: self,
+                    gosper: Self::iter_gosper(self.count_ones(), k),
                 }
             }
         }
@@ -163,10 +201,11 @@ macro impl_bitops {
             #[inline]
             fn next(&mut self) -> Option<Self::Item>
             {
-                let Self{set: s, next: u} = *self;
-                if u == 0 { return None }
+                let Self{set: s, next: u, fused} = *self;
+                if fused { return None }
 
-                self.next = (u | !s).wrapping_add(1) & s;
+                if u == s { self.fused = true; }
+                else { self.next = (u | !s) + 1 & s; }
                 Some(u)
             }
         }
@@ -183,6 +222,43 @@ macro impl_bitops {
                 let w = (v+1) | u;
                 self.used |= w;
                 Some(w)
+            }
+        }
+
+        impl Iterator for IterGosper<$type> {
+            type Item = $type;
+
+            #[inline]
+            fn next(&mut self) -> Option<Self::Item>
+            {
+                let Self{last, next: u, fused} = *self;
+                if fused { return None }
+
+                if u == last { self.fused = true; }
+                else {
+                    let lsb = u.lsb();
+                    let v = u + lsb;
+                    self.next = (((v^u) >> 2) / lsb) | v;
+                }
+                Some(u)
+            }
+        }
+
+        impl Iterator for IterGosperSubsets<$type> {
+            type Item = $type;
+
+            #[inline]
+            fn next(&mut self) -> Option<Self::Item>
+            {
+                let g = self.gosper.next()?;
+
+                let mut u = 0;
+                for (i, v) in self.set.iter_lsb().enumerate() {
+                    if g >> i &1==1 {
+                        u |= v;
+                    }
+                }
+                Some(u)
             }
         }
     },

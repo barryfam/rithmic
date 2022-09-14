@@ -15,7 +15,9 @@ uf.union(2, 3);
 uf.union(3, 5);
 
 assert!(uf.same(2, 5));
-assert_eq!(uf.size(2), 3);
+assert_eq!(uf.size(5), 3);
+# assert_eq!(uf.size(2), 3);
+# assert_eq!(uf.size(3), 3);
 # assert!(!uf.union(2, 5));
 
 # let r = uf.roots().collect::<Vec<_>>();

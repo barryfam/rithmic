@@ -1,39 +1,36 @@
 use std::ops::{Range, RangeBounds, RangeFrom, RangeFull, RangeInclusive, RangeTo, RangeToInclusive, Bound};
 
 pub trait Rangelike<T> {
-    fn clamp(&self, to: Range<T>) -> Option<Range<T>>;
+    fn clamp(&self, to: Range<T>) -> Option<(T, T)>;
     fn canonical(&self) -> (Option<T>, Option<T>);
 }
 
-macro impl_for_rangebounds($bounds_type: ty, $rangebounds: ty)
+macro impl_for_rangebounds($int_type: ty, $rangebounds: ty)
 {
-    impl Rangelike<$bounds_type> for $rangebounds
+    impl Rangelike<$int_type> for $rangebounds
     {
+        /// Convert to `(start_included, end_excluded)` and check the range is a subset of `to`, otherwise return `None`. Unbounded side(s) are substituted with `to.start` or `to.end` respectively.
         #[inline]
-        fn clamp(&self, to: Range<$bounds_type>) -> Option<Range<$bounds_type>>
+        fn clamp(&self, to: Range<$int_type>) -> Option<($int_type, $int_type)>
         {
-            let start = match self.start_bound() {
-                Bound::Included(&start) => to.start.max(start),
-                Bound::Excluded(&start) => to.start.max(start + 1),
-                Bound::Unbounded => to.start,
-            };
-            let end = match self.end_bound() {
-                Bound::Included(&end) => to.end.min(end + 1),
-                Bound::Excluded(&end) => to.end.min(end),
-                Bound::Unbounded => to.end,
-            };
-            (start < end).then_some(start..end)
+            let (start, end) = self.canonical();
+            let (start, end) = (start.unwrap_or(to.start), end.unwrap_or(to.end));
+
+            debug_assert!(start <= end);
+            (to.start <= start && end <= to.end)
+                .then_some((start, end))
         }
 
+        /// Convert to `(start_included, end_excluded)` where each side is `None` if unbounded
         #[inline]
-        fn canonical(&self) -> (Option<$bounds_type>, Option<$bounds_type>)
+        fn canonical(&self) -> (Option<$int_type>, Option<$int_type>)
         {
-            let start = match RangeBounds::<$bounds_type>::start_bound(self) {
+            let start = match RangeBounds::<$int_type>::start_bound(self) {
                 Bound::Included(&start) => Some(start),
                 Bound::Excluded(&start) => Some(start.checked_add(1).unwrap()),
                 Bound::Unbounded => None,
             };
-            let end = match RangeBounds::<$bounds_type>::end_bound(self) {
+            let end = match RangeBounds::<$int_type>::end_bound(self) {
                 Bound::Included(&end) => end.checked_add(1),
                 Bound::Excluded(&end) => Some(end),
                 Bound::Unbounded => None,
@@ -43,62 +40,62 @@ macro impl_for_rangebounds($bounds_type: ty, $rangebounds: ty)
     }
 }
 
-macro impl_for_all_rangebounds($bounds_type: ty) {
-    impl_for_rangebounds!($bounds_type, Range<$bounds_type>);
-    impl_for_rangebounds!($bounds_type, RangeFrom<$bounds_type>);
-    impl_for_rangebounds!($bounds_type, RangeFull);
-    impl_for_rangebounds!($bounds_type, RangeInclusive<$bounds_type>);
-    impl_for_rangebounds!($bounds_type, RangeTo<$bounds_type>);
-    impl_for_rangebounds!($bounds_type, RangeToInclusive<$bounds_type>);
+macro impl_for_all_rangebounds($int_type: ty) {
+    impl_for_rangebounds!($int_type, Range<$int_type>);
+    impl_for_rangebounds!($int_type, RangeFrom<$int_type>);
+    impl_for_rangebounds!($int_type, RangeFull);
+    impl_for_rangebounds!($int_type, RangeInclusive<$int_type>);
+    impl_for_rangebounds!($int_type, RangeTo<$int_type>);
+    impl_for_rangebounds!($int_type, RangeToInclusive<$int_type>);
 }
 
 macro impl_rangelike {
-    ($bounds_type: ty) =>
+    ($int_type: ty) =>
     {
-        impl_for_all_rangebounds!($bounds_type);
+        impl_for_all_rangebounds!($int_type);
 
-        impl Rangelike<$bounds_type> for $bounds_type
+        impl Rangelike<$int_type> for $int_type
         {
             #[inline]
-            fn clamp(&self, to: Range<$bounds_type>) -> Option<Range<$bounds_type>> {
-                to.contains(self).then_some(*self..(*self+1))
+            fn clamp(&self, to: Range<$int_type>) -> Option<($int_type, $int_type)> {
+                to.contains(self).then_some((*self, *self+1))
             }
 
             #[inline]
-            fn canonical(&self) -> (Option<$bounds_type>, Option<$bounds_type>) {
+            fn canonical(&self) -> (Option<$int_type>, Option<$int_type>) {
                 (Some(*self), self.checked_add(1))
             }
         }
 
-        impl Rangelike<$bounds_type> for ($bounds_type, $bounds_type)
+        impl Rangelike<$int_type> for ($int_type, $int_type)
         {
             #[inline]
-            fn clamp(&self, to: Range<$bounds_type>) -> Option<Range<$bounds_type>> {
+            fn clamp(&self, to: Range<$int_type>) -> Option<($int_type, $int_type)> {
                 (self.0..self.1).clamp(to)
             }
 
             #[inline]
-            fn canonical(&self) -> (Option<$bounds_type>, Option<$bounds_type>) {
+            fn canonical(&self) -> (Option<$int_type>, Option<$int_type>) {
                 (Some(self.0), Some(self.1))
             }
         }
 
-        impl Rangelike<$bounds_type> for [$bounds_type; 2]
+        impl Rangelike<$int_type> for [$int_type; 2]
         {
             #[inline]
-            fn clamp(&self, to: Range<$bounds_type>) -> Option<Range<$bounds_type>> {
+            fn clamp(&self, to: Range<$int_type>) -> Option<($int_type, $int_type)> {
                 (self[0]..self[1]).clamp(to)
             }
 
             #[inline]
-            fn canonical(&self) -> (Option<$bounds_type>, Option<$bounds_type>) {
+            fn canonical(&self) -> (Option<$int_type>, Option<$int_type>) {
                 (Some(self[0]), Some(self[1]))
             }
         }
     },
 
-    ( $($bounds_type: ty),+ ) => {
-        $( impl_rangelike!($bounds_type); )*
+    ( $($int_type: ty),+ ) => {
+        $( impl_rangelike!($int_type); )*
     },
 }
 

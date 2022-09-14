@@ -3,7 +3,7 @@ use std::iter;
 use itertools::Itertools;
 use primal::Sieve;
 
-/// Add a [`divisors`](Divisors::divisors) method to [`primal::Sieve`](https://docs.rs/primal/latest/primal/struct.Sieve.html)
+/// Add a [`divisors`](Divisors::divisors) method to [`::primal::Sieve`](https://docs.rs/primal/latest/primal/struct.Sieve.html)
 pub trait Divisors {
     /// Find all divisors of `n`
     ///

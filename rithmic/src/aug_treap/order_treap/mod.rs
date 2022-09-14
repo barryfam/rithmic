@@ -9,7 +9,7 @@ pub use sorted_list::SortedList;
 use std::borrow::Borrow;
 use std::iter::FusedIterator;
 use std::marker::PhantomData;
-use std::ops::{RangeBounds, self};
+use std::ops::RangeBounds;
 
 use delegate::delegate;
 
@@ -215,7 +215,7 @@ impl<K: Ord, V> OrderTreap<K, V>
 
     pub fn remove_at(&mut self, range: impl Rangelike<usize>) -> usize
     {
-        let ops::Range{start: i, end: j} = range.clamp(0..self.len()).expect("range must be within current length");
+        let (i, j) = range.clamp(0..self.len()).expect("range must be within current length");
 
         let r = self.0.root.take();
         let (u, v, w) = self.split3_at(r, i, j);

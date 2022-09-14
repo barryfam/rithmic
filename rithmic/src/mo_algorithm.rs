@@ -1,5 +1,3 @@
-use std::ops::Range;
-
 use itertools::Itertools;
 use num::integer::Roots;
 
@@ -44,8 +42,8 @@ pub fn mo_algorithm(n: usize, queries: impl IntoIterator<Item=impl Rangelike<usi
         .map(|r| r.clamp(0..n).unwrap())
         .enumerate()
         .sorted_unstable_by( |
-            &(_i, Range{start: li, end: ri}),
-            &(_j, Range{start: lj, end: rj})
+            &(_i, (li, ri)),
+            &(_j, (lj, rj))
         | {
             let bi = li / k;
             let bj = lj / k;
@@ -57,7 +55,7 @@ pub fn mo_algorithm(n: usize, queries: impl IntoIterator<Item=impl Rangelike<usi
         })
         .collect();
 
-    if let Some(&(_, Range{start: l, end: _r})) = queries.last() {
+    if let Some(&(_, (l, _r))) = queries.last() {
         MoIter { queries, l, r: l }
     } else {
         MoIter::default()
@@ -66,7 +64,7 @@ pub fn mo_algorithm(n: usize, queries: impl IntoIterator<Item=impl Rangelike<usi
 
 #[derive(Default)]
 struct MoIter {
-    queries: Vec<(usize, Range<usize>)>,
+    queries: Vec<(usize, (usize, usize))>,
     l: usize,
     r: usize,
 }
@@ -77,7 +75,7 @@ impl Iterator for MoIter {
     #[inline]
     fn next(&mut self) -> Option<Self::Item>
     {
-        let &(qi, Range{start: ql, end: qr}) = self.queries.last()?;
+        let &(qi, (ql, qr)) = self.queries.last()?;
 
         Some(
             if ql < self.l {

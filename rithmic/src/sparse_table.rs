@@ -33,9 +33,8 @@ impl<T> SparseTable<T> {
 
     pub fn query(&self, range: impl Rangelike<usize>) -> T
     {
-        let range = range.clamp(0..self.len).expect("Query out of range");
-        let (i, j) = (range.start, range.end);
-        assert!(i < j, "Empty query range");
+        let (i, j) = range.clamp(0..self.len).expect("query out of range");
+        assert!(i < j, "empty query range");
 
         let row = (j-i-1).bit_length().saturating_sub(1) as usize;
         (self.operator)(&self.table[row][i], &self.table[row][j - (1<<row)])

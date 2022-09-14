@@ -7,6 +7,14 @@ fn test_0_shift() {
     assert_eq!(u.clone() << 0, u);
 }
 
+#[test]
+fn test_ref_op_ref() {
+    let u = BVec::from_indexes([2, 3, 5], 10);
+    let v = BVec::from_indexes([0, 2, 4, 6, 8], 10);
+    let w = &u ^ &v;
+    assert_eq!(w, u ^ v);
+}
+
 #[cfg(target_pointer_width = "64")]
 #[test]
 fn test_debug() {

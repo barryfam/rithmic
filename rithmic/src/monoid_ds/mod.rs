@@ -1,6 +1,6 @@
-    mod monoid_ops;
+    mod fenwick;
+pub mod monoid_ops;
     mod segtree;
 
-pub use monoid_ops::MonoidOps;
-pub use monoid_ops::Sum;
+pub use fenwick::NdFenwick;
 pub use segtree::SegTree;

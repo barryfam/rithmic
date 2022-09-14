@@ -44,6 +44,7 @@ fn test_iter_subsets() {
     let x = 0b11010_u8;
     let u = x.iter_subsets().collect::<Vec<u8>>();
     assert_eq!(u, vec![
+        0b00000,
         0b00010,
         0b01000,
         0b01010,
@@ -75,6 +76,41 @@ fn test_iter_add_one() {
 }
 
 #[test]
+fn test_iter_gosper() {
+    let u = u8::iter_gosper(5, 3).collect::<Vec<u8>>();
+    assert_eq!(u, vec![
+        0b00111,
+        0b01011,
+        0b01101,
+        0b01110,
+        0b10011,
+        0b10101,
+        0b10110,
+        0b11001,
+        0b11010,
+        0b11100,
+    ]);
+}
+
+#[test]
+fn test_iter_gosper_subsets() {
+    let x = 0b1101_1010_u8;
+    let u = x.iter_gosper_subsets(3).collect::<Vec<u8>>();
+    assert_eq!(u, vec![
+        0b0001_1010,
+        0b0100_1010,
+        0b0101_0010,
+        0b0101_1000,
+        0b1000_1010,
+        0b1001_0010,
+        0b1001_1000,
+        0b1100_0010,
+        0b1100_1000,
+        0b1101_0000,
+    ]);
+}
+
+#[test]
 fn test_zero_inputs() {
     assert_eq!(0_u8.bit_width(), 8);
     assert_eq!(0_u8.bit_length(), 0);
@@ -85,7 +121,7 @@ fn test_zero_inputs() {
     assert_eq!(0_u8.iter_ones().next(), None);
     assert_eq!(0_u8.iter_lsb().next(), None);
     assert_eq!(0_u8.iter_msb().next(), None);
-    assert_eq!(0_u8.iter_subsets().next(), None);
+    assert_eq!(0_u8.iter_subsets().next(), Some(0));
     assert_eq!(0_u8.iter_add_one(3).next(), Some(1));
 }
 
@@ -100,6 +136,6 @@ fn test_max_inputs() {
     assert_eq!((!0_u8).iter_ones().next(), Some(0));
     assert_eq!((!0_u8).iter_lsb().next(), Some(1));
     assert_eq!((!0_u8).iter_msb().next(), Some(1<<7));
-    assert_eq!((!0_u8).iter_subsets().next(), Some(1));
+    assert_eq!((!0_u8).iter_subsets().next(), Some(0));
     assert_eq!((!0_u8).iter_add_one(8).next(), None);
 }

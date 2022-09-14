@@ -14,6 +14,9 @@ v.iter().join(" ").println();  // prints "2 3 5 7\n"
 */
 pub trait PrintMethods: Display
 {
+    fn format(&self) -> String {
+        format!("{}", self)
+    }
     fn print(&self) {
         print!("{}", self);
     }

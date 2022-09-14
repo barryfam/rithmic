@@ -20,7 +20,7 @@ pub trait OptionMerge {
     /// ```
     ///
     /// # Notes
-    /// If `T` has an [identity element](https://en.wikipedia.org/wiki/Identity_element) under `f()`, also consider [`Option::unwrap_or`]:
+    /// If `T` has an [identity element](https://en.wikipedia.org/wiki/Identity_element) under `f()`, also consider using [`Option::unwrap_or`]:
     /// ```
     /// # let (x, y) = (None, None);
     /// x.unwrap_or(0) + y.unwrap_or(0)

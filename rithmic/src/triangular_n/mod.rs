@@ -1,5 +1,9 @@
 #[cfg(test)] mod tests;
 
+use std::ops::RangeInclusive;
+
+use num::Integer;
+
 use crate::Rangelike;
 
 /**
@@ -11,8 +15,12 @@ Return the *n*th [triangular number](https://en.wikipedia.org/wiki/Triangular_nu
 assert_eq!(triangular_n(100), 5050);
 ```
 */
-pub fn triangular_n(n: usize) -> usize {
-    triangular_slice(1..=n)
+pub fn triangular_n<T>(n: T) -> T
+where
+    T: Copy + Integer,
+    RangeInclusive<T>: Rangelike<T>
+{
+    triangular_slice(T::one()..=n)
 }
 
 /**
@@ -24,8 +32,10 @@ Return the sum of the integers in `range`, in *O*(1)
 assert_eq!(triangular_slice(5..=10), 5+6+7+8+9+10);
 ```
 */
-pub fn triangular_slice(range: impl Rangelike<usize>) -> usize {
-    triangular_steps(range, 1)
+pub fn triangular_slice<T>(range: impl Rangelike<T>) -> T
+where T: Copy + Integer
+{
+    triangular_steps(range, T::one())
 }
 
 /**
@@ -34,16 +44,23 @@ Return the sum of the integers in `range`, stepping by `step`, in *O*(1)
 # Examples
 ```
 # use rithmic::triangular_steps;
-assert_eq!(triangular_steps(5..12, 3), 5+8+11);
+assert_eq!(triangular_steps(5..15, 3), 5+8+11+14);
 ```
 */
-pub fn triangular_steps(range: impl Rangelike<usize>, step: usize) -> usize
+pub fn triangular_steps<T>(range: impl Rangelike<T>, step: T) -> T
+where T: Copy + Integer
 {
     let (Some(i), Some(j)) = range.canonical() else { panic!("unbounded range") };
-    if j <= i { return 0 }
+    let zero = T::zero();
+    assert!(i >= zero && j >= zero, "range must be non-negative");
 
-    let d = j-i - 1;
+    if j <= i { return T::zero() }
+
+    let one = T::one();
+    let two = one + one;
+
+    let d = j-i - one;
     let steps = d / step;
     let d = step * steps;
-    (i + i+d) * (steps + 1) / 2
+    (i + i+d) * (steps + one) / two
 }

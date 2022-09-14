@@ -1,15 +1,15 @@
 #![doc = include_str!("../../README.md")]
 
-#![forbid(unsafe_code)]
+#![cfg_attr(not(feature = "unsafe"), forbid(unsafe_code))]
 
 #![feature(
+    array_zip,
     box_syntax,
     decl_macro,
     int_roundings,
     iter_collect_into,
     is_some_with,
     is_sorted,
-    label_break_value,
     let_chains,
     let_else,
     rustc_attrs,
@@ -17,12 +17,16 @@
 
 #![allow(
     clippy::collapsible_else_if,
+    clippy::missing_safety_doc,
     clippy::module_inception,
     clippy::needless_range_loop,
     clippy::nonminimal_bool,
+    clippy::only_used_in_recursion,
     clippy::option_map_unit_fn,
+    clippy::partialeq_to_none,
     clippy::reversed_empty_ranges,
     clippy::type_complexity,
+    clippy::unnecessary_lazy_evaluations,
 )]
 
 #![warn(
@@ -30,6 +34,8 @@
     clippy::imprecise_flops,
     clippy::print_stderr,
 )]
+
+pub use rithmic_impl::*;
 
 pub mod aug_treap;
     mod binary_search;
@@ -42,6 +48,7 @@ pub mod graph;
     mod insort;
     mod int_bitops;
     mod inversions;
+    mod ipc;
     mod meld_heap;
     mod mo_algorithm;
     mod mod_factorial_table;
@@ -56,6 +63,7 @@ pub mod polynomial;
     mod rangelike;
     mod sieve_divisors;
     mod slice_pair_mut;
+    mod slice_get_sub;
     mod sparse_table;
     mod ternary_search;
 pub mod triangular_n;
@@ -73,10 +81,11 @@ pub use index_compress::{IndexCompress, IndexCompressed};
 pub use insort::Insort;
 pub use int_bitops::IntBitOps;
 pub use inversions::CountInversions;
-pub use meld_heap::MeldHeap;
+pub use ipc::Ipc;
+pub use meld_heap::{MeldHeap, MeldMinHeap};
 pub use mo_algorithm::{mo_algorithm, MoStep};
 pub use mod_factorial_table::FactorialTable;
-pub use monoid_ds::{MonoidOps, SegTree};
+pub use monoid_ds::{monoid_ops, NdFenwick, SegTree};
 pub use ndvec::NdVec;
 pub use odometer::{OdometerBE, OdometerLE};
 pub use option_merge::OptionMerge;
@@ -87,6 +96,7 @@ pub use print_methods::PrintMethods;
 pub use rangelike::Rangelike;
 pub use sieve_divisors::Divisors;
 pub use slice_pair_mut::PairMut;
+pub use slice_get_sub::GetSub;
 pub use sparse_table::SparseTable;
 pub use ternary_search::ternary_search;
 pub use triangular_n::{triangular_n, triangular_slice, triangular_steps};

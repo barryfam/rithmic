@@ -1,21 +1,19 @@
 use std::fmt::{self, Debug, Formatter};
 use std::marker::PhantomData;
-use std::mem;
-use std::ops::Range;
+use std::{mem, iter};
 
 use crate::{IntBitOps, Rangelike};
 
-use super::MonoidOps;
+use super::monoid_ops::{MonoidOps, USumQSum};
 
 #[derive(Default, Clone)]
-pub struct SegTree<T, U, O: MonoidOps<T, U>>
+pub struct SegTree<T, U = T, O: MonoidOps<T, U> = USumQSum>
 where
     T: Default,
     U: Default
 {
     len: usize,
-    tree: Vec<T>,
-    pending: Vec<U>,
+    tree: Vec<(T, U)>,
     phantom: PhantomData<O>,
 }
 
@@ -24,24 +22,23 @@ where
     T: Default,
     U: Default
 {
-    fn from(mut vec: Vec<T>) -> Self
+    fn from(vec: Vec<T>) -> Self
     {
         let len = vec.len();
         let p2 = len.next_power_of_two();
 
         let mut tree = Vec::with_capacity(p2 * 2);
-        tree.resize_with(p2, T::default);
-        tree.append(&mut vec);
-        tree.resize_with(p2 * 2, O::operator_identity);
+        tree.resize_with(p2, Default::default);
+        tree.extend(vec.into_iter().zip(iter::repeat_with(O::update_identity)));
+        tree.resize_with(p2 * 2, || (O::operator_identity(), O::update_identity()));
         for u in (1..p2).rev() {
-            tree[u] = O::operator(&tree[u<<1], &tree[u<<1|1])
+            tree[u] = (
+                O::operator(&tree[u<<1].0, &tree[u<<1|1].0),
+                O::update_identity()
+            );
         }
 
-        let ptl = if O::LAZY {p2} else {0};
-        let mut pending = Vec::with_capacity(ptl);
-        pending.resize_with(ptl, O::update_identity);
-
-        Self { len, tree, pending, phantom: PhantomData }
+        Self { len, tree, phantom: PhantomData }
     }
 }
 
@@ -95,7 +92,7 @@ where
     #[inline]
     fn push1(&mut self, u: usize)
     {
-        let a = mem::replace(&mut self.pending[u], O::update_identity());
+        let a = mem::replace(&mut self.tree[u].1, O::update_identity());
         self.subtree_update(u<<1  , &a);
         self.subtree_update(u<<1|1, &a);
     }
@@ -103,7 +100,7 @@ where
     /// Recalculate tree node `u` by applying `operator` to its two immediate children. In a lazy tree, any pending updates at `u` or its ancestors must be pushed down before this call
     #[inline]
     fn build1(&mut self, u: usize) {
-        self.tree[u] = O::operator(&self.tree[u<<1], &self.tree[u<<1|1]);
+        self.tree[u].0 = O::operator(&self.tree[u<<1].0, &self.tree[u<<1|1].0);
     }
 
     /// Push pending updates from root to tree node `u`
@@ -128,23 +125,23 @@ where
     /// In a non-lazy tree, update leaf node `u`
     #[inline]
     fn leaf_update(&mut self, u: usize, a: &U) {
-        self.tree[u] = O::update(&self.tree[u], a);
+        self.tree[u].0 = O::update(&self.tree[u].0, a);
     }
 
     /// In a lazy tree, attempt to update tree node `u` as if all its descendant leaves had been updated with `a`, without actually traversing down to them. Then, insert the update into the pending tree at index `u`. Any pending updates at ancestors of `u` must be pushed down before this call
     #[inline]
     fn subtree_update(&mut self, u: usize, a: &U)
     {
-        if let Some(x) = O::update_distributive(self.span(u), &self.tree[u], a) {
-            self.tree[u] = x;
+        if let Some(x) = O::update_distributive(self.span(u), &self.tree[u].0, a) {
+            self.tree[u].0 = x;
             if u < self.width() {
-                self.pending[u] = O::update_composition(&self.pending[u], a);
+                self.tree[u].1 = O::update_composition(&self.tree[u].1, a);
             }
         } else {
             // update both children instead
             // maintain invariants for `u` and its descendants
             debug_assert!(u < self.width(), "update_distributive() must not fail on a leaf node");
-            let a0 = mem::replace(&mut self.pending[u], O::update_identity());
+            let a0 = mem::replace(&mut self.tree[u].1, O::update_identity());
             let a = O::update_composition(&a0, a);
             self.subtree_update(u<<1  , &a);
             self.subtree_update(u<<1|1, &a);
@@ -156,20 +153,20 @@ where
     {
         let i = index;
         let u = self.width() + i;
-        debug_assert!(i < self.len, "Index out of range");
+        debug_assert!(i < self.len, "index out of range");
 
         if O::LAZY { self.push_path(u); }
-        self.tree[u] = value;
+        self.tree[u].0 = value;
         self.build_path(u);
     }
 
     pub fn update(&mut self, range: impl Rangelike<usize>, value: &U)
     {
-        let Range{start: i, end: j} = range.clamp(0..self.len).expect("Invalid update range");
+        let (i, j) = range.clamp(0..self.len).expect("update range outside bounds");
 
         match O::LAZY {
             false => {
-                debug_assert_eq!(j-i, 1, "Non-lazy trees do not support range updates");
+                debug_assert_eq!(j-i, 1, "non-lazy trees do not support range updates");
 
                 let u = self.width() + i;
                 self.leaf_update(u, value);
@@ -206,7 +203,10 @@ where
 
     pub fn query(&mut self, range: impl Rangelike<usize>) -> T
     {
-        let Range{start: i, end: j} = range.clamp(0..self.len).expect("Invalid query range");
+        let (i, j) = range.clamp(0..self.len).expect("query range outside bounds");
+        if i == j {
+            return O::operator_identity()
+        }
 
         if O::LAZY {
             let mut u = self.width() + i;
@@ -222,11 +222,11 @@ where
         let (mut x, mut y) = (O::operator_identity(), O::operator_identity());
         while l <= r {
             if l&1 == 1 {
-                x = O::operator(&x, &self.tree[l]);
+                x = O::operator(&x, &self.tree[l].0);
                 l += 1;
             }
             if r&1 == 0 {
-                y = O::operator(&self.tree[r], &y);
+                y = O::operator(&self.tree[r].0, &y);
                 r -= 1;
             }
             l >>= 1;
@@ -245,10 +245,11 @@ where
     {
         for i in 0..self.height() {
             let (u, v) = (1<<i, 2<<i);
+            let (row, pending): (Vec<_>, Vec<_>) = self.tree[u..v].iter().map(|(x, a)| (x, a)).unzip();
 
-            write!(f, "\n{:?}", &self.tree[u..v])?;
+            write!(f, "\n{:?}", row)?;
             if O::LAZY && i < self.height() - 1 {
-                write!(f, "\n{:?}", &self.pending[u..v])?;
+                write!(f, "\n{:?}", pending)?;
             }
         }
         Ok(())

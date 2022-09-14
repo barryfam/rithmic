@@ -18,6 +18,7 @@ trait Adapter {
     fn get_i(&self, i: usize) -> bool;
 
     fn shift_xor(&mut self, s: usize);
+    fn new_xor(&self, v: &Self) -> Self;
 }
 
 impl Adapter for BVec {
@@ -31,6 +32,9 @@ impl Adapter for BVec {
     }
     fn shift_xor(&mut self, s: usize) {
         *self ^= self.clone() << s;
+    }
+    fn new_xor(&self, v: &Self) -> Self {
+        self ^ v
     }
 }
 
@@ -47,6 +51,13 @@ impl Adapter for Vec<bool> {
         for i in s..N {
             self[i-s] ^= self[i];
         }
+    }
+    fn new_xor(&self, v: &Self) -> Self {
+        let mut w = Vec::with_capacity(self.len());
+        for i in 0..self.len() {
+            w.push(self[i] ^ v[i]);
+        }
+        w
     }
 }
 
@@ -82,6 +93,18 @@ macro bench($name:ident, $new:expr) {
                 u.set_i(i, rng.gen());
             }
             b.iter(|| u.shift_xor(rng.gen_range(N/3..2*N/3)))
+        }
+
+        #[bench]
+        fn [<bench_bvec_new_xor_ $name>](b: &mut Bencher) {
+            let mut rng = SmallRng::from_entropy();
+            let mut u = $new;
+            let mut v = $new;
+            for i in 0..N {
+                u.set_i(i, rng.gen());
+                v.set_i(i, rng.gen());
+            }
+            b.iter(|| u = u.new_xor(&v))
         }
     }
 }

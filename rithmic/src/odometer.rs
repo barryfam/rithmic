@@ -59,7 +59,7 @@ impl<const D: usize, const BE: bool> sealed::Odometer<D, BE> {
     pub fn new(radix: [usize; D]) -> Self
     {
         let mut back = radix;
-        for x in back.iter_mut() { *x -= 1; }
+        for x in back.iter_mut() { *x = x.saturating_sub(1); }
 
         Self {
             front: [0; D],
@@ -129,3 +129,16 @@ impl<const D: usize, const BE: bool> DoubleEndedIterator for sealed::Odometer<D,
 
 impl<const D: usize, const BE: bool> ExactSizeIterator for sealed::Odometer<D, BE> {}
 impl<const D: usize, const BE: bool> FusedIterator for sealed::Odometer<D, BE> {}
+
+
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_empty() {
+        let mut i = OdometerBE::new([2, 0, 3]);
+        assert_eq!(i.next(), None);
+    }
+}

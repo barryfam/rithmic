@@ -1,5 +1,5 @@
 /**
-Order a pair (2-`tuple` or 2-`array`)
+Order a pair (2-[`tuple`] or 2-[`array`])
 
 ```
 use rithmic::OrdPair;
