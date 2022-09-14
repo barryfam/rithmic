@@ -27,9 +27,9 @@ Algorithms, data structures, ease-of-use
 - [Prefix sums](https://barryfam.io/rithmic/doc/rithmic/trait.PrefixSums.html)
 - [Graph](https://barryfam.io/rithmic/doc/rithmic/graph/struct.Graph.html)
     - Dijkstra, 0-1 Dijkstra, BFS *(no doc yet)*
-    - Floyd-Warshall *(no doc yet)*l
-    - DFS *(no doc yet)*S
-    - Tarjan SCC *(no doc yet)*C
+    - Floyd-Warshall *(no doc yet)*
+    - DFS *(no doc yet)*
+    - Tarjan SCC *(no doc yet)*
     - [Rooted subtree function](https://barryfam.io/rithmic/doc/rithmic/graph/struct.Graph.html#method.rooted_subtree_fn) "rerooting"
 - [Mo's algorithm](https://barryfam.io/rithmic/doc/rithmic/fn.mo_algorithm.html)
 - [Inversion counting](https://barryfam.io/rithmic/doc/rithmic/trait.CountInversions.html) *(no doc yet)*
