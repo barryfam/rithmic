@@ -1,11 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `rithmic/src/int_bitops/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script src="../../../crates.js"></script><script defer src="../../../main.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script>
-    <noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../rithmic/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"></h2>
-    </nav>
-    <nav class="sidebar"><a class="sidebar-logo" href="../../../rithmic/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../rithmic/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
-                                <a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div>
-                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `rithmic/src/int_bitops/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../rithmic/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../rithmic/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../rithmic/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -200,201 +193,352 @@
 <span id="193">193</span>
 <span id="194">194</span>
 <span id="195">195</span>
-</pre><pre class="rust"><code><span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span> <span class="kw">mod</span> <span class="ident">tests</span>;
+<span id="196">196</span>
+<span id="197">197</span>
+<span id="198">198</span>
+<span id="199">199</span>
+<span id="200">200</span>
+<span id="201">201</span>
+<span id="202">202</span>
+<span id="203">203</span>
+<span id="204">204</span>
+<span id="205">205</span>
+<span id="206">206</span>
+<span id="207">207</span>
+<span id="208">208</span>
+<span id="209">209</span>
+<span id="210">210</span>
+<span id="211">211</span>
+<span id="212">212</span>
+<span id="213">213</span>
+<span id="214">214</span>
+<span id="215">215</span>
+<span id="216">216</span>
+<span id="217">217</span>
+<span id="218">218</span>
+<span id="219">219</span>
+<span id="220">220</span>
+<span id="221">221</span>
+<span id="222">222</span>
+<span id="223">223</span>
+<span id="224">224</span>
+<span id="225">225</span>
+<span id="226">226</span>
+<span id="227">227</span>
+<span id="228">228</span>
+<span id="229">229</span>
+<span id="230">230</span>
+<span id="231">231</span>
+<span id="232">232</span>
+<span id="233">233</span>
+<span id="234">234</span>
+<span id="235">235</span>
+<span id="236">236</span>
+<span id="237">237</span>
+<span id="238">238</span>
+<span id="239">239</span>
+<span id="240">240</span>
+<span id="241">241</span>
+<span id="242">242</span>
+<span id="243">243</span>
+<span id="244">244</span>
+<span id="245">245</span>
+<span id="246">246</span>
+<span id="247">247</span>
+<span id="248">248</span>
+<span id="249">249</span>
+<span id="250">250</span>
+<span id="251">251</span>
+<span id="252">252</span>
+<span id="253">253</span>
+<span id="254">254</span>
+<span id="255">255</span>
+<span id="256">256</span>
+<span id="257">257</span>
+<span id="258">258</span>
+<span id="259">259</span>
+<span id="260">260</span>
+<span id="261">261</span>
+<span id="262">262</span>
+<span id="263">263</span>
+<span id="264">264</span>
+<span id="265">265</span>
+<span id="266">266</span>
+<span id="267">267</span>
+<span id="268">268</span>
+<span id="269">269</span>
+<span id="270">270</span>
+<span id="271">271</span>
+</pre><pre class="rust"><code><span class="attribute">#[cfg(test)] </span><span class="kw">mod </span>tests;
 
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">IntBitOps</span>
-<span class="kw">where</span> <span class="self">Self</span>: <span class="ident">Sized</span>
+<span class="kw">pub trait </span>IntBitOps
+<span class="kw">where </span><span class="self">Self</span>: Sized
 {
-    <span class="kw">fn</span> <span class="ident">bit_width</span>(<span class="self">self</span>) -&gt; <span class="ident">u32</span>;
-    <span class="kw">fn</span> <span class="ident">bit_length</span>(<span class="self">self</span>) -&gt; <span class="ident">u32</span>;
-    <span class="kw">fn</span> <span class="ident">mask</span>(<span class="ident">len</span>: <span class="ident">u32</span>) -&gt; <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">masked</span>(<span class="self">self</span>, <span class="ident">len</span>: <span class="ident">u32</span>) -&gt; <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">lsb</span>(<span class="self">self</span>) -&gt; <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">msb</span>(<span class="self">self</span>) -&gt; <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">iter_lsb</span>(<span class="self">self</span>) -&gt; <span class="ident">IterLsb</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>;
-    <span class="kw">fn</span> <span class="ident">iter_msb</span>(<span class="self">self</span>) -&gt; <span class="ident">IterMsb</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>;
-    <span class="kw">fn</span> <span class="ident">iter_ones</span>(<span class="self">self</span>) -&gt; <span class="ident">IterOnes</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>;
-    <span class="kw">fn</span> <span class="ident">iter_subsets</span>(<span class="self">self</span>) -&gt; <span class="ident">IterSubsets</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>;
-    <span class="kw">fn</span> <span class="ident">iter_add_one</span>(<span class="self">self</span>, <span class="ident">n</span>: <span class="ident">u32</span>) -&gt; <span class="ident">IterAddOne</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>;
+    <span class="kw">fn </span>bit_width(<span class="self">self</span>) -&gt; u32;
+    <span class="kw">fn </span>bit_length(<span class="self">self</span>) -&gt; u32;
+    <span class="kw">fn </span>mask(len: u32) -&gt; <span class="self">Self</span>;
+    <span class="kw">fn </span>masked(<span class="self">self</span>, len: u32) -&gt; <span class="self">Self</span>;
+    <span class="kw">fn </span>lsb(<span class="self">self</span>) -&gt; <span class="self">Self</span>;
+    <span class="kw">fn </span>msb(<span class="self">self</span>) -&gt; <span class="self">Self</span>;
+    <span class="kw">fn </span>iter_lsb(<span class="self">self</span>) -&gt; IterLsb&lt;<span class="self">Self</span>&gt;;
+    <span class="kw">fn </span>iter_msb(<span class="self">self</span>) -&gt; IterMsb&lt;<span class="self">Self</span>&gt;;
+    <span class="kw">fn </span>iter_ones(<span class="self">self</span>) -&gt; IterOnes&lt;<span class="self">Self</span>&gt;;
+    <span class="kw">fn </span>iter_subsets(<span class="self">self</span>) -&gt; IterSubsets&lt;<span class="self">Self</span>&gt;;
+    <span class="kw">fn </span>iter_add_one(<span class="self">self</span>, n: u32) -&gt; IterAddOne&lt;<span class="self">Self</span>&gt;;
+    <span class="kw">fn </span>iter_gosper(n: u32, k: u32) -&gt; IterGosper&lt;<span class="self">Self</span>&gt;;
+    <span class="kw">fn </span>iter_gosper_subsets(<span class="self">self</span>, k: u32) -&gt; IterGosperSubsets&lt;<span class="self">Self</span>&gt;;
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">IterLsb</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="ident">remaining</span>: <span class="ident">T</span>
+<span class="attribute">#[derive(Clone, Copy, Debug)]
+</span><span class="kw">pub struct </span>IterLsb&lt;T&gt; {
+    remaining: T
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">IterMsb</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="ident">remaining</span>: <span class="ident">T</span>
+<span class="attribute">#[derive(Clone, Copy, Debug)]
+</span><span class="kw">pub struct </span>IterMsb&lt;T&gt; {
+    remaining: T
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">IterOnes</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="ident">remaining</span>: <span class="ident">T</span>
+<span class="attribute">#[derive(Clone, Copy, Debug)]
+</span><span class="kw">pub struct </span>IterOnes&lt;T&gt; {
+    remaining: T
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">IterSubsets</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="ident">set</span>: <span class="ident">T</span>,
-    <span class="ident">next</span>: <span class="ident">T</span>,
+<span class="attribute">#[derive(Clone, Copy, Debug)]
+</span><span class="kw">pub struct </span>IterSubsets&lt;T&gt; {
+    set: T,
+    next: T,
+    fused: bool,
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">IterAddOne</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="ident">set</span>: <span class="ident">T</span>,
-    <span class="ident">subset</span>: <span class="ident">T</span>,
-    <span class="ident">used</span>: <span class="ident">T</span>,
+<span class="attribute">#[derive(Clone, Copy, Debug)]
+</span><span class="kw">pub struct </span>IterAddOne&lt;T&gt; {
+    set: T,
+    subset: T,
+    used: T,
 }
 
-<span class="kw">macro</span> <span class="ident">impl_bitops</span> {
+<span class="attribute">#[derive(Clone, Copy, Debug)]
+</span><span class="kw">pub struct </span>IterGosper&lt;T&gt; {
+    last: T,
+    next: T,
+    fused: bool,
+}
+
+<span class="kw">pub struct </span>IterGosperSubsets&lt;T&gt; {
+    set: T,
+    gosper: IterGosper&lt;T&gt;,
+}
+
+<span class="kw">macro </span>impl_bitops {
     (<span class="macro-nonterminal">$</span><span class="kw">type</span>:<span class="macro-nonterminal">ty</span>) =&gt;
     {
-        <span class="kw">impl</span> <span class="ident">IntBitOps</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="kw">type</span>
-        {
-            <span class="attribute">#[<span class="macro-nonterminal">inline</span>]</span>
-            <span class="kw">fn</span> <span class="ident">bit_width</span>(<span class="self">self</span>) -&gt; <span class="ident">u32</span> {
-                <span class="ident"><span class="self">Self</span>::BITS</span>
+        <span class="kw">impl </span>IntBitOps <span class="kw">for </span><span class="macro-nonterminal">$</span><span class="kw">type
+        </span>{
+            <span class="attribute">#[<span class="macro-nonterminal">inline</span>]
+            </span><span class="kw">fn </span>bit_width(<span class="self">self</span>) -&gt; u32 {
+                <span class="self">Self</span>::BITS
             }
 
-            <span class="attribute">#[<span class="ident">inline</span>]</span>
-            <span class="kw">fn</span> <span class="ident">bit_length</span>(<span class="self">self</span>) -&gt; <span class="ident">u32</span> {
-                <span class="ident"><span class="self">Self</span>::BITS</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">leading_zeros</span>()
+            <span class="attribute">#[inline]
+            </span><span class="kw">fn </span>bit_length(<span class="self">self</span>) -&gt; u32 {
+                <span class="self">Self</span>::BITS - <span class="self">self</span>.leading_zeros()
             }
 
-            <span class="attribute">#[<span class="ident">inline</span>]</span>
-            <span class="kw">fn</span> <span class="ident">mask</span>(<span class="ident">len</span>: <span class="ident">u32</span>) -&gt; <span class="self">Self</span> {
-                <span class="kw">if</span> <span class="ident">len</span> <span class="op">==</span> <span class="number">0</span> { <span class="kw">return</span> <span class="number">0</span> }
-                <span class="op">!</span><span class="number">0</span> <span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident"><span class="self">Self</span>::BITS</span> <span class="op">-</span> <span class="ident">len</span>
+            <span class="attribute">#[inline]
+            </span><span class="kw">fn </span>mask(len: u32) -&gt; <span class="self">Self </span>{
+                <span class="kw">if </span>len == <span class="number">0 </span>{ <span class="kw">return </span><span class="number">0 </span>}
+                !<span class="number">0 </span>&gt;&gt; <span class="self">Self</span>::BITS - len
             }
 
-            <span class="attribute">#[<span class="ident">inline</span>]</span>
-            <span class="kw">fn</span> <span class="ident">masked</span>(<span class="self">self</span>, <span class="ident">len</span>: <span class="ident">u32</span>) -&gt; <span class="self">Self</span> {
-                <span class="self">self</span> <span class="op">&amp;</span> <span class="ident"><span class="self">Self</span>::mask</span>(<span class="ident">len</span>)
+            <span class="attribute">#[inline]
+            </span><span class="kw">fn </span>masked(<span class="self">self</span>, len: u32) -&gt; <span class="self">Self </span>{
+                <span class="self">self </span>&amp; <span class="self">Self</span>::mask(len)
             }
 
-            <span class="attribute">#[<span class="ident">inline</span>]</span>
-            <span class="kw">fn</span> <span class="ident">lsb</span>(<span class="self">self</span>) -&gt; <span class="self">Self</span> {
-                <span class="self">self</span> <span class="op">&amp;</span> (<span class="op">!</span><span class="self">self</span>).<span class="ident">wrapping_add</span>(<span class="number">1</span>)
+            <span class="attribute">#[inline]
+            </span><span class="kw">fn </span>lsb(<span class="self">self</span>) -&gt; <span class="self">Self </span>{
+                <span class="self">self </span>&amp; (!<span class="self">self</span>).wrapping_add(<span class="number">1</span>)
             }
 
-            <span class="attribute">#[<span class="ident">inline</span>]</span>
-            <span class="kw">fn</span> <span class="ident">msb</span>(<span class="self">self</span>) -&gt; <span class="self">Self</span> {
-                <span class="kw">if</span> <span class="self">self</span> <span class="op">==</span> <span class="number">0</span> { <span class="kw">return</span> <span class="number">0</span> }
-                <span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="ident"><span class="self">Self</span>::BITS</span> <span class="op">-</span> <span class="number">1</span> <span class="op">&gt;</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">leading_zeros</span>()
+            <span class="attribute">#[inline]
+            </span><span class="kw">fn </span>msb(<span class="self">self</span>) -&gt; <span class="self">Self </span>{
+                <span class="kw">if </span><span class="self">self </span>== <span class="number">0 </span>{ <span class="kw">return </span><span class="number">0 </span>}
+                <span class="number">1 </span>&lt;&lt; <span class="self">Self</span>::BITS - <span class="number">1 </span>&gt;&gt; <span class="self">self</span>.leading_zeros()
             }
 
-            <span class="kw">fn</span> <span class="ident">iter_lsb</span>(<span class="self">self</span>) -&gt; <span class="ident">IterLsb</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
-                <span class="ident">IterLsb</span> { <span class="ident">remaining</span>: <span class="self">self</span> }
+            <span class="kw">fn </span>iter_lsb(<span class="self">self</span>) -&gt; IterLsb&lt;<span class="self">Self</span>&gt; {
+                IterLsb { remaining: <span class="self">self </span>}
             }
 
-            <span class="kw">fn</span> <span class="ident">iter_msb</span>(<span class="self">self</span>) -&gt; <span class="ident">IterMsb</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
-                <span class="ident">IterMsb</span> { <span class="ident">remaining</span>: <span class="self">self</span> }
+            <span class="kw">fn </span>iter_msb(<span class="self">self</span>) -&gt; IterMsb&lt;<span class="self">Self</span>&gt; {
+                IterMsb { remaining: <span class="self">self </span>}
             }
 
-            <span class="kw">fn</span> <span class="ident">iter_ones</span>(<span class="self">self</span>) -&gt; <span class="ident">IterOnes</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
-                <span class="ident">IterOnes</span> { <span class="ident">remaining</span>: <span class="self">self</span> }
+            <span class="kw">fn </span>iter_ones(<span class="self">self</span>) -&gt; IterOnes&lt;<span class="self">Self</span>&gt; {
+                IterOnes { remaining: <span class="self">self </span>}
             }
 
-            <span class="kw">fn</span> <span class="ident">iter_subsets</span>(<span class="self">self</span>) -&gt; <span class="ident">IterSubsets</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
-                <span class="ident">IterSubsets</span> {
-                    <span class="ident">set</span>: <span class="self">self</span>,
-                    <span class="ident">next</span>: <span class="self">self</span>.<span class="ident">lsb</span>()
+            <span class="kw">fn </span>iter_subsets(<span class="self">self</span>) -&gt; IterSubsets&lt;<span class="self">Self</span>&gt; {
+                IterSubsets {
+                    set: <span class="self">self</span>,
+                    next: <span class="number">0</span>,
+                    fused: <span class="bool-val">false</span>,
                 }
             }
 
-            <span class="kw">fn</span> <span class="ident">iter_add_one</span>(<span class="self">self</span>, <span class="ident">n</span>: <span class="ident">u32</span>) -&gt; <span class="ident">IterAddOne</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
-                <span class="macro">debug_assert_ne!</span>(<span class="ident">n</span>, <span class="number">0</span>);
-                <span class="macro">debug_assert!</span>(<span class="self">self</span>.<span class="ident">bit_length</span>() <span class="op">&lt;</span><span class="op">=</span> <span class="ident">n</span>);
+            <span class="kw">fn </span>iter_add_one(<span class="self">self</span>, n: u32) -&gt; IterAddOne&lt;<span class="self">Self</span>&gt; {
+                <span class="macro">debug_assert_ne!</span>(n, <span class="number">0</span>);
+                <span class="macro">debug_assert!</span>(<span class="self">self</span>.bit_length() &lt;= n);
 
-                <span class="ident">IterAddOne</span> {
-                    <span class="ident">set</span>: <span class="ident"><span class="self">Self</span>::mask</span>(<span class="ident">n</span>),
-                    <span class="ident">subset</span>: <span class="self">self</span>,
-                    <span class="ident">used</span>: <span class="self">self</span>
+                IterAddOne {
+                    set: <span class="self">Self</span>::mask(n),
+                    subset: <span class="self">self</span>,
+                    used: <span class="self">self
+                </span>}
+            }
+
+            <span class="kw">fn </span>iter_gosper(n: u32, k: u32) -&gt; IterGosper&lt;<span class="self">Self</span>&gt; {
+                <span class="macro">debug_assert_ne!</span>(k, <span class="number">0</span>);
+                <span class="macro">debug_assert!</span>(k &lt;= n);
+                <span class="macro">debug_assert!</span>(n &lt;= <span class="self">Self</span>::BITS);
+
+                IterGosper {
+                    last: <span class="self">Self</span>::mask(k) &lt;&lt; (n-k),
+                    next: <span class="self">Self</span>::mask(k),
+                    fused: <span class="bool-val">false</span>,
+                }
+            }
+
+            <span class="kw">fn </span>iter_gosper_subsets(<span class="self">self</span>, k: u32) -&gt; IterGosperSubsets&lt;<span class="self">Self</span>&gt; {
+                <span class="macro">debug_assert_ne!</span>(k, <span class="number">0</span>);
+                <span class="macro">debug_assert!</span>(k &lt;= <span class="self">self</span>.count_ones());
+
+                IterGosperSubsets {
+                    set: <span class="self">self</span>,
+                    gosper: <span class="self">Self</span>::iter_gosper(<span class="self">self</span>.count_ones(), k),
                 }
             }
         }
 
-        <span class="kw">impl</span> <span class="ident">Iterator</span> <span class="kw">for</span> <span class="ident">IterLsb</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="kw">type</span><span class="op">&gt;</span> {
-            <span class="kw">type</span> <span class="macro-nonterminal">Item</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="kw">type</span>;
+        <span class="kw">impl </span>Iterator <span class="kw">for </span>IterLsb&lt;<span class="macro-nonterminal">$</span><span class="kw">type</span>&gt; {
+            <span class="kw">type </span><span class="macro-nonterminal">Item </span>= <span class="macro-nonterminal">$</span><span class="kw">type</span>;
 
-            <span class="attribute">#[<span class="macro-nonterminal">inline</span>]</span>
-            <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Item</span><span class="op">&gt;</span>
+            <span class="attribute">#[<span class="macro-nonterminal">inline</span>]
+            </span><span class="kw">fn </span>next(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>::Item&gt;
             {
-                <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">remaining</span>;
-                <span class="kw">if</span> <span class="ident">r</span> <span class="op">==</span> <span class="number">0</span> { <span class="kw">return</span> <span class="prelude-val">None</span> }
+                <span class="kw">let </span>r = <span class="self">self</span>.remaining;
+                <span class="kw">if </span>r == <span class="number">0 </span>{ <span class="kw">return </span><span class="prelude-val">None </span>}
 
-                <span class="kw">let</span> <span class="ident">lsb</span> <span class="op">=</span> <span class="ident">r</span>.<span class="ident">lsb</span>();
-                <span class="self">self</span>.<span class="ident">remaining</span> <span class="op">=</span> <span class="ident">r</span> <span class="op">^</span> <span class="ident">lsb</span>;
-                <span class="prelude-val">Some</span>(<span class="ident">lsb</span>)
+                <span class="kw">let </span>lsb = r.lsb();
+                <span class="self">self</span>.remaining = r ^ lsb;
+                <span class="prelude-val">Some</span>(lsb)
             }
         }
 
-        <span class="kw">impl</span> <span class="ident">Iterator</span> <span class="kw">for</span> <span class="ident">IterMsb</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="kw">type</span><span class="op">&gt;</span> {
-            <span class="kw">type</span> <span class="macro-nonterminal">Item</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="kw">type</span>;
+        <span class="kw">impl </span>Iterator <span class="kw">for </span>IterMsb&lt;<span class="macro-nonterminal">$</span><span class="kw">type</span>&gt; {
+            <span class="kw">type </span><span class="macro-nonterminal">Item </span>= <span class="macro-nonterminal">$</span><span class="kw">type</span>;
 
-            <span class="attribute">#[<span class="macro-nonterminal">inline</span>]</span>
-            <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Item</span><span class="op">&gt;</span>
+            <span class="attribute">#[<span class="macro-nonterminal">inline</span>]
+            </span><span class="kw">fn </span>next(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>::Item&gt;
             {
-                <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">remaining</span>;
-                <span class="kw">if</span> <span class="ident">r</span> <span class="op">==</span> <span class="number">0</span> { <span class="kw">return</span> <span class="prelude-val">None</span> }
+                <span class="kw">let </span>r = <span class="self">self</span>.remaining;
+                <span class="kw">if </span>r == <span class="number">0 </span>{ <span class="kw">return </span><span class="prelude-val">None </span>}
 
-                <span class="kw">let</span> <span class="ident">msb</span> <span class="op">=</span> <span class="ident">r</span>.<span class="ident">msb</span>();
-                <span class="self">self</span>.<span class="ident">remaining</span> <span class="op">=</span> <span class="ident">r</span> <span class="op">^</span> <span class="ident">msb</span>;
-                <span class="prelude-val">Some</span>(<span class="ident">msb</span>)
+                <span class="kw">let </span>msb = r.msb();
+                <span class="self">self</span>.remaining = r ^ msb;
+                <span class="prelude-val">Some</span>(msb)
             }
         }
 
-        <span class="kw">impl</span> <span class="ident">Iterator</span> <span class="kw">for</span> <span class="ident">IterOnes</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="kw">type</span><span class="op">&gt;</span> {
-            <span class="kw">type</span> <span class="macro-nonterminal">Item</span> <span class="op">=</span> <span class="ident">usize</span>;
+        <span class="kw">impl </span>Iterator <span class="kw">for </span>IterOnes&lt;<span class="macro-nonterminal">$</span><span class="kw">type</span>&gt; {
+            <span class="kw">type </span><span class="macro-nonterminal">Item </span>= usize;
 
-            <span class="attribute">#[<span class="ident">inline</span>]</span>
-            <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Item</span><span class="op">&gt;</span>
+            <span class="attribute">#[inline]
+            </span><span class="kw">fn </span>next(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>::Item&gt;
             {
-                <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">remaining</span>;
-                <span class="kw">if</span> <span class="ident">r</span> <span class="op">==</span> <span class="number">0</span> { <span class="kw">return</span> <span class="prelude-val">None</span> }
+                <span class="kw">let </span>r = <span class="self">self</span>.remaining;
+                <span class="kw">if </span>r == <span class="number">0 </span>{ <span class="kw">return </span><span class="prelude-val">None </span>}
 
-                <span class="kw">let</span> <span class="ident">tz</span> <span class="op">=</span> <span class="ident">r</span>.<span class="ident">trailing_zeros</span>();
-                <span class="self">self</span>.<span class="ident">remaining</span> <span class="op">=</span> <span class="ident">r</span> <span class="op">^</span> <span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="ident">tz</span>;
-                <span class="prelude-val">Some</span>(<span class="ident">tz</span> <span class="kw">as</span> <span class="ident">usize</span>)
+                <span class="kw">let </span>tz = r.trailing_zeros();
+                <span class="self">self</span>.remaining = r ^ <span class="number">1 </span>&lt;&lt; tz;
+                <span class="prelude-val">Some</span>(tz <span class="kw">as </span>usize)
             }
         }
 
-        <span class="kw">impl</span> <span class="ident">Iterator</span> <span class="kw">for</span> <span class="ident">IterSubsets</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="kw">type</span><span class="op">&gt;</span> {
-            <span class="kw">type</span> <span class="macro-nonterminal">Item</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="kw">type</span>;
+        <span class="kw">impl </span>Iterator <span class="kw">for </span>IterSubsets&lt;<span class="macro-nonterminal">$</span><span class="kw">type</span>&gt; {
+            <span class="kw">type </span><span class="macro-nonterminal">Item </span>= <span class="macro-nonterminal">$</span><span class="kw">type</span>;
 
-            <span class="attribute">#[<span class="macro-nonterminal">inline</span>]</span>
-            <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Item</span><span class="op">&gt;</span>
+            <span class="attribute">#[<span class="macro-nonterminal">inline</span>]
+            </span><span class="kw">fn </span>next(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>::Item&gt;
             {
-                <span class="kw">let</span> <span class="self">Self</span>{<span class="ident">set</span>: <span class="ident">s</span>, <span class="ident">next</span>: <span class="ident">u</span>} <span class="op">=</span> <span class="kw-2">*</span><span class="self">self</span>;
-                <span class="kw">if</span> <span class="ident">u</span> <span class="op">==</span> <span class="number">0</span> { <span class="kw">return</span> <span class="prelude-val">None</span> }
+                <span class="kw">let </span><span class="self">Self</span>{set: s, next: u, fused} = <span class="kw-2">*</span><span class="self">self</span>;
+                <span class="kw">if </span>fused { <span class="kw">return </span><span class="prelude-val">None </span>}
 
-                <span class="self">self</span>.<span class="ident">next</span> <span class="op">=</span> (<span class="ident">u</span> <span class="op">|</span> <span class="op">!</span><span class="ident">s</span>).<span class="ident">wrapping_add</span>(<span class="number">1</span>) <span class="op">&amp;</span> <span class="ident">s</span>;
-                <span class="prelude-val">Some</span>(<span class="ident">u</span>)
+                <span class="kw">if </span>u == s { <span class="self">self</span>.fused = <span class="bool-val">true</span>; }
+                <span class="kw">else </span>{ <span class="self">self</span>.next = (u | !s) + <span class="number">1 </span>&amp; s; }
+                <span class="prelude-val">Some</span>(u)
             }
         }
 
-        <span class="kw">impl</span> <span class="ident">Iterator</span> <span class="kw">for</span> <span class="ident">IterAddOne</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="kw">type</span><span class="op">&gt;</span> {
-            <span class="kw">type</span> <span class="macro-nonterminal">Item</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="kw">type</span>;
+        <span class="kw">impl </span>Iterator <span class="kw">for </span>IterAddOne&lt;<span class="macro-nonterminal">$</span><span class="kw">type</span>&gt; {
+            <span class="kw">type </span><span class="macro-nonterminal">Item </span>= <span class="macro-nonterminal">$</span><span class="kw">type</span>;
 
-            <span class="attribute">#[<span class="macro-nonterminal">inline</span>]</span>
-            <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Item</span><span class="op">&gt;</span>
+            <span class="attribute">#[<span class="macro-nonterminal">inline</span>]
+            </span><span class="kw">fn </span>next(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>::Item&gt;
             {
-                <span class="kw">let</span> <span class="self">Self</span>{<span class="ident">set</span>: <span class="ident">s</span>, <span class="ident">subset</span>: <span class="ident">u</span>, <span class="ident">used</span>: <span class="ident">v</span>} <span class="op">=</span> <span class="kw-2">*</span><span class="self">self</span>;
-                <span class="kw">if</span> <span class="ident">v</span> <span class="op">==</span> <span class="ident">s</span> { <span class="kw">return</span> <span class="prelude-val">None</span> }
+                <span class="kw">let </span><span class="self">Self</span>{set: s, subset: u, used: v} = <span class="kw-2">*</span><span class="self">self</span>;
+                <span class="kw">if </span>v == s { <span class="kw">return </span><span class="prelude-val">None </span>}
 
-                <span class="kw">let</span> <span class="ident">w</span> <span class="op">=</span> (<span class="ident">v</span><span class="op">+</span><span class="number">1</span>) <span class="op">|</span> <span class="ident">u</span>;
-                <span class="self">self</span>.<span class="ident">used</span> <span class="op">|</span><span class="op">=</span> <span class="ident">w</span>;
-                <span class="prelude-val">Some</span>(<span class="ident">w</span>)
+                <span class="kw">let </span>w = (v+<span class="number">1</span>) | u;
+                <span class="self">self</span>.used |= w;
+                <span class="prelude-val">Some</span>(w)
+            }
+        }
+
+        <span class="kw">impl </span>Iterator <span class="kw">for </span>IterGosper&lt;<span class="macro-nonterminal">$</span><span class="kw">type</span>&gt; {
+            <span class="kw">type </span><span class="macro-nonterminal">Item </span>= <span class="macro-nonterminal">$</span><span class="kw">type</span>;
+
+            <span class="attribute">#[<span class="macro-nonterminal">inline</span>]
+            </span><span class="kw">fn </span>next(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>::Item&gt;
+            {
+                <span class="kw">let </span><span class="self">Self</span>{last, next: u, fused} = <span class="kw-2">*</span><span class="self">self</span>;
+                <span class="kw">if </span>fused { <span class="kw">return </span><span class="prelude-val">None </span>}
+
+                <span class="kw">if </span>u == last { <span class="self">self</span>.fused = <span class="bool-val">true</span>; }
+                <span class="kw">else </span>{
+                    <span class="kw">let </span>lsb = u.lsb();
+                    <span class="kw">let </span>v = u + lsb;
+                    <span class="self">self</span>.next = (((v^u) &gt;&gt; <span class="number">2</span>) / lsb) | v;
+                }
+                <span class="prelude-val">Some</span>(u)
+            }
+        }
+
+        <span class="kw">impl </span>Iterator <span class="kw">for </span>IterGosperSubsets&lt;<span class="macro-nonterminal">$</span><span class="kw">type</span>&gt; {
+            <span class="kw">type </span><span class="macro-nonterminal">Item </span>= <span class="macro-nonterminal">$</span><span class="kw">type</span>;
+
+            <span class="attribute">#[<span class="macro-nonterminal">inline</span>]
+            </span><span class="kw">fn </span>next(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>::Item&gt;
+            {
+                <span class="kw">let </span>g = <span class="self">self</span>.gosper.next()<span class="question-mark">?</span>;
+
+                <span class="kw">let </span><span class="kw-2">mut </span>u = <span class="number">0</span>;
+                <span class="kw">for </span>(i, v) <span class="kw">in </span><span class="self">self</span>.set.iter_lsb().enumerate() {
+                    <span class="kw">if </span>g &gt;&gt; i <span class="kw-2">&amp;</span><span class="number">1</span>==<span class="number">1 </span>{
+                        u |= v;
+                    }
+                }
+                <span class="prelude-val">Some</span>(u)
             }
         }
     },
 
-    ( $( <span class="macro-nonterminal">$</span><span class="kw">type</span>:<span class="macro-nonterminal">ty</span> ),<span class="op">+</span> ) =&gt; {
-        $( <span class="macro">impl_bitops!</span>(<span class="macro-nonterminal">$</span><span class="kw">type</span>); )<span class="op">*</span>
+    ( $( <span class="macro-nonterminal">$</span><span class="kw">type</span>:<span class="macro-nonterminal">ty </span>),+ ) =&gt; {
+        $( <span class="macro">impl_bitops!</span>(<span class="macro-nonterminal">$</span><span class="kw">type</span>); )*
     },
 }
 
-<span class="macro">impl_bitops!</span>(<span class="macro-nonterminal">usize</span>, <span class="ident">u128</span>, <span class="ident">u64</span>, <span class="ident">u32</span>, <span class="ident">u16</span>, <span class="ident">u8</span>);
+<span class="macro">impl_bitops!</span>(<span class="macro-nonterminal">usize</span>, u128, u64, u32, u16, u8);
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="rithmic" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0-nightly (12cd71f4d 2022-06-01)" ></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="rithmic" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (17cbdfd07 2022-09-13)" ></div></body></html>

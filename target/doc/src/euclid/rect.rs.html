@@ -1,11 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/bcfam/.cargo/registry/src/github.com-1ecc6299db9ec823/euclid-0.22.7/src/rect.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>rect.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><script defer src="../../main.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script>
-    <noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../euclid/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"></h2>
-    </nav>
-    <nav class="sidebar"><a class="sidebar-logo" href="../../euclid/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../euclid/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
-                                <a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div>
-                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/bcfam/.cargo/registry/src/github.com-1ecc6299db9ec823/euclid-0.22.7/src/rect.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>rect.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../euclid/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../euclid/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../euclid/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -936,937 +929,936 @@
 <span id="929">929</span>
 <span id="930">930</span>
 <span id="931">931</span>
-</pre><pre class="rust"><code><span class="comment">// Copyright 2013 The Servo Project Developers. See the COPYRIGHT</span>
-<span class="comment">// file at the top-level directory of this distribution.</span>
-<span class="comment">//</span>
-<span class="comment">// Licensed under the Apache License, Version 2.0 &lt;LICENSE-APACHE or</span>
-<span class="comment">// http://www.apache.org/licenses/LICENSE-2.0&gt; or the MIT license</span>
-<span class="comment">// &lt;LICENSE-MIT or http://opensource.org/licenses/MIT&gt;, at your</span>
-<span class="comment">// option. This file may not be copied, modified, or distributed</span>
-<span class="comment">// except according to those terms.</span>
+</pre><pre class="rust"><code><span class="comment">// Copyright 2013 The Servo Project Developers. See the COPYRIGHT
+// file at the top-level directory of this distribution.
+//
+// Licensed under the Apache License, Version 2.0 &lt;LICENSE-APACHE or
+// http://www.apache.org/licenses/LICENSE-2.0&gt; or the MIT license
+// &lt;LICENSE-MIT or http://opensource.org/licenses/MIT&gt;, at your
+// option. This file may not be copied, modified, or distributed
+// except according to those terms.
 
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::UnknownUnit</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::box2d::Box2D</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::num</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::point::Point2D</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::scale::Scale</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::side_offsets::SideOffsets2D</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::size::Size2D</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::vector::Vector2D</span>;
+</span><span class="kw">use </span><span class="kw">super</span>::UnknownUnit;
+<span class="kw">use </span><span class="kw">crate</span>::box2d::Box2D;
+<span class="kw">use </span><span class="kw">crate</span>::num::<span class="kw-2">*</span>;
+<span class="kw">use </span><span class="kw">crate</span>::point::Point2D;
+<span class="kw">use </span><span class="kw">crate</span>::scale::Scale;
+<span class="kw">use </span><span class="kw">crate</span>::side_offsets::SideOffsets2D;
+<span class="kw">use </span><span class="kw">crate</span>::size::Size2D;
+<span class="kw">use </span><span class="kw">crate</span>::vector::Vector2D;
 
-<span class="kw">use</span> <span class="ident">num_traits</span>::{<span class="ident">NumCast</span>, <span class="ident">Float</span>};
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;serde&quot;</span>)]</span>
-<span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>};
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;bytemuck&quot;</span>)]</span>
-<span class="kw">use</span> <span class="ident">bytemuck</span>::{<span class="ident">Zeroable</span>, <span class="ident">Pod</span>};
+<span class="kw">use </span>num_traits::{NumCast, Float};
+<span class="attribute">#[cfg(feature = <span class="string">&quot;serde&quot;</span>)]
+</span><span class="kw">use </span>serde::{Deserialize, Serialize};
+<span class="attribute">#[cfg(feature = <span class="string">&quot;bytemuck&quot;</span>)]
+</span><span class="kw">use </span>bytemuck::{Zeroable, Pod};
 
-<span class="kw">use</span> <span class="ident">core::borrow::Borrow</span>;
-<span class="kw">use</span> <span class="ident">core::cmp::PartialOrd</span>;
-<span class="kw">use</span> <span class="ident">core::fmt</span>;
-<span class="kw">use</span> <span class="ident">core::hash</span>::{<span class="ident">Hash</span>, <span class="ident">Hasher</span>};
-<span class="kw">use</span> <span class="ident">core::ops</span>::{<span class="ident">Add</span>, <span class="ident">Div</span>, <span class="ident">DivAssign</span>, <span class="ident">Mul</span>, <span class="ident">MulAssign</span>, <span class="ident">Range</span>, <span class="ident">Sub</span>};
+<span class="kw">use </span>core::borrow::Borrow;
+<span class="kw">use </span>core::cmp::PartialOrd;
+<span class="kw">use </span>core::fmt;
+<span class="kw">use </span>core::hash::{Hash, Hasher};
+<span class="kw">use </span>core::ops::{Add, Div, DivAssign, Mul, MulAssign, Range, Sub};
 
-<span class="doccomment">/// A 2d Rectangle optionally tagged with a unit.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Representation</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// `Rect` is represented by an origin point and a size.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// See [`Box2D`] for a rectangle represented by two endpoints.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Empty rectangle</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// A rectangle is considered empty (see [`is_empty`]) if any of the following is true:</span>
-<span class="doccomment">/// - it&#39;s area is empty,</span>
-<span class="doccomment">/// - it&#39;s area is negative (`size.x &lt; 0` or `size.y &lt; 0`),</span>
-<span class="doccomment">/// - it contains NaNs.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// [`is_empty`]: #method.is_empty</span>
-<span class="doccomment">/// [`Box2D`]: struct.Box2D.html</span>
-<span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
-<span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;serde&quot;</span>, <span class="ident">derive</span>(<span class="ident">Serialize</span>, <span class="ident">Deserialize</span>))]</span>
-<span class="attribute">#[<span class="ident">cfg_attr</span>(
-    <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;serde&quot;</span>,
-    <span class="ident">serde</span>(<span class="ident">bound</span>(<span class="ident">serialize</span> <span class="op">=</span> <span class="string">&quot;T: Serialize&quot;</span>, <span class="ident">deserialize</span> <span class="op">=</span> <span class="string">&quot;T: Deserialize&lt;&#39;de&gt;&quot;</span>))
-)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="kw">pub</span> <span class="ident">origin</span>: <span class="ident">Point2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">size</span>: <span class="ident">Size2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>,
+<span class="doccomment">/// A 2d Rectangle optionally tagged with a unit.
+///
+/// # Representation
+///
+/// `Rect` is represented by an origin point and a size.
+///
+/// See [`Box2D`] for a rectangle represented by two endpoints.
+///
+/// # Empty rectangle
+///
+/// A rectangle is considered empty (see [`is_empty`]) if any of the following is true:
+/// - it&#39;s area is empty,
+/// - it&#39;s area is negative (`size.x &lt; 0` or `size.y &lt; 0`),
+/// - it contains NaNs.
+///
+/// [`is_empty`]: #method.is_empty
+/// [`Box2D`]: struct.Box2D.html
+</span><span class="attribute">#[repr(C)]
+#[cfg_attr(feature = <span class="string">&quot;serde&quot;</span>, derive(Serialize, Deserialize))]
+#[cfg_attr(
+    feature = <span class="string">&quot;serde&quot;</span>,
+    serde(bound(serialize = <span class="string">&quot;T: Serialize&quot;</span>, deserialize = <span class="string">&quot;T: Deserialize&lt;&#39;de&gt;&quot;</span>))
+)]
+</span><span class="kw">pub struct </span>Rect&lt;T, U&gt; {
+    <span class="kw">pub </span>origin: Point2D&lt;T, U&gt;,
+    <span class="kw">pub </span>size: Size2D&lt;T, U&gt;,
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;arbitrary&quot;</span>)]</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">arbitrary::Arbitrary</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">arbitrary::Arbitrary</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
+<span class="attribute">#[cfg(feature = <span class="string">&quot;arbitrary&quot;</span>)]
+</span><span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, T, U&gt; arbitrary::Arbitrary&lt;<span class="lifetime">&#39;a</span>&gt; <span class="kw">for </span>Rect&lt;T, U&gt;
+<span class="kw">where
+    </span>T: arbitrary::Arbitrary&lt;<span class="lifetime">&#39;a</span>&gt;,
 {
-    <span class="kw">fn</span> <span class="ident">arbitrary</span>(<span class="ident">u</span>: <span class="kw-2">&amp;mut</span> <span class="ident">arbitrary::Unstructured</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>) -&gt; <span class="ident">arbitrary::Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>
+    <span class="kw">fn </span>arbitrary(u: <span class="kw-2">&amp;mut </span>arbitrary::Unstructured&lt;<span class="lifetime">&#39;a</span>&gt;) -&gt; arbitrary::Result&lt;<span class="self">Self</span>&gt;
     {
-        <span class="kw">let</span> (<span class="ident">origin</span>, <span class="ident">size</span>) <span class="op">=</span> <span class="ident">arbitrary::Arbitrary::arbitrary</span>(<span class="ident">u</span>)<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(<span class="ident">Rect</span> {
-            <span class="ident">origin</span>,
-            <span class="ident">size</span>,
+        <span class="kw">let </span>(origin, size) = arbitrary::Arbitrary::arbitrary(u)<span class="question-mark">?</span>;
+        <span class="prelude-val">Ok</span>(Rect {
+            origin,
+            size,
         })
     }
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;bytemuck&quot;</span>)]</span>
-<span class="kw">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Zeroable</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Zeroable</span> <span class="kw">for</span> <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {}
+<span class="attribute">#[cfg(feature = <span class="string">&quot;bytemuck&quot;</span>)]
+</span><span class="kw">unsafe impl</span>&lt;T: Zeroable, U&gt; Zeroable <span class="kw">for </span>Rect&lt;T, U&gt; {}
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;bytemuck&quot;</span>)]</span>
-<span class="kw">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Pod</span>, <span class="ident">U</span>: <span class="lifetime">&#39;static</span><span class="op">&gt;</span> <span class="ident">Pod</span> <span class="kw">for</span> <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {}
+<span class="attribute">#[cfg(feature = <span class="string">&quot;bytemuck&quot;</span>)]
+</span><span class="kw">unsafe impl</span>&lt;T: Pod, U: <span class="lifetime">&#39;static</span>&gt; Pod <span class="kw">for </span>Rect&lt;T, U&gt; {}
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Hash</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Hash</span> <span class="kw">for</span> <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">hash</span><span class="op">&lt;</span><span class="ident">H</span>: <span class="ident">Hasher</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">h</span>: <span class="kw-2">&amp;mut</span> <span class="ident">H</span>) {
-        <span class="self">self</span>.<span class="ident">origin</span>.<span class="ident">hash</span>(<span class="ident">h</span>);
-        <span class="self">self</span>.<span class="ident">size</span>.<span class="ident">hash</span>(<span class="ident">h</span>);
+<span class="kw">impl</span>&lt;T: Hash, U&gt; Hash <span class="kw">for </span>Rect&lt;T, U&gt; {
+    <span class="kw">fn </span>hash&lt;H: Hasher&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, h: <span class="kw-2">&amp;mut </span>H) {
+        <span class="self">self</span>.origin.hash(h);
+        <span class="self">self</span>.size.hash(h);
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Copy</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Copy</span> <span class="kw">for</span> <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {}
+<span class="kw">impl</span>&lt;T: Copy, U&gt; Copy <span class="kw">for </span>Rect&lt;T, U&gt; {}
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Clone</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Clone</span> <span class="kw">for</span> <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::new</span>(<span class="self">self</span>.<span class="ident">origin</span>.<span class="ident">clone</span>(), <span class="self">self</span>.<span class="ident">size</span>.<span class="ident">clone</span>())
+<span class="kw">impl</span>&lt;T: Clone, U&gt; Clone <span class="kw">for </span>Rect&lt;T, U&gt; {
+    <span class="kw">fn </span>clone(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::new(<span class="self">self</span>.origin.clone(), <span class="self">self</span>.size.clone())
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">PartialEq</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">PartialEq</span> <span class="kw">for</span> <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">eq</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">origin</span>.<span class="ident">eq</span>(<span class="kw-2">&amp;</span><span class="ident">other</span>.<span class="ident">origin</span>) <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">size</span>.<span class="ident">eq</span>(<span class="kw-2">&amp;</span><span class="ident">other</span>.<span class="ident">size</span>)
+<span class="kw">impl</span>&lt;T: PartialEq, U&gt; PartialEq <span class="kw">for </span>Rect&lt;T, U&gt; {
+    <span class="kw">fn </span>eq(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; bool {
+        <span class="self">self</span>.origin.eq(<span class="kw-2">&amp;</span>other.origin) &amp;&amp; <span class="self">self</span>.size.eq(<span class="kw-2">&amp;</span>other.size)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Eq</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Eq</span> <span class="kw">for</span> <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {}
+<span class="kw">impl</span>&lt;T: Eq, U&gt; Eq <span class="kw">for </span>Rect&lt;T, U&gt; {}
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">fmt::Debug</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">fmt::Debug</span> <span class="kw">for</span> <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">fmt::Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
-        <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;Rect(&quot;</span>)<span class="question-mark">?</span>;
-        <span class="ident">fmt::Debug::fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">size</span>, <span class="ident">f</span>)<span class="question-mark">?</span>;
-        <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot; at &quot;</span>)<span class="question-mark">?</span>;
-        <span class="ident">fmt::Debug::fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">origin</span>, <span class="ident">f</span>)<span class="question-mark">?</span>;
-        <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;)&quot;</span>)
+<span class="kw">impl</span>&lt;T: fmt::Debug, U&gt; fmt::Debug <span class="kw">for </span>Rect&lt;T, U&gt; {
+    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>fmt::Formatter) -&gt; fmt::Result {
+        <span class="macro">write!</span>(f, <span class="string">&quot;Rect(&quot;</span>)<span class="question-mark">?</span>;
+        fmt::Debug::fmt(<span class="kw-2">&amp;</span><span class="self">self</span>.size, f)<span class="question-mark">?</span>;
+        <span class="macro">write!</span>(f, <span class="string">&quot; at &quot;</span>)<span class="question-mark">?</span>;
+        fmt::Debug::fmt(<span class="kw-2">&amp;</span><span class="self">self</span>.origin, f)<span class="question-mark">?</span>;
+        <span class="macro">write!</span>(f, <span class="string">&quot;)&quot;</span>)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Default</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> {
-        <span class="ident">Rect::new</span>(<span class="ident">Default::default</span>(), <span class="ident">Default::default</span>())
+<span class="kw">impl</span>&lt;T: Default, U&gt; Default <span class="kw">for </span>Rect&lt;T, U&gt; {
+    <span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
+        Rect::new(Default::default(), Default::default())
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Constructor.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">origin</span>: <span class="ident">Point2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>, <span class="ident">size</span>: <span class="ident">Size2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">Rect</span> { <span class="ident">origin</span>, <span class="ident">size</span> }
+<span class="kw">impl</span>&lt;T, U&gt; Rect&lt;T, U&gt; {
+    <span class="doccomment">/// Constructor.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub const fn </span>new(origin: Point2D&lt;T, U&gt;, size: Size2D&lt;T, U&gt;) -&gt; <span class="self">Self </span>{
+        Rect { origin, size }
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Zero</span>,
+<span class="kw">impl</span>&lt;T, U&gt; Rect&lt;T, U&gt;
+<span class="kw">where
+    </span>T: Zero,
 {
-    <span class="doccomment">/// Constructor, setting all sides to zero.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">zero</span>() -&gt; <span class="self">Self</span> {
-        <span class="ident">Rect::new</span>(<span class="ident">Point2D::origin</span>(), <span class="ident">Size2D::zero</span>())
+    <span class="doccomment">/// Constructor, setting all sides to zero.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>zero() -&gt; <span class="self">Self </span>{
+        Rect::new(Point2D::origin(), Size2D::zero())
     }
 
-    <span class="doccomment">/// Creates a rect of the given size, at offset zero.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_size</span>(<span class="ident">size</span>: <span class="ident">Size2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">Rect</span> {
-            <span class="ident">origin</span>: <span class="ident">Point2D::zero</span>(),
-            <span class="ident">size</span>,
+    <span class="doccomment">/// Creates a rect of the given size, at offset zero.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>from_size(size: Size2D&lt;T, U&gt;) -&gt; <span class="self">Self </span>{
+        Rect {
+            origin: Point2D::zero(),
+            size,
         }
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Add</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span>,
+<span class="kw">impl</span>&lt;T, U&gt; Rect&lt;T, U&gt;
+<span class="kw">where
+    </span>T: Copy + Add&lt;T, Output = T&gt;,
 {
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">min</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Point2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">origin</span>
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>min(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Point2D&lt;T, U&gt; {
+        <span class="self">self</span>.origin
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">max</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Point2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">origin</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">size</span>
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>max(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Point2D&lt;T, U&gt; {
+        <span class="self">self</span>.origin + <span class="self">self</span>.size
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">max_x</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">T</span> {
-        <span class="self">self</span>.<span class="ident">origin</span>.<span class="ident">x</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">size</span>.<span class="ident">width</span>
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>max_x(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; T {
+        <span class="self">self</span>.origin.x + <span class="self">self</span>.size.width
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">min_x</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">T</span> {
-        <span class="self">self</span>.<span class="ident">origin</span>.<span class="ident">x</span>
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>min_x(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; T {
+        <span class="self">self</span>.origin.x
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">max_y</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">T</span> {
-        <span class="self">self</span>.<span class="ident">origin</span>.<span class="ident">y</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">size</span>.<span class="ident">height</span>
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>max_y(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; T {
+        <span class="self">self</span>.origin.y + <span class="self">self</span>.size.height
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">min_y</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">T</span> {
-        <span class="self">self</span>.<span class="ident">origin</span>.<span class="ident">y</span>
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>min_y(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; T {
+        <span class="self">self</span>.origin.y
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">width</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">T</span> {
-        <span class="self">self</span>.<span class="ident">size</span>.<span class="ident">width</span>
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>width(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; T {
+        <span class="self">self</span>.size.width
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">height</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">T</span> {
-        <span class="self">self</span>.<span class="ident">size</span>.<span class="ident">height</span>
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>height(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; T {
+        <span class="self">self</span>.size.height
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">x_range</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Range</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">min_x</span>()..<span class="self">self</span>.<span class="ident">max_x</span>()
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>x_range(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Range&lt;T&gt; {
+        <span class="self">self</span>.min_x()..<span class="self">self</span>.max_x()
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">y_range</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Range</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">min_y</span>()..<span class="self">self</span>.<span class="ident">max_y</span>()
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>y_range(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Range&lt;T&gt; {
+        <span class="self">self</span>.min_y()..<span class="self">self</span>.max_y()
     }
 
-    <span class="doccomment">/// Returns the same rectangle, translated by a vector.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">translate</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">by</span>: <span class="ident">Vector2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::new</span>(<span class="self">self</span>.<span class="ident">origin</span> <span class="op">+</span> <span class="ident">by</span>, <span class="self">self</span>.<span class="ident">size</span>)
+    <span class="doccomment">/// Returns the same rectangle, translated by a vector.
+    </span><span class="attribute">#[inline]
+    #[must_use]
+    </span><span class="kw">pub fn </span>translate(<span class="kw-2">&amp;</span><span class="self">self</span>, by: Vector2D&lt;T, U&gt;) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::new(<span class="self">self</span>.origin + by, <span class="self">self</span>.size)
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_box2d</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-        <span class="ident">Box2D</span> {
-            <span class="ident">min</span>: <span class="self">self</span>.<span class="ident">min</span>(),
-            <span class="ident">max</span>: <span class="self">self</span>.<span class="ident">max</span>(),
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>to_box2d(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Box2D&lt;T, U&gt; {
+        Box2D {
+            min: <span class="self">self</span>.min(),
+            max: <span class="self">self</span>.max(),
         }
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">Add</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span>,
+<span class="kw">impl</span>&lt;T, U&gt; Rect&lt;T, U&gt;
+<span class="kw">where
+    </span>T: Copy + PartialOrd + Add&lt;T, Output = T&gt;,
 {
-    <span class="doccomment">/// Returns true if this rectangle contains the point. Points are considered</span>
-    <span class="doccomment">/// in the rectangle if they are on the left or top edge, but outside if they</span>
-    <span class="doccomment">/// are on the right or bottom edge.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">p</span>: <span class="ident">Point2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">to_box2d</span>().<span class="ident">contains</span>(<span class="ident">p</span>)
+    <span class="doccomment">/// Returns true if this rectangle contains the point. Points are considered
+    /// in the rectangle if they are on the left or top edge, but outside if they
+    /// are on the right or bottom edge.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>contains(<span class="kw-2">&amp;</span><span class="self">self</span>, p: Point2D&lt;T, U&gt;) -&gt; bool {
+        <span class="self">self</span>.to_box2d().contains(p)
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">intersects</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">to_box2d</span>().<span class="ident">intersects</span>(<span class="kw-2">&amp;</span><span class="ident">other</span>.<span class="ident">to_box2d</span>())
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>intersects(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; bool {
+        <span class="self">self</span>.to_box2d().intersects(<span class="kw-2">&amp;</span>other.to_box2d())
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">Add</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Sub</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span>,
+<span class="kw">impl</span>&lt;T, U&gt; Rect&lt;T, U&gt;
+<span class="kw">where
+    </span>T: Copy + PartialOrd + Add&lt;T, Output = T&gt; + Sub&lt;T, Output = T&gt;,
 {
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">intersection</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">box2d</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">to_box2d</span>().<span class="ident">intersection_unchecked</span>(<span class="kw-2">&amp;</span><span class="ident">other</span>.<span class="ident">to_box2d</span>());
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>intersection(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>&gt; {
+        <span class="kw">let </span>box2d = <span class="self">self</span>.to_box2d().intersection_unchecked(<span class="kw-2">&amp;</span>other.to_box2d());
 
-        <span class="kw">if</span> <span class="ident">box2d</span>.<span class="ident">is_empty</span>() {
-            <span class="kw">return</span> <span class="prelude-val">None</span>;
+        <span class="kw">if </span>box2d.is_empty() {
+            <span class="kw">return </span><span class="prelude-val">None</span>;
         }
 
-        <span class="prelude-val">Some</span>(<span class="ident">box2d</span>.<span class="ident">to_rect</span>())
+        <span class="prelude-val">Some</span>(box2d.to_rect())
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Add</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Sub</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span>,
+<span class="kw">impl</span>&lt;T, U&gt; Rect&lt;T, U&gt;
+<span class="kw">where
+    </span>T: Copy + Add&lt;T, Output = T&gt; + Sub&lt;T, Output = T&gt;,
 {
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">inflate</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">width</span>: <span class="ident">T</span>, <span class="ident">height</span>: <span class="ident">T</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">Rect::new</span>(
-            <span class="ident">Point2D::new</span>(<span class="self">self</span>.<span class="ident">origin</span>.<span class="ident">x</span> <span class="op">-</span> <span class="ident">width</span>, <span class="self">self</span>.<span class="ident">origin</span>.<span class="ident">y</span> <span class="op">-</span> <span class="ident">height</span>),
-            <span class="ident">Size2D::new</span>(
-                <span class="self">self</span>.<span class="ident">size</span>.<span class="ident">width</span> <span class="op">+</span> <span class="ident">width</span> <span class="op">+</span> <span class="ident">width</span>,
-                <span class="self">self</span>.<span class="ident">size</span>.<span class="ident">height</span> <span class="op">+</span> <span class="ident">height</span> <span class="op">+</span> <span class="ident">height</span>,
+    <span class="attribute">#[inline]
+    #[must_use]
+    </span><span class="kw">pub fn </span>inflate(<span class="kw-2">&amp;</span><span class="self">self</span>, width: T, height: T) -&gt; <span class="self">Self </span>{
+        Rect::new(
+            Point2D::new(<span class="self">self</span>.origin.x - width, <span class="self">self</span>.origin.y - height),
+            Size2D::new(
+                <span class="self">self</span>.size.width + width + width,
+                <span class="self">self</span>.size.height + height + height,
             ),
         )
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Zero</span> <span class="op">+</span> <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">Add</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span>,
+<span class="kw">impl</span>&lt;T, U&gt; Rect&lt;T, U&gt;
+<span class="kw">where
+    </span>T: Copy + Zero + PartialOrd + Add&lt;T, Output = T&gt;,
 {
-    <span class="doccomment">/// Returns true if this rectangle contains the interior of rect. Always</span>
-    <span class="doccomment">/// returns true if rect is empty, and always returns false if rect is</span>
-    <span class="doccomment">/// nonempty but this rectangle is empty.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">contains_rect</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">rect</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="ident">rect</span>.<span class="ident">is_empty</span>()
-            <span class="op">|</span><span class="op">|</span> (<span class="self">self</span>.<span class="ident">min_x</span>() <span class="op">&lt;</span><span class="op">=</span> <span class="ident">rect</span>.<span class="ident">min_x</span>()
-                <span class="op">&amp;&amp;</span> <span class="ident">rect</span>.<span class="ident">max_x</span>() <span class="op">&lt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">max_x</span>()
-                <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">min_y</span>() <span class="op">&lt;</span><span class="op">=</span> <span class="ident">rect</span>.<span class="ident">min_y</span>()
-                <span class="op">&amp;&amp;</span> <span class="ident">rect</span>.<span class="ident">max_y</span>() <span class="op">&lt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">max_y</span>())
+    <span class="doccomment">/// Returns true if this rectangle contains the interior of rect. Always
+    /// returns true if rect is empty, and always returns false if rect is
+    /// nonempty but this rectangle is empty.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>contains_rect(<span class="kw-2">&amp;</span><span class="self">self</span>, rect: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; bool {
+        rect.is_empty()
+            || (<span class="self">self</span>.min_x() &lt;= rect.min_x()
+                &amp;&amp; rect.max_x() &lt;= <span class="self">self</span>.max_x()
+                &amp;&amp; <span class="self">self</span>.min_y() &lt;= rect.min_y()
+                &amp;&amp; rect.max_y() &lt;= <span class="self">self</span>.max_y())
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Zero</span> <span class="op">+</span> <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">Add</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Sub</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span>,
+<span class="kw">impl</span>&lt;T, U&gt; Rect&lt;T, U&gt;
+<span class="kw">where
+    </span>T: Copy + Zero + PartialOrd + Add&lt;T, Output = T&gt; + Sub&lt;T, Output = T&gt;,
 {
-    <span class="doccomment">/// Calculate the size and position of an inner rectangle.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Subtracts the side offsets from all sides. The horizontal and vertical</span>
-    <span class="doccomment">/// offsets must not be larger than the original side length.</span>
-    <span class="doccomment">/// This method assumes y oriented downward.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">inner_rect</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">offsets</span>: <span class="ident">SideOffsets2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">rect</span> <span class="op">=</span> <span class="ident">Rect::new</span>(
-            <span class="ident">Point2D::new</span>(<span class="self">self</span>.<span class="ident">origin</span>.<span class="ident">x</span> <span class="op">+</span> <span class="ident">offsets</span>.<span class="ident">left</span>, <span class="self">self</span>.<span class="ident">origin</span>.<span class="ident">y</span> <span class="op">+</span> <span class="ident">offsets</span>.<span class="ident">top</span>),
-            <span class="ident">Size2D::new</span>(
-                <span class="self">self</span>.<span class="ident">size</span>.<span class="ident">width</span> <span class="op">-</span> <span class="ident">offsets</span>.<span class="ident">horizontal</span>(),
-                <span class="self">self</span>.<span class="ident">size</span>.<span class="ident">height</span> <span class="op">-</span> <span class="ident">offsets</span>.<span class="ident">vertical</span>(),
+    <span class="doccomment">/// Calculate the size and position of an inner rectangle.
+    ///
+    /// Subtracts the side offsets from all sides. The horizontal and vertical
+    /// offsets must not be larger than the original side length.
+    /// This method assumes y oriented downward.
+    </span><span class="kw">pub fn </span>inner_rect(<span class="kw-2">&amp;</span><span class="self">self</span>, offsets: SideOffsets2D&lt;T, U&gt;) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>rect = Rect::new(
+            Point2D::new(<span class="self">self</span>.origin.x + offsets.left, <span class="self">self</span>.origin.y + offsets.top),
+            Size2D::new(
+                <span class="self">self</span>.size.width - offsets.horizontal(),
+                <span class="self">self</span>.size.height - offsets.vertical(),
             ),
         );
-        <span class="macro">debug_assert!</span>(<span class="ident">rect</span>.<span class="ident">size</span>.<span class="ident">width</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">Zero::zero</span>());
-        <span class="macro">debug_assert!</span>(<span class="ident">rect</span>.<span class="ident">size</span>.<span class="ident">height</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">Zero::zero</span>());
-        <span class="ident">rect</span>
+        <span class="macro">debug_assert!</span>(rect.size.width &gt;= Zero::zero());
+        <span class="macro">debug_assert!</span>(rect.size.height &gt;= Zero::zero());
+        rect
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Add</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Sub</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span>,
+<span class="kw">impl</span>&lt;T, U&gt; Rect&lt;T, U&gt;
+<span class="kw">where
+    </span>T: Copy + Add&lt;T, Output = T&gt; + Sub&lt;T, Output = T&gt;,
 {
-    <span class="doccomment">/// Calculate the size and position of an outer rectangle.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Add the offsets to all sides. The expanded rectangle is returned.</span>
-    <span class="doccomment">/// This method assumes y oriented downward.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">outer_rect</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">offsets</span>: <span class="ident">SideOffsets2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">Rect::new</span>(
-            <span class="ident">Point2D::new</span>(<span class="self">self</span>.<span class="ident">origin</span>.<span class="ident">x</span> <span class="op">-</span> <span class="ident">offsets</span>.<span class="ident">left</span>, <span class="self">self</span>.<span class="ident">origin</span>.<span class="ident">y</span> <span class="op">-</span> <span class="ident">offsets</span>.<span class="ident">top</span>),
-            <span class="ident">Size2D::new</span>(
-                <span class="self">self</span>.<span class="ident">size</span>.<span class="ident">width</span> <span class="op">+</span> <span class="ident">offsets</span>.<span class="ident">horizontal</span>(),
-                <span class="self">self</span>.<span class="ident">size</span>.<span class="ident">height</span> <span class="op">+</span> <span class="ident">offsets</span>.<span class="ident">vertical</span>(),
+    <span class="doccomment">/// Calculate the size and position of an outer rectangle.
+    ///
+    /// Add the offsets to all sides. The expanded rectangle is returned.
+    /// This method assumes y oriented downward.
+    </span><span class="kw">pub fn </span>outer_rect(<span class="kw-2">&amp;</span><span class="self">self</span>, offsets: SideOffsets2D&lt;T, U&gt;) -&gt; <span class="self">Self </span>{
+        Rect::new(
+            Point2D::new(<span class="self">self</span>.origin.x - offsets.left, <span class="self">self</span>.origin.y - offsets.top),
+            Size2D::new(
+                <span class="self">self</span>.size.width + offsets.horizontal(),
+                <span class="self">self</span>.size.height + offsets.vertical(),
             ),
         )
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Zero</span> <span class="op">+</span> <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">Sub</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span>,
+<span class="kw">impl</span>&lt;T, U&gt; Rect&lt;T, U&gt;
+<span class="kw">where
+    </span>T: Copy + Zero + PartialOrd + Sub&lt;T, Output = T&gt;,
 {
-    <span class="doccomment">/// Returns the smallest rectangle defined by the top/bottom/left/right-most</span>
-    <span class="doccomment">/// points provided as parameter.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Note: This function has a behavior that can be surprising because</span>
-    <span class="doccomment">/// the right-most and bottom-most points are exactly on the edge</span>
-    <span class="doccomment">/// of the rectangle while the `contains` function is has exclusive</span>
-    <span class="doccomment">/// semantic on these edges. This means that the right-most and bottom-most</span>
-    <span class="doccomment">/// points provided to `from_points` will count as not contained by the rect.</span>
-    <span class="doccomment">/// This behavior may change in the future.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_points</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="ident">points</span>: <span class="ident">I</span>) -&gt; <span class="self">Self</span>
-    <span class="kw">where</span>
-        <span class="ident">I</span>: <span class="ident">IntoIterator</span>,
-        <span class="ident">I::Item</span>: <span class="ident">Borrow</span><span class="op">&lt;</span><span class="ident">Point2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="doccomment">/// Returns the smallest rectangle defined by the top/bottom/left/right-most
+    /// points provided as parameter.
+    ///
+    /// Note: This function has a behavior that can be surprising because
+    /// the right-most and bottom-most points are exactly on the edge
+    /// of the rectangle while the `contains` function is has exclusive
+    /// semantic on these edges. This means that the right-most and bottom-most
+    /// points provided to `from_points` will count as not contained by the rect.
+    /// This behavior may change in the future.
+    </span><span class="kw">pub fn </span>from_points&lt;I&gt;(points: I) -&gt; <span class="self">Self
+    </span><span class="kw">where
+        </span>I: IntoIterator,
+        I::Item: Borrow&lt;Point2D&lt;T, U&gt;&gt;,
     {
-        <span class="ident">Box2D::from_points</span>(<span class="ident">points</span>).<span class="ident">to_rect</span>()
+        Box2D::from_points(points).to_rect()
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">One</span> <span class="op">+</span> <span class="ident">Add</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Sub</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Mul</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span>,
+<span class="kw">impl</span>&lt;T, U&gt; Rect&lt;T, U&gt;
+<span class="kw">where
+    </span>T: Copy + One + Add&lt;Output = T&gt; + Sub&lt;Output = T&gt; + Mul&lt;Output = T&gt;,
 {
-    <span class="doccomment">/// Linearly interpolate between this rectangle and another rectangle.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">lerp</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="self">Self</span>, <span class="ident">t</span>: <span class="ident">T</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::new</span>(
-            <span class="self">self</span>.<span class="ident">origin</span>.<span class="ident">lerp</span>(<span class="ident">other</span>.<span class="ident">origin</span>, <span class="ident">t</span>),
-            <span class="self">self</span>.<span class="ident">size</span>.<span class="ident">lerp</span>(<span class="ident">other</span>.<span class="ident">size</span>, <span class="ident">t</span>),
+    <span class="doccomment">/// Linearly interpolate between this rectangle and another rectangle.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>lerp(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="self">Self</span>, t: T) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::new(
+            <span class="self">self</span>.origin.lerp(other.origin, t),
+            <span class="self">self</span>.size.lerp(other.size, t),
         )
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">One</span> <span class="op">+</span> <span class="ident">Add</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Div</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span>,
+<span class="kw">impl</span>&lt;T, U&gt; Rect&lt;T, U&gt;
+<span class="kw">where
+    </span>T: Copy + One + Add&lt;Output = T&gt; + Div&lt;Output = T&gt;,
 {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">center</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Point2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">two</span> <span class="op">=</span> <span class="ident">T::one</span>() <span class="op">+</span> <span class="ident">T::one</span>();
-        <span class="self">self</span>.<span class="ident">origin</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">size</span>.<span class="ident">to_vector</span>() <span class="op">/</span> <span class="ident">two</span>
+    <span class="kw">pub fn </span>center(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Point2D&lt;T, U&gt; {
+        <span class="kw">let </span>two = T::one() + T::one();
+        <span class="self">self</span>.origin + <span class="self">self</span>.size.to_vector() / two
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">Add</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Sub</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Zero</span>,
+<span class="kw">impl</span>&lt;T, U&gt; Rect&lt;T, U&gt;
+<span class="kw">where
+    </span>T: Copy + PartialOrd + Add&lt;T, Output = T&gt; + Sub&lt;T, Output = T&gt; + Zero,
 {
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">union</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">to_box2d</span>().<span class="ident">union</span>(<span class="kw-2">&amp;</span><span class="ident">other</span>.<span class="ident">to_box2d</span>()).<span class="ident">to_rect</span>()
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>union(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.to_box2d().union(<span class="kw-2">&amp;</span>other.to_box2d()).to_rect()
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">scale</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="ident">Copy</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">S</span>, <span class="ident">y</span>: <span class="ident">S</span>) -&gt; <span class="self">Self</span>
-    <span class="kw">where</span>
-        <span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Mul</span><span class="op">&lt;</span><span class="ident">S</span>, <span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span>,
+<span class="kw">impl</span>&lt;T, U&gt; Rect&lt;T, U&gt; {
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>scale&lt;S: Copy&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, x: S, y: S) -&gt; <span class="self">Self
+    </span><span class="kw">where
+        </span>T: Copy + Mul&lt;S, Output = T&gt;,
     {
-        <span class="ident">Rect::new</span>(
-            <span class="ident">Point2D::new</span>(<span class="self">self</span>.<span class="ident">origin</span>.<span class="ident">x</span> <span class="op">*</span> <span class="ident">x</span>, <span class="self">self</span>.<span class="ident">origin</span>.<span class="ident">y</span> <span class="op">*</span> <span class="ident">y</span>),
-            <span class="ident">Size2D::new</span>(<span class="self">self</span>.<span class="ident">size</span>.<span class="ident">width</span> <span class="op">*</span> <span class="ident">x</span>, <span class="self">self</span>.<span class="ident">size</span>.<span class="ident">height</span> <span class="op">*</span> <span class="ident">y</span>),
+        Rect::new(
+            Point2D::new(<span class="self">self</span>.origin.x * x, <span class="self">self</span>.origin.y * y),
+            Size2D::new(<span class="self">self</span>.size.width * x, <span class="self">self</span>.size.height * y),
         )
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Mul</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">area</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">T</span> {
-        <span class="self">self</span>.<span class="ident">size</span>.<span class="ident">area</span>()
+<span class="kw">impl</span>&lt;T: Copy + Mul&lt;T, Output = T&gt;, U&gt; Rect&lt;T, U&gt; {
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>area(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; T {
+        <span class="self">self</span>.size.area()
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Zero</span> <span class="op">+</span> <span class="ident">PartialOrd</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_empty</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">size</span>.<span class="ident">is_empty</span>()
+<span class="kw">impl</span>&lt;T: Copy + Zero + PartialOrd, U&gt; Rect&lt;T, U&gt; {
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>is_empty(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="self">self</span>.size.is_empty()
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Zero</span> <span class="op">+</span> <span class="ident">PartialOrd</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_non_empty</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">is_empty</span>() {
-            <span class="kw">return</span> <span class="prelude-val">None</span>;
+<span class="kw">impl</span>&lt;T: Copy + Zero + PartialOrd, U&gt; Rect&lt;T, U&gt; {
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>to_non_empty(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>&gt; {
+        <span class="kw">if </span><span class="self">self</span>.is_empty() {
+            <span class="kw">return </span><span class="prelude-val">None</span>;
         }
 
         <span class="prelude-val">Some</span>(<span class="kw-2">*</span><span class="self">self</span>)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Mul</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Mul</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">T::Output</span>, <span class="ident">U</span><span class="op">&gt;</span>;
+<span class="kw">impl</span>&lt;T: Copy + Mul, U&gt; Mul&lt;T&gt; <span class="kw">for </span>Rect&lt;T, U&gt; {
+    <span class="kw">type </span>Output = Rect&lt;T::Output, U&gt;;
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">mul</span>(<span class="self">self</span>, <span class="ident">scale</span>: <span class="ident">T</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
-        <span class="ident">Rect::new</span>(<span class="self">self</span>.<span class="ident">origin</span> <span class="op">*</span> <span class="ident">scale</span>, <span class="self">self</span>.<span class="ident">size</span> <span class="op">*</span> <span class="ident">scale</span>)
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>mul(<span class="self">self</span>, scale: T) -&gt; <span class="self">Self</span>::Output {
+        Rect::new(<span class="self">self</span>.origin * scale, <span class="self">self</span>.size * scale)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">MulAssign</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">MulAssign</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">mul_assign</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">scale</span>: <span class="ident">T</span>) {
-        <span class="kw-2">*</span><span class="self">self</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">Scale::new</span>(<span class="ident">scale</span>);
+<span class="kw">impl</span>&lt;T: Copy + MulAssign, U&gt; MulAssign&lt;T&gt; <span class="kw">for </span>Rect&lt;T, U&gt; {
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>mul_assign(<span class="kw-2">&amp;mut </span><span class="self">self</span>, scale: T) {
+        <span class="kw-2">*</span><span class="self">self </span><span class="kw-2">*</span>= Scale::new(scale);
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Div</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Div</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">T::Output</span>, <span class="ident">U</span><span class="op">&gt;</span>;
+<span class="kw">impl</span>&lt;T: Copy + Div, U&gt; Div&lt;T&gt; <span class="kw">for </span>Rect&lt;T, U&gt; {
+    <span class="kw">type </span>Output = Rect&lt;T::Output, U&gt;;
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">div</span>(<span class="self">self</span>, <span class="ident">scale</span>: <span class="ident">T</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
-        <span class="ident">Rect::new</span>(<span class="self">self</span>.<span class="ident">origin</span> <span class="op">/</span> <span class="ident">scale</span>.<span class="ident">clone</span>(), <span class="self">self</span>.<span class="ident">size</span> <span class="op">/</span> <span class="ident">scale</span>)
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>div(<span class="self">self</span>, scale: T) -&gt; <span class="self">Self</span>::Output {
+        Rect::new(<span class="self">self</span>.origin / scale.clone(), <span class="self">self</span>.size / scale)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">DivAssign</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">DivAssign</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">div_assign</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">scale</span>: <span class="ident">T</span>) {
-        <span class="kw-2">*</span><span class="self">self</span> <span class="op">/</span><span class="op">=</span> <span class="ident">Scale::new</span>(<span class="ident">scale</span>);
+<span class="kw">impl</span>&lt;T: Copy + DivAssign, U&gt; DivAssign&lt;T&gt; <span class="kw">for </span>Rect&lt;T, U&gt; {
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>div_assign(<span class="kw-2">&amp;mut </span><span class="self">self</span>, scale: T) {
+        <span class="kw-2">*</span><span class="self">self </span>/= Scale::new(scale);
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Mul</span>, <span class="ident">U1</span>, <span class="ident">U2</span><span class="op">&gt;</span> <span class="ident">Mul</span><span class="op">&lt;</span><span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U1</span>, <span class="ident">U2</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U1</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">T::Output</span>, <span class="ident">U2</span><span class="op">&gt;</span>;
+<span class="kw">impl</span>&lt;T: Copy + Mul, U1, U2&gt; Mul&lt;Scale&lt;T, U1, U2&gt;&gt; <span class="kw">for </span>Rect&lt;T, U1&gt; {
+    <span class="kw">type </span>Output = Rect&lt;T::Output, U2&gt;;
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">mul</span>(<span class="self">self</span>, <span class="ident">scale</span>: <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U1</span>, <span class="ident">U2</span><span class="op">&gt;</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
-        <span class="ident">Rect::new</span>(<span class="self">self</span>.<span class="ident">origin</span> <span class="op">*</span> <span class="ident">scale</span>.<span class="ident">clone</span>(), <span class="self">self</span>.<span class="ident">size</span> <span class="op">*</span> <span class="ident">scale</span>)
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>mul(<span class="self">self</span>, scale: Scale&lt;T, U1, U2&gt;) -&gt; <span class="self">Self</span>::Output {
+        Rect::new(<span class="self">self</span>.origin * scale.clone(), <span class="self">self</span>.size * scale)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">MulAssign</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">MulAssign</span><span class="op">&lt;</span><span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span>, <span class="ident">U</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">mul_assign</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">scale</span>: <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span>, <span class="ident">U</span><span class="op">&gt;</span>) {
-        <span class="self">self</span>.<span class="ident">origin</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">scale</span>.<span class="ident">clone</span>();
-        <span class="self">self</span>.<span class="ident">size</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">scale</span>;
+<span class="kw">impl</span>&lt;T: Copy + MulAssign, U&gt; MulAssign&lt;Scale&lt;T, U, U&gt;&gt; <span class="kw">for </span>Rect&lt;T, U&gt; {
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>mul_assign(<span class="kw-2">&amp;mut </span><span class="self">self</span>, scale: Scale&lt;T, U, U&gt;) {
+        <span class="self">self</span>.origin <span class="kw-2">*</span>= scale.clone();
+        <span class="self">self</span>.size <span class="kw-2">*</span>= scale;
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Div</span>, <span class="ident">U1</span>, <span class="ident">U2</span><span class="op">&gt;</span> <span class="ident">Div</span><span class="op">&lt;</span><span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U1</span>, <span class="ident">U2</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U2</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">T::Output</span>, <span class="ident">U1</span><span class="op">&gt;</span>;
+<span class="kw">impl</span>&lt;T: Copy + Div, U1, U2&gt; Div&lt;Scale&lt;T, U1, U2&gt;&gt; <span class="kw">for </span>Rect&lt;T, U2&gt; {
+    <span class="kw">type </span>Output = Rect&lt;T::Output, U1&gt;;
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">div</span>(<span class="self">self</span>, <span class="ident">scale</span>: <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U1</span>, <span class="ident">U2</span><span class="op">&gt;</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
-        <span class="ident">Rect::new</span>(<span class="self">self</span>.<span class="ident">origin</span> <span class="op">/</span> <span class="ident">scale</span>.<span class="ident">clone</span>(), <span class="self">self</span>.<span class="ident">size</span> <span class="op">/</span> <span class="ident">scale</span>)
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>div(<span class="self">self</span>, scale: Scale&lt;T, U1, U2&gt;) -&gt; <span class="self">Self</span>::Output {
+        Rect::new(<span class="self">self</span>.origin / scale.clone(), <span class="self">self</span>.size / scale)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">DivAssign</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">DivAssign</span><span class="op">&lt;</span><span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span>, <span class="ident">U</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">div_assign</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">scale</span>: <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span>, <span class="ident">U</span><span class="op">&gt;</span>) {
-        <span class="self">self</span>.<span class="ident">origin</span> <span class="op">/</span><span class="op">=</span> <span class="ident">scale</span>.<span class="ident">clone</span>();
-        <span class="self">self</span>.<span class="ident">size</span> <span class="op">/</span><span class="op">=</span> <span class="ident">scale</span>;
+<span class="kw">impl</span>&lt;T: Copy + DivAssign, U&gt; DivAssign&lt;Scale&lt;T, U, U&gt;&gt; <span class="kw">for </span>Rect&lt;T, U&gt; {
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>div_assign(<span class="kw-2">&amp;mut </span><span class="self">self</span>, scale: Scale&lt;T, U, U&gt;) {
+        <span class="self">self</span>.origin /= scale.clone();
+        <span class="self">self</span>.size /= scale;
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Copy</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Drop the units, preserving only the numeric value.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_untyped</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">UnknownUnit</span><span class="op">&gt;</span> {
-        <span class="ident">Rect::new</span>(<span class="self">self</span>.<span class="ident">origin</span>.<span class="ident">to_untyped</span>(), <span class="self">self</span>.<span class="ident">size</span>.<span class="ident">to_untyped</span>())
+<span class="kw">impl</span>&lt;T: Copy, U&gt; Rect&lt;T, U&gt; {
+    <span class="doccomment">/// Drop the units, preserving only the numeric value.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>to_untyped(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Rect&lt;T, UnknownUnit&gt; {
+        Rect::new(<span class="self">self</span>.origin.to_untyped(), <span class="self">self</span>.size.to_untyped())
     }
 
-    <span class="doccomment">/// Tag a unitless value with units.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_untyped</span>(<span class="ident">r</span>: <span class="kw-2">&amp;</span><span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">UnknownUnit</span><span class="op">&gt;</span>) -&gt; <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-        <span class="ident">Rect::new</span>(
-            <span class="ident">Point2D::from_untyped</span>(<span class="ident">r</span>.<span class="ident">origin</span>),
-            <span class="ident">Size2D::from_untyped</span>(<span class="ident">r</span>.<span class="ident">size</span>),
+    <span class="doccomment">/// Tag a unitless value with units.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>from_untyped(r: <span class="kw-2">&amp;</span>Rect&lt;T, UnknownUnit&gt;) -&gt; Rect&lt;T, U&gt; {
+        Rect::new(
+            Point2D::from_untyped(r.origin),
+            Size2D::from_untyped(r.size),
         )
     }
 
-    <span class="doccomment">/// Cast the unit</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">cast_unit</span><span class="op">&lt;</span><span class="ident">V</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">V</span><span class="op">&gt;</span> {
-        <span class="ident">Rect::new</span>(<span class="self">self</span>.<span class="ident">origin</span>.<span class="ident">cast_unit</span>(), <span class="self">self</span>.<span class="ident">size</span>.<span class="ident">cast_unit</span>())
+    <span class="doccomment">/// Cast the unit
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>cast_unit&lt;V&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Rect&lt;T, V&gt; {
+        Rect::new(<span class="self">self</span>.origin.cast_unit(), <span class="self">self</span>.size.cast_unit())
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">NumCast</span> <span class="op">+</span> <span class="ident">Copy</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Cast from one numeric representation to another, preserving the units.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// When casting from floating point to integer coordinates, the decimals are truncated</span>
-    <span class="doccomment">/// as one would expect from a simple cast, but this behavior does not always make sense</span>
-    <span class="doccomment">/// geometrically. Consider using round(), round_in or round_out() before casting.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">cast</span><span class="op">&lt;</span><span class="ident">NewT</span>: <span class="ident">NumCast</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">NewT</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-        <span class="ident">Rect::new</span>(<span class="self">self</span>.<span class="ident">origin</span>.<span class="ident">cast</span>(), <span class="self">self</span>.<span class="ident">size</span>.<span class="ident">cast</span>())
+<span class="kw">impl</span>&lt;T: NumCast + Copy, U&gt; Rect&lt;T, U&gt; {
+    <span class="doccomment">/// Cast from one numeric representation to another, preserving the units.
+    ///
+    /// When casting from floating point to integer coordinates, the decimals are truncated
+    /// as one would expect from a simple cast, but this behavior does not always make sense
+    /// geometrically. Consider using round(), round_in or round_out() before casting.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>cast&lt;NewT: NumCast&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Rect&lt;NewT, U&gt; {
+        Rect::new(<span class="self">self</span>.origin.cast(), <span class="self">self</span>.size.cast())
     }
 
-    <span class="doccomment">/// Fallible cast from one numeric representation to another, preserving the units.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// When casting from floating point to integer coordinates, the decimals are truncated</span>
-    <span class="doccomment">/// as one would expect from a simple cast, but this behavior does not always make sense</span>
-    <span class="doccomment">/// geometrically. Consider using round(), round_in or round_out() before casting.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">try_cast</span><span class="op">&lt;</span><span class="ident">NewT</span>: <span class="ident">NumCast</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">NewT</span>, <span class="ident">U</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="kw">match</span> (<span class="self">self</span>.<span class="ident">origin</span>.<span class="ident">try_cast</span>(), <span class="self">self</span>.<span class="ident">size</span>.<span class="ident">try_cast</span>()) {
-            (<span class="prelude-val">Some</span>(<span class="ident">origin</span>), <span class="prelude-val">Some</span>(<span class="ident">size</span>)) =&gt; <span class="prelude-val">Some</span>(<span class="ident">Rect::new</span>(<span class="ident">origin</span>, <span class="ident">size</span>)),
-            <span class="kw">_</span> =&gt; <span class="prelude-val">None</span>,
+    <span class="doccomment">/// Fallible cast from one numeric representation to another, preserving the units.
+    ///
+    /// When casting from floating point to integer coordinates, the decimals are truncated
+    /// as one would expect from a simple cast, but this behavior does not always make sense
+    /// geometrically. Consider using round(), round_in or round_out() before casting.
+    </span><span class="kw">pub fn </span>try_cast&lt;NewT: NumCast&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;Rect&lt;NewT, U&gt;&gt; {
+        <span class="kw">match </span>(<span class="self">self</span>.origin.try_cast(), <span class="self">self</span>.size.try_cast()) {
+            (<span class="prelude-val">Some</span>(origin), <span class="prelude-val">Some</span>(size)) =&gt; <span class="prelude-val">Some</span>(Rect::new(origin, size)),
+            <span class="kw">_ </span>=&gt; <span class="prelude-val">None</span>,
         }
     }
 
-    <span class="comment">// Convenience functions for common casts</span>
+    <span class="comment">// Convenience functions for common casts
 
-    <span class="doccomment">/// Cast into an `f32` rectangle.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_f32</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">f32</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">cast</span>()
+    </span><span class="doccomment">/// Cast into an `f32` rectangle.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>to_f32(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Rect&lt;f32, U&gt; {
+        <span class="self">self</span>.cast()
     }
 
-    <span class="doccomment">/// Cast into an `f64` rectangle.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_f64</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">f64</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">cast</span>()
+    <span class="doccomment">/// Cast into an `f64` rectangle.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>to_f64(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Rect&lt;f64, U&gt; {
+        <span class="self">self</span>.cast()
     }
 
-    <span class="doccomment">/// Cast into an `usize` rectangle, truncating decimals if any.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// When casting from floating point rectangles, it is worth considering whether</span>
-    <span class="doccomment">/// to `round()`, `round_in()` or `round_out()` before the cast in order to</span>
-    <span class="doccomment">/// obtain the desired conversion behavior.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_usize</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">usize</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">cast</span>()
+    <span class="doccomment">/// Cast into an `usize` rectangle, truncating decimals if any.
+    ///
+    /// When casting from floating point rectangles, it is worth considering whether
+    /// to `round()`, `round_in()` or `round_out()` before the cast in order to
+    /// obtain the desired conversion behavior.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>to_usize(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Rect&lt;usize, U&gt; {
+        <span class="self">self</span>.cast()
     }
 
-    <span class="doccomment">/// Cast into an `u32` rectangle, truncating decimals if any.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// When casting from floating point rectangles, it is worth considering whether</span>
-    <span class="doccomment">/// to `round()`, `round_in()` or `round_out()` before the cast in order to</span>
-    <span class="doccomment">/// obtain the desired conversion behavior.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_u32</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">u32</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">cast</span>()
+    <span class="doccomment">/// Cast into an `u32` rectangle, truncating decimals if any.
+    ///
+    /// When casting from floating point rectangles, it is worth considering whether
+    /// to `round()`, `round_in()` or `round_out()` before the cast in order to
+    /// obtain the desired conversion behavior.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>to_u32(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Rect&lt;u32, U&gt; {
+        <span class="self">self</span>.cast()
     }
 
-    <span class="doccomment">/// Cast into an `u64` rectangle, truncating decimals if any.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// When casting from floating point rectangles, it is worth considering whether</span>
-    <span class="doccomment">/// to `round()`, `round_in()` or `round_out()` before the cast in order to</span>
-    <span class="doccomment">/// obtain the desired conversion behavior.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_u64</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">u64</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">cast</span>()
+    <span class="doccomment">/// Cast into an `u64` rectangle, truncating decimals if any.
+    ///
+    /// When casting from floating point rectangles, it is worth considering whether
+    /// to `round()`, `round_in()` or `round_out()` before the cast in order to
+    /// obtain the desired conversion behavior.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>to_u64(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Rect&lt;u64, U&gt; {
+        <span class="self">self</span>.cast()
     }
 
-    <span class="doccomment">/// Cast into an `i32` rectangle, truncating decimals if any.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// When casting from floating point rectangles, it is worth considering whether</span>
-    <span class="doccomment">/// to `round()`, `round_in()` or `round_out()` before the cast in order to</span>
-    <span class="doccomment">/// obtain the desired conversion behavior.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_i32</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">cast</span>()
+    <span class="doccomment">/// Cast into an `i32` rectangle, truncating decimals if any.
+    ///
+    /// When casting from floating point rectangles, it is worth considering whether
+    /// to `round()`, `round_in()` or `round_out()` before the cast in order to
+    /// obtain the desired conversion behavior.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>to_i32(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Rect&lt;i32, U&gt; {
+        <span class="self">self</span>.cast()
     }
 
-    <span class="doccomment">/// Cast into an `i64` rectangle, truncating decimals if any.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// When casting from floating point rectangles, it is worth considering whether</span>
-    <span class="doccomment">/// to `round()`, `round_in()` or `round_out()` before the cast in order to</span>
-    <span class="doccomment">/// obtain the desired conversion behavior.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_i64</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">i64</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">cast</span>()
-    }
-}
-
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Float</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Returns true if all members are finite.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_finite</span>(<span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">origin</span>.<span class="ident">is_finite</span>() <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">size</span>.<span class="ident">is_finite</span>()
+    <span class="doccomment">/// Cast into an `i64` rectangle, truncating decimals if any.
+    ///
+    /// When casting from floating point rectangles, it is worth considering whether
+    /// to `round()`, `round_in()` or `round_out()` before the cast in order to
+    /// obtain the desired conversion behavior.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>to_i64(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Rect&lt;i64, U&gt; {
+        <span class="self">self</span>.cast()
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Floor</span> <span class="op">+</span> <span class="ident">Ceil</span> <span class="op">+</span> <span class="ident">Round</span> <span class="op">+</span> <span class="ident">Add</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Sub</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Return a rectangle with edges rounded to integer coordinates, such that</span>
-    <span class="doccomment">/// the returned rectangle has the same set of pixel centers as the original</span>
-    <span class="doccomment">/// one.</span>
-    <span class="doccomment">/// Edges at offset 0.5 round up.</span>
-    <span class="doccomment">/// Suitable for most places where integral device coordinates</span>
-    <span class="doccomment">/// are needed, but note that any translation should be applied first to</span>
-    <span class="doccomment">/// avoid pixel rounding errors.</span>
-    <span class="doccomment">/// Note that this is *not* rounding to nearest integer if the values are negative.</span>
-    <span class="doccomment">/// They are always rounding as floor(n + 0.5).</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Usage notes</span>
-    <span class="doccomment">/// Note, that when using with floating-point `T` types that method can significantly</span>
-    <span class="doccomment">/// loose precision for large values, so if you need to call this method very often it</span>
-    <span class="doccomment">/// is better to use [`Box2D`].</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// [`Box2D`]: struct.Box2D.html</span>
-    <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">round</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">to_box2d</span>().<span class="ident">round</span>().<span class="ident">to_rect</span>()
-    }
-
-    <span class="doccomment">/// Return a rectangle with edges rounded to integer coordinates, such that</span>
-    <span class="doccomment">/// the original rectangle contains the resulting rectangle.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Usage notes</span>
-    <span class="doccomment">/// Note, that when using with floating-point `T` types that method can significantly</span>
-    <span class="doccomment">/// loose precision for large values, so if you need to call this method very often it</span>
-    <span class="doccomment">/// is better to use [`Box2D`].</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// [`Box2D`]: struct.Box2D.html</span>
-    <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">round_in</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">to_box2d</span>().<span class="ident">round_in</span>().<span class="ident">to_rect</span>()
-    }
-
-    <span class="doccomment">/// Return a rectangle with edges rounded to integer coordinates, such that</span>
-    <span class="doccomment">/// the original rectangle is contained in the resulting rectangle.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Usage notes</span>
-    <span class="doccomment">/// Note, that when using with floating-point `T` types that method can significantly</span>
-    <span class="doccomment">/// loose precision for large values, so if you need to call this method very often it</span>
-    <span class="doccomment">/// is better to use [`Box2D`].</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// [`Box2D`]: struct.Box2D.html</span>
-    <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">round_out</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">to_box2d</span>().<span class="ident">round_out</span>().<span class="ident">to_rect</span>()
+<span class="kw">impl</span>&lt;T: Float, U&gt; Rect&lt;T, U&gt; {
+    <span class="doccomment">/// Returns true if all members are finite.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>is_finite(<span class="self">self</span>) -&gt; bool {
+        <span class="self">self</span>.origin.is_finite() &amp;&amp; <span class="self">self</span>.size.is_finite()
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Size2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Zero</span>,
+<span class="kw">impl</span>&lt;T: Floor + Ceil + Round + Add&lt;T, Output = T&gt; + Sub&lt;T, Output = T&gt;, U&gt; Rect&lt;T, U&gt; {
+    <span class="doccomment">/// Return a rectangle with edges rounded to integer coordinates, such that
+    /// the returned rectangle has the same set of pixel centers as the original
+    /// one.
+    /// Edges at offset 0.5 round up.
+    /// Suitable for most places where integral device coordinates
+    /// are needed, but note that any translation should be applied first to
+    /// avoid pixel rounding errors.
+    /// Note that this is *not* rounding to nearest integer if the values are negative.
+    /// They are always rounding as floor(n + 0.5).
+    ///
+    /// # Usage notes
+    /// Note, that when using with floating-point `T` types that method can significantly
+    /// loose precision for large values, so if you need to call this method very often it
+    /// is better to use [`Box2D`].
+    ///
+    /// [`Box2D`]: struct.Box2D.html
+    </span><span class="attribute">#[must_use]
+    </span><span class="kw">pub fn </span>round(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.to_box2d().round().to_rect()
+    }
+
+    <span class="doccomment">/// Return a rectangle with edges rounded to integer coordinates, such that
+    /// the original rectangle contains the resulting rectangle.
+    ///
+    /// # Usage notes
+    /// Note, that when using with floating-point `T` types that method can significantly
+    /// loose precision for large values, so if you need to call this method very often it
+    /// is better to use [`Box2D`].
+    ///
+    /// [`Box2D`]: struct.Box2D.html
+    </span><span class="attribute">#[must_use]
+    </span><span class="kw">pub fn </span>round_in(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.to_box2d().round_in().to_rect()
+    }
+
+    <span class="doccomment">/// Return a rectangle with edges rounded to integer coordinates, such that
+    /// the original rectangle is contained in the resulting rectangle.
+    ///
+    /// # Usage notes
+    /// Note, that when using with floating-point `T` types that method can significantly
+    /// loose precision for large values, so if you need to call this method very often it
+    /// is better to use [`Box2D`].
+    ///
+    /// [`Box2D`]: struct.Box2D.html
+    </span><span class="attribute">#[must_use]
+    </span><span class="kw">pub fn </span>round_out(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.to_box2d().round_out().to_rect()
+    }
+}
+
+<span class="kw">impl</span>&lt;T, U&gt; From&lt;Size2D&lt;T, U&gt;&gt; <span class="kw">for </span>Rect&lt;T, U&gt;
+<span class="kw">where
+    </span>T: Zero,
 {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">size</span>: <span class="ident">Size2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::from_size</span>(<span class="ident">size</span>)
+    <span class="kw">fn </span>from(size: Size2D&lt;T, U&gt;) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::from_size(size)
     }
 }
 
-<span class="doccomment">/// Shorthand for `Rect::new(Point2D::new(x, y), Size2D::new(w, h))`.</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">rect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>(<span class="ident">x</span>: <span class="ident">T</span>, <span class="ident">y</span>: <span class="ident">T</span>, <span class="ident">w</span>: <span class="ident">T</span>, <span class="ident">h</span>: <span class="ident">T</span>) -&gt; <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="ident">Rect::new</span>(<span class="ident">Point2D::new</span>(<span class="ident">x</span>, <span class="ident">y</span>), <span class="ident">Size2D::new</span>(<span class="ident">w</span>, <span class="ident">h</span>))
+<span class="doccomment">/// Shorthand for `Rect::new(Point2D::new(x, y), Size2D::new(w, h))`.
+</span><span class="kw">pub const fn </span>rect&lt;T, U&gt;(x: T, y: T, w: T, h: T) -&gt; Rect&lt;T, U&gt; {
+    Rect::new(Point2D::new(x, y), Size2D::new(w, h))
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
-<span class="kw">mod</span> <span class="ident">tests</span> {
-    <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::default</span>::{<span class="ident">Point2D</span>, <span class="ident">Rect</span>, <span class="ident">Size2D</span>};
-    <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::side_offsets::SideOffsets2D</span>;
-    <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">point2</span>, <span class="ident">rect</span>, <span class="ident">size2</span>, <span class="ident">vec2</span>};
+<span class="attribute">#[cfg(test)]
+</span><span class="kw">mod </span>tests {
+    <span class="kw">use </span><span class="kw">crate</span>::default::{Point2D, Rect, Size2D};
+    <span class="kw">use </span><span class="kw">crate</span>::side_offsets::SideOffsets2D;
+    <span class="kw">use crate</span>::{point2, rect, size2, vec2};
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_translate</span>() {
-        <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> <span class="ident">Rect::new</span>(<span class="ident">Point2D::new</span>(<span class="number">0u32</span>, <span class="number">0u32</span>), <span class="ident">Size2D::new</span>(<span class="number">50u32</span>, <span class="number">40u32</span>));
-        <span class="kw">let</span> <span class="ident">pp</span> <span class="op">=</span> <span class="ident">p</span>.<span class="ident">translate</span>(<span class="ident">vec2</span>(<span class="number">10</span>, <span class="number">15</span>));
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_translate() {
+        <span class="kw">let </span>p = Rect::new(Point2D::new(<span class="number">0u32</span>, <span class="number">0u32</span>), Size2D::new(<span class="number">50u32</span>, <span class="number">40u32</span>));
+        <span class="kw">let </span>pp = p.translate(vec2(<span class="number">10</span>, <span class="number">15</span>));
 
-        <span class="macro">assert!</span>(<span class="ident">pp</span>.<span class="ident">size</span>.<span class="ident">width</span> <span class="op">==</span> <span class="number">50</span>);
-        <span class="macro">assert!</span>(<span class="ident">pp</span>.<span class="ident">size</span>.<span class="ident">height</span> <span class="op">==</span> <span class="number">40</span>);
-        <span class="macro">assert!</span>(<span class="ident">pp</span>.<span class="ident">origin</span>.<span class="ident">x</span> <span class="op">==</span> <span class="number">10</span>);
-        <span class="macro">assert!</span>(<span class="ident">pp</span>.<span class="ident">origin</span>.<span class="ident">y</span> <span class="op">==</span> <span class="number">15</span>);
+        <span class="macro">assert!</span>(pp.size.width == <span class="number">50</span>);
+        <span class="macro">assert!</span>(pp.size.height == <span class="number">40</span>);
+        <span class="macro">assert!</span>(pp.origin.x == <span class="number">10</span>);
+        <span class="macro">assert!</span>(pp.origin.y == <span class="number">15</span>);
 
-        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="ident">Rect::new</span>(<span class="ident">Point2D::new</span>(<span class="op">-</span><span class="number">10</span>, <span class="op">-</span><span class="number">5</span>), <span class="ident">Size2D::new</span>(<span class="number">50</span>, <span class="number">40</span>));
-        <span class="kw">let</span> <span class="ident">rr</span> <span class="op">=</span> <span class="ident">r</span>.<span class="ident">translate</span>(<span class="ident">vec2</span>(<span class="number">0</span>, <span class="op">-</span><span class="number">10</span>));
+        <span class="kw">let </span>r = Rect::new(Point2D::new(-<span class="number">10</span>, -<span class="number">5</span>), Size2D::new(<span class="number">50</span>, <span class="number">40</span>));
+        <span class="kw">let </span>rr = r.translate(vec2(<span class="number">0</span>, -<span class="number">10</span>));
 
-        <span class="macro">assert!</span>(<span class="ident">rr</span>.<span class="ident">size</span>.<span class="ident">width</span> <span class="op">==</span> <span class="number">50</span>);
-        <span class="macro">assert!</span>(<span class="ident">rr</span>.<span class="ident">size</span>.<span class="ident">height</span> <span class="op">==</span> <span class="number">40</span>);
-        <span class="macro">assert!</span>(<span class="ident">rr</span>.<span class="ident">origin</span>.<span class="ident">x</span> <span class="op">==</span> <span class="op">-</span><span class="number">10</span>);
-        <span class="macro">assert!</span>(<span class="ident">rr</span>.<span class="ident">origin</span>.<span class="ident">y</span> <span class="op">==</span> <span class="op">-</span><span class="number">15</span>);
+        <span class="macro">assert!</span>(rr.size.width == <span class="number">50</span>);
+        <span class="macro">assert!</span>(rr.size.height == <span class="number">40</span>);
+        <span class="macro">assert!</span>(rr.origin.x == -<span class="number">10</span>);
+        <span class="macro">assert!</span>(rr.origin.y == -<span class="number">15</span>);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_union</span>() {
-        <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> <span class="ident">Rect::new</span>(<span class="ident">Point2D::new</span>(<span class="number">0</span>, <span class="number">0</span>), <span class="ident">Size2D::new</span>(<span class="number">50</span>, <span class="number">40</span>));
-        <span class="kw">let</span> <span class="ident">q</span> <span class="op">=</span> <span class="ident">Rect::new</span>(<span class="ident">Point2D::new</span>(<span class="number">20</span>, <span class="number">20</span>), <span class="ident">Size2D::new</span>(<span class="number">5</span>, <span class="number">5</span>));
-        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="ident">Rect::new</span>(<span class="ident">Point2D::new</span>(<span class="op">-</span><span class="number">15</span>, <span class="op">-</span><span class="number">30</span>), <span class="ident">Size2D::new</span>(<span class="number">200</span>, <span class="number">15</span>));
-        <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">Rect::new</span>(<span class="ident">Point2D::new</span>(<span class="number">20</span>, <span class="op">-</span><span class="number">15</span>), <span class="ident">Size2D::new</span>(<span class="number">250</span>, <span class="number">200</span>));
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_union() {
+        <span class="kw">let </span>p = Rect::new(Point2D::new(<span class="number">0</span>, <span class="number">0</span>), Size2D::new(<span class="number">50</span>, <span class="number">40</span>));
+        <span class="kw">let </span>q = Rect::new(Point2D::new(<span class="number">20</span>, <span class="number">20</span>), Size2D::new(<span class="number">5</span>, <span class="number">5</span>));
+        <span class="kw">let </span>r = Rect::new(Point2D::new(-<span class="number">15</span>, -<span class="number">30</span>), Size2D::new(<span class="number">200</span>, <span class="number">15</span>));
+        <span class="kw">let </span>s = Rect::new(Point2D::new(<span class="number">20</span>, -<span class="number">15</span>), Size2D::new(<span class="number">250</span>, <span class="number">200</span>));
 
-        <span class="kw">let</span> <span class="ident">pq</span> <span class="op">=</span> <span class="ident">p</span>.<span class="ident">union</span>(<span class="kw-2">&amp;</span><span class="ident">q</span>);
-        <span class="macro">assert!</span>(<span class="ident">pq</span>.<span class="ident">origin</span> <span class="op">==</span> <span class="ident">Point2D::new</span>(<span class="number">0</span>, <span class="number">0</span>));
-        <span class="macro">assert!</span>(<span class="ident">pq</span>.<span class="ident">size</span> <span class="op">==</span> <span class="ident">Size2D::new</span>(<span class="number">50</span>, <span class="number">40</span>));
+        <span class="kw">let </span>pq = p.union(<span class="kw-2">&amp;</span>q);
+        <span class="macro">assert!</span>(pq.origin == Point2D::new(<span class="number">0</span>, <span class="number">0</span>));
+        <span class="macro">assert!</span>(pq.size == Size2D::new(<span class="number">50</span>, <span class="number">40</span>));
 
-        <span class="kw">let</span> <span class="ident">pr</span> <span class="op">=</span> <span class="ident">p</span>.<span class="ident">union</span>(<span class="kw-2">&amp;</span><span class="ident">r</span>);
-        <span class="macro">assert!</span>(<span class="ident">pr</span>.<span class="ident">origin</span> <span class="op">==</span> <span class="ident">Point2D::new</span>(<span class="op">-</span><span class="number">15</span>, <span class="op">-</span><span class="number">30</span>));
-        <span class="macro">assert!</span>(<span class="ident">pr</span>.<span class="ident">size</span> <span class="op">==</span> <span class="ident">Size2D::new</span>(<span class="number">200</span>, <span class="number">70</span>));
+        <span class="kw">let </span>pr = p.union(<span class="kw-2">&amp;</span>r);
+        <span class="macro">assert!</span>(pr.origin == Point2D::new(-<span class="number">15</span>, -<span class="number">30</span>));
+        <span class="macro">assert!</span>(pr.size == Size2D::new(<span class="number">200</span>, <span class="number">70</span>));
 
-        <span class="kw">let</span> <span class="ident">ps</span> <span class="op">=</span> <span class="ident">p</span>.<span class="ident">union</span>(<span class="kw-2">&amp;</span><span class="ident">s</span>);
-        <span class="macro">assert!</span>(<span class="ident">ps</span>.<span class="ident">origin</span> <span class="op">==</span> <span class="ident">Point2D::new</span>(<span class="number">0</span>, <span class="op">-</span><span class="number">15</span>));
-        <span class="macro">assert!</span>(<span class="ident">ps</span>.<span class="ident">size</span> <span class="op">==</span> <span class="ident">Size2D::new</span>(<span class="number">270</span>, <span class="number">200</span>));
+        <span class="kw">let </span>ps = p.union(<span class="kw-2">&amp;</span>s);
+        <span class="macro">assert!</span>(ps.origin == Point2D::new(<span class="number">0</span>, -<span class="number">15</span>));
+        <span class="macro">assert!</span>(ps.size == Size2D::new(<span class="number">270</span>, <span class="number">200</span>));
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_intersection</span>() {
-        <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> <span class="ident">Rect::new</span>(<span class="ident">Point2D::new</span>(<span class="number">0</span>, <span class="number">0</span>), <span class="ident">Size2D::new</span>(<span class="number">10</span>, <span class="number">20</span>));
-        <span class="kw">let</span> <span class="ident">q</span> <span class="op">=</span> <span class="ident">Rect::new</span>(<span class="ident">Point2D::new</span>(<span class="number">5</span>, <span class="number">15</span>), <span class="ident">Size2D::new</span>(<span class="number">10</span>, <span class="number">10</span>));
-        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="ident">Rect::new</span>(<span class="ident">Point2D::new</span>(<span class="op">-</span><span class="number">5</span>, <span class="op">-</span><span class="number">5</span>), <span class="ident">Size2D::new</span>(<span class="number">8</span>, <span class="number">8</span>));
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_intersection() {
+        <span class="kw">let </span>p = Rect::new(Point2D::new(<span class="number">0</span>, <span class="number">0</span>), Size2D::new(<span class="number">10</span>, <span class="number">20</span>));
+        <span class="kw">let </span>q = Rect::new(Point2D::new(<span class="number">5</span>, <span class="number">15</span>), Size2D::new(<span class="number">10</span>, <span class="number">10</span>));
+        <span class="kw">let </span>r = Rect::new(Point2D::new(-<span class="number">5</span>, -<span class="number">5</span>), Size2D::new(<span class="number">8</span>, <span class="number">8</span>));
 
-        <span class="kw">let</span> <span class="ident">pq</span> <span class="op">=</span> <span class="ident">p</span>.<span class="ident">intersection</span>(<span class="kw-2">&amp;</span><span class="ident">q</span>);
-        <span class="macro">assert!</span>(<span class="ident">pq</span>.<span class="ident">is_some</span>());
-        <span class="kw">let</span> <span class="ident">pq</span> <span class="op">=</span> <span class="ident">pq</span>.<span class="ident">unwrap</span>();
-        <span class="macro">assert!</span>(<span class="ident">pq</span>.<span class="ident">origin</span> <span class="op">==</span> <span class="ident">Point2D::new</span>(<span class="number">5</span>, <span class="number">15</span>));
-        <span class="macro">assert!</span>(<span class="ident">pq</span>.<span class="ident">size</span> <span class="op">==</span> <span class="ident">Size2D::new</span>(<span class="number">5</span>, <span class="number">5</span>));
+        <span class="kw">let </span>pq = p.intersection(<span class="kw-2">&amp;</span>q);
+        <span class="macro">assert!</span>(pq.is_some());
+        <span class="kw">let </span>pq = pq.unwrap();
+        <span class="macro">assert!</span>(pq.origin == Point2D::new(<span class="number">5</span>, <span class="number">15</span>));
+        <span class="macro">assert!</span>(pq.size == Size2D::new(<span class="number">5</span>, <span class="number">5</span>));
 
-        <span class="kw">let</span> <span class="ident">pr</span> <span class="op">=</span> <span class="ident">p</span>.<span class="ident">intersection</span>(<span class="kw-2">&amp;</span><span class="ident">r</span>);
-        <span class="macro">assert!</span>(<span class="ident">pr</span>.<span class="ident">is_some</span>());
-        <span class="kw">let</span> <span class="ident">pr</span> <span class="op">=</span> <span class="ident">pr</span>.<span class="ident">unwrap</span>();
-        <span class="macro">assert!</span>(<span class="ident">pr</span>.<span class="ident">origin</span> <span class="op">==</span> <span class="ident">Point2D::new</span>(<span class="number">0</span>, <span class="number">0</span>));
-        <span class="macro">assert!</span>(<span class="ident">pr</span>.<span class="ident">size</span> <span class="op">==</span> <span class="ident">Size2D::new</span>(<span class="number">3</span>, <span class="number">3</span>));
+        <span class="kw">let </span>pr = p.intersection(<span class="kw-2">&amp;</span>r);
+        <span class="macro">assert!</span>(pr.is_some());
+        <span class="kw">let </span>pr = pr.unwrap();
+        <span class="macro">assert!</span>(pr.origin == Point2D::new(<span class="number">0</span>, <span class="number">0</span>));
+        <span class="macro">assert!</span>(pr.size == Size2D::new(<span class="number">3</span>, <span class="number">3</span>));
 
-        <span class="kw">let</span> <span class="ident">qr</span> <span class="op">=</span> <span class="ident">q</span>.<span class="ident">intersection</span>(<span class="kw-2">&amp;</span><span class="ident">r</span>);
-        <span class="macro">assert!</span>(<span class="ident">qr</span>.<span class="ident">is_none</span>());
+        <span class="kw">let </span>qr = q.intersection(<span class="kw-2">&amp;</span>r);
+        <span class="macro">assert!</span>(qr.is_none());
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_intersection_overflow</span>() {
-        <span class="comment">// test some scenarios where the intersection can overflow but</span>
-        <span class="comment">// the min_x() and max_x() don&#39;t. Gecko currently fails these cases</span>
-        <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> <span class="ident">Rect::new</span>(<span class="ident">Point2D::new</span>(<span class="op">-</span><span class="number">2147483648</span>, <span class="op">-</span><span class="number">2147483648</span>), <span class="ident">Size2D::new</span>(<span class="number">0</span>, <span class="number">0</span>));
-        <span class="kw">let</span> <span class="ident">q</span> <span class="op">=</span> <span class="ident">Rect::new</span>(
-            <span class="ident">Point2D::new</span>(<span class="number">2136893440</span>, <span class="number">2136893440</span>),
-            <span class="ident">Size2D::new</span>(<span class="number">279552</span>, <span class="number">279552</span>),
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_intersection_overflow() {
+        <span class="comment">// test some scenarios where the intersection can overflow but
+        // the min_x() and max_x() don&#39;t. Gecko currently fails these cases
+        </span><span class="kw">let </span>p = Rect::new(Point2D::new(-<span class="number">2147483648</span>, -<span class="number">2147483648</span>), Size2D::new(<span class="number">0</span>, <span class="number">0</span>));
+        <span class="kw">let </span>q = Rect::new(
+            Point2D::new(<span class="number">2136893440</span>, <span class="number">2136893440</span>),
+            Size2D::new(<span class="number">279552</span>, <span class="number">279552</span>),
         );
-        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="ident">Rect::new</span>(<span class="ident">Point2D::new</span>(<span class="op">-</span><span class="number">2147483648</span>, <span class="op">-</span><span class="number">2147483648</span>), <span class="ident">Size2D::new</span>(<span class="number">1</span>, <span class="number">1</span>));
+        <span class="kw">let </span>r = Rect::new(Point2D::new(-<span class="number">2147483648</span>, -<span class="number">2147483648</span>), Size2D::new(<span class="number">1</span>, <span class="number">1</span>));
 
-        <span class="macro">assert!</span>(<span class="ident">p</span>.<span class="ident">is_empty</span>());
-        <span class="kw">let</span> <span class="ident">pq</span> <span class="op">=</span> <span class="ident">p</span>.<span class="ident">intersection</span>(<span class="kw-2">&amp;</span><span class="ident">q</span>);
-        <span class="macro">assert!</span>(<span class="ident">pq</span>.<span class="ident">is_none</span>());
+        <span class="macro">assert!</span>(p.is_empty());
+        <span class="kw">let </span>pq = p.intersection(<span class="kw-2">&amp;</span>q);
+        <span class="macro">assert!</span>(pq.is_none());
 
-        <span class="kw">let</span> <span class="ident">qr</span> <span class="op">=</span> <span class="ident">q</span>.<span class="ident">intersection</span>(<span class="kw-2">&amp;</span><span class="ident">r</span>);
-        <span class="macro">assert!</span>(<span class="ident">qr</span>.<span class="ident">is_none</span>());
+        <span class="kw">let </span>qr = q.intersection(<span class="kw-2">&amp;</span>r);
+        <span class="macro">assert!</span>(qr.is_none());
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_contains</span>() {
-        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="ident">Rect::new</span>(<span class="ident">Point2D::new</span>(<span class="op">-</span><span class="number">20</span>, <span class="number">15</span>), <span class="ident">Size2D::new</span>(<span class="number">100</span>, <span class="number">200</span>));
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_contains() {
+        <span class="kw">let </span>r = Rect::new(Point2D::new(-<span class="number">20</span>, <span class="number">15</span>), Size2D::new(<span class="number">100</span>, <span class="number">200</span>));
 
-        <span class="macro">assert!</span>(<span class="ident">r</span>.<span class="ident">contains</span>(<span class="ident">Point2D::new</span>(<span class="number">0</span>, <span class="number">50</span>)));
-        <span class="macro">assert!</span>(<span class="ident">r</span>.<span class="ident">contains</span>(<span class="ident">Point2D::new</span>(<span class="op">-</span><span class="number">10</span>, <span class="number">200</span>)));
+        <span class="macro">assert!</span>(r.contains(Point2D::new(<span class="number">0</span>, <span class="number">50</span>)));
+        <span class="macro">assert!</span>(r.contains(Point2D::new(-<span class="number">10</span>, <span class="number">200</span>)));
 
-        <span class="comment">// The `contains` method is inclusive of the top/left edges, but not the</span>
-        <span class="comment">// bottom/right edges.</span>
-        <span class="macro">assert!</span>(<span class="ident">r</span>.<span class="ident">contains</span>(<span class="ident">Point2D::new</span>(<span class="op">-</span><span class="number">20</span>, <span class="number">15</span>)));
-        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">r</span>.<span class="ident">contains</span>(<span class="ident">Point2D::new</span>(<span class="number">80</span>, <span class="number">15</span>)));
-        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">r</span>.<span class="ident">contains</span>(<span class="ident">Point2D::new</span>(<span class="number">80</span>, <span class="number">215</span>)));
-        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">r</span>.<span class="ident">contains</span>(<span class="ident">Point2D::new</span>(<span class="op">-</span><span class="number">20</span>, <span class="number">215</span>)));
+        <span class="comment">// The `contains` method is inclusive of the top/left edges, but not the
+        // bottom/right edges.
+        </span><span class="macro">assert!</span>(r.contains(Point2D::new(-<span class="number">20</span>, <span class="number">15</span>)));
+        <span class="macro">assert!</span>(!r.contains(Point2D::new(<span class="number">80</span>, <span class="number">15</span>)));
+        <span class="macro">assert!</span>(!r.contains(Point2D::new(<span class="number">80</span>, <span class="number">215</span>)));
+        <span class="macro">assert!</span>(!r.contains(Point2D::new(-<span class="number">20</span>, <span class="number">215</span>)));
 
-        <span class="comment">// Points beyond the top-left corner.</span>
-        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">r</span>.<span class="ident">contains</span>(<span class="ident">Point2D::new</span>(<span class="op">-</span><span class="number">25</span>, <span class="number">15</span>)));
-        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">r</span>.<span class="ident">contains</span>(<span class="ident">Point2D::new</span>(<span class="op">-</span><span class="number">15</span>, <span class="number">10</span>)));
+        <span class="comment">// Points beyond the top-left corner.
+        </span><span class="macro">assert!</span>(!r.contains(Point2D::new(-<span class="number">25</span>, <span class="number">15</span>)));
+        <span class="macro">assert!</span>(!r.contains(Point2D::new(-<span class="number">15</span>, <span class="number">10</span>)));
 
-        <span class="comment">// Points beyond the top-right corner.</span>
-        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">r</span>.<span class="ident">contains</span>(<span class="ident">Point2D::new</span>(<span class="number">85</span>, <span class="number">20</span>)));
-        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">r</span>.<span class="ident">contains</span>(<span class="ident">Point2D::new</span>(<span class="number">75</span>, <span class="number">10</span>)));
+        <span class="comment">// Points beyond the top-right corner.
+        </span><span class="macro">assert!</span>(!r.contains(Point2D::new(<span class="number">85</span>, <span class="number">20</span>)));
+        <span class="macro">assert!</span>(!r.contains(Point2D::new(<span class="number">75</span>, <span class="number">10</span>)));
 
-        <span class="comment">// Points beyond the bottom-right corner.</span>
-        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">r</span>.<span class="ident">contains</span>(<span class="ident">Point2D::new</span>(<span class="number">85</span>, <span class="number">210</span>)));
-        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">r</span>.<span class="ident">contains</span>(<span class="ident">Point2D::new</span>(<span class="number">75</span>, <span class="number">220</span>)));
+        <span class="comment">// Points beyond the bottom-right corner.
+        </span><span class="macro">assert!</span>(!r.contains(Point2D::new(<span class="number">85</span>, <span class="number">210</span>)));
+        <span class="macro">assert!</span>(!r.contains(Point2D::new(<span class="number">75</span>, <span class="number">220</span>)));
 
-        <span class="comment">// Points beyond the bottom-left corner.</span>
-        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">r</span>.<span class="ident">contains</span>(<span class="ident">Point2D::new</span>(<span class="op">-</span><span class="number">25</span>, <span class="number">210</span>)));
-        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">r</span>.<span class="ident">contains</span>(<span class="ident">Point2D::new</span>(<span class="op">-</span><span class="number">15</span>, <span class="number">220</span>)));
+        <span class="comment">// Points beyond the bottom-left corner.
+        </span><span class="macro">assert!</span>(!r.contains(Point2D::new(-<span class="number">25</span>, <span class="number">210</span>)));
+        <span class="macro">assert!</span>(!r.contains(Point2D::new(-<span class="number">15</span>, <span class="number">220</span>)));
 
-        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="ident">Rect::new</span>(<span class="ident">Point2D::new</span>(<span class="op">-</span><span class="number">20.0</span>, <span class="number">15.0</span>), <span class="ident">Size2D::new</span>(<span class="number">100.0</span>, <span class="number">200.0</span>));
-        <span class="macro">assert!</span>(<span class="ident">r</span>.<span class="ident">contains_rect</span>(<span class="kw-2">&amp;</span><span class="ident">r</span>));
-        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">r</span>.<span class="ident">contains_rect</span>(<span class="kw-2">&amp;</span><span class="ident">r</span>.<span class="ident">translate</span>(<span class="ident">vec2</span>(<span class="number">0.1</span>, <span class="number">0.0</span>))));
-        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">r</span>.<span class="ident">contains_rect</span>(<span class="kw-2">&amp;</span><span class="ident">r</span>.<span class="ident">translate</span>(<span class="ident">vec2</span>(<span class="op">-</span><span class="number">0.1</span>, <span class="number">0.0</span>))));
-        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">r</span>.<span class="ident">contains_rect</span>(<span class="kw-2">&amp;</span><span class="ident">r</span>.<span class="ident">translate</span>(<span class="ident">vec2</span>(<span class="number">0.0</span>, <span class="number">0.1</span>))));
-        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">r</span>.<span class="ident">contains_rect</span>(<span class="kw-2">&amp;</span><span class="ident">r</span>.<span class="ident">translate</span>(<span class="ident">vec2</span>(<span class="number">0.0</span>, <span class="op">-</span><span class="number">0.1</span>))));
-        <span class="comment">// Empty rectangles are always considered as contained in other rectangles,</span>
-        <span class="comment">// even if their origin is not.</span>
-        <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> <span class="ident">Point2D::new</span>(<span class="number">1.0</span>, <span class="number">1.0</span>);
-        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">r</span>.<span class="ident">contains</span>(<span class="ident">p</span>));
-        <span class="macro">assert!</span>(<span class="ident">r</span>.<span class="ident">contains_rect</span>(<span class="kw-2">&amp;</span><span class="ident">Rect::new</span>(<span class="ident">p</span>, <span class="ident">Size2D::zero</span>())));
+        <span class="kw">let </span>r = Rect::new(Point2D::new(-<span class="number">20.0</span>, <span class="number">15.0</span>), Size2D::new(<span class="number">100.0</span>, <span class="number">200.0</span>));
+        <span class="macro">assert!</span>(r.contains_rect(<span class="kw-2">&amp;</span>r));
+        <span class="macro">assert!</span>(!r.contains_rect(<span class="kw-2">&amp;</span>r.translate(vec2(<span class="number">0.1</span>, <span class="number">0.0</span>))));
+        <span class="macro">assert!</span>(!r.contains_rect(<span class="kw-2">&amp;</span>r.translate(vec2(-<span class="number">0.1</span>, <span class="number">0.0</span>))));
+        <span class="macro">assert!</span>(!r.contains_rect(<span class="kw-2">&amp;</span>r.translate(vec2(<span class="number">0.0</span>, <span class="number">0.1</span>))));
+        <span class="macro">assert!</span>(!r.contains_rect(<span class="kw-2">&amp;</span>r.translate(vec2(<span class="number">0.0</span>, -<span class="number">0.1</span>))));
+        <span class="comment">// Empty rectangles are always considered as contained in other rectangles,
+        // even if their origin is not.
+        </span><span class="kw">let </span>p = Point2D::new(<span class="number">1.0</span>, <span class="number">1.0</span>);
+        <span class="macro">assert!</span>(!r.contains(p));
+        <span class="macro">assert!</span>(r.contains_rect(<span class="kw-2">&amp;</span>Rect::new(p, Size2D::zero())));
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_scale</span>() {
-        <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> <span class="ident">Rect::new</span>(<span class="ident">Point2D::new</span>(<span class="number">0u32</span>, <span class="number">0u32</span>), <span class="ident">Size2D::new</span>(<span class="number">50u32</span>, <span class="number">40u32</span>));
-        <span class="kw">let</span> <span class="ident">pp</span> <span class="op">=</span> <span class="ident">p</span>.<span class="ident">scale</span>(<span class="number">10</span>, <span class="number">15</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_scale() {
+        <span class="kw">let </span>p = Rect::new(Point2D::new(<span class="number">0u32</span>, <span class="number">0u32</span>), Size2D::new(<span class="number">50u32</span>, <span class="number">40u32</span>));
+        <span class="kw">let </span>pp = p.scale(<span class="number">10</span>, <span class="number">15</span>);
 
-        <span class="macro">assert!</span>(<span class="ident">pp</span>.<span class="ident">size</span>.<span class="ident">width</span> <span class="op">==</span> <span class="number">500</span>);
-        <span class="macro">assert!</span>(<span class="ident">pp</span>.<span class="ident">size</span>.<span class="ident">height</span> <span class="op">==</span> <span class="number">600</span>);
-        <span class="macro">assert!</span>(<span class="ident">pp</span>.<span class="ident">origin</span>.<span class="ident">x</span> <span class="op">==</span> <span class="number">0</span>);
-        <span class="macro">assert!</span>(<span class="ident">pp</span>.<span class="ident">origin</span>.<span class="ident">y</span> <span class="op">==</span> <span class="number">0</span>);
+        <span class="macro">assert!</span>(pp.size.width == <span class="number">500</span>);
+        <span class="macro">assert!</span>(pp.size.height == <span class="number">600</span>);
+        <span class="macro">assert!</span>(pp.origin.x == <span class="number">0</span>);
+        <span class="macro">assert!</span>(pp.origin.y == <span class="number">0</span>);
 
-        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="ident">Rect::new</span>(<span class="ident">Point2D::new</span>(<span class="op">-</span><span class="number">10</span>, <span class="op">-</span><span class="number">5</span>), <span class="ident">Size2D::new</span>(<span class="number">50</span>, <span class="number">40</span>));
-        <span class="kw">let</span> <span class="ident">rr</span> <span class="op">=</span> <span class="ident">r</span>.<span class="ident">scale</span>(<span class="number">1</span>, <span class="number">20</span>);
+        <span class="kw">let </span>r = Rect::new(Point2D::new(-<span class="number">10</span>, -<span class="number">5</span>), Size2D::new(<span class="number">50</span>, <span class="number">40</span>));
+        <span class="kw">let </span>rr = r.scale(<span class="number">1</span>, <span class="number">20</span>);
 
-        <span class="macro">assert!</span>(<span class="ident">rr</span>.<span class="ident">size</span>.<span class="ident">width</span> <span class="op">==</span> <span class="number">50</span>);
-        <span class="macro">assert!</span>(<span class="ident">rr</span>.<span class="ident">size</span>.<span class="ident">height</span> <span class="op">==</span> <span class="number">800</span>);
-        <span class="macro">assert!</span>(<span class="ident">rr</span>.<span class="ident">origin</span>.<span class="ident">x</span> <span class="op">==</span> <span class="op">-</span><span class="number">10</span>);
-        <span class="macro">assert!</span>(<span class="ident">rr</span>.<span class="ident">origin</span>.<span class="ident">y</span> <span class="op">==</span> <span class="op">-</span><span class="number">100</span>);
+        <span class="macro">assert!</span>(rr.size.width == <span class="number">50</span>);
+        <span class="macro">assert!</span>(rr.size.height == <span class="number">800</span>);
+        <span class="macro">assert!</span>(rr.origin.x == -<span class="number">10</span>);
+        <span class="macro">assert!</span>(rr.origin.y == -<span class="number">100</span>);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_inflate</span>() {
-        <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> <span class="ident">Rect::new</span>(<span class="ident">Point2D::new</span>(<span class="number">0</span>, <span class="number">0</span>), <span class="ident">Size2D::new</span>(<span class="number">10</span>, <span class="number">10</span>));
-        <span class="kw">let</span> <span class="ident">pp</span> <span class="op">=</span> <span class="ident">p</span>.<span class="ident">inflate</span>(<span class="number">10</span>, <span class="number">20</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_inflate() {
+        <span class="kw">let </span>p = Rect::new(Point2D::new(<span class="number">0</span>, <span class="number">0</span>), Size2D::new(<span class="number">10</span>, <span class="number">10</span>));
+        <span class="kw">let </span>pp = p.inflate(<span class="number">10</span>, <span class="number">20</span>);
 
-        <span class="macro">assert!</span>(<span class="ident">pp</span>.<span class="ident">size</span>.<span class="ident">width</span> <span class="op">==</span> <span class="number">30</span>);
-        <span class="macro">assert!</span>(<span class="ident">pp</span>.<span class="ident">size</span>.<span class="ident">height</span> <span class="op">==</span> <span class="number">50</span>);
-        <span class="macro">assert!</span>(<span class="ident">pp</span>.<span class="ident">origin</span>.<span class="ident">x</span> <span class="op">==</span> <span class="op">-</span><span class="number">10</span>);
-        <span class="macro">assert!</span>(<span class="ident">pp</span>.<span class="ident">origin</span>.<span class="ident">y</span> <span class="op">==</span> <span class="op">-</span><span class="number">20</span>);
+        <span class="macro">assert!</span>(pp.size.width == <span class="number">30</span>);
+        <span class="macro">assert!</span>(pp.size.height == <span class="number">50</span>);
+        <span class="macro">assert!</span>(pp.origin.x == -<span class="number">10</span>);
+        <span class="macro">assert!</span>(pp.origin.y == -<span class="number">20</span>);
 
-        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="ident">Rect::new</span>(<span class="ident">Point2D::new</span>(<span class="number">0</span>, <span class="number">0</span>), <span class="ident">Size2D::new</span>(<span class="number">10</span>, <span class="number">20</span>));
-        <span class="kw">let</span> <span class="ident">rr</span> <span class="op">=</span> <span class="ident">r</span>.<span class="ident">inflate</span>(<span class="op">-</span><span class="number">2</span>, <span class="op">-</span><span class="number">5</span>);
+        <span class="kw">let </span>r = Rect::new(Point2D::new(<span class="number">0</span>, <span class="number">0</span>), Size2D::new(<span class="number">10</span>, <span class="number">20</span>));
+        <span class="kw">let </span>rr = r.inflate(-<span class="number">2</span>, -<span class="number">5</span>);
 
-        <span class="macro">assert!</span>(<span class="ident">rr</span>.<span class="ident">size</span>.<span class="ident">width</span> <span class="op">==</span> <span class="number">6</span>);
-        <span class="macro">assert!</span>(<span class="ident">rr</span>.<span class="ident">size</span>.<span class="ident">height</span> <span class="op">==</span> <span class="number">10</span>);
-        <span class="macro">assert!</span>(<span class="ident">rr</span>.<span class="ident">origin</span>.<span class="ident">x</span> <span class="op">==</span> <span class="number">2</span>);
-        <span class="macro">assert!</span>(<span class="ident">rr</span>.<span class="ident">origin</span>.<span class="ident">y</span> <span class="op">==</span> <span class="number">5</span>);
+        <span class="macro">assert!</span>(rr.size.width == <span class="number">6</span>);
+        <span class="macro">assert!</span>(rr.size.height == <span class="number">10</span>);
+        <span class="macro">assert!</span>(rr.origin.x == <span class="number">2</span>);
+        <span class="macro">assert!</span>(rr.origin.y == <span class="number">5</span>);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_inner_outer_rect</span>() {
-        <span class="kw">let</span> <span class="ident">inner_rect</span> <span class="op">=</span> <span class="ident">Rect::new</span>(<span class="ident">point2</span>(<span class="number">20</span>, <span class="number">40</span>), <span class="ident">size2</span>(<span class="number">80</span>, <span class="number">100</span>));
-        <span class="kw">let</span> <span class="ident">offsets</span> <span class="op">=</span> <span class="ident">SideOffsets2D::new</span>(<span class="number">20</span>, <span class="number">10</span>, <span class="number">10</span>, <span class="number">10</span>);
-        <span class="kw">let</span> <span class="ident">outer_rect</span> <span class="op">=</span> <span class="ident">inner_rect</span>.<span class="ident">outer_rect</span>(<span class="ident">offsets</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">outer_rect</span>.<span class="ident">origin</span>.<span class="ident">x</span>, <span class="number">10</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">outer_rect</span>.<span class="ident">origin</span>.<span class="ident">y</span>, <span class="number">20</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">outer_rect</span>.<span class="ident">size</span>.<span class="ident">width</span>, <span class="number">100</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">outer_rect</span>.<span class="ident">size</span>.<span class="ident">height</span>, <span class="number">130</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">outer_rect</span>.<span class="ident">inner_rect</span>(<span class="ident">offsets</span>), <span class="ident">inner_rect</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_inner_outer_rect() {
+        <span class="kw">let </span>inner_rect = Rect::new(point2(<span class="number">20</span>, <span class="number">40</span>), size2(<span class="number">80</span>, <span class="number">100</span>));
+        <span class="kw">let </span>offsets = SideOffsets2D::new(<span class="number">20</span>, <span class="number">10</span>, <span class="number">10</span>, <span class="number">10</span>);
+        <span class="kw">let </span>outer_rect = inner_rect.outer_rect(offsets);
+        <span class="macro">assert_eq!</span>(outer_rect.origin.x, <span class="number">10</span>);
+        <span class="macro">assert_eq!</span>(outer_rect.origin.y, <span class="number">20</span>);
+        <span class="macro">assert_eq!</span>(outer_rect.size.width, <span class="number">100</span>);
+        <span class="macro">assert_eq!</span>(outer_rect.size.height, <span class="number">130</span>);
+        <span class="macro">assert_eq!</span>(outer_rect.inner_rect(offsets), inner_rect);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_min_max_x_y</span>() {
-        <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> <span class="ident">Rect::new</span>(<span class="ident">Point2D::new</span>(<span class="number">0u32</span>, <span class="number">0u32</span>), <span class="ident">Size2D::new</span>(<span class="number">50u32</span>, <span class="number">40u32</span>));
-        <span class="macro">assert!</span>(<span class="ident">p</span>.<span class="ident">max_y</span>() <span class="op">==</span> <span class="number">40</span>);
-        <span class="macro">assert!</span>(<span class="ident">p</span>.<span class="ident">min_y</span>() <span class="op">==</span> <span class="number">0</span>);
-        <span class="macro">assert!</span>(<span class="ident">p</span>.<span class="ident">max_x</span>() <span class="op">==</span> <span class="number">50</span>);
-        <span class="macro">assert!</span>(<span class="ident">p</span>.<span class="ident">min_x</span>() <span class="op">==</span> <span class="number">0</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_min_max_x_y() {
+        <span class="kw">let </span>p = Rect::new(Point2D::new(<span class="number">0u32</span>, <span class="number">0u32</span>), Size2D::new(<span class="number">50u32</span>, <span class="number">40u32</span>));
+        <span class="macro">assert!</span>(p.max_y() == <span class="number">40</span>);
+        <span class="macro">assert!</span>(p.min_y() == <span class="number">0</span>);
+        <span class="macro">assert!</span>(p.max_x() == <span class="number">50</span>);
+        <span class="macro">assert!</span>(p.min_x() == <span class="number">0</span>);
 
-        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="ident">Rect::new</span>(<span class="ident">Point2D::new</span>(<span class="op">-</span><span class="number">10</span>, <span class="op">-</span><span class="number">5</span>), <span class="ident">Size2D::new</span>(<span class="number">50</span>, <span class="number">40</span>));
-        <span class="macro">assert!</span>(<span class="ident">r</span>.<span class="ident">max_y</span>() <span class="op">==</span> <span class="number">35</span>);
-        <span class="macro">assert!</span>(<span class="ident">r</span>.<span class="ident">min_y</span>() <span class="op">==</span> <span class="op">-</span><span class="number">5</span>);
-        <span class="macro">assert!</span>(<span class="ident">r</span>.<span class="ident">max_x</span>() <span class="op">==</span> <span class="number">40</span>);
-        <span class="macro">assert!</span>(<span class="ident">r</span>.<span class="ident">min_x</span>() <span class="op">==</span> <span class="op">-</span><span class="number">10</span>);
+        <span class="kw">let </span>r = Rect::new(Point2D::new(-<span class="number">10</span>, -<span class="number">5</span>), Size2D::new(<span class="number">50</span>, <span class="number">40</span>));
+        <span class="macro">assert!</span>(r.max_y() == <span class="number">35</span>);
+        <span class="macro">assert!</span>(r.min_y() == -<span class="number">5</span>);
+        <span class="macro">assert!</span>(r.max_x() == <span class="number">40</span>);
+        <span class="macro">assert!</span>(r.min_x() == -<span class="number">10</span>);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_width_height</span>() {
-        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="ident">Rect::new</span>(<span class="ident">Point2D::new</span>(<span class="op">-</span><span class="number">10</span>, <span class="op">-</span><span class="number">5</span>), <span class="ident">Size2D::new</span>(<span class="number">50</span>, <span class="number">40</span>));
-        <span class="macro">assert!</span>(<span class="ident">r</span>.<span class="ident">width</span>() <span class="op">==</span> <span class="number">50</span>);
-        <span class="macro">assert!</span>(<span class="ident">r</span>.<span class="ident">height</span>() <span class="op">==</span> <span class="number">40</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_width_height() {
+        <span class="kw">let </span>r = Rect::new(Point2D::new(-<span class="number">10</span>, -<span class="number">5</span>), Size2D::new(<span class="number">50</span>, <span class="number">40</span>));
+        <span class="macro">assert!</span>(r.width() == <span class="number">50</span>);
+        <span class="macro">assert!</span>(r.height() == <span class="number">40</span>);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_is_empty</span>() {
-        <span class="macro">assert!</span>(<span class="ident">Rect::new</span>(<span class="ident">Point2D::new</span>(<span class="number">0u32</span>, <span class="number">0u32</span>), <span class="ident">Size2D::new</span>(<span class="number">0u32</span>, <span class="number">0u32</span>)).<span class="ident">is_empty</span>());
-        <span class="macro">assert!</span>(<span class="ident">Rect::new</span>(<span class="ident">Point2D::new</span>(<span class="number">0u32</span>, <span class="number">0u32</span>), <span class="ident">Size2D::new</span>(<span class="number">10u32</span>, <span class="number">0u32</span>)).<span class="ident">is_empty</span>());
-        <span class="macro">assert!</span>(<span class="ident">Rect::new</span>(<span class="ident">Point2D::new</span>(<span class="number">0u32</span>, <span class="number">0u32</span>), <span class="ident">Size2D::new</span>(<span class="number">0u32</span>, <span class="number">10u32</span>)).<span class="ident">is_empty</span>());
-        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">Rect::new</span>(<span class="ident">Point2D::new</span>(<span class="number">0u32</span>, <span class="number">0u32</span>), <span class="ident">Size2D::new</span>(<span class="number">1u32</span>, <span class="number">1u32</span>)).<span class="ident">is_empty</span>());
-        <span class="macro">assert!</span>(<span class="ident">Rect::new</span>(<span class="ident">Point2D::new</span>(<span class="number">10u32</span>, <span class="number">10u32</span>), <span class="ident">Size2D::new</span>(<span class="number">0u32</span>, <span class="number">0u32</span>)).<span class="ident">is_empty</span>());
-        <span class="macro">assert!</span>(<span class="ident">Rect::new</span>(<span class="ident">Point2D::new</span>(<span class="number">10u32</span>, <span class="number">10u32</span>), <span class="ident">Size2D::new</span>(<span class="number">10u32</span>, <span class="number">0u32</span>)).<span class="ident">is_empty</span>());
-        <span class="macro">assert!</span>(<span class="ident">Rect::new</span>(<span class="ident">Point2D::new</span>(<span class="number">10u32</span>, <span class="number">10u32</span>), <span class="ident">Size2D::new</span>(<span class="number">0u32</span>, <span class="number">10u32</span>)).<span class="ident">is_empty</span>());
-        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">Rect::new</span>(<span class="ident">Point2D::new</span>(<span class="number">10u32</span>, <span class="number">10u32</span>), <span class="ident">Size2D::new</span>(<span class="number">1u32</span>, <span class="number">1u32</span>)).<span class="ident">is_empty</span>());
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_is_empty() {
+        <span class="macro">assert!</span>(Rect::new(Point2D::new(<span class="number">0u32</span>, <span class="number">0u32</span>), Size2D::new(<span class="number">0u32</span>, <span class="number">0u32</span>)).is_empty());
+        <span class="macro">assert!</span>(Rect::new(Point2D::new(<span class="number">0u32</span>, <span class="number">0u32</span>), Size2D::new(<span class="number">10u32</span>, <span class="number">0u32</span>)).is_empty());
+        <span class="macro">assert!</span>(Rect::new(Point2D::new(<span class="number">0u32</span>, <span class="number">0u32</span>), Size2D::new(<span class="number">0u32</span>, <span class="number">10u32</span>)).is_empty());
+        <span class="macro">assert!</span>(!Rect::new(Point2D::new(<span class="number">0u32</span>, <span class="number">0u32</span>), Size2D::new(<span class="number">1u32</span>, <span class="number">1u32</span>)).is_empty());
+        <span class="macro">assert!</span>(Rect::new(Point2D::new(<span class="number">10u32</span>, <span class="number">10u32</span>), Size2D::new(<span class="number">0u32</span>, <span class="number">0u32</span>)).is_empty());
+        <span class="macro">assert!</span>(Rect::new(Point2D::new(<span class="number">10u32</span>, <span class="number">10u32</span>), Size2D::new(<span class="number">10u32</span>, <span class="number">0u32</span>)).is_empty());
+        <span class="macro">assert!</span>(Rect::new(Point2D::new(<span class="number">10u32</span>, <span class="number">10u32</span>), Size2D::new(<span class="number">0u32</span>, <span class="number">10u32</span>)).is_empty());
+        <span class="macro">assert!</span>(!Rect::new(Point2D::new(<span class="number">10u32</span>, <span class="number">10u32</span>), Size2D::new(<span class="number">1u32</span>, <span class="number">1u32</span>)).is_empty());
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_round</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">x</span> <span class="op">=</span> <span class="op">-</span><span class="number">2.0</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">y</span> <span class="op">=</span> <span class="op">-</span><span class="number">2.0</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">w</span> <span class="op">=</span> <span class="op">-</span><span class="number">2.0</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">h</span> <span class="op">=</span> <span class="op">-</span><span class="number">2.0</span>;
-        <span class="kw">while</span> <span class="ident">x</span> <span class="op">&lt;</span> <span class="number">2.0</span> {
-            <span class="kw">while</span> <span class="ident">y</span> <span class="op">&lt;</span> <span class="number">2.0</span> {
-                <span class="kw">while</span> <span class="ident">w</span> <span class="op">&lt;</span> <span class="number">2.0</span> {
-                    <span class="kw">while</span> <span class="ident">h</span> <span class="op">&lt;</span> <span class="number">2.0</span> {
-                        <span class="kw">let</span> <span class="ident">rect</span> <span class="op">=</span> <span class="ident">Rect::new</span>(<span class="ident">Point2D::new</span>(<span class="ident">x</span>, <span class="ident">y</span>), <span class="ident">Size2D::new</span>(<span class="ident">w</span>, <span class="ident">h</span>));
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_round() {
+        <span class="kw">let </span><span class="kw-2">mut </span>x = -<span class="number">2.0</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>y = -<span class="number">2.0</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>w = -<span class="number">2.0</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>h = -<span class="number">2.0</span>;
+        <span class="kw">while </span>x &lt; <span class="number">2.0 </span>{
+            <span class="kw">while </span>y &lt; <span class="number">2.0 </span>{
+                <span class="kw">while </span>w &lt; <span class="number">2.0 </span>{
+                    <span class="kw">while </span>h &lt; <span class="number">2.0 </span>{
+                        <span class="kw">let </span>rect = Rect::new(Point2D::new(x, y), Size2D::new(w, h));
 
-                        <span class="macro">assert!</span>(<span class="ident">rect</span>.<span class="ident">contains_rect</span>(<span class="kw-2">&amp;</span><span class="ident">rect</span>.<span class="ident">round_in</span>()));
-                        <span class="macro">assert!</span>(<span class="ident">rect</span>.<span class="ident">round_in</span>().<span class="ident">inflate</span>(<span class="number">1.0</span>, <span class="number">1.0</span>).<span class="ident">contains_rect</span>(<span class="kw-2">&amp;</span><span class="ident">rect</span>));
+                        <span class="macro">assert!</span>(rect.contains_rect(<span class="kw-2">&amp;</span>rect.round_in()));
+                        <span class="macro">assert!</span>(rect.round_in().inflate(<span class="number">1.0</span>, <span class="number">1.0</span>).contains_rect(<span class="kw-2">&amp;</span>rect));
 
-                        <span class="macro">assert!</span>(<span class="ident">rect</span>.<span class="ident">round_out</span>().<span class="ident">contains_rect</span>(<span class="kw-2">&amp;</span><span class="ident">rect</span>));
-                        <span class="macro">assert!</span>(<span class="ident">rect</span>.<span class="ident">inflate</span>(<span class="number">1.0</span>, <span class="number">1.0</span>).<span class="ident">contains_rect</span>(<span class="kw-2">&amp;</span><span class="ident">rect</span>.<span class="ident">round_out</span>()));
+                        <span class="macro">assert!</span>(rect.round_out().contains_rect(<span class="kw-2">&amp;</span>rect));
+                        <span class="macro">assert!</span>(rect.inflate(<span class="number">1.0</span>, <span class="number">1.0</span>).contains_rect(<span class="kw-2">&amp;</span>rect.round_out()));
 
-                        <span class="macro">assert!</span>(<span class="ident">rect</span>.<span class="ident">inflate</span>(<span class="number">1.0</span>, <span class="number">1.0</span>).<span class="ident">contains_rect</span>(<span class="kw-2">&amp;</span><span class="ident">rect</span>.<span class="ident">round</span>()));
-                        <span class="macro">assert!</span>(<span class="ident">rect</span>.<span class="ident">round</span>().<span class="ident">inflate</span>(<span class="number">1.0</span>, <span class="number">1.0</span>).<span class="ident">contains_rect</span>(<span class="kw-2">&amp;</span><span class="ident">rect</span>));
+                        <span class="macro">assert!</span>(rect.inflate(<span class="number">1.0</span>, <span class="number">1.0</span>).contains_rect(<span class="kw-2">&amp;</span>rect.round()));
+                        <span class="macro">assert!</span>(rect.round().inflate(<span class="number">1.0</span>, <span class="number">1.0</span>).contains_rect(<span class="kw-2">&amp;</span>rect));
 
-                        <span class="ident">h</span> <span class="op">+</span><span class="op">=</span> <span class="number">0.1</span>;
+                        h += <span class="number">0.1</span>;
                     }
-                    <span class="ident">w</span> <span class="op">+</span><span class="op">=</span> <span class="number">0.1</span>;
+                    w += <span class="number">0.1</span>;
                 }
-                <span class="ident">y</span> <span class="op">+</span><span class="op">=</span> <span class="number">0.1</span>;
+                y += <span class="number">0.1</span>;
             }
-            <span class="ident">x</span> <span class="op">+</span><span class="op">=</span> <span class="number">0.1</span>
-        }
+            x += <span class="number">0.1
+        </span>}
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_center</span>() {
-        <span class="kw">let</span> <span class="ident">r</span>: <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">rect</span>(<span class="op">-</span><span class="number">2</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">10</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">r</span>.<span class="ident">center</span>(), <span class="ident">point2</span>(<span class="number">0</span>, <span class="number">10</span>));
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_center() {
+        <span class="kw">let </span>r: Rect&lt;i32&gt; = rect(-<span class="number">2</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">10</span>);
+        <span class="macro">assert_eq!</span>(r.center(), point2(<span class="number">0</span>, <span class="number">10</span>));
 
-        <span class="kw">let</span> <span class="ident">r</span>: <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">f32</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">rect</span>(<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>, <span class="number">4.0</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">r</span>.<span class="ident">center</span>(), <span class="ident">point2</span>(<span class="number">2.5</span>, <span class="number">4.0</span>));
+        <span class="kw">let </span>r: Rect&lt;f32&gt; = rect(<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>, <span class="number">4.0</span>);
+        <span class="macro">assert_eq!</span>(r.center(), point2(<span class="number">2.5</span>, <span class="number">4.0</span>));
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_nan</span>() {
-        <span class="kw">let</span> <span class="ident">r1</span>: <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">f32</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">rect</span>(<span class="op">-</span><span class="number">2.0</span>, <span class="number">5.0</span>, <span class="number">4.0</span>, <span class="ident">std::f32::NAN</span>);
-        <span class="kw">let</span> <span class="ident">r2</span>: <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">f32</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">rect</span>(<span class="ident">std::f32::NAN</span>, <span class="op">-</span><span class="number">1.0</span>, <span class="number">3.0</span>, <span class="number">10.0</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_nan() {
+        <span class="kw">let </span>r1: Rect&lt;f32&gt; = rect(-<span class="number">2.0</span>, <span class="number">5.0</span>, <span class="number">4.0</span>, std::f32::NAN);
+        <span class="kw">let </span>r2: Rect&lt;f32&gt; = rect(std::f32::NAN, -<span class="number">1.0</span>, <span class="number">3.0</span>, <span class="number">10.0</span>);
 
-        <span class="macro">assert_eq!</span>(<span class="ident">r1</span>.<span class="ident">intersection</span>(<span class="kw-2">&amp;</span><span class="ident">r2</span>), <span class="prelude-val">None</span>);
+        <span class="macro">assert_eq!</span>(r1.intersection(<span class="kw-2">&amp;</span>r2), <span class="prelude-val">None</span>);
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="euclid" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0-nightly (12cd71f4d 2022-06-01)" ></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="euclid" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (17cbdfd07 2022-09-13)" ></div></body></html>

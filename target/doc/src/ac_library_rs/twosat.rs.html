@@ -1,11 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/bcfam/.cargo/git/checkouts/ac-library-rs-d342211755004e20/d2b35ac/src/twosat.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>twosat.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><script defer src="../../main.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script>
-    <noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../ac_library_rs/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"></h2>
-    </nav>
-    <nav class="sidebar"><a class="sidebar-logo" href="../../ac_library_rs/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../ac_library_rs/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
-                                <a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div>
-                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/bcfam/.cargo/git/checkouts/ac-library-rs-d342211755004e20/d2b35ac/src/twosat.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>twosat.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../ac_library_rs/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../ac_library_rs/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../ac_library_rs/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -206,207 +199,206 @@
 <span id="199">199</span>
 <span id="200">200</span>
 <span id="201">201</span>
-</pre><pre class="rust"><code><span class="doccomment">//! A 2-SAT Solver.</span>
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::internal_scc</span>;
+</pre><pre class="rust"><code><span class="doccomment">//! A 2-SAT Solver.
+</span><span class="kw">use </span><span class="kw">crate</span>::internal_scc;
 
-<span class="doccomment">/// A 2-SAT Solver.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// For variables $x_0, x_1, \ldots, x_{N - 1}$ and clauses with from</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// \\[</span>
-<span class="doccomment">///   (x_i = f) \lor (x_j = g)</span>
-<span class="doccomment">/// \\]</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// it decides whether there is a truth assignment that satisfies all clauses.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Example</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">/// #![allow(clippy::many_single_char_names)]</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// use ac_library_rs::TwoSat;</span>
-<span class="doccomment">/// use proconio::{input, marker::Bytes, source::once::OnceSource};</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// input! {</span>
-<span class="doccomment">///     from OnceSource::from(</span>
-<span class="doccomment">///         &quot;3\n\</span>
-<span class="doccomment">///          3\n\</span>
-<span class="doccomment">///          a b\n\</span>
-<span class="doccomment">///          !b c\n\</span>
-<span class="doccomment">///          !a !a\n&quot;,</span>
-<span class="doccomment">///     ),</span>
-<span class="doccomment">///     n: usize,</span>
-<span class="doccomment">///     pqs: [(Bytes, Bytes)],</span>
-<span class="doccomment">/// }</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// let mut twosat = TwoSat::new(n);</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// for (p, q) in pqs {</span>
-<span class="doccomment">///     fn parse(s: &amp;[u8]) -&gt; (usize, bool) {</span>
-<span class="doccomment">///         match *s {</span>
-<span class="doccomment">///             [c] =&gt; ((c - b&#39;a&#39;).into(), true),</span>
-<span class="doccomment">///             [b&#39;!&#39;, c] =&gt; ((c - b&#39;a&#39;).into(), false),</span>
-<span class="doccomment">///             _ =&gt; unreachable!(),</span>
-<span class="doccomment">///         }</span>
-<span class="doccomment">///     }</span>
-<span class="doccomment">///     let ((i, f), (j, g)) = (parse(&amp;p), parse(&amp;q));</span>
-<span class="doccomment">///     twosat.add_clause(i, f, j, g);</span>
-<span class="doccomment">/// }</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// assert!(twosat.satisfiable());</span>
-<span class="doccomment">/// assert_eq!(twosat.answer(), [false, true, true]);</span>
-<span class="doccomment">/// ```</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">TwoSat</span> {
-    <span class="ident">n</span>: <span class="ident">usize</span>,
-    <span class="ident">scc</span>: <span class="ident">internal_scc::SccGraph</span>,
-    <span class="ident">answer</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">bool</span><span class="op">&gt;</span>,
+<span class="doccomment">/// A 2-SAT Solver.
+///
+/// For variables $x_0, x_1, \ldots, x_{N - 1}$ and clauses with from
+///
+/// \\[
+///   (x_i = f) \lor (x_j = g)
+/// \\]
+///
+/// it decides whether there is a truth assignment that satisfies all clauses.
+///
+/// # Example
+///
+/// ```
+/// #![allow(clippy::many_single_char_names)]
+///
+/// use ac_library_rs::TwoSat;
+/// use proconio::{input, marker::Bytes, source::once::OnceSource};
+///
+/// input! {
+///     from OnceSource::from(
+///         &quot;3\n\
+///          3\n\
+///          a b\n\
+///          !b c\n\
+///          !a !a\n&quot;,
+///     ),
+///     n: usize,
+///     pqs: [(Bytes, Bytes)],
+/// }
+///
+/// let mut twosat = TwoSat::new(n);
+///
+/// for (p, q) in pqs {
+///     fn parse(s: &amp;[u8]) -&gt; (usize, bool) {
+///         match *s {
+///             [c] =&gt; ((c - b&#39;a&#39;).into(), true),
+///             [b&#39;!&#39;, c] =&gt; ((c - b&#39;a&#39;).into(), false),
+///             _ =&gt; unreachable!(),
+///         }
+///     }
+///     let ((i, f), (j, g)) = (parse(&amp;p), parse(&amp;q));
+///     twosat.add_clause(i, f, j, g);
+/// }
+///
+/// assert!(twosat.satisfiable());
+/// assert_eq!(twosat.answer(), [false, true, true]);
+/// ```
+</span><span class="kw">pub struct </span>TwoSat {
+    n: usize,
+    scc: internal_scc::SccGraph,
+    answer: Vec&lt;bool&gt;,
 }
-<span class="kw">impl</span> <span class="ident">TwoSat</span> {
-    <span class="doccomment">/// Creates a new `TwoSat` of `n` variables and 0 clauses.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Constraints</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// - $0 \leq n \leq 10^8$</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Complexity</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// - $O(n)$</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">n</span>: <span class="ident">usize</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">TwoSat</span> {
-            <span class="ident">n</span>,
-            <span class="ident">answer</span>: <span class="macro">vec!</span>[<span class="bool-val">false</span>; <span class="ident">n</span>],
-            <span class="ident">scc</span>: <span class="ident">internal_scc::SccGraph::new</span>(<span class="number">2</span> <span class="op">*</span> <span class="ident">n</span>),
+<span class="kw">impl </span>TwoSat {
+    <span class="doccomment">/// Creates a new `TwoSat` of `n` variables and 0 clauses.
+    ///
+    /// # Constraints
+    ///
+    /// - $0 \leq n \leq 10^8$
+    ///
+    /// # Complexity
+    ///
+    /// - $O(n)$
+    </span><span class="kw">pub fn </span>new(n: usize) -&gt; <span class="self">Self </span>{
+        TwoSat {
+            n,
+            answer: <span class="macro">vec!</span>[<span class="bool-val">false</span>; n],
+            scc: internal_scc::SccGraph::new(<span class="number">2 </span>* n),
         }
     }
-    <span class="doccomment">/// Adds a clause $(x_i = f) \lor (x_j = g)$.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Constraints</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// - $0 \leq i &lt; n$</span>
-    <span class="doccomment">/// - $0 \leq j &lt; n$</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Panics</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Panics if the above constraints are not satisfied.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Complexity</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// - $O(1)$ amortized</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_clause</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">i</span>: <span class="ident">usize</span>, <span class="ident">f</span>: <span class="ident">bool</span>, <span class="ident">j</span>: <span class="ident">usize</span>, <span class="ident">g</span>: <span class="ident">bool</span>) {
-        <span class="macro">assert!</span>(<span class="ident">i</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">n</span> <span class="op">&amp;&amp;</span> <span class="ident">j</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">n</span>);
-        <span class="self">self</span>.<span class="ident">scc</span>.<span class="ident">add_edge</span>(<span class="number">2</span> <span class="op">*</span> <span class="ident">i</span> <span class="op">+</span> <span class="op">!</span><span class="ident">f</span> <span class="kw">as</span> <span class="ident">usize</span>, <span class="number">2</span> <span class="op">*</span> <span class="ident">j</span> <span class="op">+</span> <span class="ident">g</span> <span class="kw">as</span> <span class="ident">usize</span>);
-        <span class="self">self</span>.<span class="ident">scc</span>.<span class="ident">add_edge</span>(<span class="number">2</span> <span class="op">*</span> <span class="ident">j</span> <span class="op">+</span> <span class="op">!</span><span class="ident">g</span> <span class="kw">as</span> <span class="ident">usize</span>, <span class="number">2</span> <span class="op">*</span> <span class="ident">i</span> <span class="op">+</span> <span class="ident">f</span> <span class="kw">as</span> <span class="ident">usize</span>);
+    <span class="doccomment">/// Adds a clause $(x_i = f) \lor (x_j = g)$.
+    ///
+    /// # Constraints
+    ///
+    /// - $0 \leq i &lt; n$
+    /// - $0 \leq j &lt; n$
+    ///
+    /// # Panics
+    ///
+    /// Panics if the above constraints are not satisfied.
+    ///
+    /// # Complexity
+    ///
+    /// - $O(1)$ amortized
+    </span><span class="kw">pub fn </span>add_clause(<span class="kw-2">&amp;mut </span><span class="self">self</span>, i: usize, f: bool, j: usize, g: bool) {
+        <span class="macro">assert!</span>(i &lt; <span class="self">self</span>.n &amp;&amp; j &lt; <span class="self">self</span>.n);
+        <span class="self">self</span>.scc.add_edge(<span class="number">2 </span>* i + !f <span class="kw">as </span>usize, <span class="number">2 </span>* j + g <span class="kw">as </span>usize);
+        <span class="self">self</span>.scc.add_edge(<span class="number">2 </span>* j + !g <span class="kw">as </span>usize, <span class="number">2 </span>* i + f <span class="kw">as </span>usize);
     }
-    <span class="doccomment">/// Returns whether there is a truth assignment that satisfies all clauses.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Complexity</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// - $O(n + m)$ where $m$ is the number of added clauses</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">satisfiable</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="kw">let</span> <span class="ident">id</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">scc</span>.<span class="ident">scc_ids</span>().<span class="number">1</span>;
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="self">self</span>.<span class="ident">n</span> {
-            <span class="kw">if</span> <span class="ident">id</span>[<span class="number">2</span> <span class="op">*</span> <span class="ident">i</span>] <span class="op">==</span> <span class="ident">id</span>[<span class="number">2</span> <span class="op">*</span> <span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>] {
-                <span class="kw">return</span> <span class="bool-val">false</span>;
+    <span class="doccomment">/// Returns whether there is a truth assignment that satisfies all clauses.
+    ///
+    /// # Complexity
+    ///
+    /// - $O(n + m)$ where $m$ is the number of added clauses
+    </span><span class="kw">pub fn </span>satisfiable(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; bool {
+        <span class="kw">let </span>id = <span class="self">self</span>.scc.scc_ids().<span class="number">1</span>;
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..<span class="self">self</span>.n {
+            <span class="kw">if </span>id[<span class="number">2 </span>* i] == id[<span class="number">2 </span>* i + <span class="number">1</span>] {
+                <span class="kw">return </span><span class="bool-val">false</span>;
             }
-            <span class="self">self</span>.<span class="ident">answer</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">id</span>[<span class="number">2</span> <span class="op">*</span> <span class="ident">i</span>] <span class="op">&lt;</span> <span class="ident">id</span>[<span class="number">2</span> <span class="op">*</span> <span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>];
+            <span class="self">self</span>.answer[i] = id[<span class="number">2 </span>* i] &lt; id[<span class="number">2 </span>* i + <span class="number">1</span>];
         }
-        <span class="bool-val">true</span>
-    }
-    <span class="doccomment">/// Returns a truth assignment that satisfies all clauses **of the last call of [`satisfiable`]**.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Constraints</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// - [`satisfiable`] is called after adding all clauses and it has returned `true`.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Complexity</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// - $O(n)$</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// [`satisfiable`]: #method.satisfiable</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">answer</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">bool</span>] {
-        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">answer</span>
+        <span class="bool-val">true
+    </span>}
+    <span class="doccomment">/// Returns a truth assignment that satisfies all clauses **of the last call of [`satisfiable`]**.
+    ///
+    /// # Constraints
+    ///
+    /// - [`satisfiable`] is called after adding all clauses and it has returned `true`.
+    ///
+    /// # Complexity
+    ///
+    /// - $O(n)$
+    ///
+    /// [`satisfiable`]: #method.satisfiable
+    </span><span class="kw">pub fn </span>answer(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[bool] {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.answer
     }
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
-<span class="kw">mod</span> <span class="ident">tests</span> {
-    <span class="attribute">#![<span class="ident">allow</span>(<span class="ident">clippy::many_single_char_names</span>)]</span>
-    <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">solve_alpc_h_sample1</span>() {
-        <span class="comment">// https://atcoder.jp/contests/practice2/tasks/practice2_h</span>
+<span class="attribute">#[cfg(test)]
+</span><span class="kw">mod </span>tests {
+    <span class="attribute">#![allow(clippy::many_single_char_names)]
+    </span><span class="kw">use super</span>::<span class="kw-2">*</span>;
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>solve_alpc_h_sample1() {
+        <span class="comment">// https://atcoder.jp/contests/practice2/tasks/practice2_h
 
-        <span class="kw">let</span> (<span class="ident">n</span>, <span class="ident">d</span>) <span class="op">=</span> (<span class="number">3</span>, <span class="number">2</span>);
-        <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">0i32</span>];
-        <span class="kw">let</span> <span class="ident">y</span> <span class="op">=</span> [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>];
+        </span><span class="kw">let </span>(n, d) = (<span class="number">3</span>, <span class="number">2</span>);
+        <span class="kw">let </span>x = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">0i32</span>];
+        <span class="kw">let </span>y = [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>];
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">t</span> <span class="op">=</span> <span class="ident">TwoSat::new</span>(<span class="ident">n</span>);
+        <span class="kw">let </span><span class="kw-2">mut </span>t = TwoSat::new(n);
 
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">n</span> {
-            <span class="kw">for</span> <span class="ident">j</span> <span class="kw">in</span> <span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>..<span class="ident">n</span> {
-                <span class="kw">if</span> (<span class="ident">x</span>[<span class="ident">i</span>] <span class="op">-</span> <span class="ident">x</span>[<span class="ident">j</span>]).<span class="ident">abs</span>() <span class="op">&lt;</span> <span class="ident">d</span> {
-                    <span class="ident">t</span>.<span class="ident">add_clause</span>(<span class="ident">i</span>, <span class="bool-val">false</span>, <span class="ident">j</span>, <span class="bool-val">false</span>);
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..n {
+            <span class="kw">for </span>j <span class="kw">in </span>i + <span class="number">1</span>..n {
+                <span class="kw">if </span>(x[i] - x[j]).abs() &lt; d {
+                    t.add_clause(i, <span class="bool-val">false</span>, j, <span class="bool-val">false</span>);
                 }
-                <span class="kw">if</span> (<span class="ident">x</span>[<span class="ident">i</span>] <span class="op">-</span> <span class="ident">y</span>[<span class="ident">j</span>]).<span class="ident">abs</span>() <span class="op">&lt;</span> <span class="ident">d</span> {
-                    <span class="ident">t</span>.<span class="ident">add_clause</span>(<span class="ident">i</span>, <span class="bool-val">false</span>, <span class="ident">j</span>, <span class="bool-val">true</span>);
+                <span class="kw">if </span>(x[i] - y[j]).abs() &lt; d {
+                    t.add_clause(i, <span class="bool-val">false</span>, j, <span class="bool-val">true</span>);
                 }
-                <span class="kw">if</span> (<span class="ident">y</span>[<span class="ident">i</span>] <span class="op">-</span> <span class="ident">x</span>[<span class="ident">j</span>]).<span class="ident">abs</span>() <span class="op">&lt;</span> <span class="ident">d</span> {
-                    <span class="ident">t</span>.<span class="ident">add_clause</span>(<span class="ident">i</span>, <span class="bool-val">true</span>, <span class="ident">j</span>, <span class="bool-val">false</span>);
+                <span class="kw">if </span>(y[i] - x[j]).abs() &lt; d {
+                    t.add_clause(i, <span class="bool-val">true</span>, j, <span class="bool-val">false</span>);
                 }
-                <span class="kw">if</span> (<span class="ident">y</span>[<span class="ident">i</span>] <span class="op">-</span> <span class="ident">y</span>[<span class="ident">j</span>]).<span class="ident">abs</span>() <span class="op">&lt;</span> <span class="ident">d</span> {
-                    <span class="ident">t</span>.<span class="ident">add_clause</span>(<span class="ident">i</span>, <span class="bool-val">true</span>, <span class="ident">j</span>, <span class="bool-val">true</span>);
+                <span class="kw">if </span>(y[i] - y[j]).abs() &lt; d {
+                    t.add_clause(i, <span class="bool-val">true</span>, j, <span class="bool-val">true</span>);
                 }
             }
         }
-        <span class="macro">assert!</span>(<span class="ident">t</span>.<span class="ident">satisfiable</span>());
-        <span class="kw">let</span> <span class="ident">answer</span> <span class="op">=</span> <span class="ident">t</span>.<span class="ident">answer</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">res</span> <span class="op">=</span> <span class="macro">vec!</span>[];
-        <span class="kw">for</span> (<span class="ident">i</span>, <span class="kw-2">&amp;</span><span class="ident">v</span>) <span class="kw">in</span> <span class="ident">answer</span>.<span class="ident">iter</span>().<span class="ident">enumerate</span>() {
-            <span class="kw">if</span> <span class="ident">v</span> {
-                <span class="ident">res</span>.<span class="ident">push</span>(<span class="ident">x</span>[<span class="ident">i</span>])
-            } <span class="kw">else</span> {
-                <span class="ident">res</span>.<span class="ident">push</span>(<span class="ident">y</span>[<span class="ident">i</span>]);
+        <span class="macro">assert!</span>(t.satisfiable());
+        <span class="kw">let </span>answer = t.answer();
+        <span class="kw">let </span><span class="kw-2">mut </span>res = <span class="macro">vec!</span>[];
+        <span class="kw">for </span>(i, <span class="kw-2">&amp;</span>v) <span class="kw">in </span>answer.iter().enumerate() {
+            <span class="kw">if </span>v {
+                res.push(x[i])
+            } <span class="kw">else </span>{
+                res.push(y[i]);
             }
         }
 
-        <span class="comment">//Check the min distance between flags</span>
-        <span class="ident">res</span>.<span class="ident">sort_unstable</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">min_distance</span> <span class="op">=</span> <span class="ident">i32::max_value</span>();
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">1</span>..<span class="ident">res</span>.<span class="ident">len</span>() {
-            <span class="ident">min_distance</span> <span class="op">=</span> <span class="ident">std::cmp::min</span>(<span class="ident">min_distance</span>, <span class="ident">res</span>[<span class="ident">i</span>] <span class="op">-</span> <span class="ident">res</span>[<span class="ident">i</span> <span class="op">-</span> <span class="number">1</span>]);
+        <span class="comment">//Check the min distance between flags
+        </span>res.sort_unstable();
+        <span class="kw">let </span><span class="kw-2">mut </span>min_distance = i32::max_value();
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">1</span>..res.len() {
+            min_distance = std::cmp::min(min_distance, res[i] - res[i - <span class="number">1</span>]);
         }
-        <span class="macro">assert!</span>(<span class="ident">min_distance</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">d</span>);
+        <span class="macro">assert!</span>(min_distance &gt;= d);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">solve_alpc_h_sample2</span>() {
-        <span class="comment">// https://atcoder.jp/contests/practice2/tasks/practice2_h</span>
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>solve_alpc_h_sample2() {
+        <span class="comment">// https://atcoder.jp/contests/practice2/tasks/practice2_h
 
-        <span class="kw">let</span> (<span class="ident">n</span>, <span class="ident">d</span>) <span class="op">=</span> (<span class="number">3</span>, <span class="number">3</span>);
-        <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">0i32</span>];
-        <span class="kw">let</span> <span class="ident">y</span> <span class="op">=</span> [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>];
+        </span><span class="kw">let </span>(n, d) = (<span class="number">3</span>, <span class="number">3</span>);
+        <span class="kw">let </span>x = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">0i32</span>];
+        <span class="kw">let </span>y = [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>];
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">t</span> <span class="op">=</span> <span class="ident">TwoSat::new</span>(<span class="ident">n</span>);
+        <span class="kw">let </span><span class="kw-2">mut </span>t = TwoSat::new(n);
 
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">n</span> {
-            <span class="kw">for</span> <span class="ident">j</span> <span class="kw">in</span> <span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>..<span class="ident">n</span> {
-                <span class="kw">if</span> (<span class="ident">x</span>[<span class="ident">i</span>] <span class="op">-</span> <span class="ident">x</span>[<span class="ident">j</span>]).<span class="ident">abs</span>() <span class="op">&lt;</span> <span class="ident">d</span> {
-                    <span class="ident">t</span>.<span class="ident">add_clause</span>(<span class="ident">i</span>, <span class="bool-val">false</span>, <span class="ident">j</span>, <span class="bool-val">false</span>);
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..n {
+            <span class="kw">for </span>j <span class="kw">in </span>i + <span class="number">1</span>..n {
+                <span class="kw">if </span>(x[i] - x[j]).abs() &lt; d {
+                    t.add_clause(i, <span class="bool-val">false</span>, j, <span class="bool-val">false</span>);
                 }
-                <span class="kw">if</span> (<span class="ident">x</span>[<span class="ident">i</span>] <span class="op">-</span> <span class="ident">y</span>[<span class="ident">j</span>]).<span class="ident">abs</span>() <span class="op">&lt;</span> <span class="ident">d</span> {
-                    <span class="ident">t</span>.<span class="ident">add_clause</span>(<span class="ident">i</span>, <span class="bool-val">false</span>, <span class="ident">j</span>, <span class="bool-val">true</span>);
+                <span class="kw">if </span>(x[i] - y[j]).abs() &lt; d {
+                    t.add_clause(i, <span class="bool-val">false</span>, j, <span class="bool-val">true</span>);
                 }
-                <span class="kw">if</span> (<span class="ident">y</span>[<span class="ident">i</span>] <span class="op">-</span> <span class="ident">x</span>[<span class="ident">j</span>]).<span class="ident">abs</span>() <span class="op">&lt;</span> <span class="ident">d</span> {
-                    <span class="ident">t</span>.<span class="ident">add_clause</span>(<span class="ident">i</span>, <span class="bool-val">true</span>, <span class="ident">j</span>, <span class="bool-val">false</span>);
+                <span class="kw">if </span>(y[i] - x[j]).abs() &lt; d {
+                    t.add_clause(i, <span class="bool-val">true</span>, j, <span class="bool-val">false</span>);
                 }
-                <span class="kw">if</span> (<span class="ident">y</span>[<span class="ident">i</span>] <span class="op">-</span> <span class="ident">y</span>[<span class="ident">j</span>]).<span class="ident">abs</span>() <span class="op">&lt;</span> <span class="ident">d</span> {
-                    <span class="ident">t</span>.<span class="ident">add_clause</span>(<span class="ident">i</span>, <span class="bool-val">true</span>, <span class="ident">j</span>, <span class="bool-val">true</span>);
+                <span class="kw">if </span>(y[i] - y[j]).abs() &lt; d {
+                    t.add_clause(i, <span class="bool-val">true</span>, j, <span class="bool-val">true</span>);
                 }
             }
         }
-        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">t</span>.<span class="ident">satisfiable</span>());
+        <span class="macro">assert!</span>(!t.satisfiable());
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="ac_library_rs" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0-nightly (12cd71f4d 2022-06-01)" ></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="ac_library_rs" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (17cbdfd07 2022-09-13)" ></div></body></html>

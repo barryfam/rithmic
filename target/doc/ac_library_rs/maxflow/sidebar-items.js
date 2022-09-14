@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["Edge",""],["MfGraph",""]]});
+window.SIDEBAR_ITEMS = {"struct":[["Edge",""],["MfGraph",""]]};

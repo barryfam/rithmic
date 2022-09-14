@@ -1,11 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `rithmic/src/graph/lca.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lca.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script src="../../../crates.js"></script><script defer src="../../../main.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script>
-    <noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../rithmic/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"></h2>
-    </nav>
-    <nav class="sidebar"><a class="sidebar-logo" href="../../../rithmic/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../rithmic/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
-                                <a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div>
-                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `rithmic/src/graph/lca.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lca.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../rithmic/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../rithmic/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../rithmic/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -52,53 +45,52 @@
 <span id="45">45</span>
 <span id="46">46</span>
 <span id="47">47</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">SparseTable</span>, <span class="ident">OrdPair</span>};
-<span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident">dfs::DfsStep</span>;
-<span class="kw">use</span> <span class="ident">dfs::DfsStepKind::TreeNodeFinish</span>;
+</pre><pre class="rust"><code><span class="kw">use crate</span>::{SparseTable, OrdPair};
+<span class="kw">use super</span>::<span class="kw-2">*</span>;
+<span class="kw">use </span>dfs::DfsStep;
+<span class="kw">use </span>dfs::DfsStepKind::TreeNodeFinish;
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Lca</span> {
-    <span class="ident">rmq</span>: <span class="ident">SparseTable</span><span class="op">&lt;</span>(<span class="ident">usize</span>, <span class="ident">usize</span>)<span class="op">&gt;</span>,       <span class="comment">// (depth, node id)</span>
-    <span class="ident">u_map_rmq</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>,                  <span class="comment">// u_map_rmq[node id] = rmq index</span>
-}
+<span class="attribute">#[derive(Clone)]
+</span><span class="kw">pub struct </span>Lca {
+    rmq: SparseTable&lt;(usize, usize)&gt;,       <span class="comment">// (depth, node id)
+    </span>u_map_rmq: Vec&lt;usize&gt;,                  <span class="comment">// u_map_rmq[node id] = rmq index
+</span>}
 
-<span class="kw">impl</span> <span class="ident">Lca</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">query</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">u</span>: <span class="ident">usize</span>, <span class="ident">v</span>: <span class="ident">usize</span>) -&gt; <span class="ident">usize</span>
+<span class="kw">impl </span>Lca {
+    <span class="kw">pub fn </span>query(<span class="kw-2">&amp;</span><span class="self">self</span>, u: usize, v: usize) -&gt; usize
     {
-        <span class="kw">let</span> (<span class="ident">i</span>, <span class="ident">j</span>) <span class="op">=</span> (<span class="self">self</span>.<span class="ident">u_map_rmq</span>[<span class="ident">u</span>], <span class="self">self</span>.<span class="ident">u_map_rmq</span>[<span class="ident">v</span>]).<span class="ident">ordered</span>();
-        <span class="self">self</span>.<span class="ident">rmq</span>.<span class="ident">query</span>(<span class="ident">i</span>..<span class="op">=</span><span class="ident">j</span>).<span class="number">1</span>
-    }
+        <span class="kw">let </span>(i, j) = (<span class="self">self</span>.u_map_rmq[u], <span class="self">self</span>.u_map_rmq[v]).ordered();
+        <span class="self">self</span>.rmq.query(i..=j).<span class="number">1
+    </span>}
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span> <span class="ident">Tree</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span>
-<span class="kw">where</span> <span class="ident">E</span>: <span class="ident">Copy</span>
+<span class="kw">impl</span>&lt;E&gt; Tree&lt;E&gt;
+<span class="kw">where </span>E: Copy
 {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">lca</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">s</span>: <span class="ident">usize</span>) -&gt; <span class="ident">Lca</span>
+    <span class="kw">pub fn </span>lca(<span class="kw-2">&amp;</span><span class="self">self</span>, s: usize) -&gt; Lca
     {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rmq</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="op">&lt;</span>(<span class="ident">usize</span>, <span class="ident">usize</span>)<span class="op">&gt;</span><span class="ident">::new</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">u_map_rmq</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="ident">NONE</span>; <span class="self">self</span>.<span class="ident">size</span>()];
+        <span class="kw">let </span><span class="kw-2">mut </span>rmq = Vec::&lt;(usize, usize)&gt;::new();
+        <span class="kw">let </span><span class="kw-2">mut </span>u_map_rmq = <span class="macro">vec!</span>[NONE; <span class="self">self</span>.size()];
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rmq_push</span> <span class="op">=</span> <span class="op">|</span><span class="ident">u</span>, <span class="ident">d</span><span class="op">|</span> {
-            <span class="kw">if</span> <span class="ident">rmq</span>.<span class="ident">last</span>().<span class="ident">map</span>(<span class="op">|</span><span class="kw-2">&amp;</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span>.<span class="number">1</span>) <span class="op">==</span> <span class="prelude-val">Some</span>(<span class="ident">u</span>) { <span class="kw">return</span> }
+        <span class="kw">let </span><span class="kw-2">mut </span>rmq_push = |u, d| {
+            <span class="kw">if </span>rmq.last().map(|<span class="kw-2">&amp;</span>x| x.<span class="number">1</span>) == <span class="prelude-val">Some</span>(u) { <span class="kw">return </span>}
 
-            <span class="ident">u_map_rmq</span>[<span class="ident">u</span>] <span class="op">=</span> <span class="ident">rmq</span>.<span class="ident">len</span>();
-            <span class="ident">rmq</span>.<span class="ident">push</span>((<span class="ident">d</span>, <span class="ident">u</span>));
+            u_map_rmq[u] = rmq.len();
+            rmq.push((d, u));
         };
 
-        <span class="kw">for</span> <span class="ident">step</span> <span class="kw">in</span> <span class="self">self</span>.<span class="ident">dfs</span>([<span class="ident">s</span>]) {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="ident">DfsStep</span>{<span class="ident">kind</span>: <span class="ident">TreeNodeFinish</span>, <span class="ident">p</span>, <span class="ident">u</span>, <span class="ident">depth</span>, ..} <span class="op">=</span> <span class="ident">step</span> {
-                <span class="ident">rmq_push</span>(<span class="ident">u</span>, <span class="ident">depth</span>);
-                <span class="kw">if</span> <span class="ident">p</span> <span class="op">!</span><span class="op">=</span> <span class="ident">NONE</span> {
-                    <span class="ident">rmq_push</span>(<span class="ident">p</span>, <span class="ident">depth</span><span class="op">-</span><span class="number">1</span>);
+        <span class="kw">for </span>step <span class="kw">in </span><span class="self">self</span>.dfs([s]) {
+            <span class="kw">if let </span>DfsStep{kind: TreeNodeFinish, p, u, depth, ..} = step {
+                rmq_push(u, depth);
+                <span class="kw">if </span>p != NONE {
+                    rmq_push(p, depth-<span class="number">1</span>);
                 }
             }
         }
 
-        <span class="kw">let</span> <span class="ident">rmq</span> <span class="op">=</span> <span class="ident">SparseTable::from</span>(<span class="ident">rmq</span>, <span class="op">|</span><span class="kw-2">&amp;</span><span class="ident">a</span>, <span class="kw-2">&amp;</span><span class="ident">b</span><span class="op">|</span> <span class="ident">a</span>.<span class="ident">min</span>(<span class="ident">b</span>));
-        <span class="ident">Lca</span>{<span class="ident">rmq</span>, <span class="ident">u_map_rmq</span>}
+        <span class="kw">let </span>rmq = SparseTable::from(rmq, |<span class="kw-2">&amp;</span>a, <span class="kw-2">&amp;</span>b| a.min(b));
+        Lca{rmq, u_map_rmq}
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="rithmic" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0-nightly (12cd71f4d 2022-06-01)" ></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="rithmic" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (17cbdfd07 2022-09-13)" ></div></body></html>

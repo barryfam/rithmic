@@ -1,11 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `rithmic/src/graph/graph.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>graph.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script src="../../../crates.js"></script><script defer src="../../../main.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script>
-    <noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../rithmic/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"></h2>
-    </nav>
-    <nav class="sidebar"><a class="sidebar-logo" href="../../../rithmic/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../rithmic/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
-                                <a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div>
-                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `rithmic/src/graph/graph.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>graph.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../rithmic/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../rithmic/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../rithmic/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -154,155 +147,154 @@
 <span id="147">147</span>
 <span id="148">148</span>
 <span id="149">149</span>
-</pre><pre class="rust"><code><span class="kw">pub</span> <span class="kw">const</span> <span class="ident">NONE</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="op">!</span><span class="number">0</span>;
+</pre><pre class="rust"><code><span class="kw">pub const </span>NONE: usize = !<span class="number">0</span>;
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Graph</span><span class="op">&lt;</span><span class="ident">E</span>, <span class="kw">const</span> <span class="ident">FLAGS</span>: <span class="ident">usize</span><span class="op">&gt;</span>
-<span class="kw">where</span> <span class="ident">E</span>: <span class="ident">Copy</span>
+<span class="attribute">#[derive(Clone, Debug)]
+</span><span class="kw">pub struct </span>Graph&lt;E, <span class="kw">const </span>FLAGS: usize&gt;
+<span class="kw">where </span>E: Copy
 {
-    <span class="kw">pub</span> <span class="ident">adj</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">usize</span>, <span class="ident">E</span>)<span class="op">&gt;</span><span class="op">&gt;</span>
+    <span class="kw">pub </span>adj: Vec&lt;Vec&lt;(usize, E)&gt;&gt;
 }
 
-<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">mod</span> <span class="ident">flags</span> {
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SIMPLE</span>:     <span class="ident">usize</span> <span class="op">=</span> <span class="number">0b0001</span>;
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">UNDIRECTED</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">0b0010</span>;
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ACYCLIC</span>:    <span class="ident">usize</span> <span class="op">=</span> <span class="number">0b0100</span>;
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CONNECTED</span>:  <span class="ident">usize</span> <span class="op">=</span> <span class="number">0b1000</span>;
+<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">mod </span>flags {
+    <span class="kw">pub const </span>SIMPLE:     usize = <span class="number">0b0001</span>;
+    <span class="kw">pub const </span>UNDIRECTED: usize = <span class="number">0b0010</span>;
+    <span class="kw">pub const </span>ACYCLIC:    usize = <span class="number">0b0100</span>;
+    <span class="kw">pub const </span>CONNECTED:  usize = <span class="number">0b1000</span>;
 
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">FOREST</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="ident">SIMPLE</span> <span class="op">|</span> <span class="ident">UNDIRECTED</span> <span class="op">|</span> <span class="ident">ACYCLIC</span>;
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">TREE</span>:   <span class="ident">usize</span> <span class="op">=</span> <span class="ident">FOREST</span> <span class="op">|</span> <span class="ident">CONNECTED</span>;
+    <span class="kw">pub const </span>FOREST: usize = SIMPLE | UNDIRECTED | ACYCLIC;
+    <span class="kw">pub const </span>TREE:   usize = FOREST | CONNECTED;
 
-    <span class="kw">use</span> <span class="ident"><span class="kw">super</span>::Graph</span>;
-    <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">DirGraph</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Graph</span><span class="op">&lt;</span><span class="ident">E</span>, <span class="number">0</span><span class="op">&gt;</span>;
-    <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">UndirGraph</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Graph</span><span class="op">&lt;</span><span class="ident">E</span>, <span class="ident">UNDIRECTED</span><span class="op">&gt;</span>;
-    <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">SimpDirGraph</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Graph</span><span class="op">&lt;</span><span class="ident">E</span>, <span class="ident">SIMPLE</span><span class="op">&gt;</span>;
-    <span class="kw">const</span> <span class="ident">SU</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="ident">SIMPLE</span> <span class="op">|</span> <span class="ident">UNDIRECTED</span>;
-    <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">SimpUndirGraph</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Graph</span><span class="op">&lt;</span><span class="ident">E</span>, <span class="ident">SU</span><span class="op">&gt;</span>;
-    <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">Dag</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Graph</span><span class="op">&lt;</span><span class="ident">E</span>, <span class="ident">ACYCLIC</span><span class="op">&gt;</span>;
-    <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">Forest</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Graph</span><span class="op">&lt;</span><span class="ident">E</span>, <span class="ident">FOREST</span><span class="op">&gt;</span>;
-    <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">Tree</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Graph</span><span class="op">&lt;</span><span class="ident">E</span>, <span class="ident">TREE</span><span class="op">&gt;</span>;
+    <span class="kw">use </span><span class="kw">super</span>::Graph;
+    <span class="kw">pub type </span>DirGraph&lt;E&gt; = Graph&lt;E, <span class="number">0</span>&gt;;
+    <span class="kw">pub type </span>UndirGraph&lt;E&gt; = Graph&lt;E, UNDIRECTED&gt;;
+    <span class="kw">pub type </span>SimpDirGraph&lt;E&gt; = Graph&lt;E, SIMPLE&gt;;
+    <span class="kw">const </span>SU: usize = SIMPLE | UNDIRECTED;
+    <span class="kw">pub type </span>SimpUndirGraph&lt;E&gt; = Graph&lt;E, SU&gt;;
+    <span class="kw">pub type </span>Dag&lt;E&gt; = Graph&lt;E, ACYCLIC&gt;;
+    <span class="kw">pub type </span>Forest&lt;E&gt; = Graph&lt;E, FOREST&gt;;
+    <span class="kw">pub type </span>Tree&lt;E&gt; = Graph&lt;E, TREE&gt;;
 }
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">flags</span>::<span class="kw-2">*</span>;
+<span class="kw">pub use </span>flags::<span class="kw-2">*</span>;
 
-<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">has_flags</span>(<span class="ident">u</span>: <span class="ident">usize</span>, <span class="ident">flags</span>: <span class="ident">usize</span>) -&gt; <span class="ident">bool</span> {
-    <span class="ident">u</span> <span class="op">&amp;</span> <span class="ident">flags</span> <span class="op">==</span> <span class="ident">flags</span>
+<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">const fn </span>has_flags(u: usize, flags: usize) -&gt; bool {
+    u &amp; flags == flags
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">E</span>, <span class="kw">const</span> <span class="ident">FLAGS</span>: <span class="ident">usize</span><span class="op">&gt;</span> <span class="ident">Graph</span><span class="op">&lt;</span><span class="ident">E</span>, <span class="ident">FLAGS</span><span class="op">&gt;</span>
-<span class="kw">where</span> <span class="ident">E</span>: <span class="ident">Copy</span>
+<span class="kw">impl</span>&lt;E, <span class="kw">const </span>FLAGS: usize&gt; Graph&lt;E, FLAGS&gt;
+<span class="kw">where </span>E: Copy
 {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">size</span>: <span class="ident">usize</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> {
-            <span class="ident">adj</span>: <span class="macro">vec!</span>[<span class="macro">vec!</span>[]; <span class="ident">size</span>]
+    <span class="kw">pub fn </span>new(size: usize) -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{
+            adj: <span class="macro">vec!</span>[<span class="macro">vec!</span>[]; size]
         }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_edge</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">u</span>: <span class="ident">usize</span>, <span class="ident">v</span>: <span class="ident">usize</span>, <span class="ident">edge</span>: <span class="ident">E</span>)
+    <span class="kw">pub fn </span>add_edge(<span class="kw-2">&amp;mut </span><span class="self">self</span>, u: usize, v: usize, edge: E)
     {
-        <span class="kw">if</span> <span class="ident">has_flags</span>(<span class="ident">FLAGS</span>, <span class="ident">SIMPLE</span>) {
-            <span class="macro">debug_assert_ne!</span>(<span class="ident">u</span>, <span class="ident">v</span>, <span class="string">&quot;A simple graph may not contain loops&quot;</span>);
-            <span class="comment">// Only check last out-edge for multi-edgeness. A weak check, but avoids O(n²) debug build</span>
-            <span class="macro">debug_assert_ne!</span>(<span class="self">self</span>.<span class="ident">adj</span>[<span class="ident">u</span>].<span class="ident">last</span>().<span class="ident">map</span>(<span class="op">|</span><span class="kw-2">&amp;</span>(<span class="ident">v</span>, <span class="kw">_</span>)<span class="op">|</span> <span class="ident">v</span>), <span class="prelude-val">Some</span>(<span class="ident">v</span>),
+        <span class="kw">if </span>has_flags(FLAGS, SIMPLE) {
+            <span class="macro">debug_assert_ne!</span>(u, v, <span class="string">&quot;A simple graph may not contain loops&quot;</span>);
+            <span class="comment">// Only check last out-edge for multi-edgeness. A weak check, but avoids O(n²) debug build
+            </span><span class="macro">debug_assert_ne!</span>(<span class="self">self</span>.adj[u].last().map(|<span class="kw-2">&amp;</span>(v, <span class="kw">_</span>)| v), <span class="prelude-val">Some</span>(v),
                 <span class="string">&quot;A simple graph may not contain more than one edge per vertex pair&quot;</span>);
         }
 
-        <span class="self">self</span>.<span class="ident">adj</span>[<span class="ident">u</span>].<span class="ident">push</span>((<span class="ident">v</span>, <span class="ident">edge</span>));
-        <span class="kw">if</span> <span class="ident">has_flags</span>(<span class="ident">FLAGS</span>, <span class="ident">UNDIRECTED</span>) {
-            <span class="self">self</span>.<span class="ident">adj</span>[<span class="ident">v</span>].<span class="ident">push</span>((<span class="ident">u</span>, <span class="ident">edge</span>));
+        <span class="self">self</span>.adj[u].push((v, edge));
+        <span class="kw">if </span>has_flags(FLAGS, UNDIRECTED) {
+            <span class="self">self</span>.adj[v].push((u, edge));
         }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_iter</span>(<span class="ident">size</span>: <span class="ident">usize</span>, <span class="ident">iter</span>: <span class="kw">impl</span> <span class="ident">IntoIterator</span><span class="op">&lt;</span><span class="ident">Item</span><span class="op">=</span>(<span class="ident">usize</span>, <span class="ident">usize</span>, <span class="ident">E</span>)<span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">g</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::new</span>(<span class="ident">size</span>);
-        <span class="kw">for</span> (<span class="ident">u</span>, <span class="ident">v</span>, <span class="ident">w</span>) <span class="kw">in</span> <span class="ident">iter</span>.<span class="ident">into_iter</span>() {
-            <span class="ident">g</span>.<span class="ident">add_edge</span>(<span class="ident">u</span>, <span class="ident">v</span>, <span class="ident">w</span>);
+    <span class="kw">pub fn </span>from_iter(size: usize, iter: <span class="kw">impl </span>IntoIterator&lt;Item=(usize, usize, E)&gt;) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span><span class="kw-2">mut </span>g = <span class="self">Self</span>::new(size);
+        <span class="kw">for </span>(u, v, w) <span class="kw">in </span>iter.into_iter() {
+            g.add_edge(u, v, w);
         }
-        <span class="ident">g</span>
+        g
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">size</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">usize</span> {
-        <span class="self">self</span>.<span class="ident">adj</span>.<span class="ident">len</span>()
+    <span class="kw">pub fn </span>size(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize {
+        <span class="self">self</span>.adj.len()
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">rev</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rev</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::new</span>(<span class="self">self</span>.<span class="ident">size</span>());
-        <span class="kw">for</span> (<span class="ident">u</span>, <span class="ident">adj</span>) <span class="kw">in</span> <span class="self">self</span>.<span class="ident">adj</span>.<span class="ident">iter</span>().<span class="ident">enumerate</span>() {
-            <span class="kw">for</span> <span class="kw-2">&amp;</span>(<span class="ident">v</span>, <span class="ident">e</span>) <span class="kw">in</span> <span class="ident">adj</span> {
-                <span class="ident">rev</span>.<span class="ident">add_edge</span>(<span class="ident">v</span>, <span class="ident">u</span>, <span class="ident">e</span>);
+    <span class="kw">pub fn </span>rev(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span><span class="kw-2">mut </span>rev = <span class="self">Self</span>::new(<span class="self">self</span>.size());
+        <span class="kw">for </span>(u, adj) <span class="kw">in </span><span class="self">self</span>.adj.iter().enumerate() {
+            <span class="kw">for </span><span class="kw-2">&amp;</span>(v, e) <span class="kw">in </span>adj {
+                rev.add_edge(v, u, e);
             }
         }
-        <span class="ident">rev</span>
+        rev
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="kw">const</span> <span class="ident">FLAGS</span>: <span class="ident">usize</span><span class="op">&gt;</span> <span class="ident">Graph</span><span class="op">&lt;</span>(), <span class="ident">FLAGS</span><span class="op">&gt;</span>
+<span class="kw">impl</span>&lt;<span class="kw">const </span>FLAGS: usize&gt; Graph&lt;(), FLAGS&gt;
 {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_iter_unweighted</span>(<span class="ident">size</span>: <span class="ident">usize</span>, <span class="ident">iter</span>: <span class="kw">impl</span> <span class="ident">IntoIterator</span><span class="op">&lt;</span><span class="ident">Item</span><span class="op">=</span>(<span class="ident">usize</span>, <span class="ident">usize</span>)<span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">g</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::new</span>(<span class="ident">size</span>);
-        <span class="kw">for</span> (<span class="ident">u</span>, <span class="ident">v</span>) <span class="kw">in</span> <span class="ident">iter</span>.<span class="ident">into_iter</span>() {
-            <span class="ident">g</span>.<span class="ident">add_edge</span>(<span class="ident">u</span>, <span class="ident">v</span>, ());
+    <span class="kw">pub fn </span>from_iter_unweighted(size: usize, iter: <span class="kw">impl </span>IntoIterator&lt;Item=(usize, usize)&gt;) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span><span class="kw-2">mut </span>g = <span class="self">Self</span>::new(size);
+        <span class="kw">for </span>(u, v) <span class="kw">in </span>iter.into_iter() {
+            g.add_edge(u, v, ());
         }
-        <span class="ident">g</span>
+        g
     }
 }
 
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
-<span class="kw">mod</span> <span class="ident">tests</span> {
-    <span class="kw">use</span> <span class="ident">itertools::Itertools</span>;
+<span class="attribute">#[cfg(test)]
+</span><span class="kw">mod </span>tests {
+    <span class="kw">use </span>itertools::Itertools;
 
-    <span class="kw">use</span> <span class="ident"><span class="kw">super</span>::<span class="kw">super</span>::prelude</span>::<span class="kw-2">*</span>;
+    <span class="kw">use </span><span class="kw">super</span>::<span class="kw">super</span>::prelude::<span class="kw-2">*</span>;
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_from_iter</span>() {
-        <span class="kw">let</span> <span class="ident">v</span> <span class="op">=</span> <span class="macro">vec!</span>[(<span class="number">0</span>, <span class="number">1</span>), (<span class="number">1</span>, <span class="number">2</span>), (<span class="number">2</span>, <span class="number">3</span>)];
-        <span class="kw">let</span> <span class="ident">_g</span> <span class="op">=</span> <span class="ident">DirGraph</span>::<span class="op">&lt;</span>()<span class="op">&gt;</span><span class="ident">::from_iter_unweighted</span>(<span class="number">4</span>, <span class="ident">v</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_from_iter() {
+        <span class="kw">let </span>v = <span class="macro">vec!</span>[(<span class="number">0</span>, <span class="number">1</span>), (<span class="number">1</span>, <span class="number">2</span>), (<span class="number">2</span>, <span class="number">3</span>)];
+        <span class="kw">let </span>_g = DirGraph::&lt;()&gt;::from_iter_unweighted(<span class="number">4</span>, v);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_dfs_basic</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">g</span> <span class="op">=</span> <span class="ident">DirGraph</span>::<span class="op">&lt;</span>()<span class="op">&gt;</span><span class="ident">::new</span>(<span class="number">7</span>);
-        <span class="ident">g</span>.<span class="ident">add_edge</span>(<span class="number">0</span>, <span class="number">1</span>, ());
-        <span class="ident">g</span>.<span class="ident">add_edge</span>(<span class="number">1</span>, <span class="number">2</span>, ());
-        <span class="ident">g</span>.<span class="ident">add_edge</span>(<span class="number">2</span>, <span class="number">3</span>, ());
-        <span class="ident">g</span>.<span class="ident">add_edge</span>(<span class="number">3</span>, <span class="number">4</span>, ());
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_dfs_basic() {
+        <span class="kw">let </span><span class="kw-2">mut </span>g = DirGraph::&lt;()&gt;::new(<span class="number">7</span>);
+        g.add_edge(<span class="number">0</span>, <span class="number">1</span>, ());
+        g.add_edge(<span class="number">1</span>, <span class="number">2</span>, ());
+        g.add_edge(<span class="number">2</span>, <span class="number">3</span>, ());
+        g.add_edge(<span class="number">3</span>, <span class="number">4</span>, ());
 
-        <span class="ident">g</span>.<span class="ident">add_edge</span>(<span class="number">1</span>, <span class="number">3</span>, ());
-        <span class="ident">g</span>.<span class="ident">add_edge</span>(<span class="number">4</span>, <span class="number">0</span>, ());
+        g.add_edge(<span class="number">1</span>, <span class="number">3</span>, ());
+        g.add_edge(<span class="number">4</span>, <span class="number">0</span>, ());
 
-        <span class="ident">g</span>.<span class="ident">add_edge</span>(<span class="number">5</span>, <span class="number">6</span>, ());
-        <span class="ident">g</span>.<span class="ident">add_edge</span>(<span class="number">6</span>, <span class="number">0</span>, ());
+        g.add_edge(<span class="number">5</span>, <span class="number">6</span>, ());
+        g.add_edge(<span class="number">6</span>, <span class="number">0</span>, ());
 
-        <span class="kw">let</span> <span class="ident">dfs0</span> <span class="op">=</span> <span class="ident">g</span>.<span class="ident">dfs</span>([<span class="number">0</span>]);
+        <span class="kw">let </span>dfs0 = g.dfs([<span class="number">0</span>]);
 
-        <span class="kw">let</span> <span class="ident">counts</span> <span class="op">=</span> <span class="ident">dfs0</span>.<span class="ident">iter</span>().<span class="ident">counts_by</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">s</span>.<span class="ident">kind</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">counts</span>[<span class="kw-2">&amp;</span><span class="ident">TreeNodeStart</span>], <span class="number">5</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">counts</span>[<span class="kw-2">&amp;</span><span class="ident">TreeNodeFinish</span>], <span class="number">5</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">counts</span>[<span class="kw-2">&amp;</span><span class="ident">BackEdge</span>], <span class="number">1</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">counts</span>.<span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="ident">ForwardEdge</span>).<span class="ident">unwrap_or</span>(<span class="kw-2">&amp;</span><span class="number">0</span>) <span class="op">+</span>
-                   <span class="ident">counts</span>.<span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="ident">CrossEdge</span>).<span class="ident">unwrap_or</span>(<span class="kw-2">&amp;</span><span class="number">0</span>), <span class="number">1</span>);
+        <span class="kw">let </span>counts = dfs0.iter().counts_by(|s| s.kind);
+        <span class="macro">assert_eq!</span>(counts[<span class="kw-2">&amp;</span>TreeNodeStart], <span class="number">5</span>);
+        <span class="macro">assert_eq!</span>(counts[<span class="kw-2">&amp;</span>TreeNodeFinish], <span class="number">5</span>);
+        <span class="macro">assert_eq!</span>(counts[<span class="kw-2">&amp;</span>BackEdge], <span class="number">1</span>);
+        <span class="macro">assert_eq!</span>(counts.get(<span class="kw-2">&amp;</span>ForwardEdge).unwrap_or(<span class="kw-2">&amp;</span><span class="number">0</span>) +
+                   counts.get(<span class="kw-2">&amp;</span>CrossEdge).unwrap_or(<span class="kw-2">&amp;</span><span class="number">0</span>), <span class="number">1</span>);
 
-        <span class="kw">let</span> <span class="ident">dfs2</span> <span class="op">=</span> <span class="ident">g</span>.<span class="ident">dfs</span>([<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">0</span>, <span class="number">1</span>]);
+        <span class="kw">let </span>dfs2 = g.dfs([<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">0</span>, <span class="number">1</span>]);
 
-        <span class="kw">let</span> <span class="ident">counts</span> <span class="op">=</span> <span class="ident">dfs2</span>.<span class="ident">iter</span>().<span class="ident">counts_by</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">s</span>.<span class="ident">kind</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">counts</span>[<span class="kw-2">&amp;</span><span class="ident">TreeNodeStart</span>], <span class="number">7</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">counts</span>[<span class="kw-2">&amp;</span><span class="ident">TreeNodeFinish</span>], <span class="number">7</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">counts</span>[<span class="kw-2">&amp;</span><span class="ident">BackEdge</span>], <span class="number">2</span>);
-        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">counts</span>.<span class="ident">contains_key</span>(<span class="kw-2">&amp;</span><span class="ident">ForwardEdge</span>));
-        <span class="macro">assert_eq!</span>(<span class="ident">counts</span>[<span class="kw-2">&amp;</span><span class="ident">CrossEdge</span>], <span class="number">1</span>);
+        <span class="kw">let </span>counts = dfs2.iter().counts_by(|s| s.kind);
+        <span class="macro">assert_eq!</span>(counts[<span class="kw-2">&amp;</span>TreeNodeStart], <span class="number">7</span>);
+        <span class="macro">assert_eq!</span>(counts[<span class="kw-2">&amp;</span>TreeNodeFinish], <span class="number">7</span>);
+        <span class="macro">assert_eq!</span>(counts[<span class="kw-2">&amp;</span>BackEdge], <span class="number">2</span>);
+        <span class="macro">assert!</span>(!counts.contains_key(<span class="kw-2">&amp;</span>ForwardEdge));
+        <span class="macro">assert_eq!</span>(counts[<span class="kw-2">&amp;</span>CrossEdge], <span class="number">1</span>);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_dfs_undir_weighted</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">g</span> <span class="op">=</span> <span class="ident">SimpUndirGraph</span>::<span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="ident">::new</span>(<span class="number">3</span>);
-        <span class="ident">g</span>.<span class="ident">add_edge</span>(<span class="number">0</span>, <span class="number">1</span>, <span class="number">3.0</span>);
-        <span class="ident">g</span>.<span class="ident">add_edge</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">5.0</span>);
-        <span class="ident">g</span>.<span class="ident">add_edge</span>(<span class="number">2</span>, <span class="number">0</span>, <span class="number">7.0</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_dfs_undir_weighted() {
+        <span class="kw">let </span><span class="kw-2">mut </span>g = SimpUndirGraph::&lt;f64&gt;::new(<span class="number">3</span>);
+        g.add_edge(<span class="number">0</span>, <span class="number">1</span>, <span class="number">3.0</span>);
+        g.add_edge(<span class="number">1</span>, <span class="number">2</span>, <span class="number">5.0</span>);
+        g.add_edge(<span class="number">2</span>, <span class="number">0</span>, <span class="number">7.0</span>);
 
-        <span class="kw">let</span> <span class="ident">dfs</span> <span class="op">=</span> <span class="ident">g</span>.<span class="ident">dfs</span>([<span class="number">0</span>]);
-        <span class="macro">assert_eq!</span>(<span class="ident">dfs</span>.<span class="ident">len</span>(), <span class="number">3</span><span class="kw-2">*</span><span class="number">2</span> <span class="op">+</span> <span class="number">1</span>);
+        <span class="kw">let </span>dfs = g.dfs([<span class="number">0</span>]);
+        <span class="macro">assert_eq!</span>(dfs.len(), <span class="number">3</span><span class="kw-2">*</span><span class="number">2 </span>+ <span class="number">1</span>);
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="rithmic" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0-nightly (12cd71f4d 2022-06-01)" ></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="rithmic" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (17cbdfd07 2022-09-13)" ></div></body></html>

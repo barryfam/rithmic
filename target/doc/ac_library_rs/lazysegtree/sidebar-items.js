@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["LazySegtree",""]],"trait":[["MapMonoid",""]]});
+window.SIDEBAR_ITEMS = {"struct":[["LazySegtree",""]],"trait":[["MapMonoid",""]]};

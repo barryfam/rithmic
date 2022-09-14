@@ -1,11 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `rithmic/src/aug_treap/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script src="../../../crates.js"></script><script defer src="../../../main.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script>
-    <noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../rithmic/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"></h2>
-    </nav>
-    <nav class="sidebar"><a class="sidebar-logo" href="../../../rithmic/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../rithmic/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
-                                <a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div>
-                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `rithmic/src/aug_treap/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../rithmic/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../rithmic/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../rithmic/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -350,351 +343,350 @@
 <span id="343">343</span>
 <span id="344">344</span>
 <span id="345">345</span>
-</pre><pre class="rust"><code><span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">finger</span>;
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">order_treap</span>;
+</pre><pre class="rust"><code><span class="kw">pub mod </span>finger;
+<span class="kw">pub mod </span>order_treap;
 
-<span class="kw">use</span> <span class="ident">std::borrow::Borrow</span>;
-<span class="kw">use</span> <span class="ident">std::iter::FusedIterator</span>;
-<span class="kw">use</span> <span class="ident">std::marker::PhantomData</span>;
-<span class="kw">use</span> <span class="ident">std::ops</span>::{<span class="ident">RangeBounds</span>, <span class="ident">Bound</span>};
-<span class="kw">use</span> <span class="ident">std</span>::{<span class="ident">ptr</span>, <span class="ident">mem</span>};
+<span class="kw">use </span>std::borrow::Borrow;
+<span class="kw">use </span>std::iter::FusedIterator;
+<span class="kw">use </span>std::marker::PhantomData;
+<span class="kw">use </span>std::ops::{RangeBounds, Bound};
+<span class="kw">use </span>std::{ptr, mem};
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::OptionMerge</span>;
+<span class="kw">use </span><span class="kw">crate</span>::OptionMerge;
 
-<span class="kw">use</span> <span class="ident">finger::Finger</span>;
+<span class="kw">use </span>finger::Finger;
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Node</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span>, <span class="ident">A</span><span class="op">&gt;</span> {
-    <span class="kw">pub</span> <span class="ident">key</span>: <span class="ident">K</span>,
-    <span class="kw">pub</span> <span class="ident">value</span>: <span class="ident">V</span>,
-    <span class="kw">pub</span> <span class="ident">aug</span>: <span class="ident">A</span>,
-    <span class="kw">pub</span> <span class="ident">left</span>: <span class="ident">OptNode</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span>, <span class="ident">A</span><span class="op">&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">right</span>: <span class="ident">OptNode</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span>, <span class="ident">A</span><span class="op">&gt;</span>,
-    <span class="ident">heap_key</span>: <span class="ident">usize</span>,
+<span class="attribute">#[derive(Clone)]
+</span><span class="kw">pub struct </span>Node&lt;K, V, A&gt; {
+    <span class="kw">pub </span>key: K,
+    <span class="kw">pub </span>value: V,
+    <span class="kw">pub </span>aug: A,
+    <span class="kw">pub </span>left: OptNode&lt;K, V, A&gt;,
+    <span class="kw">pub </span>right: OptNode&lt;K, V, A&gt;,
+    heap_key: usize,
 }
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">OptNode</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span>, <span class="ident">A</span><span class="op">&gt;</span> <span class="op">=</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="ident">Node</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span>, <span class="ident">A</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>;
+<span class="kw">pub type </span>OptNode&lt;K, V, A&gt; = <span class="prelude-ty">Option</span>&lt;Box&lt;Node&lt;K, V, A&gt;&gt;&gt;;
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span>, <span class="ident">A</span><span class="op">&gt;</span> <span class="ident">Node</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span>, <span class="ident">A</span><span class="op">&gt;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">key</span>: <span class="ident">K</span>, <span class="ident">value</span>: <span class="ident">V</span>) -&gt; <span class="self">Self</span>
-    <span class="kw">where</span> <span class="ident">A</span>: <span class="ident">Default</span>
+<span class="kw">impl</span>&lt;K, V, A&gt; Node&lt;K, V, A&gt; {
+    <span class="kw">pub fn </span>new(key: K, value: V) -&gt; <span class="self">Self
+    </span><span class="kw">where </span>A: Default
     {
-        <span class="self">Self</span> {
-            <span class="ident">key</span>, <span class="ident">value</span>,
-            <span class="ident">aug</span>: <span class="ident">A::default</span>(),
-            <span class="ident">heap_key</span>: <span class="ident">rand::random</span>(),
-            <span class="ident">left</span>: <span class="prelude-val">None</span>,
-            <span class="ident">right</span>: <span class="prelude-val">None</span>
-        }
+        <span class="self">Self </span>{
+            key, value,
+            aug: A::default(),
+            heap_key: rand::random(),
+            left: <span class="prelude-val">None</span>,
+            right: <span class="prelude-val">None
+        </span>}
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">left_key</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">K</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">left</span>.<span class="ident">as_ref</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">l</span><span class="op">|</span> <span class="kw-2">&amp;</span><span class="ident">l</span>.<span class="ident">key</span>)
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>left_key(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>K&gt; {
+        <span class="self">self</span>.left.as_ref().map(|l| <span class="kw-2">&amp;</span>l.key)
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">right_key</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">K</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">right</span>.<span class="ident">as_ref</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">r</span><span class="op">|</span> <span class="kw-2">&amp;</span><span class="ident">r</span>.<span class="ident">key</span>)
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>right_key(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>K&gt; {
+        <span class="self">self</span>.right.as_ref().map(|r| <span class="kw-2">&amp;</span>r.key)
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">left_value</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">V</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">left</span>.<span class="ident">as_ref</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">l</span><span class="op">|</span> <span class="kw-2">&amp;</span><span class="ident">l</span>.<span class="ident">value</span>)
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>left_value(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>V&gt; {
+        <span class="self">self</span>.left.as_ref().map(|l| <span class="kw-2">&amp;</span>l.value)
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">right_value</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">V</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">right</span>.<span class="ident">as_ref</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">r</span><span class="op">|</span> <span class="kw-2">&amp;</span><span class="ident">r</span>.<span class="ident">value</span>)
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>right_value(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>V&gt; {
+        <span class="self">self</span>.right.as_ref().map(|r| <span class="kw-2">&amp;</span>r.value)
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">left_aug</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">A</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">left</span>.<span class="ident">as_ref</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">l</span><span class="op">|</span> <span class="kw-2">&amp;</span><span class="ident">l</span>.<span class="ident">aug</span>)
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>left_aug(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>A&gt; {
+        <span class="self">self</span>.left.as_ref().map(|l| <span class="kw-2">&amp;</span>l.aug)
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">right_aug</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">A</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">right</span>.<span class="ident">as_ref</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">r</span><span class="op">|</span> <span class="kw-2">&amp;</span><span class="ident">r</span>.<span class="ident">aug</span>)
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>right_aug(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>A&gt; {
+        <span class="self">self</span>.right.as_ref().map(|r| <span class="kw-2">&amp;</span>r.aug)
     }
 }
 
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">AugFn</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span>, <span class="ident">A</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">f</span>(<span class="ident">u</span>: <span class="kw-2">&amp;</span><span class="ident">Node</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span>, <span class="ident">A</span><span class="op">&gt;</span>) -&gt; <span class="ident">A</span>;
+<span class="kw">pub trait </span>AugFn&lt;K, V, A&gt; {
+    <span class="kw">fn </span>f(u: <span class="kw-2">&amp;</span>Node&lt;K, V, A&gt;) -&gt; A;
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">AugTreap</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span>, <span class="ident">A</span>, <span class="ident">F</span><span class="op">&gt;</span> {
-    <span class="kw">pub</span> <span class="ident">root</span>: <span class="ident">OptNode</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span>, <span class="ident">A</span><span class="op">&gt;</span>,
-    <span class="ident">phantom</span>: <span class="ident">PhantomData</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>
+<span class="attribute">#[derive(Clone)]
+</span><span class="kw">pub struct </span>AugTreap&lt;K, V, A, F&gt; {
+    <span class="kw">pub </span>root: OptNode&lt;K, V, A&gt;,
+    phantom: PhantomData&lt;F&gt;
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span>, <span class="ident">A</span>, <span class="ident">F</span><span class="op">&gt;</span> <span class="ident">AugTreap</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span>, <span class="ident">A</span>, <span class="ident">F</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">K</span>: <span class="ident">Ord</span>,
-    <span class="ident">A</span>: <span class="ident">Default</span>,
-    <span class="ident">F</span>: <span class="ident">AugFn</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span>, <span class="ident">A</span><span class="op">&gt;</span>
+<span class="kw">impl</span>&lt;K, V, A, F&gt; AugTreap&lt;K, V, A, F&gt;
+<span class="kw">where
+    </span>K: Ord,
+    A: Default,
+    F: AugFn&lt;K, V, A&gt;
 {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> { <span class="ident">root</span>: <span class="prelude-val">None</span>, <span class="ident">phantom</span>: <span class="ident">PhantomData</span> }
+    <span class="kw">pub fn </span>new() -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{ root: <span class="prelude-val">None</span>, phantom: PhantomData }
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">aug_fn</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">u</span>: <span class="kw-2">&amp;</span><span class="ident">Node</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span>, <span class="ident">A</span><span class="op">&gt;</span>) -&gt; <span class="ident">A</span> {
-        <span class="ident">F::f</span>(<span class="ident">u</span>)
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>aug_fn(<span class="kw-2">&amp;</span><span class="self">self</span>, u: <span class="kw-2">&amp;</span>Node&lt;K, V, A&gt;) -&gt; A {
+        F::f(u)
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_empty</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">root</span>.<span class="ident">is_none</span>()
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>is_empty(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="self">self</span>.root.is_none()
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">contains</span><span class="op">&lt;</span><span class="ident">Q</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">key</span>: <span class="kw-2">&amp;</span><span class="ident">Q</span>) -&gt; <span class="ident">bool</span>
-    <span class="kw">where</span>
-        <span class="ident">K</span>: <span class="ident">Borrow</span><span class="op">&lt;</span><span class="ident">Q</span><span class="op">&gt;</span>,
-        <span class="ident">Q</span>: <span class="ident">Ord</span>
+    <span class="kw">pub fn </span>contains&lt;Q&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, key: <span class="kw-2">&amp;</span>Q) -&gt; bool
+    <span class="kw">where
+        </span>K: Borrow&lt;Q&gt;,
+        Q: Ord
     {
-        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">root</span>.<span class="ident">take</span>();
-        <span class="kw">let</span> (<span class="ident">u</span>, <span class="ident">v</span>, <span class="ident">w</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">split3_by_key</span>(<span class="ident">r</span>, <span class="ident">key</span>);
+        <span class="kw">let </span>r = <span class="self">self</span>.root.take();
+        <span class="kw">let </span>(u, v, w) = <span class="self">self</span>.split3_by_key(r, key);
 
-        <span class="kw">let</span> <span class="ident">v_is</span> <span class="op">=</span> <span class="ident">v</span>.<span class="ident">is_some</span>();
-        <span class="self">self</span>.<span class="ident">root</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">join3</span>(<span class="ident">u</span>, <span class="ident">v</span>, <span class="ident">w</span>);
-        <span class="ident">v_is</span>
+        <span class="kw">let </span>v_is = v.is_some();
+        <span class="self">self</span>.root = <span class="self">self</span>.join3(u, v, w);
+        v_is
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">insert</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">key</span>: <span class="ident">K</span>, <span class="ident">value</span>: <span class="ident">V</span>)
+    <span class="kw">pub fn </span>insert(<span class="kw-2">&amp;mut </span><span class="self">self</span>, key: K, value: V)
     {
-        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">root</span>.<span class="ident">take</span>();
-        <span class="kw">let</span> (<span class="ident">u</span>, <span class="ident">w</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">split_by</span>(<span class="ident">r</span>, <span class="op">|</span><span class="ident">k</span><span class="op">|</span> <span class="kw-2">*</span><span class="ident">k</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">key</span>);
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="kw">box</span> <span class="ident">Node::new</span>(<span class="ident">key</span>, <span class="ident">value</span>));
+        <span class="kw">let </span>r = <span class="self">self</span>.root.take();
+        <span class="kw">let </span>(u, w) = <span class="self">self</span>.split_by(r, |k| <span class="kw-2">*</span>k &lt;= key);
+        <span class="kw">let </span><span class="kw-2">mut </span>v = <span class="prelude-val">Some</span>(<span class="kw">box </span>Node::new(key, value));
 
-        <span class="ident">v</span>.<span class="ident">as_mut</span>().<span class="ident">map</span>(<span class="op">|</span><span class="kw-2">mut</span> <span class="ident">v</span><span class="op">|</span> <span class="ident">v</span>.<span class="ident">aug</span> <span class="op">=</span> <span class="ident">F::f</span>(<span class="ident">v</span>));
-        <span class="self">self</span>.<span class="ident">root</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">join3</span>(<span class="ident">u</span>, <span class="ident">v</span>, <span class="ident">w</span>);
+        v.as_mut().map(|<span class="kw-2">mut </span>v| v.aug = F::f(v));
+        <span class="self">self</span>.root = <span class="self">self</span>.join3(u, v, w);
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">remove</span><span class="op">&lt;</span><span class="ident">Q</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">key</span>: <span class="kw-2">&amp;</span><span class="ident">Q</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">V</span><span class="op">&gt;</span>
-    <span class="kw">where</span>
-        <span class="ident">K</span>: <span class="ident">Borrow</span><span class="op">&lt;</span><span class="ident">Q</span><span class="op">&gt;</span>,
-        <span class="ident">Q</span>: <span class="ident">Ord</span>
+    <span class="kw">pub fn </span>remove&lt;Q&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, key: <span class="kw-2">&amp;</span>Q) -&gt; <span class="prelude-ty">Option</span>&lt;V&gt;
+    <span class="kw">where
+        </span>K: Borrow&lt;Q&gt;,
+        Q: Ord
     {
-        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">root</span>.<span class="ident">take</span>();
-        <span class="kw">let</span> (<span class="ident">u</span>, <span class="kw-2">mut</span> <span class="ident">v</span>, <span class="ident">w</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">split3_by_key</span>(<span class="ident">r</span>, <span class="ident">key</span>);
+        <span class="kw">let </span>r = <span class="self">self</span>.root.take();
+        <span class="kw">let </span>(u, <span class="kw-2">mut </span>v, w) = <span class="self">self</span>.split3_by_key(r, key);
 
-        <span class="kw">let</span> <span class="ident">v0</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">join</span>(
-            <span class="ident">v</span>.<span class="ident">as_mut</span>().<span class="ident">and_then</span>(<span class="op">|</span><span class="ident">v</span><span class="op">|</span> <span class="ident">v</span>.<span class="ident">left</span>.<span class="ident">take</span>()),
-            <span class="ident">v</span>.<span class="ident">as_mut</span>().<span class="ident">and_then</span>(<span class="op">|</span><span class="ident">v</span><span class="op">|</span> <span class="ident">v</span>.<span class="ident">right</span>.<span class="ident">take</span>())
+        <span class="kw">let </span>v0 = <span class="self">self</span>.join(
+            v.as_mut().and_then(|v| v.left.take()),
+            v.as_mut().and_then(|v| v.right.take())
         );
-        <span class="self">self</span>.<span class="ident">root</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">join3</span>(<span class="ident">u</span>, <span class="ident">v0</span>, <span class="ident">w</span>);
-        <span class="ident">v</span>.<span class="ident">map</span>(<span class="op">|</span><span class="ident">v</span><span class="op">|</span> <span class="ident">v</span>.<span class="ident">value</span>)
+        <span class="self">self</span>.root = <span class="self">self</span>.join3(u, v0, w);
+        v.map(|v| v.value)
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">remove_range</span><span class="op">&lt;</span><span class="ident">Q</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">range</span>: <span class="kw">impl</span> <span class="ident">RangeBounds</span><span class="op">&lt;</span><span class="ident">Q</span><span class="op">&gt;</span>) -&gt; <span class="ident">bool</span>
-    <span class="kw">where</span>
-        <span class="ident">K</span>: <span class="ident">Borrow</span><span class="op">&lt;</span><span class="ident">Q</span><span class="op">&gt;</span>,
-        <span class="ident">Q</span>: <span class="ident">Ord</span>
+    <span class="kw">pub fn </span>remove_range&lt;Q&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, range: <span class="kw">impl </span>RangeBounds&lt;Q&gt;) -&gt; bool
+    <span class="kw">where
+        </span>K: Borrow&lt;Q&gt;,
+        Q: Ord
     {
-        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">root</span>.<span class="ident">take</span>();
-        <span class="kw">let</span> (<span class="ident">u</span>, <span class="ident">v</span>, <span class="ident">w</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">split3_by_range</span>(<span class="ident">r</span>, <span class="ident">range</span>);
+        <span class="kw">let </span>r = <span class="self">self</span>.root.take();
+        <span class="kw">let </span>(u, v, w) = <span class="self">self</span>.split3_by_range(r, range);
 
-        <span class="self">self</span>.<span class="ident">root</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">join</span>(<span class="ident">u</span>, <span class="ident">w</span>);
-        <span class="ident">v</span>.<span class="ident">is_some</span>()
+        <span class="self">self</span>.root = <span class="self">self</span>.join(u, w);
+        v.is_some()
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">remove_all</span><span class="op">&lt;</span><span class="ident">Q</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">key</span>: <span class="kw-2">&amp;</span><span class="ident">Q</span>) -&gt; <span class="ident">bool</span>
-    <span class="kw">where</span>
-        <span class="ident">K</span>: <span class="ident">Borrow</span><span class="op">&lt;</span><span class="ident">Q</span><span class="op">&gt;</span>,
-        <span class="ident">Q</span>: <span class="ident">Ord</span>
+    <span class="kw">pub fn </span>remove_all&lt;Q&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, key: <span class="kw-2">&amp;</span>Q) -&gt; bool
+    <span class="kw">where
+        </span>K: Borrow&lt;Q&gt;,
+        Q: Ord
     {
-        <span class="self">self</span>.<span class="ident">remove_range</span>(<span class="ident">key</span>..<span class="op">=</span><span class="ident">key</span>)
+        <span class="self">self</span>.remove_range(key..=key)
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">split_by</span><span class="op">&lt;</span><span class="ident">P</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">root</span>: <span class="ident">OptNode</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span>, <span class="ident">A</span><span class="op">&gt;</span>, <span class="kw-2">mut</span> <span class="ident">predicate</span>: <span class="ident">P</span>) -&gt; (<span class="ident">OptNode</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span>, <span class="ident">A</span><span class="op">&gt;</span>, <span class="ident">OptNode</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span>, <span class="ident">A</span><span class="op">&gt;</span>)
-    <span class="kw">where</span> <span class="ident">P</span>: <span class="ident">FnMut</span>(<span class="kw-2">&amp;</span><span class="ident">K</span>) -&gt; <span class="ident">bool</span>
+    <span class="kw">pub fn </span>split_by&lt;P&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, root: OptNode&lt;K, V, A&gt;, <span class="kw-2">mut </span>predicate: P) -&gt; (OptNode&lt;K, V, A&gt;, OptNode&lt;K, V, A&gt;)
+    <span class="kw">where </span>P: FnMut(<span class="kw-2">&amp;</span>K) -&gt; bool
     {
-        <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">mut</span> <span class="ident">r</span>) <span class="op">=</span> <span class="ident">root</span> <span class="kw">else</span> { <span class="kw">return</span> (<span class="prelude-val">None</span>, <span class="prelude-val">None</span>) };
+        <span class="kw">let </span><span class="prelude-val">Some</span>(<span class="kw-2">mut </span>r) = root <span class="kw">else </span>{ <span class="kw">return </span>(<span class="prelude-val">None</span>, <span class="prelude-val">None</span>) };
 
-        <span class="kw">if</span> <span class="ident">predicate</span>(<span class="kw-2">&amp;</span><span class="ident">r</span>.<span class="ident">key</span>) {
-            <span class="kw">let</span> (<span class="ident">u</span>, <span class="ident">v</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">split_by</span>(<span class="ident">r</span>.<span class="ident">right</span>, <span class="ident">predicate</span>);
-            <span class="ident">r</span>.<span class="ident">right</span> <span class="op">=</span> <span class="ident">u</span>;
-            <span class="ident">r</span>.<span class="ident">aug</span> <span class="op">=</span> <span class="ident">F::f</span>(<span class="kw-2">&amp;</span><span class="ident">r</span>);
-            (<span class="prelude-val">Some</span>(<span class="ident">r</span>), <span class="ident">v</span>)
+        <span class="kw">if </span>predicate(<span class="kw-2">&amp;</span>r.key) {
+            <span class="kw">let </span>(u, v) = <span class="self">self</span>.split_by(r.right, predicate);
+            r.right = u;
+            r.aug = F::f(<span class="kw-2">&amp;</span>r);
+            (<span class="prelude-val">Some</span>(r), v)
         }
-        <span class="kw">else</span> {
-            <span class="kw">let</span> (<span class="ident">u</span>, <span class="ident">v</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">split_by</span>(<span class="ident">r</span>.<span class="ident">left</span>, <span class="ident">predicate</span>);
-            <span class="ident">r</span>.<span class="ident">left</span> <span class="op">=</span> <span class="ident">v</span>;
-            <span class="ident">r</span>.<span class="ident">aug</span> <span class="op">=</span> <span class="ident">F::f</span>(<span class="kw-2">&amp;</span><span class="ident">r</span>);
-            (<span class="ident">u</span>, <span class="prelude-val">Some</span>(<span class="ident">r</span>))
+        <span class="kw">else </span>{
+            <span class="kw">let </span>(u, v) = <span class="self">self</span>.split_by(r.left, predicate);
+            r.left = v;
+            r.aug = F::f(<span class="kw-2">&amp;</span>r);
+            (u, <span class="prelude-val">Some</span>(r))
         }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">split3_by</span><span class="op">&lt;</span><span class="ident">P0</span>, <span class="ident">P1</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">root</span>: <span class="ident">OptNode</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span>, <span class="ident">A</span><span class="op">&gt;</span>, <span class="ident">predicate0</span>: <span class="ident">P0</span>, <span class="ident">predicate1</span>: <span class="ident">P1</span>)
-        -&gt; (<span class="ident">OptNode</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span>, <span class="ident">A</span><span class="op">&gt;</span>, <span class="ident">OptNode</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span>, <span class="ident">A</span><span class="op">&gt;</span>, <span class="ident">OptNode</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span>, <span class="ident">A</span><span class="op">&gt;</span>)
-    <span class="kw">where</span>
-        <span class="ident">P0</span>: <span class="ident">FnMut</span>(<span class="kw-2">&amp;</span><span class="ident">K</span>) -&gt; <span class="ident">bool</span>,
-        <span class="ident">P1</span>: <span class="ident">FnMut</span>(<span class="kw-2">&amp;</span><span class="ident">K</span>) -&gt; <span class="ident">bool</span>
+    <span class="kw">pub fn </span>split3_by&lt;P0, P1&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, root: OptNode&lt;K, V, A&gt;, predicate0: P0, predicate1: P1)
+        -&gt; (OptNode&lt;K, V, A&gt;, OptNode&lt;K, V, A&gt;, OptNode&lt;K, V, A&gt;)
+    <span class="kw">where
+        </span>P0: FnMut(<span class="kw-2">&amp;</span>K) -&gt; bool,
+        P1: FnMut(<span class="kw-2">&amp;</span>K) -&gt; bool
     {
-        <span class="kw">let</span> (<span class="ident">u</span>, <span class="ident">vw</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">split_by</span>(<span class="ident">root</span>, <span class="ident">predicate0</span>);
-        <span class="kw">let</span> (<span class="ident">v</span>, <span class="ident">w</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">split_by</span>(<span class="ident">vw</span>, <span class="ident">predicate1</span>);
-        (<span class="ident">u</span>, <span class="ident">v</span>, <span class="ident">w</span>)
+        <span class="kw">let </span>(u, vw) = <span class="self">self</span>.split_by(root, predicate0);
+        <span class="kw">let </span>(v, w) = <span class="self">self</span>.split_by(vw, predicate1);
+        (u, v, w)
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">split3_by_range</span><span class="op">&lt;</span><span class="ident">Q</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">root</span>: <span class="ident">OptNode</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span>, <span class="ident">A</span><span class="op">&gt;</span>, <span class="ident">range</span>: <span class="kw">impl</span> <span class="ident">RangeBounds</span><span class="op">&lt;</span><span class="ident">Q</span><span class="op">&gt;</span>)
-        -&gt; (<span class="ident">OptNode</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span>, <span class="ident">A</span><span class="op">&gt;</span>, <span class="ident">OptNode</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span>, <span class="ident">A</span><span class="op">&gt;</span>, <span class="ident">OptNode</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span>, <span class="ident">A</span><span class="op">&gt;</span>)
-    <span class="kw">where</span>
-        <span class="ident">K</span>: <span class="ident">Borrow</span><span class="op">&lt;</span><span class="ident">Q</span><span class="op">&gt;</span>,
-        <span class="ident">Q</span>: <span class="ident">Ord</span>
+    <span class="kw">pub fn </span>split3_by_range&lt;Q&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, root: OptNode&lt;K, V, A&gt;, range: <span class="kw">impl </span>RangeBounds&lt;Q&gt;)
+        -&gt; (OptNode&lt;K, V, A&gt;, OptNode&lt;K, V, A&gt;, OptNode&lt;K, V, A&gt;)
+    <span class="kw">where
+        </span>K: Borrow&lt;Q&gt;,
+        Q: Ord
     {
-        <span class="self">self</span>.<span class="ident">split3_by</span>(
-            <span class="ident">root</span>,
-            <span class="op">|</span><span class="ident">k</span><span class="op">|</span> <span class="kw">match</span> <span class="ident">range</span>.<span class="ident">start_bound</span>() {
-                <span class="ident">Bound::Included</span>(<span class="ident">start</span>) =&gt; <span class="ident">k</span>.<span class="ident">borrow</span>() <span class="op">&lt;</span> <span class="ident">start</span>,
-                <span class="ident">Bound::Excluded</span>(<span class="ident">start</span>) =&gt; <span class="ident">k</span>.<span class="ident">borrow</span>() <span class="op">&lt;</span><span class="op">=</span> <span class="ident">start</span>,
-                <span class="ident">Bound::Unbounded</span> =&gt; <span class="bool-val">false</span>,
+        <span class="self">self</span>.split3_by(
+            root,
+            |k| <span class="kw">match </span>range.start_bound() {
+                Bound::Included(start) =&gt; k.borrow() &lt; start,
+                Bound::Excluded(start) =&gt; k.borrow() &lt;= start,
+                Bound::Unbounded =&gt; <span class="bool-val">false</span>,
             },
-            <span class="op">|</span><span class="ident">k</span><span class="op">|</span> <span class="kw">match</span> <span class="ident">range</span>.<span class="ident">end_bound</span>() {
-                <span class="ident">Bound::Included</span>(<span class="ident">end</span>) =&gt; <span class="ident">k</span>.<span class="ident">borrow</span>() <span class="op">&lt;</span><span class="op">=</span> <span class="ident">end</span>,
-                <span class="ident">Bound::Excluded</span>(<span class="ident">end</span>) =&gt; <span class="ident">k</span>.<span class="ident">borrow</span>() <span class="op">&lt;</span> <span class="ident">end</span>,
-                <span class="ident">Bound::Unbounded</span> =&gt; <span class="bool-val">true</span>,
+            |k| <span class="kw">match </span>range.end_bound() {
+                Bound::Included(end) =&gt; k.borrow() &lt;= end,
+                Bound::Excluded(end) =&gt; k.borrow() &lt; end,
+                Bound::Unbounded =&gt; <span class="bool-val">true</span>,
             }
         )
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">split3_by_key</span><span class="op">&lt;</span><span class="ident">Q</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">root</span>: <span class="ident">OptNode</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span>, <span class="ident">A</span><span class="op">&gt;</span>, <span class="ident">key</span>: <span class="kw-2">&amp;</span><span class="ident">Q</span>)
-        -&gt; (<span class="ident">OptNode</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span>, <span class="ident">A</span><span class="op">&gt;</span>, <span class="ident">OptNode</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span>, <span class="ident">A</span><span class="op">&gt;</span>, <span class="ident">OptNode</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span>, <span class="ident">A</span><span class="op">&gt;</span>)
-    <span class="kw">where</span>
-        <span class="ident">K</span>: <span class="ident">Borrow</span><span class="op">&lt;</span><span class="ident">Q</span><span class="op">&gt;</span>,
-        <span class="ident">Q</span>: <span class="ident">Ord</span>
+    <span class="kw">pub fn </span>split3_by_key&lt;Q&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, root: OptNode&lt;K, V, A&gt;, key: <span class="kw-2">&amp;</span>Q)
+        -&gt; (OptNode&lt;K, V, A&gt;, OptNode&lt;K, V, A&gt;, OptNode&lt;K, V, A&gt;)
+    <span class="kw">where
+        </span>K: Borrow&lt;Q&gt;,
+        Q: Ord
     {
-        <span class="self">self</span>.<span class="ident">split3_by_range</span>(<span class="ident">root</span>, <span class="ident">key</span>..<span class="op">=</span><span class="ident">key</span>)
+        <span class="self">self</span>.split3_by_range(root, key..=key)
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">join</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">left</span>: <span class="ident">OptNode</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span>, <span class="ident">A</span><span class="op">&gt;</span>, <span class="ident">right</span>: <span class="ident">OptNode</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span>, <span class="ident">A</span><span class="op">&gt;</span>) -&gt; <span class="ident">OptNode</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span>, <span class="ident">A</span><span class="op">&gt;</span>
+    <span class="kw">pub fn </span>join(<span class="kw-2">&amp;</span><span class="self">self</span>, left: OptNode&lt;K, V, A&gt;, right: OptNode&lt;K, V, A&gt;) -&gt; OptNode&lt;K, V, A&gt;
     {
-        <span class="ident">left</span>.<span class="ident">merge</span>(<span class="ident">right</span>, <span class="op">|</span><span class="kw-2">mut</span> <span class="ident">left</span>, <span class="kw-2">mut</span> <span class="ident">right</span><span class="op">|</span> {
-            <span class="kw">if</span> <span class="ident">left</span>.<span class="ident">heap_key</span> <span class="op">&lt;</span> <span class="ident">right</span>.<span class="ident">heap_key</span> {
-                <span class="ident">left</span>.<span class="ident">right</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">join</span>(<span class="ident">left</span>.<span class="ident">right</span>, <span class="prelude-val">Some</span>(<span class="ident">right</span>));
-                <span class="ident">left</span>.<span class="ident">aug</span> <span class="op">=</span> <span class="ident">F::f</span>(<span class="kw-2">&amp;</span><span class="ident">left</span>);
-                <span class="ident">left</span>
+        left.merge(right, |<span class="kw-2">mut </span>left, <span class="kw-2">mut </span>right| {
+            <span class="kw">if </span>left.heap_key &lt; right.heap_key {
+                left.right = <span class="self">self</span>.join(left.right, <span class="prelude-val">Some</span>(right));
+                left.aug = F::f(<span class="kw-2">&amp;</span>left);
+                left
             }
-            <span class="kw">else</span> {
-                <span class="ident">right</span>.<span class="ident">left</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">join</span>(<span class="prelude-val">Some</span>(<span class="ident">left</span>), <span class="ident">right</span>.<span class="ident">left</span>);
-                <span class="ident">right</span>.<span class="ident">aug</span> <span class="op">=</span> <span class="ident">F::f</span>(<span class="kw-2">&amp;</span><span class="ident">right</span>);
-                <span class="ident">right</span>
+            <span class="kw">else </span>{
+                right.left = <span class="self">self</span>.join(<span class="prelude-val">Some</span>(left), right.left);
+                right.aug = F::f(<span class="kw-2">&amp;</span>right);
+                right
             }
         })
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">join3</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">left</span>: <span class="ident">OptNode</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span>, <span class="ident">A</span><span class="op">&gt;</span>, <span class="ident">mid</span>: <span class="ident">OptNode</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span>, <span class="ident">A</span><span class="op">&gt;</span>, <span class="ident">right</span>: <span class="ident">OptNode</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span>, <span class="ident">A</span><span class="op">&gt;</span>)
-        -&gt; <span class="ident">OptNode</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span>, <span class="ident">A</span><span class="op">&gt;</span>
+    <span class="kw">pub fn </span>join3(<span class="kw-2">&amp;</span><span class="self">self</span>, left: OptNode&lt;K, V, A&gt;, mid: OptNode&lt;K, V, A&gt;, right: OptNode&lt;K, V, A&gt;)
+        -&gt; OptNode&lt;K, V, A&gt;
     {
-        <span class="self">self</span>.<span class="ident">join</span>(<span class="self">self</span>.<span class="ident">join</span>(<span class="ident">left</span>, <span class="ident">mid</span>), <span class="ident">right</span>)
+        <span class="self">self</span>.join(<span class="self">self</span>.join(left, mid), right)
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">range</span><span class="op">&lt;</span><span class="ident">Q</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">range</span>: <span class="kw">impl</span> <span class="ident">RangeBounds</span><span class="op">&lt;</span><span class="ident">Q</span><span class="op">&gt;</span>) -&gt; <span class="ident"><span class="self">self</span>::Range</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span>, <span class="ident">A</span><span class="op">&gt;</span>
-    <span class="kw">where</span>
-        <span class="ident">K</span>: <span class="ident">Borrow</span><span class="op">&lt;</span><span class="ident">Q</span><span class="op">&gt;</span>,
-        <span class="ident">Q</span>: <span class="ident">Ord</span>
+    <span class="kw">pub fn </span>range&lt;Q&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, range: <span class="kw">impl </span>RangeBounds&lt;Q&gt;) -&gt; <span class="self">self</span>::Range&lt;K, V, A&gt;
+    <span class="kw">where
+        </span>K: Borrow&lt;Q&gt;,
+        Q: Ord
     {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">fingers</span> <span class="op">=</span> [<span class="macro">vec!</span>[], <span class="macro">vec!</span>[]];
+        <span class="kw">let </span><span class="kw-2">mut </span>fingers = [<span class="macro">vec!</span>[], <span class="macro">vec!</span>[]];
 
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="ident">r</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">root</span> {
-            <span class="ident">r</span>.<span class="ident">finger_first_false</span>(
-                <span class="op">|</span><span class="ident">u</span><span class="op">|</span> <span class="kw">match</span> <span class="ident">range</span>.<span class="ident">start_bound</span>() {
-                    <span class="ident">Bound::Included</span>(<span class="ident">start</span>) =&gt; <span class="ident">u</span>.<span class="ident">key</span>.<span class="ident">borrow</span>() <span class="op">&lt;</span> <span class="ident">start</span>,
-                    <span class="ident">Bound::Excluded</span>(<span class="ident">start</span>) =&gt; <span class="ident">u</span>.<span class="ident">key</span>.<span class="ident">borrow</span>() <span class="op">&lt;</span><span class="op">=</span> <span class="ident">start</span>,
-                    <span class="ident">Bound::Unbounded</span> =&gt; <span class="bool-val">false</span>,
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(<span class="kw-2">ref </span>r) = <span class="self">self</span>.root {
+            r.finger_first_false(
+                |u| <span class="kw">match </span>range.start_bound() {
+                    Bound::Included(start) =&gt; u.key.borrow() &lt; start,
+                    Bound::Excluded(start) =&gt; u.key.borrow() &lt;= start,
+                    Bound::Unbounded =&gt; <span class="bool-val">false</span>,
                 },
-                <span class="kw-2">&amp;mut</span> <span class="ident">fingers</span>[<span class="number">0</span>]
+                <span class="kw-2">&amp;mut </span>fingers[<span class="number">0</span>]
             );
-            <span class="ident">r</span>.<span class="ident">finger_last_true</span>(
-                <span class="op">|</span><span class="ident">u</span><span class="op">|</span> <span class="kw">match</span> <span class="ident">range</span>.<span class="ident">end_bound</span>() {
-                    <span class="ident">Bound::Included</span>(<span class="ident">end</span>) =&gt; <span class="ident">u</span>.<span class="ident">key</span>.<span class="ident">borrow</span>() <span class="op">&lt;</span><span class="op">=</span> <span class="ident">end</span>,
-                    <span class="ident">Bound::Excluded</span>(<span class="ident">end</span>) =&gt; <span class="ident">u</span>.<span class="ident">key</span>.<span class="ident">borrow</span>() <span class="op">&lt;</span> <span class="ident">end</span>,
-                    <span class="ident">Bound::Unbounded</span> =&gt; <span class="bool-val">true</span>,
+            r.finger_last_true(
+                |u| <span class="kw">match </span>range.end_bound() {
+                    Bound::Included(end) =&gt; u.key.borrow() &lt;= end,
+                    Bound::Excluded(end) =&gt; u.key.borrow() &lt; end,
+                    Bound::Unbounded =&gt; <span class="bool-val">true</span>,
                 },
-                <span class="kw-2">&amp;mut</span> <span class="ident">fingers</span>[<span class="number">1</span>]
+                <span class="kw-2">&amp;mut </span>fingers[<span class="number">1</span>]
             );
         }
 
-        <span class="kw">let</span> <span class="ident">fused</span> <span class="op">=</span> <span class="ident">fingers</span>[<span class="number">0</span>].<span class="ident">is_empty</span>() <span class="op">|</span><span class="op">|</span> <span class="ident">fingers</span>[<span class="number">1</span>].<span class="ident">is_empty</span>()
-            <span class="op">|</span><span class="op">|</span> <span class="ident">fingers</span>[<span class="number">0</span>].<span class="ident">last</span>().<span class="ident">unwrap</span>().<span class="ident">key</span> <span class="op">&gt;</span> <span class="ident">fingers</span>[<span class="number">1</span>].<span class="ident">last</span>().<span class="ident">unwrap</span>().<span class="ident">key</span>;
+        <span class="kw">let </span>fused = fingers[<span class="number">0</span>].is_empty() || fingers[<span class="number">1</span>].is_empty()
+            || fingers[<span class="number">0</span>].last().unwrap().key &gt; fingers[<span class="number">1</span>].last().unwrap().key;
 
-        <span class="ident"><span class="self">self</span>::Range</span> { <span class="ident">fingers</span>, <span class="ident">fused</span> }
+        <span class="self">self</span>::Range { fingers, fused }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">iter</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident"><span class="self">self</span>::Range</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span>, <span class="ident">A</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">range</span>(..)
-    }
-}
-
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span>, <span class="ident">A</span>, <span class="ident">F</span><span class="op">&gt;</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">AugTreap</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span>, <span class="ident">A</span>, <span class="ident">F</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">K</span>: <span class="ident">Ord</span>,
-    <span class="ident">A</span>: <span class="ident">Default</span>,
-    <span class="ident">F</span>: <span class="ident">AugFn</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span>, <span class="ident">A</span><span class="op">&gt;</span>
-{
-    <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::new</span>()
+    <span class="kw">pub fn </span>iter(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">self</span>::Range&lt;K, V, A&gt; {
+        <span class="self">self</span>.range(..)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span>, <span class="ident">A</span>, <span class="ident">F</span><span class="op">&gt;</span> <span class="ident">FromIterator</span><span class="op">&lt;</span>(<span class="ident">K</span>, <span class="ident">V</span>)<span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">AugTreap</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span>, <span class="ident">A</span>, <span class="ident">F</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">K</span>: <span class="ident">Ord</span>,
-    <span class="ident">A</span>: <span class="ident">Default</span>,
-    <span class="ident">F</span>: <span class="ident">AugFn</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span>, <span class="ident">A</span><span class="op">&gt;</span>
+<span class="kw">impl</span>&lt;K, V, A, F&gt; Default <span class="kw">for </span>AugTreap&lt;K, V, A, F&gt;
+<span class="kw">where
+    </span>K: Ord,
+    A: Default,
+    F: AugFn&lt;K, V, A&gt;
 {
-    <span class="kw">fn</span> <span class="ident">from_iter</span><span class="op">&lt;</span><span class="ident">I</span>: <span class="ident">IntoIterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> (<span class="ident">K</span>, <span class="ident">V</span>)<span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">iter</span>: <span class="ident">I</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">at</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::new</span>();
-        <span class="kw">for</span> (<span class="ident">k</span>, <span class="ident">v</span>) <span class="kw">in</span> <span class="ident">iter</span> {
-            <span class="ident">at</span>.<span class="ident">insert</span>(<span class="ident">k</span>, <span class="ident">v</span>);
+    <span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::new()
+    }
+}
+
+<span class="kw">impl</span>&lt;K, V, A, F&gt; FromIterator&lt;(K, V)&gt; <span class="kw">for </span>AugTreap&lt;K, V, A, F&gt;
+<span class="kw">where
+    </span>K: Ord,
+    A: Default,
+    F: AugFn&lt;K, V, A&gt;
+{
+    <span class="kw">fn </span>from_iter&lt;I: IntoIterator&lt;Item = (K, V)&gt;&gt;(iter: I) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span><span class="kw-2">mut </span>at = <span class="self">Self</span>::new();
+        <span class="kw">for </span>(k, v) <span class="kw">in </span>iter {
+            at.insert(k, v);
         }
-        <span class="ident">at</span>
+        at
     }
 }
 
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Range</span><span class="op">&lt;</span><span class="lifetime">&#39;n</span>, <span class="ident">K</span>, <span class="ident">V</span>, <span class="ident">A</span><span class="op">&gt;</span>
+<span class="kw">pub struct </span>Range&lt;<span class="lifetime">&#39;n</span>, K, V, A&gt;
 {
-    <span class="ident">fingers</span>: [<span class="ident">Vec</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;n</span> <span class="ident">Node</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span>, <span class="ident">A</span><span class="op">&gt;</span><span class="op">&gt;</span>; <span class="number">2</span>],
-    <span class="ident">fused</span>: <span class="ident">bool</span>,
+    fingers: [Vec&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;n </span>Node&lt;K, V, A&gt;&gt;; <span class="number">2</span>],
+    fused: bool,
 }
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;n</span>, <span class="ident">K</span>, <span class="ident">V</span>, <span class="ident">A</span><span class="op">&gt;</span> <span class="ident">Iterator</span> <span class="kw">for</span> <span class="ident">Range</span><span class="op">&lt;</span><span class="lifetime">&#39;n</span>, <span class="ident">K</span>, <span class="ident">V</span>, <span class="ident">A</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> (<span class="kw-2">&amp;</span><span class="lifetime">&#39;n</span> <span class="ident">K</span>, <span class="kw-2">&amp;</span><span class="lifetime">&#39;n</span> <span class="ident">V</span>);
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;n</span>, K, V, A&gt; Iterator <span class="kw">for </span>Range&lt;<span class="lifetime">&#39;n</span>, K, V, A&gt; {
+    <span class="kw">type </span>Item = (<span class="kw-2">&amp;</span><span class="lifetime">&#39;n </span>K, <span class="kw-2">&amp;</span><span class="lifetime">&#39;n </span>V);
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Item</span><span class="op">&gt;</span>
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>next(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>::Item&gt;
     {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">fused</span> { <span class="kw">return</span> <span class="prelude-val">None</span> }
+        <span class="kw">if </span><span class="self">self</span>.fused { <span class="kw">return </span><span class="prelude-val">None </span>}
 
-        <span class="kw">let</span> <span class="ident">u</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">fingers</span>[<span class="number">0</span>].<span class="ident">tip</span>();
+        <span class="kw">let </span>u = <span class="self">self</span>.fingers[<span class="number">0</span>].tip();
 
-        <span class="kw">if</span> <span class="ident">ptr::eq</span>(<span class="self">self</span>.<span class="ident">fingers</span>[<span class="number">0</span>].<span class="ident">tip</span>(), <span class="self">self</span>.<span class="ident">fingers</span>[<span class="number">1</span>].<span class="ident">tip</span>()) {
-            <span class="self">self</span>.<span class="ident">fused</span> <span class="op">=</span> <span class="bool-val">true</span>;
-        } <span class="kw">else</span> {
-            <span class="self">self</span>.<span class="ident">fingers</span>[<span class="number">0</span>] <span class="op">=</span> <span class="ident">mem::take</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">fingers</span>[<span class="number">0</span>]).<span class="ident">successor</span>();
+        <span class="kw">if </span>ptr::eq(<span class="self">self</span>.fingers[<span class="number">0</span>].tip(), <span class="self">self</span>.fingers[<span class="number">1</span>].tip()) {
+            <span class="self">self</span>.fused = <span class="bool-val">true</span>;
+        } <span class="kw">else </span>{
+            <span class="self">self</span>.fingers[<span class="number">0</span>] = mem::take(<span class="kw-2">&amp;mut </span><span class="self">self</span>.fingers[<span class="number">0</span>]).successor();
         }
 
-        <span class="prelude-val">Some</span>((<span class="kw-2">&amp;</span><span class="ident">u</span>.<span class="ident">key</span>, <span class="kw-2">&amp;</span><span class="ident">u</span>.<span class="ident">value</span>))
+        <span class="prelude-val">Some</span>((<span class="kw-2">&amp;</span>u.key, <span class="kw-2">&amp;</span>u.value))
     }
 }
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;n</span>, <span class="ident">K</span>, <span class="ident">V</span>, <span class="ident">A</span><span class="op">&gt;</span> <span class="ident">DoubleEndedIterator</span> <span class="kw">for</span> <span class="ident">Range</span><span class="op">&lt;</span><span class="lifetime">&#39;n</span>, <span class="ident">K</span>, <span class="ident">V</span>, <span class="ident">A</span><span class="op">&gt;</span>
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;n</span>, K, V, A&gt; DoubleEndedIterator <span class="kw">for </span>Range&lt;<span class="lifetime">&#39;n</span>, K, V, A&gt;
 {
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">next_back</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Item</span><span class="op">&gt;</span>
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>next_back(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>::Item&gt;
     {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">fused</span> { <span class="kw">return</span> <span class="prelude-val">None</span> }
+        <span class="kw">if </span><span class="self">self</span>.fused { <span class="kw">return </span><span class="prelude-val">None </span>}
 
-        <span class="kw">let</span> <span class="ident">u</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">fingers</span>[<span class="number">1</span>].<span class="ident">tip</span>();
+        <span class="kw">let </span>u = <span class="self">self</span>.fingers[<span class="number">1</span>].tip();
 
-        <span class="kw">if</span> <span class="ident">ptr::eq</span>(<span class="self">self</span>.<span class="ident">fingers</span>[<span class="number">0</span>].<span class="ident">tip</span>(), <span class="self">self</span>.<span class="ident">fingers</span>[<span class="number">1</span>].<span class="ident">tip</span>()) {
-            <span class="self">self</span>.<span class="ident">fused</span> <span class="op">=</span> <span class="bool-val">true</span>;
-        } <span class="kw">else</span> {
-            <span class="self">self</span>.<span class="ident">fingers</span>[<span class="number">1</span>] <span class="op">=</span> <span class="ident">mem::take</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">fingers</span>[<span class="number">1</span>]).<span class="ident">predecessor</span>();
+        <span class="kw">if </span>ptr::eq(<span class="self">self</span>.fingers[<span class="number">0</span>].tip(), <span class="self">self</span>.fingers[<span class="number">1</span>].tip()) {
+            <span class="self">self</span>.fused = <span class="bool-val">true</span>;
+        } <span class="kw">else </span>{
+            <span class="self">self</span>.fingers[<span class="number">1</span>] = mem::take(<span class="kw-2">&amp;mut </span><span class="self">self</span>.fingers[<span class="number">1</span>]).predecessor();
         }
 
-        <span class="prelude-val">Some</span>((<span class="kw-2">&amp;</span><span class="ident">u</span>.<span class="ident">key</span>, <span class="kw-2">&amp;</span><span class="ident">u</span>.<span class="ident">value</span>))
+        <span class="prelude-val">Some</span>((<span class="kw-2">&amp;</span>u.key, <span class="kw-2">&amp;</span>u.value))
     }
 }
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;n</span>, <span class="ident">K</span>, <span class="ident">V</span>, <span class="ident">A</span><span class="op">&gt;</span> <span class="ident">FusedIterator</span> <span class="kw">for</span> <span class="ident">Range</span><span class="op">&lt;</span><span class="lifetime">&#39;n</span>, <span class="ident">K</span>, <span class="ident">V</span>, <span class="ident">A</span><span class="op">&gt;</span> {}
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;n</span>, K, V, A&gt; FusedIterator <span class="kw">for </span>Range&lt;<span class="lifetime">&#39;n</span>, K, V, A&gt; {}
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="rithmic" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0-nightly (12cd71f4d 2022-06-01)" ></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="rithmic" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (17cbdfd07 2022-09-13)" ></div></body></html>

@@ -1,11 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/bcfam/.cargo/git/checkouts/ac-library-rs-d342211755004e20/d2b35ac/src/mincostflow.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mincostflow.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><script defer src="../../main.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script>
-    <noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../ac_library_rs/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"></h2>
-    </nav>
-    <nav class="sidebar"><a class="sidebar-logo" href="../../ac_library_rs/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../ac_library_rs/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
-                                <a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div>
-                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/bcfam/.cargo/git/checkouts/ac-library-rs-d342211755004e20/d2b35ac/src/mincostflow.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mincostflow.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../ac_library_rs/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../ac_library_rs/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../ac_library_rs/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -223,224 +216,223 @@
 <span id="216">216</span>
 <span id="217">217</span>
 <span id="218">218</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::internal_type_traits::Integral</span>;
+</pre><pre class="rust"><code><span class="kw">use </span><span class="kw">crate</span>::internal_type_traits::Integral;
 
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">MinCostFlowEdge</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">pub</span> <span class="ident">from</span>: <span class="ident">usize</span>,
-    <span class="kw">pub</span> <span class="ident">to</span>: <span class="ident">usize</span>,
-    <span class="kw">pub</span> <span class="ident">cap</span>: <span class="ident">T</span>,
-    <span class="kw">pub</span> <span class="ident">flow</span>: <span class="ident">T</span>,
-    <span class="kw">pub</span> <span class="ident">cost</span>: <span class="ident">T</span>,
+<span class="kw">pub struct </span>MinCostFlowEdge&lt;T&gt; {
+    <span class="kw">pub </span>from: usize,
+    <span class="kw">pub </span>to: usize,
+    <span class="kw">pub </span>cap: T,
+    <span class="kw">pub </span>flow: T,
+    <span class="kw">pub </span>cost: T,
 }
 
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">MinCostFlowGraph</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="ident">pos</span>: <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">usize</span>, <span class="ident">usize</span>)<span class="op">&gt;</span>,
-    <span class="ident">g</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">_Edge</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+<span class="kw">pub struct </span>MinCostFlowGraph&lt;T&gt; {
+    pos: Vec&lt;(usize, usize)&gt;,
+    g: Vec&lt;Vec&lt;_Edge&lt;T&gt;&gt;&gt;,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">MinCostFlowGraph</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Integral</span> <span class="op">+</span> <span class="ident">std::ops::Neg</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span>,
+<span class="kw">impl</span>&lt;T&gt; MinCostFlowGraph&lt;T&gt;
+<span class="kw">where
+    </span>T: Integral + std::ops::Neg&lt;Output = T&gt;,
 {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">n</span>: <span class="ident">usize</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> {
-            <span class="ident">pos</span>: <span class="macro">vec!</span>[],
-            <span class="ident">g</span>: (<span class="number">0</span>..<span class="ident">n</span>).<span class="ident">map</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="macro">vec!</span>[]).<span class="ident">collect</span>(),
+    <span class="kw">pub fn </span>new(n: usize) -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{
+            pos: <span class="macro">vec!</span>[],
+            g: (<span class="number">0</span>..n).map(|<span class="kw">_</span>| <span class="macro">vec!</span>[]).collect(),
         }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_edge</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">i</span>: <span class="ident">usize</span>) -&gt; <span class="ident">MinCostFlowEdge</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-        <span class="macro">assert!</span>(<span class="ident">i</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">pos</span>.<span class="ident">len</span>());
-        <span class="kw">let</span> <span class="ident">e</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">g</span>[<span class="self">self</span>.<span class="ident">pos</span>[<span class="ident">i</span>].<span class="number">0</span>][<span class="self">self</span>.<span class="ident">pos</span>[<span class="ident">i</span>].<span class="number">1</span>];
-        <span class="kw">let</span> <span class="ident">re</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">g</span>[<span class="ident">e</span>.<span class="ident">to</span>][<span class="ident">e</span>.<span class="ident">rev</span>];
-        <span class="ident">MinCostFlowEdge</span> {
-            <span class="ident">from</span>: <span class="self">self</span>.<span class="ident">pos</span>[<span class="ident">i</span>].<span class="number">0</span>,
-            <span class="ident">to</span>: <span class="ident">e</span>.<span class="ident">to</span>,
-            <span class="ident">cap</span>: <span class="ident">e</span>.<span class="ident">cap</span> <span class="op">+</span> <span class="ident">re</span>.<span class="ident">cap</span>,
-            <span class="ident">flow</span>: <span class="ident">re</span>.<span class="ident">cap</span>,
-            <span class="ident">cost</span>: <span class="ident">e</span>.<span class="ident">cost</span>,
+    <span class="kw">pub fn </span>get_edge(<span class="kw-2">&amp;</span><span class="self">self</span>, i: usize) -&gt; MinCostFlowEdge&lt;T&gt; {
+        <span class="macro">assert!</span>(i &lt; <span class="self">self</span>.pos.len());
+        <span class="kw">let </span>e = <span class="kw-2">&amp;</span><span class="self">self</span>.g[<span class="self">self</span>.pos[i].<span class="number">0</span>][<span class="self">self</span>.pos[i].<span class="number">1</span>];
+        <span class="kw">let </span>re = <span class="kw-2">&amp;</span><span class="self">self</span>.g[e.to][e.rev];
+        MinCostFlowEdge {
+            from: <span class="self">self</span>.pos[i].<span class="number">0</span>,
+            to: e.to,
+            cap: e.cap + re.cap,
+            flow: re.cap,
+            cost: e.cost,
         }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">edges</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">MinCostFlowEdge</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">m</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">pos</span>.<span class="ident">len</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> <span class="macro">vec!</span>[];
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">m</span> {
-            <span class="ident">result</span>.<span class="ident">push</span>(<span class="self">self</span>.<span class="ident">get_edge</span>(<span class="ident">i</span>));
+    <span class="kw">pub fn </span>edges(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Vec&lt;MinCostFlowEdge&lt;T&gt;&gt; {
+        <span class="kw">let </span>m = <span class="self">self</span>.pos.len();
+        <span class="kw">let </span><span class="kw-2">mut </span>result = <span class="macro">vec!</span>[];
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..m {
+            result.push(<span class="self">self</span>.get_edge(i));
         }
-        <span class="ident">result</span>
+        result
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_edge</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">from</span>: <span class="ident">usize</span>, <span class="ident">to</span>: <span class="ident">usize</span>, <span class="ident">cap</span>: <span class="ident">T</span>, <span class="ident">cost</span>: <span class="ident">T</span>) -&gt; <span class="ident">usize</span> {
-        <span class="macro">assert!</span>(<span class="ident">from</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">g</span>.<span class="ident">len</span>());
-        <span class="macro">assert!</span>(<span class="ident">to</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">g</span>.<span class="ident">len</span>());
-        <span class="macro">assert_ne!</span>(<span class="ident">from</span>, <span class="ident">to</span>);
-        <span class="macro">assert!</span>(<span class="ident">cap</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">T::zero</span>());
-        <span class="macro">assert!</span>(<span class="ident">cost</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">T::zero</span>());
+    <span class="kw">pub fn </span>add_edge(<span class="kw-2">&amp;mut </span><span class="self">self</span>, from: usize, to: usize, cap: T, cost: T) -&gt; usize {
+        <span class="macro">assert!</span>(from &lt; <span class="self">self</span>.g.len());
+        <span class="macro">assert!</span>(to &lt; <span class="self">self</span>.g.len());
+        <span class="macro">assert_ne!</span>(from, to);
+        <span class="macro">assert!</span>(cap &gt;= T::zero());
+        <span class="macro">assert!</span>(cost &gt;= T::zero());
 
-        <span class="self">self</span>.<span class="ident">pos</span>.<span class="ident">push</span>((<span class="ident">from</span>, <span class="self">self</span>.<span class="ident">g</span>[<span class="ident">from</span>].<span class="ident">len</span>()));
+        <span class="self">self</span>.pos.push((from, <span class="self">self</span>.g[from].len()));
 
-        <span class="kw">let</span> <span class="ident">rev</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">g</span>[<span class="ident">to</span>].<span class="ident">len</span>();
-        <span class="self">self</span>.<span class="ident">g</span>[<span class="ident">from</span>].<span class="ident">push</span>(<span class="ident">_Edge</span> { <span class="ident">to</span>, <span class="ident">rev</span>, <span class="ident">cap</span>, <span class="ident">cost</span> });
+        <span class="kw">let </span>rev = <span class="self">self</span>.g[to].len();
+        <span class="self">self</span>.g[from].push(_Edge { to, rev, cap, cost });
 
-        <span class="kw">let</span> <span class="ident">rev</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">g</span>[<span class="ident">from</span>].<span class="ident">len</span>() <span class="op">-</span> <span class="number">1</span>;
-        <span class="self">self</span>.<span class="ident">g</span>[<span class="ident">to</span>].<span class="ident">push</span>(<span class="ident">_Edge</span> {
-            <span class="ident">to</span>: <span class="ident">from</span>,
-            <span class="ident">rev</span>,
-            <span class="ident">cap</span>: <span class="ident">T::zero</span>(),
-            <span class="ident">cost</span>: <span class="op">-</span><span class="ident">cost</span>,
+        <span class="kw">let </span>rev = <span class="self">self</span>.g[from].len() - <span class="number">1</span>;
+        <span class="self">self</span>.g[to].push(_Edge {
+            to: from,
+            rev,
+            cap: T::zero(),
+            cost: -cost,
         });
 
-        <span class="self">self</span>.<span class="ident">pos</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="number">1</span>
+        <span class="self">self</span>.pos.len() - <span class="number">1
+    </span>}
+
+    <span class="doccomment">/// Returns (maximum flow, cost)
+    </span><span class="kw">pub fn </span>flow(<span class="kw-2">&amp;mut </span><span class="self">self</span>, source: usize, sink: usize, flow_limit: T) -&gt; (T, T) {
+        <span class="self">self</span>.slope(source, sink, flow_limit).pop().unwrap()
     }
 
-    <span class="doccomment">/// Returns (maximum flow, cost)</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">flow</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">source</span>: <span class="ident">usize</span>, <span class="ident">sink</span>: <span class="ident">usize</span>, <span class="ident">flow_limit</span>: <span class="ident">T</span>) -&gt; (<span class="ident">T</span>, <span class="ident">T</span>) {
-        <span class="self">self</span>.<span class="ident">slope</span>(<span class="ident">source</span>, <span class="ident">sink</span>, <span class="ident">flow_limit</span>).<span class="ident">pop</span>().<span class="ident">unwrap</span>()
-    }
+    <span class="kw">pub fn </span>slope(<span class="kw-2">&amp;mut </span><span class="self">self</span>, source: usize, sink: usize, flow_limit: T) -&gt; Vec&lt;(T, T)&gt; {
+        <span class="kw">let </span>n = <span class="self">self</span>.g.len();
+        <span class="macro">assert!</span>(source &lt; n);
+        <span class="macro">assert!</span>(sink &lt; n);
+        <span class="macro">assert_ne!</span>(source, sink);
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">slope</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">source</span>: <span class="ident">usize</span>, <span class="ident">sink</span>: <span class="ident">usize</span>, <span class="ident">flow_limit</span>: <span class="ident">T</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">T</span>, <span class="ident">T</span>)<span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">n</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">g</span>.<span class="ident">len</span>();
-        <span class="macro">assert!</span>(<span class="ident">source</span> <span class="op">&lt;</span> <span class="ident">n</span>);
-        <span class="macro">assert!</span>(<span class="ident">sink</span> <span class="op">&lt;</span> <span class="ident">n</span>);
-        <span class="macro">assert_ne!</span>(<span class="ident">source</span>, <span class="ident">sink</span>);
-
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">dual</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="ident">T::zero</span>(); <span class="ident">n</span>];
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">prev_v</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="number">0</span>; <span class="ident">n</span>];
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">prev_e</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="number">0</span>; <span class="ident">n</span>];
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">flow</span> <span class="op">=</span> <span class="ident">T::zero</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">cost</span> <span class="op">=</span> <span class="ident">T::zero</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">prev_cost_per_flow</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="op">=</span> <span class="prelude-val">None</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> <span class="macro">vec!</span>[(<span class="ident">flow</span>, <span class="ident">cost</span>)];
-        <span class="kw">while</span> <span class="ident">flow</span> <span class="op">&lt;</span> <span class="ident">flow_limit</span> {
-            <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">refine_dual</span>(<span class="ident">source</span>, <span class="ident">sink</span>, <span class="kw-2">&amp;mut</span> <span class="ident">dual</span>, <span class="kw-2">&amp;mut</span> <span class="ident">prev_v</span>, <span class="kw-2">&amp;mut</span> <span class="ident">prev_e</span>) {
+        <span class="kw">let </span><span class="kw-2">mut </span>dual = <span class="macro">vec!</span>[T::zero(); n];
+        <span class="kw">let </span><span class="kw-2">mut </span>prev_v = <span class="macro">vec!</span>[<span class="number">0</span>; n];
+        <span class="kw">let </span><span class="kw-2">mut </span>prev_e = <span class="macro">vec!</span>[<span class="number">0</span>; n];
+        <span class="kw">let </span><span class="kw-2">mut </span>flow = T::zero();
+        <span class="kw">let </span><span class="kw-2">mut </span>cost = T::zero();
+        <span class="kw">let </span><span class="kw-2">mut </span>prev_cost_per_flow: <span class="prelude-ty">Option</span>&lt;T&gt; = <span class="prelude-val">None</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>result = <span class="macro">vec!</span>[(flow, cost)];
+        <span class="kw">while </span>flow &lt; flow_limit {
+            <span class="kw">if </span>!<span class="self">self</span>.refine_dual(source, sink, <span class="kw-2">&amp;mut </span>dual, <span class="kw-2">&amp;mut </span>prev_v, <span class="kw-2">&amp;mut </span>prev_e) {
                 <span class="kw">break</span>;
             }
 
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">c</span> <span class="op">=</span> <span class="ident">flow_limit</span> <span class="op">-</span> <span class="ident">flow</span>;
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span> <span class="op">=</span> <span class="ident">sink</span>;
-            <span class="kw">while</span> <span class="ident">v</span> <span class="op">!</span><span class="op">=</span> <span class="ident">source</span> {
-                <span class="ident">c</span> <span class="op">=</span> <span class="ident">std::cmp::min</span>(<span class="ident">c</span>, <span class="self">self</span>.<span class="ident">g</span>[<span class="ident">prev_v</span>[<span class="ident">v</span>]][<span class="ident">prev_e</span>[<span class="ident">v</span>]].<span class="ident">cap</span>);
-                <span class="ident">v</span> <span class="op">=</span> <span class="ident">prev_v</span>[<span class="ident">v</span>];
+            <span class="kw">let </span><span class="kw-2">mut </span>c = flow_limit - flow;
+            <span class="kw">let </span><span class="kw-2">mut </span>v = sink;
+            <span class="kw">while </span>v != source {
+                c = std::cmp::min(c, <span class="self">self</span>.g[prev_v[v]][prev_e[v]].cap);
+                v = prev_v[v];
             }
 
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span> <span class="op">=</span> <span class="ident">sink</span>;
-            <span class="kw">while</span> <span class="ident">v</span> <span class="op">!</span><span class="op">=</span> <span class="ident">source</span> {
-                <span class="self">self</span>.<span class="ident">g</span>[<span class="ident">prev_v</span>[<span class="ident">v</span>]][<span class="ident">prev_e</span>[<span class="ident">v</span>]].<span class="ident">cap</span> <span class="op">-</span><span class="op">=</span> <span class="ident">c</span>;
-                <span class="kw">let</span> <span class="ident">rev</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">g</span>[<span class="ident">prev_v</span>[<span class="ident">v</span>]][<span class="ident">prev_e</span>[<span class="ident">v</span>]].<span class="ident">rev</span>;
-                <span class="self">self</span>.<span class="ident">g</span>[<span class="ident">v</span>][<span class="ident">rev</span>].<span class="ident">cap</span> <span class="op">+</span><span class="op">=</span> <span class="ident">c</span>;
-                <span class="ident">v</span> <span class="op">=</span> <span class="ident">prev_v</span>[<span class="ident">v</span>];
+            <span class="kw">let </span><span class="kw-2">mut </span>v = sink;
+            <span class="kw">while </span>v != source {
+                <span class="self">self</span>.g[prev_v[v]][prev_e[v]].cap -= c;
+                <span class="kw">let </span>rev = <span class="self">self</span>.g[prev_v[v]][prev_e[v]].rev;
+                <span class="self">self</span>.g[v][rev].cap += c;
+                v = prev_v[v];
             }
 
-            <span class="kw">let</span> <span class="ident">d</span> <span class="op">=</span> <span class="op">-</span><span class="ident">dual</span>[<span class="ident">source</span>];
-            <span class="ident">flow</span> <span class="op">+</span><span class="op">=</span> <span class="ident">c</span>;
-            <span class="ident">cost</span> <span class="op">+</span><span class="op">=</span> <span class="ident">d</span> <span class="op">*</span> <span class="ident">c</span>;
-            <span class="kw">if</span> <span class="ident">prev_cost_per_flow</span> <span class="op">==</span> <span class="prelude-val">Some</span>(<span class="ident">d</span>) {
-                <span class="macro">assert!</span>(<span class="ident">result</span>.<span class="ident">pop</span>().<span class="ident">is_some</span>());
+            <span class="kw">let </span>d = -dual[source];
+            flow += c;
+            cost += d * c;
+            <span class="kw">if </span>prev_cost_per_flow == <span class="prelude-val">Some</span>(d) {
+                <span class="macro">assert!</span>(result.pop().is_some());
             }
-            <span class="ident">result</span>.<span class="ident">push</span>((<span class="ident">flow</span>, <span class="ident">cost</span>));
-            <span class="ident">prev_cost_per_flow</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">d</span>);
+            result.push((flow, cost));
+            prev_cost_per_flow = <span class="prelude-val">Some</span>(d);
         }
-        <span class="ident">result</span>
+        result
     }
 
-    <span class="kw">fn</span> <span class="ident">refine_dual</span>(
+    <span class="kw">fn </span>refine_dual(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">source</span>: <span class="ident">usize</span>,
-        <span class="ident">sink</span>: <span class="ident">usize</span>,
-        <span class="ident">dual</span>: <span class="kw-2">&amp;mut</span> [<span class="ident">T</span>],
-        <span class="ident">pv</span>: <span class="kw-2">&amp;mut</span> [<span class="ident">usize</span>],
-        <span class="ident">pe</span>: <span class="kw-2">&amp;mut</span> [<span class="ident">usize</span>],
-    ) -&gt; <span class="ident">bool</span> {
-        <span class="kw">let</span> <span class="ident">n</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">g</span>.<span class="ident">len</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">dist</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="ident">T::max_value</span>(); <span class="ident">n</span>];
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vis</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="bool-val">false</span>; <span class="ident">n</span>];
+        source: usize,
+        sink: usize,
+        dual: <span class="kw-2">&amp;mut </span>[T],
+        pv: <span class="kw-2">&amp;mut </span>[usize],
+        pe: <span class="kw-2">&amp;mut </span>[usize],
+    ) -&gt; bool {
+        <span class="kw">let </span>n = <span class="self">self</span>.g.len();
+        <span class="kw">let </span><span class="kw-2">mut </span>dist = <span class="macro">vec!</span>[T::max_value(); n];
+        <span class="kw">let </span><span class="kw-2">mut </span>vis = <span class="macro">vec!</span>[<span class="bool-val">false</span>; n];
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">que</span> <span class="op">=</span> <span class="ident">std::collections::BinaryHeap::new</span>();
-        <span class="ident">dist</span>[<span class="ident">source</span>] <span class="op">=</span> <span class="ident">T::zero</span>();
-        <span class="ident">que</span>.<span class="ident">push</span>((<span class="ident">std::cmp::Reverse</span>(<span class="ident">T::zero</span>()), <span class="ident">source</span>));
-        <span class="kw">while</span> <span class="kw">let</span> <span class="prelude-val">Some</span>((<span class="kw">_</span>, <span class="ident">v</span>)) <span class="op">=</span> <span class="ident">que</span>.<span class="ident">pop</span>() {
-            <span class="kw">if</span> <span class="ident">vis</span>[<span class="ident">v</span>] {
+        <span class="kw">let </span><span class="kw-2">mut </span>que = std::collections::BinaryHeap::new();
+        dist[source] = T::zero();
+        que.push((std::cmp::Reverse(T::zero()), source));
+        <span class="kw">while let </span><span class="prelude-val">Some</span>((<span class="kw">_</span>, v)) = que.pop() {
+            <span class="kw">if </span>vis[v] {
                 <span class="kw">continue</span>;
             }
-            <span class="ident">vis</span>[<span class="ident">v</span>] <span class="op">=</span> <span class="bool-val">true</span>;
-            <span class="kw">if</span> <span class="ident">v</span> <span class="op">==</span> <span class="ident">sink</span> {
+            vis[v] = <span class="bool-val">true</span>;
+            <span class="kw">if </span>v == sink {
                 <span class="kw">break</span>;
             }
 
-            <span class="kw">for</span> (<span class="ident">i</span>, <span class="ident">e</span>) <span class="kw">in</span> <span class="self">self</span>.<span class="ident">g</span>[<span class="ident">v</span>].<span class="ident">iter</span>().<span class="ident">enumerate</span>() {
-                <span class="kw">if</span> <span class="ident">vis</span>[<span class="ident">e</span>.<span class="ident">to</span>] <span class="op">|</span><span class="op">|</span> <span class="ident">e</span>.<span class="ident">cap</span> <span class="op">==</span> <span class="ident">T::zero</span>() {
+            <span class="kw">for </span>(i, e) <span class="kw">in </span><span class="self">self</span>.g[v].iter().enumerate() {
+                <span class="kw">if </span>vis[e.to] || e.cap == T::zero() {
                     <span class="kw">continue</span>;
                 }
 
-                <span class="kw">let</span> <span class="ident">cost</span> <span class="op">=</span> <span class="ident">e</span>.<span class="ident">cost</span> <span class="op">-</span> <span class="ident">dual</span>[<span class="ident">e</span>.<span class="ident">to</span>] <span class="op">+</span> <span class="ident">dual</span>[<span class="ident">v</span>];
-                <span class="kw">if</span> <span class="ident">dist</span>[<span class="ident">e</span>.<span class="ident">to</span>] <span class="op">-</span> <span class="ident">dist</span>[<span class="ident">v</span>] <span class="op">&gt;</span> <span class="ident">cost</span> {
-                    <span class="ident">dist</span>[<span class="ident">e</span>.<span class="ident">to</span>] <span class="op">=</span> <span class="ident">dist</span>[<span class="ident">v</span>] <span class="op">+</span> <span class="ident">cost</span>;
-                    <span class="ident">pv</span>[<span class="ident">e</span>.<span class="ident">to</span>] <span class="op">=</span> <span class="ident">v</span>;
-                    <span class="ident">pe</span>[<span class="ident">e</span>.<span class="ident">to</span>] <span class="op">=</span> <span class="ident">i</span>;
-                    <span class="ident">que</span>.<span class="ident">push</span>((<span class="ident">std::cmp::Reverse</span>(<span class="ident">dist</span>[<span class="ident">e</span>.<span class="ident">to</span>]), <span class="ident">e</span>.<span class="ident">to</span>));
+                <span class="kw">let </span>cost = e.cost - dual[e.to] + dual[v];
+                <span class="kw">if </span>dist[e.to] - dist[v] &gt; cost {
+                    dist[e.to] = dist[v] + cost;
+                    pv[e.to] = v;
+                    pe[e.to] = i;
+                    que.push((std::cmp::Reverse(dist[e.to]), e.to));
                 }
             }
         }
 
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">vis</span>[<span class="ident">sink</span>] {
-            <span class="kw">return</span> <span class="bool-val">false</span>;
+        <span class="kw">if </span>!vis[sink] {
+            <span class="kw">return </span><span class="bool-val">false</span>;
         }
 
-        <span class="kw">for</span> <span class="ident">v</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">n</span> {
-            <span class="kw">if</span> <span class="op">!</span><span class="ident">vis</span>[<span class="ident">v</span>] {
+        <span class="kw">for </span>v <span class="kw">in </span><span class="number">0</span>..n {
+            <span class="kw">if </span>!vis[v] {
                 <span class="kw">continue</span>;
             }
-            <span class="ident">dual</span>[<span class="ident">v</span>] <span class="op">-</span><span class="op">=</span> <span class="ident">dist</span>[<span class="ident">sink</span>] <span class="op">-</span> <span class="ident">dist</span>[<span class="ident">v</span>];
+            dual[v] -= dist[sink] - dist[v];
         }
-        <span class="bool-val">true</span>
-    }
+        <span class="bool-val">true
+    </span>}
 }
 
-<span class="kw">struct</span> <span class="ident">_Edge</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="ident">to</span>: <span class="ident">usize</span>,
-    <span class="ident">rev</span>: <span class="ident">usize</span>,
-    <span class="ident">cap</span>: <span class="ident">T</span>,
-    <span class="ident">cost</span>: <span class="ident">T</span>,
+<span class="kw">struct </span>_Edge&lt;T&gt; {
+    to: usize,
+    rev: usize,
+    cap: T,
+    cost: T,
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
-<span class="kw">mod</span> <span class="ident">tests</span> {
-    <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
+<span class="attribute">#[cfg(test)]
+</span><span class="kw">mod </span>tests {
+    <span class="kw">use super</span>::<span class="kw-2">*</span>;
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_min_cost_flow</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">graph</span> <span class="op">=</span> <span class="ident">MinCostFlowGraph::new</span>(<span class="number">4</span>);
-        <span class="ident">graph</span>.<span class="ident">add_edge</span>(<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>);
-        <span class="ident">graph</span>.<span class="ident">add_edge</span>(<span class="number">0</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">2</span>);
-        <span class="ident">graph</span>.<span class="ident">add_edge</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>);
-        <span class="ident">graph</span>.<span class="ident">add_edge</span>(<span class="number">1</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">3</span>);
-        <span class="ident">graph</span>.<span class="ident">add_edge</span>(<span class="number">2</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>);
-        <span class="kw">let</span> (<span class="ident">flow</span>, <span class="ident">cost</span>) <span class="op">=</span> <span class="ident">graph</span>.<span class="ident">flow</span>(<span class="number">0</span>, <span class="number">3</span>, <span class="number">2</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">flow</span>, <span class="number">2</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">cost</span>, <span class="number">6</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_min_cost_flow() {
+        <span class="kw">let </span><span class="kw-2">mut </span>graph = MinCostFlowGraph::new(<span class="number">4</span>);
+        graph.add_edge(<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>);
+        graph.add_edge(<span class="number">0</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">2</span>);
+        graph.add_edge(<span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>);
+        graph.add_edge(<span class="number">1</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">3</span>);
+        graph.add_edge(<span class="number">2</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>);
+        <span class="kw">let </span>(flow, cost) = graph.flow(<span class="number">0</span>, <span class="number">3</span>, <span class="number">2</span>);
+        <span class="macro">assert_eq!</span>(flow, <span class="number">2</span>);
+        <span class="macro">assert_eq!</span>(cost, <span class="number">6</span>);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">same_cost_paths</span>() {
-        <span class="comment">// https://github.com/atcoder/ac-library/blob/300e66a7d73efe27d02f38133239711148092030/test/unittest/mincostflow_test.cpp#L83-L90</span>
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">graph</span> <span class="op">=</span> <span class="ident">MinCostFlowGraph::new</span>(<span class="number">3</span>);
-        <span class="macro">assert_eq!</span>(<span class="number">0</span>, <span class="ident">graph</span>.<span class="ident">add_edge</span>(<span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>));
-        <span class="macro">assert_eq!</span>(<span class="number">1</span>, <span class="ident">graph</span>.<span class="ident">add_edge</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">0</span>));
-        <span class="macro">assert_eq!</span>(<span class="number">2</span>, <span class="ident">graph</span>.<span class="ident">add_edge</span>(<span class="number">0</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">1</span>));
-        <span class="kw">let</span> <span class="ident">expected</span> <span class="op">=</span> [(<span class="number">0</span>, <span class="number">0</span>), (<span class="number">3</span>, <span class="number">3</span>)];
-        <span class="macro">assert_eq!</span>(<span class="ident">expected</span>[..], <span class="kw-2">*</span><span class="ident">graph</span>.<span class="ident">slope</span>(<span class="number">0</span>, <span class="number">2</span>, <span class="ident">i32::max_value</span>()));
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>same_cost_paths() {
+        <span class="comment">// https://github.com/atcoder/ac-library/blob/300e66a7d73efe27d02f38133239711148092030/test/unittest/mincostflow_test.cpp#L83-L90
+        </span><span class="kw">let </span><span class="kw-2">mut </span>graph = MinCostFlowGraph::new(<span class="number">3</span>);
+        <span class="macro">assert_eq!</span>(<span class="number">0</span>, graph.add_edge(<span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>));
+        <span class="macro">assert_eq!</span>(<span class="number">1</span>, graph.add_edge(<span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">0</span>));
+        <span class="macro">assert_eq!</span>(<span class="number">2</span>, graph.add_edge(<span class="number">0</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">1</span>));
+        <span class="kw">let </span>expected = [(<span class="number">0</span>, <span class="number">0</span>), (<span class="number">3</span>, <span class="number">3</span>)];
+        <span class="macro">assert_eq!</span>(expected[..], <span class="kw-2">*</span>graph.slope(<span class="number">0</span>, <span class="number">2</span>, i32::max_value()));
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">only_one_nonzero_cost_edge</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">graph</span> <span class="op">=</span> <span class="ident">MinCostFlowGraph::new</span>(<span class="number">3</span>);
-        <span class="macro">assert_eq!</span>(<span class="number">0</span>, <span class="ident">graph</span>.<span class="ident">add_edge</span>(<span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>));
-        <span class="macro">assert_eq!</span>(<span class="number">1</span>, <span class="ident">graph</span>.<span class="ident">add_edge</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">0</span>));
-        <span class="kw">let</span> <span class="ident">expected</span> <span class="op">=</span> [(<span class="number">0</span>, <span class="number">0</span>), (<span class="number">1</span>, <span class="number">1</span>)];
-        <span class="macro">assert_eq!</span>(<span class="ident">expected</span>[..], <span class="kw-2">*</span><span class="ident">graph</span>.<span class="ident">slope</span>(<span class="number">0</span>, <span class="number">2</span>, <span class="ident">i32::max_value</span>()));
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>only_one_nonzero_cost_edge() {
+        <span class="kw">let </span><span class="kw-2">mut </span>graph = MinCostFlowGraph::new(<span class="number">3</span>);
+        <span class="macro">assert_eq!</span>(<span class="number">0</span>, graph.add_edge(<span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>));
+        <span class="macro">assert_eq!</span>(<span class="number">1</span>, graph.add_edge(<span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">0</span>));
+        <span class="kw">let </span>expected = [(<span class="number">0</span>, <span class="number">0</span>), (<span class="number">1</span>, <span class="number">1</span>)];
+        <span class="macro">assert_eq!</span>(expected[..], <span class="kw-2">*</span>graph.slope(<span class="number">0</span>, <span class="number">2</span>, i32::max_value()));
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="ac_library_rs" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0-nightly (12cd71f4d 2022-06-01)" ></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="ac_library_rs" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (17cbdfd07 2022-09-13)" ></div></body></html>

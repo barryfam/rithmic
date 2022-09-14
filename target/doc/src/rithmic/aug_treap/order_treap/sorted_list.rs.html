@@ -1,11 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `rithmic/src/aug_treap/order_treap/sorted_list.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>sorted_list.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script src="../../../../crates.js"></script><script defer src="../../../../main.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script>
-    <noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../rithmic/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"></h2>
-    </nav>
-    <nav class="sidebar"><a class="sidebar-logo" href="../../../../rithmic/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../rithmic/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
-                                <a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div>
-                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `rithmic/src/aug_treap/order_treap/sorted_list.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>sorted_list.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../normalize.css"><link rel="stylesheet" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../dark.css" disabled><link rel="stylesheet" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../rithmic/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../rithmic/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../rithmic/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -103,104 +96,103 @@
 <span id="96">96</span>
 <span id="97">97</span>
 <span id="98">98</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::borrow::Borrow</span>;
-<span class="kw">use</span> <span class="ident">std::iter::FusedIterator</span>;
-<span class="kw">use</span> <span class="ident">std::ops</span>::{<span class="ident">Index</span>, <span class="ident">RangeBounds</span>};
+</pre><pre class="rust"><code><span class="kw">use </span>std::borrow::Borrow;
+<span class="kw">use </span>std::iter::FusedIterator;
+<span class="kw">use </span>std::ops::{Index, RangeBounds};
 
-<span class="kw">use</span> <span class="ident">delegate::delegate</span>;
+<span class="kw">use </span>delegate::delegate;
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::Rangelike</span>;
+<span class="kw">use </span><span class="kw">crate</span>::Rangelike;
 
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::OrderTreap</span>;
+<span class="kw">use </span><span class="kw">super</span>::OrderTreap;
 
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SortedList</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Ord</span><span class="op">&gt;</span>(<span class="kw">pub</span> <span class="ident">OrderTreap</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;</span>);
+<span class="kw">pub struct </span>SortedList&lt;T: Ord&gt;(<span class="kw">pub </span>OrderTreap&lt;T, ()&gt;);
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Ord</span><span class="op">&gt;</span> <span class="ident">SortedList</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span>(<span class="ident">OrderTreap::new</span>())
+<span class="kw">impl</span>&lt;T: Ord&gt; SortedList&lt;T&gt; {
+    <span class="kw">pub fn </span>new() -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>(OrderTreap::new())
     }
 
-    <span class="macro">delegate!</span> {
-    <span class="ident">to</span> <span class="self">self</span>.<span class="number">0</span> {
-        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">len</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">usize</span>;
-        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_empty</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span>;
+    <span class="macro">delegate! </span>{
+    to <span class="self">self</span>.<span class="number">0 </span>{
+        <span class="kw">pub fn </span>len(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize;
+        <span class="kw">pub fn </span>is_empty(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool;
 
-        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">insert</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">value</span>: <span class="ident">T</span>, [()]) -&gt; <span class="ident">usize</span>;
-        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">insert_left</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">value</span>: <span class="ident">T</span>, [()]) -&gt; <span class="ident">usize</span>;
-        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">remove_at</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">range</span>: <span class="kw">impl</span> <span class="ident">Rangelike</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>) -&gt; <span class="ident">usize</span>;
+        <span class="kw">pub fn </span>insert(<span class="kw-2">&amp;mut </span><span class="self">self</span>, value: T, [()]) -&gt; usize;
+        <span class="kw">pub fn </span>insert_left(<span class="kw-2">&amp;mut </span><span class="self">self</span>, value: T, [()]) -&gt; usize;
+        <span class="kw">pub fn </span>remove_at(<span class="kw-2">&amp;mut </span><span class="self">self</span>, range: <span class="kw">impl </span>Rangelike&lt;usize&gt;) -&gt; usize;
 
-        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">remove_all</span><span class="op">&lt;</span><span class="ident">Q</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">value</span>: <span class="kw-2">&amp;</span><span class="ident">Q</span>) -&gt; <span class="ident">usize</span>
-        <span class="kw">where</span> <span class="ident">T</span>: <span class="ident">Borrow</span><span class="op">&lt;</span><span class="ident">Q</span><span class="op">&gt;</span>, <span class="ident">Q</span>: <span class="ident">Ord</span>;
+        <span class="kw">pub fn </span>remove_all&lt;Q&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, value: <span class="kw-2">&amp;</span>Q) -&gt; usize
+        <span class="kw">where </span>T: Borrow&lt;Q&gt;, Q: Ord;
 
-        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">remove_range</span><span class="op">&lt;</span><span class="ident">Q</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">range</span>: <span class="kw">impl</span> <span class="ident">RangeBounds</span><span class="op">&lt;</span><span class="ident">Q</span><span class="op">&gt;</span>) -&gt; <span class="ident">usize</span>
-        <span class="kw">where</span> <span class="ident">T</span>: <span class="ident">Borrow</span><span class="op">&lt;</span><span class="ident">Q</span><span class="op">&gt;</span>, <span class="ident">Q</span>: <span class="ident">Ord</span>;
+        <span class="kw">pub fn </span>remove_range&lt;Q&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, range: <span class="kw">impl </span>RangeBounds&lt;Q&gt;) -&gt; usize
+        <span class="kw">where </span>T: Borrow&lt;Q&gt;, Q: Ord;
 
-        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">contains</span><span class="op">&lt;</span><span class="ident">Q</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">value</span>: <span class="kw-2">&amp;</span><span class="ident">Q</span>) -&gt; <span class="ident">bool</span>
-        <span class="kw">where</span> <span class="ident">T</span>: <span class="ident">Borrow</span><span class="op">&lt;</span><span class="ident">Q</span><span class="op">&gt;</span>, <span class="ident">Q</span>: <span class="ident">Ord</span>;
+        <span class="kw">pub fn </span>contains&lt;Q&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, value: <span class="kw-2">&amp;</span>Q) -&gt; bool
+        <span class="kw">where </span>T: Borrow&lt;Q&gt;, Q: Ord;
 
-        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">count</span><span class="op">&lt;</span><span class="ident">Q</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">value</span>: <span class="kw-2">&amp;</span><span class="ident">Q</span>) -&gt; <span class="ident">usize</span>
-        <span class="kw">where</span> <span class="ident">T</span>: <span class="ident">Borrow</span><span class="op">&lt;</span><span class="ident">Q</span><span class="op">&gt;</span>, <span class="ident">Q</span>: <span class="ident">Ord</span>;
+        <span class="kw">pub fn </span>count&lt;Q&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, value: <span class="kw-2">&amp;</span>Q) -&gt; usize
+        <span class="kw">where </span>T: Borrow&lt;Q&gt;, Q: Ord;
 
-        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">position</span><span class="op">&lt;</span><span class="ident">Q</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">value</span>: <span class="kw-2">&amp;</span><span class="ident">Q</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>
-        <span class="kw">where</span> <span class="ident">T</span>: <span class="ident">Borrow</span><span class="op">&lt;</span><span class="ident">Q</span><span class="op">&gt;</span>, <span class="ident">Q</span>: <span class="ident">Ord</span>;
+        <span class="kw">pub fn </span>position&lt;Q&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, value: <span class="kw-2">&amp;</span>Q) -&gt; <span class="prelude-ty">Option</span>&lt;usize&gt;
+        <span class="kw">where </span>T: Borrow&lt;Q&gt;, Q: Ord;
 
-        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">trisect</span><span class="op">&lt;</span><span class="ident">Q</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">value</span>: <span class="kw-2">&amp;</span><span class="ident">Q</span>) -&gt; (<span class="ident">usize</span>, <span class="ident">usize</span>)
-        <span class="kw">where</span> <span class="ident">T</span>: <span class="ident">Borrow</span><span class="op">&lt;</span><span class="ident">Q</span><span class="op">&gt;</span>, <span class="ident">Q</span>: <span class="ident">Ord</span>;
+        <span class="kw">pub fn </span>trisect&lt;Q&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, value: <span class="kw-2">&amp;</span>Q) -&gt; (usize, usize)
+        <span class="kw">where </span>T: Borrow&lt;Q&gt;, Q: Ord;
 
-        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">trisect_range</span><span class="op">&lt;</span><span class="ident">Q</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">range</span>: <span class="kw">impl</span> <span class="ident">RangeBounds</span><span class="op">&lt;</span><span class="ident">Q</span><span class="op">&gt;</span>) -&gt; (<span class="ident">usize</span>, <span class="ident">usize</span>)
-        <span class="kw">where</span> <span class="ident">T</span>: <span class="ident">Borrow</span><span class="op">&lt;</span><span class="ident">Q</span><span class="op">&gt;</span>, <span class="ident">Q</span>: <span class="ident">Ord</span>;
+        <span class="kw">pub fn </span>trisect_range&lt;Q&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, range: <span class="kw">impl </span>RangeBounds&lt;Q&gt;) -&gt; (usize, usize)
+        <span class="kw">where </span>T: Borrow&lt;Q&gt;, Q: Ord;
 
-        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">range_len</span><span class="op">&lt;</span><span class="ident">Q</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">range</span>: <span class="kw">impl</span> <span class="ident">RangeBounds</span><span class="op">&lt;</span><span class="ident">Q</span><span class="op">&gt;</span>) -&gt; <span class="ident">usize</span>
-        <span class="kw">where</span> <span class="ident">T</span>: <span class="ident">Borrow</span><span class="op">&lt;</span><span class="ident">Q</span><span class="op">&gt;</span>, <span class="ident">Q</span>: <span class="ident">Ord</span>;
+        <span class="kw">pub fn </span>range_len&lt;Q&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, range: <span class="kw">impl </span>RangeBounds&lt;Q&gt;) -&gt; usize
+        <span class="kw">where </span>T: Borrow&lt;Q&gt;, Q: Ord;
     }}
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">remove</span><span class="op">&lt;</span><span class="ident">Q</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">value</span>: <span class="kw-2">&amp;</span><span class="ident">Q</span>) -&gt; <span class="ident">bool</span>
-    <span class="kw">where</span>
-        <span class="ident">T</span>: <span class="ident">Borrow</span><span class="op">&lt;</span><span class="ident">Q</span><span class="op">&gt;</span>,
-        <span class="ident">Q</span>: <span class="ident">Ord</span>
+    <span class="kw">pub fn </span>remove&lt;Q&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, value: <span class="kw-2">&amp;</span>Q) -&gt; bool
+    <span class="kw">where
+        </span>T: Borrow&lt;Q&gt;,
+        Q: Ord
     {
-        <span class="self">self</span>.<span class="number">0</span>.<span class="ident">remove</span>(<span class="ident">value</span>).<span class="ident">is_some</span>()
+        <span class="self">self</span>.<span class="number">0</span>.remove(value).is_some()
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">range</span><span class="op">&lt;</span><span class="lifetime">&#39;me</span>:<span class="lifetime">&#39;i</span>, <span class="lifetime">&#39;r</span>:<span class="lifetime">&#39;i</span>, <span class="lifetime">&#39;i</span>, <span class="ident">Q</span>:<span class="lifetime">&#39;r</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;me</span> <span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">range</span>: <span class="kw">impl</span> <span class="ident">RangeBounds</span><span class="op">&lt;</span><span class="ident">Q</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Clone</span> <span class="op">+</span> <span class="lifetime">&#39;r</span>)
-        -&gt; <span class="kw">impl</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span><span class="op">=</span><span class="kw-2">&amp;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">DoubleEndedIterator</span> <span class="op">+</span> <span class="ident">ExactSizeIterator</span> <span class="op">+</span> <span class="ident">FusedIterator</span> <span class="op">+</span> <span class="lifetime">&#39;i</span>
-    <span class="kw">where</span>
-        <span class="ident">T</span>: <span class="ident">Borrow</span><span class="op">&lt;</span><span class="ident">Q</span><span class="op">&gt;</span>,
-        <span class="ident">Q</span>: <span class="ident">Ord</span>
+    <span class="kw">pub fn </span>range&lt;<span class="lifetime">&#39;me</span>:<span class="lifetime">&#39;i</span>, <span class="lifetime">&#39;r</span>:<span class="lifetime">&#39;i</span>, <span class="lifetime">&#39;i</span>, Q:<span class="lifetime">&#39;r</span>&gt;(<span class="kw-2">&amp;</span><span class="lifetime">&#39;me </span><span class="kw-2">mut </span><span class="self">self</span>, range: <span class="kw">impl </span>RangeBounds&lt;Q&gt; + Clone + <span class="lifetime">&#39;r</span>)
+        -&gt; <span class="kw">impl </span>Iterator&lt;Item=<span class="kw-2">&amp;</span>T&gt; + DoubleEndedIterator + ExactSizeIterator + FusedIterator + <span class="lifetime">&#39;i
+    </span><span class="kw">where
+        </span>T: Borrow&lt;Q&gt;,
+        Q: Ord
     {
-        <span class="self">self</span>.<span class="number">0</span>.<span class="ident">range</span>(<span class="ident">range</span>).<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">k</span>, <span class="kw">_</span>)<span class="op">|</span> <span class="ident">k</span>)
+        <span class="self">self</span>.<span class="number">0</span>.range(range).map(|(k, <span class="kw">_</span>)| k)
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">iter</span>(<span class="kw-2">&amp;</span><span class="self">self</span>)
-        -&gt; <span class="kw">impl</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span><span class="op">=</span><span class="kw-2">&amp;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">DoubleEndedIterator</span> <span class="op">+</span> <span class="ident">ExactSizeIterator</span> <span class="op">+</span> <span class="ident">FusedIterator</span> <span class="op">+</span> <span class="lifetime">&#39;_</span>
-    {
-        <span class="self">self</span>.<span class="number">0</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">k</span>, <span class="kw">_</span>)<span class="op">|</span> <span class="ident">k</span>)
-    }
-}
-
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Ord</span><span class="op">&gt;</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">SortedList</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::new</span>()
+    <span class="kw">pub fn </span>iter(<span class="kw-2">&amp;</span><span class="self">self</span>)
+        -&gt; <span class="kw">impl </span>Iterator&lt;Item=<span class="kw-2">&amp;</span>T&gt; + DoubleEndedIterator + ExactSizeIterator + FusedIterator + <span class="lifetime">&#39;_
+    </span>{
+        <span class="self">self</span>.<span class="number">0</span>.iter().map(|(k, <span class="kw">_</span>)| k)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Ord</span><span class="op">&gt;</span> <span class="ident">FromIterator</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">SortedList</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">from_iter</span><span class="op">&lt;</span><span class="ident">I</span>: <span class="ident">IntoIterator</span><span class="op">&lt;</span><span class="ident">Item</span><span class="op">=</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">iter</span>: <span class="ident">I</span>) -&gt; <span class="self">Self</span>
-    {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">sl</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::new</span>();
-        <span class="kw">for</span> <span class="ident">value</span> <span class="kw">in</span> <span class="ident">iter</span> {
-            <span class="ident">sl</span>.<span class="ident">insert</span>(<span class="ident">value</span>);
+<span class="kw">impl</span>&lt;T: Ord&gt; Default <span class="kw">for </span>SortedList&lt;T&gt; {
+    <span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::new()
+    }
+}
+
+<span class="kw">impl</span>&lt;T: Ord&gt; FromIterator&lt;T&gt; <span class="kw">for </span>SortedList&lt;T&gt; {
+    <span class="kw">fn </span>from_iter&lt;I: IntoIterator&lt;Item=T&gt;&gt;(iter: I) -&gt; <span class="self">Self
+    </span>{
+        <span class="kw">let </span><span class="kw-2">mut </span>sl = <span class="self">Self</span>::new();
+        <span class="kw">for </span>value <span class="kw">in </span>iter {
+            sl.insert(value);
         }
-        <span class="ident">sl</span>
+        sl
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Ord</span><span class="op">&gt;</span> <span class="ident">Index</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">SortedList</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span>;
-    <span class="kw">fn</span> <span class="ident">index</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">index</span>: <span class="ident">usize</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::Output</span> {
-        <span class="self">self</span>.<span class="number">0</span>.<span class="ident">get_at</span>(<span class="ident">index</span>).<span class="number">0</span>
-    }
+<span class="kw">impl</span>&lt;T: Ord&gt; Index&lt;usize&gt; <span class="kw">for </span>SortedList&lt;T&gt; {
+    <span class="kw">type </span>Output = T;
+    <span class="kw">fn </span>index(<span class="kw-2">&amp;</span><span class="self">self</span>, index: usize) -&gt; <span class="kw-2">&amp;</span><span class="self">Self</span>::Output {
+        <span class="self">self</span>.<span class="number">0</span>.get_at(index).<span class="number">0
+    </span>}
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="rithmic" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0-nightly (12cd71f4d 2022-06-01)" ></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="rithmic" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (17cbdfd07 2022-09-13)" ></div></body></html>

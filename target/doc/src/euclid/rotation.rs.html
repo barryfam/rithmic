@@ -1,11 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/bcfam/.cargo/registry/src/github.com-1ecc6299db9ec823/euclid-0.22.7/src/rotation.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>rotation.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><script defer src="../../main.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script>
-    <noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../euclid/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"></h2>
-    </nav>
-    <nav class="sidebar"><a class="sidebar-logo" href="../../euclid/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../euclid/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
-                                <a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div>
-                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/bcfam/.cargo/registry/src/github.com-1ecc6299db9ec823/euclid-0.22.7/src/rotation.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>rotation.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../euclid/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../euclid/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../euclid/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -1019,1020 +1012,1019 @@
 <span id="1012">1012</span>
 <span id="1013">1013</span>
 <span id="1014">1014</span>
-</pre><pre class="rust"><code><span class="comment">// Copyright 2013 The Servo Project Developers. See the COPYRIGHT</span>
-<span class="comment">// file at the top-level directory of this distribution.</span>
-<span class="comment">//</span>
-<span class="comment">// Licensed under the Apache License, Version 2.0 &lt;LICENSE-APACHE or</span>
-<span class="comment">// http://www.apache.org/licenses/LICENSE-2.0&gt; or the MIT license</span>
-<span class="comment">// &lt;LICENSE-MIT or http://opensource.org/licenses/MIT&gt;, at your</span>
-<span class="comment">// option. This file may not be copied, modified, or distributed</span>
-<span class="comment">// except according to those terms.</span>
+</pre><pre class="rust"><code><span class="comment">// Copyright 2013 The Servo Project Developers. See the COPYRIGHT
+// file at the top-level directory of this distribution.
+//
+// Licensed under the Apache License, Version 2.0 &lt;LICENSE-APACHE or
+// http://www.apache.org/licenses/LICENSE-2.0&gt; or the MIT license
+// &lt;LICENSE-MIT or http://opensource.org/licenses/MIT&gt;, at your
+// option. This file may not be copied, modified, or distributed
+// except according to those terms.
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::approxeq::ApproxEq</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::trig::Trig</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">point2</span>, <span class="ident">point3</span>, <span class="ident">vec3</span>, <span class="ident">Angle</span>, <span class="ident">Point2D</span>, <span class="ident">Point3D</span>, <span class="ident">Vector2D</span>, <span class="ident">Vector3D</span>};
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">Transform2D</span>, <span class="ident">Transform3D</span>, <span class="ident">UnknownUnit</span>};
-<span class="kw">use</span> <span class="ident">core::cmp</span>::{<span class="ident">Eq</span>, <span class="ident">PartialEq</span>};
-<span class="kw">use</span> <span class="ident">core::fmt</span>;
-<span class="kw">use</span> <span class="ident">core::hash::Hash</span>;
-<span class="kw">use</span> <span class="ident">core::marker::PhantomData</span>;
-<span class="kw">use</span> <span class="ident">core::ops</span>::{<span class="ident">Add</span>, <span class="ident">Mul</span>, <span class="ident">Neg</span>, <span class="ident">Sub</span>};
-<span class="kw">use</span> <span class="ident">num_traits::real::Real</span>;
-<span class="kw">use</span> <span class="ident">num_traits</span>::{<span class="ident">NumCast</span>, <span class="ident">One</span>, <span class="ident">Zero</span>};
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;serde&quot;</span>)]</span>
-<span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>};
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;bytemuck&quot;</span>)]</span>
-<span class="kw">use</span> <span class="ident">bytemuck</span>::{<span class="ident">Zeroable</span>, <span class="ident">Pod</span>};
+</span><span class="kw">use </span><span class="kw">crate</span>::approxeq::ApproxEq;
+<span class="kw">use </span><span class="kw">crate</span>::trig::Trig;
+<span class="kw">use crate</span>::{point2, point3, vec3, Angle, Point2D, Point3D, Vector2D, Vector3D};
+<span class="kw">use crate</span>::{Transform2D, Transform3D, UnknownUnit};
+<span class="kw">use </span>core::cmp::{Eq, PartialEq};
+<span class="kw">use </span>core::fmt;
+<span class="kw">use </span>core::hash::Hash;
+<span class="kw">use </span>core::marker::PhantomData;
+<span class="kw">use </span>core::ops::{Add, Mul, Neg, Sub};
+<span class="kw">use </span>num_traits::real::Real;
+<span class="kw">use </span>num_traits::{NumCast, One, Zero};
+<span class="attribute">#[cfg(feature = <span class="string">&quot;serde&quot;</span>)]
+</span><span class="kw">use </span>serde::{Deserialize, Serialize};
+<span class="attribute">#[cfg(feature = <span class="string">&quot;bytemuck&quot;</span>)]
+</span><span class="kw">use </span>bytemuck::{Zeroable, Pod};
 
-<span class="doccomment">/// A transform that can represent rotations in 2d, represented as an angle in radians.</span>
-<span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
-<span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;serde&quot;</span>, <span class="ident">derive</span>(<span class="ident">Serialize</span>, <span class="ident">Deserialize</span>))]</span>
-<span class="attribute">#[<span class="ident">cfg_attr</span>(
-    <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;serde&quot;</span>,
-    <span class="ident">serde</span>(<span class="ident">bound</span>(
-        <span class="ident">serialize</span> <span class="op">=</span> <span class="string">&quot;T: serde::Serialize&quot;</span>,
-        <span class="ident">deserialize</span> <span class="op">=</span> <span class="string">&quot;T: serde::Deserialize&lt;&#39;de&gt;&quot;</span>
-    ))
-)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Rotation2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Angle in radians</span>
-    <span class="kw">pub</span> <span class="ident">angle</span>: <span class="ident">T</span>,
-    <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">_unit</span>: <span class="ident">PhantomData</span><span class="op">&lt;</span>(<span class="ident">Src</span>, <span class="ident">Dst</span>)<span class="op">&gt;</span>,
+<span class="doccomment">/// A transform that can represent rotations in 2d, represented as an angle in radians.
+</span><span class="attribute">#[repr(C)]
+#[cfg_attr(feature = <span class="string">&quot;serde&quot;</span>, derive(Serialize, Deserialize))]
+#[cfg_attr(
+    feature = <span class="string">&quot;serde&quot;</span>,
+    serde(bound(
+        serialize = <span class="string">&quot;T: serde::Serialize&quot;</span>,
+        deserialize = <span class="string">&quot;T: serde::Deserialize&lt;&#39;de&gt;&quot;
+    </span>))
+)]
+</span><span class="kw">pub struct </span>Rotation2D&lt;T, Src, Dst&gt; {
+    <span class="doccomment">/// Angle in radians
+    </span><span class="kw">pub </span>angle: T,
+    <span class="attribute">#[doc(hidden)]
+    </span><span class="kw">pub </span>_unit: PhantomData&lt;(Src, Dst)&gt;,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Copy</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">Copy</span> <span class="kw">for</span> <span class="ident">Rotation2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {}
+<span class="kw">impl</span>&lt;T: Copy, Src, Dst&gt; Copy <span class="kw">for </span>Rotation2D&lt;T, Src, Dst&gt; {}
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Clone</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">Clone</span> <span class="kw">for</span> <span class="ident">Rotation2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">Rotation2D</span> {
-            <span class="ident">angle</span>: <span class="self">self</span>.<span class="ident">angle</span>.<span class="ident">clone</span>(),
-            <span class="ident">_unit</span>: <span class="ident">PhantomData</span>,
+<span class="kw">impl</span>&lt;T: Clone, Src, Dst&gt; Clone <span class="kw">for </span>Rotation2D&lt;T, Src, Dst&gt; {
+    <span class="kw">fn </span>clone(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        Rotation2D {
+            angle: <span class="self">self</span>.angle.clone(),
+            _unit: PhantomData,
         }
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">Eq</span> <span class="kw">for</span> <span class="ident">Rotation2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="kw">where</span> <span class="ident">T</span>: <span class="ident">Eq</span> {}
+<span class="kw">impl</span>&lt;T, Src, Dst&gt; Eq <span class="kw">for </span>Rotation2D&lt;T, Src, Dst&gt; <span class="kw">where </span>T: Eq {}
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">PartialEq</span> <span class="kw">for</span> <span class="ident">Rotation2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">PartialEq</span>,
+<span class="kw">impl</span>&lt;T, Src, Dst&gt; PartialEq <span class="kw">for </span>Rotation2D&lt;T, Src, Dst&gt;
+<span class="kw">where
+    </span>T: PartialEq,
 {
-    <span class="kw">fn</span> <span class="ident">eq</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">angle</span> <span class="op">==</span> <span class="ident">other</span>.<span class="ident">angle</span>
+    <span class="kw">fn </span>eq(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; bool {
+        <span class="self">self</span>.angle == other.angle
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">Hash</span> <span class="kw">for</span> <span class="ident">Rotation2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Hash</span>,
+<span class="kw">impl</span>&lt;T, Src, Dst&gt; Hash <span class="kw">for </span>Rotation2D&lt;T, Src, Dst&gt;
+<span class="kw">where
+    </span>T: Hash,
 {
-    <span class="kw">fn</span> <span class="ident">hash</span><span class="op">&lt;</span><span class="ident">H</span>: <span class="ident">core::hash::Hasher</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">h</span>: <span class="kw-2">&amp;mut</span> <span class="ident">H</span>) {
-        <span class="self">self</span>.<span class="ident">angle</span>.<span class="ident">hash</span>(<span class="ident">h</span>);
+    <span class="kw">fn </span>hash&lt;H: core::hash::Hasher&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, h: <span class="kw-2">&amp;mut </span>H) {
+        <span class="self">self</span>.angle.hash(h);
     }
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;bytemuck&quot;</span>)]</span>
-<span class="kw">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Zeroable</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">Zeroable</span> <span class="kw">for</span> <span class="ident">Rotation2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {}
+<span class="attribute">#[cfg(feature = <span class="string">&quot;bytemuck&quot;</span>)]
+</span><span class="kw">unsafe impl</span>&lt;T: Zeroable, Src, Dst&gt; Zeroable <span class="kw">for </span>Rotation2D&lt;T, Src, Dst&gt; {}
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;bytemuck&quot;</span>)]</span>
-<span class="kw">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Pod</span>, <span class="ident">Src</span>: <span class="lifetime">&#39;static</span>, <span class="ident">Dst</span>: <span class="lifetime">&#39;static</span><span class="op">&gt;</span> <span class="ident">Pod</span> <span class="kw">for</span> <span class="ident">Rotation2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {}
+<span class="attribute">#[cfg(feature = <span class="string">&quot;bytemuck&quot;</span>)]
+</span><span class="kw">unsafe impl</span>&lt;T: Pod, Src: <span class="lifetime">&#39;static</span>, Dst: <span class="lifetime">&#39;static</span>&gt; Pod <span class="kw">for </span>Rotation2D&lt;T, Src, Dst&gt; {}
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">Rotation2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Creates a rotation from an angle in radians.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">angle</span>: <span class="ident">Angle</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">Rotation2D</span> {
-            <span class="ident">angle</span>: <span class="ident">angle</span>.<span class="ident">radians</span>,
-            <span class="ident">_unit</span>: <span class="ident">PhantomData</span>,
+<span class="kw">impl</span>&lt;T, Src, Dst&gt; Rotation2D&lt;T, Src, Dst&gt; {
+    <span class="doccomment">/// Creates a rotation from an angle in radians.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>new(angle: Angle&lt;T&gt;) -&gt; <span class="self">Self </span>{
+        Rotation2D {
+            angle: angle.radians,
+            _unit: PhantomData,
         }
     }
 
-    <span class="doccomment">/// Creates a rotation from an angle in radians.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">radians</span>(<span class="ident">angle</span>: <span class="ident">T</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::new</span>(<span class="ident">Angle::radians</span>(<span class="ident">angle</span>))
+    <span class="doccomment">/// Creates a rotation from an angle in radians.
+    </span><span class="kw">pub fn </span>radians(angle: T) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::new(Angle::radians(angle))
     }
 
-    <span class="doccomment">/// Creates the identity rotation.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">identity</span>() -&gt; <span class="self">Self</span>
-    <span class="kw">where</span>
-        <span class="ident">T</span>: <span class="ident">Zero</span>,
+    <span class="doccomment">/// Creates the identity rotation.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>identity() -&gt; <span class="self">Self
+    </span><span class="kw">where
+        </span>T: Zero,
     {
-        <span class="ident"><span class="self">Self</span>::radians</span>(<span class="ident">T::zero</span>())
+        <span class="self">Self</span>::radians(T::zero())
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Copy</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">Rotation2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Cast the unit, preserving the numeric value.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Example</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use euclid::Rotation2D;</span>
-    <span class="doccomment">/// enum Local {}</span>
-    <span class="doccomment">/// enum World {}</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// enum Local2 {}</span>
-    <span class="doccomment">/// enum World2 {}</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// let to_world: Rotation2D&lt;_, Local, World&gt; = Rotation2D::radians(42);</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// assert_eq!(to_world.angle, to_world.cast_unit::&lt;Local2, World2&gt;().angle);</span>
-    <span class="doccomment">/// ```</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">cast_unit</span><span class="op">&lt;</span><span class="ident">Src2</span>, <span class="ident">Dst2</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Rotation2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src2</span>, <span class="ident">Dst2</span><span class="op">&gt;</span> {
-        <span class="ident">Rotation2D</span> {
-            <span class="ident">angle</span>: <span class="self">self</span>.<span class="ident">angle</span>,
-            <span class="ident">_unit</span>: <span class="ident">PhantomData</span>,
+<span class="kw">impl</span>&lt;T: Copy, Src, Dst&gt; Rotation2D&lt;T, Src, Dst&gt; {
+    <span class="doccomment">/// Cast the unit, preserving the numeric value.
+    ///
+    /// # Example
+    ///
+    /// ```rust
+    /// # use euclid::Rotation2D;
+    /// enum Local {}
+    /// enum World {}
+    ///
+    /// enum Local2 {}
+    /// enum World2 {}
+    ///
+    /// let to_world: Rotation2D&lt;_, Local, World&gt; = Rotation2D::radians(42);
+    ///
+    /// assert_eq!(to_world.angle, to_world.cast_unit::&lt;Local2, World2&gt;().angle);
+    /// ```
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>cast_unit&lt;Src2, Dst2&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Rotation2D&lt;T, Src2, Dst2&gt; {
+        Rotation2D {
+            angle: <span class="self">self</span>.angle,
+            _unit: PhantomData,
         }
     }
 
-    <span class="doccomment">/// Drop the units, preserving only the numeric value.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Example</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use euclid::Rotation2D;</span>
-    <span class="doccomment">/// enum Local {}</span>
-    <span class="doccomment">/// enum World {}</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// let to_world: Rotation2D&lt;_, Local, World&gt; = Rotation2D::radians(42);</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// assert_eq!(to_world.angle, to_world.to_untyped().angle);</span>
-    <span class="doccomment">/// ```</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_untyped</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Rotation2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">UnknownUnit</span>, <span class="ident">UnknownUnit</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">cast_unit</span>()
+    <span class="doccomment">/// Drop the units, preserving only the numeric value.
+    ///
+    /// # Example
+    ///
+    /// ```rust
+    /// # use euclid::Rotation2D;
+    /// enum Local {}
+    /// enum World {}
+    ///
+    /// let to_world: Rotation2D&lt;_, Local, World&gt; = Rotation2D::radians(42);
+    ///
+    /// assert_eq!(to_world.angle, to_world.to_untyped().angle);
+    /// ```
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>to_untyped(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Rotation2D&lt;T, UnknownUnit, UnknownUnit&gt; {
+        <span class="self">self</span>.cast_unit()
     }
 
-    <span class="doccomment">/// Tag a unitless value with units.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Example</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use euclid::Rotation2D;</span>
-    <span class="doccomment">/// use euclid::UnknownUnit;</span>
-    <span class="doccomment">/// enum Local {}</span>
-    <span class="doccomment">/// enum World {}</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// let rot: Rotation2D&lt;_, UnknownUnit, UnknownUnit&gt; = Rotation2D::radians(42);</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// assert_eq!(rot.angle, Rotation2D::&lt;_, Local, World&gt;::from_untyped(&amp;rot).angle);</span>
-    <span class="doccomment">/// ```</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_untyped</span>(<span class="ident">r</span>: <span class="kw-2">&amp;</span><span class="ident">Rotation2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">UnknownUnit</span>, <span class="ident">UnknownUnit</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">r</span>.<span class="ident">cast_unit</span>()
+    <span class="doccomment">/// Tag a unitless value with units.
+    ///
+    /// # Example
+    ///
+    /// ```rust
+    /// # use euclid::Rotation2D;
+    /// use euclid::UnknownUnit;
+    /// enum Local {}
+    /// enum World {}
+    ///
+    /// let rot: Rotation2D&lt;_, UnknownUnit, UnknownUnit&gt; = Rotation2D::radians(42);
+    ///
+    /// assert_eq!(rot.angle, Rotation2D::&lt;_, Local, World&gt;::from_untyped(&amp;rot).angle);
+    /// ```
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>from_untyped(r: <span class="kw-2">&amp;</span>Rotation2D&lt;T, UnknownUnit, UnknownUnit&gt;) -&gt; <span class="self">Self </span>{
+        r.cast_unit()
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">Rotation2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Copy</span>,
+<span class="kw">impl</span>&lt;T, Src, Dst&gt; Rotation2D&lt;T, Src, Dst&gt;
+<span class="kw">where
+    </span>T: Copy,
 {
-    <span class="doccomment">/// Returns self.angle as a strongly typed `Angle&lt;T&gt;`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_angle</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Angle</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-        <span class="ident">Angle::radians</span>(<span class="self">self</span>.<span class="ident">angle</span>)
+    <span class="doccomment">/// Returns self.angle as a strongly typed `Angle&lt;T&gt;`.
+    </span><span class="kw">pub fn </span>get_angle(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Angle&lt;T&gt; {
+        Angle::radians(<span class="self">self</span>.angle)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Real</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">Rotation2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Creates a 3d rotation (around the z axis) from this 2d rotation.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_3d</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Rotation3D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {
-        <span class="ident">Rotation3D::around_z</span>(<span class="self">self</span>.<span class="ident">get_angle</span>())
+<span class="kw">impl</span>&lt;T: Real, Src, Dst&gt; Rotation2D&lt;T, Src, Dst&gt; {
+    <span class="doccomment">/// Creates a 3d rotation (around the z axis) from this 2d rotation.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>to_3d(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Rotation3D&lt;T, Src, Dst&gt; {
+        Rotation3D::around_z(<span class="self">self</span>.get_angle())
     }
 
-    <span class="doccomment">/// Returns the inverse of this rotation.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">inverse</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Rotation2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Dst</span>, <span class="ident">Src</span><span class="op">&gt;</span> {
-        <span class="ident">Rotation2D::radians</span>(<span class="op">-</span><span class="self">self</span>.<span class="ident">angle</span>)
+    <span class="doccomment">/// Returns the inverse of this rotation.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>inverse(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Rotation2D&lt;T, Dst, Src&gt; {
+        Rotation2D::radians(-<span class="self">self</span>.angle)
     }
 
-    <span class="doccomment">/// Returns a rotation representing the other rotation followed by this rotation.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">then</span><span class="op">&lt;</span><span class="ident">NewSrc</span><span class="op">&gt;</span>(
+    <span class="doccomment">/// Returns a rotation representing the other rotation followed by this rotation.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>then&lt;NewSrc&gt;(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="ident">Rotation2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">NewSrc</span>, <span class="ident">Src</span><span class="op">&gt;</span>,
-    ) -&gt; <span class="ident">Rotation2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">NewSrc</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {
-        <span class="ident">Rotation2D::radians</span>(<span class="self">self</span>.<span class="ident">angle</span> <span class="op">+</span> <span class="ident">other</span>.<span class="ident">angle</span>)
+        other: <span class="kw-2">&amp;</span>Rotation2D&lt;T, NewSrc, Src&gt;,
+    ) -&gt; Rotation2D&lt;T, NewSrc, Dst&gt; {
+        Rotation2D::radians(<span class="self">self</span>.angle + other.angle)
     }
 
-    <span class="doccomment">/// Returns the given 2d point transformed by this rotation.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// The input point must be use the unit Src, and the returned point has the unit Dst.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">transform_point</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">point</span>: <span class="ident">Point2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span><span class="op">&gt;</span>) -&gt; <span class="ident">Point2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> (<span class="ident">sin</span>, <span class="ident">cos</span>) <span class="op">=</span> <span class="ident">Real::sin_cos</span>(<span class="self">self</span>.<span class="ident">angle</span>);
-        <span class="ident">point2</span>(<span class="ident">point</span>.<span class="ident">x</span> <span class="op">*</span> <span class="ident">cos</span> <span class="op">-</span> <span class="ident">point</span>.<span class="ident">y</span> <span class="op">*</span> <span class="ident">sin</span>, <span class="ident">point</span>.<span class="ident">y</span> <span class="op">*</span> <span class="ident">cos</span> <span class="op">+</span> <span class="ident">point</span>.<span class="ident">x</span> <span class="op">*</span> <span class="ident">sin</span>)
+    <span class="doccomment">/// Returns the given 2d point transformed by this rotation.
+    ///
+    /// The input point must be use the unit Src, and the returned point has the unit Dst.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>transform_point(<span class="kw-2">&amp;</span><span class="self">self</span>, point: Point2D&lt;T, Src&gt;) -&gt; Point2D&lt;T, Dst&gt; {
+        <span class="kw">let </span>(sin, cos) = Real::sin_cos(<span class="self">self</span>.angle);
+        point2(point.x * cos - point.y * sin, point.y * cos + point.x * sin)
     }
 
-    <span class="doccomment">/// Returns the given 2d vector transformed by this rotation.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// The input point must be use the unit Src, and the returned point has the unit Dst.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">transform_vector</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">vector</span>: <span class="ident">Vector2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span><span class="op">&gt;</span>) -&gt; <span class="ident">Vector2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">transform_point</span>(<span class="ident">vector</span>.<span class="ident">to_point</span>()).<span class="ident">to_vector</span>()
+    <span class="doccomment">/// Returns the given 2d vector transformed by this rotation.
+    ///
+    /// The input point must be use the unit Src, and the returned point has the unit Dst.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>transform_vector(<span class="kw-2">&amp;</span><span class="self">self</span>, vector: Vector2D&lt;T, Src&gt;) -&gt; Vector2D&lt;T, Dst&gt; {
+        <span class="self">self</span>.transform_point(vector.to_point()).to_vector()
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">Rotation2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Add</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Sub</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Mul</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Zero</span> <span class="op">+</span> <span class="ident">Trig</span>,
+<span class="kw">impl</span>&lt;T, Src, Dst&gt; Rotation2D&lt;T, Src, Dst&gt;
+<span class="kw">where
+    </span>T: Copy + Add&lt;Output = T&gt; + Sub&lt;Output = T&gt; + Mul&lt;Output = T&gt; + Zero + Trig,
 {
-    <span class="doccomment">/// Returns the matrix representation of this rotation.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_transform</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Transform2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {
-        <span class="ident">Transform2D::rotation</span>(<span class="self">self</span>.<span class="ident">get_angle</span>())
+    <span class="doccomment">/// Returns the matrix representation of this rotation.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>to_transform(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Transform2D&lt;T, Src, Dst&gt; {
+        Transform2D::rotation(<span class="self">self</span>.get_angle())
     }
 }
 
-<span class="doccomment">/// A transform that can represent rotations in 3d, represented as a quaternion.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// Most methods expect the quaternion to be normalized.</span>
-<span class="doccomment">/// When in doubt, use `unit_quaternion` instead of `quaternion` to create</span>
-<span class="doccomment">/// a rotation as the former will ensure that its result is normalized.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// Some people use the `x, y, z, w` (or `w, x, y, z`) notations. The equivalence is</span>
-<span class="doccomment">/// as follows: `x -&gt; i`, `y -&gt; j`, `z -&gt; k`, `w -&gt; r`.</span>
-<span class="doccomment">/// The memory layout of this type corresponds to the `x, y, z, w` notation</span>
-<span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
-<span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;serde&quot;</span>, <span class="ident">derive</span>(<span class="ident">Serialize</span>, <span class="ident">Deserialize</span>))]</span>
-<span class="attribute">#[<span class="ident">cfg_attr</span>(
-    <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;serde&quot;</span>,
-    <span class="ident">serde</span>(<span class="ident">bound</span>(
-        <span class="ident">serialize</span> <span class="op">=</span> <span class="string">&quot;T: serde::Serialize&quot;</span>,
-        <span class="ident">deserialize</span> <span class="op">=</span> <span class="string">&quot;T: serde::Deserialize&lt;&#39;de&gt;&quot;</span>
-    ))
-)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Rotation3D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Component multiplied by the imaginary number `i`.</span>
-    <span class="kw">pub</span> <span class="ident">i</span>: <span class="ident">T</span>,
-    <span class="doccomment">/// Component multiplied by the imaginary number `j`.</span>
-    <span class="kw">pub</span> <span class="ident">j</span>: <span class="ident">T</span>,
-    <span class="doccomment">/// Component multiplied by the imaginary number `k`.</span>
-    <span class="kw">pub</span> <span class="ident">k</span>: <span class="ident">T</span>,
-    <span class="doccomment">/// The real part.</span>
-    <span class="kw">pub</span> <span class="ident">r</span>: <span class="ident">T</span>,
-    <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">_unit</span>: <span class="ident">PhantomData</span><span class="op">&lt;</span>(<span class="ident">Src</span>, <span class="ident">Dst</span>)<span class="op">&gt;</span>,
+<span class="doccomment">/// A transform that can represent rotations in 3d, represented as a quaternion.
+///
+/// Most methods expect the quaternion to be normalized.
+/// When in doubt, use `unit_quaternion` instead of `quaternion` to create
+/// a rotation as the former will ensure that its result is normalized.
+///
+/// Some people use the `x, y, z, w` (or `w, x, y, z`) notations. The equivalence is
+/// as follows: `x -&gt; i`, `y -&gt; j`, `z -&gt; k`, `w -&gt; r`.
+/// The memory layout of this type corresponds to the `x, y, z, w` notation
+</span><span class="attribute">#[repr(C)]
+#[cfg_attr(feature = <span class="string">&quot;serde&quot;</span>, derive(Serialize, Deserialize))]
+#[cfg_attr(
+    feature = <span class="string">&quot;serde&quot;</span>,
+    serde(bound(
+        serialize = <span class="string">&quot;T: serde::Serialize&quot;</span>,
+        deserialize = <span class="string">&quot;T: serde::Deserialize&lt;&#39;de&gt;&quot;
+    </span>))
+)]
+</span><span class="kw">pub struct </span>Rotation3D&lt;T, Src, Dst&gt; {
+    <span class="doccomment">/// Component multiplied by the imaginary number `i`.
+    </span><span class="kw">pub </span>i: T,
+    <span class="doccomment">/// Component multiplied by the imaginary number `j`.
+    </span><span class="kw">pub </span>j: T,
+    <span class="doccomment">/// Component multiplied by the imaginary number `k`.
+    </span><span class="kw">pub </span>k: T,
+    <span class="doccomment">/// The real part.
+    </span><span class="kw">pub </span>r: T,
+    <span class="attribute">#[doc(hidden)]
+    </span><span class="kw">pub </span>_unit: PhantomData&lt;(Src, Dst)&gt;,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Copy</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">Copy</span> <span class="kw">for</span> <span class="ident">Rotation3D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {}
+<span class="kw">impl</span>&lt;T: Copy, Src, Dst&gt; Copy <span class="kw">for </span>Rotation3D&lt;T, Src, Dst&gt; {}
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Clone</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">Clone</span> <span class="kw">for</span> <span class="ident">Rotation3D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">Rotation3D</span> {
-            <span class="ident">i</span>: <span class="self">self</span>.<span class="ident">i</span>.<span class="ident">clone</span>(),
-            <span class="ident">j</span>: <span class="self">self</span>.<span class="ident">j</span>.<span class="ident">clone</span>(),
-            <span class="ident">k</span>: <span class="self">self</span>.<span class="ident">k</span>.<span class="ident">clone</span>(),
-            <span class="ident">r</span>: <span class="self">self</span>.<span class="ident">r</span>.<span class="ident">clone</span>(),
-            <span class="ident">_unit</span>: <span class="ident">PhantomData</span>,
+<span class="kw">impl</span>&lt;T: Clone, Src, Dst&gt; Clone <span class="kw">for </span>Rotation3D&lt;T, Src, Dst&gt; {
+    <span class="kw">fn </span>clone(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        Rotation3D {
+            i: <span class="self">self</span>.i.clone(),
+            j: <span class="self">self</span>.j.clone(),
+            k: <span class="self">self</span>.k.clone(),
+            r: <span class="self">self</span>.r.clone(),
+            _unit: PhantomData,
         }
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">Eq</span> <span class="kw">for</span> <span class="ident">Rotation3D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="kw">where</span> <span class="ident">T</span>: <span class="ident">Eq</span> {}
+<span class="kw">impl</span>&lt;T, Src, Dst&gt; Eq <span class="kw">for </span>Rotation3D&lt;T, Src, Dst&gt; <span class="kw">where </span>T: Eq {}
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">PartialEq</span> <span class="kw">for</span> <span class="ident">Rotation3D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">PartialEq</span>,
+<span class="kw">impl</span>&lt;T, Src, Dst&gt; PartialEq <span class="kw">for </span>Rotation3D&lt;T, Src, Dst&gt;
+<span class="kw">where
+    </span>T: PartialEq,
 {
-    <span class="kw">fn</span> <span class="ident">eq</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">i</span> <span class="op">==</span> <span class="ident">other</span>.<span class="ident">i</span> <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">j</span> <span class="op">==</span> <span class="ident">other</span>.<span class="ident">j</span> <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">k</span> <span class="op">==</span> <span class="ident">other</span>.<span class="ident">k</span> <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">r</span> <span class="op">==</span> <span class="ident">other</span>.<span class="ident">r</span>
+    <span class="kw">fn </span>eq(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; bool {
+        <span class="self">self</span>.i == other.i &amp;&amp; <span class="self">self</span>.j == other.j &amp;&amp; <span class="self">self</span>.k == other.k &amp;&amp; <span class="self">self</span>.r == other.r
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">Hash</span> <span class="kw">for</span> <span class="ident">Rotation3D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Hash</span>,
+<span class="kw">impl</span>&lt;T, Src, Dst&gt; Hash <span class="kw">for </span>Rotation3D&lt;T, Src, Dst&gt;
+<span class="kw">where
+    </span>T: Hash,
 {
-    <span class="kw">fn</span> <span class="ident">hash</span><span class="op">&lt;</span><span class="ident">H</span>: <span class="ident">core::hash::Hasher</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">h</span>: <span class="kw-2">&amp;mut</span> <span class="ident">H</span>) {
-        <span class="self">self</span>.<span class="ident">i</span>.<span class="ident">hash</span>(<span class="ident">h</span>);
-        <span class="self">self</span>.<span class="ident">j</span>.<span class="ident">hash</span>(<span class="ident">h</span>);
-        <span class="self">self</span>.<span class="ident">k</span>.<span class="ident">hash</span>(<span class="ident">h</span>);
-        <span class="self">self</span>.<span class="ident">r</span>.<span class="ident">hash</span>(<span class="ident">h</span>);
+    <span class="kw">fn </span>hash&lt;H: core::hash::Hasher&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, h: <span class="kw-2">&amp;mut </span>H) {
+        <span class="self">self</span>.i.hash(h);
+        <span class="self">self</span>.j.hash(h);
+        <span class="self">self</span>.k.hash(h);
+        <span class="self">self</span>.r.hash(h);
     }
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;bytemuck&quot;</span>)]</span>
-<span class="kw">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Zeroable</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">Zeroable</span> <span class="kw">for</span> <span class="ident">Rotation3D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {}
+<span class="attribute">#[cfg(feature = <span class="string">&quot;bytemuck&quot;</span>)]
+</span><span class="kw">unsafe impl</span>&lt;T: Zeroable, Src, Dst&gt; Zeroable <span class="kw">for </span>Rotation3D&lt;T, Src, Dst&gt; {}
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;bytemuck&quot;</span>)]</span>
-<span class="kw">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Pod</span>, <span class="ident">Src</span>: <span class="lifetime">&#39;static</span>, <span class="ident">Dst</span>: <span class="lifetime">&#39;static</span><span class="op">&gt;</span> <span class="ident">Pod</span> <span class="kw">for</span> <span class="ident">Rotation3D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {}
+<span class="attribute">#[cfg(feature = <span class="string">&quot;bytemuck&quot;</span>)]
+</span><span class="kw">unsafe impl</span>&lt;T: Pod, Src: <span class="lifetime">&#39;static</span>, Dst: <span class="lifetime">&#39;static</span>&gt; Pod <span class="kw">for </span>Rotation3D&lt;T, Src, Dst&gt; {}
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">Rotation3D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Creates a rotation around from a quaternion representation.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// The parameters are a, b, c and r compose the quaternion `a*i + b*j + c*k + r`</span>
-    <span class="doccomment">/// where `a`, `b` and `c` describe the vector part and the last parameter `r` is</span>
-    <span class="doccomment">/// the real part.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// The resulting quaternion is not necessarily normalized. See [`unit_quaternion`].</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// [`unit_quaternion`]: #method.unit_quaternion</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">quaternion</span>(<span class="ident">a</span>: <span class="ident">T</span>, <span class="ident">b</span>: <span class="ident">T</span>, <span class="ident">c</span>: <span class="ident">T</span>, <span class="ident">r</span>: <span class="ident">T</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">Rotation3D</span> {
-            <span class="ident">i</span>: <span class="ident">a</span>,
-            <span class="ident">j</span>: <span class="ident">b</span>,
-            <span class="ident">k</span>: <span class="ident">c</span>,
-            <span class="ident">r</span>,
-            <span class="ident">_unit</span>: <span class="ident">PhantomData</span>,
+<span class="kw">impl</span>&lt;T, Src, Dst&gt; Rotation3D&lt;T, Src, Dst&gt; {
+    <span class="doccomment">/// Creates a rotation around from a quaternion representation.
+    ///
+    /// The parameters are a, b, c and r compose the quaternion `a*i + b*j + c*k + r`
+    /// where `a`, `b` and `c` describe the vector part and the last parameter `r` is
+    /// the real part.
+    ///
+    /// The resulting quaternion is not necessarily normalized. See [`unit_quaternion`].
+    ///
+    /// [`unit_quaternion`]: #method.unit_quaternion
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>quaternion(a: T, b: T, c: T, r: T) -&gt; <span class="self">Self </span>{
+        Rotation3D {
+            i: a,
+            j: b,
+            k: c,
+            r,
+            _unit: PhantomData,
         }
     }
 
-    <span class="doccomment">/// Creates the identity rotation.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">identity</span>() -&gt; <span class="self">Self</span>
-    <span class="kw">where</span>
-        <span class="ident">T</span>: <span class="ident">Zero</span> <span class="op">+</span> <span class="ident">One</span>,
+    <span class="doccomment">/// Creates the identity rotation.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>identity() -&gt; <span class="self">Self
+    </span><span class="kw">where
+        </span>T: Zero + One,
     {
-        <span class="ident"><span class="self">Self</span>::quaternion</span>(<span class="ident">T::zero</span>(), <span class="ident">T::zero</span>(), <span class="ident">T::zero</span>(), <span class="ident">T::one</span>())
+        <span class="self">Self</span>::quaternion(T::zero(), T::zero(), T::zero(), T::one())
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">Rotation3D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Copy</span>,
+<span class="kw">impl</span>&lt;T, Src, Dst&gt; Rotation3D&lt;T, Src, Dst&gt;
+<span class="kw">where
+    </span>T: Copy,
 {
-    <span class="doccomment">/// Returns the vector part (i, j, k) of this quaternion.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vector_part</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Vector3D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">UnknownUnit</span><span class="op">&gt;</span> {
-        <span class="ident">vec3</span>(<span class="self">self</span>.<span class="ident">i</span>, <span class="self">self</span>.<span class="ident">j</span>, <span class="self">self</span>.<span class="ident">k</span>)
+    <span class="doccomment">/// Returns the vector part (i, j, k) of this quaternion.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>vector_part(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Vector3D&lt;T, UnknownUnit&gt; {
+        vec3(<span class="self">self</span>.i, <span class="self">self</span>.j, <span class="self">self</span>.k)
     }
 
-    <span class="doccomment">/// Cast the unit, preserving the numeric value.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Example</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use euclid::Rotation3D;</span>
-    <span class="doccomment">/// enum Local {}</span>
-    <span class="doccomment">/// enum World {}</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// enum Local2 {}</span>
-    <span class="doccomment">/// enum World2 {}</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// let to_world: Rotation3D&lt;_, Local, World&gt; = Rotation3D::quaternion(1, 2, 3, 4);</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// assert_eq!(to_world.i, to_world.cast_unit::&lt;Local2, World2&gt;().i);</span>
-    <span class="doccomment">/// assert_eq!(to_world.j, to_world.cast_unit::&lt;Local2, World2&gt;().j);</span>
-    <span class="doccomment">/// assert_eq!(to_world.k, to_world.cast_unit::&lt;Local2, World2&gt;().k);</span>
-    <span class="doccomment">/// assert_eq!(to_world.r, to_world.cast_unit::&lt;Local2, World2&gt;().r);</span>
-    <span class="doccomment">/// ```</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">cast_unit</span><span class="op">&lt;</span><span class="ident">Src2</span>, <span class="ident">Dst2</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Rotation3D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src2</span>, <span class="ident">Dst2</span><span class="op">&gt;</span> {
-        <span class="ident">Rotation3D</span> {
-            <span class="ident">i</span>: <span class="self">self</span>.<span class="ident">i</span>,
-            <span class="ident">j</span>: <span class="self">self</span>.<span class="ident">j</span>,
-            <span class="ident">k</span>: <span class="self">self</span>.<span class="ident">k</span>,
-            <span class="ident">r</span>: <span class="self">self</span>.<span class="ident">r</span>,
-            <span class="ident">_unit</span>: <span class="ident">PhantomData</span>,
+    <span class="doccomment">/// Cast the unit, preserving the numeric value.
+    ///
+    /// # Example
+    ///
+    /// ```rust
+    /// # use euclid::Rotation3D;
+    /// enum Local {}
+    /// enum World {}
+    ///
+    /// enum Local2 {}
+    /// enum World2 {}
+    ///
+    /// let to_world: Rotation3D&lt;_, Local, World&gt; = Rotation3D::quaternion(1, 2, 3, 4);
+    ///
+    /// assert_eq!(to_world.i, to_world.cast_unit::&lt;Local2, World2&gt;().i);
+    /// assert_eq!(to_world.j, to_world.cast_unit::&lt;Local2, World2&gt;().j);
+    /// assert_eq!(to_world.k, to_world.cast_unit::&lt;Local2, World2&gt;().k);
+    /// assert_eq!(to_world.r, to_world.cast_unit::&lt;Local2, World2&gt;().r);
+    /// ```
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>cast_unit&lt;Src2, Dst2&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Rotation3D&lt;T, Src2, Dst2&gt; {
+        Rotation3D {
+            i: <span class="self">self</span>.i,
+            j: <span class="self">self</span>.j,
+            k: <span class="self">self</span>.k,
+            r: <span class="self">self</span>.r,
+            _unit: PhantomData,
         }
     }
 
-    <span class="doccomment">/// Drop the units, preserving only the numeric value.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Example</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use euclid::Rotation3D;</span>
-    <span class="doccomment">/// enum Local {}</span>
-    <span class="doccomment">/// enum World {}</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// let to_world: Rotation3D&lt;_, Local, World&gt; = Rotation3D::quaternion(1, 2, 3, 4);</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// assert_eq!(to_world.i, to_world.to_untyped().i);</span>
-    <span class="doccomment">/// assert_eq!(to_world.j, to_world.to_untyped().j);</span>
-    <span class="doccomment">/// assert_eq!(to_world.k, to_world.to_untyped().k);</span>
-    <span class="doccomment">/// assert_eq!(to_world.r, to_world.to_untyped().r);</span>
-    <span class="doccomment">/// ```</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_untyped</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Rotation3D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">UnknownUnit</span>, <span class="ident">UnknownUnit</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">cast_unit</span>()
+    <span class="doccomment">/// Drop the units, preserving only the numeric value.
+    ///
+    /// # Example
+    ///
+    /// ```rust
+    /// # use euclid::Rotation3D;
+    /// enum Local {}
+    /// enum World {}
+    ///
+    /// let to_world: Rotation3D&lt;_, Local, World&gt; = Rotation3D::quaternion(1, 2, 3, 4);
+    ///
+    /// assert_eq!(to_world.i, to_world.to_untyped().i);
+    /// assert_eq!(to_world.j, to_world.to_untyped().j);
+    /// assert_eq!(to_world.k, to_world.to_untyped().k);
+    /// assert_eq!(to_world.r, to_world.to_untyped().r);
+    /// ```
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>to_untyped(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Rotation3D&lt;T, UnknownUnit, UnknownUnit&gt; {
+        <span class="self">self</span>.cast_unit()
     }
 
-    <span class="doccomment">/// Tag a unitless value with units.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Example</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use euclid::Rotation3D;</span>
-    <span class="doccomment">/// use euclid::UnknownUnit;</span>
-    <span class="doccomment">/// enum Local {}</span>
-    <span class="doccomment">/// enum World {}</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// let rot: Rotation3D&lt;_, UnknownUnit, UnknownUnit&gt; = Rotation3D::quaternion(1, 2, 3, 4);</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// assert_eq!(rot.i, Rotation3D::&lt;_, Local, World&gt;::from_untyped(&amp;rot).i);</span>
-    <span class="doccomment">/// assert_eq!(rot.j, Rotation3D::&lt;_, Local, World&gt;::from_untyped(&amp;rot).j);</span>
-    <span class="doccomment">/// assert_eq!(rot.k, Rotation3D::&lt;_, Local, World&gt;::from_untyped(&amp;rot).k);</span>
-    <span class="doccomment">/// assert_eq!(rot.r, Rotation3D::&lt;_, Local, World&gt;::from_untyped(&amp;rot).r);</span>
-    <span class="doccomment">/// ```</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_untyped</span>(<span class="ident">r</span>: <span class="kw-2">&amp;</span><span class="ident">Rotation3D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">UnknownUnit</span>, <span class="ident">UnknownUnit</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">r</span>.<span class="ident">cast_unit</span>()
+    <span class="doccomment">/// Tag a unitless value with units.
+    ///
+    /// # Example
+    ///
+    /// ```rust
+    /// # use euclid::Rotation3D;
+    /// use euclid::UnknownUnit;
+    /// enum Local {}
+    /// enum World {}
+    ///
+    /// let rot: Rotation3D&lt;_, UnknownUnit, UnknownUnit&gt; = Rotation3D::quaternion(1, 2, 3, 4);
+    ///
+    /// assert_eq!(rot.i, Rotation3D::&lt;_, Local, World&gt;::from_untyped(&amp;rot).i);
+    /// assert_eq!(rot.j, Rotation3D::&lt;_, Local, World&gt;::from_untyped(&amp;rot).j);
+    /// assert_eq!(rot.k, Rotation3D::&lt;_, Local, World&gt;::from_untyped(&amp;rot).k);
+    /// assert_eq!(rot.r, Rotation3D::&lt;_, Local, World&gt;::from_untyped(&amp;rot).r);
+    /// ```
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>from_untyped(r: <span class="kw-2">&amp;</span>Rotation3D&lt;T, UnknownUnit, UnknownUnit&gt;) -&gt; <span class="self">Self </span>{
+        r.cast_unit()
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">Rotation3D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Real</span>,
+<span class="kw">impl</span>&lt;T, Src, Dst&gt; Rotation3D&lt;T, Src, Dst&gt;
+<span class="kw">where
+    </span>T: Real,
 {
-    <span class="doccomment">/// Creates a rotation around from a quaternion representation and normalizes it.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// The parameters are a, b, c and r compose the quaternion `a*i + b*j + c*k + r`</span>
-    <span class="doccomment">/// before normalization, where `a`, `b` and `c` describe the vector part and the</span>
-    <span class="doccomment">/// last parameter `r` is the real part.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">unit_quaternion</span>(<span class="ident">i</span>: <span class="ident">T</span>, <span class="ident">j</span>: <span class="ident">T</span>, <span class="ident">k</span>: <span class="ident">T</span>, <span class="ident">r</span>: <span class="ident">T</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::quaternion</span>(<span class="ident">i</span>, <span class="ident">j</span>, <span class="ident">k</span>, <span class="ident">r</span>).<span class="ident">normalize</span>()
+    <span class="doccomment">/// Creates a rotation around from a quaternion representation and normalizes it.
+    ///
+    /// The parameters are a, b, c and r compose the quaternion `a*i + b*j + c*k + r`
+    /// before normalization, where `a`, `b` and `c` describe the vector part and the
+    /// last parameter `r` is the real part.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>unit_quaternion(i: T, j: T, k: T, r: T) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::quaternion(i, j, k, r).normalize()
     }
 
-    <span class="doccomment">/// Creates a rotation around a given axis.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">around_axis</span>(<span class="ident">axis</span>: <span class="ident">Vector3D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span><span class="op">&gt;</span>, <span class="ident">angle</span>: <span class="ident">Angle</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">axis</span> <span class="op">=</span> <span class="ident">axis</span>.<span class="ident">normalize</span>();
-        <span class="kw">let</span> <span class="ident">two</span> <span class="op">=</span> <span class="ident">T::one</span>() <span class="op">+</span> <span class="ident">T::one</span>();
-        <span class="kw">let</span> (<span class="ident">sin</span>, <span class="ident">cos</span>) <span class="op">=</span> <span class="ident">Angle::sin_cos</span>(<span class="ident">angle</span> <span class="op">/</span> <span class="ident">two</span>);
-        <span class="ident"><span class="self">Self</span>::quaternion</span>(<span class="ident">axis</span>.<span class="ident">x</span> <span class="op">*</span> <span class="ident">sin</span>, <span class="ident">axis</span>.<span class="ident">y</span> <span class="op">*</span> <span class="ident">sin</span>, <span class="ident">axis</span>.<span class="ident">z</span> <span class="op">*</span> <span class="ident">sin</span>, <span class="ident">cos</span>)
+    <span class="doccomment">/// Creates a rotation around a given axis.
+    </span><span class="kw">pub fn </span>around_axis(axis: Vector3D&lt;T, Src&gt;, angle: Angle&lt;T&gt;) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>axis = axis.normalize();
+        <span class="kw">let </span>two = T::one() + T::one();
+        <span class="kw">let </span>(sin, cos) = Angle::sin_cos(angle / two);
+        <span class="self">Self</span>::quaternion(axis.x * sin, axis.y * sin, axis.z * sin, cos)
     }
 
-    <span class="doccomment">/// Creates a rotation around the x axis.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">around_x</span>(<span class="ident">angle</span>: <span class="ident">Angle</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">zero</span> <span class="op">=</span> <span class="ident">Zero::zero</span>();
-        <span class="kw">let</span> <span class="ident">two</span> <span class="op">=</span> <span class="ident">T::one</span>() <span class="op">+</span> <span class="ident">T::one</span>();
-        <span class="kw">let</span> (<span class="ident">sin</span>, <span class="ident">cos</span>) <span class="op">=</span> <span class="ident">Angle::sin_cos</span>(<span class="ident">angle</span> <span class="op">/</span> <span class="ident">two</span>);
-        <span class="ident"><span class="self">Self</span>::quaternion</span>(<span class="ident">sin</span>, <span class="ident">zero</span>, <span class="ident">zero</span>, <span class="ident">cos</span>)
+    <span class="doccomment">/// Creates a rotation around the x axis.
+    </span><span class="kw">pub fn </span>around_x(angle: Angle&lt;T&gt;) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>zero = Zero::zero();
+        <span class="kw">let </span>two = T::one() + T::one();
+        <span class="kw">let </span>(sin, cos) = Angle::sin_cos(angle / two);
+        <span class="self">Self</span>::quaternion(sin, zero, zero, cos)
     }
 
-    <span class="doccomment">/// Creates a rotation around the y axis.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">around_y</span>(<span class="ident">angle</span>: <span class="ident">Angle</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">zero</span> <span class="op">=</span> <span class="ident">Zero::zero</span>();
-        <span class="kw">let</span> <span class="ident">two</span> <span class="op">=</span> <span class="ident">T::one</span>() <span class="op">+</span> <span class="ident">T::one</span>();
-        <span class="kw">let</span> (<span class="ident">sin</span>, <span class="ident">cos</span>) <span class="op">=</span> <span class="ident">Angle::sin_cos</span>(<span class="ident">angle</span> <span class="op">/</span> <span class="ident">two</span>);
-        <span class="ident"><span class="self">Self</span>::quaternion</span>(<span class="ident">zero</span>, <span class="ident">sin</span>, <span class="ident">zero</span>, <span class="ident">cos</span>)
+    <span class="doccomment">/// Creates a rotation around the y axis.
+    </span><span class="kw">pub fn </span>around_y(angle: Angle&lt;T&gt;) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>zero = Zero::zero();
+        <span class="kw">let </span>two = T::one() + T::one();
+        <span class="kw">let </span>(sin, cos) = Angle::sin_cos(angle / two);
+        <span class="self">Self</span>::quaternion(zero, sin, zero, cos)
     }
 
-    <span class="doccomment">/// Creates a rotation around the z axis.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">around_z</span>(<span class="ident">angle</span>: <span class="ident">Angle</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">zero</span> <span class="op">=</span> <span class="ident">Zero::zero</span>();
-        <span class="kw">let</span> <span class="ident">two</span> <span class="op">=</span> <span class="ident">T::one</span>() <span class="op">+</span> <span class="ident">T::one</span>();
-        <span class="kw">let</span> (<span class="ident">sin</span>, <span class="ident">cos</span>) <span class="op">=</span> <span class="ident">Angle::sin_cos</span>(<span class="ident">angle</span> <span class="op">/</span> <span class="ident">two</span>);
-        <span class="ident"><span class="self">Self</span>::quaternion</span>(<span class="ident">zero</span>, <span class="ident">zero</span>, <span class="ident">sin</span>, <span class="ident">cos</span>)
+    <span class="doccomment">/// Creates a rotation around the z axis.
+    </span><span class="kw">pub fn </span>around_z(angle: Angle&lt;T&gt;) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>zero = Zero::zero();
+        <span class="kw">let </span>two = T::one() + T::one();
+        <span class="kw">let </span>(sin, cos) = Angle::sin_cos(angle / two);
+        <span class="self">Self</span>::quaternion(zero, zero, sin, cos)
     }
 
-    <span class="doccomment">/// Creates a rotation from Euler angles.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// The rotations are applied in roll then pitch then yaw order.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">///  - Roll (also called bank) is a rotation around the x axis.</span>
-    <span class="doccomment">///  - Pitch (also called bearing) is a rotation around the y axis.</span>
-    <span class="doccomment">///  - Yaw (also called heading) is a rotation around the z axis.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">euler</span>(<span class="ident">roll</span>: <span class="ident">Angle</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">pitch</span>: <span class="ident">Angle</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">yaw</span>: <span class="ident">Angle</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">half</span> <span class="op">=</span> <span class="ident">T::one</span>() <span class="op">/</span> (<span class="ident">T::one</span>() <span class="op">+</span> <span class="ident">T::one</span>());
+    <span class="doccomment">/// Creates a rotation from Euler angles.
+    ///
+    /// The rotations are applied in roll then pitch then yaw order.
+    ///
+    ///  - Roll (also called bank) is a rotation around the x axis.
+    ///  - Pitch (also called bearing) is a rotation around the y axis.
+    ///  - Yaw (also called heading) is a rotation around the z axis.
+    </span><span class="kw">pub fn </span>euler(roll: Angle&lt;T&gt;, pitch: Angle&lt;T&gt;, yaw: Angle&lt;T&gt;) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>half = T::one() / (T::one() + T::one());
 
-        <span class="kw">let</span> (<span class="ident">sy</span>, <span class="ident">cy</span>) <span class="op">=</span> <span class="ident">Real::sin_cos</span>(<span class="ident">half</span> <span class="op">*</span> <span class="ident">yaw</span>.<span class="ident">get</span>());
-        <span class="kw">let</span> (<span class="ident">sp</span>, <span class="ident">cp</span>) <span class="op">=</span> <span class="ident">Real::sin_cos</span>(<span class="ident">half</span> <span class="op">*</span> <span class="ident">pitch</span>.<span class="ident">get</span>());
-        <span class="kw">let</span> (<span class="ident">sr</span>, <span class="ident">cr</span>) <span class="op">=</span> <span class="ident">Real::sin_cos</span>(<span class="ident">half</span> <span class="op">*</span> <span class="ident">roll</span>.<span class="ident">get</span>());
+        <span class="kw">let </span>(sy, cy) = Real::sin_cos(half * yaw.get());
+        <span class="kw">let </span>(sp, cp) = Real::sin_cos(half * pitch.get());
+        <span class="kw">let </span>(sr, cr) = Real::sin_cos(half * roll.get());
 
-        <span class="ident"><span class="self">Self</span>::quaternion</span>(
-            <span class="ident">cy</span> <span class="op">*</span> <span class="ident">sr</span> <span class="op">*</span> <span class="ident">cp</span> <span class="op">-</span> <span class="ident">sy</span> <span class="op">*</span> <span class="ident">cr</span> <span class="op">*</span> <span class="ident">sp</span>,
-            <span class="ident">cy</span> <span class="op">*</span> <span class="ident">cr</span> <span class="op">*</span> <span class="ident">sp</span> <span class="op">+</span> <span class="ident">sy</span> <span class="op">*</span> <span class="ident">sr</span> <span class="op">*</span> <span class="ident">cp</span>,
-            <span class="ident">sy</span> <span class="op">*</span> <span class="ident">cr</span> <span class="op">*</span> <span class="ident">cp</span> <span class="op">-</span> <span class="ident">cy</span> <span class="op">*</span> <span class="ident">sr</span> <span class="op">*</span> <span class="ident">sp</span>,
-            <span class="ident">cy</span> <span class="op">*</span> <span class="ident">cr</span> <span class="op">*</span> <span class="ident">cp</span> <span class="op">+</span> <span class="ident">sy</span> <span class="op">*</span> <span class="ident">sr</span> <span class="op">*</span> <span class="ident">sp</span>,
+        <span class="self">Self</span>::quaternion(
+            cy * sr * cp - sy * cr * sp,
+            cy * cr * sp + sy * sr * cp,
+            sy * cr * cp - cy * sr * sp,
+            cy * cr * cp + sy * sr * sp,
         )
     }
 
-    <span class="doccomment">/// Returns the inverse of this rotation.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">inverse</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Rotation3D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Dst</span>, <span class="ident">Src</span><span class="op">&gt;</span> {
-        <span class="ident">Rotation3D::quaternion</span>(<span class="op">-</span><span class="self">self</span>.<span class="ident">i</span>, <span class="op">-</span><span class="self">self</span>.<span class="ident">j</span>, <span class="op">-</span><span class="self">self</span>.<span class="ident">k</span>, <span class="self">self</span>.<span class="ident">r</span>)
+    <span class="doccomment">/// Returns the inverse of this rotation.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>inverse(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Rotation3D&lt;T, Dst, Src&gt; {
+        Rotation3D::quaternion(-<span class="self">self</span>.i, -<span class="self">self</span>.j, -<span class="self">self</span>.k, <span class="self">self</span>.r)
     }
 
-    <span class="doccomment">/// Computes the norm of this quaternion.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">norm</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">T</span> {
-        <span class="self">self</span>.<span class="ident">square_norm</span>().<span class="ident">sqrt</span>()
+    <span class="doccomment">/// Computes the norm of this quaternion.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>norm(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; T {
+        <span class="self">self</span>.square_norm().sqrt()
     }
 
-    <span class="doccomment">/// Computes the squared norm of this quaternion.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">square_norm</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">T</span> {
-        <span class="self">self</span>.<span class="ident">i</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">i</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">j</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">j</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">k</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">k</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">r</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">r</span>
+    <span class="doccomment">/// Computes the squared norm of this quaternion.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>square_norm(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; T {
+        <span class="self">self</span>.i * <span class="self">self</span>.i + <span class="self">self</span>.j * <span class="self">self</span>.j + <span class="self">self</span>.k * <span class="self">self</span>.k + <span class="self">self</span>.r * <span class="self">self</span>.r
     }
 
-    <span class="doccomment">/// Returns a [unit quaternion] from this one.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// [unit quaternion]: https://en.wikipedia.org/wiki/Quaternion#Unit_quaternion</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">normalize</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">mul</span>(<span class="ident">T::one</span>() <span class="op">/</span> <span class="self">self</span>.<span class="ident">norm</span>())
+    <span class="doccomment">/// Returns a [unit quaternion] from this one.
+    ///
+    /// [unit quaternion]: https://en.wikipedia.org/wiki/Quaternion#Unit_quaternion
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>normalize(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.mul(T::one() / <span class="self">self</span>.norm())
     }
 
-    <span class="doccomment">/// Returns `true` if [norm] of this quaternion is (approximately) one.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// [norm]: #method.norm</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_normalized</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span>
-    <span class="kw">where</span>
-        <span class="ident">T</span>: <span class="ident">ApproxEq</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
+    <span class="doccomment">/// Returns `true` if [norm] of this quaternion is (approximately) one.
+    ///
+    /// [norm]: #method.norm
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>is_normalized(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool
+    <span class="kw">where
+        </span>T: ApproxEq&lt;T&gt;,
     {
-        <span class="kw">let</span> <span class="ident">eps</span> <span class="op">=</span> <span class="ident">NumCast::from</span>(<span class="number">1.0e-5</span>).<span class="ident">unwrap</span>();
-        <span class="self">self</span>.<span class="ident">square_norm</span>().<span class="ident">approx_eq_eps</span>(<span class="kw-2">&amp;</span><span class="ident">T::one</span>(), <span class="kw-2">&amp;</span><span class="ident">eps</span>)
+        <span class="kw">let </span>eps = NumCast::from(<span class="number">1.0e-5</span>).unwrap();
+        <span class="self">self</span>.square_norm().approx_eq_eps(<span class="kw-2">&amp;</span>T::one(), <span class="kw-2">&amp;</span>eps)
     }
 
-    <span class="doccomment">/// Spherical linear interpolation between this rotation and another rotation.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// `t` is expected to be between zero and one.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">slerp</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>, <span class="ident">t</span>: <span class="ident">T</span>) -&gt; <span class="self">Self</span>
-    <span class="kw">where</span>
-        <span class="ident">T</span>: <span class="ident">ApproxEq</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
+    <span class="doccomment">/// Spherical linear interpolation between this rotation and another rotation.
+    ///
+    /// `t` is expected to be between zero and one.
+    </span><span class="kw">pub fn </span>slerp(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="self">Self</span>, t: T) -&gt; <span class="self">Self
+    </span><span class="kw">where
+        </span>T: ApproxEq&lt;T&gt;,
     {
-        <span class="macro">debug_assert!</span>(<span class="self">self</span>.<span class="ident">is_normalized</span>());
-        <span class="macro">debug_assert!</span>(<span class="ident">other</span>.<span class="ident">is_normalized</span>());
+        <span class="macro">debug_assert!</span>(<span class="self">self</span>.is_normalized());
+        <span class="macro">debug_assert!</span>(other.is_normalized());
 
-        <span class="kw">let</span> <span class="ident">r1</span> <span class="op">=</span> <span class="kw-2">*</span><span class="self">self</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">r2</span> <span class="op">=</span> <span class="kw-2">*</span><span class="ident">other</span>;
+        <span class="kw">let </span>r1 = <span class="kw-2">*</span><span class="self">self</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>r2 = <span class="kw-2">*</span>other;
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">dot</span> <span class="op">=</span> <span class="ident">r1</span>.<span class="ident">i</span> <span class="op">*</span> <span class="ident">r2</span>.<span class="ident">i</span> <span class="op">+</span> <span class="ident">r1</span>.<span class="ident">j</span> <span class="op">*</span> <span class="ident">r2</span>.<span class="ident">j</span> <span class="op">+</span> <span class="ident">r1</span>.<span class="ident">k</span> <span class="op">*</span> <span class="ident">r2</span>.<span class="ident">k</span> <span class="op">+</span> <span class="ident">r1</span>.<span class="ident">r</span> <span class="op">*</span> <span class="ident">r2</span>.<span class="ident">r</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>dot = r1.i * r2.i + r1.j * r2.j + r1.k * r2.k + r1.r * r2.r;
 
-        <span class="kw">let</span> <span class="ident">one</span> <span class="op">=</span> <span class="ident">T::one</span>();
+        <span class="kw">let </span>one = T::one();
 
-        <span class="kw">if</span> <span class="ident">dot</span>.<span class="ident">approx_eq</span>(<span class="kw-2">&amp;</span><span class="ident">T::one</span>()) {
-            <span class="comment">// If the inputs are too close, linearly interpolate to avoid precision issues.</span>
-            <span class="kw">return</span> <span class="ident">r1</span>.<span class="ident">lerp</span>(<span class="kw-2">&amp;</span><span class="ident">r2</span>, <span class="ident">t</span>);
+        <span class="kw">if </span>dot.approx_eq(<span class="kw-2">&amp;</span>T::one()) {
+            <span class="comment">// If the inputs are too close, linearly interpolate to avoid precision issues.
+            </span><span class="kw">return </span>r1.lerp(<span class="kw-2">&amp;</span>r2, t);
         }
 
-        <span class="comment">// If the dot product is negative, the quaternions</span>
-        <span class="comment">// have opposite handed-ness and slerp won&#39;t take</span>
-        <span class="comment">// the shorter path. Fix by reversing one quaternion.</span>
-        <span class="kw">if</span> <span class="ident">dot</span> <span class="op">&lt;</span> <span class="ident">T::zero</span>() {
-            <span class="ident">r2</span> <span class="op">=</span> <span class="ident">r2</span>.<span class="ident">mul</span>(<span class="op">-</span><span class="ident">T::one</span>());
-            <span class="ident">dot</span> <span class="op">=</span> <span class="op">-</span><span class="ident">dot</span>;
+        <span class="comment">// If the dot product is negative, the quaternions
+        // have opposite handed-ness and slerp won&#39;t take
+        // the shorter path. Fix by reversing one quaternion.
+        </span><span class="kw">if </span>dot &lt; T::zero() {
+            r2 = r2.mul(-T::one());
+            dot = -dot;
         }
 
-        <span class="comment">// For robustness, stay within the domain of acos.</span>
-        <span class="ident">dot</span> <span class="op">=</span> <span class="ident">Real::min</span>(<span class="ident">dot</span>, <span class="ident">one</span>);
+        <span class="comment">// For robustness, stay within the domain of acos.
+        </span>dot = Real::min(dot, one);
 
-        <span class="comment">// Angle between r1 and the result.</span>
-        <span class="kw">let</span> <span class="ident">theta</span> <span class="op">=</span> <span class="ident">Real::acos</span>(<span class="ident">dot</span>) <span class="op">*</span> <span class="ident">t</span>;
+        <span class="comment">// Angle between r1 and the result.
+        </span><span class="kw">let </span>theta = Real::acos(dot) * t;
 
-        <span class="comment">// r1 and r3 form an orthonormal basis.</span>
-        <span class="kw">let</span> <span class="ident">r3</span> <span class="op">=</span> <span class="ident">r2</span>.<span class="ident">sub</span>(<span class="ident">r1</span>.<span class="ident">mul</span>(<span class="ident">dot</span>)).<span class="ident">normalize</span>();
-        <span class="kw">let</span> (<span class="ident">sin</span>, <span class="ident">cos</span>) <span class="op">=</span> <span class="ident">Real::sin_cos</span>(<span class="ident">theta</span>);
-        <span class="ident">r1</span>.<span class="ident">mul</span>(<span class="ident">cos</span>).<span class="ident">add</span>(<span class="ident">r3</span>.<span class="ident">mul</span>(<span class="ident">sin</span>))
+        <span class="comment">// r1 and r3 form an orthonormal basis.
+        </span><span class="kw">let </span>r3 = r2.sub(r1.mul(dot)).normalize();
+        <span class="kw">let </span>(sin, cos) = Real::sin_cos(theta);
+        r1.mul(cos).add(r3.mul(sin))
     }
 
-    <span class="doccomment">/// Basic Linear interpolation between this rotation and another rotation.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">lerp</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>, <span class="ident">t</span>: <span class="ident">T</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">one_t</span> <span class="op">=</span> <span class="ident">T::one</span>() <span class="op">-</span> <span class="ident">t</span>;
-        <span class="self">self</span>.<span class="ident">mul</span>(<span class="ident">one_t</span>).<span class="ident">add</span>(<span class="ident">other</span>.<span class="ident">mul</span>(<span class="ident">t</span>)).<span class="ident">normalize</span>()
+    <span class="doccomment">/// Basic Linear interpolation between this rotation and another rotation.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>lerp(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="self">Self</span>, t: T) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>one_t = T::one() - t;
+        <span class="self">self</span>.mul(one_t).add(other.mul(t)).normalize()
     }
 
-    <span class="doccomment">/// Returns the given 3d point transformed by this rotation.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// The input point must be use the unit Src, and the returned point has the unit Dst.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">transform_point3d</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">point</span>: <span class="ident">Point3D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span><span class="op">&gt;</span>) -&gt; <span class="ident">Point3D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Dst</span><span class="op">&gt;</span>
-    <span class="kw">where</span>
-        <span class="ident">T</span>: <span class="ident">ApproxEq</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
+    <span class="doccomment">/// Returns the given 3d point transformed by this rotation.
+    ///
+    /// The input point must be use the unit Src, and the returned point has the unit Dst.
+    </span><span class="kw">pub fn </span>transform_point3d(<span class="kw-2">&amp;</span><span class="self">self</span>, point: Point3D&lt;T, Src&gt;) -&gt; Point3D&lt;T, Dst&gt;
+    <span class="kw">where
+        </span>T: ApproxEq&lt;T&gt;,
     {
-        <span class="macro">debug_assert!</span>(<span class="self">self</span>.<span class="ident">is_normalized</span>());
+        <span class="macro">debug_assert!</span>(<span class="self">self</span>.is_normalized());
 
-        <span class="kw">let</span> <span class="ident">two</span> <span class="op">=</span> <span class="ident">T::one</span>() <span class="op">+</span> <span class="ident">T::one</span>();
-        <span class="kw">let</span> <span class="ident">cross</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">vector_part</span>().<span class="ident">cross</span>(<span class="ident">point</span>.<span class="ident">to_vector</span>().<span class="ident">to_untyped</span>()) <span class="op">*</span> <span class="ident">two</span>;
+        <span class="kw">let </span>two = T::one() + T::one();
+        <span class="kw">let </span>cross = <span class="self">self</span>.vector_part().cross(point.to_vector().to_untyped()) * two;
 
-        <span class="ident">point3</span>(
-            <span class="ident">point</span>.<span class="ident">x</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">r</span> <span class="op">*</span> <span class="ident">cross</span>.<span class="ident">x</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">j</span> <span class="op">*</span> <span class="ident">cross</span>.<span class="ident">z</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">k</span> <span class="op">*</span> <span class="ident">cross</span>.<span class="ident">y</span>,
-            <span class="ident">point</span>.<span class="ident">y</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">r</span> <span class="op">*</span> <span class="ident">cross</span>.<span class="ident">y</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">k</span> <span class="op">*</span> <span class="ident">cross</span>.<span class="ident">x</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">i</span> <span class="op">*</span> <span class="ident">cross</span>.<span class="ident">z</span>,
-            <span class="ident">point</span>.<span class="ident">z</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">r</span> <span class="op">*</span> <span class="ident">cross</span>.<span class="ident">z</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">i</span> <span class="op">*</span> <span class="ident">cross</span>.<span class="ident">y</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">j</span> <span class="op">*</span> <span class="ident">cross</span>.<span class="ident">x</span>,
+        point3(
+            point.x + <span class="self">self</span>.r * cross.x + <span class="self">self</span>.j * cross.z - <span class="self">self</span>.k * cross.y,
+            point.y + <span class="self">self</span>.r * cross.y + <span class="self">self</span>.k * cross.x - <span class="self">self</span>.i * cross.z,
+            point.z + <span class="self">self</span>.r * cross.z + <span class="self">self</span>.i * cross.y - <span class="self">self</span>.j * cross.x,
         )
     }
 
-    <span class="doccomment">/// Returns the given 2d point transformed by this rotation then projected on the xy plane.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// The input point must be use the unit Src, and the returned point has the unit Dst.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">transform_point2d</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">point</span>: <span class="ident">Point2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span><span class="op">&gt;</span>) -&gt; <span class="ident">Point2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Dst</span><span class="op">&gt;</span>
-    <span class="kw">where</span>
-        <span class="ident">T</span>: <span class="ident">ApproxEq</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
+    <span class="doccomment">/// Returns the given 2d point transformed by this rotation then projected on the xy plane.
+    ///
+    /// The input point must be use the unit Src, and the returned point has the unit Dst.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>transform_point2d(<span class="kw-2">&amp;</span><span class="self">self</span>, point: Point2D&lt;T, Src&gt;) -&gt; Point2D&lt;T, Dst&gt;
+    <span class="kw">where
+        </span>T: ApproxEq&lt;T&gt;,
     {
-        <span class="self">self</span>.<span class="ident">transform_point3d</span>(<span class="ident">point</span>.<span class="ident">to_3d</span>()).<span class="ident">xy</span>()
+        <span class="self">self</span>.transform_point3d(point.to_3d()).xy()
     }
 
-    <span class="doccomment">/// Returns the given 3d vector transformed by this rotation.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// The input vector must be use the unit Src, and the returned point has the unit Dst.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">transform_vector3d</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">vector</span>: <span class="ident">Vector3D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span><span class="op">&gt;</span>) -&gt; <span class="ident">Vector3D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Dst</span><span class="op">&gt;</span>
-    <span class="kw">where</span>
-        <span class="ident">T</span>: <span class="ident">ApproxEq</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
+    <span class="doccomment">/// Returns the given 3d vector transformed by this rotation.
+    ///
+    /// The input vector must be use the unit Src, and the returned point has the unit Dst.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>transform_vector3d(<span class="kw-2">&amp;</span><span class="self">self</span>, vector: Vector3D&lt;T, Src&gt;) -&gt; Vector3D&lt;T, Dst&gt;
+    <span class="kw">where
+        </span>T: ApproxEq&lt;T&gt;,
     {
-        <span class="self">self</span>.<span class="ident">transform_point3d</span>(<span class="ident">vector</span>.<span class="ident">to_point</span>()).<span class="ident">to_vector</span>()
+        <span class="self">self</span>.transform_point3d(vector.to_point()).to_vector()
     }
 
-    <span class="doccomment">/// Returns the given 2d vector transformed by this rotation then projected on the xy plane.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// The input vector must be use the unit Src, and the returned point has the unit Dst.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">transform_vector2d</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">vector</span>: <span class="ident">Vector2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span><span class="op">&gt;</span>) -&gt; <span class="ident">Vector2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Dst</span><span class="op">&gt;</span>
-    <span class="kw">where</span>
-        <span class="ident">T</span>: <span class="ident">ApproxEq</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
+    <span class="doccomment">/// Returns the given 2d vector transformed by this rotation then projected on the xy plane.
+    ///
+    /// The input vector must be use the unit Src, and the returned point has the unit Dst.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>transform_vector2d(<span class="kw-2">&amp;</span><span class="self">self</span>, vector: Vector2D&lt;T, Src&gt;) -&gt; Vector2D&lt;T, Dst&gt;
+    <span class="kw">where
+        </span>T: ApproxEq&lt;T&gt;,
     {
-        <span class="self">self</span>.<span class="ident">transform_vector3d</span>(<span class="ident">vector</span>.<span class="ident">to_3d</span>()).<span class="ident">xy</span>()
+        <span class="self">self</span>.transform_vector3d(vector.to_3d()).xy()
     }
 
-    <span class="doccomment">/// Returns the matrix representation of this rotation.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_transform</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Transform3D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span>
-    <span class="kw">where</span>
-        <span class="ident">T</span>: <span class="ident">ApproxEq</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
+    <span class="doccomment">/// Returns the matrix representation of this rotation.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>to_transform(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Transform3D&lt;T, Src, Dst&gt;
+    <span class="kw">where
+        </span>T: ApproxEq&lt;T&gt;,
     {
-        <span class="macro">debug_assert!</span>(<span class="self">self</span>.<span class="ident">is_normalized</span>());
+        <span class="macro">debug_assert!</span>(<span class="self">self</span>.is_normalized());
 
-        <span class="kw">let</span> <span class="ident">i2</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">i</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">i</span>;
-        <span class="kw">let</span> <span class="ident">j2</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">j</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">j</span>;
-        <span class="kw">let</span> <span class="ident">k2</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">k</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">k</span>;
-        <span class="kw">let</span> <span class="ident">ii</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">i</span> <span class="op">*</span> <span class="ident">i2</span>;
-        <span class="kw">let</span> <span class="ident">ij</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">i</span> <span class="op">*</span> <span class="ident">j2</span>;
-        <span class="kw">let</span> <span class="ident">ik</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">i</span> <span class="op">*</span> <span class="ident">k2</span>;
-        <span class="kw">let</span> <span class="ident">jj</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">j</span> <span class="op">*</span> <span class="ident">j2</span>;
-        <span class="kw">let</span> <span class="ident">jk</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">j</span> <span class="op">*</span> <span class="ident">k2</span>;
-        <span class="kw">let</span> <span class="ident">kk</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">k</span> <span class="op">*</span> <span class="ident">k2</span>;
-        <span class="kw">let</span> <span class="ident">ri</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">r</span> <span class="op">*</span> <span class="ident">i2</span>;
-        <span class="kw">let</span> <span class="ident">rj</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">r</span> <span class="op">*</span> <span class="ident">j2</span>;
-        <span class="kw">let</span> <span class="ident">rk</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">r</span> <span class="op">*</span> <span class="ident">k2</span>;
+        <span class="kw">let </span>i2 = <span class="self">self</span>.i + <span class="self">self</span>.i;
+        <span class="kw">let </span>j2 = <span class="self">self</span>.j + <span class="self">self</span>.j;
+        <span class="kw">let </span>k2 = <span class="self">self</span>.k + <span class="self">self</span>.k;
+        <span class="kw">let </span>ii = <span class="self">self</span>.i * i2;
+        <span class="kw">let </span>ij = <span class="self">self</span>.i * j2;
+        <span class="kw">let </span>ik = <span class="self">self</span>.i * k2;
+        <span class="kw">let </span>jj = <span class="self">self</span>.j * j2;
+        <span class="kw">let </span>jk = <span class="self">self</span>.j * k2;
+        <span class="kw">let </span>kk = <span class="self">self</span>.k * k2;
+        <span class="kw">let </span>ri = <span class="self">self</span>.r * i2;
+        <span class="kw">let </span>rj = <span class="self">self</span>.r * j2;
+        <span class="kw">let </span>rk = <span class="self">self</span>.r * k2;
 
-        <span class="kw">let</span> <span class="ident">one</span> <span class="op">=</span> <span class="ident">T::one</span>();
-        <span class="kw">let</span> <span class="ident">zero</span> <span class="op">=</span> <span class="ident">T::zero</span>();
+        <span class="kw">let </span>one = T::one();
+        <span class="kw">let </span>zero = T::zero();
 
-        <span class="kw">let</span> <span class="ident">m11</span> <span class="op">=</span> <span class="ident">one</span> <span class="op">-</span> (<span class="ident">jj</span> <span class="op">+</span> <span class="ident">kk</span>);
-        <span class="kw">let</span> <span class="ident">m12</span> <span class="op">=</span> <span class="ident">ij</span> <span class="op">+</span> <span class="ident">rk</span>;
-        <span class="kw">let</span> <span class="ident">m13</span> <span class="op">=</span> <span class="ident">ik</span> <span class="op">-</span> <span class="ident">rj</span>;
+        <span class="kw">let </span>m11 = one - (jj + kk);
+        <span class="kw">let </span>m12 = ij + rk;
+        <span class="kw">let </span>m13 = ik - rj;
 
-        <span class="kw">let</span> <span class="ident">m21</span> <span class="op">=</span> <span class="ident">ij</span> <span class="op">-</span> <span class="ident">rk</span>;
-        <span class="kw">let</span> <span class="ident">m22</span> <span class="op">=</span> <span class="ident">one</span> <span class="op">-</span> (<span class="ident">ii</span> <span class="op">+</span> <span class="ident">kk</span>);
-        <span class="kw">let</span> <span class="ident">m23</span> <span class="op">=</span> <span class="ident">jk</span> <span class="op">+</span> <span class="ident">ri</span>;
+        <span class="kw">let </span>m21 = ij - rk;
+        <span class="kw">let </span>m22 = one - (ii + kk);
+        <span class="kw">let </span>m23 = jk + ri;
 
-        <span class="kw">let</span> <span class="ident">m31</span> <span class="op">=</span> <span class="ident">ik</span> <span class="op">+</span> <span class="ident">rj</span>;
-        <span class="kw">let</span> <span class="ident">m32</span> <span class="op">=</span> <span class="ident">jk</span> <span class="op">-</span> <span class="ident">ri</span>;
-        <span class="kw">let</span> <span class="ident">m33</span> <span class="op">=</span> <span class="ident">one</span> <span class="op">-</span> (<span class="ident">ii</span> <span class="op">+</span> <span class="ident">jj</span>);
+        <span class="kw">let </span>m31 = ik + rj;
+        <span class="kw">let </span>m32 = jk - ri;
+        <span class="kw">let </span>m33 = one - (ii + jj);
 
-        <span class="ident">Transform3D::new</span>(
-            <span class="ident">m11</span>, <span class="ident">m12</span>, <span class="ident">m13</span>, <span class="ident">zero</span>,
-            <span class="ident">m21</span>, <span class="ident">m22</span>, <span class="ident">m23</span>, <span class="ident">zero</span>,
-            <span class="ident">m31</span>, <span class="ident">m32</span>, <span class="ident">m33</span>, <span class="ident">zero</span>,
-            <span class="ident">zero</span>, <span class="ident">zero</span>, <span class="ident">zero</span>, <span class="ident">one</span>,
+        Transform3D::new(
+            m11, m12, m13, zero,
+            m21, m22, m23, zero,
+            m31, m32, m33, zero,
+            zero, zero, zero, one,
         )
     }
 
-    <span class="doccomment">/// Returns a rotation representing this rotation followed by the other rotation.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">then</span><span class="op">&lt;</span><span class="ident">NewDst</span><span class="op">&gt;</span>(
+    <span class="doccomment">/// Returns a rotation representing this rotation followed by the other rotation.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>then&lt;NewDst&gt;(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="ident">Rotation3D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Dst</span>, <span class="ident">NewDst</span><span class="op">&gt;</span>,
-    ) -&gt; <span class="ident">Rotation3D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">NewDst</span><span class="op">&gt;</span>
-    <span class="kw">where</span>
-        <span class="ident">T</span>: <span class="ident">ApproxEq</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
+        other: <span class="kw-2">&amp;</span>Rotation3D&lt;T, Dst, NewDst&gt;,
+    ) -&gt; Rotation3D&lt;T, Src, NewDst&gt;
+    <span class="kw">where
+        </span>T: ApproxEq&lt;T&gt;,
     {
-        <span class="macro">debug_assert!</span>(<span class="self">self</span>.<span class="ident">is_normalized</span>());
-        <span class="ident">Rotation3D::quaternion</span>(
-            <span class="ident">other</span>.<span class="ident">i</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">r</span> <span class="op">+</span> <span class="ident">other</span>.<span class="ident">r</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">i</span> <span class="op">+</span> <span class="ident">other</span>.<span class="ident">j</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">k</span> <span class="op">-</span> <span class="ident">other</span>.<span class="ident">k</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">j</span>,
-            <span class="ident">other</span>.<span class="ident">j</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">r</span> <span class="op">+</span> <span class="ident">other</span>.<span class="ident">r</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">j</span> <span class="op">+</span> <span class="ident">other</span>.<span class="ident">k</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">i</span> <span class="op">-</span> <span class="ident">other</span>.<span class="ident">i</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">k</span>,
-            <span class="ident">other</span>.<span class="ident">k</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">r</span> <span class="op">+</span> <span class="ident">other</span>.<span class="ident">r</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">k</span> <span class="op">+</span> <span class="ident">other</span>.<span class="ident">i</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">j</span> <span class="op">-</span> <span class="ident">other</span>.<span class="ident">j</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">i</span>,
-            <span class="ident">other</span>.<span class="ident">r</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">r</span> <span class="op">-</span> <span class="ident">other</span>.<span class="ident">i</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">i</span> <span class="op">-</span> <span class="ident">other</span>.<span class="ident">j</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">j</span> <span class="op">-</span> <span class="ident">other</span>.<span class="ident">k</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">k</span>,
+        <span class="macro">debug_assert!</span>(<span class="self">self</span>.is_normalized());
+        Rotation3D::quaternion(
+            other.i * <span class="self">self</span>.r + other.r * <span class="self">self</span>.i + other.j * <span class="self">self</span>.k - other.k * <span class="self">self</span>.j,
+            other.j * <span class="self">self</span>.r + other.r * <span class="self">self</span>.j + other.k * <span class="self">self</span>.i - other.i * <span class="self">self</span>.k,
+            other.k * <span class="self">self</span>.r + other.r * <span class="self">self</span>.k + other.i * <span class="self">self</span>.j - other.j * <span class="self">self</span>.i,
+            other.r * <span class="self">self</span>.r - other.i * <span class="self">self</span>.i - other.j * <span class="self">self</span>.j - other.k * <span class="self">self</span>.k,
         )
     }
 
-    <span class="comment">// add, sub and mul are used internally for intermediate computation but aren&#39;t public</span>
-    <span class="comment">// because they don&#39;t carry real semantic meanings (I think?).</span>
+    <span class="comment">// add, sub and mul are used internally for intermediate computation but aren&#39;t public
+    // because they don&#39;t carry real semantic meanings (I think?).
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">add</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="self">Self</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::quaternion</span>(
-            <span class="self">self</span>.<span class="ident">i</span> <span class="op">+</span> <span class="ident">other</span>.<span class="ident">i</span>,
-            <span class="self">self</span>.<span class="ident">j</span> <span class="op">+</span> <span class="ident">other</span>.<span class="ident">j</span>,
-            <span class="self">self</span>.<span class="ident">k</span> <span class="op">+</span> <span class="ident">other</span>.<span class="ident">k</span>,
-            <span class="self">self</span>.<span class="ident">r</span> <span class="op">+</span> <span class="ident">other</span>.<span class="ident">r</span>,
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">fn </span>add(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="self">Self</span>) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::quaternion(
+            <span class="self">self</span>.i + other.i,
+            <span class="self">self</span>.j + other.j,
+            <span class="self">self</span>.k + other.k,
+            <span class="self">self</span>.r + other.r,
         )
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">sub</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="self">Self</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::quaternion</span>(
-            <span class="self">self</span>.<span class="ident">i</span> <span class="op">-</span> <span class="ident">other</span>.<span class="ident">i</span>,
-            <span class="self">self</span>.<span class="ident">j</span> <span class="op">-</span> <span class="ident">other</span>.<span class="ident">j</span>,
-            <span class="self">self</span>.<span class="ident">k</span> <span class="op">-</span> <span class="ident">other</span>.<span class="ident">k</span>,
-            <span class="self">self</span>.<span class="ident">r</span> <span class="op">-</span> <span class="ident">other</span>.<span class="ident">r</span>,
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>sub(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="self">Self</span>) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::quaternion(
+            <span class="self">self</span>.i - other.i,
+            <span class="self">self</span>.j - other.j,
+            <span class="self">self</span>.k - other.k,
+            <span class="self">self</span>.r - other.r,
         )
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">mul</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">factor</span>: <span class="ident">T</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::quaternion</span>(
-            <span class="self">self</span>.<span class="ident">i</span> <span class="op">*</span> <span class="ident">factor</span>,
-            <span class="self">self</span>.<span class="ident">j</span> <span class="op">*</span> <span class="ident">factor</span>,
-            <span class="self">self</span>.<span class="ident">k</span> <span class="op">*</span> <span class="ident">factor</span>,
-            <span class="self">self</span>.<span class="ident">r</span> <span class="op">*</span> <span class="ident">factor</span>,
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>mul(<span class="kw-2">&amp;</span><span class="self">self</span>, factor: T) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::quaternion(
+            <span class="self">self</span>.i * factor,
+            <span class="self">self</span>.j * factor,
+            <span class="self">self</span>.k * factor,
+            <span class="self">self</span>.r * factor,
         )
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">fmt::Debug</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">fmt::Debug</span> <span class="kw">for</span> <span class="ident">Rotation3D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">fmt::Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
+<span class="kw">impl</span>&lt;T: fmt::Debug, Src, Dst&gt; fmt::Debug <span class="kw">for </span>Rotation3D&lt;T, Src, Dst&gt; {
+    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>fmt::Formatter) -&gt; fmt::Result {
         <span class="macro">write!</span>(
-            <span class="ident">f</span>,
+            f,
             <span class="string">&quot;Quat({:?}*i + {:?}*j + {:?}*k + {:?})&quot;</span>,
-            <span class="self">self</span>.<span class="ident">i</span>, <span class="self">self</span>.<span class="ident">j</span>, <span class="self">self</span>.<span class="ident">k</span>, <span class="self">self</span>.<span class="ident">r</span>
+            <span class="self">self</span>.i, <span class="self">self</span>.j, <span class="self">self</span>.k, <span class="self">self</span>.r
         )
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">ApproxEq</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Rotation3D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Neg</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">ApproxEq</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
+<span class="kw">impl</span>&lt;T, Src, Dst&gt; ApproxEq&lt;T&gt; <span class="kw">for </span>Rotation3D&lt;T, Src, Dst&gt;
+<span class="kw">where
+    </span>T: Copy + Neg&lt;Output = T&gt; + ApproxEq&lt;T&gt;,
 {
-    <span class="kw">fn</span> <span class="ident">approx_epsilon</span>() -&gt; <span class="ident">T</span> {
-        <span class="ident">T::approx_epsilon</span>()
+    <span class="kw">fn </span>approx_epsilon() -&gt; T {
+        T::approx_epsilon()
     }
 
-    <span class="kw">fn</span> <span class="ident">approx_eq_eps</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>, <span class="ident">eps</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>) -&gt; <span class="ident">bool</span> {
-        (<span class="self">self</span>.<span class="ident">i</span>.<span class="ident">approx_eq_eps</span>(<span class="kw-2">&amp;</span><span class="ident">other</span>.<span class="ident">i</span>, <span class="ident">eps</span>)
-            <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">j</span>.<span class="ident">approx_eq_eps</span>(<span class="kw-2">&amp;</span><span class="ident">other</span>.<span class="ident">j</span>, <span class="ident">eps</span>)
-            <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">k</span>.<span class="ident">approx_eq_eps</span>(<span class="kw-2">&amp;</span><span class="ident">other</span>.<span class="ident">k</span>, <span class="ident">eps</span>)
-            <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">r</span>.<span class="ident">approx_eq_eps</span>(<span class="kw-2">&amp;</span><span class="ident">other</span>.<span class="ident">r</span>, <span class="ident">eps</span>))
-            <span class="op">|</span><span class="op">|</span> (<span class="self">self</span>.<span class="ident">i</span>.<span class="ident">approx_eq_eps</span>(<span class="kw-2">&amp;</span><span class="op">-</span><span class="ident">other</span>.<span class="ident">i</span>, <span class="ident">eps</span>)
-                <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">j</span>.<span class="ident">approx_eq_eps</span>(<span class="kw-2">&amp;</span><span class="op">-</span><span class="ident">other</span>.<span class="ident">j</span>, <span class="ident">eps</span>)
-                <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">k</span>.<span class="ident">approx_eq_eps</span>(<span class="kw-2">&amp;</span><span class="op">-</span><span class="ident">other</span>.<span class="ident">k</span>, <span class="ident">eps</span>)
-                <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">r</span>.<span class="ident">approx_eq_eps</span>(<span class="kw-2">&amp;</span><span class="op">-</span><span class="ident">other</span>.<span class="ident">r</span>, <span class="ident">eps</span>))
+    <span class="kw">fn </span>approx_eq_eps(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="self">Self</span>, eps: <span class="kw-2">&amp;</span>T) -&gt; bool {
+        (<span class="self">self</span>.i.approx_eq_eps(<span class="kw-2">&amp;</span>other.i, eps)
+            &amp;&amp; <span class="self">self</span>.j.approx_eq_eps(<span class="kw-2">&amp;</span>other.j, eps)
+            &amp;&amp; <span class="self">self</span>.k.approx_eq_eps(<span class="kw-2">&amp;</span>other.k, eps)
+            &amp;&amp; <span class="self">self</span>.r.approx_eq_eps(<span class="kw-2">&amp;</span>other.r, eps))
+            || (<span class="self">self</span>.i.approx_eq_eps(<span class="kw-2">&amp;</span>-other.i, eps)
+                &amp;&amp; <span class="self">self</span>.j.approx_eq_eps(<span class="kw-2">&amp;</span>-other.j, eps)
+                &amp;&amp; <span class="self">self</span>.k.approx_eq_eps(<span class="kw-2">&amp;</span>-other.k, eps)
+                &amp;&amp; <span class="self">self</span>.r.approx_eq_eps(<span class="kw-2">&amp;</span>-other.r, eps))
     }
 }
 
-<span class="attribute">#[<span class="ident">test</span>]</span>
-<span class="kw">fn</span> <span class="ident">simple_rotation_2d</span>() {
-    <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::default::Rotation2D</span>;
-    <span class="kw">use</span> <span class="ident">core::f32::consts</span>::{<span class="ident">FRAC_PI_2</span>, <span class="ident">PI</span>};
+<span class="attribute">#[test]
+</span><span class="kw">fn </span>simple_rotation_2d() {
+    <span class="kw">use </span><span class="kw">crate</span>::default::Rotation2D;
+    <span class="kw">use </span>core::f32::consts::{FRAC_PI_2, PI};
 
-    <span class="kw">let</span> <span class="ident">ri</span> <span class="op">=</span> <span class="ident">Rotation2D::identity</span>();
-    <span class="kw">let</span> <span class="ident">r90</span> <span class="op">=</span> <span class="ident">Rotation2D::radians</span>(<span class="ident">FRAC_PI_2</span>);
-    <span class="kw">let</span> <span class="ident">rm90</span> <span class="op">=</span> <span class="ident">Rotation2D::radians</span>(<span class="op">-</span><span class="ident">FRAC_PI_2</span>);
-    <span class="kw">let</span> <span class="ident">r180</span> <span class="op">=</span> <span class="ident">Rotation2D::radians</span>(<span class="ident">PI</span>);
+    <span class="kw">let </span>ri = Rotation2D::identity();
+    <span class="kw">let </span>r90 = Rotation2D::radians(FRAC_PI_2);
+    <span class="kw">let </span>rm90 = Rotation2D::radians(-FRAC_PI_2);
+    <span class="kw">let </span>r180 = Rotation2D::radians(PI);
 
-    <span class="macro">assert!</span>(<span class="ident">ri</span>
-        .<span class="ident">transform_point</span>(<span class="ident">point2</span>(<span class="number">1.0</span>, <span class="number">2.0</span>))
-        .<span class="ident">approx_eq</span>(<span class="kw-2">&amp;</span><span class="ident">point2</span>(<span class="number">1.0</span>, <span class="number">2.0</span>)));
-    <span class="macro">assert!</span>(<span class="ident">r90</span>
-        .<span class="ident">transform_point</span>(<span class="ident">point2</span>(<span class="number">1.0</span>, <span class="number">2.0</span>))
-        .<span class="ident">approx_eq</span>(<span class="kw-2">&amp;</span><span class="ident">point2</span>(<span class="op">-</span><span class="number">2.0</span>, <span class="number">1.0</span>)));
-    <span class="macro">assert!</span>(<span class="ident">rm90</span>
-        .<span class="ident">transform_point</span>(<span class="ident">point2</span>(<span class="number">1.0</span>, <span class="number">2.0</span>))
-        .<span class="ident">approx_eq</span>(<span class="kw-2">&amp;</span><span class="ident">point2</span>(<span class="number">2.0</span>, <span class="op">-</span><span class="number">1.0</span>)));
-    <span class="macro">assert!</span>(<span class="ident">r180</span>
-        .<span class="ident">transform_point</span>(<span class="ident">point2</span>(<span class="number">1.0</span>, <span class="number">2.0</span>))
-        .<span class="ident">approx_eq</span>(<span class="kw-2">&amp;</span><span class="ident">point2</span>(<span class="op">-</span><span class="number">1.0</span>, <span class="op">-</span><span class="number">2.0</span>)));
+    <span class="macro">assert!</span>(ri
+        .transform_point(point2(<span class="number">1.0</span>, <span class="number">2.0</span>))
+        .approx_eq(<span class="kw-2">&amp;</span>point2(<span class="number">1.0</span>, <span class="number">2.0</span>)));
+    <span class="macro">assert!</span>(r90
+        .transform_point(point2(<span class="number">1.0</span>, <span class="number">2.0</span>))
+        .approx_eq(<span class="kw-2">&amp;</span>point2(-<span class="number">2.0</span>, <span class="number">1.0</span>)));
+    <span class="macro">assert!</span>(rm90
+        .transform_point(point2(<span class="number">1.0</span>, <span class="number">2.0</span>))
+        .approx_eq(<span class="kw-2">&amp;</span>point2(<span class="number">2.0</span>, -<span class="number">1.0</span>)));
+    <span class="macro">assert!</span>(r180
+        .transform_point(point2(<span class="number">1.0</span>, <span class="number">2.0</span>))
+        .approx_eq(<span class="kw-2">&amp;</span>point2(-<span class="number">1.0</span>, -<span class="number">2.0</span>)));
 
-    <span class="macro">assert!</span>(<span class="ident">r90</span>
-        .<span class="ident">inverse</span>()
-        .<span class="ident">inverse</span>()
-        .<span class="ident">transform_point</span>(<span class="ident">point2</span>(<span class="number">1.0</span>, <span class="number">2.0</span>))
-        .<span class="ident">approx_eq</span>(<span class="kw-2">&amp;</span><span class="ident">r90</span>.<span class="ident">transform_point</span>(<span class="ident">point2</span>(<span class="number">1.0</span>, <span class="number">2.0</span>))));
+    <span class="macro">assert!</span>(r90
+        .inverse()
+        .inverse()
+        .transform_point(point2(<span class="number">1.0</span>, <span class="number">2.0</span>))
+        .approx_eq(<span class="kw-2">&amp;</span>r90.transform_point(point2(<span class="number">1.0</span>, <span class="number">2.0</span>))));
 }
 
-<span class="attribute">#[<span class="ident">test</span>]</span>
-<span class="kw">fn</span> <span class="ident">simple_rotation_3d_in_2d</span>() {
-    <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::default::Rotation3D</span>;
-    <span class="kw">use</span> <span class="ident">core::f32::consts</span>::{<span class="ident">FRAC_PI_2</span>, <span class="ident">PI</span>};
+<span class="attribute">#[test]
+</span><span class="kw">fn </span>simple_rotation_3d_in_2d() {
+    <span class="kw">use </span><span class="kw">crate</span>::default::Rotation3D;
+    <span class="kw">use </span>core::f32::consts::{FRAC_PI_2, PI};
 
-    <span class="kw">let</span> <span class="ident">ri</span> <span class="op">=</span> <span class="ident">Rotation3D::identity</span>();
-    <span class="kw">let</span> <span class="ident">r90</span> <span class="op">=</span> <span class="ident">Rotation3D::around_z</span>(<span class="ident">Angle::radians</span>(<span class="ident">FRAC_PI_2</span>));
-    <span class="kw">let</span> <span class="ident">rm90</span> <span class="op">=</span> <span class="ident">Rotation3D::around_z</span>(<span class="ident">Angle::radians</span>(<span class="op">-</span><span class="ident">FRAC_PI_2</span>));
-    <span class="kw">let</span> <span class="ident">r180</span> <span class="op">=</span> <span class="ident">Rotation3D::around_z</span>(<span class="ident">Angle::radians</span>(<span class="ident">PI</span>));
+    <span class="kw">let </span>ri = Rotation3D::identity();
+    <span class="kw">let </span>r90 = Rotation3D::around_z(Angle::radians(FRAC_PI_2));
+    <span class="kw">let </span>rm90 = Rotation3D::around_z(Angle::radians(-FRAC_PI_2));
+    <span class="kw">let </span>r180 = Rotation3D::around_z(Angle::radians(PI));
 
-    <span class="macro">assert!</span>(<span class="ident">ri</span>
-        .<span class="ident">transform_point2d</span>(<span class="ident">point2</span>(<span class="number">1.0</span>, <span class="number">2.0</span>))
-        .<span class="ident">approx_eq</span>(<span class="kw-2">&amp;</span><span class="ident">point2</span>(<span class="number">1.0</span>, <span class="number">2.0</span>)));
-    <span class="macro">assert!</span>(<span class="ident">r90</span>
-        .<span class="ident">transform_point2d</span>(<span class="ident">point2</span>(<span class="number">1.0</span>, <span class="number">2.0</span>))
-        .<span class="ident">approx_eq</span>(<span class="kw-2">&amp;</span><span class="ident">point2</span>(<span class="op">-</span><span class="number">2.0</span>, <span class="number">1.0</span>)));
-    <span class="macro">assert!</span>(<span class="ident">rm90</span>
-        .<span class="ident">transform_point2d</span>(<span class="ident">point2</span>(<span class="number">1.0</span>, <span class="number">2.0</span>))
-        .<span class="ident">approx_eq</span>(<span class="kw-2">&amp;</span><span class="ident">point2</span>(<span class="number">2.0</span>, <span class="op">-</span><span class="number">1.0</span>)));
-    <span class="macro">assert!</span>(<span class="ident">r180</span>
-        .<span class="ident">transform_point2d</span>(<span class="ident">point2</span>(<span class="number">1.0</span>, <span class="number">2.0</span>))
-        .<span class="ident">approx_eq</span>(<span class="kw-2">&amp;</span><span class="ident">point2</span>(<span class="op">-</span><span class="number">1.0</span>, <span class="op">-</span><span class="number">2.0</span>)));
+    <span class="macro">assert!</span>(ri
+        .transform_point2d(point2(<span class="number">1.0</span>, <span class="number">2.0</span>))
+        .approx_eq(<span class="kw-2">&amp;</span>point2(<span class="number">1.0</span>, <span class="number">2.0</span>)));
+    <span class="macro">assert!</span>(r90
+        .transform_point2d(point2(<span class="number">1.0</span>, <span class="number">2.0</span>))
+        .approx_eq(<span class="kw-2">&amp;</span>point2(-<span class="number">2.0</span>, <span class="number">1.0</span>)));
+    <span class="macro">assert!</span>(rm90
+        .transform_point2d(point2(<span class="number">1.0</span>, <span class="number">2.0</span>))
+        .approx_eq(<span class="kw-2">&amp;</span>point2(<span class="number">2.0</span>, -<span class="number">1.0</span>)));
+    <span class="macro">assert!</span>(r180
+        .transform_point2d(point2(<span class="number">1.0</span>, <span class="number">2.0</span>))
+        .approx_eq(<span class="kw-2">&amp;</span>point2(-<span class="number">1.0</span>, -<span class="number">2.0</span>)));
 
-    <span class="macro">assert!</span>(<span class="ident">r90</span>
-        .<span class="ident">inverse</span>()
-        .<span class="ident">inverse</span>()
-        .<span class="ident">transform_point2d</span>(<span class="ident">point2</span>(<span class="number">1.0</span>, <span class="number">2.0</span>))
-        .<span class="ident">approx_eq</span>(<span class="kw-2">&amp;</span><span class="ident">r90</span>.<span class="ident">transform_point2d</span>(<span class="ident">point2</span>(<span class="number">1.0</span>, <span class="number">2.0</span>))));
+    <span class="macro">assert!</span>(r90
+        .inverse()
+        .inverse()
+        .transform_point2d(point2(<span class="number">1.0</span>, <span class="number">2.0</span>))
+        .approx_eq(<span class="kw-2">&amp;</span>r90.transform_point2d(point2(<span class="number">1.0</span>, <span class="number">2.0</span>))));
 }
 
-<span class="attribute">#[<span class="ident">test</span>]</span>
-<span class="kw">fn</span> <span class="ident">pre_post</span>() {
-    <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::default::Rotation3D</span>;
-    <span class="kw">use</span> <span class="ident">core::f32::consts::FRAC_PI_2</span>;
+<span class="attribute">#[test]
+</span><span class="kw">fn </span>pre_post() {
+    <span class="kw">use </span><span class="kw">crate</span>::default::Rotation3D;
+    <span class="kw">use </span>core::f32::consts::FRAC_PI_2;
 
-    <span class="kw">let</span> <span class="ident">r1</span> <span class="op">=</span> <span class="ident">Rotation3D::around_x</span>(<span class="ident">Angle::radians</span>(<span class="ident">FRAC_PI_2</span>));
-    <span class="kw">let</span> <span class="ident">r2</span> <span class="op">=</span> <span class="ident">Rotation3D::around_y</span>(<span class="ident">Angle::radians</span>(<span class="ident">FRAC_PI_2</span>));
-    <span class="kw">let</span> <span class="ident">r3</span> <span class="op">=</span> <span class="ident">Rotation3D::around_z</span>(<span class="ident">Angle::radians</span>(<span class="ident">FRAC_PI_2</span>));
+    <span class="kw">let </span>r1 = Rotation3D::around_x(Angle::radians(FRAC_PI_2));
+    <span class="kw">let </span>r2 = Rotation3D::around_y(Angle::radians(FRAC_PI_2));
+    <span class="kw">let </span>r3 = Rotation3D::around_z(Angle::radians(FRAC_PI_2));
 
-    <span class="kw">let</span> <span class="ident">t1</span> <span class="op">=</span> <span class="ident">r1</span>.<span class="ident">to_transform</span>();
-    <span class="kw">let</span> <span class="ident">t2</span> <span class="op">=</span> <span class="ident">r2</span>.<span class="ident">to_transform</span>();
-    <span class="kw">let</span> <span class="ident">t3</span> <span class="op">=</span> <span class="ident">r3</span>.<span class="ident">to_transform</span>();
+    <span class="kw">let </span>t1 = r1.to_transform();
+    <span class="kw">let </span>t2 = r2.to_transform();
+    <span class="kw">let </span>t3 = r3.to_transform();
 
-    <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> <span class="ident">point3</span>(<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>);
+    <span class="kw">let </span>p = point3(<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>);
 
-    <span class="comment">// Check that the order of transformations is correct (corresponds to what</span>
-    <span class="comment">// we do in Transform3D).</span>
-    <span class="kw">let</span> <span class="ident">p1</span> <span class="op">=</span> <span class="ident">r1</span>.<span class="ident">then</span>(<span class="kw-2">&amp;</span><span class="ident">r2</span>).<span class="ident">then</span>(<span class="kw-2">&amp;</span><span class="ident">r3</span>).<span class="ident">transform_point3d</span>(<span class="ident">p</span>);
-    <span class="kw">let</span> <span class="ident">p2</span> <span class="op">=</span> <span class="ident">t1</span>
-        .<span class="ident">then</span>(<span class="kw-2">&amp;</span><span class="ident">t2</span>)
-        .<span class="ident">then</span>(<span class="kw-2">&amp;</span><span class="ident">t3</span>)
-        .<span class="ident">transform_point3d</span>(<span class="ident">p</span>);
+    <span class="comment">// Check that the order of transformations is correct (corresponds to what
+    // we do in Transform3D).
+    </span><span class="kw">let </span>p1 = r1.then(<span class="kw-2">&amp;</span>r2).then(<span class="kw-2">&amp;</span>r3).transform_point3d(p);
+    <span class="kw">let </span>p2 = t1
+        .then(<span class="kw-2">&amp;</span>t2)
+        .then(<span class="kw-2">&amp;</span>t3)
+        .transform_point3d(p);
 
-    <span class="macro">assert!</span>(<span class="ident">p1</span>.<span class="ident">approx_eq</span>(<span class="kw-2">&amp;</span><span class="ident">p2</span>.<span class="ident">unwrap</span>()));
+    <span class="macro">assert!</span>(p1.approx_eq(<span class="kw-2">&amp;</span>p2.unwrap()));
 
-    <span class="comment">// Check that changing the order indeed matters.</span>
-    <span class="kw">let</span> <span class="ident">p3</span> <span class="op">=</span> <span class="ident">t3</span>
-        .<span class="ident">then</span>(<span class="kw-2">&amp;</span><span class="ident">t1</span>)
-        .<span class="ident">then</span>(<span class="kw-2">&amp;</span><span class="ident">t2</span>)
-        .<span class="ident">transform_point3d</span>(<span class="ident">p</span>);
-    <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">p1</span>.<span class="ident">approx_eq</span>(<span class="kw-2">&amp;</span><span class="ident">p3</span>.<span class="ident">unwrap</span>()));
+    <span class="comment">// Check that changing the order indeed matters.
+    </span><span class="kw">let </span>p3 = t3
+        .then(<span class="kw-2">&amp;</span>t1)
+        .then(<span class="kw-2">&amp;</span>t2)
+        .transform_point3d(p);
+    <span class="macro">assert!</span>(!p1.approx_eq(<span class="kw-2">&amp;</span>p3.unwrap()));
 }
 
-<span class="attribute">#[<span class="ident">test</span>]</span>
-<span class="kw">fn</span> <span class="ident">to_transform3d</span>() {
-    <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::default::Rotation3D</span>;
+<span class="attribute">#[test]
+</span><span class="kw">fn </span>to_transform3d() {
+    <span class="kw">use </span><span class="kw">crate</span>::default::Rotation3D;
 
-    <span class="kw">use</span> <span class="ident">core::f32::consts</span>::{<span class="ident">FRAC_PI_2</span>, <span class="ident">PI</span>};
-    <span class="kw">let</span> <span class="ident">rotations</span> <span class="op">=</span> [
-        <span class="ident">Rotation3D::identity</span>(),
-        <span class="ident">Rotation3D::around_x</span>(<span class="ident">Angle::radians</span>(<span class="ident">FRAC_PI_2</span>)),
-        <span class="ident">Rotation3D::around_x</span>(<span class="ident">Angle::radians</span>(<span class="op">-</span><span class="ident">FRAC_PI_2</span>)),
-        <span class="ident">Rotation3D::around_x</span>(<span class="ident">Angle::radians</span>(<span class="ident">PI</span>)),
-        <span class="ident">Rotation3D::around_y</span>(<span class="ident">Angle::radians</span>(<span class="ident">FRAC_PI_2</span>)),
-        <span class="ident">Rotation3D::around_y</span>(<span class="ident">Angle::radians</span>(<span class="op">-</span><span class="ident">FRAC_PI_2</span>)),
-        <span class="ident">Rotation3D::around_y</span>(<span class="ident">Angle::radians</span>(<span class="ident">PI</span>)),
-        <span class="ident">Rotation3D::around_z</span>(<span class="ident">Angle::radians</span>(<span class="ident">FRAC_PI_2</span>)),
-        <span class="ident">Rotation3D::around_z</span>(<span class="ident">Angle::radians</span>(<span class="op">-</span><span class="ident">FRAC_PI_2</span>)),
-        <span class="ident">Rotation3D::around_z</span>(<span class="ident">Angle::radians</span>(<span class="ident">PI</span>)),
+    <span class="kw">use </span>core::f32::consts::{FRAC_PI_2, PI};
+    <span class="kw">let </span>rotations = [
+        Rotation3D::identity(),
+        Rotation3D::around_x(Angle::radians(FRAC_PI_2)),
+        Rotation3D::around_x(Angle::radians(-FRAC_PI_2)),
+        Rotation3D::around_x(Angle::radians(PI)),
+        Rotation3D::around_y(Angle::radians(FRAC_PI_2)),
+        Rotation3D::around_y(Angle::radians(-FRAC_PI_2)),
+        Rotation3D::around_y(Angle::radians(PI)),
+        Rotation3D::around_z(Angle::radians(FRAC_PI_2)),
+        Rotation3D::around_z(Angle::radians(-FRAC_PI_2)),
+        Rotation3D::around_z(Angle::radians(PI)),
     ];
 
-    <span class="kw">let</span> <span class="ident">points</span> <span class="op">=</span> [
-        <span class="ident">point3</span>(<span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>),
-        <span class="ident">point3</span>(<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>),
-        <span class="ident">point3</span>(<span class="op">-</span><span class="number">5.0</span>, <span class="number">3.0</span>, <span class="op">-</span><span class="number">1.0</span>),
-        <span class="ident">point3</span>(<span class="op">-</span><span class="number">0.5</span>, <span class="op">-</span><span class="number">1.0</span>, <span class="number">1.5</span>),
+    <span class="kw">let </span>points = [
+        point3(<span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>),
+        point3(<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>),
+        point3(-<span class="number">5.0</span>, <span class="number">3.0</span>, -<span class="number">1.0</span>),
+        point3(-<span class="number">0.5</span>, -<span class="number">1.0</span>, <span class="number">1.5</span>),
     ];
 
-    <span class="kw">for</span> <span class="ident">rotation</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">rotations</span> {
-        <span class="kw">for</span> <span class="kw-2">&amp;</span><span class="ident">point</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">points</span> {
-            <span class="kw">let</span> <span class="ident">p1</span> <span class="op">=</span> <span class="ident">rotation</span>.<span class="ident">transform_point3d</span>(<span class="ident">point</span>);
-            <span class="kw">let</span> <span class="ident">p2</span> <span class="op">=</span> <span class="ident">rotation</span>.<span class="ident">to_transform</span>().<span class="ident">transform_point3d</span>(<span class="ident">point</span>);
-            <span class="macro">assert!</span>(<span class="ident">p1</span>.<span class="ident">approx_eq</span>(<span class="kw-2">&amp;</span><span class="ident">p2</span>.<span class="ident">unwrap</span>()));
+    <span class="kw">for </span>rotation <span class="kw">in </span><span class="kw-2">&amp;</span>rotations {
+        <span class="kw">for </span><span class="kw-2">&amp;</span>point <span class="kw">in </span><span class="kw-2">&amp;</span>points {
+            <span class="kw">let </span>p1 = rotation.transform_point3d(point);
+            <span class="kw">let </span>p2 = rotation.to_transform().transform_point3d(point);
+            <span class="macro">assert!</span>(p1.approx_eq(<span class="kw-2">&amp;</span>p2.unwrap()));
         }
     }
 }
 
-<span class="attribute">#[<span class="ident">test</span>]</span>
-<span class="kw">fn</span> <span class="ident">slerp</span>() {
-    <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::default::Rotation3D</span>;
+<span class="attribute">#[test]
+</span><span class="kw">fn </span>slerp() {
+    <span class="kw">use </span><span class="kw">crate</span>::default::Rotation3D;
 
-    <span class="kw">let</span> <span class="ident">q1</span> <span class="op">=</span> <span class="ident">Rotation3D::quaternion</span>(<span class="number">1.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>);
-    <span class="kw">let</span> <span class="ident">q2</span> <span class="op">=</span> <span class="ident">Rotation3D::quaternion</span>(<span class="number">0.0</span>, <span class="number">1.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>);
-    <span class="kw">let</span> <span class="ident">q3</span> <span class="op">=</span> <span class="ident">Rotation3D::quaternion</span>(<span class="number">0.0</span>, <span class="number">0.0</span>, <span class="op">-</span><span class="number">1.0</span>, <span class="number">0.0</span>);
+    <span class="kw">let </span>q1 = Rotation3D::quaternion(<span class="number">1.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>);
+    <span class="kw">let </span>q2 = Rotation3D::quaternion(<span class="number">0.0</span>, <span class="number">1.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>);
+    <span class="kw">let </span>q3 = Rotation3D::quaternion(<span class="number">0.0</span>, <span class="number">0.0</span>, -<span class="number">1.0</span>, <span class="number">0.0</span>);
 
-    <span class="comment">// The values below can be obtained with a python program:</span>
-    <span class="comment">// import numpy</span>
-    <span class="comment">// import quaternion</span>
-    <span class="comment">// q1 = numpy.quaternion(1, 0, 0, 0)</span>
-    <span class="comment">// q2 = numpy.quaternion(0, 1, 0, 0)</span>
-    <span class="comment">// quaternion.slerp_evaluate(q1, q2, 0.2)</span>
+    <span class="comment">// The values below can be obtained with a python program:
+    // import numpy
+    // import quaternion
+    // q1 = numpy.quaternion(1, 0, 0, 0)
+    // q2 = numpy.quaternion(0, 1, 0, 0)
+    // quaternion.slerp_evaluate(q1, q2, 0.2)
 
-    <span class="macro">assert!</span>(<span class="ident">q1</span>.<span class="ident">slerp</span>(<span class="kw-2">&amp;</span><span class="ident">q2</span>, <span class="number">0.0</span>).<span class="ident">approx_eq</span>(<span class="kw-2">&amp;</span><span class="ident">q1</span>));
-    <span class="macro">assert!</span>(<span class="ident">q1</span>.<span class="ident">slerp</span>(<span class="kw-2">&amp;</span><span class="ident">q2</span>, <span class="number">0.2</span>).<span class="ident">approx_eq</span>(<span class="kw-2">&amp;</span><span class="ident">Rotation3D::quaternion</span>(
+    </span><span class="macro">assert!</span>(q1.slerp(<span class="kw-2">&amp;</span>q2, <span class="number">0.0</span>).approx_eq(<span class="kw-2">&amp;</span>q1));
+    <span class="macro">assert!</span>(q1.slerp(<span class="kw-2">&amp;</span>q2, <span class="number">0.2</span>).approx_eq(<span class="kw-2">&amp;</span>Rotation3D::quaternion(
         <span class="number">0.951056516295154</span>,
         <span class="number">0.309016994374947</span>,
         <span class="number">0.0</span>,
-        <span class="number">0.0</span>
-    )));
-    <span class="macro">assert!</span>(<span class="ident">q1</span>.<span class="ident">slerp</span>(<span class="kw-2">&amp;</span><span class="ident">q2</span>, <span class="number">0.4</span>).<span class="ident">approx_eq</span>(<span class="kw-2">&amp;</span><span class="ident">Rotation3D::quaternion</span>(
+        <span class="number">0.0
+    </span>)));
+    <span class="macro">assert!</span>(q1.slerp(<span class="kw-2">&amp;</span>q2, <span class="number">0.4</span>).approx_eq(<span class="kw-2">&amp;</span>Rotation3D::quaternion(
         <span class="number">0.809016994374947</span>,
         <span class="number">0.587785252292473</span>,
         <span class="number">0.0</span>,
-        <span class="number">0.0</span>
-    )));
-    <span class="macro">assert!</span>(<span class="ident">q1</span>.<span class="ident">slerp</span>(<span class="kw-2">&amp;</span><span class="ident">q2</span>, <span class="number">0.6</span>).<span class="ident">approx_eq</span>(<span class="kw-2">&amp;</span><span class="ident">Rotation3D::quaternion</span>(
+        <span class="number">0.0
+    </span>)));
+    <span class="macro">assert!</span>(q1.slerp(<span class="kw-2">&amp;</span>q2, <span class="number">0.6</span>).approx_eq(<span class="kw-2">&amp;</span>Rotation3D::quaternion(
         <span class="number">0.587785252292473</span>,
         <span class="number">0.809016994374947</span>,
         <span class="number">0.0</span>,
-        <span class="number">0.0</span>
-    )));
-    <span class="macro">assert!</span>(<span class="ident">q1</span>.<span class="ident">slerp</span>(<span class="kw-2">&amp;</span><span class="ident">q2</span>, <span class="number">0.8</span>).<span class="ident">approx_eq</span>(<span class="kw-2">&amp;</span><span class="ident">Rotation3D::quaternion</span>(
+        <span class="number">0.0
+    </span>)));
+    <span class="macro">assert!</span>(q1.slerp(<span class="kw-2">&amp;</span>q2, <span class="number">0.8</span>).approx_eq(<span class="kw-2">&amp;</span>Rotation3D::quaternion(
         <span class="number">0.309016994374947</span>,
         <span class="number">0.951056516295154</span>,
         <span class="number">0.0</span>,
-        <span class="number">0.0</span>
-    )));
-    <span class="macro">assert!</span>(<span class="ident">q1</span>.<span class="ident">slerp</span>(<span class="kw-2">&amp;</span><span class="ident">q2</span>, <span class="number">1.0</span>).<span class="ident">approx_eq</span>(<span class="kw-2">&amp;</span><span class="ident">q2</span>));
+        <span class="number">0.0
+    </span>)));
+    <span class="macro">assert!</span>(q1.slerp(<span class="kw-2">&amp;</span>q2, <span class="number">1.0</span>).approx_eq(<span class="kw-2">&amp;</span>q2));
 
-    <span class="macro">assert!</span>(<span class="ident">q1</span>.<span class="ident">slerp</span>(<span class="kw-2">&amp;</span><span class="ident">q3</span>, <span class="number">0.0</span>).<span class="ident">approx_eq</span>(<span class="kw-2">&amp;</span><span class="ident">q1</span>));
-    <span class="macro">assert!</span>(<span class="ident">q1</span>.<span class="ident">slerp</span>(<span class="kw-2">&amp;</span><span class="ident">q3</span>, <span class="number">0.2</span>).<span class="ident">approx_eq</span>(<span class="kw-2">&amp;</span><span class="ident">Rotation3D::quaternion</span>(
+    <span class="macro">assert!</span>(q1.slerp(<span class="kw-2">&amp;</span>q3, <span class="number">0.0</span>).approx_eq(<span class="kw-2">&amp;</span>q1));
+    <span class="macro">assert!</span>(q1.slerp(<span class="kw-2">&amp;</span>q3, <span class="number">0.2</span>).approx_eq(<span class="kw-2">&amp;</span>Rotation3D::quaternion(
         <span class="number">0.951056516295154</span>,
         <span class="number">0.0</span>,
-        <span class="op">-</span><span class="number">0.309016994374947</span>,
-        <span class="number">0.0</span>
-    )));
-    <span class="macro">assert!</span>(<span class="ident">q1</span>.<span class="ident">slerp</span>(<span class="kw-2">&amp;</span><span class="ident">q3</span>, <span class="number">0.4</span>).<span class="ident">approx_eq</span>(<span class="kw-2">&amp;</span><span class="ident">Rotation3D::quaternion</span>(
+        -<span class="number">0.309016994374947</span>,
+        <span class="number">0.0
+    </span>)));
+    <span class="macro">assert!</span>(q1.slerp(<span class="kw-2">&amp;</span>q3, <span class="number">0.4</span>).approx_eq(<span class="kw-2">&amp;</span>Rotation3D::quaternion(
         <span class="number">0.809016994374947</span>,
         <span class="number">0.0</span>,
-        <span class="op">-</span><span class="number">0.587785252292473</span>,
-        <span class="number">0.0</span>
-    )));
-    <span class="macro">assert!</span>(<span class="ident">q1</span>.<span class="ident">slerp</span>(<span class="kw-2">&amp;</span><span class="ident">q3</span>, <span class="number">0.6</span>).<span class="ident">approx_eq</span>(<span class="kw-2">&amp;</span><span class="ident">Rotation3D::quaternion</span>(
+        -<span class="number">0.587785252292473</span>,
+        <span class="number">0.0
+    </span>)));
+    <span class="macro">assert!</span>(q1.slerp(<span class="kw-2">&amp;</span>q3, <span class="number">0.6</span>).approx_eq(<span class="kw-2">&amp;</span>Rotation3D::quaternion(
         <span class="number">0.587785252292473</span>,
         <span class="number">0.0</span>,
-        <span class="op">-</span><span class="number">0.809016994374947</span>,
-        <span class="number">0.0</span>
-    )));
-    <span class="macro">assert!</span>(<span class="ident">q1</span>.<span class="ident">slerp</span>(<span class="kw-2">&amp;</span><span class="ident">q3</span>, <span class="number">0.8</span>).<span class="ident">approx_eq</span>(<span class="kw-2">&amp;</span><span class="ident">Rotation3D::quaternion</span>(
+        -<span class="number">0.809016994374947</span>,
+        <span class="number">0.0
+    </span>)));
+    <span class="macro">assert!</span>(q1.slerp(<span class="kw-2">&amp;</span>q3, <span class="number">0.8</span>).approx_eq(<span class="kw-2">&amp;</span>Rotation3D::quaternion(
         <span class="number">0.309016994374947</span>,
         <span class="number">0.0</span>,
-        <span class="op">-</span><span class="number">0.951056516295154</span>,
-        <span class="number">0.0</span>
-    )));
-    <span class="macro">assert!</span>(<span class="ident">q1</span>.<span class="ident">slerp</span>(<span class="kw-2">&amp;</span><span class="ident">q3</span>, <span class="number">1.0</span>).<span class="ident">approx_eq</span>(<span class="kw-2">&amp;</span><span class="ident">q3</span>));
+        -<span class="number">0.951056516295154</span>,
+        <span class="number">0.0
+    </span>)));
+    <span class="macro">assert!</span>(q1.slerp(<span class="kw-2">&amp;</span>q3, <span class="number">1.0</span>).approx_eq(<span class="kw-2">&amp;</span>q3));
 }
 
-<span class="attribute">#[<span class="ident">test</span>]</span>
-<span class="kw">fn</span> <span class="ident">around_axis</span>() {
-    <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::default::Rotation3D</span>;
-    <span class="kw">use</span> <span class="ident">core::f32::consts</span>::{<span class="ident">FRAC_PI_2</span>, <span class="ident">PI</span>};
+<span class="attribute">#[test]
+</span><span class="kw">fn </span>around_axis() {
+    <span class="kw">use </span><span class="kw">crate</span>::default::Rotation3D;
+    <span class="kw">use </span>core::f32::consts::{FRAC_PI_2, PI};
 
-    <span class="comment">// Two sort of trivial cases:</span>
-    <span class="kw">let</span> <span class="ident">r1</span> <span class="op">=</span> <span class="ident">Rotation3D::around_axis</span>(<span class="ident">vec3</span>(<span class="number">1.0</span>, <span class="number">1.0</span>, <span class="number">0.0</span>), <span class="ident">Angle::radians</span>(<span class="ident">PI</span>));
-    <span class="kw">let</span> <span class="ident">r2</span> <span class="op">=</span> <span class="ident">Rotation3D::around_axis</span>(<span class="ident">vec3</span>(<span class="number">1.0</span>, <span class="number">1.0</span>, <span class="number">0.0</span>), <span class="ident">Angle::radians</span>(<span class="ident">FRAC_PI_2</span>));
-    <span class="macro">assert!</span>(<span class="ident">r1</span>
-        .<span class="ident">transform_point3d</span>(<span class="ident">point3</span>(<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">0.0</span>))
-        .<span class="ident">approx_eq</span>(<span class="kw-2">&amp;</span><span class="ident">point3</span>(<span class="number">2.0</span>, <span class="number">1.0</span>, <span class="number">0.0</span>)));
-    <span class="macro">assert!</span>(<span class="ident">r2</span>
-        .<span class="ident">transform_point3d</span>(<span class="ident">point3</span>(<span class="number">1.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>))
-        .<span class="ident">approx_eq</span>(<span class="kw-2">&amp;</span><span class="ident">point3</span>(<span class="number">0.5</span>, <span class="number">0.5</span>, <span class="op">-</span><span class="number">0.5</span>.<span class="ident">sqrt</span>())));
+    <span class="comment">// Two sort of trivial cases:
+    </span><span class="kw">let </span>r1 = Rotation3D::around_axis(vec3(<span class="number">1.0</span>, <span class="number">1.0</span>, <span class="number">0.0</span>), Angle::radians(PI));
+    <span class="kw">let </span>r2 = Rotation3D::around_axis(vec3(<span class="number">1.0</span>, <span class="number">1.0</span>, <span class="number">0.0</span>), Angle::radians(FRAC_PI_2));
+    <span class="macro">assert!</span>(r1
+        .transform_point3d(point3(<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">0.0</span>))
+        .approx_eq(<span class="kw-2">&amp;</span>point3(<span class="number">2.0</span>, <span class="number">1.0</span>, <span class="number">0.0</span>)));
+    <span class="macro">assert!</span>(r2
+        .transform_point3d(point3(<span class="number">1.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>))
+        .approx_eq(<span class="kw-2">&amp;</span>point3(<span class="number">0.5</span>, <span class="number">0.5</span>, -<span class="number">0.5</span>.sqrt())));
 
-    <span class="comment">// A more arbitrary test (made up with numpy):</span>
-    <span class="kw">let</span> <span class="ident">r3</span> <span class="op">=</span> <span class="ident">Rotation3D::around_axis</span>(<span class="ident">vec3</span>(<span class="number">0.5</span>, <span class="number">1.0</span>, <span class="number">2.0</span>), <span class="ident">Angle::radians</span>(<span class="number">2.291288</span>));
-    <span class="macro">assert!</span>(<span class="ident">r3</span>
-        .<span class="ident">transform_point3d</span>(<span class="ident">point3</span>(<span class="number">1.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>))
-        .<span class="ident">approx_eq</span>(<span class="kw-2">&amp;</span><span class="ident">point3</span>(<span class="op">-</span><span class="number">0.58071821</span>, <span class="number">0.81401868</span>, <span class="op">-</span><span class="number">0.01182979</span>)));
+    <span class="comment">// A more arbitrary test (made up with numpy):
+    </span><span class="kw">let </span>r3 = Rotation3D::around_axis(vec3(<span class="number">0.5</span>, <span class="number">1.0</span>, <span class="number">2.0</span>), Angle::radians(<span class="number">2.291288</span>));
+    <span class="macro">assert!</span>(r3
+        .transform_point3d(point3(<span class="number">1.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>))
+        .approx_eq(<span class="kw-2">&amp;</span>point3(-<span class="number">0.58071821</span>, <span class="number">0.81401868</span>, -<span class="number">0.01182979</span>)));
 }
 
-<span class="attribute">#[<span class="ident">test</span>]</span>
-<span class="kw">fn</span> <span class="ident">from_euler</span>() {
-    <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::default::Rotation3D</span>;
-    <span class="kw">use</span> <span class="ident">core::f32::consts::FRAC_PI_2</span>;
+<span class="attribute">#[test]
+</span><span class="kw">fn </span>from_euler() {
+    <span class="kw">use </span><span class="kw">crate</span>::default::Rotation3D;
+    <span class="kw">use </span>core::f32::consts::FRAC_PI_2;
 
-    <span class="comment">// First test simple separate yaw pitch and roll rotations, because it is easy to come</span>
-    <span class="comment">// up with the corresponding quaternion.</span>
-    <span class="comment">// Since several quaternions can represent the same transformation we compare the result</span>
-    <span class="comment">// of transforming a point rather than the values of each quaternions.</span>
-    <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> <span class="ident">point3</span>(<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>);
+    <span class="comment">// First test simple separate yaw pitch and roll rotations, because it is easy to come
+    // up with the corresponding quaternion.
+    // Since several quaternions can represent the same transformation we compare the result
+    // of transforming a point rather than the values of each quaternions.
+    </span><span class="kw">let </span>p = point3(<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>);
 
-    <span class="kw">let</span> <span class="ident">angle</span> <span class="op">=</span> <span class="ident">Angle::radians</span>(<span class="ident">FRAC_PI_2</span>);
-    <span class="kw">let</span> <span class="ident">zero</span> <span class="op">=</span> <span class="ident">Angle::radians</span>(<span class="number">0.0</span>);
+    <span class="kw">let </span>angle = Angle::radians(FRAC_PI_2);
+    <span class="kw">let </span>zero = Angle::radians(<span class="number">0.0</span>);
 
-    <span class="comment">// roll</span>
-    <span class="kw">let</span> <span class="ident">roll_re</span> <span class="op">=</span> <span class="ident">Rotation3D::euler</span>(<span class="ident">angle</span>, <span class="ident">zero</span>, <span class="ident">zero</span>);
-    <span class="kw">let</span> <span class="ident">roll_rq</span> <span class="op">=</span> <span class="ident">Rotation3D::around_x</span>(<span class="ident">angle</span>);
-    <span class="kw">let</span> <span class="ident">roll_pe</span> <span class="op">=</span> <span class="ident">roll_re</span>.<span class="ident">transform_point3d</span>(<span class="ident">p</span>);
-    <span class="kw">let</span> <span class="ident">roll_pq</span> <span class="op">=</span> <span class="ident">roll_rq</span>.<span class="ident">transform_point3d</span>(<span class="ident">p</span>);
+    <span class="comment">// roll
+    </span><span class="kw">let </span>roll_re = Rotation3D::euler(angle, zero, zero);
+    <span class="kw">let </span>roll_rq = Rotation3D::around_x(angle);
+    <span class="kw">let </span>roll_pe = roll_re.transform_point3d(p);
+    <span class="kw">let </span>roll_pq = roll_rq.transform_point3d(p);
 
-    <span class="comment">// pitch</span>
-    <span class="kw">let</span> <span class="ident">pitch_re</span> <span class="op">=</span> <span class="ident">Rotation3D::euler</span>(<span class="ident">zero</span>, <span class="ident">angle</span>, <span class="ident">zero</span>);
-    <span class="kw">let</span> <span class="ident">pitch_rq</span> <span class="op">=</span> <span class="ident">Rotation3D::around_y</span>(<span class="ident">angle</span>);
-    <span class="kw">let</span> <span class="ident">pitch_pe</span> <span class="op">=</span> <span class="ident">pitch_re</span>.<span class="ident">transform_point3d</span>(<span class="ident">p</span>);
-    <span class="kw">let</span> <span class="ident">pitch_pq</span> <span class="op">=</span> <span class="ident">pitch_rq</span>.<span class="ident">transform_point3d</span>(<span class="ident">p</span>);
+    <span class="comment">// pitch
+    </span><span class="kw">let </span>pitch_re = Rotation3D::euler(zero, angle, zero);
+    <span class="kw">let </span>pitch_rq = Rotation3D::around_y(angle);
+    <span class="kw">let </span>pitch_pe = pitch_re.transform_point3d(p);
+    <span class="kw">let </span>pitch_pq = pitch_rq.transform_point3d(p);
 
-    <span class="comment">// yaw</span>
-    <span class="kw">let</span> <span class="ident">yaw_re</span> <span class="op">=</span> <span class="ident">Rotation3D::euler</span>(<span class="ident">zero</span>, <span class="ident">zero</span>, <span class="ident">angle</span>);
-    <span class="kw">let</span> <span class="ident">yaw_rq</span> <span class="op">=</span> <span class="ident">Rotation3D::around_z</span>(<span class="ident">angle</span>);
-    <span class="kw">let</span> <span class="ident">yaw_pe</span> <span class="op">=</span> <span class="ident">yaw_re</span>.<span class="ident">transform_point3d</span>(<span class="ident">p</span>);
-    <span class="kw">let</span> <span class="ident">yaw_pq</span> <span class="op">=</span> <span class="ident">yaw_rq</span>.<span class="ident">transform_point3d</span>(<span class="ident">p</span>);
+    <span class="comment">// yaw
+    </span><span class="kw">let </span>yaw_re = Rotation3D::euler(zero, zero, angle);
+    <span class="kw">let </span>yaw_rq = Rotation3D::around_z(angle);
+    <span class="kw">let </span>yaw_pe = yaw_re.transform_point3d(p);
+    <span class="kw">let </span>yaw_pq = yaw_rq.transform_point3d(p);
 
-    <span class="macro">assert!</span>(<span class="ident">roll_pe</span>.<span class="ident">approx_eq</span>(<span class="kw-2">&amp;</span><span class="ident">roll_pq</span>));
-    <span class="macro">assert!</span>(<span class="ident">pitch_pe</span>.<span class="ident">approx_eq</span>(<span class="kw-2">&amp;</span><span class="ident">pitch_pq</span>));
-    <span class="macro">assert!</span>(<span class="ident">yaw_pe</span>.<span class="ident">approx_eq</span>(<span class="kw-2">&amp;</span><span class="ident">yaw_pq</span>));
+    <span class="macro">assert!</span>(roll_pe.approx_eq(<span class="kw-2">&amp;</span>roll_pq));
+    <span class="macro">assert!</span>(pitch_pe.approx_eq(<span class="kw-2">&amp;</span>pitch_pq));
+    <span class="macro">assert!</span>(yaw_pe.approx_eq(<span class="kw-2">&amp;</span>yaw_pq));
 
-    <span class="comment">// Now check that the yaw pitch and roll transformations when combined are applied in</span>
-    <span class="comment">// the proper order: roll -&gt; pitch -&gt; yaw.</span>
-    <span class="kw">let</span> <span class="ident">ypr_e</span> <span class="op">=</span> <span class="ident">Rotation3D::euler</span>(<span class="ident">angle</span>, <span class="ident">angle</span>, <span class="ident">angle</span>);
-    <span class="kw">let</span> <span class="ident">ypr_q</span> <span class="op">=</span> <span class="ident">roll_rq</span>.<span class="ident">then</span>(<span class="kw-2">&amp;</span><span class="ident">pitch_rq</span>).<span class="ident">then</span>(<span class="kw-2">&amp;</span><span class="ident">yaw_rq</span>);
-    <span class="kw">let</span> <span class="ident">ypr_pe</span> <span class="op">=</span> <span class="ident">ypr_e</span>.<span class="ident">transform_point3d</span>(<span class="ident">p</span>);
-    <span class="kw">let</span> <span class="ident">ypr_pq</span> <span class="op">=</span> <span class="ident">ypr_q</span>.<span class="ident">transform_point3d</span>(<span class="ident">p</span>);
+    <span class="comment">// Now check that the yaw pitch and roll transformations when combined are applied in
+    // the proper order: roll -&gt; pitch -&gt; yaw.
+    </span><span class="kw">let </span>ypr_e = Rotation3D::euler(angle, angle, angle);
+    <span class="kw">let </span>ypr_q = roll_rq.then(<span class="kw-2">&amp;</span>pitch_rq).then(<span class="kw-2">&amp;</span>yaw_rq);
+    <span class="kw">let </span>ypr_pe = ypr_e.transform_point3d(p);
+    <span class="kw">let </span>ypr_pq = ypr_q.transform_point3d(p);
 
-    <span class="macro">assert!</span>(<span class="ident">ypr_pe</span>.<span class="ident">approx_eq</span>(<span class="kw-2">&amp;</span><span class="ident">ypr_pq</span>));
+    <span class="macro">assert!</span>(ypr_pe.approx_eq(<span class="kw-2">&amp;</span>ypr_pq));
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="euclid" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0-nightly (12cd71f4d 2022-06-01)" ></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="euclid" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (17cbdfd07 2022-09-13)" ></div></body></html>

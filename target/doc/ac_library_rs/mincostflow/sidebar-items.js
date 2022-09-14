@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["MinCostFlowEdge",""],["MinCostFlowGraph",""]]});
+window.SIDEBAR_ITEMS = {"struct":[["MinCostFlowEdge",""],["MinCostFlowGraph",""]]};

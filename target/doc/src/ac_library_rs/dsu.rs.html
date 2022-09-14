@@ -1,11 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/bcfam/.cargo/git/checkouts/ac-library-rs-d342211755004e20/d2b35ac/src/dsu.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>dsu.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><script defer src="../../main.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script>
-    <noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../ac_library_rs/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"></h2>
-    </nav>
-    <nav class="sidebar"><a class="sidebar-logo" href="../../ac_library_rs/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../ac_library_rs/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
-                                <a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div>
-                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/bcfam/.cargo/git/checkouts/ac-library-rs-d342211755004e20/d2b35ac/src/dsu.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>dsu.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../ac_library_rs/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../ac_library_rs/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../ac_library_rs/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -210,211 +203,210 @@
 <span id="203">203</span>
 <span id="204">204</span>
 <span id="205">205</span>
-</pre><pre class="rust"><code><span class="doccomment">//! A Disjoint set union (DSU) with union by size and path compression.</span>
+</pre><pre class="rust"><code><span class="doccomment">//! A Disjoint set union (DSU) with union by size and path compression.
 
-<span class="doccomment">/// A Disjoint set union (DSU) with union by size and path compression.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// See: [Zvi Galil and Giuseppe F. Italiano, Data structures and algorithms for disjoint set union problems](https://core.ac.uk/download/pdf/161439519.pdf)</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// In the following documentation, let $n$ be the size of the DSU.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Example</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">/// use ac_library_rs::Dsu;</span>
-<span class="doccomment">/// use proconio::{input, source::once::OnceSource};</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// input! {</span>
-<span class="doccomment">///     from OnceSource::from(</span>
-<span class="doccomment">///         &quot;5\n\</span>
-<span class="doccomment">///          3\n\</span>
-<span class="doccomment">///          0 1\n\</span>
-<span class="doccomment">///          2 3\n\</span>
-<span class="doccomment">///          3 4\n&quot;,</span>
-<span class="doccomment">///     ),</span>
-<span class="doccomment">///     n: usize,</span>
-<span class="doccomment">///     abs: [(usize, usize)],</span>
-<span class="doccomment">/// }</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// let mut dsu = Dsu::new(n);</span>
-<span class="doccomment">/// for (a, b) in abs {</span>
-<span class="doccomment">///     dsu.merge(a, b);</span>
-<span class="doccomment">/// }</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// assert!(dsu.same(0, 1));</span>
-<span class="doccomment">/// assert!(!dsu.same(1, 2));</span>
-<span class="doccomment">/// assert!(dsu.same(2, 4));</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// assert_eq!(</span>
-<span class="doccomment">///     dsu.groups()</span>
-<span class="doccomment">///         .into_iter()</span>
-<span class="doccomment">///         .map(|mut group| {</span>
-<span class="doccomment">///             group.sort_unstable();</span>
-<span class="doccomment">///             group</span>
-<span class="doccomment">///         })</span>
-<span class="doccomment">///         .collect::&lt;Vec&lt;_&gt;&gt;(),</span>
-<span class="doccomment">///     [&amp;[0, 1][..], &amp;[2, 3, 4][..]],</span>
-<span class="doccomment">/// );</span>
-<span class="doccomment">/// ```</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Dsu</span> {
-    <span class="ident">n</span>: <span class="ident">usize</span>,
-    <span class="comment">// root node: -1 * component size</span>
-    <span class="comment">// otherwise: parent</span>
-    <span class="ident">parent_or_size</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>,
+/// A Disjoint set union (DSU) with union by size and path compression.
+///
+/// See: [Zvi Galil and Giuseppe F. Italiano, Data structures and algorithms for disjoint set union problems](https://core.ac.uk/download/pdf/161439519.pdf)
+///
+/// In the following documentation, let $n$ be the size of the DSU.
+///
+/// # Example
+///
+/// ```
+/// use ac_library_rs::Dsu;
+/// use proconio::{input, source::once::OnceSource};
+///
+/// input! {
+///     from OnceSource::from(
+///         &quot;5\n\
+///          3\n\
+///          0 1\n\
+///          2 3\n\
+///          3 4\n&quot;,
+///     ),
+///     n: usize,
+///     abs: [(usize, usize)],
+/// }
+///
+/// let mut dsu = Dsu::new(n);
+/// for (a, b) in abs {
+///     dsu.merge(a, b);
+/// }
+///
+/// assert!(dsu.same(0, 1));
+/// assert!(!dsu.same(1, 2));
+/// assert!(dsu.same(2, 4));
+///
+/// assert_eq!(
+///     dsu.groups()
+///         .into_iter()
+///         .map(|mut group| {
+///             group.sort_unstable();
+///             group
+///         })
+///         .collect::&lt;Vec&lt;_&gt;&gt;(),
+///     [&amp;[0, 1][..], &amp;[2, 3, 4][..]],
+/// );
+/// ```
+</span><span class="kw">pub struct </span>Dsu {
+    n: usize,
+    <span class="comment">// root node: -1 * component size
+    // otherwise: parent
+    </span>parent_or_size: Vec&lt;i32&gt;,
 }
 
-<span class="kw">impl</span> <span class="ident">Dsu</span> {
-    <span class="doccomment">/// Creates a new `Dsu`.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Constraints</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// - $0 \leq n \leq 10^8$</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Complexity</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// - $O(n)$</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">size</span>: <span class="ident">usize</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> {
-            <span class="ident">n</span>: <span class="ident">size</span>,
-            <span class="ident">parent_or_size</span>: <span class="macro">vec!</span>[<span class="op">-</span><span class="number">1</span>; <span class="ident">size</span>],
+<span class="kw">impl </span>Dsu {
+    <span class="doccomment">/// Creates a new `Dsu`.
+    ///
+    /// # Constraints
+    ///
+    /// - $0 \leq n \leq 10^8$
+    ///
+    /// # Complexity
+    ///
+    /// - $O(n)$
+    </span><span class="kw">pub fn </span>new(size: usize) -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{
+            n: size,
+            parent_or_size: <span class="macro">vec!</span>[-<span class="number">1</span>; size],
         }
     }
 
-    <span class="comment">// `\textsc` does not work in KaTeX</span>
-    <span class="doccomment">/// Performs the Uɴɪᴏɴ operation.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Constraints</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// - $0 \leq a &lt; n$</span>
-    <span class="doccomment">/// - $0 \leq b &lt; n$</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Panics</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Panics if the above constraints are not satisfied.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Complexity</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// - $O(\alpha(n))$ amortized</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">merge</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">a</span>: <span class="ident">usize</span>, <span class="ident">b</span>: <span class="ident">usize</span>) -&gt; <span class="ident">usize</span> {
-        <span class="macro">assert!</span>(<span class="ident">a</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">n</span>);
-        <span class="macro">assert!</span>(<span class="ident">b</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">n</span>);
-        <span class="kw">let</span> (<span class="kw-2">mut</span> <span class="ident">x</span>, <span class="kw-2">mut</span> <span class="ident">y</span>) <span class="op">=</span> (<span class="self">self</span>.<span class="ident">leader</span>(<span class="ident">a</span>), <span class="self">self</span>.<span class="ident">leader</span>(<span class="ident">b</span>));
-        <span class="kw">if</span> <span class="ident">x</span> <span class="op">==</span> <span class="ident">y</span> {
-            <span class="kw">return</span> <span class="ident">x</span>;
+    <span class="comment">// `\textsc` does not work in KaTeX
+    </span><span class="doccomment">/// Performs the Uɴɪᴏɴ operation.
+    ///
+    /// # Constraints
+    ///
+    /// - $0 \leq a &lt; n$
+    /// - $0 \leq b &lt; n$
+    ///
+    /// # Panics
+    ///
+    /// Panics if the above constraints are not satisfied.
+    ///
+    /// # Complexity
+    ///
+    /// - $O(\alpha(n))$ amortized
+    </span><span class="kw">pub fn </span>merge(<span class="kw-2">&amp;mut </span><span class="self">self</span>, a: usize, b: usize) -&gt; usize {
+        <span class="macro">assert!</span>(a &lt; <span class="self">self</span>.n);
+        <span class="macro">assert!</span>(b &lt; <span class="self">self</span>.n);
+        <span class="kw">let </span>(<span class="kw-2">mut </span>x, <span class="kw-2">mut </span>y) = (<span class="self">self</span>.leader(a), <span class="self">self</span>.leader(b));
+        <span class="kw">if </span>x == y {
+            <span class="kw">return </span>x;
         }
-        <span class="kw">if</span> <span class="op">-</span><span class="self">self</span>.<span class="ident">parent_or_size</span>[<span class="ident">x</span>] <span class="op">&lt;</span> <span class="op">-</span><span class="self">self</span>.<span class="ident">parent_or_size</span>[<span class="ident">y</span>] {
-            <span class="ident">std::mem::swap</span>(<span class="kw-2">&amp;mut</span> <span class="ident">x</span>, <span class="kw-2">&amp;mut</span> <span class="ident">y</span>);
+        <span class="kw">if </span>-<span class="self">self</span>.parent_or_size[x] &lt; -<span class="self">self</span>.parent_or_size[y] {
+            std::mem::swap(<span class="kw-2">&amp;mut </span>x, <span class="kw-2">&amp;mut </span>y);
         }
-        <span class="self">self</span>.<span class="ident">parent_or_size</span>[<span class="ident">x</span>] <span class="op">+</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">parent_or_size</span>[<span class="ident">y</span>];
-        <span class="self">self</span>.<span class="ident">parent_or_size</span>[<span class="ident">y</span>] <span class="op">=</span> <span class="ident">x</span> <span class="kw">as</span> <span class="ident">i32</span>;
-        <span class="ident">x</span>
+        <span class="self">self</span>.parent_or_size[x] += <span class="self">self</span>.parent_or_size[y];
+        <span class="self">self</span>.parent_or_size[y] = x <span class="kw">as </span>i32;
+        x
     }
 
-    <span class="doccomment">/// Returns whether the vertices $a$ and $b$ are in the same connected component.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Constraints</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// - $0 \leq a &lt; n$</span>
-    <span class="doccomment">/// - $0 \leq b &lt; n$</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Panics</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Panics if the above constraint is not satisfied.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Complexity</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// - $O(\alpha(n))$ amortized</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">same</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">a</span>: <span class="ident">usize</span>, <span class="ident">b</span>: <span class="ident">usize</span>) -&gt; <span class="ident">bool</span> {
-        <span class="macro">assert!</span>(<span class="ident">a</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">n</span>);
-        <span class="macro">assert!</span>(<span class="ident">b</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">n</span>);
-        <span class="self">self</span>.<span class="ident">leader</span>(<span class="ident">a</span>) <span class="op">==</span> <span class="self">self</span>.<span class="ident">leader</span>(<span class="ident">b</span>)
+    <span class="doccomment">/// Returns whether the vertices $a$ and $b$ are in the same connected component.
+    ///
+    /// # Constraints
+    ///
+    /// - $0 \leq a &lt; n$
+    /// - $0 \leq b &lt; n$
+    ///
+    /// # Panics
+    ///
+    /// Panics if the above constraint is not satisfied.
+    ///
+    /// # Complexity
+    ///
+    /// - $O(\alpha(n))$ amortized
+    </span><span class="kw">pub fn </span>same(<span class="kw-2">&amp;mut </span><span class="self">self</span>, a: usize, b: usize) -&gt; bool {
+        <span class="macro">assert!</span>(a &lt; <span class="self">self</span>.n);
+        <span class="macro">assert!</span>(b &lt; <span class="self">self</span>.n);
+        <span class="self">self</span>.leader(a) == <span class="self">self</span>.leader(b)
     }
 
-    <span class="doccomment">/// Performs the Fɪɴᴅ operation.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Constraints</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// - $0 \leq a &lt; n$</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Panics</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Panics if the above constraint is not satisfied.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Complexity</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// - $O(\alpha(n))$ amortized</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">leader</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">a</span>: <span class="ident">usize</span>) -&gt; <span class="ident">usize</span> {
-        <span class="macro">assert!</span>(<span class="ident">a</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">n</span>);
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">parent_or_size</span>[<span class="ident">a</span>] <span class="op">&lt;</span> <span class="number">0</span> {
-            <span class="kw">return</span> <span class="ident">a</span>;
+    <span class="doccomment">/// Performs the Fɪɴᴅ operation.
+    ///
+    /// # Constraints
+    ///
+    /// - $0 \leq a &lt; n$
+    ///
+    /// # Panics
+    ///
+    /// Panics if the above constraint is not satisfied.
+    ///
+    /// # Complexity
+    ///
+    /// - $O(\alpha(n))$ amortized
+    </span><span class="kw">pub fn </span>leader(<span class="kw-2">&amp;mut </span><span class="self">self</span>, a: usize) -&gt; usize {
+        <span class="macro">assert!</span>(a &lt; <span class="self">self</span>.n);
+        <span class="kw">if </span><span class="self">self</span>.parent_or_size[a] &lt; <span class="number">0 </span>{
+            <span class="kw">return </span>a;
         }
-        <span class="self">self</span>.<span class="ident">parent_or_size</span>[<span class="ident">a</span>] <span class="op">=</span> <span class="self">self</span>.<span class="ident">leader</span>(<span class="self">self</span>.<span class="ident">parent_or_size</span>[<span class="ident">a</span>] <span class="kw">as</span> <span class="ident">usize</span>) <span class="kw">as</span> <span class="ident">i32</span>;
-        <span class="self">self</span>.<span class="ident">parent_or_size</span>[<span class="ident">a</span>] <span class="kw">as</span> <span class="ident">usize</span>
+        <span class="self">self</span>.parent_or_size[a] = <span class="self">self</span>.leader(<span class="self">self</span>.parent_or_size[a] <span class="kw">as </span>usize) <span class="kw">as </span>i32;
+        <span class="self">self</span>.parent_or_size[a] <span class="kw">as </span>usize
     }
 
-    <span class="doccomment">/// Returns the size of the connected component that contains the vertex $a$.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Constraints</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// - $0 \leq a &lt; n$</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Panics</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Panics if the above constraint is not satisfied.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Complexity</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// - $O(\alpha(n))$ amortized</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">size</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">a</span>: <span class="ident">usize</span>) -&gt; <span class="ident">usize</span> {
-        <span class="macro">assert!</span>(<span class="ident">a</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">n</span>);
-        <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">leader</span>(<span class="ident">a</span>);
-        <span class="op">-</span><span class="self">self</span>.<span class="ident">parent_or_size</span>[<span class="ident">x</span>] <span class="kw">as</span> <span class="ident">usize</span>
+    <span class="doccomment">/// Returns the size of the connected component that contains the vertex $a$.
+    ///
+    /// # Constraints
+    ///
+    /// - $0 \leq a &lt; n$
+    ///
+    /// # Panics
+    ///
+    /// Panics if the above constraint is not satisfied.
+    ///
+    /// # Complexity
+    ///
+    /// - $O(\alpha(n))$ amortized
+    </span><span class="kw">pub fn </span>size(<span class="kw-2">&amp;mut </span><span class="self">self</span>, a: usize) -&gt; usize {
+        <span class="macro">assert!</span>(a &lt; <span class="self">self</span>.n);
+        <span class="kw">let </span>x = <span class="self">self</span>.leader(a);
+        -<span class="self">self</span>.parent_or_size[x] <span class="kw">as </span>usize
     }
 
-    <span class="doccomment">/// Divides the graph into connected components.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// The result may not be ordered.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Complexity</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// - $O(n)$</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">groups</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">leader_buf</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="number">0</span>; <span class="self">self</span>.<span class="ident">n</span>];
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">group_size</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="number">0</span>; <span class="self">self</span>.<span class="ident">n</span>];
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="self">self</span>.<span class="ident">n</span> {
-            <span class="ident">leader_buf</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="self">self</span>.<span class="ident">leader</span>(<span class="ident">i</span>);
-            <span class="ident">group_size</span>[<span class="ident">leader_buf</span>[<span class="ident">i</span>]] <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+    <span class="doccomment">/// Divides the graph into connected components.
+    ///
+    /// The result may not be ordered.
+    ///
+    /// # Complexity
+    ///
+    /// - $O(n)$
+    </span><span class="kw">pub fn </span>groups(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; Vec&lt;Vec&lt;usize&gt;&gt; {
+        <span class="kw">let </span><span class="kw-2">mut </span>leader_buf = <span class="macro">vec!</span>[<span class="number">0</span>; <span class="self">self</span>.n];
+        <span class="kw">let </span><span class="kw-2">mut </span>group_size = <span class="macro">vec!</span>[<span class="number">0</span>; <span class="self">self</span>.n];
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..<span class="self">self</span>.n {
+            leader_buf[i] = <span class="self">self</span>.leader(i);
+            group_size[leader_buf[i]] += <span class="number">1</span>;
         }
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="ident">Vec::new</span>(); <span class="self">self</span>.<span class="ident">n</span>];
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="self">self</span>.<span class="ident">n</span> {
-            <span class="ident">result</span>[<span class="ident">i</span>].<span class="ident">reserve</span>(<span class="ident">group_size</span>[<span class="ident">i</span>]);
+        <span class="kw">let </span><span class="kw-2">mut </span>result = <span class="macro">vec!</span>[Vec::new(); <span class="self">self</span>.n];
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..<span class="self">self</span>.n {
+            result[i].reserve(group_size[i]);
         }
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="self">self</span>.<span class="ident">n</span> {
-            <span class="ident">result</span>[<span class="ident">leader_buf</span>[<span class="ident">i</span>]].<span class="ident">push</span>(<span class="ident">i</span>);
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..<span class="self">self</span>.n {
+            result[leader_buf[i]].push(i);
         }
-        <span class="ident">result</span>
-            .<span class="ident">into_iter</span>()
-            .<span class="ident">filter</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="op">!</span><span class="ident">x</span>.<span class="ident">is_empty</span>())
-            .<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>()
+        result
+            .into_iter()
+            .filter(|x| !x.is_empty())
+            .collect::&lt;Vec&lt;Vec&lt;usize&gt;&gt;&gt;()
     }
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
-<span class="kw">mod</span> <span class="ident">tests</span> {
-    <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
+<span class="attribute">#[cfg(test)]
+</span><span class="kw">mod </span>tests {
+    <span class="kw">use super</span>::<span class="kw-2">*</span>;
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">dsu_works</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">d</span> <span class="op">=</span> <span class="ident">Dsu::new</span>(<span class="number">4</span>);
-        <span class="ident">d</span>.<span class="ident">merge</span>(<span class="number">0</span>, <span class="number">1</span>);
-        <span class="macro">assert!</span>(<span class="ident">d</span>.<span class="ident">same</span>(<span class="number">0</span>, <span class="number">1</span>));
-        <span class="ident">d</span>.<span class="ident">merge</span>(<span class="number">1</span>, <span class="number">2</span>);
-        <span class="macro">assert!</span>(<span class="ident">d</span>.<span class="ident">same</span>(<span class="number">0</span>, <span class="number">2</span>));
-        <span class="macro">assert_eq!</span>(<span class="ident">d</span>.<span class="ident">size</span>(<span class="number">0</span>), <span class="number">3</span>);
-        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">d</span>.<span class="ident">same</span>(<span class="number">0</span>, <span class="number">3</span>));
-        <span class="macro">assert_eq!</span>(<span class="ident">d</span>.<span class="ident">groups</span>(), <span class="macro">vec!</span>[<span class="macro">vec!</span>[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>], <span class="macro">vec!</span>[<span class="number">3</span>]]);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>dsu_works() {
+        <span class="kw">let </span><span class="kw-2">mut </span>d = Dsu::new(<span class="number">4</span>);
+        d.merge(<span class="number">0</span>, <span class="number">1</span>);
+        <span class="macro">assert!</span>(d.same(<span class="number">0</span>, <span class="number">1</span>));
+        d.merge(<span class="number">1</span>, <span class="number">2</span>);
+        <span class="macro">assert!</span>(d.same(<span class="number">0</span>, <span class="number">2</span>));
+        <span class="macro">assert_eq!</span>(d.size(<span class="number">0</span>), <span class="number">3</span>);
+        <span class="macro">assert!</span>(!d.same(<span class="number">0</span>, <span class="number">3</span>));
+        <span class="macro">assert_eq!</span>(d.groups(), <span class="macro">vec!</span>[<span class="macro">vec!</span>[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>], <span class="macro">vec!</span>[<span class="number">3</span>]]);
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="ac_library_rs" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0-nightly (12cd71f4d 2022-06-01)" ></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="ac_library_rs" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (17cbdfd07 2022-09-13)" ></div></body></html>

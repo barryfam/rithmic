@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["max",""],["min",""]]});
+window.SIDEBAR_ITEMS = {"fn":[["max",""],["min",""]]};

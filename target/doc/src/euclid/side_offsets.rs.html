@@ -1,11 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/bcfam/.cargo/registry/src/github.com-1ecc6299db9ec823/euclid-0.22.7/src/side_offsets.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>side_offsets.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><script defer src="../../main.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script>
-    <noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../euclid/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"></h2>
-    </nav>
-    <nav class="sidebar"><a class="sidebar-logo" href="../../euclid/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../euclid/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
-                                <a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div>
-                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/bcfam/.cargo/registry/src/github.com-1ecc6299db9ec823/euclid-0.22.7/src/side_offsets.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>side_offsets.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../euclid/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../euclid/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../euclid/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -525,526 +518,525 @@
 <span id="518">518</span>
 <span id="519">519</span>
 <span id="520">520</span>
-</pre><pre class="rust"><code><span class="comment">// Copyright 2013 The Servo Project Developers. See the COPYRIGHT</span>
-<span class="comment">// file at the top-level directory of this distribution.</span>
-<span class="comment">//</span>
-<span class="comment">// Licensed under the Apache License, Version 2.0 &lt;LICENSE-APACHE or</span>
-<span class="comment">// http://www.apache.org/licenses/LICENSE-2.0&gt; or the MIT license</span>
-<span class="comment">// &lt;LICENSE-MIT or http://opensource.org/licenses/MIT&gt;, at your</span>
-<span class="comment">// option. This file may not be copied, modified, or distributed</span>
-<span class="comment">// except according to those terms.</span>
+</pre><pre class="rust"><code><span class="comment">// Copyright 2013 The Servo Project Developers. See the COPYRIGHT
+// file at the top-level directory of this distribution.
+//
+// Licensed under the Apache License, Version 2.0 &lt;LICENSE-APACHE or
+// http://www.apache.org/licenses/LICENSE-2.0&gt; or the MIT license
+// &lt;LICENSE-MIT or http://opensource.org/licenses/MIT&gt;, at your
+// option. This file may not be copied, modified, or distributed
+// except according to those terms.
 
-<span class="doccomment">//! A group of side offsets, which correspond to top/left/bottom/right for borders, padding,</span>
-<span class="doccomment">//! and margins in CSS.</span>
+</span><span class="doccomment">//! A group of side offsets, which correspond to top/left/bottom/right for borders, padding,
+//! and margins in CSS.
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::length::Length</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::num::Zero</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::scale::Scale</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::Vector2D</span>;
-<span class="kw">use</span> <span class="ident">core::cmp</span>::{<span class="ident">Eq</span>, <span class="ident">PartialEq</span>};
-<span class="kw">use</span> <span class="ident">core::fmt</span>;
-<span class="kw">use</span> <span class="ident">core::hash::Hash</span>;
-<span class="kw">use</span> <span class="ident">core::marker::PhantomData</span>;
-<span class="kw">use</span> <span class="ident">core::ops</span>::{<span class="ident">Add</span>, <span class="ident">AddAssign</span>, <span class="ident">Sub</span>, <span class="ident">SubAssign</span>, <span class="ident">Div</span>, <span class="ident">DivAssign</span>, <span class="ident">Mul</span>, <span class="ident">MulAssign</span>, <span class="ident">Neg</span>};
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;serde&quot;</span>)]</span>
-<span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>};
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;bytemuck&quot;</span>)]</span>
-<span class="kw">use</span> <span class="ident">bytemuck</span>::{<span class="ident">Zeroable</span>, <span class="ident">Pod</span>};
+</span><span class="kw">use </span><span class="kw">crate</span>::length::Length;
+<span class="kw">use </span><span class="kw">crate</span>::num::Zero;
+<span class="kw">use </span><span class="kw">crate</span>::scale::Scale;
+<span class="kw">use </span><span class="kw">crate</span>::Vector2D;
+<span class="kw">use </span>core::cmp::{Eq, PartialEq};
+<span class="kw">use </span>core::fmt;
+<span class="kw">use </span>core::hash::Hash;
+<span class="kw">use </span>core::marker::PhantomData;
+<span class="kw">use </span>core::ops::{Add, AddAssign, Sub, SubAssign, Div, DivAssign, Mul, MulAssign, Neg};
+<span class="attribute">#[cfg(feature = <span class="string">&quot;serde&quot;</span>)]
+</span><span class="kw">use </span>serde::{Deserialize, Serialize};
+<span class="attribute">#[cfg(feature = <span class="string">&quot;bytemuck&quot;</span>)]
+</span><span class="kw">use </span>bytemuck::{Zeroable, Pod};
 
-<span class="doccomment">/// A group of 2D side offsets, which correspond to top/right/bottom/left for borders, padding,</span>
-<span class="doccomment">/// and margins in CSS, optionally tagged with a unit.</span>
-<span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
-<span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;serde&quot;</span>, <span class="ident">derive</span>(<span class="ident">Serialize</span>, <span class="ident">Deserialize</span>))]</span>
-<span class="attribute">#[<span class="ident">cfg_attr</span>(
-    <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;serde&quot;</span>,
-    <span class="ident">serde</span>(<span class="ident">bound</span>(<span class="ident">serialize</span> <span class="op">=</span> <span class="string">&quot;T: Serialize&quot;</span>, <span class="ident">deserialize</span> <span class="op">=</span> <span class="string">&quot;T: Deserialize&lt;&#39;de&gt;&quot;</span>))
-)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SideOffsets2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="kw">pub</span> <span class="ident">top</span>: <span class="ident">T</span>,
-    <span class="kw">pub</span> <span class="ident">right</span>: <span class="ident">T</span>,
-    <span class="kw">pub</span> <span class="ident">bottom</span>: <span class="ident">T</span>,
-    <span class="kw">pub</span> <span class="ident">left</span>: <span class="ident">T</span>,
-    <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">_unit</span>: <span class="ident">PhantomData</span><span class="op">&lt;</span><span class="ident">U</span><span class="op">&gt;</span>,
+<span class="doccomment">/// A group of 2D side offsets, which correspond to top/right/bottom/left for borders, padding,
+/// and margins in CSS, optionally tagged with a unit.
+</span><span class="attribute">#[repr(C)]
+#[cfg_attr(feature = <span class="string">&quot;serde&quot;</span>, derive(Serialize, Deserialize))]
+#[cfg_attr(
+    feature = <span class="string">&quot;serde&quot;</span>,
+    serde(bound(serialize = <span class="string">&quot;T: Serialize&quot;</span>, deserialize = <span class="string">&quot;T: Deserialize&lt;&#39;de&gt;&quot;</span>))
+)]
+</span><span class="kw">pub struct </span>SideOffsets2D&lt;T, U&gt; {
+    <span class="kw">pub </span>top: T,
+    <span class="kw">pub </span>right: T,
+    <span class="kw">pub </span>bottom: T,
+    <span class="kw">pub </span>left: T,
+    <span class="attribute">#[doc(hidden)]
+    </span><span class="kw">pub </span>_unit: PhantomData&lt;U&gt;,
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;arbitrary&quot;</span>)]</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">arbitrary::Arbitrary</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">SideOffsets2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">arbitrary::Arbitrary</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
+<span class="attribute">#[cfg(feature = <span class="string">&quot;arbitrary&quot;</span>)]
+</span><span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, T, U&gt; arbitrary::Arbitrary&lt;<span class="lifetime">&#39;a</span>&gt; <span class="kw">for </span>SideOffsets2D&lt;T, U&gt;
+<span class="kw">where
+    </span>T: arbitrary::Arbitrary&lt;<span class="lifetime">&#39;a</span>&gt;,
 {
-    <span class="kw">fn</span> <span class="ident">arbitrary</span>(<span class="ident">u</span>: <span class="kw-2">&amp;mut</span> <span class="ident">arbitrary::Unstructured</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>) -&gt; <span class="ident">arbitrary::Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>
+    <span class="kw">fn </span>arbitrary(u: <span class="kw-2">&amp;mut </span>arbitrary::Unstructured&lt;<span class="lifetime">&#39;a</span>&gt;) -&gt; arbitrary::Result&lt;<span class="self">Self</span>&gt;
     {
-        <span class="kw">let</span> (<span class="ident">top</span>, <span class="ident">right</span>, <span class="ident">bottom</span>, <span class="ident">left</span>) <span class="op">=</span> <span class="ident">arbitrary::Arbitrary::arbitrary</span>(<span class="ident">u</span>)<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(<span class="ident">SideOffsets2D</span> {
-            <span class="ident">top</span>,
-            <span class="ident">right</span>,
-            <span class="ident">bottom</span>,
-            <span class="ident">left</span>,
-            <span class="ident">_unit</span>: <span class="ident">PhantomData</span>,
+        <span class="kw">let </span>(top, right, bottom, left) = arbitrary::Arbitrary::arbitrary(u)<span class="question-mark">?</span>;
+        <span class="prelude-val">Ok</span>(SideOffsets2D {
+            top,
+            right,
+            bottom,
+            left,
+            _unit: PhantomData,
         })
     }
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;bytemuck&quot;</span>)]</span>
-<span class="kw">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Zeroable</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Zeroable</span> <span class="kw">for</span> <span class="ident">SideOffsets2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {}
+<span class="attribute">#[cfg(feature = <span class="string">&quot;bytemuck&quot;</span>)]
+</span><span class="kw">unsafe impl</span>&lt;T: Zeroable, U&gt; Zeroable <span class="kw">for </span>SideOffsets2D&lt;T, U&gt; {}
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;bytemuck&quot;</span>)]</span>
-<span class="kw">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Pod</span>, <span class="ident">U</span>: <span class="lifetime">&#39;static</span><span class="op">&gt;</span> <span class="ident">Pod</span> <span class="kw">for</span> <span class="ident">SideOffsets2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {}
+<span class="attribute">#[cfg(feature = <span class="string">&quot;bytemuck&quot;</span>)]
+</span><span class="kw">unsafe impl</span>&lt;T: Pod, U: <span class="lifetime">&#39;static</span>&gt; Pod <span class="kw">for </span>SideOffsets2D&lt;T, U&gt; {}
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Copy</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Copy</span> <span class="kw">for</span> <span class="ident">SideOffsets2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {}
+<span class="kw">impl</span>&lt;T: Copy, U&gt; Copy <span class="kw">for </span>SideOffsets2D&lt;T, U&gt; {}
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Clone</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Clone</span> <span class="kw">for</span> <span class="ident">SideOffsets2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">SideOffsets2D</span> {
-            <span class="ident">top</span>: <span class="self">self</span>.<span class="ident">top</span>.<span class="ident">clone</span>(),
-            <span class="ident">right</span>: <span class="self">self</span>.<span class="ident">right</span>.<span class="ident">clone</span>(),
-            <span class="ident">bottom</span>: <span class="self">self</span>.<span class="ident">bottom</span>.<span class="ident">clone</span>(),
-            <span class="ident">left</span>: <span class="self">self</span>.<span class="ident">left</span>.<span class="ident">clone</span>(),
-            <span class="ident">_unit</span>: <span class="ident">PhantomData</span>,
+<span class="kw">impl</span>&lt;T: Clone, U&gt; Clone <span class="kw">for </span>SideOffsets2D&lt;T, U&gt; {
+    <span class="kw">fn </span>clone(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        SideOffsets2D {
+            top: <span class="self">self</span>.top.clone(),
+            right: <span class="self">self</span>.right.clone(),
+            bottom: <span class="self">self</span>.bottom.clone(),
+            left: <span class="self">self</span>.left.clone(),
+            _unit: PhantomData,
         }
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Eq</span> <span class="kw">for</span> <span class="ident">SideOffsets2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="kw">where</span> <span class="ident">T</span>: <span class="ident">Eq</span> {}
+<span class="kw">impl</span>&lt;T, U&gt; Eq <span class="kw">for </span>SideOffsets2D&lt;T, U&gt; <span class="kw">where </span>T: Eq {}
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">PartialEq</span> <span class="kw">for</span> <span class="ident">SideOffsets2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">PartialEq</span>,
+<span class="kw">impl</span>&lt;T, U&gt; PartialEq <span class="kw">for </span>SideOffsets2D&lt;T, U&gt;
+<span class="kw">where
+    </span>T: PartialEq,
 {
-    <span class="kw">fn</span> <span class="ident">eq</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">top</span> <span class="op">==</span> <span class="ident">other</span>.<span class="ident">top</span>
-            <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">right</span> <span class="op">==</span> <span class="ident">other</span>.<span class="ident">right</span>
-            <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">bottom</span> <span class="op">==</span> <span class="ident">other</span>.<span class="ident">bottom</span>
-            <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">left</span> <span class="op">==</span> <span class="ident">other</span>.<span class="ident">left</span>
+    <span class="kw">fn </span>eq(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; bool {
+        <span class="self">self</span>.top == other.top
+            &amp;&amp; <span class="self">self</span>.right == other.right
+            &amp;&amp; <span class="self">self</span>.bottom == other.bottom
+            &amp;&amp; <span class="self">self</span>.left == other.left
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Hash</span> <span class="kw">for</span> <span class="ident">SideOffsets2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Hash</span>,
+<span class="kw">impl</span>&lt;T, U&gt; Hash <span class="kw">for </span>SideOffsets2D&lt;T, U&gt;
+<span class="kw">where
+    </span>T: Hash,
 {
-    <span class="kw">fn</span> <span class="ident">hash</span><span class="op">&lt;</span><span class="ident">H</span>: <span class="ident">core::hash::Hasher</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">h</span>: <span class="kw-2">&amp;mut</span> <span class="ident">H</span>) {
-        <span class="self">self</span>.<span class="ident">top</span>.<span class="ident">hash</span>(<span class="ident">h</span>);
-        <span class="self">self</span>.<span class="ident">right</span>.<span class="ident">hash</span>(<span class="ident">h</span>);
-        <span class="self">self</span>.<span class="ident">bottom</span>.<span class="ident">hash</span>(<span class="ident">h</span>);
-        <span class="self">self</span>.<span class="ident">left</span>.<span class="ident">hash</span>(<span class="ident">h</span>);
+    <span class="kw">fn </span>hash&lt;H: core::hash::Hasher&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, h: <span class="kw-2">&amp;mut </span>H) {
+        <span class="self">self</span>.top.hash(h);
+        <span class="self">self</span>.right.hash(h);
+        <span class="self">self</span>.bottom.hash(h);
+        <span class="self">self</span>.left.hash(h);
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">fmt::Debug</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">fmt::Debug</span> <span class="kw">for</span> <span class="ident">SideOffsets2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">fmt::Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
+<span class="kw">impl</span>&lt;T: fmt::Debug, U&gt; fmt::Debug <span class="kw">for </span>SideOffsets2D&lt;T, U&gt; {
+    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>fmt::Formatter) -&gt; fmt::Result {
         <span class="macro">write!</span>(
-            <span class="ident">f</span>,
+            f,
             <span class="string">&quot;({:?},{:?},{:?},{:?})&quot;</span>,
-            <span class="self">self</span>.<span class="ident">top</span>, <span class="self">self</span>.<span class="ident">right</span>, <span class="self">self</span>.<span class="ident">bottom</span>, <span class="self">self</span>.<span class="ident">left</span>
+            <span class="self">self</span>.top, <span class="self">self</span>.right, <span class="self">self</span>.bottom, <span class="self">self</span>.left
         )
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Default</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">SideOffsets2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> {
-        <span class="ident">SideOffsets2D</span> {
-            <span class="ident">top</span>: <span class="ident">Default::default</span>(),
-            <span class="ident">right</span>: <span class="ident">Default::default</span>(),
-            <span class="ident">bottom</span>: <span class="ident">Default::default</span>(),
-            <span class="ident">left</span>: <span class="ident">Default::default</span>(),
-            <span class="ident">_unit</span>: <span class="ident">PhantomData</span>,
+<span class="kw">impl</span>&lt;T: Default, U&gt; Default <span class="kw">for </span>SideOffsets2D&lt;T, U&gt; {
+    <span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
+        SideOffsets2D {
+            top: Default::default(),
+            right: Default::default(),
+            bottom: Default::default(),
+            left: Default::default(),
+            _unit: PhantomData,
         }
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">SideOffsets2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Constructor taking a scalar for each side.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Sides are specified in top-right-bottom-left order following</span>
-    <span class="doccomment">/// CSS&#39;s convention.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">top</span>: <span class="ident">T</span>, <span class="ident">right</span>: <span class="ident">T</span>, <span class="ident">bottom</span>: <span class="ident">T</span>, <span class="ident">left</span>: <span class="ident">T</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">SideOffsets2D</span> {
-            <span class="ident">top</span>,
-            <span class="ident">right</span>,
-            <span class="ident">bottom</span>,
-            <span class="ident">left</span>,
-            <span class="ident">_unit</span>: <span class="ident">PhantomData</span>,
+<span class="kw">impl</span>&lt;T, U&gt; SideOffsets2D&lt;T, U&gt; {
+    <span class="doccomment">/// Constructor taking a scalar for each side.
+    ///
+    /// Sides are specified in top-right-bottom-left order following
+    /// CSS&#39;s convention.
+    </span><span class="kw">pub const fn </span>new(top: T, right: T, bottom: T, left: T) -&gt; <span class="self">Self </span>{
+        SideOffsets2D {
+            top,
+            right,
+            bottom,
+            left,
+            _unit: PhantomData,
         }
     }
 
-    <span class="doccomment">/// Constructor taking a typed Length for each side.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Sides are specified in top-right-bottom-left order following</span>
-    <span class="doccomment">/// CSS&#39;s convention.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_lengths</span>(
-        <span class="ident">top</span>: <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>,
-        <span class="ident">right</span>: <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>,
-        <span class="ident">bottom</span>: <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>,
-        <span class="ident">left</span>: <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>,
-    ) -&gt; <span class="self">Self</span> {
-        <span class="ident">SideOffsets2D::new</span>(<span class="ident">top</span>.<span class="number">0</span>, <span class="ident">right</span>.<span class="number">0</span>, <span class="ident">bottom</span>.<span class="number">0</span>, <span class="ident">left</span>.<span class="number">0</span>)
+    <span class="doccomment">/// Constructor taking a typed Length for each side.
+    ///
+    /// Sides are specified in top-right-bottom-left order following
+    /// CSS&#39;s convention.
+    </span><span class="kw">pub fn </span>from_lengths(
+        top: Length&lt;T, U&gt;,
+        right: Length&lt;T, U&gt;,
+        bottom: Length&lt;T, U&gt;,
+        left: Length&lt;T, U&gt;,
+    ) -&gt; <span class="self">Self </span>{
+        SideOffsets2D::new(top.<span class="number">0</span>, right.<span class="number">0</span>, bottom.<span class="number">0</span>, left.<span class="number">0</span>)
     }
 
-    <span class="doccomment">/// Construct side offsets from min and a max vector offsets.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// The outer rect of the resulting side offsets is equivalent to translating</span>
-    <span class="doccomment">/// a rectangle&#39;s upper-left corner with the min vector and translating the</span>
-    <span class="doccomment">/// bottom-right corner with the max vector.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_vectors_outer</span>(<span class="ident">min</span>: <span class="ident">Vector2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>, <span class="ident">max</span>: <span class="ident">Vector2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span>
-    <span class="kw">where</span>
-        <span class="ident">T</span>: <span class="ident">Neg</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span>,
+    <span class="doccomment">/// Construct side offsets from min and a max vector offsets.
+    ///
+    /// The outer rect of the resulting side offsets is equivalent to translating
+    /// a rectangle&#39;s upper-left corner with the min vector and translating the
+    /// bottom-right corner with the max vector.
+    </span><span class="kw">pub fn </span>from_vectors_outer(min: Vector2D&lt;T, U&gt;, max: Vector2D&lt;T, U&gt;) -&gt; <span class="self">Self
+    </span><span class="kw">where
+        </span>T: Neg&lt;Output = T&gt;,
     {
-        <span class="ident">SideOffsets2D</span> {
-            <span class="ident">left</span>: <span class="op">-</span><span class="ident">min</span>.<span class="ident">x</span>,
-            <span class="ident">top</span>: <span class="op">-</span><span class="ident">min</span>.<span class="ident">y</span>,
-            <span class="ident">right</span>: <span class="ident">max</span>.<span class="ident">x</span>,
-            <span class="ident">bottom</span>: <span class="ident">max</span>.<span class="ident">y</span>,
-            <span class="ident">_unit</span>: <span class="ident">PhantomData</span>,
+        SideOffsets2D {
+            left: -min.x,
+            top: -min.y,
+            right: max.x,
+            bottom: max.y,
+            _unit: PhantomData,
         }
     }
 
-    <span class="doccomment">/// Construct side offsets from min and a max vector offsets.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// The inner rect of the resulting side offsets is equivalent to translating</span>
-    <span class="doccomment">/// a rectangle&#39;s upper-left corner with the min vector and translating the</span>
-    <span class="doccomment">/// bottom-right corner with the max vector.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_vectors_inner</span>(<span class="ident">min</span>: <span class="ident">Vector2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>, <span class="ident">max</span>: <span class="ident">Vector2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span>
-    <span class="kw">where</span>
-        <span class="ident">T</span>: <span class="ident">Neg</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span>,
+    <span class="doccomment">/// Construct side offsets from min and a max vector offsets.
+    ///
+    /// The inner rect of the resulting side offsets is equivalent to translating
+    /// a rectangle&#39;s upper-left corner with the min vector and translating the
+    /// bottom-right corner with the max vector.
+    </span><span class="kw">pub fn </span>from_vectors_inner(min: Vector2D&lt;T, U&gt;, max: Vector2D&lt;T, U&gt;) -&gt; <span class="self">Self
+    </span><span class="kw">where
+        </span>T: Neg&lt;Output = T&gt;,
     {
-        <span class="ident">SideOffsets2D</span> {
-            <span class="ident">left</span>: <span class="ident">min</span>.<span class="ident">x</span>,
-            <span class="ident">top</span>: <span class="ident">min</span>.<span class="ident">y</span>,
-            <span class="ident">right</span>: <span class="op">-</span><span class="ident">max</span>.<span class="ident">x</span>,
-            <span class="ident">bottom</span>: <span class="op">-</span><span class="ident">max</span>.<span class="ident">y</span>,
-            <span class="ident">_unit</span>: <span class="ident">PhantomData</span>,
+        SideOffsets2D {
+            left: min.x,
+            top: min.y,
+            right: -max.x,
+            bottom: -max.y,
+            _unit: PhantomData,
         }
     }
 
-    <span class="doccomment">/// Constructor, setting all sides to zero.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">zero</span>() -&gt; <span class="self">Self</span>
-        <span class="kw">where</span> <span class="ident">T</span>: <span class="ident">Zero</span>,
+    <span class="doccomment">/// Constructor, setting all sides to zero.
+    </span><span class="kw">pub fn </span>zero() -&gt; <span class="self">Self
+        </span><span class="kw">where </span>T: Zero,
     {
-        <span class="ident">SideOffsets2D::new</span>(<span class="ident">Zero::zero</span>(), <span class="ident">Zero::zero</span>(), <span class="ident">Zero::zero</span>(), <span class="ident">Zero::zero</span>())
+        SideOffsets2D::new(Zero::zero(), Zero::zero(), Zero::zero(), Zero::zero())
     }
 
-    <span class="doccomment">/// Returns `true` if all side offsets are zero.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_zero</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span>
-    <span class="kw">where</span>
-        <span class="ident">T</span>: <span class="ident">Zero</span> <span class="op">+</span> <span class="ident">PartialEq</span>,
+    <span class="doccomment">/// Returns `true` if all side offsets are zero.
+    </span><span class="kw">pub fn </span>is_zero(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool
+    <span class="kw">where
+        </span>T: Zero + PartialEq,
     {
-        <span class="kw">let</span> <span class="ident">zero</span> <span class="op">=</span> <span class="ident">T::zero</span>();
-        <span class="self">self</span>.<span class="ident">top</span> <span class="op">==</span> <span class="ident">zero</span> <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">right</span> <span class="op">==</span> <span class="ident">zero</span> <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">bottom</span> <span class="op">==</span> <span class="ident">zero</span> <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">left</span> <span class="op">==</span> <span class="ident">zero</span>
+        <span class="kw">let </span>zero = T::zero();
+        <span class="self">self</span>.top == zero &amp;&amp; <span class="self">self</span>.right == zero &amp;&amp; <span class="self">self</span>.bottom == zero &amp;&amp; <span class="self">self</span>.left == zero
     }
 
-    <span class="doccomment">/// Constructor setting the same value to all sides, taking a scalar value directly.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new_all_same</span>(<span class="ident">all</span>: <span class="ident">T</span>) -&gt; <span class="self">Self</span>
-        <span class="kw">where</span> <span class="ident">T</span> : <span class="ident">Copy</span>
+    <span class="doccomment">/// Constructor setting the same value to all sides, taking a scalar value directly.
+    </span><span class="kw">pub fn </span>new_all_same(all: T) -&gt; <span class="self">Self
+        </span><span class="kw">where </span>T : Copy
     {
-        <span class="ident">SideOffsets2D::new</span>(<span class="ident">all</span>, <span class="ident">all</span>, <span class="ident">all</span>, <span class="ident">all</span>)
+        SideOffsets2D::new(all, all, all, all)
     }
 
-    <span class="doccomment">/// Constructor setting the same value to all sides, taking a typed Length.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_length_all_same</span>(<span class="ident">all</span>: <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span>
-        <span class="kw">where</span> <span class="ident">T</span> : <span class="ident">Copy</span>
+    <span class="doccomment">/// Constructor setting the same value to all sides, taking a typed Length.
+    </span><span class="kw">pub fn </span>from_length_all_same(all: Length&lt;T, U&gt;) -&gt; <span class="self">Self
+        </span><span class="kw">where </span>T : Copy
     {
-        <span class="ident">SideOffsets2D::new_all_same</span>(<span class="ident">all</span>.<span class="number">0</span>)
+        SideOffsets2D::new_all_same(all.<span class="number">0</span>)
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">horizontal</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">T</span>
-        <span class="kw">where</span> <span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Add</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span>
+    <span class="kw">pub fn </span>horizontal(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; T
+        <span class="kw">where </span>T: Copy + Add&lt;T, Output = T&gt;
     {
-        <span class="self">self</span>.<span class="ident">left</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">right</span>
+        <span class="self">self</span>.left + <span class="self">self</span>.right
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vertical</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">T</span>
-        <span class="kw">where</span> <span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Add</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span>
+    <span class="kw">pub fn </span>vertical(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; T
+        <span class="kw">where </span>T: Copy + Add&lt;T, Output = T&gt;
     {
-        <span class="self">self</span>.<span class="ident">top</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">bottom</span>
+        <span class="self">self</span>.top + <span class="self">self</span>.bottom
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Add</span> <span class="kw">for</span> <span class="ident">SideOffsets2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Add</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span>,
+<span class="kw">impl</span>&lt;T, U&gt; Add <span class="kw">for </span>SideOffsets2D&lt;T, U&gt;
+<span class="kw">where
+    </span>T: Add&lt;T, Output = T&gt;,
 {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">add</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="self">Self</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">SideOffsets2D::new</span>(
-            <span class="self">self</span>.<span class="ident">top</span> <span class="op">+</span> <span class="ident">other</span>.<span class="ident">top</span>,
-            <span class="self">self</span>.<span class="ident">right</span> <span class="op">+</span> <span class="ident">other</span>.<span class="ident">right</span>,
-            <span class="self">self</span>.<span class="ident">bottom</span> <span class="op">+</span> <span class="ident">other</span>.<span class="ident">bottom</span>,
-            <span class="self">self</span>.<span class="ident">left</span> <span class="op">+</span> <span class="ident">other</span>.<span class="ident">left</span>,
+    <span class="kw">type </span>Output = <span class="self">Self</span>;
+    <span class="kw">fn </span>add(<span class="self">self</span>, other: <span class="self">Self</span>) -&gt; <span class="self">Self </span>{
+        SideOffsets2D::new(
+            <span class="self">self</span>.top + other.top,
+            <span class="self">self</span>.right + other.right,
+            <span class="self">self</span>.bottom + other.bottom,
+            <span class="self">self</span>.left + other.left,
         )
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">AddAssign</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">SideOffsets2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">AddAssign</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
+<span class="kw">impl</span>&lt;T, U&gt; AddAssign&lt;<span class="self">Self</span>&gt; <span class="kw">for </span>SideOffsets2D&lt;T, U&gt;
+<span class="kw">where
+    </span>T: AddAssign&lt;T&gt;,
 {
-    <span class="kw">fn</span> <span class="ident">add_assign</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="self">Self</span>) {
-        <span class="self">self</span>.<span class="ident">top</span> <span class="op">+</span><span class="op">=</span> <span class="ident">other</span>.<span class="ident">top</span>;
-        <span class="self">self</span>.<span class="ident">right</span> <span class="op">+</span><span class="op">=</span> <span class="ident">other</span>.<span class="ident">right</span>;
-        <span class="self">self</span>.<span class="ident">bottom</span> <span class="op">+</span><span class="op">=</span> <span class="ident">other</span>.<span class="ident">bottom</span>;
-        <span class="self">self</span>.<span class="ident">left</span> <span class="op">+</span><span class="op">=</span> <span class="ident">other</span>.<span class="ident">left</span>;
+    <span class="kw">fn </span>add_assign(<span class="kw-2">&amp;mut </span><span class="self">self</span>, other: <span class="self">Self</span>) {
+        <span class="self">self</span>.top += other.top;
+        <span class="self">self</span>.right += other.right;
+        <span class="self">self</span>.bottom += other.bottom;
+        <span class="self">self</span>.left += other.left;
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Sub</span> <span class="kw">for</span> <span class="ident">SideOffsets2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Sub</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span>,
+<span class="kw">impl</span>&lt;T, U&gt; Sub <span class="kw">for </span>SideOffsets2D&lt;T, U&gt;
+<span class="kw">where
+    </span>T: Sub&lt;T, Output = T&gt;,
 {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">sub</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="self">Self</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">SideOffsets2D::new</span>(
-            <span class="self">self</span>.<span class="ident">top</span> <span class="op">-</span> <span class="ident">other</span>.<span class="ident">top</span>,
-            <span class="self">self</span>.<span class="ident">right</span> <span class="op">-</span> <span class="ident">other</span>.<span class="ident">right</span>,
-            <span class="self">self</span>.<span class="ident">bottom</span> <span class="op">-</span> <span class="ident">other</span>.<span class="ident">bottom</span>,
-            <span class="self">self</span>.<span class="ident">left</span> <span class="op">-</span> <span class="ident">other</span>.<span class="ident">left</span>,
+    <span class="kw">type </span>Output = <span class="self">Self</span>;
+    <span class="kw">fn </span>sub(<span class="self">self</span>, other: <span class="self">Self</span>) -&gt; <span class="self">Self </span>{
+        SideOffsets2D::new(
+            <span class="self">self</span>.top - other.top,
+            <span class="self">self</span>.right - other.right,
+            <span class="self">self</span>.bottom - other.bottom,
+            <span class="self">self</span>.left - other.left,
         )
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">SubAssign</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">SideOffsets2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">SubAssign</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
+<span class="kw">impl</span>&lt;T, U&gt; SubAssign&lt;<span class="self">Self</span>&gt; <span class="kw">for </span>SideOffsets2D&lt;T, U&gt;
+<span class="kw">where
+    </span>T: SubAssign&lt;T&gt;,
 {
-    <span class="kw">fn</span> <span class="ident">sub_assign</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="self">Self</span>) {
-        <span class="self">self</span>.<span class="ident">top</span> <span class="op">-</span><span class="op">=</span> <span class="ident">other</span>.<span class="ident">top</span>;
-        <span class="self">self</span>.<span class="ident">right</span> <span class="op">-</span><span class="op">=</span> <span class="ident">other</span>.<span class="ident">right</span>;
-        <span class="self">self</span>.<span class="ident">bottom</span> <span class="op">-</span><span class="op">=</span> <span class="ident">other</span>.<span class="ident">bottom</span>;
-        <span class="self">self</span>.<span class="ident">left</span> <span class="op">-</span><span class="op">=</span> <span class="ident">other</span>.<span class="ident">left</span>;
+    <span class="kw">fn </span>sub_assign(<span class="kw-2">&amp;mut </span><span class="self">self</span>, other: <span class="self">Self</span>) {
+        <span class="self">self</span>.top -= other.top;
+        <span class="self">self</span>.right -= other.right;
+        <span class="self">self</span>.bottom -= other.bottom;
+        <span class="self">self</span>.left -= other.left;
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Neg</span> <span class="kw">for</span> <span class="ident">SideOffsets2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Neg</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span>
+<span class="kw">impl</span>&lt;T, U&gt; Neg <span class="kw">for </span>SideOffsets2D&lt;T, U&gt;
+<span class="kw">where
+    </span>T: Neg&lt;Output = T&gt;
 {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">neg</span>(<span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">SideOffsets2D</span> {
-            <span class="ident">top</span>: <span class="op">-</span><span class="self">self</span>.<span class="ident">top</span>,
-            <span class="ident">right</span>: <span class="op">-</span><span class="self">self</span>.<span class="ident">right</span>,
-            <span class="ident">bottom</span>: <span class="op">-</span><span class="self">self</span>.<span class="ident">bottom</span>,
-            <span class="ident">left</span>: <span class="op">-</span><span class="self">self</span>.<span class="ident">left</span>,
-            <span class="ident">_unit</span>: <span class="ident">PhantomData</span>,
+    <span class="kw">type </span>Output = <span class="self">Self</span>;
+    <span class="kw">fn </span>neg(<span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        SideOffsets2D {
+            top: -<span class="self">self</span>.top,
+            right: -<span class="self">self</span>.right,
+            bottom: -<span class="self">self</span>.bottom,
+            left: -<span class="self">self</span>.left,
+            _unit: PhantomData,
         }
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Mul</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Mul</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">SideOffsets2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">SideOffsets2D</span><span class="op">&lt;</span><span class="ident">T::Output</span>, <span class="ident">U</span><span class="op">&gt;</span>;
+<span class="kw">impl</span>&lt;T: Copy + Mul, U&gt; Mul&lt;T&gt; <span class="kw">for </span>SideOffsets2D&lt;T, U&gt; {
+    <span class="kw">type </span>Output = SideOffsets2D&lt;T::Output, U&gt;;
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">mul</span>(<span class="self">self</span>, <span class="ident">scale</span>: <span class="ident">T</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
-        <span class="ident">SideOffsets2D::new</span>(
-            <span class="self">self</span>.<span class="ident">top</span> <span class="op">*</span> <span class="ident">scale</span>,
-            <span class="self">self</span>.<span class="ident">right</span> <span class="op">*</span> <span class="ident">scale</span>,
-            <span class="self">self</span>.<span class="ident">bottom</span> <span class="op">*</span> <span class="ident">scale</span>,
-            <span class="self">self</span>.<span class="ident">left</span> <span class="op">*</span> <span class="ident">scale</span>,
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>mul(<span class="self">self</span>, scale: T) -&gt; <span class="self">Self</span>::Output {
+        SideOffsets2D::new(
+            <span class="self">self</span>.top * scale,
+            <span class="self">self</span>.right * scale,
+            <span class="self">self</span>.bottom * scale,
+            <span class="self">self</span>.left * scale,
         )
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">MulAssign</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">MulAssign</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">SideOffsets2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">mul_assign</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="ident">T</span>) {
-        <span class="self">self</span>.<span class="ident">top</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">other</span>;
-        <span class="self">self</span>.<span class="ident">right</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">other</span>;
-        <span class="self">self</span>.<span class="ident">bottom</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">other</span>;
-        <span class="self">self</span>.<span class="ident">left</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">other</span>;
+<span class="kw">impl</span>&lt;T: Copy + MulAssign, U&gt; MulAssign&lt;T&gt; <span class="kw">for </span>SideOffsets2D&lt;T, U&gt; {
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>mul_assign(<span class="kw-2">&amp;mut </span><span class="self">self</span>, other: T) {
+        <span class="self">self</span>.top <span class="kw-2">*</span>= other;
+        <span class="self">self</span>.right <span class="kw-2">*</span>= other;
+        <span class="self">self</span>.bottom <span class="kw-2">*</span>= other;
+        <span class="self">self</span>.left <span class="kw-2">*</span>= other;
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Mul</span>, <span class="ident">U1</span>, <span class="ident">U2</span><span class="op">&gt;</span> <span class="ident">Mul</span><span class="op">&lt;</span><span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U1</span>, <span class="ident">U2</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">SideOffsets2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U1</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">SideOffsets2D</span><span class="op">&lt;</span><span class="ident">T::Output</span>, <span class="ident">U2</span><span class="op">&gt;</span>;
+<span class="kw">impl</span>&lt;T: Copy + Mul, U1, U2&gt; Mul&lt;Scale&lt;T, U1, U2&gt;&gt; <span class="kw">for </span>SideOffsets2D&lt;T, U1&gt; {
+    <span class="kw">type </span>Output = SideOffsets2D&lt;T::Output, U2&gt;;
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">mul</span>(<span class="self">self</span>, <span class="ident">scale</span>: <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U1</span>, <span class="ident">U2</span><span class="op">&gt;</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
-        <span class="ident">SideOffsets2D::new</span>(
-            <span class="self">self</span>.<span class="ident">top</span> <span class="op">*</span> <span class="ident">scale</span>.<span class="number">0</span>,
-            <span class="self">self</span>.<span class="ident">right</span> <span class="op">*</span> <span class="ident">scale</span>.<span class="number">0</span>,
-            <span class="self">self</span>.<span class="ident">bottom</span> <span class="op">*</span> <span class="ident">scale</span>.<span class="number">0</span>,
-            <span class="self">self</span>.<span class="ident">left</span> <span class="op">*</span> <span class="ident">scale</span>.<span class="number">0</span>,
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>mul(<span class="self">self</span>, scale: Scale&lt;T, U1, U2&gt;) -&gt; <span class="self">Self</span>::Output {
+        SideOffsets2D::new(
+            <span class="self">self</span>.top * scale.<span class="number">0</span>,
+            <span class="self">self</span>.right * scale.<span class="number">0</span>,
+            <span class="self">self</span>.bottom * scale.<span class="number">0</span>,
+            <span class="self">self</span>.left * scale.<span class="number">0</span>,
         )
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">MulAssign</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">MulAssign</span><span class="op">&lt;</span><span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span>, <span class="ident">U</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">SideOffsets2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">mul_assign</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span>, <span class="ident">U</span><span class="op">&gt;</span>) {
-        <span class="kw-2">*</span><span class="self">self</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">other</span>.<span class="number">0</span>;
+<span class="kw">impl</span>&lt;T: Copy + MulAssign, U&gt; MulAssign&lt;Scale&lt;T, U, U&gt;&gt; <span class="kw">for </span>SideOffsets2D&lt;T, U&gt; {
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>mul_assign(<span class="kw-2">&amp;mut </span><span class="self">self</span>, other: Scale&lt;T, U, U&gt;) {
+        <span class="kw-2">*</span><span class="self">self </span><span class="kw-2">*</span>= other.<span class="number">0</span>;
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Div</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Div</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">SideOffsets2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">SideOffsets2D</span><span class="op">&lt;</span><span class="ident">T::Output</span>, <span class="ident">U</span><span class="op">&gt;</span>;
+<span class="kw">impl</span>&lt;T: Copy + Div, U&gt; Div&lt;T&gt; <span class="kw">for </span>SideOffsets2D&lt;T, U&gt; {
+    <span class="kw">type </span>Output = SideOffsets2D&lt;T::Output, U&gt;;
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">div</span>(<span class="self">self</span>, <span class="ident">scale</span>: <span class="ident">T</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
-        <span class="ident">SideOffsets2D::new</span>(
-            <span class="self">self</span>.<span class="ident">top</span> <span class="op">/</span> <span class="ident">scale</span>,
-            <span class="self">self</span>.<span class="ident">right</span> <span class="op">/</span> <span class="ident">scale</span>,
-            <span class="self">self</span>.<span class="ident">bottom</span> <span class="op">/</span> <span class="ident">scale</span>,
-            <span class="self">self</span>.<span class="ident">left</span> <span class="op">/</span> <span class="ident">scale</span>,
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>div(<span class="self">self</span>, scale: T) -&gt; <span class="self">Self</span>::Output {
+        SideOffsets2D::new(
+            <span class="self">self</span>.top / scale,
+            <span class="self">self</span>.right / scale,
+            <span class="self">self</span>.bottom / scale,
+            <span class="self">self</span>.left / scale,
         )
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">DivAssign</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">DivAssign</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">SideOffsets2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">div_assign</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="ident">T</span>) {
-        <span class="self">self</span>.<span class="ident">top</span> <span class="op">/</span><span class="op">=</span> <span class="ident">other</span>;
-        <span class="self">self</span>.<span class="ident">right</span> <span class="op">/</span><span class="op">=</span> <span class="ident">other</span>;
-        <span class="self">self</span>.<span class="ident">bottom</span> <span class="op">/</span><span class="op">=</span> <span class="ident">other</span>;
-        <span class="self">self</span>.<span class="ident">left</span> <span class="op">/</span><span class="op">=</span> <span class="ident">other</span>;
+<span class="kw">impl</span>&lt;T: Copy + DivAssign, U&gt; DivAssign&lt;T&gt; <span class="kw">for </span>SideOffsets2D&lt;T, U&gt; {
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>div_assign(<span class="kw-2">&amp;mut </span><span class="self">self</span>, other: T) {
+        <span class="self">self</span>.top /= other;
+        <span class="self">self</span>.right /= other;
+        <span class="self">self</span>.bottom /= other;
+        <span class="self">self</span>.left /= other;
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Div</span>, <span class="ident">U1</span>, <span class="ident">U2</span><span class="op">&gt;</span> <span class="ident">Div</span><span class="op">&lt;</span><span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U1</span>, <span class="ident">U2</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">SideOffsets2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U2</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">SideOffsets2D</span><span class="op">&lt;</span><span class="ident">T::Output</span>, <span class="ident">U1</span><span class="op">&gt;</span>;
+<span class="kw">impl</span>&lt;T: Copy + Div, U1, U2&gt; Div&lt;Scale&lt;T, U1, U2&gt;&gt; <span class="kw">for </span>SideOffsets2D&lt;T, U2&gt; {
+    <span class="kw">type </span>Output = SideOffsets2D&lt;T::Output, U1&gt;;
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">div</span>(<span class="self">self</span>, <span class="ident">scale</span>: <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U1</span>, <span class="ident">U2</span><span class="op">&gt;</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
-        <span class="ident">SideOffsets2D::new</span>(
-            <span class="self">self</span>.<span class="ident">top</span> <span class="op">/</span> <span class="ident">scale</span>.<span class="number">0</span>,
-            <span class="self">self</span>.<span class="ident">right</span> <span class="op">/</span> <span class="ident">scale</span>.<span class="number">0</span>,
-            <span class="self">self</span>.<span class="ident">bottom</span> <span class="op">/</span> <span class="ident">scale</span>.<span class="number">0</span>,
-            <span class="self">self</span>.<span class="ident">left</span> <span class="op">/</span> <span class="ident">scale</span>.<span class="number">0</span>,
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>div(<span class="self">self</span>, scale: Scale&lt;T, U1, U2&gt;) -&gt; <span class="self">Self</span>::Output {
+        SideOffsets2D::new(
+            <span class="self">self</span>.top / scale.<span class="number">0</span>,
+            <span class="self">self</span>.right / scale.<span class="number">0</span>,
+            <span class="self">self</span>.bottom / scale.<span class="number">0</span>,
+            <span class="self">self</span>.left / scale.<span class="number">0</span>,
         )
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">DivAssign</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">DivAssign</span><span class="op">&lt;</span><span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span>, <span class="ident">U</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">SideOffsets2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">div_assign</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span>, <span class="ident">U</span><span class="op">&gt;</span>) {
-        <span class="kw-2">*</span><span class="self">self</span> <span class="op">/</span><span class="op">=</span> <span class="ident">other</span>.<span class="number">0</span>;
+<span class="kw">impl</span>&lt;T: Copy + DivAssign, U&gt; DivAssign&lt;Scale&lt;T, U, U&gt;&gt; <span class="kw">for </span>SideOffsets2D&lt;T, U&gt; {
+    <span class="kw">fn </span>div_assign(<span class="kw-2">&amp;mut </span><span class="self">self</span>, other: Scale&lt;T, U, U&gt;) {
+        <span class="kw-2">*</span><span class="self">self </span>/= other.<span class="number">0</span>;
     }
 }
 
-<span class="attribute">#[<span class="ident">test</span>]</span>
-<span class="kw">fn</span> <span class="ident">from_vectors</span>() {
-    <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">point2</span>, <span class="ident">vec2</span>};
-    <span class="kw">type</span> <span class="ident">Box2D</span> <span class="op">=</span> <span class="ident"><span class="kw">crate</span>::default::Box2D</span><span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>;
+<span class="attribute">#[test]
+</span><span class="kw">fn </span>from_vectors() {
+    <span class="kw">use crate</span>::{point2, vec2};
+    <span class="kw">type </span>Box2D = <span class="kw">crate</span>::default::Box2D&lt;i32&gt;;
 
-    <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">Box2D</span> {
-        <span class="ident">min</span>: <span class="ident">point2</span>(<span class="number">10</span>, <span class="number">10</span>),
-        <span class="ident">max</span>: <span class="ident">point2</span>(<span class="number">20</span>, <span class="number">20</span>),
+    <span class="kw">let </span>b = Box2D {
+        min: point2(<span class="number">10</span>, <span class="number">10</span>),
+        max: point2(<span class="number">20</span>, <span class="number">20</span>),
     };
 
-    <span class="kw">let</span> <span class="ident">outer</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">outer_box</span>(<span class="ident">SideOffsets2D::from_vectors_outer</span>(<span class="ident">vec2</span>(<span class="op">-</span><span class="number">1</span>, <span class="op">-</span><span class="number">2</span>), <span class="ident">vec2</span>(<span class="number">3</span>, <span class="number">4</span>)));
-    <span class="kw">let</span> <span class="ident">inner</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">inner_box</span>(<span class="ident">SideOffsets2D::from_vectors_inner</span>(<span class="ident">vec2</span>(<span class="number">1</span>, <span class="number">2</span>), <span class="ident">vec2</span>(<span class="op">-</span><span class="number">3</span>, <span class="op">-</span><span class="number">4</span>)));
+    <span class="kw">let </span>outer = b.outer_box(SideOffsets2D::from_vectors_outer(vec2(-<span class="number">1</span>, -<span class="number">2</span>), vec2(<span class="number">3</span>, <span class="number">4</span>)));
+    <span class="kw">let </span>inner = b.inner_box(SideOffsets2D::from_vectors_inner(vec2(<span class="number">1</span>, <span class="number">2</span>), vec2(-<span class="number">3</span>, -<span class="number">4</span>)));
 
     <span class="macro">assert_eq!</span>(
-        <span class="ident">outer</span>,
-        <span class="ident">Box2D</span> {
-            <span class="ident">min</span>: <span class="ident">point2</span>(<span class="number">9</span>, <span class="number">8</span>),
-            <span class="ident">max</span>: <span class="ident">point2</span>(<span class="number">23</span>, <span class="number">24</span>)
+        outer,
+        Box2D {
+            min: point2(<span class="number">9</span>, <span class="number">8</span>),
+            max: point2(<span class="number">23</span>, <span class="number">24</span>)
         }
     );
     <span class="macro">assert_eq!</span>(
-        <span class="ident">inner</span>,
-        <span class="ident">Box2D</span> {
-            <span class="ident">min</span>: <span class="ident">point2</span>(<span class="number">11</span>, <span class="number">12</span>),
-            <span class="ident">max</span>: <span class="ident">point2</span>(<span class="number">17</span>, <span class="number">16</span>)
+        inner,
+        Box2D {
+            min: point2(<span class="number">11</span>, <span class="number">12</span>),
+            max: point2(<span class="number">17</span>, <span class="number">16</span>)
         }
     );
 }
 
-<span class="attribute">#[<span class="ident">test</span>]</span>
-<span class="kw">fn</span> <span class="ident">test_is_zero</span>() {
-    <span class="kw">let</span> <span class="ident">s1</span>: <span class="ident">SideOffsets2D</span><span class="op">&lt;</span><span class="ident">f32</span>, ()<span class="op">&gt;</span> <span class="op">=</span> <span class="ident">SideOffsets2D::new_all_same</span>(<span class="number">0.0</span>);
-    <span class="macro">assert!</span>(<span class="ident">s1</span>.<span class="ident">is_zero</span>());
+<span class="attribute">#[test]
+</span><span class="kw">fn </span>test_is_zero() {
+    <span class="kw">let </span>s1: SideOffsets2D&lt;f32, ()&gt; = SideOffsets2D::new_all_same(<span class="number">0.0</span>);
+    <span class="macro">assert!</span>(s1.is_zero());
 
-    <span class="kw">let</span> <span class="ident">s2</span>: <span class="ident">SideOffsets2D</span><span class="op">&lt;</span><span class="ident">f32</span>, ()<span class="op">&gt;</span> <span class="op">=</span> <span class="ident">SideOffsets2D::new</span>(<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>, <span class="number">4.0</span>);
-    <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">s2</span>.<span class="ident">is_zero</span>());
+    <span class="kw">let </span>s2: SideOffsets2D&lt;f32, ()&gt; = SideOffsets2D::new(<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>, <span class="number">4.0</span>);
+    <span class="macro">assert!</span>(!s2.is_zero());
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
-<span class="kw">mod</span> <span class="ident">ops</span> {
-    <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::Scale</span>;
+<span class="attribute">#[cfg(test)]
+</span><span class="kw">mod </span>ops {
+    <span class="kw">use </span><span class="kw">crate</span>::Scale;
 
-    <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Mm</span> {}
-    <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Cm</span> {}
+    <span class="kw">pub enum </span>Mm {}
+    <span class="kw">pub enum </span>Cm {}
 
-    <span class="kw">type</span> <span class="ident">SideOffsets2D</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident"><span class="kw">crate</span>::default::SideOffsets2D</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>;
-    <span class="kw">type</span> <span class="ident">SideOffsets2DMm</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident"><span class="kw">crate</span>::SideOffsets2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Mm</span><span class="op">&gt;</span>;
-    <span class="kw">type</span> <span class="ident">SideOffsets2DCm</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident"><span class="kw">crate</span>::SideOffsets2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Cm</span><span class="op">&gt;</span>;
+    <span class="kw">type </span>SideOffsets2D&lt;T&gt; = <span class="kw">crate</span>::default::SideOffsets2D&lt;T&gt;;
+    <span class="kw">type </span>SideOffsets2DMm&lt;T&gt; = <span class="kw">crate</span>::SideOffsets2D&lt;T, Mm&gt;;
+    <span class="kw">type </span>SideOffsets2DCm&lt;T&gt; = <span class="kw">crate</span>::SideOffsets2D&lt;T, Cm&gt;;
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_mul_scalar</span>() {
-        <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">SideOffsets2D::new</span>(<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>, <span class="number">4.0</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_mul_scalar() {
+        <span class="kw">let </span>s = SideOffsets2D::new(<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>, <span class="number">4.0</span>);
 
-        <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">s</span> <span class="op">*</span> <span class="number">3.0</span>;
+        <span class="kw">let </span>result = s * <span class="number">3.0</span>;
 
-        <span class="macro">assert_eq!</span>(<span class="ident">result</span>, <span class="ident">SideOffsets2D::new</span>(<span class="number">3.0</span>, <span class="number">6.0</span>, <span class="number">9.0</span>, <span class="number">12.0</span>));
+        <span class="macro">assert_eq!</span>(result, SideOffsets2D::new(<span class="number">3.0</span>, <span class="number">6.0</span>, <span class="number">9.0</span>, <span class="number">12.0</span>));
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_mul_assign_scalar</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">SideOffsets2D::new</span>(<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>, <span class="number">4.0</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_mul_assign_scalar() {
+        <span class="kw">let </span><span class="kw-2">mut </span>s = SideOffsets2D::new(<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>, <span class="number">4.0</span>);
 
-        <span class="ident">s</span> <span class="kw-2">*</span><span class="op">=</span> <span class="number">2.0</span>;
+        s <span class="kw-2">*</span>= <span class="number">2.0</span>;
 
-        <span class="macro">assert_eq!</span>(<span class="ident">s</span>, <span class="ident">SideOffsets2D::new</span>(<span class="number">2.0</span>, <span class="number">4.0</span>, <span class="number">6.0</span>, <span class="number">8.0</span>));
+        <span class="macro">assert_eq!</span>(s, SideOffsets2D::new(<span class="number">2.0</span>, <span class="number">4.0</span>, <span class="number">6.0</span>, <span class="number">8.0</span>));
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_mul_scale</span>() {
-        <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">SideOffsets2DMm::new</span>(<span class="number">0.0</span>, <span class="number">1.0</span>, <span class="number">3.0</span>, <span class="number">2.0</span>);
-        <span class="kw">let</span> <span class="ident">cm_per_mm</span>: <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">f32</span>, <span class="ident">Mm</span>, <span class="ident">Cm</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Scale::new</span>(<span class="number">0.1</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_mul_scale() {
+        <span class="kw">let </span>s = SideOffsets2DMm::new(<span class="number">0.0</span>, <span class="number">1.0</span>, <span class="number">3.0</span>, <span class="number">2.0</span>);
+        <span class="kw">let </span>cm_per_mm: Scale&lt;f32, Mm, Cm&gt; = Scale::new(<span class="number">0.1</span>);
 
-        <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">s</span> <span class="op">*</span> <span class="ident">cm_per_mm</span>;
+        <span class="kw">let </span>result = s * cm_per_mm;
 
-        <span class="macro">assert_eq!</span>(<span class="ident">result</span>, <span class="ident">SideOffsets2DCm::new</span>(<span class="number">0.0</span>, <span class="number">0.1</span>, <span class="number">0.3</span>, <span class="number">0.2</span>));
+        <span class="macro">assert_eq!</span>(result, SideOffsets2DCm::new(<span class="number">0.0</span>, <span class="number">0.1</span>, <span class="number">0.3</span>, <span class="number">0.2</span>));
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_mul_assign_scale</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">SideOffsets2DMm::new</span>(<span class="number">2.0</span>, <span class="number">4.0</span>, <span class="number">6.0</span>, <span class="number">8.0</span>);
-        <span class="kw">let</span> <span class="ident">scale</span>: <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">f32</span>, <span class="ident">Mm</span>, <span class="ident">Mm</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Scale::new</span>(<span class="number">0.1</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_mul_assign_scale() {
+        <span class="kw">let </span><span class="kw-2">mut </span>s = SideOffsets2DMm::new(<span class="number">2.0</span>, <span class="number">4.0</span>, <span class="number">6.0</span>, <span class="number">8.0</span>);
+        <span class="kw">let </span>scale: Scale&lt;f32, Mm, Mm&gt; = Scale::new(<span class="number">0.1</span>);
 
-        <span class="ident">s</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">scale</span>;
+        s <span class="kw-2">*</span>= scale;
 
-        <span class="macro">assert_eq!</span>(<span class="ident">s</span>, <span class="ident">SideOffsets2DMm::new</span>(<span class="number">0.2</span>, <span class="number">0.4</span>, <span class="number">0.6</span>, <span class="number">0.8</span>));
+        <span class="macro">assert_eq!</span>(s, SideOffsets2DMm::new(<span class="number">0.2</span>, <span class="number">0.4</span>, <span class="number">0.6</span>, <span class="number">0.8</span>));
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_div_scalar</span>() {
-        <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">SideOffsets2D::new</span>(<span class="number">10.0</span>, <span class="number">20.0</span>, <span class="number">30.0</span>, <span class="number">40.0</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_div_scalar() {
+        <span class="kw">let </span>s = SideOffsets2D::new(<span class="number">10.0</span>, <span class="number">20.0</span>, <span class="number">30.0</span>, <span class="number">40.0</span>);
 
-        <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">s</span> <span class="op">/</span> <span class="number">10.0</span>;
+        <span class="kw">let </span>result = s / <span class="number">10.0</span>;
 
-        <span class="macro">assert_eq!</span>(<span class="ident">result</span>, <span class="ident">SideOffsets2D::new</span>(<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>, <span class="number">4.0</span>));
+        <span class="macro">assert_eq!</span>(result, SideOffsets2D::new(<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>, <span class="number">4.0</span>));
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_div_assign_scalar</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">SideOffsets2D::new</span>(<span class="number">10.0</span>, <span class="number">20.0</span>, <span class="number">30.0</span>, <span class="number">40.0</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_div_assign_scalar() {
+        <span class="kw">let </span><span class="kw-2">mut </span>s = SideOffsets2D::new(<span class="number">10.0</span>, <span class="number">20.0</span>, <span class="number">30.0</span>, <span class="number">40.0</span>);
 
-        <span class="ident">s</span> <span class="op">/</span><span class="op">=</span> <span class="number">10.0</span>;
+        s /= <span class="number">10.0</span>;
 
-        <span class="macro">assert_eq!</span>(<span class="ident">s</span>, <span class="ident">SideOffsets2D::new</span>(<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>, <span class="number">4.0</span>));
+        <span class="macro">assert_eq!</span>(s, SideOffsets2D::new(<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>, <span class="number">4.0</span>));
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_div_scale</span>() {
-        <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">SideOffsets2DCm::new</span>(<span class="number">0.1</span>, <span class="number">0.2</span>, <span class="number">0.3</span>, <span class="number">0.4</span>);
-        <span class="kw">let</span> <span class="ident">cm_per_mm</span>: <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">f32</span>, <span class="ident">Mm</span>, <span class="ident">Cm</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Scale::new</span>(<span class="number">0.1</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_div_scale() {
+        <span class="kw">let </span>s = SideOffsets2DCm::new(<span class="number">0.1</span>, <span class="number">0.2</span>, <span class="number">0.3</span>, <span class="number">0.4</span>);
+        <span class="kw">let </span>cm_per_mm: Scale&lt;f32, Mm, Cm&gt; = Scale::new(<span class="number">0.1</span>);
 
-        <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">s</span> <span class="op">/</span> <span class="ident">cm_per_mm</span>;
+        <span class="kw">let </span>result = s / cm_per_mm;
 
-        <span class="macro">assert_eq!</span>(<span class="ident">result</span>, <span class="ident">SideOffsets2DMm::new</span>(<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>, <span class="number">4.0</span>));
+        <span class="macro">assert_eq!</span>(result, SideOffsets2DMm::new(<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>, <span class="number">4.0</span>));
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_div_assign_scale</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">SideOffsets2DMm::new</span>(<span class="number">0.1</span>, <span class="number">0.2</span>, <span class="number">0.3</span>, <span class="number">0.4</span>);
-        <span class="kw">let</span> <span class="ident">scale</span>: <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">f32</span>, <span class="ident">Mm</span>, <span class="ident">Mm</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Scale::new</span>(<span class="number">0.1</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_div_assign_scale() {
+        <span class="kw">let </span><span class="kw-2">mut </span>s = SideOffsets2DMm::new(<span class="number">0.1</span>, <span class="number">0.2</span>, <span class="number">0.3</span>, <span class="number">0.4</span>);
+        <span class="kw">let </span>scale: Scale&lt;f32, Mm, Mm&gt; = Scale::new(<span class="number">0.1</span>);
 
-        <span class="ident">s</span> <span class="op">/</span><span class="op">=</span> <span class="ident">scale</span>;
+        s /= scale;
 
-        <span class="macro">assert_eq!</span>(<span class="ident">s</span>, <span class="ident">SideOffsets2DMm::new</span>(<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>, <span class="number">4.0</span>));
+        <span class="macro">assert_eq!</span>(s, SideOffsets2DMm::new(<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>, <span class="number">4.0</span>));
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="euclid" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0-nightly (12cd71f4d 2022-06-01)" ></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="euclid" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (17cbdfd07 2022-09-13)" ></div></body></html>

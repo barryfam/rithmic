@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["RsfStep",""]]});
+window.SIDEBAR_ITEMS = {"enum":[["RsfStep","See `rooted_subtree_fn`"]]};

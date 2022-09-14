@@ -1,11 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/bcfam/.cargo/registry/src/github.com-1ecc6299db9ec823/euclid-0.22.7/src/transform2d.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>transform2d.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><script defer src="../../main.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script>
-    <noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../euclid/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"></h2>
-    </nav>
-    <nav class="sidebar"><a class="sidebar-logo" href="../../euclid/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../euclid/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
-                                <a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div>
-                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/bcfam/.cargo/registry/src/github.com-1ecc6299db9ec823/euclid-0.22.7/src/transform2d.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>transform2d.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../euclid/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../euclid/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../euclid/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -814,815 +807,814 @@
 <span id="807">807</span>
 <span id="808">808</span>
 <span id="809">809</span>
-</pre><pre class="rust"><code><span class="comment">// Copyright 2013 The Servo Project Developers. See the COPYRIGHT</span>
-<span class="comment">// file at the top-level directory of this distribution.</span>
-<span class="comment">//</span>
-<span class="comment">// Licensed under the Apache License, Version 2.0 &lt;LICENSE-APACHE or</span>
-<span class="comment">// http://www.apache.org/licenses/LICENSE-2.0&gt; or the MIT license</span>
-<span class="comment">// &lt;LICENSE-MIT or http://opensource.org/licenses/MIT&gt;, at your</span>
-<span class="comment">// option. This file may not be copied, modified, or distributed</span>
-<span class="comment">// except according to those terms.</span>
+</pre><pre class="rust"><code><span class="comment">// Copyright 2013 The Servo Project Developers. See the COPYRIGHT
+// file at the top-level directory of this distribution.
+//
+// Licensed under the Apache License, Version 2.0 &lt;LICENSE-APACHE or
+// http://www.apache.org/licenses/LICENSE-2.0&gt; or the MIT license
+// &lt;LICENSE-MIT or http://opensource.org/licenses/MIT&gt;, at your
+// option. This file may not be copied, modified, or distributed
+// except according to those terms.
 
-<span class="attribute">#![<span class="ident">cfg_attr</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;cargo-clippy&quot;</span>, <span class="ident">allow</span>(<span class="ident">just_underscores_and_digits</span>))]</span>
+</span><span class="attribute">#![cfg_attr(feature = <span class="string">&quot;cargo-clippy&quot;</span>, allow(just_underscores_and_digits))]
 
-<span class="kw">use</span> <span class="kw">super</span>::{<span class="ident">UnknownUnit</span>, <span class="ident">Angle</span>};
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;mint&quot;</span>)]</span>
-<span class="kw">use</span> <span class="ident">mint</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::num</span>::{<span class="ident">One</span>, <span class="ident">Zero</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::point</span>::{<span class="ident">Point2D</span>, <span class="ident">point2</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::vector</span>::{<span class="ident">Vector2D</span>, <span class="ident">vec2</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::rect::Rect</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::box2d::Box2D</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::transform3d::Transform3D</span>;
-<span class="kw">use</span> <span class="ident">core::ops</span>::{<span class="ident">Add</span>, <span class="ident">Mul</span>, <span class="ident">Div</span>, <span class="ident">Sub</span>};
-<span class="kw">use</span> <span class="ident">core::marker::PhantomData</span>;
-<span class="kw">use</span> <span class="ident">core::cmp</span>::{<span class="ident">Eq</span>, <span class="ident">PartialEq</span>};
-<span class="kw">use</span> <span class="ident">core::hash</span>::{<span class="ident">Hash</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::approxeq::ApproxEq</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::trig::Trig</span>;
-<span class="kw">use</span> <span class="ident">core::fmt</span>;
-<span class="kw">use</span> <span class="ident">num_traits::NumCast</span>;
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;serde&quot;</span>)]</span>
-<span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>};
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;bytemuck&quot;</span>)]</span>
-<span class="kw">use</span> <span class="ident">bytemuck</span>::{<span class="ident">Zeroable</span>, <span class="ident">Pod</span>};
+</span><span class="kw">use super</span>::{UnknownUnit, Angle};
+<span class="attribute">#[cfg(feature = <span class="string">&quot;mint&quot;</span>)]
+</span><span class="kw">use </span>mint;
+<span class="kw">use </span><span class="kw">crate</span>::num::{One, Zero};
+<span class="kw">use </span><span class="kw">crate</span>::point::{Point2D, point2};
+<span class="kw">use </span><span class="kw">crate</span>::vector::{Vector2D, vec2};
+<span class="kw">use </span><span class="kw">crate</span>::rect::Rect;
+<span class="kw">use </span><span class="kw">crate</span>::box2d::Box2D;
+<span class="kw">use </span><span class="kw">crate</span>::transform3d::Transform3D;
+<span class="kw">use </span>core::ops::{Add, Mul, Div, Sub};
+<span class="kw">use </span>core::marker::PhantomData;
+<span class="kw">use </span>core::cmp::{Eq, PartialEq};
+<span class="kw">use </span>core::hash::{Hash};
+<span class="kw">use </span><span class="kw">crate</span>::approxeq::ApproxEq;
+<span class="kw">use </span><span class="kw">crate</span>::trig::Trig;
+<span class="kw">use </span>core::fmt;
+<span class="kw">use </span>num_traits::NumCast;
+<span class="attribute">#[cfg(feature = <span class="string">&quot;serde&quot;</span>)]
+</span><span class="kw">use </span>serde::{Deserialize, Serialize};
+<span class="attribute">#[cfg(feature = <span class="string">&quot;bytemuck&quot;</span>)]
+</span><span class="kw">use </span>bytemuck::{Zeroable, Pod};
 
-<span class="doccomment">/// A 2d transform represented by a column-major 3 by 3 matrix, compressed down to 3 by 2.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// Transforms can be parametrized over the source and destination units, to describe a</span>
-<span class="doccomment">/// transformation from a space to another.</span>
-<span class="doccomment">/// For example, `Transform2D&lt;f32, WorldSpace, ScreenSpace&gt;::transform_point4d`</span>
-<span class="doccomment">/// takes a `Point2D&lt;f32, WorldSpace&gt;` and returns a `Point2D&lt;f32, ScreenSpace&gt;`.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// Transforms expose a set of convenience methods for pre- and post-transformations.</span>
-<span class="doccomment">/// Pre-transformations (`pre_*` methods) correspond to adding an operation that is</span>
-<span class="doccomment">/// applied before the rest of the transformation, while post-transformations (`then_*`</span>
-<span class="doccomment">/// methods) add an operation that is applied after.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// The matrix representation is conceptually equivalent to a 3 by 3 matrix transformation</span>
-<span class="doccomment">/// compressed to 3 by 2 with the components that aren&#39;t needed to describe the set of 2d</span>
-<span class="doccomment">/// transformations we are interested in implicitly defined:</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// ```text</span>
-<span class="doccomment">///  | m11 m12 0 |   |x|   |x&#39;|</span>
-<span class="doccomment">///  | m21 m22 0 | x |y| = |y&#39;|</span>
-<span class="doccomment">///  | m31 m32 1 |   |1|   |w |</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// When translating Transform2D into general matrix representations, consider that the</span>
-<span class="doccomment">/// representation follows the column-major notation with column vectors.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// The translation terms are m31 and m32.</span>
-<span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
-<span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;serde&quot;</span>, <span class="ident">derive</span>(<span class="ident">Serialize</span>, <span class="ident">Deserialize</span>))]</span>
-<span class="attribute">#[<span class="ident">cfg_attr</span>(
-    <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;serde&quot;</span>,
-    <span class="ident">serde</span>(<span class="ident">bound</span>(<span class="ident">serialize</span> <span class="op">=</span> <span class="string">&quot;T: Serialize&quot;</span>, <span class="ident">deserialize</span> <span class="op">=</span> <span class="string">&quot;T: Deserialize&lt;&#39;de&gt;&quot;</span>))
-)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Transform2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {
-    <span class="kw">pub</span> <span class="ident">m11</span>: <span class="ident">T</span>, <span class="kw">pub</span> <span class="ident">m12</span>: <span class="ident">T</span>,
-    <span class="kw">pub</span> <span class="ident">m21</span>: <span class="ident">T</span>, <span class="kw">pub</span> <span class="ident">m22</span>: <span class="ident">T</span>,
-    <span class="kw">pub</span> <span class="ident">m31</span>: <span class="ident">T</span>, <span class="kw">pub</span> <span class="ident">m32</span>: <span class="ident">T</span>,
-    <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">_unit</span>: <span class="ident">PhantomData</span><span class="op">&lt;</span>(<span class="ident">Src</span>, <span class="ident">Dst</span>)<span class="op">&gt;</span>,
+<span class="doccomment">/// A 2d transform represented by a column-major 3 by 3 matrix, compressed down to 3 by 2.
+///
+/// Transforms can be parametrized over the source and destination units, to describe a
+/// transformation from a space to another.
+/// For example, `Transform2D&lt;f32, WorldSpace, ScreenSpace&gt;::transform_point4d`
+/// takes a `Point2D&lt;f32, WorldSpace&gt;` and returns a `Point2D&lt;f32, ScreenSpace&gt;`.
+///
+/// Transforms expose a set of convenience methods for pre- and post-transformations.
+/// Pre-transformations (`pre_*` methods) correspond to adding an operation that is
+/// applied before the rest of the transformation, while post-transformations (`then_*`
+/// methods) add an operation that is applied after.
+///
+/// The matrix representation is conceptually equivalent to a 3 by 3 matrix transformation
+/// compressed to 3 by 2 with the components that aren&#39;t needed to describe the set of 2d
+/// transformations we are interested in implicitly defined:
+///
+/// ```text
+///  | m11 m12 0 |   |x|   |x&#39;|
+///  | m21 m22 0 | x |y| = |y&#39;|
+///  | m31 m32 1 |   |1|   |w |
+/// ```
+///
+/// When translating Transform2D into general matrix representations, consider that the
+/// representation follows the column-major notation with column vectors.
+///
+/// The translation terms are m31 and m32.
+</span><span class="attribute">#[repr(C)]
+#[cfg_attr(feature = <span class="string">&quot;serde&quot;</span>, derive(Serialize, Deserialize))]
+#[cfg_attr(
+    feature = <span class="string">&quot;serde&quot;</span>,
+    serde(bound(serialize = <span class="string">&quot;T: Serialize&quot;</span>, deserialize = <span class="string">&quot;T: Deserialize&lt;&#39;de&gt;&quot;</span>))
+)]
+</span><span class="kw">pub struct </span>Transform2D&lt;T, Src, Dst&gt; {
+    <span class="kw">pub </span>m11: T, <span class="kw">pub </span>m12: T,
+    <span class="kw">pub </span>m21: T, <span class="kw">pub </span>m22: T,
+    <span class="kw">pub </span>m31: T, <span class="kw">pub </span>m32: T,
+    <span class="attribute">#[doc(hidden)]
+    </span><span class="kw">pub </span>_unit: PhantomData&lt;(Src, Dst)&gt;,
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;arbitrary&quot;</span>)]</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">arbitrary::Arbitrary</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Transform2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">arbitrary::Arbitrary</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
+<span class="attribute">#[cfg(feature = <span class="string">&quot;arbitrary&quot;</span>)]
+</span><span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, T, Src, Dst&gt; arbitrary::Arbitrary&lt;<span class="lifetime">&#39;a</span>&gt; <span class="kw">for </span>Transform2D&lt;T, Src, Dst&gt;
+<span class="kw">where
+    </span>T: arbitrary::Arbitrary&lt;<span class="lifetime">&#39;a</span>&gt;,
 {
-    <span class="kw">fn</span> <span class="ident">arbitrary</span>(<span class="ident">u</span>: <span class="kw-2">&amp;mut</span> <span class="ident">arbitrary::Unstructured</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>) -&gt; <span class="ident">arbitrary::Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>
+    <span class="kw">fn </span>arbitrary(u: <span class="kw-2">&amp;mut </span>arbitrary::Unstructured&lt;<span class="lifetime">&#39;a</span>&gt;) -&gt; arbitrary::Result&lt;<span class="self">Self</span>&gt;
     {
-        <span class="kw">let</span> (<span class="ident">m11</span>, <span class="ident">m12</span>, <span class="ident">m21</span>, <span class="ident">m22</span>, <span class="ident">m31</span>, <span class="ident">m32</span>) <span class="op">=</span> <span class="ident">arbitrary::Arbitrary::arbitrary</span>(<span class="ident">u</span>)<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(<span class="ident">Transform2D</span> {
-            <span class="ident">m11</span>, <span class="ident">m12</span>, <span class="ident">m21</span>, <span class="ident">m22</span>, <span class="ident">m31</span>, <span class="ident">m32</span>,
-            <span class="ident">_unit</span>: <span class="ident">PhantomData</span>,
+        <span class="kw">let </span>(m11, m12, m21, m22, m31, m32) = arbitrary::Arbitrary::arbitrary(u)<span class="question-mark">?</span>;
+        <span class="prelude-val">Ok</span>(Transform2D {
+            m11, m12, m21, m22, m31, m32,
+            _unit: PhantomData,
         })
     }
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;bytemuck&quot;</span>)]</span>
-<span class="kw">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Zeroable</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">Zeroable</span> <span class="kw">for</span> <span class="ident">Transform2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {}
+<span class="attribute">#[cfg(feature = <span class="string">&quot;bytemuck&quot;</span>)]
+</span><span class="kw">unsafe impl</span>&lt;T: Zeroable, Src, Dst&gt; Zeroable <span class="kw">for </span>Transform2D&lt;T, Src, Dst&gt; {}
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;bytemuck&quot;</span>)]</span>
-<span class="kw">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Pod</span>, <span class="ident">Src</span>: <span class="lifetime">&#39;static</span>, <span class="ident">Dst</span>: <span class="lifetime">&#39;static</span><span class="op">&gt;</span> <span class="ident">Pod</span> <span class="kw">for</span> <span class="ident">Transform2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {}
+<span class="attribute">#[cfg(feature = <span class="string">&quot;bytemuck&quot;</span>)]
+</span><span class="kw">unsafe impl</span>&lt;T: Pod, Src: <span class="lifetime">&#39;static</span>, Dst: <span class="lifetime">&#39;static</span>&gt; Pod <span class="kw">for </span>Transform2D&lt;T, Src, Dst&gt; {}
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Copy</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">Copy</span> <span class="kw">for</span> <span class="ident">Transform2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {}
+<span class="kw">impl</span>&lt;T: Copy, Src, Dst&gt; Copy <span class="kw">for </span>Transform2D&lt;T, Src, Dst&gt; {}
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Clone</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">Clone</span> <span class="kw">for</span> <span class="ident">Transform2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">Transform2D</span> {
-            <span class="ident">m11</span>: <span class="self">self</span>.<span class="ident">m11</span>.<span class="ident">clone</span>(),
-            <span class="ident">m12</span>: <span class="self">self</span>.<span class="ident">m12</span>.<span class="ident">clone</span>(),
-            <span class="ident">m21</span>: <span class="self">self</span>.<span class="ident">m21</span>.<span class="ident">clone</span>(),
-            <span class="ident">m22</span>: <span class="self">self</span>.<span class="ident">m22</span>.<span class="ident">clone</span>(),
-            <span class="ident">m31</span>: <span class="self">self</span>.<span class="ident">m31</span>.<span class="ident">clone</span>(),
-            <span class="ident">m32</span>: <span class="self">self</span>.<span class="ident">m32</span>.<span class="ident">clone</span>(),
-            <span class="ident">_unit</span>: <span class="ident">PhantomData</span>,
+<span class="kw">impl</span>&lt;T: Clone, Src, Dst&gt; Clone <span class="kw">for </span>Transform2D&lt;T, Src, Dst&gt; {
+    <span class="kw">fn </span>clone(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        Transform2D {
+            m11: <span class="self">self</span>.m11.clone(),
+            m12: <span class="self">self</span>.m12.clone(),
+            m21: <span class="self">self</span>.m21.clone(),
+            m22: <span class="self">self</span>.m22.clone(),
+            m31: <span class="self">self</span>.m31.clone(),
+            m32: <span class="self">self</span>.m32.clone(),
+            _unit: PhantomData,
         }
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">Eq</span> <span class="kw">for</span> <span class="ident">Transform2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="kw">where</span> <span class="ident">T</span>: <span class="ident">Eq</span> {}
+<span class="kw">impl</span>&lt;T, Src, Dst&gt; Eq <span class="kw">for </span>Transform2D&lt;T, Src, Dst&gt; <span class="kw">where </span>T: Eq {}
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">PartialEq</span> <span class="kw">for</span> <span class="ident">Transform2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span>
-    <span class="kw">where</span> <span class="ident">T</span>: <span class="ident">PartialEq</span>
+<span class="kw">impl</span>&lt;T, Src, Dst&gt; PartialEq <span class="kw">for </span>Transform2D&lt;T, Src, Dst&gt;
+    <span class="kw">where </span>T: PartialEq
 {
-    <span class="kw">fn</span> <span class="ident">eq</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">m11</span> <span class="op">==</span> <span class="ident">other</span>.<span class="ident">m11</span> <span class="op">&amp;&amp;</span>
-            <span class="self">self</span>.<span class="ident">m12</span> <span class="op">==</span> <span class="ident">other</span>.<span class="ident">m12</span> <span class="op">&amp;&amp;</span>
-            <span class="self">self</span>.<span class="ident">m21</span> <span class="op">==</span> <span class="ident">other</span>.<span class="ident">m21</span> <span class="op">&amp;&amp;</span>
-            <span class="self">self</span>.<span class="ident">m22</span> <span class="op">==</span> <span class="ident">other</span>.<span class="ident">m22</span> <span class="op">&amp;&amp;</span>
-            <span class="self">self</span>.<span class="ident">m31</span> <span class="op">==</span> <span class="ident">other</span>.<span class="ident">m31</span> <span class="op">&amp;&amp;</span>
-            <span class="self">self</span>.<span class="ident">m32</span> <span class="op">==</span> <span class="ident">other</span>.<span class="ident">m32</span>
+    <span class="kw">fn </span>eq(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; bool {
+        <span class="self">self</span>.m11 == other.m11 &amp;&amp;
+            <span class="self">self</span>.m12 == other.m12 &amp;&amp;
+            <span class="self">self</span>.m21 == other.m21 &amp;&amp;
+            <span class="self">self</span>.m22 == other.m22 &amp;&amp;
+            <span class="self">self</span>.m31 == other.m31 &amp;&amp;
+            <span class="self">self</span>.m32 == other.m32
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">Hash</span> <span class="kw">for</span> <span class="ident">Transform2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span>
-    <span class="kw">where</span> <span class="ident">T</span>: <span class="ident">Hash</span>
+<span class="kw">impl</span>&lt;T, Src, Dst&gt; Hash <span class="kw">for </span>Transform2D&lt;T, Src, Dst&gt;
+    <span class="kw">where </span>T: Hash
 {
-    <span class="kw">fn</span> <span class="ident">hash</span><span class="op">&lt;</span><span class="ident">H</span>: <span class="ident">core::hash::Hasher</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">h</span>: <span class="kw-2">&amp;mut</span> <span class="ident">H</span>) {
-        <span class="self">self</span>.<span class="ident">m11</span>.<span class="ident">hash</span>(<span class="ident">h</span>);
-        <span class="self">self</span>.<span class="ident">m12</span>.<span class="ident">hash</span>(<span class="ident">h</span>);
-        <span class="self">self</span>.<span class="ident">m21</span>.<span class="ident">hash</span>(<span class="ident">h</span>);
-        <span class="self">self</span>.<span class="ident">m22</span>.<span class="ident">hash</span>(<span class="ident">h</span>);
-        <span class="self">self</span>.<span class="ident">m31</span>.<span class="ident">hash</span>(<span class="ident">h</span>);
-        <span class="self">self</span>.<span class="ident">m32</span>.<span class="ident">hash</span>(<span class="ident">h</span>);
+    <span class="kw">fn </span>hash&lt;H: core::hash::Hasher&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, h: <span class="kw-2">&amp;mut </span>H) {
+        <span class="self">self</span>.m11.hash(h);
+        <span class="self">self</span>.m12.hash(h);
+        <span class="self">self</span>.m21.hash(h);
+        <span class="self">self</span>.m22.hash(h);
+        <span class="self">self</span>.m31.hash(h);
+        <span class="self">self</span>.m32.hash(h);
     }
 }
 
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">Transform2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Create a transform specifying its components in using the column-major-column-vector</span>
-    <span class="doccomment">/// matrix notation.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// For example, the translation terms m31 and m32 are the last two parameters parameters.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// use euclid::default::Transform2D;</span>
-    <span class="doccomment">/// let tx = 1.0;</span>
-    <span class="doccomment">/// let ty = 2.0;</span>
-    <span class="doccomment">/// let translation = Transform2D::new(</span>
-    <span class="doccomment">///   1.0, 0.0,</span>
-    <span class="doccomment">///   0.0, 1.0,</span>
-    <span class="doccomment">///   tx,  ty,</span>
-    <span class="doccomment">/// );</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">m11</span>: <span class="ident">T</span>, <span class="ident">m12</span>: <span class="ident">T</span>, <span class="ident">m21</span>: <span class="ident">T</span>, <span class="ident">m22</span>: <span class="ident">T</span>, <span class="ident">m31</span>: <span class="ident">T</span>, <span class="ident">m32</span>: <span class="ident">T</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">Transform2D</span> {
-            <span class="ident">m11</span>, <span class="ident">m12</span>,
-            <span class="ident">m21</span>, <span class="ident">m22</span>,
-            <span class="ident">m31</span>, <span class="ident">m32</span>,
-            <span class="ident">_unit</span>: <span class="ident">PhantomData</span>,
+<span class="kw">impl</span>&lt;T, Src, Dst&gt; Transform2D&lt;T, Src, Dst&gt; {
+    <span class="doccomment">/// Create a transform specifying its components in using the column-major-column-vector
+    /// matrix notation.
+    ///
+    /// For example, the translation terms m31 and m32 are the last two parameters parameters.
+    ///
+    /// ```
+    /// use euclid::default::Transform2D;
+    /// let tx = 1.0;
+    /// let ty = 2.0;
+    /// let translation = Transform2D::new(
+    ///   1.0, 0.0,
+    ///   0.0, 1.0,
+    ///   tx,  ty,
+    /// );
+    /// ```
+    </span><span class="kw">pub const fn </span>new(m11: T, m12: T, m21: T, m22: T, m31: T, m32: T) -&gt; <span class="self">Self </span>{
+        Transform2D {
+            m11, m12,
+            m21, m22,
+            m31, m32,
+            _unit: PhantomData,
         }
     }
 
-    <span class="doccomment">/// Returns true is this transform is approximately equal to the other one, using</span>
-    <span class="doccomment">/// T&#39;s default epsilon value.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// The same as [`ApproxEq::approx_eq()`] but available without importing trait.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// [`ApproxEq::approx_eq()`]: ./approxeq/trait.ApproxEq.html#method.approx_eq</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">approx_eq</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="ident">bool</span>
-    <span class="kw">where</span> <span class="ident">T</span> : <span class="ident">ApproxEq</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-        <span class="op">&lt;</span><span class="self">Self</span> <span class="kw">as</span> <span class="ident">ApproxEq</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::approx_eq</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="kw-2">&amp;</span><span class="ident">other</span>)
+    <span class="doccomment">/// Returns true is this transform is approximately equal to the other one, using
+    /// T&#39;s default epsilon value.
+    ///
+    /// The same as [`ApproxEq::approx_eq()`] but available without importing trait.
+    ///
+    /// [`ApproxEq::approx_eq()`]: ./approxeq/trait.ApproxEq.html#method.approx_eq
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>approx_eq(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; bool
+    <span class="kw">where </span>T : ApproxEq&lt;T&gt; {
+        &lt;<span class="self">Self </span><span class="kw">as </span>ApproxEq&lt;T&gt;&gt;::approx_eq(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="kw-2">&amp;</span>other)
     }
 
-    <span class="doccomment">/// Returns true is this transform is approximately equal to the other one, using</span>
-    <span class="doccomment">/// a provided epsilon value.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// The same as [`ApproxEq::approx_eq_eps()`] but available without importing trait.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// [`ApproxEq::approx_eq_eps()`]: ./approxeq/trait.ApproxEq.html#method.approx_eq_eps</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">approx_eq_eps</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>, <span class="ident">eps</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>) -&gt; <span class="ident">bool</span>
-    <span class="kw">where</span> <span class="ident">T</span> : <span class="ident">ApproxEq</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-        <span class="op">&lt;</span><span class="self">Self</span> <span class="kw">as</span> <span class="ident">ApproxEq</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::approx_eq_eps</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="kw-2">&amp;</span><span class="ident">other</span>, <span class="kw-2">&amp;</span><span class="ident">eps</span>)
+    <span class="doccomment">/// Returns true is this transform is approximately equal to the other one, using
+    /// a provided epsilon value.
+    ///
+    /// The same as [`ApproxEq::approx_eq_eps()`] but available without importing trait.
+    ///
+    /// [`ApproxEq::approx_eq_eps()`]: ./approxeq/trait.ApproxEq.html#method.approx_eq_eps
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>approx_eq_eps(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="self">Self</span>, eps: <span class="kw-2">&amp;</span>T) -&gt; bool
+    <span class="kw">where </span>T : ApproxEq&lt;T&gt; {
+        &lt;<span class="self">Self </span><span class="kw">as </span>ApproxEq&lt;T&gt;&gt;::approx_eq_eps(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="kw-2">&amp;</span>other, <span class="kw-2">&amp;</span>eps)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Copy</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">Transform2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Returns an array containing this transform&#39;s terms.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// The terms are laid out in the same order as they are</span>
-    <span class="doccomment">/// specified in `Transform2D::new`, that is following the</span>
-    <span class="doccomment">/// column-major-column-vector matrix notation.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// For example the translation terms are found in the</span>
-    <span class="doccomment">/// last two slots of the array.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_array</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; [<span class="ident">T</span>; <span class="number">6</span>] {
+<span class="kw">impl</span>&lt;T: Copy, Src, Dst&gt; Transform2D&lt;T, Src, Dst&gt; {
+    <span class="doccomment">/// Returns an array containing this transform&#39;s terms.
+    ///
+    /// The terms are laid out in the same order as they are
+    /// specified in `Transform2D::new`, that is following the
+    /// column-major-column-vector matrix notation.
+    ///
+    /// For example the translation terms are found in the
+    /// last two slots of the array.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>to_array(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; [T; <span class="number">6</span>] {
         [
-            <span class="self">self</span>.<span class="ident">m11</span>, <span class="self">self</span>.<span class="ident">m12</span>,
-            <span class="self">self</span>.<span class="ident">m21</span>, <span class="self">self</span>.<span class="ident">m22</span>,
-            <span class="self">self</span>.<span class="ident">m31</span>, <span class="self">self</span>.<span class="ident">m32</span>
+            <span class="self">self</span>.m11, <span class="self">self</span>.m12,
+            <span class="self">self</span>.m21, <span class="self">self</span>.m22,
+            <span class="self">self</span>.m31, <span class="self">self</span>.m32
         ]
     }
 
-    <span class="doccomment">/// Returns an array containing this transform&#39;s terms transposed.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// The terms are laid out in transposed order from the same order of</span>
-    <span class="doccomment">/// `Transform3D::new` and `Transform3D::to_array`, that is following</span>
-    <span class="doccomment">/// the row-major-column-vector matrix notation.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// For example the translation terms are found at indices 2 and 5</span>
-    <span class="doccomment">/// in the array.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_array_transposed</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; [<span class="ident">T</span>; <span class="number">6</span>] {
+    <span class="doccomment">/// Returns an array containing this transform&#39;s terms transposed.
+    ///
+    /// The terms are laid out in transposed order from the same order of
+    /// `Transform3D::new` and `Transform3D::to_array`, that is following
+    /// the row-major-column-vector matrix notation.
+    ///
+    /// For example the translation terms are found at indices 2 and 5
+    /// in the array.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>to_array_transposed(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; [T; <span class="number">6</span>] {
         [
-            <span class="self">self</span>.<span class="ident">m11</span>, <span class="self">self</span>.<span class="ident">m21</span>, <span class="self">self</span>.<span class="ident">m31</span>,
-            <span class="self">self</span>.<span class="ident">m12</span>, <span class="self">self</span>.<span class="ident">m22</span>, <span class="self">self</span>.<span class="ident">m32</span>
+            <span class="self">self</span>.m11, <span class="self">self</span>.m21, <span class="self">self</span>.m31,
+            <span class="self">self</span>.m12, <span class="self">self</span>.m22, <span class="self">self</span>.m32
         ]
     }
 
-    <span class="doccomment">/// Equivalent to `to_array` with elements packed two at a time</span>
-    <span class="doccomment">/// in an array of arrays.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_arrays</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; [[<span class="ident">T</span>; <span class="number">2</span>]; <span class="number">3</span>] {
+    <span class="doccomment">/// Equivalent to `to_array` with elements packed two at a time
+    /// in an array of arrays.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>to_arrays(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; [[T; <span class="number">2</span>]; <span class="number">3</span>] {
         [
-            [<span class="self">self</span>.<span class="ident">m11</span>, <span class="self">self</span>.<span class="ident">m12</span>],
-            [<span class="self">self</span>.<span class="ident">m21</span>, <span class="self">self</span>.<span class="ident">m22</span>],
-            [<span class="self">self</span>.<span class="ident">m31</span>, <span class="self">self</span>.<span class="ident">m32</span>],
+            [<span class="self">self</span>.m11, <span class="self">self</span>.m12],
+            [<span class="self">self</span>.m21, <span class="self">self</span>.m22],
+            [<span class="self">self</span>.m31, <span class="self">self</span>.m32],
         ]
     }
 
-    <span class="doccomment">/// Create a transform providing its components via an array</span>
-    <span class="doccomment">/// of 6 elements instead of as individual parameters.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// The order of the components corresponds to the</span>
-    <span class="doccomment">/// column-major-column-vector matrix notation (the same order</span>
-    <span class="doccomment">/// as `Transform2D::new`).</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_array</span>(<span class="ident">array</span>: [<span class="ident">T</span>; <span class="number">6</span>]) -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::new</span>(
-            <span class="ident">array</span>[<span class="number">0</span>], <span class="ident">array</span>[<span class="number">1</span>],
-            <span class="ident">array</span>[<span class="number">2</span>], <span class="ident">array</span>[<span class="number">3</span>],
-            <span class="ident">array</span>[<span class="number">4</span>], <span class="ident">array</span>[<span class="number">5</span>],
+    <span class="doccomment">/// Create a transform providing its components via an array
+    /// of 6 elements instead of as individual parameters.
+    ///
+    /// The order of the components corresponds to the
+    /// column-major-column-vector matrix notation (the same order
+    /// as `Transform2D::new`).
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>from_array(array: [T; <span class="number">6</span>]) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::new(
+            array[<span class="number">0</span>], array[<span class="number">1</span>],
+            array[<span class="number">2</span>], array[<span class="number">3</span>],
+            array[<span class="number">4</span>], array[<span class="number">5</span>],
         )
     }
 
-    <span class="doccomment">/// Equivalent to `from_array` with elements packed two at a time</span>
-    <span class="doccomment">/// in an array of arrays.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// The order of the components corresponds to the</span>
-    <span class="doccomment">/// column-major-column-vector matrix notation (the same order</span>
-    <span class="doccomment">/// as `Transform3D::new`).</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_arrays</span>(<span class="ident">array</span>: [[<span class="ident">T</span>; <span class="number">2</span>]; <span class="number">3</span>]) -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::new</span>(
-            <span class="ident">array</span>[<span class="number">0</span>][<span class="number">0</span>], <span class="ident">array</span>[<span class="number">0</span>][<span class="number">1</span>],
-            <span class="ident">array</span>[<span class="number">1</span>][<span class="number">0</span>], <span class="ident">array</span>[<span class="number">1</span>][<span class="number">1</span>],
-            <span class="ident">array</span>[<span class="number">2</span>][<span class="number">0</span>], <span class="ident">array</span>[<span class="number">2</span>][<span class="number">1</span>],
+    <span class="doccomment">/// Equivalent to `from_array` with elements packed two at a time
+    /// in an array of arrays.
+    ///
+    /// The order of the components corresponds to the
+    /// column-major-column-vector matrix notation (the same order
+    /// as `Transform3D::new`).
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>from_arrays(array: [[T; <span class="number">2</span>]; <span class="number">3</span>]) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::new(
+            array[<span class="number">0</span>][<span class="number">0</span>], array[<span class="number">0</span>][<span class="number">1</span>],
+            array[<span class="number">1</span>][<span class="number">0</span>], array[<span class="number">1</span>][<span class="number">1</span>],
+            array[<span class="number">2</span>][<span class="number">0</span>], array[<span class="number">2</span>][<span class="number">1</span>],
         )
     }
 
-    <span class="doccomment">/// Drop the units, preserving only the numeric value.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_untyped</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Transform2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">UnknownUnit</span>, <span class="ident">UnknownUnit</span><span class="op">&gt;</span> {
-        <span class="ident">Transform2D::new</span>(
-            <span class="self">self</span>.<span class="ident">m11</span>, <span class="self">self</span>.<span class="ident">m12</span>,
-            <span class="self">self</span>.<span class="ident">m21</span>, <span class="self">self</span>.<span class="ident">m22</span>,
-            <span class="self">self</span>.<span class="ident">m31</span>, <span class="self">self</span>.<span class="ident">m32</span>
+    <span class="doccomment">/// Drop the units, preserving only the numeric value.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>to_untyped(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Transform2D&lt;T, UnknownUnit, UnknownUnit&gt; {
+        Transform2D::new(
+            <span class="self">self</span>.m11, <span class="self">self</span>.m12,
+            <span class="self">self</span>.m21, <span class="self">self</span>.m22,
+            <span class="self">self</span>.m31, <span class="self">self</span>.m32
         )
     }
 
-    <span class="doccomment">/// Tag a unitless value with units.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_untyped</span>(<span class="ident">p</span>: <span class="kw-2">&amp;</span><span class="ident">Transform2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">UnknownUnit</span>, <span class="ident">UnknownUnit</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">Transform2D::new</span>(
-            <span class="ident">p</span>.<span class="ident">m11</span>, <span class="ident">p</span>.<span class="ident">m12</span>,
-            <span class="ident">p</span>.<span class="ident">m21</span>, <span class="ident">p</span>.<span class="ident">m22</span>,
-            <span class="ident">p</span>.<span class="ident">m31</span>, <span class="ident">p</span>.<span class="ident">m32</span>
+    <span class="doccomment">/// Tag a unitless value with units.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>from_untyped(p: <span class="kw-2">&amp;</span>Transform2D&lt;T, UnknownUnit, UnknownUnit&gt;) -&gt; <span class="self">Self </span>{
+        Transform2D::new(
+            p.m11, p.m12,
+            p.m21, p.m22,
+            p.m31, p.m32
         )
     }
 
-    <span class="doccomment">/// Returns the same transform with a different source unit.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_source</span><span class="op">&lt;</span><span class="ident">NewSrc</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Transform2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">NewSrc</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {
-        <span class="ident">Transform2D::new</span>(
-            <span class="self">self</span>.<span class="ident">m11</span>, <span class="self">self</span>.<span class="ident">m12</span>,
-            <span class="self">self</span>.<span class="ident">m21</span>, <span class="self">self</span>.<span class="ident">m22</span>,
-            <span class="self">self</span>.<span class="ident">m31</span>, <span class="self">self</span>.<span class="ident">m32</span>,
+    <span class="doccomment">/// Returns the same transform with a different source unit.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>with_source&lt;NewSrc&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Transform2D&lt;T, NewSrc, Dst&gt; {
+        Transform2D::new(
+            <span class="self">self</span>.m11, <span class="self">self</span>.m12,
+            <span class="self">self</span>.m21, <span class="self">self</span>.m22,
+            <span class="self">self</span>.m31, <span class="self">self</span>.m32,
         )
     }
 
-    <span class="doccomment">/// Returns the same transform with a different destination unit.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_destination</span><span class="op">&lt;</span><span class="ident">NewDst</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Transform2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">NewDst</span><span class="op">&gt;</span> {
-        <span class="ident">Transform2D::new</span>(
-            <span class="self">self</span>.<span class="ident">m11</span>, <span class="self">self</span>.<span class="ident">m12</span>,
-            <span class="self">self</span>.<span class="ident">m21</span>, <span class="self">self</span>.<span class="ident">m22</span>,
-            <span class="self">self</span>.<span class="ident">m31</span>, <span class="self">self</span>.<span class="ident">m32</span>,
+    <span class="doccomment">/// Returns the same transform with a different destination unit.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>with_destination&lt;NewDst&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Transform2D&lt;T, Src, NewDst&gt; {
+        Transform2D::new(
+            <span class="self">self</span>.m11, <span class="self">self</span>.m12,
+            <span class="self">self</span>.m21, <span class="self">self</span>.m22,
+            <span class="self">self</span>.m31, <span class="self">self</span>.m32,
         )
     }
 
-    <span class="doccomment">/// Create a 3D transform from the current transform</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_3d</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Transform3D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span>
-    <span class="kw">where</span>
-        <span class="ident">T</span>: <span class="ident">Zero</span> <span class="op">+</span> <span class="ident">One</span>,
+    <span class="doccomment">/// Create a 3D transform from the current transform
+    </span><span class="kw">pub fn </span>to_3d(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Transform3D&lt;T, Src, Dst&gt;
+    <span class="kw">where
+        </span>T: Zero + One,
     {
-        <span class="ident">Transform3D::new_2d</span>(<span class="self">self</span>.<span class="ident">m11</span>, <span class="self">self</span>.<span class="ident">m12</span>, <span class="self">self</span>.<span class="ident">m21</span>, <span class="self">self</span>.<span class="ident">m22</span>, <span class="self">self</span>.<span class="ident">m31</span>, <span class="self">self</span>.<span class="ident">m32</span>)
+        Transform3D::new_2d(<span class="self">self</span>.m11, <span class="self">self</span>.m12, <span class="self">self</span>.m21, <span class="self">self</span>.m22, <span class="self">self</span>.m31, <span class="self">self</span>.m32)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">NumCast</span> <span class="op">+</span> <span class="ident">Copy</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">Transform2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Cast from one numeric representation to another, preserving the units.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">cast</span><span class="op">&lt;</span><span class="ident">NewT</span>: <span class="ident">NumCast</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Transform2D</span><span class="op">&lt;</span><span class="ident">NewT</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">try_cast</span>().<span class="ident">unwrap</span>()
+<span class="kw">impl</span>&lt;T: NumCast + Copy, Src, Dst&gt; Transform2D&lt;T, Src, Dst&gt; {
+    <span class="doccomment">/// Cast from one numeric representation to another, preserving the units.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>cast&lt;NewT: NumCast&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Transform2D&lt;NewT, Src, Dst&gt; {
+        <span class="self">self</span>.try_cast().unwrap()
     }
 
-    <span class="doccomment">/// Fallible cast from one numeric representation to another, preserving the units.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">try_cast</span><span class="op">&lt;</span><span class="ident">NewT</span>: <span class="ident">NumCast</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Transform2D</span><span class="op">&lt;</span><span class="ident">NewT</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="kw">match</span> (<span class="ident">NumCast::from</span>(<span class="self">self</span>.<span class="ident">m11</span>), <span class="ident">NumCast::from</span>(<span class="self">self</span>.<span class="ident">m12</span>),
-               <span class="ident">NumCast::from</span>(<span class="self">self</span>.<span class="ident">m21</span>), <span class="ident">NumCast::from</span>(<span class="self">self</span>.<span class="ident">m22</span>),
-               <span class="ident">NumCast::from</span>(<span class="self">self</span>.<span class="ident">m31</span>), <span class="ident">NumCast::from</span>(<span class="self">self</span>.<span class="ident">m32</span>)) {
-            (<span class="prelude-val">Some</span>(<span class="ident">m11</span>), <span class="prelude-val">Some</span>(<span class="ident">m12</span>),
-             <span class="prelude-val">Some</span>(<span class="ident">m21</span>), <span class="prelude-val">Some</span>(<span class="ident">m22</span>),
-             <span class="prelude-val">Some</span>(<span class="ident">m31</span>), <span class="prelude-val">Some</span>(<span class="ident">m32</span>)) =&gt; {
-                <span class="prelude-val">Some</span>(<span class="ident">Transform2D::new</span>(
-                    <span class="ident">m11</span>, <span class="ident">m12</span>,
-                    <span class="ident">m21</span>, <span class="ident">m22</span>,
-                    <span class="ident">m31</span>, <span class="ident">m32</span>
+    <span class="doccomment">/// Fallible cast from one numeric representation to another, preserving the units.
+    </span><span class="kw">pub fn </span>try_cast&lt;NewT: NumCast&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;Transform2D&lt;NewT, Src, Dst&gt;&gt; {
+        <span class="kw">match </span>(NumCast::from(<span class="self">self</span>.m11), NumCast::from(<span class="self">self</span>.m12),
+               NumCast::from(<span class="self">self</span>.m21), NumCast::from(<span class="self">self</span>.m22),
+               NumCast::from(<span class="self">self</span>.m31), NumCast::from(<span class="self">self</span>.m32)) {
+            (<span class="prelude-val">Some</span>(m11), <span class="prelude-val">Some</span>(m12),
+             <span class="prelude-val">Some</span>(m21), <span class="prelude-val">Some</span>(m22),
+             <span class="prelude-val">Some</span>(m31), <span class="prelude-val">Some</span>(m32)) =&gt; {
+                <span class="prelude-val">Some</span>(Transform2D::new(
+                    m11, m12,
+                    m21, m22,
+                    m31, m32
                 ))
             },
-            <span class="kw">_</span> =&gt; <span class="prelude-val">None</span>
-        }
+            <span class="kw">_ </span>=&gt; <span class="prelude-val">None
+        </span>}
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">Transform2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Zero</span> <span class="op">+</span> <span class="ident">One</span>,
+<span class="kw">impl</span>&lt;T, Src, Dst&gt; Transform2D&lt;T, Src, Dst&gt;
+<span class="kw">where
+    </span>T: Zero + One,
 {
-    <span class="doccomment">/// Create an identity matrix:</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```text</span>
-    <span class="doccomment">/// 1 0</span>
-    <span class="doccomment">/// 0 1</span>
-    <span class="doccomment">/// 0 0</span>
-    <span class="doccomment">/// ```</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">identity</span>() -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::translation</span>(<span class="ident">T::zero</span>(), <span class="ident">T::zero</span>())
+    <span class="doccomment">/// Create an identity matrix:
+    ///
+    /// ```text
+    /// 1 0
+    /// 0 1
+    /// 0 0
+    /// ```
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>identity() -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::translation(T::zero(), T::zero())
     }
 
-    <span class="doccomment">/// Intentional not public, because it checks for exact equivalence</span>
-    <span class="doccomment">/// while most consumers will probably want some sort of approximate</span>
-    <span class="doccomment">/// equivalence to deal with floating-point errors.</span>
-    <span class="kw">fn</span> <span class="ident">is_identity</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span>
-    <span class="kw">where</span>
-        <span class="ident">T</span>: <span class="ident">PartialEq</span>,
+    <span class="doccomment">/// Intentional not public, because it checks for exact equivalence
+    /// while most consumers will probably want some sort of approximate
+    /// equivalence to deal with floating-point errors.
+    </span><span class="kw">fn </span>is_identity(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool
+    <span class="kw">where
+        </span>T: PartialEq,
     {
-        <span class="kw-2">*</span><span class="self">self</span> <span class="op">==</span> <span class="ident"><span class="self">Self</span>::identity</span>()
+        <span class="kw-2">*</span><span class="self">self </span>== <span class="self">Self</span>::identity()
     }
 }
 
 
-<span class="doccomment">/// Methods for combining generic transformations</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">Transform2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Add</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Mul</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span>,
+<span class="doccomment">/// Methods for combining generic transformations
+</span><span class="kw">impl</span>&lt;T, Src, Dst&gt; Transform2D&lt;T, Src, Dst&gt;
+<span class="kw">where
+    </span>T: Copy + Add&lt;Output = T&gt; + Mul&lt;Output = T&gt;,
 {
-    <span class="doccomment">/// Returns the multiplication of the two matrices such that mat&#39;s transformation</span>
-    <span class="doccomment">/// applies after self&#39;s transformation.</span>
-    <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">then</span><span class="op">&lt;</span><span class="ident">NewDst</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">mat</span>: <span class="kw-2">&amp;</span><span class="ident">Transform2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Dst</span>, <span class="ident">NewDst</span><span class="op">&gt;</span>) -&gt; <span class="ident">Transform2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">NewDst</span><span class="op">&gt;</span> {
-        <span class="ident">Transform2D::new</span>(
-            <span class="self">self</span>.<span class="ident">m11</span> <span class="op">*</span> <span class="ident">mat</span>.<span class="ident">m11</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">m12</span> <span class="op">*</span> <span class="ident">mat</span>.<span class="ident">m21</span>,
-            <span class="self">self</span>.<span class="ident">m11</span> <span class="op">*</span> <span class="ident">mat</span>.<span class="ident">m12</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">m12</span> <span class="op">*</span> <span class="ident">mat</span>.<span class="ident">m22</span>,
+    <span class="doccomment">/// Returns the multiplication of the two matrices such that mat&#39;s transformation
+    /// applies after self&#39;s transformation.
+    </span><span class="attribute">#[must_use]
+    </span><span class="kw">pub fn </span>then&lt;NewDst&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, mat: <span class="kw-2">&amp;</span>Transform2D&lt;T, Dst, NewDst&gt;) -&gt; Transform2D&lt;T, Src, NewDst&gt; {
+        Transform2D::new(
+            <span class="self">self</span>.m11 * mat.m11 + <span class="self">self</span>.m12 * mat.m21,
+            <span class="self">self</span>.m11 * mat.m12 + <span class="self">self</span>.m12 * mat.m22,
 
-            <span class="self">self</span>.<span class="ident">m21</span> <span class="op">*</span> <span class="ident">mat</span>.<span class="ident">m11</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">m22</span> <span class="op">*</span> <span class="ident">mat</span>.<span class="ident">m21</span>,
-            <span class="self">self</span>.<span class="ident">m21</span> <span class="op">*</span> <span class="ident">mat</span>.<span class="ident">m12</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">m22</span> <span class="op">*</span> <span class="ident">mat</span>.<span class="ident">m22</span>,
+            <span class="self">self</span>.m21 * mat.m11 + <span class="self">self</span>.m22 * mat.m21,
+            <span class="self">self</span>.m21 * mat.m12 + <span class="self">self</span>.m22 * mat.m22,
 
-            <span class="self">self</span>.<span class="ident">m31</span> <span class="op">*</span> <span class="ident">mat</span>.<span class="ident">m11</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">m32</span> <span class="op">*</span> <span class="ident">mat</span>.<span class="ident">m21</span> <span class="op">+</span> <span class="ident">mat</span>.<span class="ident">m31</span>,
-            <span class="self">self</span>.<span class="ident">m31</span> <span class="op">*</span> <span class="ident">mat</span>.<span class="ident">m12</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">m32</span> <span class="op">*</span> <span class="ident">mat</span>.<span class="ident">m22</span> <span class="op">+</span> <span class="ident">mat</span>.<span class="ident">m32</span>,
+            <span class="self">self</span>.m31 * mat.m11 + <span class="self">self</span>.m32 * mat.m21 + mat.m31,
+            <span class="self">self</span>.m31 * mat.m12 + <span class="self">self</span>.m32 * mat.m22 + mat.m32,
         )
     }
 }
 
-<span class="doccomment">/// Methods for creating and combining translation transformations</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">Transform2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Zero</span> <span class="op">+</span> <span class="ident">One</span>,
+<span class="doccomment">/// Methods for creating and combining translation transformations
+</span><span class="kw">impl</span>&lt;T, Src, Dst&gt; Transform2D&lt;T, Src, Dst&gt;
+<span class="kw">where
+    </span>T: Zero + One,
 {
-    <span class="doccomment">/// Create a 2d translation transform:</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```text</span>
-    <span class="doccomment">/// 1 0</span>
-    <span class="doccomment">/// 0 1</span>
-    <span class="doccomment">/// x y</span>
-    <span class="doccomment">/// ```</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">translation</span>(<span class="ident">x</span>: <span class="ident">T</span>, <span class="ident">y</span>: <span class="ident">T</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">_0</span> <span class="op">=</span> <span class="op">|</span><span class="op">|</span> <span class="ident">T::zero</span>();
-        <span class="kw">let</span> <span class="ident">_1</span> <span class="op">=</span> <span class="op">|</span><span class="op">|</span> <span class="ident">T::one</span>();
+    <span class="doccomment">/// Create a 2d translation transform:
+    ///
+    /// ```text
+    /// 1 0
+    /// 0 1
+    /// x y
+    /// ```
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>translation(x: T, y: T) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>_0 = || T::zero();
+        <span class="kw">let </span>_1 = || T::one();
 
-        <span class="ident"><span class="self">Self</span>::new</span>(
-            <span class="ident">_1</span>(), <span class="ident">_0</span>(),
-            <span class="ident">_0</span>(), <span class="ident">_1</span>(),
-             <span class="ident">x</span>,    <span class="ident">y</span>,
+        <span class="self">Self</span>::new(
+            _1(), _0(),
+            _0(), _1(),
+             x,    y,
         )
     }
 
-    <span class="doccomment">/// Applies a translation after self&#39;s transformation and returns the resulting transform.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">then_translate</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">v</span>: <span class="ident">Vector2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Dst</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span>
-    <span class="kw">where</span>
-        <span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Add</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Mul</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span>,
+    <span class="doccomment">/// Applies a translation after self&#39;s transformation and returns the resulting transform.
+    </span><span class="attribute">#[inline]
+    #[must_use]
+    </span><span class="kw">pub fn </span>then_translate(<span class="kw-2">&amp;</span><span class="self">self</span>, v: Vector2D&lt;T, Dst&gt;) -&gt; <span class="self">Self
+    </span><span class="kw">where
+        </span>T: Copy + Add&lt;Output = T&gt; + Mul&lt;Output = T&gt;,
     {
-        <span class="self">self</span>.<span class="ident">then</span>(<span class="kw-2">&amp;</span><span class="ident">Transform2D::translation</span>(<span class="ident">v</span>.<span class="ident">x</span>, <span class="ident">v</span>.<span class="ident">y</span>))
+        <span class="self">self</span>.then(<span class="kw-2">&amp;</span>Transform2D::translation(v.x, v.y))
     }
 
-    <span class="doccomment">/// Applies a translation before self&#39;s transformation and returns the resulting transform.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">pre_translate</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">v</span>: <span class="ident">Vector2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span>
-    <span class="kw">where</span>
-        <span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Add</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Mul</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span>,
+    <span class="doccomment">/// Applies a translation before self&#39;s transformation and returns the resulting transform.
+    </span><span class="attribute">#[inline]
+    #[must_use]
+    </span><span class="kw">pub fn </span>pre_translate(<span class="kw-2">&amp;</span><span class="self">self</span>, v: Vector2D&lt;T, Src&gt;) -&gt; <span class="self">Self
+    </span><span class="kw">where
+        </span>T: Copy + Add&lt;Output = T&gt; + Mul&lt;Output = T&gt;,
     {
-        <span class="ident">Transform2D::translation</span>(<span class="ident">v</span>.<span class="ident">x</span>, <span class="ident">v</span>.<span class="ident">y</span>).<span class="ident">then</span>(<span class="self">self</span>)
+        Transform2D::translation(v.x, v.y).then(<span class="self">self</span>)
     }
 }
 
-<span class="doccomment">/// Methods for creating and combining rotation transformations</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">Transform2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Add</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Sub</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Mul</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Zero</span> <span class="op">+</span> <span class="ident">Trig</span>,
+<span class="doccomment">/// Methods for creating and combining rotation transformations
+</span><span class="kw">impl</span>&lt;T, Src, Dst&gt; Transform2D&lt;T, Src, Dst&gt;
+<span class="kw">where
+    </span>T: Copy + Add&lt;Output = T&gt; + Sub&lt;Output = T&gt; + Mul&lt;Output = T&gt; + Zero + Trig,
 {
-    <span class="doccomment">/// Returns a rotation transform.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">rotation</span>(<span class="ident">theta</span>: <span class="ident">Angle</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">_0</span> <span class="op">=</span> <span class="ident">Zero::zero</span>();
-        <span class="kw">let</span> <span class="ident">cos</span> <span class="op">=</span> <span class="ident">theta</span>.<span class="ident">get</span>().<span class="ident">cos</span>();
-        <span class="kw">let</span> <span class="ident">sin</span> <span class="op">=</span> <span class="ident">theta</span>.<span class="ident">get</span>().<span class="ident">sin</span>();
-        <span class="ident">Transform2D::new</span>(
-            <span class="ident">cos</span>, <span class="ident">sin</span>,
-            <span class="ident">_0</span> <span class="op">-</span> <span class="ident">sin</span>, <span class="ident">cos</span>,
-            <span class="ident">_0</span>, <span class="ident">_0</span>
+    <span class="doccomment">/// Returns a rotation transform.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>rotation(theta: Angle&lt;T&gt;) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>_0 = Zero::zero();
+        <span class="kw">let </span>cos = theta.get().cos();
+        <span class="kw">let </span>sin = theta.get().sin();
+        Transform2D::new(
+            cos, sin,
+            _0 - sin, cos,
+            _0, _0
         )
     }
 
-    <span class="doccomment">/// Applies a rotation after self&#39;s transformation and returns the resulting transform.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">then_rotate</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">theta</span>: <span class="ident">Angle</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">then</span>(<span class="kw-2">&amp;</span><span class="ident">Transform2D::rotation</span>(<span class="ident">theta</span>))
+    <span class="doccomment">/// Applies a rotation after self&#39;s transformation and returns the resulting transform.
+    </span><span class="attribute">#[inline]
+    #[must_use]
+    </span><span class="kw">pub fn </span>then_rotate(<span class="kw-2">&amp;</span><span class="self">self</span>, theta: Angle&lt;T&gt;) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.then(<span class="kw-2">&amp;</span>Transform2D::rotation(theta))
     }
 
-    <span class="doccomment">/// Applies a rotation before self&#39;s transformation and returns the resulting transform.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">pre_rotate</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">theta</span>: <span class="ident">Angle</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">Transform2D::rotation</span>(<span class="ident">theta</span>).<span class="ident">then</span>(<span class="self">self</span>)
+    <span class="doccomment">/// Applies a rotation before self&#39;s transformation and returns the resulting transform.
+    </span><span class="attribute">#[inline]
+    #[must_use]
+    </span><span class="kw">pub fn </span>pre_rotate(<span class="kw-2">&amp;</span><span class="self">self</span>, theta: Angle&lt;T&gt;) -&gt; <span class="self">Self </span>{
+        Transform2D::rotation(theta).then(<span class="self">self</span>)
     }
 }
 
-<span class="doccomment">/// Methods for creating and combining scale transformations</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">Transform2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Create a 2d scale transform:</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```text</span>
-    <span class="doccomment">/// x 0</span>
-    <span class="doccomment">/// 0 y</span>
-    <span class="doccomment">/// 0 0</span>
-    <span class="doccomment">/// ```</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">scale</span>(<span class="ident">x</span>: <span class="ident">T</span>, <span class="ident">y</span>: <span class="ident">T</span>) -&gt; <span class="self">Self</span>
-    <span class="kw">where</span>
-        <span class="ident">T</span>: <span class="ident">Zero</span>,
+<span class="doccomment">/// Methods for creating and combining scale transformations
+</span><span class="kw">impl</span>&lt;T, Src, Dst&gt; Transform2D&lt;T, Src, Dst&gt; {
+    <span class="doccomment">/// Create a 2d scale transform:
+    ///
+    /// ```text
+    /// x 0
+    /// 0 y
+    /// 0 0
+    /// ```
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>scale(x: T, y: T) -&gt; <span class="self">Self
+    </span><span class="kw">where
+        </span>T: Zero,
     {
-        <span class="kw">let</span> <span class="ident">_0</span> <span class="op">=</span> <span class="op">|</span><span class="op">|</span> <span class="ident">Zero::zero</span>();
+        <span class="kw">let </span>_0 = || Zero::zero();
 
-        <span class="ident"><span class="self">Self</span>::new</span>(
-             <span class="ident">x</span>,   <span class="ident">_0</span>(),
-            <span class="ident">_0</span>(),  <span class="ident">y</span>,
-            <span class="ident">_0</span>(), <span class="ident">_0</span>(),
+        <span class="self">Self</span>::new(
+             x,   _0(),
+            _0(),  y,
+            _0(), _0(),
         )
     }
 
-    <span class="doccomment">/// Applies a scale after self&#39;s transformation and returns the resulting transform.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">then_scale</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">T</span>, <span class="ident">y</span>: <span class="ident">T</span>) -&gt; <span class="self">Self</span>
-    <span class="kw">where</span>
-        <span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Add</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Mul</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Zero</span>,
+    <span class="doccomment">/// Applies a scale after self&#39;s transformation and returns the resulting transform.
+    </span><span class="attribute">#[inline]
+    #[must_use]
+    </span><span class="kw">pub fn </span>then_scale(<span class="kw-2">&amp;</span><span class="self">self</span>, x: T, y: T) -&gt; <span class="self">Self
+    </span><span class="kw">where
+        </span>T: Copy + Add&lt;Output = T&gt; + Mul&lt;Output = T&gt; + Zero,
     {
-        <span class="self">self</span>.<span class="ident">then</span>(<span class="kw-2">&amp;</span><span class="ident">Transform2D::scale</span>(<span class="ident">x</span>, <span class="ident">y</span>))
+        <span class="self">self</span>.then(<span class="kw-2">&amp;</span>Transform2D::scale(x, y))
     }
 
-    <span class="doccomment">/// Applies a scale before self&#39;s transformation and returns the resulting transform.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">pre_scale</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">T</span>, <span class="ident">y</span>: <span class="ident">T</span>) -&gt; <span class="self">Self</span>
-    <span class="kw">where</span>
-        <span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Mul</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span>,
+    <span class="doccomment">/// Applies a scale before self&#39;s transformation and returns the resulting transform.
+    </span><span class="attribute">#[inline]
+    #[must_use]
+    </span><span class="kw">pub fn </span>pre_scale(<span class="kw-2">&amp;</span><span class="self">self</span>, x: T, y: T) -&gt; <span class="self">Self
+    </span><span class="kw">where
+        </span>T: Copy + Mul&lt;Output = T&gt;,
     {
-        <span class="ident">Transform2D::new</span>(
-            <span class="self">self</span>.<span class="ident">m11</span> <span class="op">*</span> <span class="ident">x</span>, <span class="self">self</span>.<span class="ident">m12</span> <span class="op">*</span> <span class="ident">x</span>,
-            <span class="self">self</span>.<span class="ident">m21</span> <span class="op">*</span> <span class="ident">y</span>, <span class="self">self</span>.<span class="ident">m22</span> <span class="op">*</span> <span class="ident">y</span>,
-            <span class="self">self</span>.<span class="ident">m31</span>,     <span class="self">self</span>.<span class="ident">m32</span>
+        Transform2D::new(
+            <span class="self">self</span>.m11 * x, <span class="self">self</span>.m12 * x,
+            <span class="self">self</span>.m21 * y, <span class="self">self</span>.m22 * y,
+            <span class="self">self</span>.m31,     <span class="self">self</span>.m32
         )
     }
 }
 
-<span class="doccomment">/// Methods for apply transformations to objects</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">Transform2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Add</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Mul</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span>,
+<span class="doccomment">/// Methods for apply transformations to objects
+</span><span class="kw">impl</span>&lt;T, Src, Dst&gt; Transform2D&lt;T, Src, Dst&gt;
+<span class="kw">where
+    </span>T: Copy + Add&lt;Output = T&gt; + Mul&lt;Output = T&gt;,
 {
-    <span class="doccomment">/// Returns the given point transformed by this transform.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">transform_point</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">point</span>: <span class="ident">Point2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span><span class="op">&gt;</span>) -&gt; <span class="ident">Point2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {
-        <span class="ident">Point2D::new</span>(
-            <span class="ident">point</span>.<span class="ident">x</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">m11</span> <span class="op">+</span> <span class="ident">point</span>.<span class="ident">y</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">m21</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">m31</span>,
-            <span class="ident">point</span>.<span class="ident">x</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">m12</span> <span class="op">+</span> <span class="ident">point</span>.<span class="ident">y</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">m22</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">m32</span>
+    <span class="doccomment">/// Returns the given point transformed by this transform.
+    </span><span class="attribute">#[inline]
+    #[must_use]
+    </span><span class="kw">pub fn </span>transform_point(<span class="kw-2">&amp;</span><span class="self">self</span>, point: Point2D&lt;T, Src&gt;) -&gt; Point2D&lt;T, Dst&gt; {
+        Point2D::new(
+            point.x * <span class="self">self</span>.m11 + point.y * <span class="self">self</span>.m21 + <span class="self">self</span>.m31,
+            point.x * <span class="self">self</span>.m12 + point.y * <span class="self">self</span>.m22 + <span class="self">self</span>.m32
         )
     }
 
-    <span class="doccomment">/// Returns the given vector transformed by this matrix.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">transform_vector</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">vec</span>: <span class="ident">Vector2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span><span class="op">&gt;</span>) -&gt; <span class="ident">Vector2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {
-        <span class="ident">vec2</span>(<span class="ident">vec</span>.<span class="ident">x</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">m11</span> <span class="op">+</span> <span class="ident">vec</span>.<span class="ident">y</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">m21</span>,
-             <span class="ident">vec</span>.<span class="ident">x</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">m12</span> <span class="op">+</span> <span class="ident">vec</span>.<span class="ident">y</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">m22</span>)
+    <span class="doccomment">/// Returns the given vector transformed by this matrix.
+    </span><span class="attribute">#[inline]
+    #[must_use]
+    </span><span class="kw">pub fn </span>transform_vector(<span class="kw-2">&amp;</span><span class="self">self</span>, vec: Vector2D&lt;T, Src&gt;) -&gt; Vector2D&lt;T, Dst&gt; {
+        vec2(vec.x * <span class="self">self</span>.m11 + vec.y * <span class="self">self</span>.m21,
+             vec.x * <span class="self">self</span>.m12 + vec.y * <span class="self">self</span>.m22)
     }
 
-    <span class="doccomment">/// Returns a rectangle that encompasses the result of transforming the given rectangle by this</span>
-    <span class="doccomment">/// transform.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">outer_transformed_rect</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">rect</span>: <span class="kw-2">&amp;</span><span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span><span class="op">&gt;</span>) -&gt; <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Dst</span><span class="op">&gt;</span>
-    <span class="kw">where</span>
-        <span class="ident">T</span>: <span class="ident">Sub</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Zero</span> <span class="op">+</span> <span class="ident">PartialOrd</span>,
+    <span class="doccomment">/// Returns a rectangle that encompasses the result of transforming the given rectangle by this
+    /// transform.
+    </span><span class="attribute">#[inline]
+    #[must_use]
+    </span><span class="kw">pub fn </span>outer_transformed_rect(<span class="kw-2">&amp;</span><span class="self">self</span>, rect: <span class="kw-2">&amp;</span>Rect&lt;T, Src&gt;) -&gt; Rect&lt;T, Dst&gt;
+    <span class="kw">where
+        </span>T: Sub&lt;Output = T&gt; + Zero + PartialOrd,
     {
-        <span class="kw">let</span> <span class="ident">min</span> <span class="op">=</span> <span class="ident">rect</span>.<span class="ident">min</span>();
-        <span class="kw">let</span> <span class="ident">max</span> <span class="op">=</span> <span class="ident">rect</span>.<span class="ident">max</span>();
-        <span class="ident">Rect::from_points</span>(<span class="kw-2">&amp;</span>[
-            <span class="self">self</span>.<span class="ident">transform_point</span>(<span class="ident">min</span>),
-            <span class="self">self</span>.<span class="ident">transform_point</span>(<span class="ident">max</span>),
-            <span class="self">self</span>.<span class="ident">transform_point</span>(<span class="ident">point2</span>(<span class="ident">max</span>.<span class="ident">x</span>, <span class="ident">min</span>.<span class="ident">y</span>)),
-            <span class="self">self</span>.<span class="ident">transform_point</span>(<span class="ident">point2</span>(<span class="ident">min</span>.<span class="ident">x</span>, <span class="ident">max</span>.<span class="ident">y</span>)),
+        <span class="kw">let </span>min = rect.min();
+        <span class="kw">let </span>max = rect.max();
+        Rect::from_points(<span class="kw-2">&amp;</span>[
+            <span class="self">self</span>.transform_point(min),
+            <span class="self">self</span>.transform_point(max),
+            <span class="self">self</span>.transform_point(point2(max.x, min.y)),
+            <span class="self">self</span>.transform_point(point2(min.x, max.y)),
         ])
     }
 
 
-    <span class="doccomment">/// Returns a box that encompasses the result of transforming the given box by this</span>
-    <span class="doccomment">/// transform.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">outer_transformed_box</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">b</span>: <span class="kw-2">&amp;</span><span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span><span class="op">&gt;</span>) -&gt; <span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Dst</span><span class="op">&gt;</span>
-    <span class="kw">where</span>
-        <span class="ident">T</span>: <span class="ident">Sub</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Zero</span> <span class="op">+</span> <span class="ident">PartialOrd</span>,
+    <span class="doccomment">/// Returns a box that encompasses the result of transforming the given box by this
+    /// transform.
+    </span><span class="attribute">#[inline]
+    #[must_use]
+    </span><span class="kw">pub fn </span>outer_transformed_box(<span class="kw-2">&amp;</span><span class="self">self</span>, b: <span class="kw-2">&amp;</span>Box2D&lt;T, Src&gt;) -&gt; Box2D&lt;T, Dst&gt;
+    <span class="kw">where
+        </span>T: Sub&lt;Output = T&gt; + Zero + PartialOrd,
     {
-        <span class="ident">Box2D::from_points</span>(<span class="kw-2">&amp;</span>[
-            <span class="self">self</span>.<span class="ident">transform_point</span>(<span class="ident">b</span>.<span class="ident">min</span>),
-            <span class="self">self</span>.<span class="ident">transform_point</span>(<span class="ident">b</span>.<span class="ident">max</span>),
-            <span class="self">self</span>.<span class="ident">transform_point</span>(<span class="ident">point2</span>(<span class="ident">b</span>.<span class="ident">max</span>.<span class="ident">x</span>, <span class="ident">b</span>.<span class="ident">min</span>.<span class="ident">y</span>)),
-            <span class="self">self</span>.<span class="ident">transform_point</span>(<span class="ident">point2</span>(<span class="ident">b</span>.<span class="ident">min</span>.<span class="ident">x</span>, <span class="ident">b</span>.<span class="ident">max</span>.<span class="ident">y</span>)),
+        Box2D::from_points(<span class="kw-2">&amp;</span>[
+            <span class="self">self</span>.transform_point(b.min),
+            <span class="self">self</span>.transform_point(b.max),
+            <span class="self">self</span>.transform_point(point2(b.max.x, b.min.y)),
+            <span class="self">self</span>.transform_point(point2(b.min.x, b.max.y)),
         ])
     }
 }
 
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">Transform2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Sub</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Mul</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Div</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">PartialEq</span> <span class="op">+</span> <span class="ident">Zero</span> <span class="op">+</span> <span class="ident">One</span>,
+<span class="kw">impl</span>&lt;T, Src, Dst&gt; Transform2D&lt;T, Src, Dst&gt;
+<span class="kw">where
+    </span>T: Copy + Sub&lt;Output = T&gt; + Mul&lt;Output = T&gt; + Div&lt;Output = T&gt; + PartialEq + Zero + One,
 {
-    <span class="doccomment">/// Computes and returns the determinant of this transform.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">determinant</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">T</span> {
-        <span class="self">self</span>.<span class="ident">m11</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">m22</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">m12</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">m21</span>
+    <span class="doccomment">/// Computes and returns the determinant of this transform.
+    </span><span class="kw">pub fn </span>determinant(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; T {
+        <span class="self">self</span>.m11 * <span class="self">self</span>.m22 - <span class="self">self</span>.m12 * <span class="self">self</span>.m21
     }
 
-    <span class="doccomment">/// Returns whether it is possible to compute the inverse transform.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_invertible</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">determinant</span>() <span class="op">!</span><span class="op">=</span> <span class="ident">Zero::zero</span>()
+    <span class="doccomment">/// Returns whether it is possible to compute the inverse transform.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>is_invertible(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="self">self</span>.determinant() != Zero::zero()
     }
 
-    <span class="doccomment">/// Returns the inverse transform if possible.</span>
-    <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">inverse</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Transform2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Dst</span>, <span class="ident">Src</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">det</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">determinant</span>();
+    <span class="doccomment">/// Returns the inverse transform if possible.
+    </span><span class="attribute">#[must_use]
+    </span><span class="kw">pub fn </span>inverse(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;Transform2D&lt;T, Dst, Src&gt;&gt; {
+        <span class="kw">let </span>det = <span class="self">self</span>.determinant();
 
-        <span class="kw">let</span> <span class="ident">_0</span>: <span class="ident">T</span> <span class="op">=</span> <span class="ident">Zero::zero</span>();
-        <span class="kw">let</span> <span class="ident">_1</span>: <span class="ident">T</span> <span class="op">=</span> <span class="ident">One::one</span>();
+        <span class="kw">let </span>_0: T = Zero::zero();
+        <span class="kw">let </span>_1: T = One::one();
 
-        <span class="kw">if</span> <span class="ident">det</span> <span class="op">==</span> <span class="ident">_0</span> {
-          <span class="kw">return</span> <span class="prelude-val">None</span>;
+        <span class="kw">if </span>det == _0 {
+          <span class="kw">return </span><span class="prelude-val">None</span>;
         }
 
-        <span class="kw">let</span> <span class="ident">inv_det</span> <span class="op">=</span> <span class="ident">_1</span> <span class="op">/</span> <span class="ident">det</span>;
-        <span class="prelude-val">Some</span>(<span class="ident">Transform2D::new</span>(
-            <span class="ident">inv_det</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">m22</span>,
-            <span class="ident">inv_det</span> <span class="op">*</span> (<span class="ident">_0</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">m12</span>),
-            <span class="ident">inv_det</span> <span class="op">*</span> (<span class="ident">_0</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">m21</span>),
-            <span class="ident">inv_det</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">m11</span>,
-            <span class="ident">inv_det</span> <span class="op">*</span> (<span class="self">self</span>.<span class="ident">m21</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">m32</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">m22</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">m31</span>),
-            <span class="ident">inv_det</span> <span class="op">*</span> (<span class="self">self</span>.<span class="ident">m31</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">m12</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">m11</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">m32</span>),
+        <span class="kw">let </span>inv_det = _1 / det;
+        <span class="prelude-val">Some</span>(Transform2D::new(
+            inv_det * <span class="self">self</span>.m22,
+            inv_det * (_0 - <span class="self">self</span>.m12),
+            inv_det * (_0 - <span class="self">self</span>.m21),
+            inv_det * <span class="self">self</span>.m11,
+            inv_det * (<span class="self">self</span>.m21 * <span class="self">self</span>.m32 - <span class="self">self</span>.m22 * <span class="self">self</span>.m31),
+            inv_det * (<span class="self">self</span>.m31 * <span class="self">self</span>.m12 - <span class="self">self</span>.m11 * <span class="self">self</span>.m32),
         ))
     }
 }
 
-<span class="kw">impl</span> <span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">Transform2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span>
-    <span class="kw">where</span> <span class="ident">T</span>: <span class="ident">Zero</span> <span class="op">+</span> <span class="ident">One</span>
+<span class="kw">impl </span>&lt;T, Src, Dst&gt; Default <span class="kw">for </span>Transform2D&lt;T, Src, Dst&gt;
+    <span class="kw">where </span>T: Zero + One
 {
-    <span class="doccomment">/// Returns the [identity transform](#method.identity).</span>
-    <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::identity</span>()
+    <span class="doccomment">/// Returns the [identity transform](#method.identity).
+    </span><span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::identity()
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">ApproxEq</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">ApproxEq</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Transform2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">approx_epsilon</span>() -&gt; <span class="ident">T</span> { <span class="ident">T::approx_epsilon</span>() }
+<span class="kw">impl</span>&lt;T: ApproxEq&lt;T&gt;, Src, Dst&gt; ApproxEq&lt;T&gt; <span class="kw">for </span>Transform2D&lt;T, Src, Dst&gt; {
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>approx_epsilon() -&gt; T { T::approx_epsilon() }
 
-    <span class="doccomment">/// Returns true is this transform is approximately equal to the other one, using</span>
-    <span class="doccomment">/// a provided epsilon value.</span>
-    <span class="kw">fn</span> <span class="ident">approx_eq_eps</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>, <span class="ident">eps</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">m11</span>.<span class="ident">approx_eq_eps</span>(<span class="kw-2">&amp;</span><span class="ident">other</span>.<span class="ident">m11</span>, <span class="ident">eps</span>) <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">m12</span>.<span class="ident">approx_eq_eps</span>(<span class="kw-2">&amp;</span><span class="ident">other</span>.<span class="ident">m12</span>, <span class="ident">eps</span>) <span class="op">&amp;&amp;</span>
-        <span class="self">self</span>.<span class="ident">m21</span>.<span class="ident">approx_eq_eps</span>(<span class="kw-2">&amp;</span><span class="ident">other</span>.<span class="ident">m21</span>, <span class="ident">eps</span>) <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">m22</span>.<span class="ident">approx_eq_eps</span>(<span class="kw-2">&amp;</span><span class="ident">other</span>.<span class="ident">m22</span>, <span class="ident">eps</span>) <span class="op">&amp;&amp;</span>
-        <span class="self">self</span>.<span class="ident">m31</span>.<span class="ident">approx_eq_eps</span>(<span class="kw-2">&amp;</span><span class="ident">other</span>.<span class="ident">m31</span>, <span class="ident">eps</span>) <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">m32</span>.<span class="ident">approx_eq_eps</span>(<span class="kw-2">&amp;</span><span class="ident">other</span>.<span class="ident">m32</span>, <span class="ident">eps</span>)
+    <span class="doccomment">/// Returns true is this transform is approximately equal to the other one, using
+    /// a provided epsilon value.
+    </span><span class="kw">fn </span>approx_eq_eps(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="self">Self</span>, eps: <span class="kw-2">&amp;</span>T) -&gt; bool {
+        <span class="self">self</span>.m11.approx_eq_eps(<span class="kw-2">&amp;</span>other.m11, eps) &amp;&amp; <span class="self">self</span>.m12.approx_eq_eps(<span class="kw-2">&amp;</span>other.m12, eps) &amp;&amp;
+        <span class="self">self</span>.m21.approx_eq_eps(<span class="kw-2">&amp;</span>other.m21, eps) &amp;&amp; <span class="self">self</span>.m22.approx_eq_eps(<span class="kw-2">&amp;</span>other.m22, eps) &amp;&amp;
+        <span class="self">self</span>.m31.approx_eq_eps(<span class="kw-2">&amp;</span>other.m31, eps) &amp;&amp; <span class="self">self</span>.m32.approx_eq_eps(<span class="kw-2">&amp;</span>other.m32, eps)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">fmt::Debug</span> <span class="kw">for</span> <span class="ident">Transform2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span>
-<span class="kw">where</span> <span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">fmt::Debug</span> <span class="op">+</span>
-         <span class="ident">PartialEq</span> <span class="op">+</span>
-         <span class="ident">One</span> <span class="op">+</span> <span class="ident">Zero</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">fmt::Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">is_identity</span>() {
-            <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;[I]&quot;</span>)
-        } <span class="kw">else</span> {
-            <span class="self">self</span>.<span class="ident">to_array</span>().<span class="ident">fmt</span>(<span class="ident">f</span>)
+<span class="kw">impl</span>&lt;T, Src, Dst&gt; fmt::Debug <span class="kw">for </span>Transform2D&lt;T, Src, Dst&gt;
+<span class="kw">where </span>T: Copy + fmt::Debug +
+         PartialEq +
+         One + Zero {
+    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>fmt::Formatter) -&gt; fmt::Result {
+        <span class="kw">if </span><span class="self">self</span>.is_identity() {
+            <span class="macro">write!</span>(f, <span class="string">&quot;[I]&quot;</span>)
+        } <span class="kw">else </span>{
+            <span class="self">self</span>.to_array().fmt(f)
         }
     }
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;mint&quot;</span>)]</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">mint::RowMatrix3x2</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Transform2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">m</span>: <span class="ident">mint::RowMatrix3x2</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">Transform2D</span> {
-            <span class="ident">m11</span>: <span class="ident">m</span>.<span class="ident">x</span>.<span class="ident">x</span>, <span class="ident">m12</span>: <span class="ident">m</span>.<span class="ident">x</span>.<span class="ident">y</span>,
-            <span class="ident">m21</span>: <span class="ident">m</span>.<span class="ident">y</span>.<span class="ident">x</span>, <span class="ident">m22</span>: <span class="ident">m</span>.<span class="ident">y</span>.<span class="ident">y</span>,
-            <span class="ident">m31</span>: <span class="ident">m</span>.<span class="ident">z</span>.<span class="ident">x</span>, <span class="ident">m32</span>: <span class="ident">m</span>.<span class="ident">z</span>.<span class="ident">y</span>,
-            <span class="ident">_unit</span>: <span class="ident">PhantomData</span>,
+<span class="attribute">#[cfg(feature = <span class="string">&quot;mint&quot;</span>)]
+</span><span class="kw">impl</span>&lt;T, Src, Dst&gt; From&lt;mint::RowMatrix3x2&lt;T&gt;&gt; <span class="kw">for </span>Transform2D&lt;T, Src, Dst&gt; {
+    <span class="kw">fn </span>from(m: mint::RowMatrix3x2&lt;T&gt;) -&gt; <span class="self">Self </span>{
+        Transform2D {
+            m11: m.x.x, m12: m.x.y,
+            m21: m.y.x, m22: m.y.y,
+            m31: m.z.x, m32: m.z.y,
+            _unit: PhantomData,
         }
     }
 }
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;mint&quot;</span>)]</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">mint::RowMatrix3x2</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Transform2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">into</span>(<span class="self">self</span>) -&gt; <span class="ident">mint::RowMatrix3x2</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-        <span class="ident">mint::RowMatrix3x2</span> {
-            <span class="ident">x</span>: <span class="ident">mint::Vector2</span> { <span class="ident">x</span>: <span class="self">self</span>.<span class="ident">m11</span>, <span class="ident">y</span>: <span class="self">self</span>.<span class="ident">m12</span> },
-            <span class="ident">y</span>: <span class="ident">mint::Vector2</span> { <span class="ident">x</span>: <span class="self">self</span>.<span class="ident">m21</span>, <span class="ident">y</span>: <span class="self">self</span>.<span class="ident">m22</span> },
-            <span class="ident">z</span>: <span class="ident">mint::Vector2</span> { <span class="ident">x</span>: <span class="self">self</span>.<span class="ident">m31</span>, <span class="ident">y</span>: <span class="self">self</span>.<span class="ident">m32</span> },
+<span class="attribute">#[cfg(feature = <span class="string">&quot;mint&quot;</span>)]
+</span><span class="kw">impl</span>&lt;T, Src, Dst&gt; Into&lt;mint::RowMatrix3x2&lt;T&gt;&gt; <span class="kw">for </span>Transform2D&lt;T, Src, Dst&gt; {
+    <span class="kw">fn </span>into(<span class="self">self</span>) -&gt; mint::RowMatrix3x2&lt;T&gt; {
+        mint::RowMatrix3x2 {
+            x: mint::Vector2 { x: <span class="self">self</span>.m11, y: <span class="self">self</span>.m12 },
+            y: mint::Vector2 { x: <span class="self">self</span>.m21, y: <span class="self">self</span>.m22 },
+            z: mint::Vector2 { x: <span class="self">self</span>.m31, y: <span class="self">self</span>.m32 },
         }
     }
 }
 
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
-<span class="kw">mod</span> <span class="ident">test</span> {
-    <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
-    <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::default</span>;
-    <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::approxeq::ApproxEq</span>;
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;mint&quot;</span>)]</span>
-    <span class="kw">use</span> <span class="ident">mint</span>;
+<span class="attribute">#[cfg(test)]
+</span><span class="kw">mod </span>test {
+    <span class="kw">use super</span>::<span class="kw-2">*</span>;
+    <span class="kw">use </span><span class="kw">crate</span>::default;
+    <span class="kw">use </span><span class="kw">crate</span>::approxeq::ApproxEq;
+    <span class="attribute">#[cfg(feature = <span class="string">&quot;mint&quot;</span>)]
+    </span><span class="kw">use </span>mint;
 
-    <span class="kw">use</span> <span class="ident">core::f32::consts::FRAC_PI_2</span>;
+    <span class="kw">use </span>core::f32::consts::FRAC_PI_2;
 
-    <span class="kw">type</span> <span class="ident">Mat</span> <span class="op">=</span> <span class="ident">default::Transform2D</span><span class="op">&lt;</span><span class="ident">f32</span><span class="op">&gt;</span>;
+    <span class="kw">type </span>Mat = default::Transform2D&lt;f32&gt;;
 
-    <span class="kw">fn</span> <span class="ident">rad</span>(<span class="ident">v</span>: <span class="ident">f32</span>) -&gt; <span class="ident">Angle</span><span class="op">&lt;</span><span class="ident">f32</span><span class="op">&gt;</span> { <span class="ident">Angle::radians</span>(<span class="ident">v</span>) }
+    <span class="kw">fn </span>rad(v: f32) -&gt; Angle&lt;f32&gt; { Angle::radians(v) }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">test_translation</span>() {
-        <span class="kw">let</span> <span class="ident">t1</span> <span class="op">=</span> <span class="ident">Mat::translation</span>(<span class="number">1.0</span>, <span class="number">2.0</span>);
-        <span class="kw">let</span> <span class="ident">t2</span> <span class="op">=</span> <span class="ident">Mat::identity</span>().<span class="ident">pre_translate</span>(<span class="ident">vec2</span>(<span class="number">1.0</span>, <span class="number">2.0</span>));
-        <span class="kw">let</span> <span class="ident">t3</span> <span class="op">=</span> <span class="ident">Mat::identity</span>().<span class="ident">then_translate</span>(<span class="ident">vec2</span>(<span class="number">1.0</span>, <span class="number">2.0</span>));
-        <span class="macro">assert_eq!</span>(<span class="ident">t1</span>, <span class="ident">t2</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">t1</span>, <span class="ident">t3</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">pub fn </span>test_translation() {
+        <span class="kw">let </span>t1 = Mat::translation(<span class="number">1.0</span>, <span class="number">2.0</span>);
+        <span class="kw">let </span>t2 = Mat::identity().pre_translate(vec2(<span class="number">1.0</span>, <span class="number">2.0</span>));
+        <span class="kw">let </span>t3 = Mat::identity().then_translate(vec2(<span class="number">1.0</span>, <span class="number">2.0</span>));
+        <span class="macro">assert_eq!</span>(t1, t2);
+        <span class="macro">assert_eq!</span>(t1, t3);
 
-        <span class="macro">assert_eq!</span>(<span class="ident">t1</span>.<span class="ident">transform_point</span>(<span class="ident">Point2D::new</span>(<span class="number">1.0</span>, <span class="number">1.0</span>)), <span class="ident">Point2D::new</span>(<span class="number">2.0</span>, <span class="number">3.0</span>));
+        <span class="macro">assert_eq!</span>(t1.transform_point(Point2D::new(<span class="number">1.0</span>, <span class="number">1.0</span>)), Point2D::new(<span class="number">2.0</span>, <span class="number">3.0</span>));
 
-        <span class="macro">assert_eq!</span>(<span class="ident">t1</span>.<span class="ident">then</span>(<span class="kw-2">&amp;</span><span class="ident">t1</span>), <span class="ident">Mat::translation</span>(<span class="number">2.0</span>, <span class="number">4.0</span>));
+        <span class="macro">assert_eq!</span>(t1.then(<span class="kw-2">&amp;</span>t1), Mat::translation(<span class="number">2.0</span>, <span class="number">4.0</span>));
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">test_rotation</span>() {
-        <span class="kw">let</span> <span class="ident">r1</span> <span class="op">=</span> <span class="ident">Mat::rotation</span>(<span class="ident">rad</span>(<span class="ident">FRAC_PI_2</span>));
-        <span class="kw">let</span> <span class="ident">r2</span> <span class="op">=</span> <span class="ident">Mat::identity</span>().<span class="ident">pre_rotate</span>(<span class="ident">rad</span>(<span class="ident">FRAC_PI_2</span>));
-        <span class="kw">let</span> <span class="ident">r3</span> <span class="op">=</span> <span class="ident">Mat::identity</span>().<span class="ident">then_rotate</span>(<span class="ident">rad</span>(<span class="ident">FRAC_PI_2</span>));
-        <span class="macro">assert_eq!</span>(<span class="ident">r1</span>, <span class="ident">r2</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">r1</span>, <span class="ident">r3</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">pub fn </span>test_rotation() {
+        <span class="kw">let </span>r1 = Mat::rotation(rad(FRAC_PI_2));
+        <span class="kw">let </span>r2 = Mat::identity().pre_rotate(rad(FRAC_PI_2));
+        <span class="kw">let </span>r3 = Mat::identity().then_rotate(rad(FRAC_PI_2));
+        <span class="macro">assert_eq!</span>(r1, r2);
+        <span class="macro">assert_eq!</span>(r1, r3);
 
-        <span class="macro">assert!</span>(<span class="ident">r1</span>.<span class="ident">transform_point</span>(<span class="ident">Point2D::new</span>(<span class="number">1.0</span>, <span class="number">2.0</span>)).<span class="ident">approx_eq</span>(<span class="kw-2">&amp;</span><span class="ident">Point2D::new</span>(<span class="op">-</span><span class="number">2.0</span>, <span class="number">1.0</span>)));
+        <span class="macro">assert!</span>(r1.transform_point(Point2D::new(<span class="number">1.0</span>, <span class="number">2.0</span>)).approx_eq(<span class="kw-2">&amp;</span>Point2D::new(-<span class="number">2.0</span>, <span class="number">1.0</span>)));
 
-        <span class="macro">assert!</span>(<span class="ident">r1</span>.<span class="ident">then</span>(<span class="kw-2">&amp;</span><span class="ident">r1</span>).<span class="ident">approx_eq</span>(<span class="kw-2">&amp;</span><span class="ident">Mat::rotation</span>(<span class="ident">rad</span>(<span class="ident">FRAC_PI_2</span><span class="kw-2">*</span><span class="number">2.0</span>))));
+        <span class="macro">assert!</span>(r1.then(<span class="kw-2">&amp;</span>r1).approx_eq(<span class="kw-2">&amp;</span>Mat::rotation(rad(FRAC_PI_2<span class="kw-2">*</span><span class="number">2.0</span>))));
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">test_scale</span>() {
-        <span class="kw">let</span> <span class="ident">s1</span> <span class="op">=</span> <span class="ident">Mat::scale</span>(<span class="number">2.0</span>, <span class="number">3.0</span>);
-        <span class="kw">let</span> <span class="ident">s2</span> <span class="op">=</span> <span class="ident">Mat::identity</span>().<span class="ident">pre_scale</span>(<span class="number">2.0</span>, <span class="number">3.0</span>);
-        <span class="kw">let</span> <span class="ident">s3</span> <span class="op">=</span> <span class="ident">Mat::identity</span>().<span class="ident">then_scale</span>(<span class="number">2.0</span>, <span class="number">3.0</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">s1</span>, <span class="ident">s2</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">s1</span>, <span class="ident">s3</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">pub fn </span>test_scale() {
+        <span class="kw">let </span>s1 = Mat::scale(<span class="number">2.0</span>, <span class="number">3.0</span>);
+        <span class="kw">let </span>s2 = Mat::identity().pre_scale(<span class="number">2.0</span>, <span class="number">3.0</span>);
+        <span class="kw">let </span>s3 = Mat::identity().then_scale(<span class="number">2.0</span>, <span class="number">3.0</span>);
+        <span class="macro">assert_eq!</span>(s1, s2);
+        <span class="macro">assert_eq!</span>(s1, s3);
 
-        <span class="macro">assert!</span>(<span class="ident">s1</span>.<span class="ident">transform_point</span>(<span class="ident">Point2D::new</span>(<span class="number">2.0</span>, <span class="number">2.0</span>)).<span class="ident">approx_eq</span>(<span class="kw-2">&amp;</span><span class="ident">Point2D::new</span>(<span class="number">4.0</span>, <span class="number">6.0</span>)));
+        <span class="macro">assert!</span>(s1.transform_point(Point2D::new(<span class="number">2.0</span>, <span class="number">2.0</span>)).approx_eq(<span class="kw-2">&amp;</span>Point2D::new(<span class="number">4.0</span>, <span class="number">6.0</span>)));
     }
 
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">test_pre_then_scale</span>() {
-        <span class="kw">let</span> <span class="ident">m</span> <span class="op">=</span> <span class="ident">Mat::rotation</span>(<span class="ident">rad</span>(<span class="ident">FRAC_PI_2</span>)).<span class="ident">then_translate</span>(<span class="ident">vec2</span>(<span class="number">6.0</span>, <span class="number">7.0</span>));
-        <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">Mat::scale</span>(<span class="number">2.0</span>, <span class="number">3.0</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">m</span>.<span class="ident">then</span>(<span class="kw-2">&amp;</span><span class="ident">s</span>), <span class="ident">m</span>.<span class="ident">then_scale</span>(<span class="number">2.0</span>, <span class="number">3.0</span>));
+    <span class="attribute">#[test]
+    </span><span class="kw">pub fn </span>test_pre_then_scale() {
+        <span class="kw">let </span>m = Mat::rotation(rad(FRAC_PI_2)).then_translate(vec2(<span class="number">6.0</span>, <span class="number">7.0</span>));
+        <span class="kw">let </span>s = Mat::scale(<span class="number">2.0</span>, <span class="number">3.0</span>);
+        <span class="macro">assert_eq!</span>(m.then(<span class="kw-2">&amp;</span>s), m.then_scale(<span class="number">2.0</span>, <span class="number">3.0</span>));
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">test_inverse_simple</span>() {
-        <span class="kw">let</span> <span class="ident">m1</span> <span class="op">=</span> <span class="ident">Mat::identity</span>();
-        <span class="kw">let</span> <span class="ident">m2</span> <span class="op">=</span> <span class="ident">m1</span>.<span class="ident">inverse</span>().<span class="ident">unwrap</span>();
-        <span class="macro">assert!</span>(<span class="ident">m1</span>.<span class="ident">approx_eq</span>(<span class="kw-2">&amp;</span><span class="ident">m2</span>));
+    <span class="attribute">#[test]
+    </span><span class="kw">pub fn </span>test_inverse_simple() {
+        <span class="kw">let </span>m1 = Mat::identity();
+        <span class="kw">let </span>m2 = m1.inverse().unwrap();
+        <span class="macro">assert!</span>(m1.approx_eq(<span class="kw-2">&amp;</span>m2));
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">test_inverse_scale</span>() {
-        <span class="kw">let</span> <span class="ident">m1</span> <span class="op">=</span> <span class="ident">Mat::scale</span>(<span class="number">1.5</span>, <span class="number">0.3</span>);
-        <span class="kw">let</span> <span class="ident">m2</span> <span class="op">=</span> <span class="ident">m1</span>.<span class="ident">inverse</span>().<span class="ident">unwrap</span>();
-        <span class="macro">assert!</span>(<span class="ident">m1</span>.<span class="ident">then</span>(<span class="kw-2">&amp;</span><span class="ident">m2</span>).<span class="ident">approx_eq</span>(<span class="kw-2">&amp;</span><span class="ident">Mat::identity</span>()));
-        <span class="macro">assert!</span>(<span class="ident">m2</span>.<span class="ident">then</span>(<span class="kw-2">&amp;</span><span class="ident">m1</span>).<span class="ident">approx_eq</span>(<span class="kw-2">&amp;</span><span class="ident">Mat::identity</span>()));
+    <span class="attribute">#[test]
+    </span><span class="kw">pub fn </span>test_inverse_scale() {
+        <span class="kw">let </span>m1 = Mat::scale(<span class="number">1.5</span>, <span class="number">0.3</span>);
+        <span class="kw">let </span>m2 = m1.inverse().unwrap();
+        <span class="macro">assert!</span>(m1.then(<span class="kw-2">&amp;</span>m2).approx_eq(<span class="kw-2">&amp;</span>Mat::identity()));
+        <span class="macro">assert!</span>(m2.then(<span class="kw-2">&amp;</span>m1).approx_eq(<span class="kw-2">&amp;</span>Mat::identity()));
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">test_inverse_translate</span>() {
-        <span class="kw">let</span> <span class="ident">m1</span> <span class="op">=</span> <span class="ident">Mat::translation</span>(<span class="op">-</span><span class="number">132.0</span>, <span class="number">0.3</span>);
-        <span class="kw">let</span> <span class="ident">m2</span> <span class="op">=</span> <span class="ident">m1</span>.<span class="ident">inverse</span>().<span class="ident">unwrap</span>();
-        <span class="macro">assert!</span>(<span class="ident">m1</span>.<span class="ident">then</span>(<span class="kw-2">&amp;</span><span class="ident">m2</span>).<span class="ident">approx_eq</span>(<span class="kw-2">&amp;</span><span class="ident">Mat::identity</span>()));
-        <span class="macro">assert!</span>(<span class="ident">m2</span>.<span class="ident">then</span>(<span class="kw-2">&amp;</span><span class="ident">m1</span>).<span class="ident">approx_eq</span>(<span class="kw-2">&amp;</span><span class="ident">Mat::identity</span>()));
+    <span class="attribute">#[test]
+    </span><span class="kw">pub fn </span>test_inverse_translate() {
+        <span class="kw">let </span>m1 = Mat::translation(-<span class="number">132.0</span>, <span class="number">0.3</span>);
+        <span class="kw">let </span>m2 = m1.inverse().unwrap();
+        <span class="macro">assert!</span>(m1.then(<span class="kw-2">&amp;</span>m2).approx_eq(<span class="kw-2">&amp;</span>Mat::identity()));
+        <span class="macro">assert!</span>(m2.then(<span class="kw-2">&amp;</span>m1).approx_eq(<span class="kw-2">&amp;</span>Mat::identity()));
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_inverse_none</span>() {
-        <span class="macro">assert!</span>(<span class="ident">Mat::scale</span>(<span class="number">2.0</span>, <span class="number">0.0</span>).<span class="ident">inverse</span>().<span class="ident">is_none</span>());
-        <span class="macro">assert!</span>(<span class="ident">Mat::scale</span>(<span class="number">2.0</span>, <span class="number">2.0</span>).<span class="ident">inverse</span>().<span class="ident">is_some</span>());
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_inverse_none() {
+        <span class="macro">assert!</span>(Mat::scale(<span class="number">2.0</span>, <span class="number">0.0</span>).inverse().is_none());
+        <span class="macro">assert!</span>(Mat::scale(<span class="number">2.0</span>, <span class="number">2.0</span>).inverse().is_some());
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">test_pre_post</span>() {
-        <span class="kw">let</span> <span class="ident">m1</span> <span class="op">=</span> <span class="ident">default::Transform2D::identity</span>().<span class="ident">then_scale</span>(<span class="number">1.0</span>, <span class="number">2.0</span>).<span class="ident">then_translate</span>(<span class="ident">vec2</span>(<span class="number">1.0</span>, <span class="number">2.0</span>));
-        <span class="kw">let</span> <span class="ident">m2</span> <span class="op">=</span> <span class="ident">default::Transform2D::identity</span>().<span class="ident">pre_translate</span>(<span class="ident">vec2</span>(<span class="number">1.0</span>, <span class="number">2.0</span>)).<span class="ident">pre_scale</span>(<span class="number">1.0</span>, <span class="number">2.0</span>);
-        <span class="macro">assert!</span>(<span class="ident">m1</span>.<span class="ident">approx_eq</span>(<span class="kw-2">&amp;</span><span class="ident">m2</span>));
+    <span class="attribute">#[test]
+    </span><span class="kw">pub fn </span>test_pre_post() {
+        <span class="kw">let </span>m1 = default::Transform2D::identity().then_scale(<span class="number">1.0</span>, <span class="number">2.0</span>).then_translate(vec2(<span class="number">1.0</span>, <span class="number">2.0</span>));
+        <span class="kw">let </span>m2 = default::Transform2D::identity().pre_translate(vec2(<span class="number">1.0</span>, <span class="number">2.0</span>)).pre_scale(<span class="number">1.0</span>, <span class="number">2.0</span>);
+        <span class="macro">assert!</span>(m1.approx_eq(<span class="kw-2">&amp;</span>m2));
 
-        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="ident">Mat::rotation</span>(<span class="ident">rad</span>(<span class="ident">FRAC_PI_2</span>));
-        <span class="kw">let</span> <span class="ident">t</span> <span class="op">=</span> <span class="ident">Mat::translation</span>(<span class="number">2.0</span>, <span class="number">3.0</span>);
+        <span class="kw">let </span>r = Mat::rotation(rad(FRAC_PI_2));
+        <span class="kw">let </span>t = Mat::translation(<span class="number">2.0</span>, <span class="number">3.0</span>);
 
-        <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="ident">Point2D::new</span>(<span class="number">1.0</span>, <span class="number">1.0</span>);
+        <span class="kw">let </span>a = Point2D::new(<span class="number">1.0</span>, <span class="number">1.0</span>);
 
-        <span class="macro">assert!</span>(<span class="ident">r</span>.<span class="ident">then</span>(<span class="kw-2">&amp;</span><span class="ident">t</span>).<span class="ident">transform_point</span>(<span class="ident">a</span>).<span class="ident">approx_eq</span>(<span class="kw-2">&amp;</span><span class="ident">Point2D::new</span>(<span class="number">1.0</span>, <span class="number">4.0</span>)));
-        <span class="macro">assert!</span>(<span class="ident">t</span>.<span class="ident">then</span>(<span class="kw-2">&amp;</span><span class="ident">r</span>).<span class="ident">transform_point</span>(<span class="ident">a</span>).<span class="ident">approx_eq</span>(<span class="kw-2">&amp;</span><span class="ident">Point2D::new</span>(<span class="op">-</span><span class="number">4.0</span>, <span class="number">3.0</span>)));
-        <span class="macro">assert!</span>(<span class="ident">t</span>.<span class="ident">then</span>(<span class="kw-2">&amp;</span><span class="ident">r</span>).<span class="ident">transform_point</span>(<span class="ident">a</span>).<span class="ident">approx_eq</span>(<span class="kw-2">&amp;</span><span class="ident">r</span>.<span class="ident">transform_point</span>(<span class="ident">t</span>.<span class="ident">transform_point</span>(<span class="ident">a</span>))));
+        <span class="macro">assert!</span>(r.then(<span class="kw-2">&amp;</span>t).transform_point(a).approx_eq(<span class="kw-2">&amp;</span>Point2D::new(<span class="number">1.0</span>, <span class="number">4.0</span>)));
+        <span class="macro">assert!</span>(t.then(<span class="kw-2">&amp;</span>r).transform_point(a).approx_eq(<span class="kw-2">&amp;</span>Point2D::new(-<span class="number">4.0</span>, <span class="number">3.0</span>)));
+        <span class="macro">assert!</span>(t.then(<span class="kw-2">&amp;</span>r).transform_point(a).approx_eq(<span class="kw-2">&amp;</span>r.transform_point(t.transform_point(a))));
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_size_of</span>() {
-        <span class="kw">use</span> <span class="ident">core::mem::size_of</span>;
-        <span class="macro">assert_eq!</span>(<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">default::Transform2D</span><span class="op">&lt;</span><span class="ident">f32</span><span class="op">&gt;</span><span class="op">&gt;</span>(), <span class="number">6</span><span class="kw-2">*</span><span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">f32</span><span class="op">&gt;</span>());
-        <span class="macro">assert_eq!</span>(<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">default::Transform2D</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span>(), <span class="number">6</span><span class="kw-2">*</span><span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>());
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_size_of() {
+        <span class="kw">use </span>core::mem::size_of;
+        <span class="macro">assert_eq!</span>(size_of::&lt;default::Transform2D&lt;f32&gt;&gt;(), <span class="number">6</span><span class="kw-2">*</span>size_of::&lt;f32&gt;());
+        <span class="macro">assert_eq!</span>(size_of::&lt;default::Transform2D&lt;f64&gt;&gt;(), <span class="number">6</span><span class="kw-2">*</span>size_of::&lt;f64&gt;());
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">test_is_identity</span>() {
-        <span class="kw">let</span> <span class="ident">m1</span> <span class="op">=</span> <span class="ident">default::Transform2D::identity</span>();
-        <span class="macro">assert!</span>(<span class="ident">m1</span>.<span class="ident">is_identity</span>());
-        <span class="kw">let</span> <span class="ident">m2</span> <span class="op">=</span> <span class="ident">m1</span>.<span class="ident">then_translate</span>(<span class="ident">vec2</span>(<span class="number">0.1</span>, <span class="number">0.0</span>));
-        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">m2</span>.<span class="ident">is_identity</span>());
+    <span class="attribute">#[test]
+    </span><span class="kw">pub fn </span>test_is_identity() {
+        <span class="kw">let </span>m1 = default::Transform2D::identity();
+        <span class="macro">assert!</span>(m1.is_identity());
+        <span class="kw">let </span>m2 = m1.then_translate(vec2(<span class="number">0.1</span>, <span class="number">0.0</span>));
+        <span class="macro">assert!</span>(!m2.is_identity());
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">test_transform_vector</span>() {
-        <span class="comment">// Translation does not apply to vectors.</span>
-        <span class="kw">let</span> <span class="ident">m1</span> <span class="op">=</span> <span class="ident">Mat::translation</span>(<span class="number">1.0</span>, <span class="number">1.0</span>);
-        <span class="kw">let</span> <span class="ident">v1</span> <span class="op">=</span> <span class="ident">vec2</span>(<span class="number">10.0</span>, <span class="op">-</span><span class="number">10.0</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">v1</span>, <span class="ident">m1</span>.<span class="ident">transform_vector</span>(<span class="ident">v1</span>));
+    <span class="attribute">#[test]
+    </span><span class="kw">pub fn </span>test_transform_vector() {
+        <span class="comment">// Translation does not apply to vectors.
+        </span><span class="kw">let </span>m1 = Mat::translation(<span class="number">1.0</span>, <span class="number">1.0</span>);
+        <span class="kw">let </span>v1 = vec2(<span class="number">10.0</span>, -<span class="number">10.0</span>);
+        <span class="macro">assert_eq!</span>(v1, m1.transform_vector(v1));
     }
 
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;mint&quot;</span>)]</span>
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">test_mint</span>() {
-        <span class="kw">let</span> <span class="ident">m1</span> <span class="op">=</span> <span class="ident">Mat::rotation</span>(<span class="ident">rad</span>(<span class="ident">FRAC_PI_2</span>));
-        <span class="kw">let</span> <span class="ident">mm</span>: <span class="ident">mint::RowMatrix3x2</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">m1</span>.<span class="ident">into</span>();
-        <span class="kw">let</span> <span class="ident">m2</span> <span class="op">=</span> <span class="ident">Mat::from</span>(<span class="ident">mm</span>);
+    <span class="attribute">#[cfg(feature = <span class="string">&quot;mint&quot;</span>)]
+    #[test]
+    </span><span class="kw">pub fn </span>test_mint() {
+        <span class="kw">let </span>m1 = Mat::rotation(rad(FRAC_PI_2));
+        <span class="kw">let </span>mm: mint::RowMatrix3x2&lt;<span class="kw">_</span>&gt; = m1.into();
+        <span class="kw">let </span>m2 = Mat::from(mm);
 
-        <span class="macro">assert_eq!</span>(<span class="ident">m1</span>, <span class="ident">m2</span>);
+        <span class="macro">assert_eq!</span>(m1, m2);
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="euclid" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0-nightly (12cd71f4d 2022-06-01)" ></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="euclid" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (17cbdfd07 2022-09-13)" ></div></body></html>

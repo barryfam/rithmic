@@ -1,11 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `rithmic/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><script defer src="../../main.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script>
-    <noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../rithmic/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"></h2>
-    </nav>
-    <nav class="sidebar"><a class="sidebar-logo" href="../../rithmic/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../rithmic/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
-                                <a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div>
-                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `rithmic/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../rithmic/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../rithmic/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../rithmic/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -100,101 +93,120 @@
 <span id="93">93</span>
 <span id="94">94</span>
 <span id="95">95</span>
-</pre><pre class="rust"><code><span class="attribute">#![<span class="ident">doc</span> <span class="op">=</span> <span class="macro">include_str!</span>(<span class="string">&quot;../../README.md&quot;</span>)]</span>
+<span id="96">96</span>
+<span id="97">97</span>
+<span id="98">98</span>
+<span id="99">99</span>
+<span id="100">100</span>
+<span id="101">101</span>
+<span id="102">102</span>
+<span id="103">103</span>
+<span id="104">104</span>
+<span id="105">105</span>
+</pre><pre class="rust"><code><span class="attribute">#![doc = <span class="macro">include_str!</span>(<span class="string">&quot;../../README.md&quot;</span>)]
 
-<span class="attribute">#![<span class="ident">forbid</span>(<span class="ident">unsafe_code</span>)]</span>
+#![cfg_attr(not(feature = <span class="string">&quot;unsafe&quot;</span>), forbid(unsafe_code))]
 
-<span class="attribute">#![<span class="ident">feature</span>(
-    <span class="ident">box_syntax</span>,
-    <span class="ident">decl_macro</span>,
-    <span class="ident">int_roundings</span>,
-    <span class="ident">iter_collect_into</span>,
-    <span class="ident">is_some_with</span>,
-    <span class="ident">is_sorted</span>,
-    <span class="ident">label_break_value</span>,
-    <span class="ident">let_chains</span>,
-    <span class="ident">let_else</span>,
-    <span class="ident">rustc_attrs</span>,
-)]</span>
+#![feature(
+    array_zip,
+    box_syntax,
+    decl_macro,
+    int_roundings,
+    iter_collect_into,
+    is_some_with,
+    is_sorted,
+    let_chains,
+    let_else,
+    rustc_attrs,
+)]
 
-<span class="attribute">#![<span class="ident">allow</span>(
-    <span class="ident">clippy::collapsible_else_if</span>,
-    <span class="ident">clippy::module_inception</span>,
-    <span class="ident">clippy::needless_range_loop</span>,
-    <span class="ident">clippy::nonminimal_bool</span>,
-    <span class="ident">clippy::option_map_unit_fn</span>,
-    <span class="ident">clippy::reversed_empty_ranges</span>,
-    <span class="ident">clippy::type_complexity</span>,
-)]</span>
+#![allow(
+    clippy::collapsible_else_if,
+    clippy::missing_safety_doc,
+    clippy::module_inception,
+    clippy::needless_range_loop,
+    clippy::nonminimal_bool,
+    clippy::only_used_in_recursion,
+    clippy::option_map_unit_fn,
+    clippy::partialeq_to_none,
+    clippy::reversed_empty_ranges,
+    clippy::type_complexity,
+    clippy::unnecessary_lazy_evaluations,
+)]
 
-<span class="attribute">#![<span class="ident">warn</span>(
-    <span class="ident">clippy::dbg_macro</span>,
-    <span class="ident">clippy::imprecise_flops</span>,
-    <span class="ident">clippy::print_stderr</span>,
-)]</span>
+#![warn(
+    clippy::dbg_macro,
+    clippy::imprecise_flops,
+    clippy::print_stderr,
+)]
 
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">aug_treap</span>;
-    <span class="kw">mod</span> <span class="ident">binary_search</span>;
-    <span class="kw">mod</span> <span class="ident">bvec</span>;
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">gameboard</span>;
-    <span class="kw">mod</span> <span class="ident">geometry</span>;
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">graph</span>;
-    <span class="kw">mod</span> <span class="ident">imin_imax</span>;
-    <span class="kw">mod</span> <span class="ident">index_compress</span>;
-    <span class="kw">mod</span> <span class="ident">insort</span>;
-    <span class="kw">mod</span> <span class="ident">int_bitops</span>;
-    <span class="kw">mod</span> <span class="ident">inversions</span>;
-    <span class="kw">mod</span> <span class="ident">meld_heap</span>;
-    <span class="kw">mod</span> <span class="ident">mo_algorithm</span>;
-    <span class="kw">mod</span> <span class="ident">mod_factorial_table</span>;
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">monoid_ds</span>;
-    <span class="kw">mod</span> <span class="ident">ndvec</span>;
-    <span class="kw">mod</span> <span class="ident">odometer</span>;
-    <span class="kw">mod</span> <span class="ident">option_merge</span>;
-    <span class="kw">mod</span> <span class="ident">ord_pair</span>;
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">polynomial</span>;
-    <span class="kw">mod</span> <span class="ident">prefix_sums</span>;
-    <span class="kw">mod</span> <span class="ident">print_methods</span>;
-    <span class="kw">mod</span> <span class="ident">rangelike</span>;
-    <span class="kw">mod</span> <span class="ident">sieve_divisors</span>;
-    <span class="kw">mod</span> <span class="ident">slice_pair_mut</span>;
-    <span class="kw">mod</span> <span class="ident">sparse_table</span>;
-    <span class="kw">mod</span> <span class="ident">ternary_search</span>;
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">triangular_n</span>;
-    <span class="kw">mod</span> <span class="ident">union_find</span>;
-    <span class="kw">mod</span> <span class="ident">unwrap_any</span>;
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">xor_basis</span>;
+</span><span class="kw">pub use </span>rithmic_impl::<span class="kw-2">*</span>;
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">aug_treap::order_treap</span>::{<span class="ident">List</span>, <span class="ident">SortedList</span>};
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">binary_search::binary_search</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">bvec::BVec</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">gameboard::Gameboard</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">geometry::Vector2DMore</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">imin_imax</span>::{<span class="ident">imax</span>, <span class="ident">imin</span>};
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">index_compress</span>::{<span class="ident">IndexCompress</span>, <span class="ident">IndexCompressed</span>};
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">insort::Insort</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">int_bitops::IntBitOps</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">inversions::CountInversions</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">meld_heap::MeldHeap</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">mo_algorithm</span>::{<span class="ident">mo_algorithm</span>, <span class="ident">MoStep</span>};
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">mod_factorial_table::FactorialTable</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">monoid_ds</span>::{<span class="ident">MonoidOps</span>, <span class="ident">SegTree</span>};
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">ndvec::NdVec</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">odometer</span>::{<span class="ident">OdometerBE</span>, <span class="ident">OdometerLE</span>};
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">option_merge::OptionMerge</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">ord_pair::OrdPair</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">polynomial</span>::{<span class="ident">polynomial_add</span>, <span class="ident">polynomial_mul</span>, <span class="ident">polynomial_div</span>, <span class="ident">polynomial_div_exact</span>, <span class="ident">lagrange_interpolation</span>};
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">prefix_sums::PrefixSums</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">print_methods::PrintMethods</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">rangelike::Rangelike</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">sieve_divisors::Divisors</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">slice_pair_mut::PairMut</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">sparse_table::SparseTable</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">ternary_search::ternary_search</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">triangular_n</span>::{<span class="ident">triangular_n</span>, <span class="ident">triangular_slice</span>, <span class="ident">triangular_steps</span>};
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">union_find::UnionFind</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">unwrap_any::UnwrapAny</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">xor_basis</span>::{<span class="ident">XorBasis128</span>, <span class="ident">XorBasis64</span>, <span class="ident">XorBasis32</span>, <span class="ident">XorBasis16</span>, <span class="ident">XorBasis8</span>};
+<span class="kw">pub mod </span>aug_treap;
+    <span class="kw">mod </span>binary_search;
+    <span class="kw">mod </span>bvec;
+<span class="kw">pub mod </span>gameboard;
+    <span class="kw">mod </span>geometry;
+<span class="kw">pub mod </span>graph;
+    <span class="kw">mod </span>imin_imax;
+    <span class="kw">mod </span>index_compress;
+    <span class="kw">mod </span>insort;
+    <span class="kw">mod </span>int_bitops;
+    <span class="kw">mod </span>inversions;
+    <span class="kw">mod </span>ipc;
+    <span class="kw">mod </span>meld_heap;
+    <span class="kw">mod </span>mo_algorithm;
+    <span class="kw">mod </span>mod_factorial_table;
+<span class="kw">pub mod </span>monoid_ds;
+    <span class="kw">mod </span>ndvec;
+    <span class="kw">mod </span>odometer;
+    <span class="kw">mod </span>option_merge;
+    <span class="kw">mod </span>ord_pair;
+<span class="kw">pub mod </span>polynomial;
+    <span class="kw">mod </span>prefix_sums;
+    <span class="kw">mod </span>print_methods;
+    <span class="kw">mod </span>rangelike;
+    <span class="kw">mod </span>sieve_divisors;
+    <span class="kw">mod </span>slice_pair_mut;
+    <span class="kw">mod </span>slice_get_sub;
+    <span class="kw">mod </span>sparse_table;
+    <span class="kw">mod </span>ternary_search;
+<span class="kw">pub mod </span>triangular_n;
+    <span class="kw">mod </span>union_find;
+    <span class="kw">mod </span>unwrap_any;
+<span class="kw">pub mod </span>xor_basis;
+
+<span class="kw">pub use </span>aug_treap::order_treap::{List, SortedList};
+<span class="kw">pub use </span>binary_search::binary_search;
+<span class="kw">pub use </span>bvec::BVec;
+<span class="kw">pub use </span>gameboard::Gameboard;
+<span class="kw">pub use </span>geometry::Vector2DMore;
+<span class="kw">pub use </span>imin_imax::{imax, imin};
+<span class="kw">pub use </span>index_compress::{IndexCompress, IndexCompressed};
+<span class="kw">pub use </span>insort::Insort;
+<span class="kw">pub use </span>int_bitops::IntBitOps;
+<span class="kw">pub use </span>inversions::CountInversions;
+<span class="kw">pub use </span>ipc::Ipc;
+<span class="kw">pub use </span>meld_heap::{MeldHeap, MeldMinHeap};
+<span class="kw">pub use </span>mo_algorithm::{mo_algorithm, MoStep};
+<span class="kw">pub use </span>mod_factorial_table::FactorialTable;
+<span class="kw">pub use </span>monoid_ds::{monoid_ops, NdFenwick, SegTree};
+<span class="kw">pub use </span>ndvec::NdVec;
+<span class="kw">pub use </span>odometer::{OdometerBE, OdometerLE};
+<span class="kw">pub use </span>option_merge::OptionMerge;
+<span class="kw">pub use </span>ord_pair::OrdPair;
+<span class="kw">pub use </span>polynomial::{polynomial_add, polynomial_mul, polynomial_div, polynomial_div_exact, lagrange_interpolation};
+<span class="kw">pub use </span>prefix_sums::PrefixSums;
+<span class="kw">pub use </span>print_methods::PrintMethods;
+<span class="kw">pub use </span>rangelike::Rangelike;
+<span class="kw">pub use </span>sieve_divisors::Divisors;
+<span class="kw">pub use </span>slice_pair_mut::PairMut;
+<span class="kw">pub use </span>slice_get_sub::GetSub;
+<span class="kw">pub use </span>sparse_table::SparseTable;
+<span class="kw">pub use </span>ternary_search::ternary_search;
+<span class="kw">pub use </span>triangular_n::{triangular_n, triangular_slice, triangular_steps};
+<span class="kw">pub use </span>union_find::UnionFind;
+<span class="kw">pub use </span>unwrap_any::UnwrapAny;
+<span class="kw">pub use </span>xor_basis::{XorBasis128, XorBasis64, XorBasis32, XorBasis16, XorBasis8};
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="rithmic" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0-nightly (12cd71f4d 2022-06-01)" ></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="rithmic" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (17cbdfd07 2022-09-13)" ></div></body></html>

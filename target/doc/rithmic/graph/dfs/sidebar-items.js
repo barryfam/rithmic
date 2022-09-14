@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["DfsStepKind",""]],"struct":[["DfsStep",""]]});
+window.SIDEBAR_ITEMS = {"enum":[["DfsStepKind",""]],"struct":[["DfsStep",""]]};

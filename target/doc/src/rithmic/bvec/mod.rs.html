@@ -1,11 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `rithmic/src/bvec/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script src="../../../crates.js"></script><script defer src="../../../main.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script>
-    <noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../rithmic/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"></h2>
-    </nav>
-    <nav class="sidebar"><a class="sidebar-logo" href="../../../rithmic/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../rithmic/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
-                                <a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div>
-                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `rithmic/src/bvec/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../rithmic/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../rithmic/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../rithmic/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -407,29 +400,201 @@
 <span id="400">400</span>
 <span id="401">401</span>
 <span id="402">402</span>
-</pre><pre class="rust"><code><span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span> <span class="kw">mod</span> <span class="ident">tests</span>;
+<span id="403">403</span>
+<span id="404">404</span>
+<span id="405">405</span>
+<span id="406">406</span>
+<span id="407">407</span>
+<span id="408">408</span>
+<span id="409">409</span>
+<span id="410">410</span>
+<span id="411">411</span>
+<span id="412">412</span>
+<span id="413">413</span>
+<span id="414">414</span>
+<span id="415">415</span>
+<span id="416">416</span>
+<span id="417">417</span>
+<span id="418">418</span>
+<span id="419">419</span>
+<span id="420">420</span>
+<span id="421">421</span>
+<span id="422">422</span>
+<span id="423">423</span>
+<span id="424">424</span>
+<span id="425">425</span>
+<span id="426">426</span>
+<span id="427">427</span>
+<span id="428">428</span>
+<span id="429">429</span>
+<span id="430">430</span>
+<span id="431">431</span>
+<span id="432">432</span>
+<span id="433">433</span>
+<span id="434">434</span>
+<span id="435">435</span>
+<span id="436">436</span>
+<span id="437">437</span>
+<span id="438">438</span>
+<span id="439">439</span>
+<span id="440">440</span>
+<span id="441">441</span>
+<span id="442">442</span>
+<span id="443">443</span>
+<span id="444">444</span>
+<span id="445">445</span>
+<span id="446">446</span>
+<span id="447">447</span>
+<span id="448">448</span>
+<span id="449">449</span>
+<span id="450">450</span>
+<span id="451">451</span>
+<span id="452">452</span>
+<span id="453">453</span>
+<span id="454">454</span>
+<span id="455">455</span>
+<span id="456">456</span>
+<span id="457">457</span>
+<span id="458">458</span>
+<span id="459">459</span>
+<span id="460">460</span>
+<span id="461">461</span>
+<span id="462">462</span>
+<span id="463">463</span>
+<span id="464">464</span>
+<span id="465">465</span>
+<span id="466">466</span>
+<span id="467">467</span>
+<span id="468">468</span>
+<span id="469">469</span>
+<span id="470">470</span>
+<span id="471">471</span>
+<span id="472">472</span>
+<span id="473">473</span>
+<span id="474">474</span>
+<span id="475">475</span>
+<span id="476">476</span>
+<span id="477">477</span>
+<span id="478">478</span>
+<span id="479">479</span>
+<span id="480">480</span>
+<span id="481">481</span>
+<span id="482">482</span>
+<span id="483">483</span>
+<span id="484">484</span>
+<span id="485">485</span>
+<span id="486">486</span>
+<span id="487">487</span>
+<span id="488">488</span>
+<span id="489">489</span>
+<span id="490">490</span>
+<span id="491">491</span>
+<span id="492">492</span>
+<span id="493">493</span>
+<span id="494">494</span>
+<span id="495">495</span>
+<span id="496">496</span>
+<span id="497">497</span>
+<span id="498">498</span>
+<span id="499">499</span>
+<span id="500">500</span>
+<span id="501">501</span>
+<span id="502">502</span>
+<span id="503">503</span>
+<span id="504">504</span>
+<span id="505">505</span>
+<span id="506">506</span>
+<span id="507">507</span>
+<span id="508">508</span>
+<span id="509">509</span>
+<span id="510">510</span>
+<span id="511">511</span>
+<span id="512">512</span>
+<span id="513">513</span>
+<span id="514">514</span>
+<span id="515">515</span>
+<span id="516">516</span>
+<span id="517">517</span>
+<span id="518">518</span>
+<span id="519">519</span>
+<span id="520">520</span>
+<span id="521">521</span>
+<span id="522">522</span>
+<span id="523">523</span>
+<span id="524">524</span>
+<span id="525">525</span>
+<span id="526">526</span>
+<span id="527">527</span>
+<span id="528">528</span>
+<span id="529">529</span>
+<span id="530">530</span>
+<span id="531">531</span>
+<span id="532">532</span>
+<span id="533">533</span>
+<span id="534">534</span>
+<span id="535">535</span>
+<span id="536">536</span>
+<span id="537">537</span>
+<span id="538">538</span>
+<span id="539">539</span>
+<span id="540">540</span>
+<span id="541">541</span>
+<span id="542">542</span>
+<span id="543">543</span>
+<span id="544">544</span>
+<span id="545">545</span>
+<span id="546">546</span>
+<span id="547">547</span>
+<span id="548">548</span>
+<span id="549">549</span>
+<span id="550">550</span>
+<span id="551">551</span>
+<span id="552">552</span>
+<span id="553">553</span>
+<span id="554">554</span>
+<span id="555">555</span>
+<span id="556">556</span>
+<span id="557">557</span>
+<span id="558">558</span>
+<span id="559">559</span>
+<span id="560">560</span>
+<span id="561">561</span>
+<span id="562">562</span>
+<span id="563">563</span>
+<span id="564">564</span>
+<span id="565">565</span>
+<span id="566">566</span>
+<span id="567">567</span>
+<span id="568">568</span>
+<span id="569">569</span>
+<span id="570">570</span>
+<span id="571">571</span>
+<span id="572">572</span>
+<span id="573">573</span>
+<span id="574">574</span>
+</pre><pre class="rust"><code><span class="attribute">#[cfg(test)] </span><span class="kw">mod </span>tests;
 
-<span class="kw">use</span> <span class="ident">std::fmt</span>::{<span class="self">self</span>, <span class="ident">Debug</span>, <span class="ident">Formatter</span>};
-<span class="kw">use</span> <span class="ident">std::ops</span>::{<span class="ident">BitAnd</span>, <span class="ident">BitAndAssign</span>, <span class="ident">BitOr</span>, <span class="ident">BitOrAssign</span>, <span class="ident">BitXor</span>, <span class="ident">BitXorAssign</span>, <span class="ident">Index</span>, <span class="ident">Not</span>, <span class="ident">Shl</span>, <span class="ident">ShlAssign</span>, <span class="ident">Shr</span>, <span class="ident">ShrAssign</span>};
+<span class="kw">use </span>std::fmt::{<span class="self">self</span>, Debug, Formatter};
+<span class="kw">use </span>std::ops::{BitAnd, BitAndAssign, BitOr, BitOrAssign, BitXor, BitXorAssign, Index, Not, Shl, ShlAssign, Shr, ShrAssign};
 
-<span class="kw">macro</span> <span class="ident">INDEX_RANGE</span> () {<span class="string">&quot;index out of range&quot;</span>}
-<span class="kw">macro</span> <span class="ident">UNEQUAL_LEN</span> () {<span class="string">&quot;bit operation on vectors of unequal length&quot;</span>}
+<span class="kw">macro </span>INDEX_RANGE () {<span class="string">&quot;index out of range&quot;</span>}
+<span class="kw">macro </span>UNEQUAL_LEN () {<span class="string">&quot;bit operation on vectors of unequal length&quot;</span>}
 
-<span class="kw">const</span> <span class="ident">U_BITS</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="ident">usize::BITS</span> <span class="kw">as</span> <span class="ident">usize</span>;
+<span class="kw">const </span>U_BITS: usize = usize::BITS <span class="kw">as </span>usize;
 
-<span class="attribute">#[<span class="ident">inline</span>]</span>
-<span class="kw">fn</span> <span class="ident">major</span>(<span class="ident">index</span>: <span class="ident">usize</span>) -&gt; <span class="ident">usize</span> {
-    <span class="ident">index</span> <span class="op">/</span> <span class="ident">U_BITS</span>
+<span class="attribute">#[inline]
+</span><span class="kw">fn </span>major(index: usize) -&gt; usize {
+    index / U_BITS
 }
-<span class="attribute">#[<span class="ident">inline</span>]</span>
-<span class="kw">fn</span> <span class="ident">minor</span>(<span class="ident">index</span>: <span class="ident">usize</span>) -&gt; <span class="ident">usize</span> {
-    <span class="ident">index</span> <span class="op">%</span> <span class="ident">U_BITS</span>
+<span class="attribute">#[inline]
+</span><span class="kw">fn </span>minor(index: usize) -&gt; usize {
+    index % U_BITS
 }
 
 <span class="doccomment">/**
 A compact boolean (bitset) vector with efficient `&lt;&lt;` `&gt;&gt;` shifting and `|` `^` `&amp;` logical operators
 
-8x smaller and ~20x faster for those operations than `Vec&lt;bool&gt;`
+8x smaller and ~20-500x faster for those operations than `Vec&lt;bool&gt;`
 
 # Examples
 Finding the [twin primes](https://en.wikipedia.org/wiki/Twin_prime) under 100:
@@ -458,351 +623,523 @@ assert_eq!(primes.iter_ones().take(5).collect::&lt;Vec&lt;_&gt;&gt;(), vec![2, 3
 # assert_eq!(primes.iter_zeros().take(5).collect::&lt;Vec&lt;_&gt;&gt;(), vec![0, 1, 4, 6, 8]);
 
 let twins1 = primes.clone() &amp; (primes &gt;&gt; 2);
-let twins2 = twins1.clone() &lt;&lt; 2;
+let twins2 = &amp;twins1 &lt;&lt; 2;
 
 assert_eq!(twins1.iter_ones().collect::&lt;Vec&lt;_&gt;&gt;(), vec![3, 5, 11, 17, 29, 41, 59, 71]);
 assert_eq!(twins2.iter_ones().collect::&lt;Vec&lt;_&gt;&gt;(), vec![5, 7, 13, 19, 31, 43, 61, 73]);
 ```
-*/</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Default</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">Hash</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">BVec</span> {
-    <span class="ident">vec</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>,
-    <span class="ident">len</span>: <span class="ident">usize</span>,
+*/
+</span><span class="attribute">#[derive(Default, Clone, PartialEq, Eq, Hash)]
+</span><span class="kw">pub struct </span>BVec {
+    vec: Vec&lt;usize&gt;,
+    len: usize,
 }
 
-<span class="kw">impl</span> <span class="ident">BVec</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">len</span>: <span class="ident">usize</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::zeros</span>(<span class="ident">len</span>)
+<span class="kw">impl </span>BVec {
+    <span class="kw">pub fn </span>new(len: usize) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::zeros(len)
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_indexes</span>(<span class="ident">indexes</span>: <span class="kw">impl</span> <span class="ident">IntoIterator</span><span class="op">&lt;</span><span class="ident">Item</span><span class="op">=</span><span class="ident">usize</span><span class="op">&gt;</span>, <span class="ident">len</span>: <span class="ident">usize</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">bv</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::new</span>(<span class="ident">len</span>);
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="ident">indexes</span> {
-            <span class="ident">bv</span>.<span class="ident">set</span>(<span class="ident">i</span>, <span class="bool-val">true</span>);
+    <span class="kw">pub fn </span>from_indexes(indexes: <span class="kw">impl </span>IntoIterator&lt;Item=usize&gt;, len: usize) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span><span class="kw-2">mut </span>bv = <span class="self">Self</span>::new(len);
+        <span class="kw">for </span>i <span class="kw">in </span>indexes {
+            bv.set(i, <span class="bool-val">true</span>);
         }
-        <span class="ident">bv</span>
+        bv
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">zeros</span>(<span class="ident">len</span>: <span class="ident">usize</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">vec</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="number">0</span>; <span class="ident">len</span>.<span class="ident">div_ceil</span>(<span class="ident">U_BITS</span>)];
-        <span class="self">Self</span>{<span class="ident">vec</span>, <span class="ident">len</span>}
+    <span class="kw">pub fn </span>zeros(len: usize) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>vec = <span class="macro">vec!</span>[<span class="number">0</span>; len.div_ceil(U_BITS)];
+        <span class="self">Self</span>{vec, len}
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ones</span>(<span class="ident">len</span>: <span class="ident">usize</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">vec</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="op">!</span><span class="number">0</span>; <span class="ident">len</span>.<span class="ident">div_ceil</span>(<span class="ident">U_BITS</span>)];
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">bv</span> <span class="op">=</span> <span class="self">Self</span>{<span class="ident">vec</span>, <span class="ident">len</span>};
-        <span class="ident">bv</span>.<span class="ident">top_off</span>();
-        <span class="ident">bv</span>
+    <span class="kw">pub fn </span>ones(len: usize) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>vec = <span class="macro">vec!</span>[!<span class="number">0</span>; len.div_ceil(U_BITS)];
+        <span class="kw">let </span><span class="kw-2">mut </span>bv = <span class="self">Self</span>{vec, len};
+        bv.top_off();
+        bv
     }
 
-    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::len_without_is_empty</span>)]</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">len</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">usize</span> {
-        <span class="self">self</span>.<span class="ident">len</span>
+    <span class="attribute">#[allow(clippy::len_without_is_empty)]
+    #[inline]
+    </span><span class="kw">pub fn </span>len(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize {
+        <span class="self">self</span>.len
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">index</span>: <span class="ident">usize</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">bool</span><span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="ident">index</span> <span class="op">&gt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">len</span> { <span class="prelude-val">None</span> }
-        <span class="kw">else</span> { <span class="prelude-val">Some</span>(<span class="self">self</span>[<span class="ident">index</span>]) }
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>get(<span class="kw-2">&amp;</span><span class="self">self</span>, index: usize) -&gt; <span class="prelude-ty">Option</span>&lt;bool&gt; {
+        <span class="kw">if </span>index &gt;= <span class="self">self</span>.len { <span class="prelude-val">None </span>}
+        <span class="kw">else </span>{ <span class="prelude-val">Some</span>(<span class="self">self</span>[index]) }
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">index</span>: <span class="ident">usize</span>, <span class="ident">b</span>: <span class="ident">bool</span>)
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>set(<span class="kw-2">&amp;mut </span><span class="self">self</span>, index: usize, b: bool)
     {
-        <span class="macro">debug_assert!</span>(<span class="ident">index</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">len</span>, <span class="macro">INDEX_RANGE!</span>());
-        <span class="kw">if</span> <span class="ident">b</span> {
-            <span class="self">self</span>.<span class="ident">vec</span>[<span class="ident">major</span>(<span class="ident">index</span>)] <span class="op">|</span><span class="op">=</span> <span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="ident">minor</span>(<span class="ident">index</span>);
-        } <span class="kw">else</span> {
-            <span class="self">self</span>.<span class="ident">vec</span>[<span class="ident">major</span>(<span class="ident">index</span>)] <span class="op">&amp;=</span> <span class="op">!</span>(<span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="ident">minor</span>(<span class="ident">index</span>));
-        }
-    }
+        <span class="macro">assert!</span>(index &lt; <span class="self">self</span>.len, <span class="macro">INDEX_RANGE!</span>());
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">first</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">bool</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">get</span>(<span class="number">0</span>)
-    }
-
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">last</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">bool</span><span class="op">&gt;</span> {
-        <span class="prelude-val">Some</span>(<span class="self">self</span>[<span class="self">self</span>.<span class="ident">len</span>.<span class="ident">checked_sub</span>(<span class="number">1</span>)<span class="question-mark">?</span>])
-    }
-
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">fill</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">b</span>: <span class="ident">bool</span>) {
-        <span class="kw">if</span> <span class="ident">b</span> {
-            <span class="self">self</span>.<span class="ident">vec</span>.<span class="ident">fill</span>(<span class="op">!</span><span class="number">0</span>);
-            <span class="self">self</span>.<span class="ident">top_off</span>();
-        }
-        <span class="kw">else</span> {
-            <span class="self">self</span>.<span class="ident">vec</span>.<span class="ident">fill</span>(<span class="number">0</span>);
-        }
-    }
-
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">flip</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
-        <span class="self">self</span>.<span class="ident">vec</span>.<span class="ident">iter_mut</span>().<span class="ident">for_each</span>(<span class="op">|</span><span class="ident">u</span><span class="op">|</span> <span class="kw-2">*</span><span class="ident">u</span> <span class="op">=</span> <span class="op">!</span><span class="kw-2">*</span><span class="ident">u</span>);
-        <span class="self">self</span>.<span class="ident">top_off</span>();
-    }
-
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">resize</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">new_len</span>: <span class="ident">usize</span>, <span class="ident">b</span>: <span class="ident">bool</span>) {
-        <span class="kw">if</span> <span class="ident">b</span> <span class="op">&amp;&amp;</span> <span class="ident">minor</span>(<span class="self">self</span>.<span class="ident">len</span>) <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="kw-2">*</span><span class="self">self</span>.<span class="ident">vec</span>.<span class="ident">last_mut</span>().<span class="ident">unwrap</span>() <span class="op">|</span><span class="op">=</span> <span class="op">!</span><span class="number">0</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="ident">minor</span>(<span class="self">self</span>.<span class="ident">len</span>);
+        <span class="attribute">#[cfg(not(feature = <span class="string">&quot;unsafe&quot;</span>))]
+        </span><span class="kw">if </span>b {
+            <span class="self">self</span>.vec[major(index)] |= <span class="number">1 </span>&lt;&lt; minor(index);
+        } <span class="kw">else </span>{
+            <span class="self">self</span>.vec[major(index)] &amp;= !(<span class="number">1 </span>&lt;&lt; minor(index));
         }
 
-        <span class="self">self</span>.<span class="ident">vec</span>.<span class="ident">resize</span>(<span class="ident">new_len</span>.<span class="ident">div_ceil</span>(<span class="ident">U_BITS</span>), <span class="kw">if</span> <span class="ident">b</span> {<span class="op">!</span><span class="number">0</span>} <span class="kw">else</span> {<span class="number">0</span>});
-        <span class="self">self</span>.<span class="ident">len</span> <span class="op">=</span> <span class="ident">new_len</span>;
-
-        <span class="self">self</span>.<span class="ident">top_off</span>();
-    }
-
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">any</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">vec</span>.<span class="ident">iter</span>().<span class="ident">any</span>(<span class="op">|</span><span class="kw-2">&amp;</span><span class="ident">u</span><span class="op">|</span> <span class="ident">u</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span>)
-    }
-
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">all</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">first_zero</span>().<span class="ident">is_none</span>()
-    }
-
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">first_one</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
-        <span class="kw">for</span> (<span class="ident">i</span>, <span class="kw-2">&amp;</span><span class="ident">u</span>) <span class="kw">in</span> <span class="self">self</span>.<span class="ident">vec</span>.<span class="ident">iter</span>().<span class="ident">enumerate</span>() {
-            <span class="kw">if</span> <span class="ident">u</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-                <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">i</span> <span class="op">*</span> <span class="ident">U_BITS</span> <span class="op">+</span> <span class="ident">u</span>.<span class="ident">trailing_zeros</span>() <span class="kw">as</span> <span class="ident">usize</span>)
+        <span class="attribute">#[cfg(feature = <span class="string">&quot;unsafe&quot;</span>)]
+        </span><span class="comment">// SAFETY: Asserted index &lt; self.len. Invariant self.vec.len = self.len.div_ceil(U_BITS)
+        </span><span class="kw">unsafe </span>{
+            <span class="kw">if </span>b {
+                <span class="kw-2">*</span><span class="self">self</span>.vec.get_unchecked_mut(major(index)) |= <span class="number">1 </span>&lt;&lt; minor(index);
+            } <span class="kw">else </span>{
+                <span class="kw-2">*</span><span class="self">self</span>.vec.get_unchecked_mut(major(index)) &amp;= !(<span class="number">1 </span>&lt;&lt; minor(index));
             }
         }
-        <span class="prelude-val">None</span>
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">last_one</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
-        <span class="kw">for</span> (<span class="ident">i</span>, <span class="kw-2">&amp;</span><span class="ident">u</span>) <span class="kw">in</span> <span class="self">self</span>.<span class="ident">vec</span>.<span class="ident">iter</span>().<span class="ident">enumerate</span>().<span class="ident">rev</span>() {
-            <span class="kw">if</span> <span class="ident">u</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-                <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">i</span> <span class="op">*</span> <span class="ident">U_BITS</span> <span class="op">+</span> <span class="ident">U_BITS</span> <span class="op">-</span> <span class="number">1</span> <span class="op">-</span> <span class="ident">u</span>.<span class="ident">leading_zeros</span>() <span class="kw">as</span> <span class="ident">usize</span>)
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>replace(<span class="kw-2">&amp;mut </span><span class="self">self</span>, index: usize, b: bool) -&gt; bool {
+        <span class="kw">let </span>ret = <span class="self">self</span>[index];
+        <span class="self">self</span>.set(index, b);
+        ret
+    }
+
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>first(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;bool&gt; {
+        <span class="self">self</span>.get(<span class="number">0</span>)
+    }
+
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>last(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;bool&gt; {
+        <span class="prelude-val">Some</span>(<span class="self">self</span>[<span class="self">self</span>.len.checked_sub(<span class="number">1</span>)<span class="question-mark">?</span>])
+    }
+
+    <span class="kw">pub fn </span>fill(<span class="kw-2">&amp;mut </span><span class="self">self</span>, b: bool) {
+        <span class="kw">if </span>b {
+            <span class="self">self</span>.vec.fill(!<span class="number">0</span>);
+            <span class="self">self</span>.top_off();
+        }
+        <span class="kw">else </span>{
+            <span class="self">self</span>.vec.fill(<span class="number">0</span>);
+        }
+    }
+
+    <span class="kw">pub fn </span>flip(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
+        <span class="self">self</span>.vec.iter_mut().for_each(|u| <span class="kw-2">*</span>u = !<span class="kw-2">*</span>u);
+        <span class="self">self</span>.top_off();
+    }
+
+    <span class="kw">pub fn </span>resize(<span class="kw-2">&amp;mut </span><span class="self">self</span>, new_len: usize, b: bool) {
+        <span class="kw">if </span>b &amp;&amp; minor(<span class="self">self</span>.len) != <span class="number">0 </span>{
+            <span class="kw-2">*</span><span class="self">self</span>.vec.last_mut().unwrap() |= !<span class="number">0 </span>&lt;&lt; minor(<span class="self">self</span>.len);
+        }
+
+        <span class="self">self</span>.vec.resize(new_len.div_ceil(U_BITS), <span class="kw">if </span>b {!<span class="number">0</span>} <span class="kw">else </span>{<span class="number">0</span>});
+        <span class="self">self</span>.len = new_len;
+
+        <span class="self">self</span>.top_off();
+    }
+
+    <span class="kw">pub fn </span>any(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="self">self</span>.vec.iter().any(|<span class="kw-2">&amp;</span>u| u != <span class="number">0</span>)
+    }
+
+    <span class="kw">pub fn </span>all(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="self">self</span>.first_zero().is_none()
+    }
+
+    <span class="kw">pub fn </span>first_one(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;usize&gt; {
+        <span class="kw">for </span>(i, <span class="kw-2">&amp;</span>u) <span class="kw">in </span><span class="self">self</span>.vec.iter().enumerate() {
+            <span class="kw">if </span>u != <span class="number">0 </span>{
+                <span class="kw">return </span><span class="prelude-val">Some</span>(i * U_BITS + u.trailing_zeros() <span class="kw">as </span>usize)
             }
         }
-        <span class="prelude-val">None</span>
-    }
+        <span class="prelude-val">None
+    </span>}
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">first_zero</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>
-    {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">fz</span> <span class="op">=</span> <span class="ident">usize::MAX</span>;
-        <span class="kw">for</span> (<span class="ident">i</span>, <span class="kw-2">&amp;</span><span class="ident">u</span>) <span class="kw">in</span> <span class="self">self</span>.<span class="ident">vec</span>.<span class="ident">iter</span>().<span class="ident">enumerate</span>() {
-            <span class="kw">if</span> <span class="ident">u</span> <span class="op">!</span><span class="op">=</span> <span class="op">!</span><span class="number">0</span> {
-                <span class="ident">fz</span> <span class="op">=</span> <span class="ident">i</span> <span class="op">*</span> <span class="ident">U_BITS</span> <span class="op">+</span> <span class="ident">u</span>.<span class="ident">trailing_ones</span>() <span class="kw">as</span> <span class="ident">usize</span>;
-                <span class="kw">break</span>
+    <span class="kw">pub fn </span>last_one(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;usize&gt; {
+        <span class="kw">for </span>(i, <span class="kw-2">&amp;</span>u) <span class="kw">in </span><span class="self">self</span>.vec.iter().enumerate().rev() {
+            <span class="kw">if </span>u != <span class="number">0 </span>{
+                <span class="kw">return </span><span class="prelude-val">Some</span>(i * U_BITS + U_BITS - <span class="number">1 </span>- u.leading_zeros() <span class="kw">as </span>usize)
             }
         }
-        (<span class="ident">fz</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">len</span>).<span class="ident">then_some</span>(<span class="ident">fz</span>)
+        <span class="prelude-val">None
+    </span>}
+
+    <span class="kw">pub fn </span>first_zero(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;usize&gt;
+    {
+        <span class="kw">let </span><span class="kw-2">mut </span>fz = usize::MAX;
+        <span class="kw">for </span>(i, <span class="kw-2">&amp;</span>u) <span class="kw">in </span><span class="self">self</span>.vec.iter().enumerate() {
+            <span class="kw">if </span>u != !<span class="number">0 </span>{
+                fz = i * U_BITS + u.trailing_ones() <span class="kw">as </span>usize;
+                <span class="kw">break
+            </span>}
+        }
+        (fz &lt; <span class="self">self</span>.len).then_some(fz)
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">last_zero</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>
+    <span class="kw">pub fn </span>last_zero(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;usize&gt;
     {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">i</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">vec</span>.<span class="ident">len</span>().<span class="ident">checked_sub</span>(<span class="number">1</span>)<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">u</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">vec</span>[<span class="ident">i</span>];
+        <span class="kw">let </span><span class="kw-2">mut </span>i = <span class="self">self</span>.vec.len().checked_sub(<span class="number">1</span>)<span class="question-mark">?</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>u = <span class="self">self</span>.vec[i];
 
         <span class="lifetime">&#39;z</span>: {
-            <span class="kw">if</span> <span class="ident">minor</span>(<span class="self">self</span>.<span class="ident">len</span>) <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-                <span class="ident">u</span> <span class="op">|</span><span class="op">=</span> <span class="op">!</span><span class="number">0</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="ident">minor</span>(<span class="self">self</span>.<span class="ident">len</span>);
+            <span class="kw">if </span>minor(<span class="self">self</span>.len) != <span class="number">0 </span>{
+                u |= !<span class="number">0 </span>&lt;&lt; minor(<span class="self">self</span>.len);
             }
-            <span class="kw">if</span> <span class="ident">u</span> <span class="op">!</span><span class="op">=</span> <span class="op">!</span><span class="number">0</span> {
-                <span class="kw">break</span> <span class="lifetime">&#39;z</span>
+            <span class="kw">if </span>u != !<span class="number">0 </span>{
+                <span class="kw">break </span><span class="lifetime">&#39;z
+            </span>}
+
+            <span class="kw">while </span>i &gt; <span class="number">0 </span>{
+                i -= <span class="number">1</span>;
+                u = <span class="self">self</span>.vec[i];
+                <span class="kw">if </span>u != !<span class="number">0 </span>{
+                    <span class="kw">break </span><span class="lifetime">&#39;z
+                </span>}
             }
-
-            <span class="kw">while</span> <span class="ident">i</span> <span class="op">&gt;</span> <span class="number">0</span> {
-                <span class="ident">i</span> <span class="op">-</span><span class="op">=</span> <span class="number">1</span>;
-                <span class="ident">u</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">vec</span>[<span class="ident">i</span>];
-                <span class="kw">if</span> <span class="ident">u</span> <span class="op">!</span><span class="op">=</span> <span class="op">!</span><span class="number">0</span> {
-                    <span class="kw">break</span> <span class="lifetime">&#39;z</span>
-                }
-            }
-            <span class="kw">return</span> <span class="prelude-val">None</span>
-        }
-        <span class="prelude-val">Some</span>(<span class="ident">i</span> <span class="op">*</span> <span class="ident">U_BITS</span> <span class="op">+</span> <span class="ident">U_BITS</span> <span class="op">-</span> <span class="number">1</span> <span class="op">-</span> <span class="ident">u</span>.<span class="ident">leading_ones</span>() <span class="kw">as</span> <span class="ident">usize</span>)
+            <span class="kw">return </span><span class="prelude-val">None
+        </span>}
+        <span class="prelude-val">Some</span>(i * U_BITS + U_BITS - <span class="number">1 </span>- u.leading_ones() <span class="kw">as </span>usize)
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">count_ones</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">usize</span> {
-        <span class="self">self</span>.<span class="ident">vec</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">u</span><span class="op">|</span> <span class="ident">u</span>.<span class="ident">count_ones</span>() <span class="kw">as</span> <span class="ident">usize</span>).<span class="ident">sum</span>()
+    <span class="kw">pub fn </span>count_ones(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize {
+        <span class="self">self</span>.vec.iter().map(|u| u.count_ones() <span class="kw">as </span>usize).sum()
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">count_zeros</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">usize</span> {
-        <span class="self">self</span>.<span class="ident">len</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">count_ones</span>()
+    <span class="kw">pub fn </span>count_zeros(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize {
+        <span class="self">self</span>.len - <span class="self">self</span>.count_ones()
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">iter_ones</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Iter</span> {
-        <span class="ident">Iter</span>{<span class="ident">bvec</span>: <span class="self">self</span>, <span class="ident">i</span>: <span class="number">0</span>, <span class="ident">predicate</span>: <span class="bool-val">true</span>}
+    <span class="kw">pub fn </span>iter_ones(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Iter&lt;<span class="bool-val">true</span>&gt; {
+        Iter::new(<span class="self">self</span>)
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">iter_zeros</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Iter</span> {
-        <span class="ident">Iter</span>{<span class="ident">bvec</span>: <span class="self">self</span>, <span class="ident">i</span>: <span class="number">0</span>, <span class="ident">predicate</span>: <span class="bool-val">false</span>}
+    <span class="kw">pub fn </span>iter_zeros(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Iter&lt;<span class="bool-val">false</span>&gt; {
+        Iter::new(<span class="self">self</span>)
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">raw_vec</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
-        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">vec</span>
+    <span class="kw">pub fn </span>iter_usize(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw">impl </span>Iterator&lt;Item=usize&gt; + <span class="lifetime">&#39;_ </span>{
+        <span class="self">self</span>.vec.iter().copied()
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">top_off</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
-        <span class="kw">if</span> <span class="ident">minor</span>(<span class="self">self</span>.<span class="ident">len</span>) <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="kw-2">*</span><span class="self">self</span>.<span class="ident">vec</span>.<span class="ident">last_mut</span>().<span class="ident">unwrap</span>() <span class="op">&amp;=</span> (<span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="ident">minor</span>(<span class="self">self</span>.<span class="ident">len</span>)) <span class="op">-</span> <span class="number">1</span>;
+    <span class="kw">pub fn </span>raw_vec(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>Vec&lt;usize&gt; {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.vec
+    }
+
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>top_off(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
+        <span class="kw">if </span>minor(<span class="self">self</span>.len) != <span class="number">0 </span>{
+            <span class="kw-2">*</span><span class="self">self</span>.vec.last_mut().unwrap() &amp;= (<span class="number">1 </span>&lt;&lt; minor(<span class="self">self</span>.len)) - <span class="number">1</span>;
         }
     }
 }
 
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Iter</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="ident">bvec</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">BVec</span>,
-    <span class="ident">i</span>: <span class="ident">usize</span>,
-    <span class="ident">predicate</span>: <span class="ident">bool</span>
+<span class="kw">pub struct </span>Iter&lt;<span class="lifetime">&#39;me</span>, <span class="kw">const </span>P: bool&gt; {
+    bvec: <span class="kw-2">&amp;</span><span class="lifetime">&#39;me </span>BVec,
+    vec_i: usize,
+    sub_iter: usize,
 }
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Iterator</span> <span class="kw">for</span> <span class="ident">Iter</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="ident">usize</span>;
-
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Item</span><span class="op">&gt;</span> {
-        <span class="kw">while</span> <span class="self">self</span>.<span class="ident">i</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">bvec</span>.<span class="ident">len</span> {
-            <span class="kw">let</span> <span class="ident">i</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">i</span>;
-            <span class="self">self</span>.<span class="ident">i</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-            <span class="kw">if</span> <span class="self">self</span>.<span class="ident">bvec</span>.<span class="ident">get</span>(<span class="ident">i</span>) <span class="op">==</span> <span class="prelude-val">Some</span>(<span class="self">self</span>.<span class="ident">predicate</span>) {
-                <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">i</span>);
-            }
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;me</span>, <span class="kw">const </span>P: bool&gt; Iter&lt;<span class="lifetime">&#39;me</span>, P&gt; {
+    <span class="kw">fn </span>new(bvec: <span class="kw-2">&amp;</span><span class="lifetime">&#39;me </span>BVec) -&gt; <span class="self">Self </span>{
+        Iter::&lt;P&gt; {
+            bvec,
+            vec_i: <span class="number">0</span>,
+            sub_iter: <span class="kw-2">*</span>bvec.vec.first().unwrap_or(<span class="kw-2">&amp;</span><span class="number">0</span>) ^ <span class="kw">if </span>P {<span class="number">0</span>} <span class="kw">else </span>{!<span class="number">0</span>},
         }
-        <span class="prelude-val">None</span>
     }
 }
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;me</span>, <span class="kw">const </span>P: bool&gt; Iterator <span class="kw">for </span>Iter&lt;<span class="lifetime">&#39;me</span>, P&gt; {
+    <span class="kw">type </span>Item = usize;
 
-<span class="kw">impl</span> <span class="ident">Index</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">BVec</span> {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">bool</span>;
-
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">index</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">index</span>: <span class="ident">usize</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::Output</span>
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>next(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>::Item&gt;
     {
-        <span class="macro">debug_assert!</span>(<span class="ident">index</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">len</span>, <span class="macro">INDEX_RANGE!</span>());
-        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">vec</span>[<span class="ident">major</span>(<span class="ident">index</span>)] <span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">minor</span>(<span class="ident">index</span>) <span class="kw-2">&amp;</span><span class="number">1</span><span class="op">==</span><span class="number">1</span> {
-            <span class="bool-val">true</span> =&gt; <span class="kw-2">&amp;</span><span class="bool-val">true</span>,
-            <span class="bool-val">false</span> =&gt; <span class="kw-2">&amp;</span><span class="bool-val">false</span>
-        }
-    }
-}
-
-<span class="kw">impl</span> <span class="ident">Shr</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">BVec</span> {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
-
-    <span class="kw">fn</span> <span class="ident">shr</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">usize</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
-        <span class="self">self</span> <span class="op">&gt;</span><span class="op">&gt;</span><span class="op">=</span> <span class="ident">rhs</span>;
-        <span class="self">self</span>
-    }
-}
-
-<span class="kw">impl</span> <span class="ident">ShrAssign</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">BVec</span> {
-    <span class="kw">fn</span> <span class="ident">shr_assign</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">usize</span>) {
-        <span class="kw">let</span> <span class="ident">offset</span> <span class="op">=</span> <span class="ident">major</span>(<span class="ident">rhs</span>);
-        <span class="kw">let</span> <span class="ident">sr0</span> <span class="op">=</span> <span class="ident">minor</span>(<span class="ident">rhs</span>);
-        <span class="kw">let</span> <span class="ident">sl1</span> <span class="op">=</span> <span class="ident">U_BITS</span> <span class="op">-</span> <span class="ident">sr0</span>;
-
-        <span class="kw">let</span> <span class="ident">v_len</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">vec</span>.<span class="ident">len</span>();
-        <span class="kw">if</span> <span class="ident">sr0</span> <span class="op">==</span> <span class="number">0</span> {
-            <span class="self">self</span>.<span class="ident">vec</span>.<span class="ident">copy_within</span>(<span class="ident">offset</span>..<span class="ident">v_len</span>, <span class="number">0</span>);
-        }
-        <span class="kw">else</span> {
-            <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="ident">offset</span>..<span class="ident">v_len</span> {
-                <span class="self">self</span>.<span class="ident">vec</span>[<span class="ident">i</span> <span class="op">-</span> <span class="ident">offset</span>] <span class="op">=</span> (<span class="self">self</span>.<span class="ident">vec</span>[<span class="ident">i</span>] <span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">sr0</span>) <span class="op">+</span> (<span class="self">self</span>.<span class="ident">vec</span>.<span class="ident">get</span>(<span class="ident">i</span><span class="op">+</span><span class="number">1</span>).<span class="ident">unwrap_or</span>(<span class="kw-2">&amp;</span><span class="number">0</span>) <span class="op">&lt;</span><span class="op">&lt;</span> <span class="ident">sl1</span>);
+        <span class="kw">while </span><span class="self">self</span>.sub_iter == <span class="number">0 </span>{
+            <span class="kw">if </span><span class="self">self</span>.vec_i + <span class="number">1 </span>&lt; <span class="self">self</span>.bvec.vec.len() {
+                <span class="self">self</span>.vec_i += <span class="number">1</span>;
+                <span class="self">self</span>.sub_iter = <span class="self">self</span>.bvec.vec[<span class="self">self</span>.vec_i] ^ <span class="kw">if </span>P {<span class="number">0</span>} <span class="kw">else </span>{!<span class="number">0</span>};
             }
+            <span class="kw">else </span>{
+                <span class="kw">return </span><span class="prelude-val">None
+            </span>}
         }
-        <span class="self">self</span>.<span class="ident">vec</span>[<span class="ident">v_len</span> <span class="op">-</span> <span class="ident">offset</span> ..].<span class="ident">fill</span>(<span class="number">0</span>);
+        <span class="kw">let </span>tz = <span class="self">self</span>.sub_iter.trailing_zeros();
+        <span class="self">self</span>.sub_iter ^= <span class="number">1 </span>&lt;&lt; tz;
+
+        <span class="kw">let </span>i = tz <span class="kw">as </span>usize + <span class="self">self</span>.vec_i * U_BITS;
+        <span class="kw">if </span>!P &amp;&amp; i &gt;= <span class="self">self</span>.bvec.len { <span class="kw">return </span><span class="prelude-val">None </span>}
+        <span class="prelude-val">Some</span>(i)
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Shl</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">BVec</span> {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
+<span class="kw">impl </span>Index&lt;usize&gt; <span class="kw">for </span>BVec {
+    <span class="kw">type </span>Output = bool;
 
-    <span class="kw">fn</span> <span class="ident">shl</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">usize</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
-        <span class="self">self</span> <span class="op">&lt;</span><span class="op">&lt;</span><span class="op">=</span> <span class="ident">rhs</span>;
-        <span class="self">self</span>
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>index(<span class="kw-2">&amp;</span><span class="self">self</span>, index: usize) -&gt; <span class="kw-2">&amp;</span><span class="self">Self</span>::Output
+    {
+        <span class="macro">assert!</span>(index &lt; <span class="self">self</span>.len, <span class="macro">INDEX_RANGE!</span>());
+
+        <span class="kw">let </span>u;
+        { <span class="attribute">#![cfg(not(feature = <span class="string">&quot;unsafe&quot;</span>))] </span>u = <span class="self">self</span>.vec[major(index)]; }
+
+        <span class="comment">// SAFETY: Asserted index &lt; self.len. Invariant self.vec.len = self.len.div_ceil(U_BITS)
+        </span>{ <span class="attribute">#![cfg(feature = <span class="string">&quot;unsafe&quot;</span>)] </span><span class="kw">unsafe </span>{ u = <span class="self">self</span>.vec.get_unchecked(major(index)); }}
+
+        <span class="kw">match </span>u &gt;&gt; minor(index) <span class="kw-2">&amp;</span><span class="number">1</span>==<span class="number">1 </span>{
+            <span class="bool-val">true </span>=&gt; <span class="kw-2">&amp;</span><span class="bool-val">true</span>,
+            <span class="bool-val">false </span>=&gt; <span class="kw-2">&amp;</span><span class="bool-val">false
+        </span>}
     }
 }
 
-<span class="kw">impl</span> <span class="ident">ShlAssign</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">BVec</span> {
-    <span class="kw">fn</span> <span class="ident">shl_assign</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">usize</span>) {
-        <span class="kw">let</span> <span class="ident">offset</span> <span class="op">=</span> <span class="ident">major</span>(<span class="ident">rhs</span>);
-        <span class="kw">let</span> <span class="ident">sl0</span> <span class="op">=</span> <span class="ident">minor</span>(<span class="ident">rhs</span>);
-        <span class="kw">let</span> <span class="ident">sr1</span> <span class="op">=</span> <span class="ident">U_BITS</span> <span class="op">-</span> <span class="ident">sl0</span>;
+<span class="kw">impl </span>ShrAssign&lt;usize&gt; <span class="kw">for </span>BVec {
+    <span class="kw">fn </span>shr_assign(<span class="kw-2">&amp;mut </span><span class="self">self</span>, rhs: usize) {
+        <span class="kw">let </span>offset = major(rhs);
+        <span class="kw">let </span>sr0 = minor(rhs);
+        <span class="kw">let </span>sl1 = U_BITS - sr0;
 
-        <span class="kw">let</span> <span class="ident">v_len</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">vec</span>.<span class="ident">len</span>();
-        <span class="kw">if</span> <span class="ident">sl0</span> <span class="op">==</span> <span class="number">0</span> {
-            <span class="self">self</span>.<span class="ident">vec</span>.<span class="ident">copy_within</span>(<span class="number">0</span>..(<span class="ident">v_len</span> <span class="op">-</span> <span class="ident">offset</span>), <span class="ident">offset</span>)
+        <span class="kw">let </span>v_len = <span class="self">self</span>.vec.len();
+        <span class="kw">if </span>sr0 == <span class="number">0 </span>{
+            <span class="self">self</span>.vec.copy_within(offset..v_len, <span class="number">0</span>);
         }
-        <span class="kw">else</span> {
-            <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> (<span class="number">0</span>..(<span class="ident">v_len</span> <span class="op">-</span> <span class="ident">offset</span>)).<span class="ident">rev</span>() {
-                <span class="self">self</span>.<span class="ident">vec</span>[<span class="ident">i</span> <span class="op">+</span> <span class="ident">offset</span>] <span class="op">=</span> (<span class="self">self</span>.<span class="ident">vec</span>[<span class="ident">i</span>] <span class="op">&lt;</span><span class="op">&lt;</span> <span class="ident">sl0</span>) <span class="op">+</span> <span class="kw">if</span> <span class="ident">i</span> <span class="op">&gt;</span> <span class="number">0</span> { <span class="self">self</span>.<span class="ident">vec</span>[<span class="ident">i</span><span class="op">-</span><span class="number">1</span>] <span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">sr1</span> } <span class="kw">else</span> { <span class="number">0</span> };
+        <span class="kw">else </span>{
+            <span class="attribute">#[cfg(not(feature = <span class="string">&quot;unsafe&quot;</span>))]
+            </span><span class="kw">for </span>i <span class="kw">in </span>offset..v_len {
+                <span class="self">self</span>.vec[i - offset] = (<span class="self">self</span>.vec[i] &gt;&gt; sr0) + (<span class="self">self</span>.vec.get(i+<span class="number">1</span>).unwrap_or(<span class="kw-2">&amp;</span><span class="number">0</span>) &lt;&lt; sl1);
             }
-        }
-        <span class="self">self</span>.<span class="ident">vec</span>[..<span class="ident">offset</span>].<span class="ident">fill</span>(<span class="number">0</span>);
-    }
-}
 
-<span class="kw">impl</span> <span class="ident">Not</span> <span class="kw">for</span> <span class="ident">BVec</span> {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
-
-    <span class="kw">fn</span> <span class="ident">not</span>(<span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
-        <span class="self">self</span>.<span class="ident">flip</span>();
-        <span class="self">self</span>
-    }
-}
-
-<span class="kw">macro</span> <span class="ident">impl_bitops</span> {
-    (<span class="macro-nonterminal">$</span><span class="kw">trait</span>:<span class="macro-nonterminal">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">method</span>:<span class="ident">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">op</span>:<span class="ident">tt</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">a_trait</span>:<span class="ident">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">a_method</span>:<span class="ident">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">a_op</span>:<span class="ident">tt</span>) =&gt; {
-        <span class="kw">impl</span> <span class="macro-nonterminal">$</span><span class="kw">trait</span> <span class="kw">for</span> <span class="macro-nonterminal">BVec</span> {
-            <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
-
-            <span class="kw">fn</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">method</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">rhs</span>: <span class="self">Self</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
-                <span class="self">self</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">a_op</span> <span class="ident">rhs</span>;
-                <span class="self">self</span>
-            }
-        }
-
-        <span class="kw">impl</span> <span class="macro-nonterminal">$</span><span class="kw">trait</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="macro-nonterminal">Self</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">BVec</span> {
-            <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
-
-            <span class="kw">fn</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">method</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">rhs</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
-                <span class="self">self</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">a_op</span> <span class="ident">rhs</span>;
-                <span class="self">self</span>
-            }
-        }
-
-        <span class="kw">impl</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">a_trait</span> <span class="kw">for</span> <span class="ident">BVec</span> {
-            <span class="kw">fn</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">a_method</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">rhs</span>: <span class="self">Self</span>) {
-                <span class="self">self</span>.<span class="macro-nonterminal">$</span><span class="macro-nonterminal">a_method</span>(<span class="kw-2">&amp;</span><span class="ident">rhs</span>)
-            }
-        }
-
-        <span class="kw">impl</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">a_trait</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="self">Self</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">BVec</span> {
-            <span class="kw">fn</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">a_method</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">rhs</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) {
-                <span class="macro">assert_eq!</span>(<span class="self">self</span>.<span class="ident">len</span>, <span class="ident">rhs</span>.<span class="ident">len</span>, <span class="macro">UNEQUAL_LEN!</span>());
-
-                <span class="kw">for</span> (<span class="ident">u</span>, <span class="kw-2">&amp;</span><span class="ident">v</span>) <span class="kw">in</span> <span class="self">self</span>.<span class="ident">vec</span>.<span class="ident">iter_mut</span>().<span class="ident">zip</span>(<span class="ident">rhs</span>.<span class="ident">vec</span>.<span class="ident">iter</span>()) {
-                    <span class="kw-2">*</span><span class="ident">u</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">a_op</span> <span class="ident">v</span>;
+            <span class="attribute">#[cfg(feature = <span class="string">&quot;unsafe&quot;</span>)]
+            </span><span class="comment">// SAFETY: offset &lt;= i &lt; v_len-1
+            </span><span class="kw">unsafe </span>{
+                <span class="kw">let </span>u = <span class="self">self</span>.vec.as_mut_ptr();
+                <span class="kw">for </span>i <span class="kw">in </span>offset..v_len-<span class="number">1 </span>{
+                    <span class="kw-2">*</span>u.add(i - offset) =
+                        ((<span class="kw-2">*</span>u.add(i)) &gt;&gt; sr0) +
+                        ((<span class="kw-2">*</span>u.add(i+<span class="number">1</span>)) &lt;&lt; (sl1));
+                }
+                <span class="kw">if </span>v_len &gt; <span class="number">0 </span>{
+                    (<span class="kw-2">*</span>u.add(v_len-<span class="number">1</span>) = (<span class="kw-2">*</span>u.add(v_len-<span class="number">1</span>)) &gt;&gt; sr0);
                 }
             }
         }
+        <span class="self">self</span>.vec[v_len - offset ..].fill(<span class="number">0</span>);
     }
 }
 
-<span class="macro">impl_bitops!</span>(<span class="ident">BitAnd</span>, <span class="ident">bitand</span>, <span class="kw-2">&amp;</span>, <span class="ident">BitAndAssign</span>, <span class="ident">bitand_assign</span>, <span class="op">&amp;=</span>);
-<span class="macro">impl_bitops!</span>(<span class="ident">BitOr</span> , <span class="ident">bitor</span> , <span class="op">|</span>, <span class="ident">BitOrAssign</span> , <span class="ident">bitor_assign</span> , <span class="op">|</span><span class="op">=</span>);
-<span class="macro">impl_bitops!</span>(<span class="ident">BitXor</span>, <span class="ident">bitxor</span>, <span class="op">^</span>, <span class="ident">BitXorAssign</span>, <span class="ident">bitxor_assign</span>, <span class="op">^</span><span class="op">=</span>);
+<span class="kw">impl </span>Shr&lt;usize&gt; <span class="kw">for </span>BVec {
+    <span class="kw">type </span>Output = BVec;
 
-<span class="kw">impl</span> <span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">BVec</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Formatter</span>) -&gt; <span class="ident">fmt::Result</span>
-    {
-        <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;\n{:&gt;w$}&quot;</span>, <span class="string">&quot;(rows ↓, columns ←):&quot;</span>, <span class="ident">w</span><span class="op">=</span><span class="ident">U_BITS</span>)<span class="question-mark">?</span>;
+    <span class="kw">fn </span>shr(<span class="kw-2">mut </span><span class="self">self</span>, rhs: usize) -&gt; <span class="self">Self</span>::Output {
+        <span class="self">self </span>&gt;&gt;= rhs;
+        <span class="self">self
+    </span>}
+}
 
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="self">self</span>.<span class="ident">vec</span>.<span class="ident">len</span>()
-        {
-            <span class="kw">let</span> <span class="ident">u</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">vec</span>[<span class="ident">i</span>];
-            <span class="kw">if</span> <span class="ident">i</span> <span class="op">==</span> <span class="self">self</span>.<span class="ident">vec</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="number">1</span> <span class="op">&amp;&amp;</span> <span class="ident">minor</span>(<span class="self">self</span>.<span class="ident">len</span>) <span class="op">!</span><span class="op">=</span> <span class="number">0</span>
+<span class="kw">impl </span>Shr&lt;usize&gt; <span class="kw">for </span><span class="kw-2">&amp;</span>BVec {
+    <span class="kw">type </span>Output = BVec;
+
+    <span class="kw">fn </span>shr(<span class="self">self</span>, rhs: usize) -&gt; <span class="self">Self</span>::Output {
+        <span class="self">self</span>.clone() &gt;&gt; rhs
+    }
+}
+
+<span class="kw">impl </span>ShlAssign&lt;usize&gt; <span class="kw">for </span>BVec {
+    <span class="kw">fn </span>shl_assign(<span class="kw-2">&amp;mut </span><span class="self">self</span>, rhs: usize) {
+        <span class="kw">let </span>offset = major(rhs);
+        <span class="kw">let </span>sl0 = minor(rhs);
+        <span class="kw">let </span>sr1 = U_BITS - sl0;
+
+        <span class="kw">let </span>v_len = <span class="self">self</span>.vec.len();
+        <span class="kw">if </span>sl0 == <span class="number">0 </span>{
+            <span class="self">self</span>.vec.copy_within(<span class="number">0</span>..(v_len - offset), offset)
+        }
+        <span class="kw">else </span>{
+            <span class="attribute">#[cfg(not(feature = <span class="string">&quot;unsafe&quot;</span>))]
+            </span><span class="kw">for </span>i <span class="kw">in </span>(<span class="number">0</span>..(v_len - offset)).rev() {
+                <span class="self">self</span>.vec[i + offset] = (<span class="self">self</span>.vec[i] &lt;&lt; sl0) + <span class="kw">if </span>i &gt; <span class="number">0 </span>{ <span class="self">self</span>.vec[i-<span class="number">1</span>] &gt;&gt; sr1 } <span class="kw">else </span>{ <span class="number">0 </span>};
+            }
+
+            <span class="attribute">#[cfg(feature = <span class="string">&quot;unsafe&quot;</span>)]
+            </span><span class="comment">// SAFETY: 1 &lt;= i &lt; v_len - offset
+            </span><span class="kw">unsafe </span>{
+                <span class="kw">let </span>u = <span class="self">self</span>.vec.as_mut_ptr();
+                <span class="kw">for </span>i <span class="kw">in </span>(<span class="number">1</span>..(v_len - offset)).rev() {
+                    <span class="kw-2">*</span>u.add(i + offset) =
+                        ((<span class="kw-2">*</span>u.add(i)) &lt;&lt; sl0) +
+                        ((<span class="kw-2">*</span>u.add(i-<span class="number">1</span>)) &gt;&gt; sr1);
+                }
+                <span class="kw">if </span>v_len - offset &gt; <span class="number">0 </span>{
+                    <span class="kw-2">*</span>u = (<span class="kw-2">*</span>u) &lt;&lt; sl0;
+                }
+            }
+        }
+        <span class="self">self</span>.vec[..offset].fill(<span class="number">0</span>);
+    }
+}
+
+<span class="kw">impl </span>Shl&lt;usize&gt; <span class="kw">for </span>BVec {
+    <span class="kw">type </span>Output = BVec;
+
+    <span class="kw">fn </span>shl(<span class="kw-2">mut </span><span class="self">self</span>, rhs: usize) -&gt; <span class="self">Self</span>::Output {
+        <span class="self">self </span>&lt;&lt;= rhs;
+        <span class="self">self
+    </span>}
+}
+
+<span class="kw">impl </span>Shl&lt;usize&gt; <span class="kw">for </span><span class="kw-2">&amp;</span>BVec {
+    <span class="kw">type </span>Output = BVec;
+
+    <span class="kw">fn </span>shl(<span class="self">self</span>, rhs: usize) -&gt; <span class="self">Self</span>::Output {
+        <span class="self">self</span>.clone() &lt;&lt; rhs
+    }
+}
+
+<span class="kw">impl </span>Not <span class="kw">for </span>BVec {
+    <span class="kw">type </span>Output = BVec;
+
+    <span class="kw">fn </span>not(<span class="kw-2">mut </span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Output {
+        <span class="self">self</span>.flip();
+        <span class="self">self
+    </span>}
+}
+
+<span class="kw">impl </span>Not <span class="kw">for </span><span class="kw-2">&amp;</span>BVec {
+    <span class="kw">type </span>Output = BVec;
+
+    <span class="kw">fn </span>not(<span class="self">self</span>) -&gt; <span class="self">Self</span>::Output {
+        !<span class="self">self</span>.clone()
+    }
+}
+
+<span class="kw">macro </span>impl_bitops {
+    (<span class="macro-nonterminal">$</span><span class="kw">trait</span>:<span class="macro-nonterminal">ident</span>, <span class="macro-nonterminal">$method</span>:ident, <span class="macro-nonterminal">$op</span>:tt, <span class="macro-nonterminal">$a_trait</span>:ident, <span class="macro-nonterminal">$a_method</span>:ident, <span class="macro-nonterminal">$a_op</span>:tt) =&gt; {
+        <span class="kw">impl </span><span class="macro-nonterminal">$</span><span class="kw">trait</span>&lt;<span class="macro-nonterminal">BVec</span>&gt; <span class="kw">for </span>BVec {
+            <span class="kw">type </span>Output = BVec;
+
+            <span class="attribute">#[inline]
+            </span><span class="kw">fn </span><span class="macro-nonterminal">$method</span>(<span class="kw-2">mut </span><span class="self">self</span>, rhs: BVec) -&gt; <span class="self">Self</span>::Output {
+                <span class="self">self </span><span class="macro-nonterminal">$a_op </span>rhs;
+                <span class="self">self
+            </span>}
+        }
+
+        <span class="kw">impl </span><span class="macro-nonterminal">$</span><span class="kw">trait</span>&lt;<span class="kw-2">&amp;</span><span class="macro-nonterminal">BVec</span>&gt; <span class="kw">for </span>BVec {
+            <span class="kw">type </span>Output = BVec;
+
+            <span class="attribute">#[inline]
+            </span><span class="kw">fn </span><span class="macro-nonterminal">$method</span>(<span class="kw-2">mut </span><span class="self">self</span>, rhs: <span class="kw-2">&amp;</span>BVec) -&gt; <span class="self">Self</span>::Output {
+                <span class="self">self </span><span class="macro-nonterminal">$a_op </span>rhs;
+                <span class="self">self
+            </span>}
+        }
+
+        <span class="kw">impl </span><span class="macro-nonterminal">$</span><span class="kw">trait</span>&lt;<span class="macro-nonterminal">BVec</span>&gt; <span class="kw">for </span><span class="kw-2">&amp;</span>BVec {
+            <span class="kw">type </span>Output = BVec;
+
+            <span class="attribute">#[inline]
+            </span><span class="kw">fn </span><span class="macro-nonterminal">$method</span>(<span class="self">self</span>, <span class="kw-2">mut </span>rhs: BVec) -&gt; <span class="self">Self</span>::Output {
+                rhs <span class="macro-nonterminal">$a_op </span><span class="self">self</span>;
+                rhs
+            }
+        }
+
+        <span class="kw">impl </span><span class="macro-nonterminal">$</span><span class="kw">trait</span>&lt;<span class="kw-2">&amp;</span><span class="macro-nonterminal">BVec</span>&gt; <span class="kw">for </span><span class="kw-2">&amp;</span>BVec {
+            <span class="kw">type </span>Output = BVec;
+
+            <span class="attribute">#[inline]
+            </span><span class="kw">fn </span><span class="macro-nonterminal">$method</span>(<span class="self">self</span>, rhs: <span class="kw-2">&amp;</span>BVec) -&gt; <span class="self">Self</span>::Output
             {
-                <span class="kw">let</span> <span class="ident">w</span> <span class="op">=</span> <span class="ident">minor</span>(<span class="self">self</span>.<span class="ident">len</span>);
-                <span class="kw">let</span> <span class="ident">pad</span> <span class="op">=</span> <span class="ident">U_BITS</span> <span class="op">-</span> <span class="ident">w</span>;
-                <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;\n{:pad$}{u:0w$b}&quot;</span>, <span class="string">&quot;&quot;</span>)<span class="question-mark">?</span>;
+                <span class="macro">assert_eq!</span>(<span class="self">self</span>.len, rhs.len, <span class="macro">UNEQUAL_LEN!</span>());
+
+                <span class="attribute">#[cfg(not(feature = <span class="string">&quot;unsafe&quot;</span>))]
+                </span>{
+                    <span class="kw">let </span><span class="kw-2">mut </span>vec = Vec::with_capacity(<span class="self">self</span>.vec.len());
+                    <span class="kw">let </span><span class="kw-2">mut </span>i = <span class="number">0</span>;
+                    vec.resize_with(<span class="self">self</span>.vec.len(), || {
+                        <span class="kw">let </span>u = <span class="self">self</span>.vec[i] <span class="macro-nonterminal">$op </span>rhs.vec[i];
+                        i += <span class="number">1</span>;
+                        u
+                    });
+                    BVec { vec, len: <span class="self">self</span>.len }
+                }
+                <span class="attribute">#[cfg(feature = <span class="string">&quot;unsafe&quot;</span>)]
+                </span>{
+                    <span class="kw">let </span>n = <span class="self">self</span>.vec.len();
+                    <span class="kw">let </span><span class="kw-2">mut </span>vec = Vec::&lt;usize&gt;::with_capacity(n);
+                    <span class="kw">let </span>u = <span class="self">self</span>.vec.as_ptr();
+                    <span class="kw">let </span>v = rhs.vec.as_ptr();
+                    <span class="kw">let </span>w = vec.as_mut_ptr();
+
+                    <span class="comment">// SAFETY: Asserted self.len == rhs.len. Invariant BVec.vec.len == self.len.div_ceil(U_BITS)
+                    // SAFETY: Created `w` with `n` capacity
+                    </span><span class="kw">unsafe </span>{
+                        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..n {
+                            <span class="kw-2">*</span>w.add(i) = <span class="kw-2">*</span>u.add(i) <span class="macro-nonterminal">$op </span><span class="kw-2">*</span>v.add(i);
+                        }
+                        vec.set_len(n);
+                    }
+                    BVec { vec, len: <span class="self">self</span>.len }
+                }
             }
-            <span class="kw">else</span> {
-                <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;\n{u:0w$b}&quot;</span>, <span class="ident">w</span><span class="op">=</span><span class="ident">U_BITS</span>)<span class="question-mark">?</span>;
+        }
+
+        <span class="kw">impl </span><span class="macro-nonterminal">$a_trait</span>&lt;BVec&gt; <span class="kw">for </span>BVec {
+            <span class="attribute">#[inline]
+            </span><span class="kw">fn </span><span class="macro-nonterminal">$a_method</span>(<span class="kw-2">&amp;mut </span><span class="self">self</span>, rhs: BVec) {
+                <span class="self">self</span>.<span class="macro-nonterminal">$a_method</span>(<span class="kw-2">&amp;</span>rhs)
+            }
+        }
+
+        <span class="kw">impl </span><span class="macro-nonterminal">$a_trait</span>&lt;<span class="kw-2">&amp;</span>BVec&gt; <span class="kw">for </span>BVec {
+            <span class="attribute">#[inline]
+            </span><span class="kw">fn </span><span class="macro-nonterminal">$a_method</span>(<span class="kw-2">&amp;mut </span><span class="self">self</span>, rhs: <span class="kw-2">&amp;</span>BVec)
+            {
+                <span class="macro">assert_eq!</span>(<span class="self">self</span>.len, rhs.len, <span class="macro">UNEQUAL_LEN!</span>());
+
+                <span class="attribute">#[cfg(not(feature = <span class="string">&quot;unsafe&quot;</span>))]
+                </span>{
+                    <span class="kw">for </span>(u, <span class="kw-2">&amp;</span>v) <span class="kw">in </span><span class="self">self</span>.vec.iter_mut().zip(rhs.vec.iter()) {
+                        <span class="kw-2">*</span>u <span class="macro-nonterminal">$a_op </span>v;
+                    }
+                }
+                <span class="attribute">#[cfg(feature = <span class="string">&quot;unsafe&quot;</span>)]
+                </span>{
+                    <span class="kw">let </span>n = <span class="self">self</span>.vec.len();
+                    <span class="kw">let </span>u = <span class="self">self</span>.vec.as_mut_ptr();
+                    <span class="kw">let </span>v = rhs.vec.as_ptr();
+
+                    <span class="comment">// SAFETY: Asserted self.len == rhs.len. Invariant BVec.vec.len == self.len.div_ceil(U_BITS)
+                    </span><span class="kw">unsafe </span>{
+                        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..n {
+                            <span class="kw-2">*</span>u.add(i) <span class="macro-nonterminal">$a_op </span><span class="kw-2">*</span>v.add(i);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+<span class="macro">impl_bitops!</span>(BitAnd, bitand, <span class="kw-2">&amp;</span>, BitAndAssign, bitand_assign, &amp;=);
+<span class="macro">impl_bitops!</span>(BitOr , bitor , |, BitOrAssign , bitor_assign , |=);
+<span class="macro">impl_bitops!</span>(BitXor, bitxor, ^, BitXorAssign, bitxor_assign, ^=);
+
+<span class="kw">impl </span>Debug <span class="kw">for </span>BVec {
+    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>Formatter) -&gt; fmt::Result
+    {
+        <span class="macro">write!</span>(f, <span class="string">&quot;\n{:&gt;w$}&quot;</span>, <span class="string">&quot;(rows ↓, columns ←):&quot;</span>, w=U_BITS)<span class="question-mark">?</span>;
+
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..<span class="self">self</span>.vec.len()
+        {
+            <span class="kw">let </span>u = <span class="self">self</span>.vec[i];
+            <span class="kw">if </span>i == <span class="self">self</span>.vec.len() - <span class="number">1 </span>&amp;&amp; minor(<span class="self">self</span>.len) != <span class="number">0
+            </span>{
+                <span class="kw">let </span>w = minor(<span class="self">self</span>.len);
+                <span class="kw">let </span>pad = U_BITS - w;
+                <span class="macro">write!</span>(f, <span class="string">&quot;\n{:pad$}{u:0w$b}&quot;</span>, <span class="string">&quot;&quot;</span>)<span class="question-mark">?</span>;
+            }
+            <span class="kw">else </span>{
+                <span class="macro">write!</span>(f, <span class="string">&quot;\n{u:0w$b}&quot;</span>, w=U_BITS)<span class="question-mark">?</span>;
             }
         }
 
@@ -810,5 +1147,4 @@ assert_eq!(twins2.iter_ones().collect::&lt;Vec&lt;_&gt;&gt;(), vec![5, 7, 13, 19
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="rithmic" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0-nightly (12cd71f4d 2022-06-01)" ></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="rithmic" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (17cbdfd07 2022-09-13)" ></div></body></html>

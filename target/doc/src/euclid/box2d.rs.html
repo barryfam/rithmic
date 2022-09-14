@@ -1,11 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/bcfam/.cargo/registry/src/github.com-1ecc6299db9ec823/euclid-0.22.7/src/box2d.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>box2d.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><script defer src="../../main.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script>
-    <noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../euclid/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"></h2>
-    </nav>
-    <nav class="sidebar"><a class="sidebar-logo" href="../../euclid/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../euclid/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
-                                <a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div>
-                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/bcfam/.cargo/registry/src/github.com-1ecc6299db9ec823/euclid-0.22.7/src/box2d.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>box2d.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../euclid/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../euclid/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../euclid/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -908,909 +901,908 @@
 <span id="901">901</span>
 <span id="902">902</span>
 <span id="903">903</span>
-</pre><pre class="rust"><code><span class="comment">// Copyright 2013 The Servo Project Developers. See the COPYRIGHT</span>
-<span class="comment">// file at the top-level directory of this distribution.</span>
-<span class="comment">//</span>
-<span class="comment">// Licensed under the Apache License, Version 2.0 &lt;LICENSE-APACHE or</span>
-<span class="comment">// http://www.apache.org/licenses/LICENSE-2.0&gt; or the MIT license</span>
-<span class="comment">// &lt;LICENSE-MIT or http://opensource.org/licenses/MIT&gt;, at your</span>
-<span class="comment">// option. This file may not be copied, modified, or distributed</span>
-<span class="comment">// except according to those terms.</span>
+</pre><pre class="rust"><code><span class="comment">// Copyright 2013 The Servo Project Developers. See the COPYRIGHT
+// file at the top-level directory of this distribution.
+//
+// Licensed under the Apache License, Version 2.0 &lt;LICENSE-APACHE or
+// http://www.apache.org/licenses/LICENSE-2.0&gt; or the MIT license
+// &lt;LICENSE-MIT or http://opensource.org/licenses/MIT&gt;, at your
+// option. This file may not be copied, modified, or distributed
+// except according to those terms.
 
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::UnknownUnit</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::approxord</span>::{<span class="ident">max</span>, <span class="ident">min</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::num</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::point</span>::{<span class="ident">point2</span>, <span class="ident">Point2D</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::rect::Rect</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::scale::Scale</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::side_offsets::SideOffsets2D</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::size::Size2D</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::vector</span>::{<span class="ident">vec2</span>, <span class="ident">Vector2D</span>};
+</span><span class="kw">use </span><span class="kw">super</span>::UnknownUnit;
+<span class="kw">use </span><span class="kw">crate</span>::approxord::{max, min};
+<span class="kw">use </span><span class="kw">crate</span>::num::<span class="kw-2">*</span>;
+<span class="kw">use </span><span class="kw">crate</span>::point::{point2, Point2D};
+<span class="kw">use </span><span class="kw">crate</span>::rect::Rect;
+<span class="kw">use </span><span class="kw">crate</span>::scale::Scale;
+<span class="kw">use </span><span class="kw">crate</span>::side_offsets::SideOffsets2D;
+<span class="kw">use </span><span class="kw">crate</span>::size::Size2D;
+<span class="kw">use </span><span class="kw">crate</span>::vector::{vec2, Vector2D};
 
-<span class="kw">use</span> <span class="ident">num_traits</span>::{<span class="ident">NumCast</span>, <span class="ident">Float</span>};
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;serde&quot;</span>)]</span>
-<span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>};
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;bytemuck&quot;</span>)]</span>
-<span class="kw">use</span> <span class="ident">bytemuck</span>::{<span class="ident">Zeroable</span>, <span class="ident">Pod</span>};
+<span class="kw">use </span>num_traits::{NumCast, Float};
+<span class="attribute">#[cfg(feature = <span class="string">&quot;serde&quot;</span>)]
+</span><span class="kw">use </span>serde::{Deserialize, Serialize};
+<span class="attribute">#[cfg(feature = <span class="string">&quot;bytemuck&quot;</span>)]
+</span><span class="kw">use </span>bytemuck::{Zeroable, Pod};
 
-<span class="kw">use</span> <span class="ident">core::borrow::Borrow</span>;
-<span class="kw">use</span> <span class="ident">core::cmp::PartialOrd</span>;
-<span class="kw">use</span> <span class="ident">core::fmt</span>;
-<span class="kw">use</span> <span class="ident">core::hash</span>::{<span class="ident">Hash</span>, <span class="ident">Hasher</span>};
-<span class="kw">use</span> <span class="ident">core::ops</span>::{<span class="ident">Add</span>, <span class="ident">Div</span>, <span class="ident">DivAssign</span>, <span class="ident">Mul</span>, <span class="ident">MulAssign</span>, <span class="ident">Sub</span>, <span class="ident">Range</span>};
+<span class="kw">use </span>core::borrow::Borrow;
+<span class="kw">use </span>core::cmp::PartialOrd;
+<span class="kw">use </span>core::fmt;
+<span class="kw">use </span>core::hash::{Hash, Hasher};
+<span class="kw">use </span>core::ops::{Add, Div, DivAssign, Mul, MulAssign, Sub, Range};
 
-<span class="doccomment">/// A 2d axis aligned rectangle represented by its minimum and maximum coordinates.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Representation</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// This struct is similar to [`Rect`], but stores rectangle as two endpoints</span>
-<span class="doccomment">/// instead of origin point and size. Such representation has several advantages over</span>
-<span class="doccomment">/// [`Rect`] representation:</span>
-<span class="doccomment">/// - Several operations are more efficient with `Box2D`, including [`intersection`],</span>
-<span class="doccomment">///   [`union`], and point-in-rect.</span>
-<span class="doccomment">/// - The representation is less susceptible to overflow. With [`Rect`], computation</span>
-<span class="doccomment">///   of second point can overflow for a large range of values of origin and size.</span>
-<span class="doccomment">///   However, with `Box2D`, computation of [`size`] cannot overflow if the coordinates</span>
-<span class="doccomment">///   are signed and the resulting size is unsigned.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// A known disadvantage of `Box2D` is that translating the rectangle requires translating</span>
-<span class="doccomment">/// both points, whereas translating [`Rect`] only requires translating one point.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Empty box</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// A box is considered empty (see [`is_empty`]) if any of the following is true:</span>
-<span class="doccomment">/// - it&#39;s area is empty,</span>
-<span class="doccomment">/// - it&#39;s area is negative (`min.x &gt; max.x` or `min.y &gt; max.y`),</span>
-<span class="doccomment">/// - it contains NaNs.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// [`Rect`]: struct.Rect.html</span>
-<span class="doccomment">/// [`intersection`]: #method.intersection</span>
-<span class="doccomment">/// [`is_empty`]: #method.is_empty</span>
-<span class="doccomment">/// [`union`]: #method.union</span>
-<span class="doccomment">/// [`size`]: #method.size</span>
-<span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
-<span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;serde&quot;</span>, <span class="ident">derive</span>(<span class="ident">Serialize</span>, <span class="ident">Deserialize</span>))]</span>
-<span class="attribute">#[<span class="ident">cfg_attr</span>(
-    <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;serde&quot;</span>,
-    <span class="ident">serde</span>(<span class="ident">bound</span>(<span class="ident">serialize</span> <span class="op">=</span> <span class="string">&quot;T: Serialize&quot;</span>, <span class="ident">deserialize</span> <span class="op">=</span> <span class="string">&quot;T: Deserialize&lt;&#39;de&gt;&quot;</span>))
-)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="kw">pub</span> <span class="ident">min</span>: <span class="ident">Point2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">max</span>: <span class="ident">Point2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>,
+<span class="doccomment">/// A 2d axis aligned rectangle represented by its minimum and maximum coordinates.
+///
+/// # Representation
+///
+/// This struct is similar to [`Rect`], but stores rectangle as two endpoints
+/// instead of origin point and size. Such representation has several advantages over
+/// [`Rect`] representation:
+/// - Several operations are more efficient with `Box2D`, including [`intersection`],
+///   [`union`], and point-in-rect.
+/// - The representation is less susceptible to overflow. With [`Rect`], computation
+///   of second point can overflow for a large range of values of origin and size.
+///   However, with `Box2D`, computation of [`size`] cannot overflow if the coordinates
+///   are signed and the resulting size is unsigned.
+///
+/// A known disadvantage of `Box2D` is that translating the rectangle requires translating
+/// both points, whereas translating [`Rect`] only requires translating one point.
+///
+/// # Empty box
+///
+/// A box is considered empty (see [`is_empty`]) if any of the following is true:
+/// - it&#39;s area is empty,
+/// - it&#39;s area is negative (`min.x &gt; max.x` or `min.y &gt; max.y`),
+/// - it contains NaNs.
+///
+/// [`Rect`]: struct.Rect.html
+/// [`intersection`]: #method.intersection
+/// [`is_empty`]: #method.is_empty
+/// [`union`]: #method.union
+/// [`size`]: #method.size
+</span><span class="attribute">#[repr(C)]
+#[cfg_attr(feature = <span class="string">&quot;serde&quot;</span>, derive(Serialize, Deserialize))]
+#[cfg_attr(
+    feature = <span class="string">&quot;serde&quot;</span>,
+    serde(bound(serialize = <span class="string">&quot;T: Serialize&quot;</span>, deserialize = <span class="string">&quot;T: Deserialize&lt;&#39;de&gt;&quot;</span>))
+)]
+</span><span class="kw">pub struct </span>Box2D&lt;T, U&gt; {
+    <span class="kw">pub </span>min: Point2D&lt;T, U&gt;,
+    <span class="kw">pub </span>max: Point2D&lt;T, U&gt;,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Hash</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Hash</span> <span class="kw">for</span> <span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">hash</span><span class="op">&lt;</span><span class="ident">H</span>: <span class="ident">Hasher</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">h</span>: <span class="kw-2">&amp;mut</span> <span class="ident">H</span>) {
-        <span class="self">self</span>.<span class="ident">min</span>.<span class="ident">hash</span>(<span class="ident">h</span>);
-        <span class="self">self</span>.<span class="ident">max</span>.<span class="ident">hash</span>(<span class="ident">h</span>);
+<span class="kw">impl</span>&lt;T: Hash, U&gt; Hash <span class="kw">for </span>Box2D&lt;T, U&gt; {
+    <span class="kw">fn </span>hash&lt;H: Hasher&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, h: <span class="kw-2">&amp;mut </span>H) {
+        <span class="self">self</span>.min.hash(h);
+        <span class="self">self</span>.max.hash(h);
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Copy</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Copy</span> <span class="kw">for</span> <span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {}
+<span class="kw">impl</span>&lt;T: Copy, U&gt; Copy <span class="kw">for </span>Box2D&lt;T, U&gt; {}
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Clone</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Clone</span> <span class="kw">for</span> <span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::new</span>(<span class="self">self</span>.<span class="ident">min</span>.<span class="ident">clone</span>(), <span class="self">self</span>.<span class="ident">max</span>.<span class="ident">clone</span>())
+<span class="kw">impl</span>&lt;T: Clone, U&gt; Clone <span class="kw">for </span>Box2D&lt;T, U&gt; {
+    <span class="kw">fn </span>clone(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::new(<span class="self">self</span>.min.clone(), <span class="self">self</span>.max.clone())
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">PartialEq</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">PartialEq</span> <span class="kw">for</span> <span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">eq</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">min</span>.<span class="ident">eq</span>(<span class="kw-2">&amp;</span><span class="ident">other</span>.<span class="ident">min</span>) <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">max</span>.<span class="ident">eq</span>(<span class="kw-2">&amp;</span><span class="ident">other</span>.<span class="ident">max</span>)
+<span class="kw">impl</span>&lt;T: PartialEq, U&gt; PartialEq <span class="kw">for </span>Box2D&lt;T, U&gt; {
+    <span class="kw">fn </span>eq(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; bool {
+        <span class="self">self</span>.min.eq(<span class="kw-2">&amp;</span>other.min) &amp;&amp; <span class="self">self</span>.max.eq(<span class="kw-2">&amp;</span>other.max)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Eq</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Eq</span> <span class="kw">for</span> <span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {}
+<span class="kw">impl</span>&lt;T: Eq, U&gt; Eq <span class="kw">for </span>Box2D&lt;T, U&gt; {}
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">fmt::Debug</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">fmt::Debug</span> <span class="kw">for</span> <span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">fmt::Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
-        <span class="ident">f</span>.<span class="ident">debug_tuple</span>(<span class="string">&quot;Box2D&quot;</span>)
-            .<span class="ident">field</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">min</span>)
-            .<span class="ident">field</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">max</span>)
-            .<span class="ident">finish</span>()
+<span class="kw">impl</span>&lt;T: fmt::Debug, U&gt; fmt::Debug <span class="kw">for </span>Box2D&lt;T, U&gt; {
+    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>fmt::Formatter) -&gt; fmt::Result {
+        f.debug_tuple(<span class="string">&quot;Box2D&quot;</span>)
+            .field(<span class="kw-2">&amp;</span><span class="self">self</span>.min)
+            .field(<span class="kw-2">&amp;</span><span class="self">self</span>.max)
+            .finish()
     }
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;bytemuck&quot;</span>)]</span>
-<span class="kw">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Zeroable</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Zeroable</span> <span class="kw">for</span> <span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {}
+<span class="attribute">#[cfg(feature = <span class="string">&quot;bytemuck&quot;</span>)]
+</span><span class="kw">unsafe impl</span>&lt;T: Zeroable, U&gt; Zeroable <span class="kw">for </span>Box2D&lt;T, U&gt; {}
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;bytemuck&quot;</span>)]</span>
-<span class="kw">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Pod</span>, <span class="ident">U</span>: <span class="lifetime">&#39;static</span><span class="op">&gt;</span> <span class="ident">Pod</span> <span class="kw">for</span> <span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {}
+<span class="attribute">#[cfg(feature = <span class="string">&quot;bytemuck&quot;</span>)]
+</span><span class="kw">unsafe impl</span>&lt;T: Pod, U: <span class="lifetime">&#39;static</span>&gt; Pod <span class="kw">for </span>Box2D&lt;T, U&gt; {}
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Constructor.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">min</span>: <span class="ident">Point2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>, <span class="ident">max</span>: <span class="ident">Point2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">Box2D</span> { <span class="ident">min</span>, <span class="ident">max</span> }
+<span class="kw">impl</span>&lt;T, U&gt; Box2D&lt;T, U&gt; {
+    <span class="doccomment">/// Constructor.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub const fn </span>new(min: Point2D&lt;T, U&gt;, max: Point2D&lt;T, U&gt;) -&gt; <span class="self">Self </span>{
+        Box2D { min, max }
     }
 
-    <span class="doccomment">/// Constructor.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_origin_and_size</span>(<span class="ident">origin</span>: <span class="ident">Point2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>, <span class="ident">size</span>: <span class="ident">Size2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> 
-    <span class="kw">where</span>
-        <span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Add</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span>
+    <span class="doccomment">/// Constructor.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>from_origin_and_size(origin: Point2D&lt;T, U&gt;, size: Size2D&lt;T, U&gt;) -&gt; <span class="self">Self 
+    </span><span class="kw">where
+        </span>T: Copy + Add&lt;T, Output = T&gt;
     {
-        <span class="ident">Box2D</span> {
-            <span class="ident">min</span>: <span class="ident">origin</span>,
-            <span class="ident">max</span>: <span class="ident">point2</span>(<span class="ident">origin</span>.<span class="ident">x</span> <span class="op">+</span> <span class="ident">size</span>.<span class="ident">width</span>, <span class="ident">origin</span>.<span class="ident">y</span> <span class="op">+</span> <span class="ident">size</span>.<span class="ident">height</span>),
+        Box2D {
+            min: origin,
+            max: point2(origin.x + size.width, origin.y + size.height),
         }
     }
 
-    <span class="doccomment">/// Creates a Box2D of the given size, at offset zero.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_size</span>(<span class="ident">size</span>: <span class="ident">Size2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> <span class="kw">where</span> <span class="ident">T</span>: <span class="ident">Zero</span> {
-        <span class="ident">Box2D</span> {
-            <span class="ident">min</span>: <span class="ident">Point2D::zero</span>(),
-            <span class="ident">max</span>: <span class="ident">point2</span>(<span class="ident">size</span>.<span class="ident">width</span>, <span class="ident">size</span>.<span class="ident">height</span>),
+    <span class="doccomment">/// Creates a Box2D of the given size, at offset zero.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>from_size(size: Size2D&lt;T, U&gt;) -&gt; <span class="self">Self </span><span class="kw">where </span>T: Zero {
+        Box2D {
+            min: Point2D::zero(),
+            max: point2(size.width, size.height),
         }
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">PartialOrd</span>,
+<span class="kw">impl</span>&lt;T, U&gt; Box2D&lt;T, U&gt;
+<span class="kw">where
+    </span>T: PartialOrd,
 {
-    <span class="doccomment">/// Returns true if the box has a negative area.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// The common interpretation for a negative box is to consider it empty. It can be obtained</span>
-    <span class="doccomment">/// by calculating the intersection of two boxes that do not intersect.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_negative</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">max</span>.<span class="ident">x</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">min</span>.<span class="ident">x</span> <span class="op">|</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">max</span>.<span class="ident">y</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">min</span>.<span class="ident">y</span>
+    <span class="doccomment">/// Returns true if the box has a negative area.
+    ///
+    /// The common interpretation for a negative box is to consider it empty. It can be obtained
+    /// by calculating the intersection of two boxes that do not intersect.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>is_negative(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="self">self</span>.max.x &lt; <span class="self">self</span>.min.x || <span class="self">self</span>.max.y &lt; <span class="self">self</span>.min.y
     }
 
-    <span class="doccomment">/// Returns true if the size is zero, negative or NaN.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_empty</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="op">!</span>(<span class="self">self</span>.<span class="ident">max</span>.<span class="ident">x</span> <span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">min</span>.<span class="ident">x</span> <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">max</span>.<span class="ident">y</span> <span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">min</span>.<span class="ident">y</span>)
+    <span class="doccomment">/// Returns true if the size is zero, negative or NaN.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>is_empty(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        !(<span class="self">self</span>.max.x &gt; <span class="self">self</span>.min.x &amp;&amp; <span class="self">self</span>.max.y &gt; <span class="self">self</span>.min.y)
     }
 
-    <span class="doccomment">/// Returns `true` if the two boxes intersect.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">intersects</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">min</span>.<span class="ident">x</span> <span class="op">&lt;</span> <span class="ident">other</span>.<span class="ident">max</span>.<span class="ident">x</span>
-            <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">max</span>.<span class="ident">x</span> <span class="op">&gt;</span> <span class="ident">other</span>.<span class="ident">min</span>.<span class="ident">x</span>
-            <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">min</span>.<span class="ident">y</span> <span class="op">&lt;</span> <span class="ident">other</span>.<span class="ident">max</span>.<span class="ident">y</span>
-            <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">max</span>.<span class="ident">y</span> <span class="op">&gt;</span> <span class="ident">other</span>.<span class="ident">min</span>.<span class="ident">y</span>
+    <span class="doccomment">/// Returns `true` if the two boxes intersect.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>intersects(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; bool {
+        <span class="self">self</span>.min.x &lt; other.max.x
+            &amp;&amp; <span class="self">self</span>.max.x &gt; other.min.x
+            &amp;&amp; <span class="self">self</span>.min.y &lt; other.max.y
+            &amp;&amp; <span class="self">self</span>.max.y &gt; other.min.y
     }
 
-    <span class="doccomment">/// Returns `true` if this box contains the point. Points are considered</span>
-    <span class="doccomment">/// in the box if they are on the front, left or top faces, but outside if they</span>
-    <span class="doccomment">/// are on the back, right or bottom faces.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">p</span>: <span class="ident">Point2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">min</span>.<span class="ident">x</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">p</span>.<span class="ident">x</span> <span class="op">&amp;&amp;</span> <span class="ident">p</span>.<span class="ident">x</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">max</span>.<span class="ident">x</span> <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">min</span>.<span class="ident">y</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">p</span>.<span class="ident">y</span> <span class="op">&amp;&amp;</span> <span class="ident">p</span>.<span class="ident">y</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">max</span>.<span class="ident">y</span>
+    <span class="doccomment">/// Returns `true` if this box contains the point. Points are considered
+    /// in the box if they are on the front, left or top faces, but outside if they
+    /// are on the back, right or bottom faces.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>contains(<span class="kw-2">&amp;</span><span class="self">self</span>, p: Point2D&lt;T, U&gt;) -&gt; bool {
+        <span class="self">self</span>.min.x &lt;= p.x &amp;&amp; p.x &lt; <span class="self">self</span>.max.x &amp;&amp; <span class="self">self</span>.min.y &lt;= p.y &amp;&amp; p.y &lt; <span class="self">self</span>.max.y
     }
 
-    <span class="doccomment">/// Returns `true` if this box contains the interior of the other box. Always</span>
-    <span class="doccomment">/// returns `true` if other is empty, and always returns `false` if other is</span>
-    <span class="doccomment">/// nonempty but this box is empty.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">contains_box</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="ident">other</span>.<span class="ident">is_empty</span>()
-            <span class="op">|</span><span class="op">|</span> (<span class="self">self</span>.<span class="ident">min</span>.<span class="ident">x</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">other</span>.<span class="ident">min</span>.<span class="ident">x</span>
-                <span class="op">&amp;&amp;</span> <span class="ident">other</span>.<span class="ident">max</span>.<span class="ident">x</span> <span class="op">&lt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">max</span>.<span class="ident">x</span>
-                <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">min</span>.<span class="ident">y</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">other</span>.<span class="ident">min</span>.<span class="ident">y</span>
-                <span class="op">&amp;&amp;</span> <span class="ident">other</span>.<span class="ident">max</span>.<span class="ident">y</span> <span class="op">&lt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">max</span>.<span class="ident">y</span>)
+    <span class="doccomment">/// Returns `true` if this box contains the interior of the other box. Always
+    /// returns `true` if other is empty, and always returns `false` if other is
+    /// nonempty but this box is empty.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>contains_box(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; bool {
+        other.is_empty()
+            || (<span class="self">self</span>.min.x &lt;= other.min.x
+                &amp;&amp; other.max.x &lt;= <span class="self">self</span>.max.x
+                &amp;&amp; <span class="self">self</span>.min.y &lt;= other.min.y
+                &amp;&amp; other.max.y &lt;= <span class="self">self</span>.max.y)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">PartialOrd</span>,
+<span class="kw">impl</span>&lt;T, U&gt; Box2D&lt;T, U&gt;
+<span class="kw">where
+    </span>T: Copy + PartialOrd,
 {
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_non_empty</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">is_empty</span>() {
-            <span class="kw">return</span> <span class="prelude-val">None</span>;
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>to_non_empty(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>&gt; {
+        <span class="kw">if </span><span class="self">self</span>.is_empty() {
+            <span class="kw">return </span><span class="prelude-val">None</span>;
         }
 
         <span class="prelude-val">Some</span>(<span class="kw-2">*</span><span class="self">self</span>)
     }
 
-    <span class="doccomment">/// Computes the intersection of two boxes, returning `None` if the boxes do not intersect.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">intersection</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">intersection_unchecked</span>(<span class="ident">other</span>);
+    <span class="doccomment">/// Computes the intersection of two boxes, returning `None` if the boxes do not intersect.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>intersection(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>&gt; {
+        <span class="kw">let </span>b = <span class="self">self</span>.intersection_unchecked(other);
 
-        <span class="kw">if</span> <span class="ident">b</span>.<span class="ident">is_empty</span>() {
-            <span class="kw">return</span> <span class="prelude-val">None</span>;
+        <span class="kw">if </span>b.is_empty() {
+            <span class="kw">return </span><span class="prelude-val">None</span>;
         }
 
-        <span class="prelude-val">Some</span>(<span class="ident">b</span>)
+        <span class="prelude-val">Some</span>(b)
     }
 
-    <span class="doccomment">/// Computes the intersection of two boxes without check whether they do intersect.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// The result is a negative box if the boxes do not intersect.</span>
-    <span class="doccomment">/// This can be useful for computing the intersection of more than two boxes, as</span>
-    <span class="doccomment">/// it is possible to chain multiple intersection_unchecked calls and check for</span>
-    <span class="doccomment">/// empty/negative result at the end.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">intersection_unchecked</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">Box2D</span> {
-            <span class="ident">min</span>: <span class="ident">point2</span>(<span class="ident">max</span>(<span class="self">self</span>.<span class="ident">min</span>.<span class="ident">x</span>, <span class="ident">other</span>.<span class="ident">min</span>.<span class="ident">x</span>), <span class="ident">max</span>(<span class="self">self</span>.<span class="ident">min</span>.<span class="ident">y</span>, <span class="ident">other</span>.<span class="ident">min</span>.<span class="ident">y</span>)),
-            <span class="ident">max</span>: <span class="ident">point2</span>(<span class="ident">min</span>(<span class="self">self</span>.<span class="ident">max</span>.<span class="ident">x</span>, <span class="ident">other</span>.<span class="ident">max</span>.<span class="ident">x</span>), <span class="ident">min</span>(<span class="self">self</span>.<span class="ident">max</span>.<span class="ident">y</span>, <span class="ident">other</span>.<span class="ident">max</span>.<span class="ident">y</span>)),
+    <span class="doccomment">/// Computes the intersection of two boxes without check whether they do intersect.
+    ///
+    /// The result is a negative box if the boxes do not intersect.
+    /// This can be useful for computing the intersection of more than two boxes, as
+    /// it is possible to chain multiple intersection_unchecked calls and check for
+    /// empty/negative result at the end.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>intersection_unchecked(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="self">Self </span>{
+        Box2D {
+            min: point2(max(<span class="self">self</span>.min.x, other.min.x), max(<span class="self">self</span>.min.y, other.min.y)),
+            max: point2(min(<span class="self">self</span>.max.x, other.max.x), min(<span class="self">self</span>.max.y, other.max.y)),
         }
     }
 
-    <span class="doccomment">/// Computes the union of two boxes.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// If either of the boxes is empty, the other one is returned.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">union</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">if</span> <span class="ident">other</span>.<span class="ident">is_empty</span>() {
-            <span class="kw">return</span> <span class="kw-2">*</span><span class="self">self</span>;
+    <span class="doccomment">/// Computes the union of two boxes.
+    ///
+    /// If either of the boxes is empty, the other one is returned.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>union(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="self">Self </span>{
+        <span class="kw">if </span>other.is_empty() {
+            <span class="kw">return </span><span class="kw-2">*</span><span class="self">self</span>;
         }
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">is_empty</span>() {
-            <span class="kw">return</span> <span class="kw-2">*</span><span class="ident">other</span>;
+        <span class="kw">if </span><span class="self">self</span>.is_empty() {
+            <span class="kw">return </span><span class="kw-2">*</span>other;
         }
 
-        <span class="ident">Box2D</span> {
-            <span class="ident">min</span>: <span class="ident">point2</span>(<span class="ident">min</span>(<span class="self">self</span>.<span class="ident">min</span>.<span class="ident">x</span>, <span class="ident">other</span>.<span class="ident">min</span>.<span class="ident">x</span>), <span class="ident">min</span>(<span class="self">self</span>.<span class="ident">min</span>.<span class="ident">y</span>, <span class="ident">other</span>.<span class="ident">min</span>.<span class="ident">y</span>)),
-            <span class="ident">max</span>: <span class="ident">point2</span>(<span class="ident">max</span>(<span class="self">self</span>.<span class="ident">max</span>.<span class="ident">x</span>, <span class="ident">other</span>.<span class="ident">max</span>.<span class="ident">x</span>), <span class="ident">max</span>(<span class="self">self</span>.<span class="ident">max</span>.<span class="ident">y</span>, <span class="ident">other</span>.<span class="ident">max</span>.<span class="ident">y</span>)),
-        }
-    }
-}
-
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Add</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span>,
-{
-    <span class="doccomment">/// Returns the same box, translated by a vector.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">translate</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">by</span>: <span class="ident">Vector2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">Box2D</span> {
-            <span class="ident">min</span>: <span class="self">self</span>.<span class="ident">min</span> <span class="op">+</span> <span class="ident">by</span>,
-            <span class="ident">max</span>: <span class="self">self</span>.<span class="ident">max</span> <span class="op">+</span> <span class="ident">by</span>,
+        Box2D {
+            min: point2(min(<span class="self">self</span>.min.x, other.min.x), min(<span class="self">self</span>.min.y, other.min.y)),
+            max: point2(max(<span class="self">self</span>.max.x, other.max.x), max(<span class="self">self</span>.max.y, other.max.y)),
         }
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Sub</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span>,
+<span class="kw">impl</span>&lt;T, U&gt; Box2D&lt;T, U&gt;
+<span class="kw">where
+    </span>T: Copy + Add&lt;T, Output = T&gt;,
 {
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">size</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Size2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-        (<span class="self">self</span>.<span class="ident">max</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">min</span>).<span class="ident">to_size</span>()
-    }
-
-    <span class="doccomment">/// Change the size of the box by adjusting the max endpoint</span>
-    <span class="doccomment">/// without modifying the min endpoint.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_size</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">size</span>: <span class="ident">Size2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>) {
-        <span class="kw">let</span> <span class="ident">diff</span> <span class="op">=</span> (<span class="self">self</span>.<span class="ident">size</span>() <span class="op">-</span> <span class="ident">size</span>).<span class="ident">to_vector</span>();
-        <span class="self">self</span>.<span class="ident">max</span> <span class="op">-</span><span class="op">=</span> <span class="ident">diff</span>;
-    }
-
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">width</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">T</span> {
-        <span class="self">self</span>.<span class="ident">max</span>.<span class="ident">x</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">min</span>.<span class="ident">x</span>
-    }
-
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">height</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">T</span> {
-        <span class="self">self</span>.<span class="ident">max</span>.<span class="ident">y</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">min</span>.<span class="ident">y</span>
-    }
-
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_rect</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-        <span class="ident">Rect</span> {
-            <span class="ident">origin</span>: <span class="self">self</span>.<span class="ident">min</span>,
-            <span class="ident">size</span>: <span class="self">self</span>.<span class="ident">size</span>(),
+    <span class="doccomment">/// Returns the same box, translated by a vector.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>translate(<span class="kw-2">&amp;</span><span class="self">self</span>, by: Vector2D&lt;T, U&gt;) -&gt; <span class="self">Self </span>{
+        Box2D {
+            min: <span class="self">self</span>.min + by,
+            max: <span class="self">self</span>.max + by,
         }
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Add</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Sub</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span>,
+<span class="kw">impl</span>&lt;T, U&gt; Box2D&lt;T, U&gt;
+<span class="kw">where
+    </span>T: Copy + Sub&lt;T, Output = T&gt;,
 {
-    <span class="doccomment">/// Inflates the box by the specified sizes on each side respectively.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">inflate</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">width</span>: <span class="ident">T</span>, <span class="ident">height</span>: <span class="ident">T</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">Box2D</span> {
-            <span class="ident">min</span>: <span class="ident">point2</span>(<span class="self">self</span>.<span class="ident">min</span>.<span class="ident">x</span> <span class="op">-</span> <span class="ident">width</span>, <span class="self">self</span>.<span class="ident">min</span>.<span class="ident">y</span> <span class="op">-</span> <span class="ident">height</span>),
-            <span class="ident">max</span>: <span class="ident">point2</span>(<span class="self">self</span>.<span class="ident">max</span>.<span class="ident">x</span> <span class="op">+</span> <span class="ident">width</span>, <span class="self">self</span>.<span class="ident">max</span>.<span class="ident">y</span> <span class="op">+</span> <span class="ident">height</span>),
-        }
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>size(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Size2D&lt;T, U&gt; {
+        (<span class="self">self</span>.max - <span class="self">self</span>.min).to_size()
     }
 
-    <span class="doccomment">/// Calculate the size and position of an inner box.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Subtracts the side offsets from all sides. The horizontal, vertical</span>
-    <span class="doccomment">/// and applicate offsets must not be larger than the original side length.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">inner_box</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">offsets</span>: <span class="ident">SideOffsets2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">Box2D</span> {
-            <span class="ident">min</span>: <span class="self">self</span>.<span class="ident">min</span> <span class="op">+</span> <span class="ident">vec2</span>(<span class="ident">offsets</span>.<span class="ident">left</span>, <span class="ident">offsets</span>.<span class="ident">top</span>),
-            <span class="ident">max</span>: <span class="self">self</span>.<span class="ident">max</span> <span class="op">-</span> <span class="ident">vec2</span>(<span class="ident">offsets</span>.<span class="ident">right</span>, <span class="ident">offsets</span>.<span class="ident">bottom</span>),
-        }
+    <span class="doccomment">/// Change the size of the box by adjusting the max endpoint
+    /// without modifying the min endpoint.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>set_size(<span class="kw-2">&amp;mut </span><span class="self">self</span>, size: Size2D&lt;T, U&gt;) {
+        <span class="kw">let </span>diff = (<span class="self">self</span>.size() - size).to_vector();
+        <span class="self">self</span>.max -= diff;
     }
 
-    <span class="doccomment">/// Calculate the b and position of an outer box.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Add the offsets to all sides. The expanded box is returned.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">outer_box</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">offsets</span>: <span class="ident">SideOffsets2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">Box2D</span> {
-            <span class="ident">min</span>: <span class="self">self</span>.<span class="ident">min</span> <span class="op">-</span> <span class="ident">vec2</span>(<span class="ident">offsets</span>.<span class="ident">left</span>, <span class="ident">offsets</span>.<span class="ident">top</span>),
-            <span class="ident">max</span>: <span class="self">self</span>.<span class="ident">max</span> <span class="op">+</span> <span class="ident">vec2</span>(<span class="ident">offsets</span>.<span class="ident">right</span>, <span class="ident">offsets</span>.<span class="ident">bottom</span>),
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>width(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; T {
+        <span class="self">self</span>.max.x - <span class="self">self</span>.min.x
+    }
+
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>height(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; T {
+        <span class="self">self</span>.max.y - <span class="self">self</span>.min.y
+    }
+
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>to_rect(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Rect&lt;T, U&gt; {
+        Rect {
+            origin: <span class="self">self</span>.min,
+            size: <span class="self">self</span>.size(),
         }
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Zero</span> <span class="op">+</span> <span class="ident">PartialOrd</span>,
+<span class="kw">impl</span>&lt;T, U&gt; Box2D&lt;T, U&gt;
+<span class="kw">where
+    </span>T: Copy + Add&lt;T, Output = T&gt; + Sub&lt;T, Output = T&gt;,
 {
-    <span class="doccomment">/// Returns the smallest box containing all of the provided points.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_points</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="ident">points</span>: <span class="ident">I</span>) -&gt; <span class="self">Self</span>
-    <span class="kw">where</span>
-        <span class="ident">I</span>: <span class="ident">IntoIterator</span>,
-        <span class="ident">I::Item</span>: <span class="ident">Borrow</span><span class="op">&lt;</span><span class="ident">Point2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="doccomment">/// Inflates the box by the specified sizes on each side respectively.
+    </span><span class="attribute">#[inline]
+    #[must_use]
+    </span><span class="kw">pub fn </span>inflate(<span class="kw-2">&amp;</span><span class="self">self</span>, width: T, height: T) -&gt; <span class="self">Self </span>{
+        Box2D {
+            min: point2(<span class="self">self</span>.min.x - width, <span class="self">self</span>.min.y - height),
+            max: point2(<span class="self">self</span>.max.x + width, <span class="self">self</span>.max.y + height),
+        }
+    }
+
+    <span class="doccomment">/// Calculate the size and position of an inner box.
+    ///
+    /// Subtracts the side offsets from all sides. The horizontal, vertical
+    /// and applicate offsets must not be larger than the original side length.
+    </span><span class="kw">pub fn </span>inner_box(<span class="kw-2">&amp;</span><span class="self">self</span>, offsets: SideOffsets2D&lt;T, U&gt;) -&gt; <span class="self">Self </span>{
+        Box2D {
+            min: <span class="self">self</span>.min + vec2(offsets.left, offsets.top),
+            max: <span class="self">self</span>.max - vec2(offsets.right, offsets.bottom),
+        }
+    }
+
+    <span class="doccomment">/// Calculate the b and position of an outer box.
+    ///
+    /// Add the offsets to all sides. The expanded box is returned.
+    </span><span class="kw">pub fn </span>outer_box(<span class="kw-2">&amp;</span><span class="self">self</span>, offsets: SideOffsets2D&lt;T, U&gt;) -&gt; <span class="self">Self </span>{
+        Box2D {
+            min: <span class="self">self</span>.min - vec2(offsets.left, offsets.top),
+            max: <span class="self">self</span>.max + vec2(offsets.right, offsets.bottom),
+        }
+    }
+}
+
+<span class="kw">impl</span>&lt;T, U&gt; Box2D&lt;T, U&gt;
+<span class="kw">where
+    </span>T: Copy + Zero + PartialOrd,
+{
+    <span class="doccomment">/// Returns the smallest box containing all of the provided points.
+    </span><span class="kw">pub fn </span>from_points&lt;I&gt;(points: I) -&gt; <span class="self">Self
+    </span><span class="kw">where
+        </span>I: IntoIterator,
+        I::Item: Borrow&lt;Point2D&lt;T, U&gt;&gt;,
     {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">points</span> <span class="op">=</span> <span class="ident">points</span>.<span class="ident">into_iter</span>();
+        <span class="kw">let </span><span class="kw-2">mut </span>points = points.into_iter();
 
-        <span class="kw">let</span> (<span class="kw-2">mut</span> <span class="ident">min_x</span>, <span class="kw-2">mut</span> <span class="ident">min_y</span>) <span class="op">=</span> <span class="kw">match</span> <span class="ident">points</span>.<span class="ident">next</span>() {
-            <span class="prelude-val">Some</span>(<span class="ident">first</span>) =&gt; <span class="ident">first</span>.<span class="ident">borrow</span>().<span class="ident">to_tuple</span>(),
-            <span class="prelude-val">None</span> =&gt; <span class="kw">return</span> <span class="ident">Box2D::zero</span>(),
+        <span class="kw">let </span>(<span class="kw-2">mut </span>min_x, <span class="kw-2">mut </span>min_y) = <span class="kw">match </span>points.next() {
+            <span class="prelude-val">Some</span>(first) =&gt; first.borrow().to_tuple(),
+            <span class="prelude-val">None </span>=&gt; <span class="kw">return </span>Box2D::zero(),
         };
 
-        <span class="kw">let</span> (<span class="kw-2">mut</span> <span class="ident">max_x</span>, <span class="kw-2">mut</span> <span class="ident">max_y</span>) <span class="op">=</span> (<span class="ident">min_x</span>, <span class="ident">min_y</span>);
-        <span class="kw">for</span> <span class="ident">point</span> <span class="kw">in</span> <span class="ident">points</span> {
-            <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> <span class="ident">point</span>.<span class="ident">borrow</span>();
-            <span class="kw">if</span> <span class="ident">p</span>.<span class="ident">x</span> <span class="op">&lt;</span> <span class="ident">min_x</span> {
-                <span class="ident">min_x</span> <span class="op">=</span> <span class="ident">p</span>.<span class="ident">x</span>
+        <span class="kw">let </span>(<span class="kw-2">mut </span>max_x, <span class="kw-2">mut </span>max_y) = (min_x, min_y);
+        <span class="kw">for </span>point <span class="kw">in </span>points {
+            <span class="kw">let </span>p = point.borrow();
+            <span class="kw">if </span>p.x &lt; min_x {
+                min_x = p.x
             }
-            <span class="kw">if</span> <span class="ident">p</span>.<span class="ident">x</span> <span class="op">&gt;</span> <span class="ident">max_x</span> {
-                <span class="ident">max_x</span> <span class="op">=</span> <span class="ident">p</span>.<span class="ident">x</span>
+            <span class="kw">if </span>p.x &gt; max_x {
+                max_x = p.x
             }
-            <span class="kw">if</span> <span class="ident">p</span>.<span class="ident">y</span> <span class="op">&lt;</span> <span class="ident">min_y</span> {
-                <span class="ident">min_y</span> <span class="op">=</span> <span class="ident">p</span>.<span class="ident">y</span>
+            <span class="kw">if </span>p.y &lt; min_y {
+                min_y = p.y
             }
-            <span class="kw">if</span> <span class="ident">p</span>.<span class="ident">y</span> <span class="op">&gt;</span> <span class="ident">max_y</span> {
-                <span class="ident">max_y</span> <span class="op">=</span> <span class="ident">p</span>.<span class="ident">y</span>
+            <span class="kw">if </span>p.y &gt; max_y {
+                max_y = p.y
             }
         }
 
-        <span class="ident">Box2D</span> {
-            <span class="ident">min</span>: <span class="ident">point2</span>(<span class="ident">min_x</span>, <span class="ident">min_y</span>),
-            <span class="ident">max</span>: <span class="ident">point2</span>(<span class="ident">max_x</span>, <span class="ident">max_y</span>),
+        Box2D {
+            min: point2(min_x, min_y),
+            max: point2(max_x, max_y),
         }
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">One</span> <span class="op">+</span> <span class="ident">Add</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Sub</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Mul</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span>,
+<span class="kw">impl</span>&lt;T, U&gt; Box2D&lt;T, U&gt;
+<span class="kw">where
+    </span>T: Copy + One + Add&lt;Output = T&gt; + Sub&lt;Output = T&gt; + Mul&lt;Output = T&gt;,
 {
-    <span class="doccomment">/// Linearly interpolate between this box and another box.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">lerp</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="self">Self</span>, <span class="ident">t</span>: <span class="ident">T</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::new</span>(<span class="self">self</span>.<span class="ident">min</span>.<span class="ident">lerp</span>(<span class="ident">other</span>.<span class="ident">min</span>, <span class="ident">t</span>), <span class="self">self</span>.<span class="ident">max</span>.<span class="ident">lerp</span>(<span class="ident">other</span>.<span class="ident">max</span>, <span class="ident">t</span>))
+    <span class="doccomment">/// Linearly interpolate between this box and another box.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>lerp(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="self">Self</span>, t: T) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::new(<span class="self">self</span>.min.lerp(other.min, t), <span class="self">self</span>.max.lerp(other.max, t))
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">One</span> <span class="op">+</span> <span class="ident">Add</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Div</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span>,
+<span class="kw">impl</span>&lt;T, U&gt; Box2D&lt;T, U&gt;
+<span class="kw">where
+    </span>T: Copy + One + Add&lt;Output = T&gt; + Div&lt;Output = T&gt;,
 {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">center</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Point2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">two</span> <span class="op">=</span> <span class="ident">T::one</span>() <span class="op">+</span> <span class="ident">T::one</span>();
-        (<span class="self">self</span>.<span class="ident">min</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">max</span>.<span class="ident">to_vector</span>()) <span class="op">/</span> <span class="ident">two</span>
+    <span class="kw">pub fn </span>center(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Point2D&lt;T, U&gt; {
+        <span class="kw">let </span>two = T::one() + T::one();
+        (<span class="self">self</span>.min + <span class="self">self</span>.max.to_vector()) / two
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Mul</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Sub</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span>,
+<span class="kw">impl</span>&lt;T, U&gt; Box2D&lt;T, U&gt;
+<span class="kw">where
+    </span>T: Copy + Mul&lt;T, Output = T&gt; + Sub&lt;T, Output = T&gt;,
 {
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">area</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">T</span> {
-        <span class="kw">let</span> <span class="ident">size</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">size</span>();
-        <span class="ident">size</span>.<span class="ident">width</span> <span class="op">*</span> <span class="ident">size</span>.<span class="ident">height</span>
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>area(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; T {
+        <span class="kw">let </span>size = <span class="self">self</span>.size();
+        size.width * size.height
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Zero</span>,
+<span class="kw">impl</span>&lt;T, U&gt; Box2D&lt;T, U&gt;
+<span class="kw">where
+    </span>T: Zero,
 {
-    <span class="doccomment">/// Constructor, setting all sides to zero.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">zero</span>() -&gt; <span class="self">Self</span> {
-        <span class="ident">Box2D::new</span>(<span class="ident">Point2D::zero</span>(), <span class="ident">Point2D::zero</span>())
+    <span class="doccomment">/// Constructor, setting all sides to zero.
+    </span><span class="kw">pub fn </span>zero() -&gt; <span class="self">Self </span>{
+        Box2D::new(Point2D::zero(), Point2D::zero())
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Mul</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Mul</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">T::Output</span>, <span class="ident">U</span><span class="op">&gt;</span>;
+<span class="kw">impl</span>&lt;T: Copy + Mul, U&gt; Mul&lt;T&gt; <span class="kw">for </span>Box2D&lt;T, U&gt; {
+    <span class="kw">type </span>Output = Box2D&lt;T::Output, U&gt;;
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">mul</span>(<span class="self">self</span>, <span class="ident">scale</span>: <span class="ident">T</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
-        <span class="ident">Box2D::new</span>(<span class="self">self</span>.<span class="ident">min</span> <span class="op">*</span> <span class="ident">scale</span>, <span class="self">self</span>.<span class="ident">max</span> <span class="op">*</span> <span class="ident">scale</span>)
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>mul(<span class="self">self</span>, scale: T) -&gt; <span class="self">Self</span>::Output {
+        Box2D::new(<span class="self">self</span>.min * scale, <span class="self">self</span>.max * scale)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">MulAssign</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">MulAssign</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">mul_assign</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">scale</span>: <span class="ident">T</span>) {
-        <span class="kw-2">*</span><span class="self">self</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">Scale::new</span>(<span class="ident">scale</span>);
+<span class="kw">impl</span>&lt;T: Copy + MulAssign, U&gt; MulAssign&lt;T&gt; <span class="kw">for </span>Box2D&lt;T, U&gt; {
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>mul_assign(<span class="kw-2">&amp;mut </span><span class="self">self</span>, scale: T) {
+        <span class="kw-2">*</span><span class="self">self </span><span class="kw-2">*</span>= Scale::new(scale);
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Div</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Div</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">T::Output</span>, <span class="ident">U</span><span class="op">&gt;</span>;
+<span class="kw">impl</span>&lt;T: Copy + Div, U&gt; Div&lt;T&gt; <span class="kw">for </span>Box2D&lt;T, U&gt; {
+    <span class="kw">type </span>Output = Box2D&lt;T::Output, U&gt;;
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">div</span>(<span class="self">self</span>, <span class="ident">scale</span>: <span class="ident">T</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
-        <span class="ident">Box2D::new</span>(<span class="self">self</span>.<span class="ident">min</span> <span class="op">/</span> <span class="ident">scale</span>, <span class="self">self</span>.<span class="ident">max</span> <span class="op">/</span> <span class="ident">scale</span>)
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>div(<span class="self">self</span>, scale: T) -&gt; <span class="self">Self</span>::Output {
+        Box2D::new(<span class="self">self</span>.min / scale, <span class="self">self</span>.max / scale)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">DivAssign</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">DivAssign</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">div_assign</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">scale</span>: <span class="ident">T</span>) {
-        <span class="kw-2">*</span><span class="self">self</span> <span class="op">/</span><span class="op">=</span> <span class="ident">Scale::new</span>(<span class="ident">scale</span>);
+<span class="kw">impl</span>&lt;T: Copy + DivAssign, U&gt; DivAssign&lt;T&gt; <span class="kw">for </span>Box2D&lt;T, U&gt; {
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>div_assign(<span class="kw-2">&amp;mut </span><span class="self">self</span>, scale: T) {
+        <span class="kw-2">*</span><span class="self">self </span>/= Scale::new(scale);
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Mul</span>, <span class="ident">U1</span>, <span class="ident">U2</span><span class="op">&gt;</span> <span class="ident">Mul</span><span class="op">&lt;</span><span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U1</span>, <span class="ident">U2</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U1</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">T::Output</span>, <span class="ident">U2</span><span class="op">&gt;</span>;
+<span class="kw">impl</span>&lt;T: Copy + Mul, U1, U2&gt; Mul&lt;Scale&lt;T, U1, U2&gt;&gt; <span class="kw">for </span>Box2D&lt;T, U1&gt; {
+    <span class="kw">type </span>Output = Box2D&lt;T::Output, U2&gt;;
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">mul</span>(<span class="self">self</span>, <span class="ident">scale</span>: <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U1</span>, <span class="ident">U2</span><span class="op">&gt;</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
-        <span class="ident">Box2D::new</span>(<span class="self">self</span>.<span class="ident">min</span> <span class="op">*</span> <span class="ident">scale</span>, <span class="self">self</span>.<span class="ident">max</span> <span class="op">*</span> <span class="ident">scale</span>)
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>mul(<span class="self">self</span>, scale: Scale&lt;T, U1, U2&gt;) -&gt; <span class="self">Self</span>::Output {
+        Box2D::new(<span class="self">self</span>.min * scale, <span class="self">self</span>.max * scale)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">MulAssign</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">MulAssign</span><span class="op">&lt;</span><span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span>, <span class="ident">U</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">mul_assign</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">scale</span>: <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span>, <span class="ident">U</span><span class="op">&gt;</span>) {
-        <span class="self">self</span>.<span class="ident">min</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">scale</span>;
-        <span class="self">self</span>.<span class="ident">max</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">scale</span>;
+<span class="kw">impl</span>&lt;T: Copy + MulAssign, U&gt; MulAssign&lt;Scale&lt;T, U, U&gt;&gt; <span class="kw">for </span>Box2D&lt;T, U&gt; {
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>mul_assign(<span class="kw-2">&amp;mut </span><span class="self">self</span>, scale: Scale&lt;T, U, U&gt;) {
+        <span class="self">self</span>.min <span class="kw-2">*</span>= scale;
+        <span class="self">self</span>.max <span class="kw-2">*</span>= scale;
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Div</span>, <span class="ident">U1</span>, <span class="ident">U2</span><span class="op">&gt;</span> <span class="ident">Div</span><span class="op">&lt;</span><span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U1</span>, <span class="ident">U2</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U2</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">T::Output</span>, <span class="ident">U1</span><span class="op">&gt;</span>;
+<span class="kw">impl</span>&lt;T: Copy + Div, U1, U2&gt; Div&lt;Scale&lt;T, U1, U2&gt;&gt; <span class="kw">for </span>Box2D&lt;T, U2&gt; {
+    <span class="kw">type </span>Output = Box2D&lt;T::Output, U1&gt;;
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">div</span>(<span class="self">self</span>, <span class="ident">scale</span>: <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U1</span>, <span class="ident">U2</span><span class="op">&gt;</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
-        <span class="ident">Box2D::new</span>(<span class="self">self</span>.<span class="ident">min</span> <span class="op">/</span> <span class="ident">scale</span>, <span class="self">self</span>.<span class="ident">max</span> <span class="op">/</span> <span class="ident">scale</span>)
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>div(<span class="self">self</span>, scale: Scale&lt;T, U1, U2&gt;) -&gt; <span class="self">Self</span>::Output {
+        Box2D::new(<span class="self">self</span>.min / scale, <span class="self">self</span>.max / scale)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">DivAssign</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">DivAssign</span><span class="op">&lt;</span><span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span>, <span class="ident">U</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">div_assign</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">scale</span>: <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span>, <span class="ident">U</span><span class="op">&gt;</span>) {
-        <span class="self">self</span>.<span class="ident">min</span> <span class="op">/</span><span class="op">=</span> <span class="ident">scale</span>;
-        <span class="self">self</span>.<span class="ident">max</span> <span class="op">/</span><span class="op">=</span> <span class="ident">scale</span>;
+<span class="kw">impl</span>&lt;T: Copy + DivAssign, U&gt; DivAssign&lt;Scale&lt;T, U, U&gt;&gt; <span class="kw">for </span>Box2D&lt;T, U&gt; {
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>div_assign(<span class="kw-2">&amp;mut </span><span class="self">self</span>, scale: Scale&lt;T, U, U&gt;) {
+        <span class="self">self</span>.min /= scale;
+        <span class="self">self</span>.max /= scale;
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Copy</span>,
+<span class="kw">impl</span>&lt;T, U&gt; Box2D&lt;T, U&gt;
+<span class="kw">where
+    </span>T: Copy,
 {
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">x_range</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Range</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">min</span>.<span class="ident">x</span>..<span class="self">self</span>.<span class="ident">max</span>.<span class="ident">x</span>
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>x_range(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Range&lt;T&gt; {
+        <span class="self">self</span>.min.x..<span class="self">self</span>.max.x
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">y_range</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Range</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">min</span>.<span class="ident">y</span>..<span class="self">self</span>.<span class="ident">max</span>.<span class="ident">y</span>
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>y_range(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Range&lt;T&gt; {
+        <span class="self">self</span>.min.y..<span class="self">self</span>.max.y
     }
 
-    <span class="doccomment">/// Drop the units, preserving only the numeric value.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_untyped</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">UnknownUnit</span><span class="op">&gt;</span> {
-        <span class="ident">Box2D::new</span>(<span class="self">self</span>.<span class="ident">min</span>.<span class="ident">to_untyped</span>(), <span class="self">self</span>.<span class="ident">max</span>.<span class="ident">to_untyped</span>())
+    <span class="doccomment">/// Drop the units, preserving only the numeric value.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>to_untyped(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Box2D&lt;T, UnknownUnit&gt; {
+        Box2D::new(<span class="self">self</span>.min.to_untyped(), <span class="self">self</span>.max.to_untyped())
     }
 
-    <span class="doccomment">/// Tag a unitless value with units.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_untyped</span>(<span class="ident">c</span>: <span class="kw-2">&amp;</span><span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">UnknownUnit</span><span class="op">&gt;</span>) -&gt; <span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-        <span class="ident">Box2D::new</span>(<span class="ident">Point2D::from_untyped</span>(<span class="ident">c</span>.<span class="ident">min</span>), <span class="ident">Point2D::from_untyped</span>(<span class="ident">c</span>.<span class="ident">max</span>))
+    <span class="doccomment">/// Tag a unitless value with units.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>from_untyped(c: <span class="kw-2">&amp;</span>Box2D&lt;T, UnknownUnit&gt;) -&gt; Box2D&lt;T, U&gt; {
+        Box2D::new(Point2D::from_untyped(c.min), Point2D::from_untyped(c.max))
     }
 
-    <span class="doccomment">/// Cast the unit</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">cast_unit</span><span class="op">&lt;</span><span class="ident">V</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">V</span><span class="op">&gt;</span> {
-        <span class="ident">Box2D::new</span>(<span class="self">self</span>.<span class="ident">min</span>.<span class="ident">cast_unit</span>(), <span class="self">self</span>.<span class="ident">max</span>.<span class="ident">cast_unit</span>())
+    <span class="doccomment">/// Cast the unit
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>cast_unit&lt;V&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Box2D&lt;T, V&gt; {
+        Box2D::new(<span class="self">self</span>.min.cast_unit(), <span class="self">self</span>.max.cast_unit())
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">scale</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="ident">Copy</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">S</span>, <span class="ident">y</span>: <span class="ident">S</span>) -&gt; <span class="self">Self</span>
-    <span class="kw">where</span>
-        <span class="ident">T</span>: <span class="ident">Mul</span><span class="op">&lt;</span><span class="ident">S</span>, <span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span>,
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>scale&lt;S: Copy&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, x: S, y: S) -&gt; <span class="self">Self
+    </span><span class="kw">where
+        </span>T: Mul&lt;S, Output = T&gt;,
     {
-        <span class="ident">Box2D</span> {
-            <span class="ident">min</span>: <span class="ident">point2</span>(<span class="self">self</span>.<span class="ident">min</span>.<span class="ident">x</span> <span class="op">*</span> <span class="ident">x</span>, <span class="self">self</span>.<span class="ident">min</span>.<span class="ident">y</span> <span class="op">*</span> <span class="ident">y</span>),
-            <span class="ident">max</span>: <span class="ident">point2</span>(<span class="self">self</span>.<span class="ident">max</span>.<span class="ident">x</span> <span class="op">*</span> <span class="ident">x</span>, <span class="self">self</span>.<span class="ident">max</span>.<span class="ident">y</span> <span class="op">*</span> <span class="ident">y</span>),
+        Box2D {
+            min: point2(<span class="self">self</span>.min.x * x, <span class="self">self</span>.min.y * y),
+            max: point2(<span class="self">self</span>.max.x * x, <span class="self">self</span>.max.y * y),
         }
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">NumCast</span> <span class="op">+</span> <span class="ident">Copy</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Cast from one numeric representation to another, preserving the units.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// When casting from floating point to integer coordinates, the decimals are truncated</span>
-    <span class="doccomment">/// as one would expect from a simple cast, but this behavior does not always make sense</span>
-    <span class="doccomment">/// geometrically. Consider using round(), round_in or round_out() before casting.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">cast</span><span class="op">&lt;</span><span class="ident">NewT</span>: <span class="ident">NumCast</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">NewT</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-        <span class="ident">Box2D::new</span>(<span class="self">self</span>.<span class="ident">min</span>.<span class="ident">cast</span>(), <span class="self">self</span>.<span class="ident">max</span>.<span class="ident">cast</span>())
+<span class="kw">impl</span>&lt;T: NumCast + Copy, U&gt; Box2D&lt;T, U&gt; {
+    <span class="doccomment">/// Cast from one numeric representation to another, preserving the units.
+    ///
+    /// When casting from floating point to integer coordinates, the decimals are truncated
+    /// as one would expect from a simple cast, but this behavior does not always make sense
+    /// geometrically. Consider using round(), round_in or round_out() before casting.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>cast&lt;NewT: NumCast&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Box2D&lt;NewT, U&gt; {
+        Box2D::new(<span class="self">self</span>.min.cast(), <span class="self">self</span>.max.cast())
     }
 
-    <span class="doccomment">/// Fallible cast from one numeric representation to another, preserving the units.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// When casting from floating point to integer coordinates, the decimals are truncated</span>
-    <span class="doccomment">/// as one would expect from a simple cast, but this behavior does not always make sense</span>
-    <span class="doccomment">/// geometrically. Consider using round(), round_in or round_out() before casting.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">try_cast</span><span class="op">&lt;</span><span class="ident">NewT</span>: <span class="ident">NumCast</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">NewT</span>, <span class="ident">U</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="kw">match</span> (<span class="self">self</span>.<span class="ident">min</span>.<span class="ident">try_cast</span>(), <span class="self">self</span>.<span class="ident">max</span>.<span class="ident">try_cast</span>()) {
-            (<span class="prelude-val">Some</span>(<span class="ident">a</span>), <span class="prelude-val">Some</span>(<span class="ident">b</span>)) =&gt; <span class="prelude-val">Some</span>(<span class="ident">Box2D::new</span>(<span class="ident">a</span>, <span class="ident">b</span>)),
-            <span class="kw">_</span> =&gt; <span class="prelude-val">None</span>,
+    <span class="doccomment">/// Fallible cast from one numeric representation to another, preserving the units.
+    ///
+    /// When casting from floating point to integer coordinates, the decimals are truncated
+    /// as one would expect from a simple cast, but this behavior does not always make sense
+    /// geometrically. Consider using round(), round_in or round_out() before casting.
+    </span><span class="kw">pub fn </span>try_cast&lt;NewT: NumCast&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;Box2D&lt;NewT, U&gt;&gt; {
+        <span class="kw">match </span>(<span class="self">self</span>.min.try_cast(), <span class="self">self</span>.max.try_cast()) {
+            (<span class="prelude-val">Some</span>(a), <span class="prelude-val">Some</span>(b)) =&gt; <span class="prelude-val">Some</span>(Box2D::new(a, b)),
+            <span class="kw">_ </span>=&gt; <span class="prelude-val">None</span>,
         }
     }
 
-    <span class="comment">// Convenience functions for common casts</span>
+    <span class="comment">// Convenience functions for common casts
 
-    <span class="doccomment">/// Cast into an `f32` box.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_f32</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">f32</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">cast</span>()
+    </span><span class="doccomment">/// Cast into an `f32` box.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>to_f32(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Box2D&lt;f32, U&gt; {
+        <span class="self">self</span>.cast()
     }
 
-    <span class="doccomment">/// Cast into an `f64` box.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_f64</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">f64</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">cast</span>()
+    <span class="doccomment">/// Cast into an `f64` box.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>to_f64(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Box2D&lt;f64, U&gt; {
+        <span class="self">self</span>.cast()
     }
 
-    <span class="doccomment">/// Cast into an `usize` box, truncating decimals if any.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// When casting from floating point boxes, it is worth considering whether</span>
-    <span class="doccomment">/// to `round()`, `round_in()` or `round_out()` before the cast in order to</span>
-    <span class="doccomment">/// obtain the desired conversion behavior.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_usize</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">usize</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">cast</span>()
+    <span class="doccomment">/// Cast into an `usize` box, truncating decimals if any.
+    ///
+    /// When casting from floating point boxes, it is worth considering whether
+    /// to `round()`, `round_in()` or `round_out()` before the cast in order to
+    /// obtain the desired conversion behavior.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>to_usize(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Box2D&lt;usize, U&gt; {
+        <span class="self">self</span>.cast()
     }
 
-    <span class="doccomment">/// Cast into an `u32` box, truncating decimals if any.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// When casting from floating point boxes, it is worth considering whether</span>
-    <span class="doccomment">/// to `round()`, `round_in()` or `round_out()` before the cast in order to</span>
-    <span class="doccomment">/// obtain the desired conversion behavior.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_u32</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">u32</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">cast</span>()
+    <span class="doccomment">/// Cast into an `u32` box, truncating decimals if any.
+    ///
+    /// When casting from floating point boxes, it is worth considering whether
+    /// to `round()`, `round_in()` or `round_out()` before the cast in order to
+    /// obtain the desired conversion behavior.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>to_u32(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Box2D&lt;u32, U&gt; {
+        <span class="self">self</span>.cast()
     }
 
-    <span class="doccomment">/// Cast into an `i32` box, truncating decimals if any.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// When casting from floating point boxes, it is worth considering whether</span>
-    <span class="doccomment">/// to `round()`, `round_in()` or `round_out()` before the cast in order to</span>
-    <span class="doccomment">/// obtain the desired conversion behavior.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_i32</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">cast</span>()
+    <span class="doccomment">/// Cast into an `i32` box, truncating decimals if any.
+    ///
+    /// When casting from floating point boxes, it is worth considering whether
+    /// to `round()`, `round_in()` or `round_out()` before the cast in order to
+    /// obtain the desired conversion behavior.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>to_i32(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Box2D&lt;i32, U&gt; {
+        <span class="self">self</span>.cast()
     }
 
-    <span class="doccomment">/// Cast into an `i64` box, truncating decimals if any.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// When casting from floating point boxes, it is worth considering whether</span>
-    <span class="doccomment">/// to `round()`, `round_in()` or `round_out()` before the cast in order to</span>
-    <span class="doccomment">/// obtain the desired conversion behavior.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_i64</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">i64</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">cast</span>()
-    }
-}
-
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Float</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Returns true if all members are finite.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_finite</span>(<span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">min</span>.<span class="ident">is_finite</span>() <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">max</span>.<span class="ident">is_finite</span>()
+    <span class="doccomment">/// Cast into an `i64` box, truncating decimals if any.
+    ///
+    /// When casting from floating point boxes, it is worth considering whether
+    /// to `round()`, `round_in()` or `round_out()` before the cast in order to
+    /// obtain the desired conversion behavior.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>to_i64(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Box2D&lt;i64, U&gt; {
+        <span class="self">self</span>.cast()
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Round</span>,
+<span class="kw">impl</span>&lt;T: Float, U&gt; Box2D&lt;T, U&gt; {
+    <span class="doccomment">/// Returns true if all members are finite.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>is_finite(<span class="self">self</span>) -&gt; bool {
+        <span class="self">self</span>.min.is_finite() &amp;&amp; <span class="self">self</span>.max.is_finite()
+    }
+}
+
+<span class="kw">impl</span>&lt;T, U&gt; Box2D&lt;T, U&gt;
+<span class="kw">where
+    </span>T: Round,
 {
-    <span class="doccomment">/// Return a box with edges rounded to integer coordinates, such that</span>
-    <span class="doccomment">/// the returned box has the same set of pixel centers as the original</span>
-    <span class="doccomment">/// one.</span>
-    <span class="doccomment">/// Values equal to 0.5 round up.</span>
-    <span class="doccomment">/// Suitable for most places where integral device coordinates</span>
-    <span class="doccomment">/// are needed, but note that any translation should be applied first to</span>
-    <span class="doccomment">/// avoid pixel rounding errors.</span>
-    <span class="doccomment">/// Note that this is *not* rounding to nearest integer if the values are negative.</span>
-    <span class="doccomment">/// They are always rounding as floor(n + 0.5).</span>
-    <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">round</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">Box2D::new</span>(<span class="self">self</span>.<span class="ident">min</span>.<span class="ident">round</span>(), <span class="self">self</span>.<span class="ident">max</span>.<span class="ident">round</span>())
+    <span class="doccomment">/// Return a box with edges rounded to integer coordinates, such that
+    /// the returned box has the same set of pixel centers as the original
+    /// one.
+    /// Values equal to 0.5 round up.
+    /// Suitable for most places where integral device coordinates
+    /// are needed, but note that any translation should be applied first to
+    /// avoid pixel rounding errors.
+    /// Note that this is *not* rounding to nearest integer if the values are negative.
+    /// They are always rounding as floor(n + 0.5).
+    </span><span class="attribute">#[must_use]
+    </span><span class="kw">pub fn </span>round(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        Box2D::new(<span class="self">self</span>.min.round(), <span class="self">self</span>.max.round())
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Floor</span> <span class="op">+</span> <span class="ident">Ceil</span>,
+<span class="kw">impl</span>&lt;T, U&gt; Box2D&lt;T, U&gt;
+<span class="kw">where
+    </span>T: Floor + Ceil,
 {
-    <span class="doccomment">/// Return a box with faces/edges rounded to integer coordinates, such that</span>
-    <span class="doccomment">/// the original box contains the resulting box.</span>
-    <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">round_in</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">min</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">min</span>.<span class="ident">ceil</span>();
-        <span class="kw">let</span> <span class="ident">max</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">max</span>.<span class="ident">floor</span>();
-        <span class="ident">Box2D</span> { <span class="ident">min</span>, <span class="ident">max</span> }
+    <span class="doccomment">/// Return a box with faces/edges rounded to integer coordinates, such that
+    /// the original box contains the resulting box.
+    </span><span class="attribute">#[must_use]
+    </span><span class="kw">pub fn </span>round_in(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>min = <span class="self">self</span>.min.ceil();
+        <span class="kw">let </span>max = <span class="self">self</span>.max.floor();
+        Box2D { min, max }
     }
 
-    <span class="doccomment">/// Return a box with faces/edges rounded to integer coordinates, such that</span>
-    <span class="doccomment">/// the original box is contained in the resulting box.</span>
-    <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">round_out</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">min</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">min</span>.<span class="ident">floor</span>();
-        <span class="kw">let</span> <span class="ident">max</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">max</span>.<span class="ident">ceil</span>();
-        <span class="ident">Box2D</span> { <span class="ident">min</span>, <span class="ident">max</span> }
+    <span class="doccomment">/// Return a box with faces/edges rounded to integer coordinates, such that
+    /// the original box is contained in the resulting box.
+    </span><span class="attribute">#[must_use]
+    </span><span class="kw">pub fn </span>round_out(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>min = <span class="self">self</span>.min.floor();
+        <span class="kw">let </span>max = <span class="self">self</span>.max.ceil();
+        Box2D { min, max }
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Size2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Zero</span> <span class="op">+</span> <span class="ident">PartialOrd</span>,
+<span class="kw">impl</span>&lt;T, U&gt; From&lt;Size2D&lt;T, U&gt;&gt; <span class="kw">for </span>Box2D&lt;T, U&gt;
+<span class="kw">where
+    </span>T: Copy + Zero + PartialOrd,
 {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">b</span>: <span class="ident">Size2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::from_size</span>(<span class="ident">b</span>)
+    <span class="kw">fn </span>from(b: Size2D&lt;T, U&gt;) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::from_size(b)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Default</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> {
-        <span class="ident">Box2D</span> {
-            <span class="ident">min</span>: <span class="ident">Default::default</span>(),
-            <span class="ident">max</span>: <span class="ident">Default::default</span>(),
+<span class="kw">impl</span>&lt;T: Default, U&gt; Default <span class="kw">for </span>Box2D&lt;T, U&gt; {
+    <span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
+        Box2D {
+            min: Default::default(),
+            max: Default::default(),
         }
     }
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
-<span class="kw">mod</span> <span class="ident">tests</span> {
-    <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::default::Box2D</span>;
-    <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::side_offsets::SideOffsets2D</span>;
-    <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">point2</span>, <span class="ident">size2</span>, <span class="ident">vec2</span>, <span class="ident">Point2D</span>};
-    <span class="comment">//use super::*;</span>
+<span class="attribute">#[cfg(test)]
+</span><span class="kw">mod </span>tests {
+    <span class="kw">use </span><span class="kw">crate</span>::default::Box2D;
+    <span class="kw">use </span><span class="kw">crate</span>::side_offsets::SideOffsets2D;
+    <span class="kw">use crate</span>::{point2, size2, vec2, Point2D};
+    <span class="comment">//use super::*;
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_size</span>() {
-        <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">Box2D::new</span>(<span class="ident">point2</span>(<span class="op">-</span><span class="number">10.0</span>, <span class="op">-</span><span class="number">10.0</span>), <span class="ident">point2</span>(<span class="number">10.0</span>, <span class="number">10.0</span>));
-        <span class="macro">assert_eq!</span>(<span class="ident">b</span>.<span class="ident">size</span>().<span class="ident">width</span>, <span class="number">20.0</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">b</span>.<span class="ident">size</span>().<span class="ident">height</span>, <span class="number">20.0</span>);
+    </span><span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_size() {
+        <span class="kw">let </span>b = Box2D::new(point2(-<span class="number">10.0</span>, -<span class="number">10.0</span>), point2(<span class="number">10.0</span>, <span class="number">10.0</span>));
+        <span class="macro">assert_eq!</span>(b.size().width, <span class="number">20.0</span>);
+        <span class="macro">assert_eq!</span>(b.size().height, <span class="number">20.0</span>);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_width_height</span>() {
-        <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">Box2D::new</span>(<span class="ident">point2</span>(<span class="op">-</span><span class="number">10.0</span>, <span class="op">-</span><span class="number">10.0</span>), <span class="ident">point2</span>(<span class="number">10.0</span>, <span class="number">10.0</span>));
-        <span class="macro">assert!</span>(<span class="ident">b</span>.<span class="ident">width</span>() <span class="op">==</span> <span class="number">20.0</span>);
-        <span class="macro">assert!</span>(<span class="ident">b</span>.<span class="ident">height</span>() <span class="op">==</span> <span class="number">20.0</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_width_height() {
+        <span class="kw">let </span>b = Box2D::new(point2(-<span class="number">10.0</span>, -<span class="number">10.0</span>), point2(<span class="number">10.0</span>, <span class="number">10.0</span>));
+        <span class="macro">assert!</span>(b.width() == <span class="number">20.0</span>);
+        <span class="macro">assert!</span>(b.height() == <span class="number">20.0</span>);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_center</span>() {
-        <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">Box2D::new</span>(<span class="ident">point2</span>(<span class="op">-</span><span class="number">10.0</span>, <span class="op">-</span><span class="number">10.0</span>), <span class="ident">point2</span>(<span class="number">10.0</span>, <span class="number">10.0</span>));
-        <span class="macro">assert_eq!</span>(<span class="ident">b</span>.<span class="ident">center</span>(), <span class="ident">Point2D::zero</span>());
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_center() {
+        <span class="kw">let </span>b = Box2D::new(point2(-<span class="number">10.0</span>, -<span class="number">10.0</span>), point2(<span class="number">10.0</span>, <span class="number">10.0</span>));
+        <span class="macro">assert_eq!</span>(b.center(), Point2D::zero());
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_area</span>() {
-        <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">Box2D::new</span>(<span class="ident">point2</span>(<span class="op">-</span><span class="number">10.0</span>, <span class="op">-</span><span class="number">10.0</span>), <span class="ident">point2</span>(<span class="number">10.0</span>, <span class="number">10.0</span>));
-        <span class="macro">assert_eq!</span>(<span class="ident">b</span>.<span class="ident">area</span>(), <span class="number">400.0</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_area() {
+        <span class="kw">let </span>b = Box2D::new(point2(-<span class="number">10.0</span>, -<span class="number">10.0</span>), point2(<span class="number">10.0</span>, <span class="number">10.0</span>));
+        <span class="macro">assert_eq!</span>(b.area(), <span class="number">400.0</span>);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_from_points</span>() {
-        <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">Box2D::from_points</span>(<span class="kw-2">&amp;</span>[<span class="ident">point2</span>(<span class="number">50.0</span>, <span class="number">160.0</span>), <span class="ident">point2</span>(<span class="number">100.0</span>, <span class="number">25.0</span>)]);
-        <span class="macro">assert_eq!</span>(<span class="ident">b</span>.<span class="ident">min</span>, <span class="ident">point2</span>(<span class="number">50.0</span>, <span class="number">25.0</span>));
-        <span class="macro">assert_eq!</span>(<span class="ident">b</span>.<span class="ident">max</span>, <span class="ident">point2</span>(<span class="number">100.0</span>, <span class="number">160.0</span>));
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_from_points() {
+        <span class="kw">let </span>b = Box2D::from_points(<span class="kw-2">&amp;</span>[point2(<span class="number">50.0</span>, <span class="number">160.0</span>), point2(<span class="number">100.0</span>, <span class="number">25.0</span>)]);
+        <span class="macro">assert_eq!</span>(b.min, point2(<span class="number">50.0</span>, <span class="number">25.0</span>));
+        <span class="macro">assert_eq!</span>(b.max, point2(<span class="number">100.0</span>, <span class="number">160.0</span>));
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_round_in</span>() {
-        <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">Box2D::from_points</span>(<span class="kw-2">&amp;</span>[<span class="ident">point2</span>(<span class="op">-</span><span class="number">25.5</span>, <span class="op">-</span><span class="number">40.4</span>), <span class="ident">point2</span>(<span class="number">60.3</span>, <span class="number">36.5</span>)]).<span class="ident">round_in</span>();
-        <span class="macro">assert_eq!</span>(<span class="ident">b</span>.<span class="ident">min</span>.<span class="ident">x</span>, <span class="op">-</span><span class="number">25.0</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">b</span>.<span class="ident">min</span>.<span class="ident">y</span>, <span class="op">-</span><span class="number">40.0</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">b</span>.<span class="ident">max</span>.<span class="ident">x</span>, <span class="number">60.0</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">b</span>.<span class="ident">max</span>.<span class="ident">y</span>, <span class="number">36.0</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_round_in() {
+        <span class="kw">let </span>b = Box2D::from_points(<span class="kw-2">&amp;</span>[point2(-<span class="number">25.5</span>, -<span class="number">40.4</span>), point2(<span class="number">60.3</span>, <span class="number">36.5</span>)]).round_in();
+        <span class="macro">assert_eq!</span>(b.min.x, -<span class="number">25.0</span>);
+        <span class="macro">assert_eq!</span>(b.min.y, -<span class="number">40.0</span>);
+        <span class="macro">assert_eq!</span>(b.max.x, <span class="number">60.0</span>);
+        <span class="macro">assert_eq!</span>(b.max.y, <span class="number">36.0</span>);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_round_out</span>() {
-        <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">Box2D::from_points</span>(<span class="kw-2">&amp;</span>[<span class="ident">point2</span>(<span class="op">-</span><span class="number">25.5</span>, <span class="op">-</span><span class="number">40.4</span>), <span class="ident">point2</span>(<span class="number">60.3</span>, <span class="number">36.5</span>)]).<span class="ident">round_out</span>();
-        <span class="macro">assert_eq!</span>(<span class="ident">b</span>.<span class="ident">min</span>.<span class="ident">x</span>, <span class="op">-</span><span class="number">26.0</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">b</span>.<span class="ident">min</span>.<span class="ident">y</span>, <span class="op">-</span><span class="number">41.0</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">b</span>.<span class="ident">max</span>.<span class="ident">x</span>, <span class="number">61.0</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">b</span>.<span class="ident">max</span>.<span class="ident">y</span>, <span class="number">37.0</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_round_out() {
+        <span class="kw">let </span>b = Box2D::from_points(<span class="kw-2">&amp;</span>[point2(-<span class="number">25.5</span>, -<span class="number">40.4</span>), point2(<span class="number">60.3</span>, <span class="number">36.5</span>)]).round_out();
+        <span class="macro">assert_eq!</span>(b.min.x, -<span class="number">26.0</span>);
+        <span class="macro">assert_eq!</span>(b.min.y, -<span class="number">41.0</span>);
+        <span class="macro">assert_eq!</span>(b.max.x, <span class="number">61.0</span>);
+        <span class="macro">assert_eq!</span>(b.max.y, <span class="number">37.0</span>);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_round</span>() {
-        <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">Box2D::from_points</span>(<span class="kw-2">&amp;</span>[<span class="ident">point2</span>(<span class="op">-</span><span class="number">25.5</span>, <span class="op">-</span><span class="number">40.4</span>), <span class="ident">point2</span>(<span class="number">60.3</span>, <span class="number">36.5</span>)]).<span class="ident">round</span>();
-        <span class="macro">assert_eq!</span>(<span class="ident">b</span>.<span class="ident">min</span>.<span class="ident">x</span>, <span class="op">-</span><span class="number">25.0</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">b</span>.<span class="ident">min</span>.<span class="ident">y</span>, <span class="op">-</span><span class="number">40.0</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">b</span>.<span class="ident">max</span>.<span class="ident">x</span>, <span class="number">60.0</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">b</span>.<span class="ident">max</span>.<span class="ident">y</span>, <span class="number">37.0</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_round() {
+        <span class="kw">let </span>b = Box2D::from_points(<span class="kw-2">&amp;</span>[point2(-<span class="number">25.5</span>, -<span class="number">40.4</span>), point2(<span class="number">60.3</span>, <span class="number">36.5</span>)]).round();
+        <span class="macro">assert_eq!</span>(b.min.x, -<span class="number">25.0</span>);
+        <span class="macro">assert_eq!</span>(b.min.y, -<span class="number">40.0</span>);
+        <span class="macro">assert_eq!</span>(b.max.x, <span class="number">60.0</span>);
+        <span class="macro">assert_eq!</span>(b.max.y, <span class="number">37.0</span>);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_from_size</span>() {
-        <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">Box2D::from_size</span>(<span class="ident">size2</span>(<span class="number">30.0</span>, <span class="number">40.0</span>));
-        <span class="macro">assert!</span>(<span class="ident">b</span>.<span class="ident">min</span> <span class="op">==</span> <span class="ident">Point2D::zero</span>());
-        <span class="macro">assert!</span>(<span class="ident">b</span>.<span class="ident">size</span>().<span class="ident">width</span> <span class="op">==</span> <span class="number">30.0</span>);
-        <span class="macro">assert!</span>(<span class="ident">b</span>.<span class="ident">size</span>().<span class="ident">height</span> <span class="op">==</span> <span class="number">40.0</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_from_size() {
+        <span class="kw">let </span>b = Box2D::from_size(size2(<span class="number">30.0</span>, <span class="number">40.0</span>));
+        <span class="macro">assert!</span>(b.min == Point2D::zero());
+        <span class="macro">assert!</span>(b.size().width == <span class="number">30.0</span>);
+        <span class="macro">assert!</span>(b.size().height == <span class="number">40.0</span>);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_inner_box</span>() {
-        <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">Box2D::from_points</span>(<span class="kw-2">&amp;</span>[<span class="ident">point2</span>(<span class="number">50.0</span>, <span class="number">25.0</span>), <span class="ident">point2</span>(<span class="number">100.0</span>, <span class="number">160.0</span>)]);
-        <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">inner_box</span>(<span class="ident">SideOffsets2D::new</span>(<span class="number">10.0</span>, <span class="number">20.0</span>, <span class="number">5.0</span>, <span class="number">10.0</span>));
-        <span class="macro">assert_eq!</span>(<span class="ident">b</span>.<span class="ident">max</span>.<span class="ident">x</span>, <span class="number">80.0</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">b</span>.<span class="ident">max</span>.<span class="ident">y</span>, <span class="number">155.0</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">b</span>.<span class="ident">min</span>.<span class="ident">x</span>, <span class="number">60.0</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">b</span>.<span class="ident">min</span>.<span class="ident">y</span>, <span class="number">35.0</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_inner_box() {
+        <span class="kw">let </span>b = Box2D::from_points(<span class="kw-2">&amp;</span>[point2(<span class="number">50.0</span>, <span class="number">25.0</span>), point2(<span class="number">100.0</span>, <span class="number">160.0</span>)]);
+        <span class="kw">let </span>b = b.inner_box(SideOffsets2D::new(<span class="number">10.0</span>, <span class="number">20.0</span>, <span class="number">5.0</span>, <span class="number">10.0</span>));
+        <span class="macro">assert_eq!</span>(b.max.x, <span class="number">80.0</span>);
+        <span class="macro">assert_eq!</span>(b.max.y, <span class="number">155.0</span>);
+        <span class="macro">assert_eq!</span>(b.min.x, <span class="number">60.0</span>);
+        <span class="macro">assert_eq!</span>(b.min.y, <span class="number">35.0</span>);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_outer_box</span>() {
-        <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">Box2D::from_points</span>(<span class="kw-2">&amp;</span>[<span class="ident">point2</span>(<span class="number">50.0</span>, <span class="number">25.0</span>), <span class="ident">point2</span>(<span class="number">100.0</span>, <span class="number">160.0</span>)]);
-        <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">outer_box</span>(<span class="ident">SideOffsets2D::new</span>(<span class="number">10.0</span>, <span class="number">20.0</span>, <span class="number">5.0</span>, <span class="number">10.0</span>));
-        <span class="macro">assert_eq!</span>(<span class="ident">b</span>.<span class="ident">max</span>.<span class="ident">x</span>, <span class="number">120.0</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">b</span>.<span class="ident">max</span>.<span class="ident">y</span>, <span class="number">165.0</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">b</span>.<span class="ident">min</span>.<span class="ident">x</span>, <span class="number">40.0</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">b</span>.<span class="ident">min</span>.<span class="ident">y</span>, <span class="number">15.0</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_outer_box() {
+        <span class="kw">let </span>b = Box2D::from_points(<span class="kw-2">&amp;</span>[point2(<span class="number">50.0</span>, <span class="number">25.0</span>), point2(<span class="number">100.0</span>, <span class="number">160.0</span>)]);
+        <span class="kw">let </span>b = b.outer_box(SideOffsets2D::new(<span class="number">10.0</span>, <span class="number">20.0</span>, <span class="number">5.0</span>, <span class="number">10.0</span>));
+        <span class="macro">assert_eq!</span>(b.max.x, <span class="number">120.0</span>);
+        <span class="macro">assert_eq!</span>(b.max.y, <span class="number">165.0</span>);
+        <span class="macro">assert_eq!</span>(b.min.x, <span class="number">40.0</span>);
+        <span class="macro">assert_eq!</span>(b.min.y, <span class="number">15.0</span>);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_translate</span>() {
-        <span class="kw">let</span> <span class="ident">size</span> <span class="op">=</span> <span class="ident">size2</span>(<span class="number">15.0</span>, <span class="number">15.0</span>);
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">center</span> <span class="op">=</span> (<span class="ident">size</span> <span class="op">/</span> <span class="number">2.0</span>).<span class="ident">to_vector</span>().<span class="ident">to_point</span>();
-        <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">Box2D::from_size</span>(<span class="ident">size</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">b</span>.<span class="ident">center</span>(), <span class="ident">center</span>);
-        <span class="kw">let</span> <span class="ident">translation</span> <span class="op">=</span> <span class="ident">vec2</span>(<span class="number">10.0</span>, <span class="number">2.5</span>);
-        <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">translate</span>(<span class="ident">translation</span>);
-        <span class="ident">center</span> <span class="op">+</span><span class="op">=</span> <span class="ident">translation</span>;
-        <span class="macro">assert_eq!</span>(<span class="ident">b</span>.<span class="ident">center</span>(), <span class="ident">center</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">b</span>.<span class="ident">max</span>.<span class="ident">x</span>, <span class="number">25.0</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">b</span>.<span class="ident">max</span>.<span class="ident">y</span>, <span class="number">17.5</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">b</span>.<span class="ident">min</span>.<span class="ident">x</span>, <span class="number">10.0</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">b</span>.<span class="ident">min</span>.<span class="ident">y</span>, <span class="number">2.5</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_translate() {
+        <span class="kw">let </span>size = size2(<span class="number">15.0</span>, <span class="number">15.0</span>);
+        <span class="kw">let </span><span class="kw-2">mut </span>center = (size / <span class="number">2.0</span>).to_vector().to_point();
+        <span class="kw">let </span>b = Box2D::from_size(size);
+        <span class="macro">assert_eq!</span>(b.center(), center);
+        <span class="kw">let </span>translation = vec2(<span class="number">10.0</span>, <span class="number">2.5</span>);
+        <span class="kw">let </span>b = b.translate(translation);
+        center += translation;
+        <span class="macro">assert_eq!</span>(b.center(), center);
+        <span class="macro">assert_eq!</span>(b.max.x, <span class="number">25.0</span>);
+        <span class="macro">assert_eq!</span>(b.max.y, <span class="number">17.5</span>);
+        <span class="macro">assert_eq!</span>(b.min.x, <span class="number">10.0</span>);
+        <span class="macro">assert_eq!</span>(b.min.y, <span class="number">2.5</span>);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_union</span>() {
-        <span class="kw">let</span> <span class="ident">b1</span> <span class="op">=</span> <span class="ident">Box2D::from_points</span>(<span class="kw-2">&amp;</span>[<span class="ident">point2</span>(<span class="op">-</span><span class="number">20.0</span>, <span class="op">-</span><span class="number">20.0</span>), <span class="ident">point2</span>(<span class="number">0.0</span>, <span class="number">20.0</span>)]);
-        <span class="kw">let</span> <span class="ident">b2</span> <span class="op">=</span> <span class="ident">Box2D::from_points</span>(<span class="kw-2">&amp;</span>[<span class="ident">point2</span>(<span class="number">0.0</span>, <span class="number">20.0</span>), <span class="ident">point2</span>(<span class="number">20.0</span>, <span class="op">-</span><span class="number">20.0</span>)]);
-        <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">b1</span>.<span class="ident">union</span>(<span class="kw-2">&amp;</span><span class="ident">b2</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">b</span>.<span class="ident">max</span>.<span class="ident">x</span>, <span class="number">20.0</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">b</span>.<span class="ident">max</span>.<span class="ident">y</span>, <span class="number">20.0</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">b</span>.<span class="ident">min</span>.<span class="ident">x</span>, <span class="op">-</span><span class="number">20.0</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">b</span>.<span class="ident">min</span>.<span class="ident">y</span>, <span class="op">-</span><span class="number">20.0</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_union() {
+        <span class="kw">let </span>b1 = Box2D::from_points(<span class="kw-2">&amp;</span>[point2(-<span class="number">20.0</span>, -<span class="number">20.0</span>), point2(<span class="number">0.0</span>, <span class="number">20.0</span>)]);
+        <span class="kw">let </span>b2 = Box2D::from_points(<span class="kw-2">&amp;</span>[point2(<span class="number">0.0</span>, <span class="number">20.0</span>), point2(<span class="number">20.0</span>, -<span class="number">20.0</span>)]);
+        <span class="kw">let </span>b = b1.union(<span class="kw-2">&amp;</span>b2);
+        <span class="macro">assert_eq!</span>(b.max.x, <span class="number">20.0</span>);
+        <span class="macro">assert_eq!</span>(b.max.y, <span class="number">20.0</span>);
+        <span class="macro">assert_eq!</span>(b.min.x, -<span class="number">20.0</span>);
+        <span class="macro">assert_eq!</span>(b.min.y, -<span class="number">20.0</span>);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_intersects</span>() {
-        <span class="kw">let</span> <span class="ident">b1</span> <span class="op">=</span> <span class="ident">Box2D::from_points</span>(<span class="kw-2">&amp;</span>[<span class="ident">point2</span>(<span class="op">-</span><span class="number">15.0</span>, <span class="op">-</span><span class="number">20.0</span>), <span class="ident">point2</span>(<span class="number">10.0</span>, <span class="number">20.0</span>)]);
-        <span class="kw">let</span> <span class="ident">b2</span> <span class="op">=</span> <span class="ident">Box2D::from_points</span>(<span class="kw-2">&amp;</span>[<span class="ident">point2</span>(<span class="op">-</span><span class="number">10.0</span>, <span class="number">20.0</span>), <span class="ident">point2</span>(<span class="number">15.0</span>, <span class="op">-</span><span class="number">20.0</span>)]);
-        <span class="macro">assert!</span>(<span class="ident">b1</span>.<span class="ident">intersects</span>(<span class="kw-2">&amp;</span><span class="ident">b2</span>));
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_intersects() {
+        <span class="kw">let </span>b1 = Box2D::from_points(<span class="kw-2">&amp;</span>[point2(-<span class="number">15.0</span>, -<span class="number">20.0</span>), point2(<span class="number">10.0</span>, <span class="number">20.0</span>)]);
+        <span class="kw">let </span>b2 = Box2D::from_points(<span class="kw-2">&amp;</span>[point2(-<span class="number">10.0</span>, <span class="number">20.0</span>), point2(<span class="number">15.0</span>, -<span class="number">20.0</span>)]);
+        <span class="macro">assert!</span>(b1.intersects(<span class="kw-2">&amp;</span>b2));
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_intersection_unchecked</span>() {
-        <span class="kw">let</span> <span class="ident">b1</span> <span class="op">=</span> <span class="ident">Box2D::from_points</span>(<span class="kw-2">&amp;</span>[<span class="ident">point2</span>(<span class="op">-</span><span class="number">15.0</span>, <span class="op">-</span><span class="number">20.0</span>), <span class="ident">point2</span>(<span class="number">10.0</span>, <span class="number">20.0</span>)]);
-        <span class="kw">let</span> <span class="ident">b2</span> <span class="op">=</span> <span class="ident">Box2D::from_points</span>(<span class="kw-2">&amp;</span>[<span class="ident">point2</span>(<span class="op">-</span><span class="number">10.0</span>, <span class="number">20.0</span>), <span class="ident">point2</span>(<span class="number">15.0</span>, <span class="op">-</span><span class="number">20.0</span>)]);
-        <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">b1</span>.<span class="ident">intersection_unchecked</span>(<span class="kw-2">&amp;</span><span class="ident">b2</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">b</span>.<span class="ident">max</span>.<span class="ident">x</span>, <span class="number">10.0</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">b</span>.<span class="ident">max</span>.<span class="ident">y</span>, <span class="number">20.0</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">b</span>.<span class="ident">min</span>.<span class="ident">x</span>, <span class="op">-</span><span class="number">10.0</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">b</span>.<span class="ident">min</span>.<span class="ident">y</span>, <span class="op">-</span><span class="number">20.0</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_intersection_unchecked() {
+        <span class="kw">let </span>b1 = Box2D::from_points(<span class="kw-2">&amp;</span>[point2(-<span class="number">15.0</span>, -<span class="number">20.0</span>), point2(<span class="number">10.0</span>, <span class="number">20.0</span>)]);
+        <span class="kw">let </span>b2 = Box2D::from_points(<span class="kw-2">&amp;</span>[point2(-<span class="number">10.0</span>, <span class="number">20.0</span>), point2(<span class="number">15.0</span>, -<span class="number">20.0</span>)]);
+        <span class="kw">let </span>b = b1.intersection_unchecked(<span class="kw-2">&amp;</span>b2);
+        <span class="macro">assert_eq!</span>(b.max.x, <span class="number">10.0</span>);
+        <span class="macro">assert_eq!</span>(b.max.y, <span class="number">20.0</span>);
+        <span class="macro">assert_eq!</span>(b.min.x, -<span class="number">10.0</span>);
+        <span class="macro">assert_eq!</span>(b.min.y, -<span class="number">20.0</span>);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_intersection</span>() {
-        <span class="kw">let</span> <span class="ident">b1</span> <span class="op">=</span> <span class="ident">Box2D::from_points</span>(<span class="kw-2">&amp;</span>[<span class="ident">point2</span>(<span class="op">-</span><span class="number">15.0</span>, <span class="op">-</span><span class="number">20.0</span>), <span class="ident">point2</span>(<span class="number">10.0</span>, <span class="number">20.0</span>)]);
-        <span class="kw">let</span> <span class="ident">b2</span> <span class="op">=</span> <span class="ident">Box2D::from_points</span>(<span class="kw-2">&amp;</span>[<span class="ident">point2</span>(<span class="op">-</span><span class="number">10.0</span>, <span class="number">20.0</span>), <span class="ident">point2</span>(<span class="number">15.0</span>, <span class="op">-</span><span class="number">20.0</span>)]);
-        <span class="macro">assert!</span>(<span class="ident">b1</span>.<span class="ident">intersection</span>(<span class="kw-2">&amp;</span><span class="ident">b2</span>).<span class="ident">is_some</span>());
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_intersection() {
+        <span class="kw">let </span>b1 = Box2D::from_points(<span class="kw-2">&amp;</span>[point2(-<span class="number">15.0</span>, -<span class="number">20.0</span>), point2(<span class="number">10.0</span>, <span class="number">20.0</span>)]);
+        <span class="kw">let </span>b2 = Box2D::from_points(<span class="kw-2">&amp;</span>[point2(-<span class="number">10.0</span>, <span class="number">20.0</span>), point2(<span class="number">15.0</span>, -<span class="number">20.0</span>)]);
+        <span class="macro">assert!</span>(b1.intersection(<span class="kw-2">&amp;</span>b2).is_some());
 
-        <span class="kw">let</span> <span class="ident">b1</span> <span class="op">=</span> <span class="ident">Box2D::from_points</span>(<span class="kw-2">&amp;</span>[<span class="ident">point2</span>(<span class="op">-</span><span class="number">15.0</span>, <span class="op">-</span><span class="number">20.0</span>), <span class="ident">point2</span>(<span class="op">-</span><span class="number">10.0</span>, <span class="number">20.0</span>)]);
-        <span class="kw">let</span> <span class="ident">b2</span> <span class="op">=</span> <span class="ident">Box2D::from_points</span>(<span class="kw-2">&amp;</span>[<span class="ident">point2</span>(<span class="number">10.0</span>, <span class="number">20.0</span>), <span class="ident">point2</span>(<span class="number">15.0</span>, <span class="op">-</span><span class="number">20.0</span>)]);
-        <span class="macro">assert!</span>(<span class="ident">b1</span>.<span class="ident">intersection</span>(<span class="kw-2">&amp;</span><span class="ident">b2</span>).<span class="ident">is_none</span>());
+        <span class="kw">let </span>b1 = Box2D::from_points(<span class="kw-2">&amp;</span>[point2(-<span class="number">15.0</span>, -<span class="number">20.0</span>), point2(-<span class="number">10.0</span>, <span class="number">20.0</span>)]);
+        <span class="kw">let </span>b2 = Box2D::from_points(<span class="kw-2">&amp;</span>[point2(<span class="number">10.0</span>, <span class="number">20.0</span>), point2(<span class="number">15.0</span>, -<span class="number">20.0</span>)]);
+        <span class="macro">assert!</span>(b1.intersection(<span class="kw-2">&amp;</span>b2).is_none());
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_scale</span>() {
-        <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">Box2D::from_points</span>(<span class="kw-2">&amp;</span>[<span class="ident">point2</span>(<span class="op">-</span><span class="number">10.0</span>, <span class="op">-</span><span class="number">10.0</span>), <span class="ident">point2</span>(<span class="number">10.0</span>, <span class="number">10.0</span>)]);
-        <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">scale</span>(<span class="number">0.5</span>, <span class="number">0.5</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">b</span>.<span class="ident">max</span>.<span class="ident">x</span>, <span class="number">5.0</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">b</span>.<span class="ident">max</span>.<span class="ident">y</span>, <span class="number">5.0</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">b</span>.<span class="ident">min</span>.<span class="ident">x</span>, <span class="op">-</span><span class="number">5.0</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">b</span>.<span class="ident">min</span>.<span class="ident">y</span>, <span class="op">-</span><span class="number">5.0</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_scale() {
+        <span class="kw">let </span>b = Box2D::from_points(<span class="kw-2">&amp;</span>[point2(-<span class="number">10.0</span>, -<span class="number">10.0</span>), point2(<span class="number">10.0</span>, <span class="number">10.0</span>)]);
+        <span class="kw">let </span>b = b.scale(<span class="number">0.5</span>, <span class="number">0.5</span>);
+        <span class="macro">assert_eq!</span>(b.max.x, <span class="number">5.0</span>);
+        <span class="macro">assert_eq!</span>(b.max.y, <span class="number">5.0</span>);
+        <span class="macro">assert_eq!</span>(b.min.x, -<span class="number">5.0</span>);
+        <span class="macro">assert_eq!</span>(b.min.y, -<span class="number">5.0</span>);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_lerp</span>() {
-        <span class="kw">let</span> <span class="ident">b1</span> <span class="op">=</span> <span class="ident">Box2D::from_points</span>(<span class="kw-2">&amp;</span>[<span class="ident">point2</span>(<span class="op">-</span><span class="number">20.0</span>, <span class="op">-</span><span class="number">20.0</span>), <span class="ident">point2</span>(<span class="op">-</span><span class="number">10.0</span>, <span class="op">-</span><span class="number">10.0</span>)]);
-        <span class="kw">let</span> <span class="ident">b2</span> <span class="op">=</span> <span class="ident">Box2D::from_points</span>(<span class="kw-2">&amp;</span>[<span class="ident">point2</span>(<span class="number">10.0</span>, <span class="number">10.0</span>), <span class="ident">point2</span>(<span class="number">20.0</span>, <span class="number">20.0</span>)]);
-        <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">b1</span>.<span class="ident">lerp</span>(<span class="ident">b2</span>, <span class="number">0.5</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">b</span>.<span class="ident">center</span>(), <span class="ident">Point2D::zero</span>());
-        <span class="macro">assert_eq!</span>(<span class="ident">b</span>.<span class="ident">size</span>().<span class="ident">width</span>, <span class="number">10.0</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">b</span>.<span class="ident">size</span>().<span class="ident">height</span>, <span class="number">10.0</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_lerp() {
+        <span class="kw">let </span>b1 = Box2D::from_points(<span class="kw-2">&amp;</span>[point2(-<span class="number">20.0</span>, -<span class="number">20.0</span>), point2(-<span class="number">10.0</span>, -<span class="number">10.0</span>)]);
+        <span class="kw">let </span>b2 = Box2D::from_points(<span class="kw-2">&amp;</span>[point2(<span class="number">10.0</span>, <span class="number">10.0</span>), point2(<span class="number">20.0</span>, <span class="number">20.0</span>)]);
+        <span class="kw">let </span>b = b1.lerp(b2, <span class="number">0.5</span>);
+        <span class="macro">assert_eq!</span>(b.center(), Point2D::zero());
+        <span class="macro">assert_eq!</span>(b.size().width, <span class="number">10.0</span>);
+        <span class="macro">assert_eq!</span>(b.size().height, <span class="number">10.0</span>);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_contains</span>() {
-        <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">Box2D::from_points</span>(<span class="kw-2">&amp;</span>[<span class="ident">point2</span>(<span class="op">-</span><span class="number">20.0</span>, <span class="op">-</span><span class="number">20.0</span>), <span class="ident">point2</span>(<span class="number">20.0</span>, <span class="number">20.0</span>)]);
-        <span class="macro">assert!</span>(<span class="ident">b</span>.<span class="ident">contains</span>(<span class="ident">point2</span>(<span class="op">-</span><span class="number">15.3</span>, <span class="number">10.5</span>)));
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_contains() {
+        <span class="kw">let </span>b = Box2D::from_points(<span class="kw-2">&amp;</span>[point2(-<span class="number">20.0</span>, -<span class="number">20.0</span>), point2(<span class="number">20.0</span>, <span class="number">20.0</span>)]);
+        <span class="macro">assert!</span>(b.contains(point2(-<span class="number">15.3</span>, <span class="number">10.5</span>)));
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_contains_box</span>() {
-        <span class="kw">let</span> <span class="ident">b1</span> <span class="op">=</span> <span class="ident">Box2D::from_points</span>(<span class="kw-2">&amp;</span>[<span class="ident">point2</span>(<span class="op">-</span><span class="number">20.0</span>, <span class="op">-</span><span class="number">20.0</span>), <span class="ident">point2</span>(<span class="number">20.0</span>, <span class="number">20.0</span>)]);
-        <span class="kw">let</span> <span class="ident">b2</span> <span class="op">=</span> <span class="ident">Box2D::from_points</span>(<span class="kw-2">&amp;</span>[<span class="ident">point2</span>(<span class="op">-</span><span class="number">14.3</span>, <span class="op">-</span><span class="number">16.5</span>), <span class="ident">point2</span>(<span class="number">6.7</span>, <span class="number">17.6</span>)]);
-        <span class="macro">assert!</span>(<span class="ident">b1</span>.<span class="ident">contains_box</span>(<span class="kw-2">&amp;</span><span class="ident">b2</span>));
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_contains_box() {
+        <span class="kw">let </span>b1 = Box2D::from_points(<span class="kw-2">&amp;</span>[point2(-<span class="number">20.0</span>, -<span class="number">20.0</span>), point2(<span class="number">20.0</span>, <span class="number">20.0</span>)]);
+        <span class="kw">let </span>b2 = Box2D::from_points(<span class="kw-2">&amp;</span>[point2(-<span class="number">14.3</span>, -<span class="number">16.5</span>), point2(<span class="number">6.7</span>, <span class="number">17.6</span>)]);
+        <span class="macro">assert!</span>(b1.contains_box(<span class="kw-2">&amp;</span>b2));
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_inflate</span>() {
-        <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">Box2D::from_points</span>(<span class="kw-2">&amp;</span>[<span class="ident">point2</span>(<span class="op">-</span><span class="number">20.0</span>, <span class="op">-</span><span class="number">20.0</span>), <span class="ident">point2</span>(<span class="number">20.0</span>, <span class="number">20.0</span>)]);
-        <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">inflate</span>(<span class="number">10.0</span>, <span class="number">5.0</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">b</span>.<span class="ident">size</span>().<span class="ident">width</span>, <span class="number">60.0</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">b</span>.<span class="ident">size</span>().<span class="ident">height</span>, <span class="number">50.0</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">b</span>.<span class="ident">center</span>(), <span class="ident">Point2D::zero</span>());
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_inflate() {
+        <span class="kw">let </span>b = Box2D::from_points(<span class="kw-2">&amp;</span>[point2(-<span class="number">20.0</span>, -<span class="number">20.0</span>), point2(<span class="number">20.0</span>, <span class="number">20.0</span>)]);
+        <span class="kw">let </span>b = b.inflate(<span class="number">10.0</span>, <span class="number">5.0</span>);
+        <span class="macro">assert_eq!</span>(b.size().width, <span class="number">60.0</span>);
+        <span class="macro">assert_eq!</span>(b.size().height, <span class="number">50.0</span>);
+        <span class="macro">assert_eq!</span>(b.center(), Point2D::zero());
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_is_empty</span>() {
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="number">2</span> {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">coords_neg</span> <span class="op">=</span> [<span class="op">-</span><span class="number">20.0</span>, <span class="op">-</span><span class="number">20.0</span>];
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">coords_pos</span> <span class="op">=</span> [<span class="number">20.0</span>, <span class="number">20.0</span>];
-            <span class="ident">coords_neg</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="number">0.0</span>;
-            <span class="ident">coords_pos</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="number">0.0</span>;
-            <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">Box2D::from_points</span>(<span class="kw-2">&amp;</span>[<span class="ident">Point2D::from</span>(<span class="ident">coords_neg</span>), <span class="ident">Point2D::from</span>(<span class="ident">coords_pos</span>)]);
-            <span class="macro">assert!</span>(<span class="ident">b</span>.<span class="ident">is_empty</span>());
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_is_empty() {
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..<span class="number">2 </span>{
+            <span class="kw">let </span><span class="kw-2">mut </span>coords_neg = [-<span class="number">20.0</span>, -<span class="number">20.0</span>];
+            <span class="kw">let </span><span class="kw-2">mut </span>coords_pos = [<span class="number">20.0</span>, <span class="number">20.0</span>];
+            coords_neg[i] = <span class="number">0.0</span>;
+            coords_pos[i] = <span class="number">0.0</span>;
+            <span class="kw">let </span>b = Box2D::from_points(<span class="kw-2">&amp;</span>[Point2D::from(coords_neg), Point2D::from(coords_pos)]);
+            <span class="macro">assert!</span>(b.is_empty());
         }
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_nan_empty</span>() {
-        <span class="kw">use</span> <span class="ident">std::f32::NAN</span>;
-        <span class="macro">assert!</span>(<span class="ident">Box2D</span> { <span class="ident">min</span>: <span class="ident">point2</span>(<span class="ident">NAN</span>, <span class="number">2.0</span>), <span class="ident">max</span>: <span class="ident">point2</span>(<span class="number">1.0</span>, <span class="number">3.0</span>) }.<span class="ident">is_empty</span>());
-        <span class="macro">assert!</span>(<span class="ident">Box2D</span> { <span class="ident">min</span>: <span class="ident">point2</span>(<span class="number">0.0</span>, <span class="ident">NAN</span>), <span class="ident">max</span>: <span class="ident">point2</span>(<span class="number">1.0</span>, <span class="number">2.0</span>) }.<span class="ident">is_empty</span>());
-        <span class="macro">assert!</span>(<span class="ident">Box2D</span> { <span class="ident">min</span>: <span class="ident">point2</span>(<span class="number">1.0</span>, <span class="op">-</span><span class="number">2.0</span>), <span class="ident">max</span>: <span class="ident">point2</span>(<span class="ident">NAN</span>, <span class="number">2.0</span>) }.<span class="ident">is_empty</span>());
-        <span class="macro">assert!</span>(<span class="ident">Box2D</span> { <span class="ident">min</span>: <span class="ident">point2</span>(<span class="number">1.0</span>, <span class="op">-</span><span class="number">2.0</span>), <span class="ident">max</span>: <span class="ident">point2</span>(<span class="number">0.0</span>, <span class="ident">NAN</span>) }.<span class="ident">is_empty</span>());
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_nan_empty() {
+        <span class="kw">use </span>std::f32::NAN;
+        <span class="macro">assert!</span>(Box2D { min: point2(NAN, <span class="number">2.0</span>), max: point2(<span class="number">1.0</span>, <span class="number">3.0</span>) }.is_empty());
+        <span class="macro">assert!</span>(Box2D { min: point2(<span class="number">0.0</span>, NAN), max: point2(<span class="number">1.0</span>, <span class="number">2.0</span>) }.is_empty());
+        <span class="macro">assert!</span>(Box2D { min: point2(<span class="number">1.0</span>, -<span class="number">2.0</span>), max: point2(NAN, <span class="number">2.0</span>) }.is_empty());
+        <span class="macro">assert!</span>(Box2D { min: point2(<span class="number">1.0</span>, -<span class="number">2.0</span>), max: point2(<span class="number">0.0</span>, NAN) }.is_empty());
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_from_origin_and_size</span>() {
-        <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">Box2D::from_origin_and_size</span>(<span class="ident">point2</span>(<span class="number">1.0</span>, <span class="number">2.0</span>), <span class="ident">size2</span>(<span class="number">3.0</span>, <span class="number">4.0</span>));
-        <span class="macro">assert_eq!</span>(<span class="ident">b</span>.<span class="ident">min</span>, <span class="ident">point2</span>(<span class="number">1.0</span>, <span class="number">2.0</span>));
-        <span class="macro">assert_eq!</span>(<span class="ident">b</span>.<span class="ident">size</span>(), <span class="ident">size2</span>(<span class="number">3.0</span>, <span class="number">4.0</span>));
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_from_origin_and_size() {
+        <span class="kw">let </span>b = Box2D::from_origin_and_size(point2(<span class="number">1.0</span>, <span class="number">2.0</span>), size2(<span class="number">3.0</span>, <span class="number">4.0</span>));
+        <span class="macro">assert_eq!</span>(b.min, point2(<span class="number">1.0</span>, <span class="number">2.0</span>));
+        <span class="macro">assert_eq!</span>(b.size(), size2(<span class="number">3.0</span>, <span class="number">4.0</span>));
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_set_size</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">Box2D</span> {
-            <span class="ident">min</span>: <span class="ident">point2</span>(<span class="number">1.0</span>, <span class="number">2.0</span>),
-            <span class="ident">max</span>: <span class="ident">point2</span>(<span class="number">3.0</span>, <span class="number">4.0</span>),
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_set_size() {
+        <span class="kw">let </span><span class="kw-2">mut </span>b = Box2D {
+            min: point2(<span class="number">1.0</span>, <span class="number">2.0</span>),
+            max: point2(<span class="number">3.0</span>, <span class="number">4.0</span>),
         };
-        <span class="ident">b</span>.<span class="ident">set_size</span>(<span class="ident">size2</span>(<span class="number">5.0</span>, <span class="number">6.0</span>));
+        b.set_size(size2(<span class="number">5.0</span>, <span class="number">6.0</span>));
 
-        <span class="macro">assert_eq!</span>(<span class="ident">b</span>.<span class="ident">min</span>, <span class="ident">point2</span>(<span class="number">1.0</span>, <span class="number">2.0</span>));
-        <span class="macro">assert_eq!</span>(<span class="ident">b</span>.<span class="ident">size</span>(), <span class="ident">size2</span>(<span class="number">5.0</span>, <span class="number">6.0</span>));
+        <span class="macro">assert_eq!</span>(b.min, point2(<span class="number">1.0</span>, <span class="number">2.0</span>));
+        <span class="macro">assert_eq!</span>(b.size(), size2(<span class="number">5.0</span>, <span class="number">6.0</span>));
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="euclid" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0-nightly (12cd71f4d 2022-06-01)" ></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="euclid" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (17cbdfd07 2022-09-13)" ></div></body></html>

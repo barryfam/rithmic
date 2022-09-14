@@ -1,11 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `rithmic/src/monoid_ds/segtree.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>segtree.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script src="../../../crates.js"></script><script defer src="../../../main.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script>
-    <noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../rithmic/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"></h2>
-    </nav>
-    <nav class="sidebar"><a class="sidebar-logo" href="../../../rithmic/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../rithmic/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
-                                <a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div>
-                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `rithmic/src/monoid_ds/segtree.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>segtree.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../rithmic/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../rithmic/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../rithmic/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -261,262 +254,263 @@
 <span id="254">254</span>
 <span id="255">255</span>
 <span id="256">256</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::fmt</span>::{<span class="self">self</span>, <span class="ident">Debug</span>, <span class="ident">Formatter</span>};
-<span class="kw">use</span> <span class="ident">std::marker::PhantomData</span>;
-<span class="kw">use</span> <span class="ident">std::mem</span>;
-<span class="kw">use</span> <span class="ident">std::ops::Range</span>;
+<span id="257">257</span>
+</pre><pre class="rust"><code><span class="kw">use </span>std::fmt::{<span class="self">self</span>, Debug, Formatter};
+<span class="kw">use </span>std::marker::PhantomData;
+<span class="kw">use </span>std::{mem, iter};
 
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">IntBitOps</span>, <span class="ident">Rangelike</span>};
+<span class="kw">use crate</span>::{IntBitOps, Rangelike};
 
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::MonoidOps</span>;
+<span class="kw">use </span><span class="kw">super</span>::monoid_ops::{MonoidOps, USumQSum};
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Default</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SegTree</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span>, <span class="ident">O</span>: <span class="ident">MonoidOps</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Default</span>,
-    <span class="ident">U</span>: <span class="ident">Default</span>
+<span class="attribute">#[derive(Default, Clone)]
+</span><span class="kw">pub struct </span>SegTree&lt;T, U = T, O: MonoidOps&lt;T, U&gt; = USumQSum&gt;
+<span class="kw">where
+    </span>T: Default,
+    U: Default
 {
-    <span class="ident">len</span>: <span class="ident">usize</span>,
-    <span class="ident">tree</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
-    <span class="ident">pending</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">U</span><span class="op">&gt;</span>,
-    <span class="ident">phantom</span>: <span class="ident">PhantomData</span><span class="op">&lt;</span><span class="ident">O</span><span class="op">&gt;</span>,
+    len: usize,
+    tree: Vec&lt;(T, U)&gt;,
+    phantom: PhantomData&lt;O&gt;,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span>, <span class="ident">O</span>: <span class="ident">MonoidOps</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">SegTree</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span>, <span class="ident">O</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Default</span>,
-    <span class="ident">U</span>: <span class="ident">Default</span>
+<span class="kw">impl</span>&lt;T, U, O: MonoidOps&lt;T, U&gt;&gt; From&lt;Vec&lt;T&gt;&gt; <span class="kw">for </span>SegTree&lt;T, U, O&gt;
+<span class="kw">where
+    </span>T: Default,
+    U: Default
 {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="kw-2">mut</span> <span class="ident">vec</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span>
-    {
-        <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident">vec</span>.<span class="ident">len</span>();
-        <span class="kw">let</span> <span class="ident">p2</span> <span class="op">=</span> <span class="ident">len</span>.<span class="ident">next_power_of_two</span>();
+    <span class="kw">fn </span>from(vec: Vec&lt;T&gt;) -&gt; <span class="self">Self
+    </span>{
+        <span class="kw">let </span>len = vec.len();
+        <span class="kw">let </span>p2 = len.next_power_of_two();
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">tree</span> <span class="op">=</span> <span class="ident">Vec::with_capacity</span>(<span class="ident">p2</span> <span class="op">*</span> <span class="number">2</span>);
-        <span class="ident">tree</span>.<span class="ident">resize_with</span>(<span class="ident">p2</span>, <span class="ident">T::default</span>);
-        <span class="ident">tree</span>.<span class="ident">append</span>(<span class="kw-2">&amp;mut</span> <span class="ident">vec</span>);
-        <span class="ident">tree</span>.<span class="ident">resize_with</span>(<span class="ident">p2</span> <span class="op">*</span> <span class="number">2</span>, <span class="ident">O::operator_identity</span>);
-        <span class="kw">for</span> <span class="ident">u</span> <span class="kw">in</span> (<span class="number">1</span>..<span class="ident">p2</span>).<span class="ident">rev</span>() {
-            <span class="ident">tree</span>[<span class="ident">u</span>] <span class="op">=</span> <span class="ident">O::operator</span>(<span class="kw-2">&amp;</span><span class="ident">tree</span>[<span class="ident">u</span><span class="op">&lt;</span><span class="op">&lt;</span><span class="number">1</span>], <span class="kw-2">&amp;</span><span class="ident">tree</span>[<span class="ident">u</span><span class="op">&lt;</span><span class="op">&lt;</span><span class="number">1</span><span class="op">|</span><span class="number">1</span>])
+        <span class="kw">let </span><span class="kw-2">mut </span>tree = Vec::with_capacity(p2 * <span class="number">2</span>);
+        tree.resize_with(p2, Default::default);
+        tree.extend(vec.into_iter().zip(iter::repeat_with(O::update_identity)));
+        tree.resize_with(p2 * <span class="number">2</span>, || (O::operator_identity(), O::update_identity()));
+        <span class="kw">for </span>u <span class="kw">in </span>(<span class="number">1</span>..p2).rev() {
+            tree[u] = (
+                O::operator(<span class="kw-2">&amp;</span>tree[u&lt;&lt;<span class="number">1</span>].<span class="number">0</span>, <span class="kw-2">&amp;</span>tree[u&lt;&lt;<span class="number">1</span>|<span class="number">1</span>].<span class="number">0</span>),
+                O::update_identity()
+            );
         }
 
-        <span class="kw">let</span> <span class="ident">ptl</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">O::LAZY</span> {<span class="ident">p2</span>} <span class="kw">else</span> {<span class="number">0</span>};
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">pending</span> <span class="op">=</span> <span class="ident">Vec::with_capacity</span>(<span class="ident">ptl</span>);
-        <span class="ident">pending</span>.<span class="ident">resize_with</span>(<span class="ident">ptl</span>, <span class="ident">O::update_identity</span>);
-
-        <span class="self">Self</span> { <span class="ident">len</span>, <span class="ident">tree</span>, <span class="ident">pending</span>, <span class="ident">phantom</span>: <span class="ident">PhantomData</span> }
-    }
-}
-
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span>, <span class="ident">O</span>: <span class="ident">MonoidOps</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">FromIterator</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">SegTree</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span>, <span class="ident">O</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Default</span>,
-    <span class="ident">U</span>: <span class="ident">Default</span>
-{
-    <span class="kw">fn</span> <span class="ident">from_iter</span><span class="op">&lt;</span><span class="ident">I</span>: <span class="ident">IntoIterator</span><span class="op">&lt;</span><span class="ident">Item</span><span class="op">=</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">iter</span>: <span class="ident">I</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::from</span>(<span class="ident">iter</span>.<span class="ident">into_iter</span>().<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span>())
+        <span class="self">Self </span>{ len, tree, phantom: PhantomData }
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span>, <span class="ident">O</span>: <span class="ident">MonoidOps</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">SegTree</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span>, <span class="ident">O</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Default</span>,
-    <span class="ident">U</span>: <span class="ident">Default</span>
+<span class="kw">impl</span>&lt;T, U, O: MonoidOps&lt;T, U&gt;&gt; FromIterator&lt;T&gt; <span class="kw">for </span>SegTree&lt;T, U, O&gt;
+<span class="kw">where
+    </span>T: Default,
+    U: Default
 {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">len</span>: <span class="ident">usize</span>) -&gt; <span class="self">Self</span>
+    <span class="kw">fn </span>from_iter&lt;I: IntoIterator&lt;Item=T&gt;&gt;(iter: I) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::from(iter.into_iter().collect::&lt;Vec&lt;T&gt;&gt;())
+    }
+}
+
+<span class="kw">impl</span>&lt;T, U, O: MonoidOps&lt;T, U&gt;&gt; SegTree&lt;T, U, O&gt;
+<span class="kw">where
+    </span>T: Default,
+    U: Default
+{
+    <span class="kw">pub fn </span>new(len: usize) -&gt; <span class="self">Self
+    </span>{
+        <span class="kw">let </span><span class="kw-2">mut </span>vec = Vec::with_capacity(len);
+        vec.resize_with(len, O::operator_identity);
+        <span class="self">Self</span>::from(vec)
+    }
+
+    <span class="attribute">#[allow(clippy::len_without_is_empty)]
+    #[inline]
+    </span><span class="kw">pub fn </span>len(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize {
+        <span class="self">self</span>.len
+    }
+
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>width(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize {
+        <span class="self">self</span>.tree.len() / <span class="number">2
+    </span>}
+
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>height(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; u32 {
+        <span class="self">self</span>.width().bit_length()
+    }
+
+    <span class="doccomment">/// The range of indexes of the leaf nodes descendant of tree node `u`
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">fn </span>span(<span class="kw-2">&amp;</span><span class="self">self</span>, u: usize) -&gt; (usize, usize)
     {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec</span> <span class="op">=</span> <span class="ident">Vec::with_capacity</span>(<span class="ident">len</span>);
-        <span class="ident">vec</span>.<span class="ident">resize_with</span>(<span class="ident">len</span>, <span class="ident">O::operator_identity</span>);
-        <span class="ident"><span class="self">Self</span>::from</span>(<span class="ident">vec</span>)
+        <span class="kw">let </span>s = <span class="self">self</span>.height() - u.bit_length();
+        ((u&lt;&lt;s) - <span class="self">self</span>.width(), ((u+<span class="number">1</span>)&lt;&lt;s) - <span class="self">self</span>.width())
     }
 
-    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::len_without_is_empty</span>)]</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">len</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">usize</span> {
-        <span class="self">self</span>.<span class="ident">len</span>
-    }
-
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">width</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">usize</span> {
-        <span class="self">self</span>.<span class="ident">tree</span>.<span class="ident">len</span>() <span class="op">/</span> <span class="number">2</span>
-    }
-
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">height</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u32</span> {
-        <span class="self">self</span>.<span class="ident">width</span>().<span class="ident">bit_length</span>()
-    }
-
-    <span class="doccomment">/// The range of indexes of the leaf nodes descendant of tree node `u`</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">span</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">u</span>: <span class="ident">usize</span>) -&gt; (<span class="ident">usize</span>, <span class="ident">usize</span>)
+    <span class="doccomment">/// Apply any pending update at `u` to its two immediate children, then compose the update into those children in the pending tree
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">fn </span>push1(<span class="kw-2">&amp;mut </span><span class="self">self</span>, u: usize)
     {
-        <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">height</span>() <span class="op">-</span> <span class="ident">u</span>.<span class="ident">bit_length</span>();
-        ((<span class="ident">u</span><span class="op">&lt;</span><span class="op">&lt;</span><span class="ident">s</span>) <span class="op">-</span> <span class="self">self</span>.<span class="ident">width</span>(), ((<span class="ident">u</span><span class="op">+</span><span class="number">1</span>)<span class="op">&lt;</span><span class="op">&lt;</span><span class="ident">s</span>) <span class="op">-</span> <span class="self">self</span>.<span class="ident">width</span>())
+        <span class="kw">let </span>a = mem::replace(<span class="kw-2">&amp;mut </span><span class="self">self</span>.tree[u].<span class="number">1</span>, O::update_identity());
+        <span class="self">self</span>.subtree_update(u&lt;&lt;<span class="number">1  </span>, <span class="kw-2">&amp;</span>a);
+        <span class="self">self</span>.subtree_update(u&lt;&lt;<span class="number">1</span>|<span class="number">1</span>, <span class="kw-2">&amp;</span>a);
     }
 
-    <span class="doccomment">/// Apply any pending update at `u` to its two immediate children, then compose the update into those children in the pending tree</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">push1</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">u</span>: <span class="ident">usize</span>)
+    <span class="doccomment">/// Recalculate tree node `u` by applying `operator` to its two immediate children. In a lazy tree, any pending updates at `u` or its ancestors must be pushed down before this call
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">fn </span>build1(<span class="kw-2">&amp;mut </span><span class="self">self</span>, u: usize) {
+        <span class="self">self</span>.tree[u].<span class="number">0 </span>= O::operator(<span class="kw-2">&amp;</span><span class="self">self</span>.tree[u&lt;&lt;<span class="number">1</span>].<span class="number">0</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.tree[u&lt;&lt;<span class="number">1</span>|<span class="number">1</span>].<span class="number">0</span>);
+    }
+
+    <span class="doccomment">/// Push pending updates from root to tree node `u`
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">fn </span>push_path(<span class="kw-2">&amp;mut </span><span class="self">self</span>, u: usize)
     {
-        <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="ident">mem::replace</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">pending</span>[<span class="ident">u</span>], <span class="ident">O::update_identity</span>());
-        <span class="self">self</span>.<span class="ident">subtree_update</span>(<span class="ident">u</span><span class="op">&lt;</span><span class="op">&lt;</span><span class="number">1</span>  , <span class="kw-2">&amp;</span><span class="ident">a</span>);
-        <span class="self">self</span>.<span class="ident">subtree_update</span>(<span class="ident">u</span><span class="op">&lt;</span><span class="op">&lt;</span><span class="number">1</span><span class="op">|</span><span class="number">1</span>, <span class="kw-2">&amp;</span><span class="ident">a</span>);
-    }
-
-    <span class="doccomment">/// Recalculate tree node `u` by applying `operator` to its two immediate children. In a lazy tree, any pending updates at `u` or its ancestors must be pushed down before this call</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">build1</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">u</span>: <span class="ident">usize</span>) {
-        <span class="self">self</span>.<span class="ident">tree</span>[<span class="ident">u</span>] <span class="op">=</span> <span class="ident">O::operator</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">tree</span>[<span class="ident">u</span><span class="op">&lt;</span><span class="op">&lt;</span><span class="number">1</span>], <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">tree</span>[<span class="ident">u</span><span class="op">&lt;</span><span class="op">&lt;</span><span class="number">1</span><span class="op">|</span><span class="number">1</span>]);
-    }
-
-    <span class="doccomment">/// Push pending updates from root to tree node `u`</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">push_path</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">u</span>: <span class="ident">usize</span>)
-    {
-        <span class="kw">for</span> <span class="ident">s</span> <span class="kw">in</span> (<span class="number">1</span>..<span class="ident">u</span>.<span class="ident">bit_length</span>()).<span class="ident">rev</span>() {
-            <span class="self">self</span>.<span class="ident">push1</span>(<span class="ident">u</span> <span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">s</span>);
+        <span class="kw">for </span>s <span class="kw">in </span>(<span class="number">1</span>..u.bit_length()).rev() {
+            <span class="self">self</span>.push1(u &gt;&gt; s);
         }
     }
 
-    <span class="doccomment">/// Recalculate tree nodes from the parent of `u` to root. In a lazy tree, any pending updates at ancestors of `u` must be pushed down before this call</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">build_path</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="kw-2">mut</span> <span class="ident">u</span>: <span class="ident">usize</span>)
+    <span class="doccomment">/// Recalculate tree nodes from the parent of `u` to root. In a lazy tree, any pending updates at ancestors of `u` must be pushed down before this call
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">fn </span>build_path(<span class="kw-2">&amp;mut </span><span class="self">self</span>, <span class="kw-2">mut </span>u: usize)
     {
-        <span class="kw">while</span> <span class="ident">u</span> <span class="op">&gt;</span> <span class="number">1</span> {
-            <span class="ident">u</span> <span class="op">&gt;</span><span class="op">&gt;</span><span class="op">=</span> <span class="number">1</span>;
-            <span class="self">self</span>.<span class="ident">build1</span>(<span class="ident">u</span>);
+        <span class="kw">while </span>u &gt; <span class="number">1 </span>{
+            u &gt;&gt;= <span class="number">1</span>;
+            <span class="self">self</span>.build1(u);
         }
     }
 
-    <span class="doccomment">/// In a non-lazy tree, update leaf node `u`</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">leaf_update</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">u</span>: <span class="ident">usize</span>, <span class="ident">a</span>: <span class="kw-2">&amp;</span><span class="ident">U</span>) {
-        <span class="self">self</span>.<span class="ident">tree</span>[<span class="ident">u</span>] <span class="op">=</span> <span class="ident">O::update</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">tree</span>[<span class="ident">u</span>], <span class="ident">a</span>);
+    <span class="doccomment">/// In a non-lazy tree, update leaf node `u`
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">fn </span>leaf_update(<span class="kw-2">&amp;mut </span><span class="self">self</span>, u: usize, a: <span class="kw-2">&amp;</span>U) {
+        <span class="self">self</span>.tree[u].<span class="number">0 </span>= O::update(<span class="kw-2">&amp;</span><span class="self">self</span>.tree[u].<span class="number">0</span>, a);
     }
 
-    <span class="doccomment">/// In a lazy tree, attempt to update tree node `u` as if all its descendant leaves had been updated with `a`, without actually traversing down to them. Then, insert the update into the pending tree at index `u`. Any pending updates at ancestors of `u` must be pushed down before this call</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">subtree_update</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">u</span>: <span class="ident">usize</span>, <span class="ident">a</span>: <span class="kw-2">&amp;</span><span class="ident">U</span>)
+    <span class="doccomment">/// In a lazy tree, attempt to update tree node `u` as if all its descendant leaves had been updated with `a`, without actually traversing down to them. Then, insert the update into the pending tree at index `u`. Any pending updates at ancestors of `u` must be pushed down before this call
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">fn </span>subtree_update(<span class="kw-2">&amp;mut </span><span class="self">self</span>, u: usize, a: <span class="kw-2">&amp;</span>U)
     {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">x</span>) <span class="op">=</span> <span class="ident">O::update_distributive</span>(<span class="self">self</span>.<span class="ident">span</span>(<span class="ident">u</span>), <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">tree</span>[<span class="ident">u</span>], <span class="ident">a</span>) {
-            <span class="self">self</span>.<span class="ident">tree</span>[<span class="ident">u</span>] <span class="op">=</span> <span class="ident">x</span>;
-            <span class="kw">if</span> <span class="ident">u</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">width</span>() {
-                <span class="self">self</span>.<span class="ident">pending</span>[<span class="ident">u</span>] <span class="op">=</span> <span class="ident">O::update_composition</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">pending</span>[<span class="ident">u</span>], <span class="ident">a</span>);
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(x) = O::update_distributive(<span class="self">self</span>.span(u), <span class="kw-2">&amp;</span><span class="self">self</span>.tree[u].<span class="number">0</span>, a) {
+            <span class="self">self</span>.tree[u].<span class="number">0 </span>= x;
+            <span class="kw">if </span>u &lt; <span class="self">self</span>.width() {
+                <span class="self">self</span>.tree[u].<span class="number">1 </span>= O::update_composition(<span class="kw-2">&amp;</span><span class="self">self</span>.tree[u].<span class="number">1</span>, a);
             }
-        } <span class="kw">else</span> {
-            <span class="comment">// update both children instead</span>
-            <span class="comment">// maintain invariants for `u` and its descendants</span>
-            <span class="macro">debug_assert!</span>(<span class="ident">u</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">width</span>(), <span class="string">&quot;update_distributive() must not fail on a leaf node&quot;</span>);
-            <span class="kw">let</span> <span class="ident">a0</span> <span class="op">=</span> <span class="ident">mem::replace</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">pending</span>[<span class="ident">u</span>], <span class="ident">O::update_identity</span>());
-            <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="ident">O::update_composition</span>(<span class="kw-2">&amp;</span><span class="ident">a0</span>, <span class="ident">a</span>);
-            <span class="self">self</span>.<span class="ident">subtree_update</span>(<span class="ident">u</span><span class="op">&lt;</span><span class="op">&lt;</span><span class="number">1</span>  , <span class="kw-2">&amp;</span><span class="ident">a</span>);
-            <span class="self">self</span>.<span class="ident">subtree_update</span>(<span class="ident">u</span><span class="op">&lt;</span><span class="op">&lt;</span><span class="number">1</span><span class="op">|</span><span class="number">1</span>, <span class="kw-2">&amp;</span><span class="ident">a</span>);
-            <span class="self">self</span>.<span class="ident">build1</span>(<span class="ident">u</span>);
+        } <span class="kw">else </span>{
+            <span class="comment">// update both children instead
+            // maintain invariants for `u` and its descendants
+            </span><span class="macro">debug_assert!</span>(u &lt; <span class="self">self</span>.width(), <span class="string">&quot;update_distributive() must not fail on a leaf node&quot;</span>);
+            <span class="kw">let </span>a0 = mem::replace(<span class="kw-2">&amp;mut </span><span class="self">self</span>.tree[u].<span class="number">1</span>, O::update_identity());
+            <span class="kw">let </span>a = O::update_composition(<span class="kw-2">&amp;</span>a0, a);
+            <span class="self">self</span>.subtree_update(u&lt;&lt;<span class="number">1  </span>, <span class="kw-2">&amp;</span>a);
+            <span class="self">self</span>.subtree_update(u&lt;&lt;<span class="number">1</span>|<span class="number">1</span>, <span class="kw-2">&amp;</span>a);
+            <span class="self">self</span>.build1(u);
         }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">index</span>: <span class="ident">usize</span>, <span class="ident">value</span>: <span class="ident">T</span>)
+    <span class="kw">pub fn </span>set(<span class="kw-2">&amp;mut </span><span class="self">self</span>, index: usize, value: T)
     {
-        <span class="kw">let</span> <span class="ident">i</span> <span class="op">=</span> <span class="ident">index</span>;
-        <span class="kw">let</span> <span class="ident">u</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">width</span>() <span class="op">+</span> <span class="ident">i</span>;
-        <span class="macro">debug_assert!</span>(<span class="ident">i</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">len</span>, <span class="string">&quot;Index out of range&quot;</span>);
+        <span class="kw">let </span>i = index;
+        <span class="kw">let </span>u = <span class="self">self</span>.width() + i;
+        <span class="macro">debug_assert!</span>(i &lt; <span class="self">self</span>.len, <span class="string">&quot;index out of range&quot;</span>);
 
-        <span class="kw">if</span> <span class="ident">O::LAZY</span> { <span class="self">self</span>.<span class="ident">push_path</span>(<span class="ident">u</span>); }
-        <span class="self">self</span>.<span class="ident">tree</span>[<span class="ident">u</span>] <span class="op">=</span> <span class="ident">value</span>;
-        <span class="self">self</span>.<span class="ident">build_path</span>(<span class="ident">u</span>);
+        <span class="kw">if </span>O::LAZY { <span class="self">self</span>.push_path(u); }
+        <span class="self">self</span>.tree[u].<span class="number">0 </span>= value;
+        <span class="self">self</span>.build_path(u);
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">update</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">range</span>: <span class="kw">impl</span> <span class="ident">Rangelike</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>, <span class="ident">value</span>: <span class="kw-2">&amp;</span><span class="ident">U</span>)
+    <span class="kw">pub fn </span>update(<span class="kw-2">&amp;mut </span><span class="self">self</span>, range: <span class="kw">impl </span>Rangelike&lt;usize&gt;, value: <span class="kw-2">&amp;</span>U)
     {
-        <span class="kw">let</span> <span class="ident">Range</span>{<span class="ident">start</span>: <span class="ident">i</span>, <span class="ident">end</span>: <span class="ident">j</span>} <span class="op">=</span> <span class="ident">range</span>.<span class="ident">clamp</span>(<span class="number">0</span>..<span class="self">self</span>.<span class="ident">len</span>).<span class="ident">expect</span>(<span class="string">&quot;Invalid update range&quot;</span>);
+        <span class="kw">let </span>(i, j) = range.clamp(<span class="number">0</span>..<span class="self">self</span>.len).expect(<span class="string">&quot;update range outside bounds&quot;</span>);
 
-        <span class="kw">match</span> <span class="ident">O::LAZY</span> {
-            <span class="bool-val">false</span> =&gt; {
-                <span class="macro">debug_assert_eq!</span>(<span class="ident">j</span><span class="op">-</span><span class="ident">i</span>, <span class="number">1</span>, <span class="string">&quot;Non-lazy trees do not support range updates&quot;</span>);
+        <span class="kw">match </span>O::LAZY {
+            <span class="bool-val">false </span>=&gt; {
+                <span class="macro">debug_assert_eq!</span>(j-i, <span class="number">1</span>, <span class="string">&quot;non-lazy trees do not support range updates&quot;</span>);
 
-                <span class="kw">let</span> <span class="ident">u</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">width</span>() <span class="op">+</span> <span class="ident">i</span>;
-                <span class="self">self</span>.<span class="ident">leaf_update</span>(<span class="ident">u</span>, <span class="ident">value</span>);
-                <span class="self">self</span>.<span class="ident">build_path</span>(<span class="ident">u</span>);
+                <span class="kw">let </span>u = <span class="self">self</span>.width() + i;
+                <span class="self">self</span>.leaf_update(u, value);
+                <span class="self">self</span>.build_path(u);
             }
-            <span class="bool-val">true</span> =&gt; {
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">u</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">width</span>() <span class="op">+</span> <span class="ident">i</span>;
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">width</span>() <span class="op">+</span> <span class="ident">j</span><span class="op">-</span><span class="number">1</span>;
-                <span class="ident">u</span> <span class="op">&gt;</span><span class="op">&gt;</span><span class="op">=</span> <span class="ident">u</span>.<span class="ident">trailing_zeros</span>();
-                <span class="ident">v</span> <span class="op">&gt;</span><span class="op">&gt;</span><span class="op">=</span> <span class="ident">v</span>.<span class="ident">trailing_ones</span>();
+            <span class="bool-val">true </span>=&gt; {
+                <span class="kw">let </span><span class="kw-2">mut </span>u = <span class="self">self</span>.width() + i;
+                <span class="kw">let </span><span class="kw-2">mut </span>v = <span class="self">self</span>.width() + j-<span class="number">1</span>;
+                u &gt;&gt;= u.trailing_zeros();
+                v &gt;&gt;= v.trailing_ones();
 
-                <span class="self">self</span>.<span class="ident">push_path</span>(<span class="ident">u</span>);
-                <span class="self">self</span>.<span class="ident">push_path</span>(<span class="ident">v</span>);
+                <span class="self">self</span>.push_path(u);
+                <span class="self">self</span>.push_path(v);
 
-                <span class="kw">let</span> (<span class="kw-2">mut</span> <span class="ident">l</span>, <span class="kw-2">mut</span> <span class="ident">r</span>) <span class="op">=</span> (<span class="self">self</span>.<span class="ident">width</span>() <span class="op">+</span> <span class="ident">i</span>, <span class="self">self</span>.<span class="ident">width</span>() <span class="op">+</span> <span class="ident">j</span><span class="op">-</span><span class="number">1</span>);
-                <span class="kw">while</span> <span class="ident">l</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">r</span> {
-                    <span class="kw">if</span> <span class="ident">l</span><span class="kw-2">&amp;</span><span class="number">1</span> <span class="op">==</span> <span class="number">1</span> {
-                        <span class="self">self</span>.<span class="ident">subtree_update</span>(<span class="ident">l</span>, <span class="ident">value</span>);
-                        <span class="ident">l</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+                <span class="kw">let </span>(<span class="kw-2">mut </span>l, <span class="kw-2">mut </span>r) = (<span class="self">self</span>.width() + i, <span class="self">self</span>.width() + j-<span class="number">1</span>);
+                <span class="kw">while </span>l &lt;= r {
+                    <span class="kw">if </span>l<span class="kw-2">&amp;</span><span class="number">1 </span>== <span class="number">1 </span>{
+                        <span class="self">self</span>.subtree_update(l, value);
+                        l += <span class="number">1</span>;
                     }
-                    <span class="kw">if</span> <span class="ident">r</span><span class="kw-2">&amp;</span><span class="number">1</span> <span class="op">==</span> <span class="number">0</span> {
-                        <span class="self">self</span>.<span class="ident">subtree_update</span>(<span class="ident">r</span>, <span class="ident">value</span>);
-                        <span class="ident">r</span> <span class="op">-</span><span class="op">=</span> <span class="number">1</span>;
+                    <span class="kw">if </span>r<span class="kw-2">&amp;</span><span class="number">1 </span>== <span class="number">0 </span>{
+                        <span class="self">self</span>.subtree_update(r, value);
+                        r -= <span class="number">1</span>;
                     }
-                    <span class="ident">l</span> <span class="op">&gt;</span><span class="op">&gt;</span><span class="op">=</span> <span class="number">1</span>;
-                    <span class="ident">r</span> <span class="op">&gt;</span><span class="op">&gt;</span><span class="op">=</span> <span class="number">1</span>;
+                    l &gt;&gt;= <span class="number">1</span>;
+                    r &gt;&gt;= <span class="number">1</span>;
                 }
 
-                <span class="self">self</span>.<span class="ident">build_path</span>(<span class="ident">u</span>);
-                <span class="self">self</span>.<span class="ident">build_path</span>(<span class="ident">v</span>);
+                <span class="self">self</span>.build_path(u);
+                <span class="self">self</span>.build_path(v);
             }
         }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">query</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">range</span>: <span class="kw">impl</span> <span class="ident">Rangelike</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>) -&gt; <span class="ident">T</span>
+    <span class="kw">pub fn </span>query(<span class="kw-2">&amp;mut </span><span class="self">self</span>, range: <span class="kw">impl </span>Rangelike&lt;usize&gt;) -&gt; T
     {
-        <span class="kw">let</span> <span class="ident">Range</span>{<span class="ident">start</span>: <span class="ident">i</span>, <span class="ident">end</span>: <span class="ident">j</span>} <span class="op">=</span> <span class="ident">range</span>.<span class="ident">clamp</span>(<span class="number">0</span>..<span class="self">self</span>.<span class="ident">len</span>).<span class="ident">expect</span>(<span class="string">&quot;Invalid query range&quot;</span>);
-
-        <span class="kw">if</span> <span class="ident">O::LAZY</span> {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">u</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">width</span>() <span class="op">+</span> <span class="ident">i</span>;
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">width</span>() <span class="op">+</span> <span class="ident">j</span><span class="op">-</span><span class="number">1</span>;
-            <span class="ident">u</span> <span class="op">&gt;</span><span class="op">&gt;</span><span class="op">=</span> <span class="ident">u</span>.<span class="ident">trailing_zeros</span>();
-            <span class="ident">v</span> <span class="op">&gt;</span><span class="op">&gt;</span><span class="op">=</span> <span class="ident">v</span>.<span class="ident">trailing_ones</span>();
-
-            <span class="self">self</span>.<span class="ident">push_path</span>(<span class="ident">u</span>);
-            <span class="self">self</span>.<span class="ident">push_path</span>(<span class="ident">v</span>);
+        <span class="kw">let </span>(i, j) = range.clamp(<span class="number">0</span>..<span class="self">self</span>.len).expect(<span class="string">&quot;query range outside bounds&quot;</span>);
+        <span class="kw">if </span>i == j {
+            <span class="kw">return </span>O::operator_identity()
         }
 
-        <span class="kw">let</span> (<span class="kw-2">mut</span> <span class="ident">l</span>, <span class="kw-2">mut</span> <span class="ident">r</span>) <span class="op">=</span> (<span class="self">self</span>.<span class="ident">width</span>() <span class="op">+</span> <span class="ident">i</span>, <span class="self">self</span>.<span class="ident">width</span>() <span class="op">+</span> <span class="ident">j</span><span class="op">-</span><span class="number">1</span>);
-        <span class="kw">let</span> (<span class="kw-2">mut</span> <span class="ident">x</span>, <span class="kw-2">mut</span> <span class="ident">y</span>) <span class="op">=</span> (<span class="ident">O::operator_identity</span>(), <span class="ident">O::operator_identity</span>());
-        <span class="kw">while</span> <span class="ident">l</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">r</span> {
-            <span class="kw">if</span> <span class="ident">l</span><span class="kw-2">&amp;</span><span class="number">1</span> <span class="op">==</span> <span class="number">1</span> {
-                <span class="ident">x</span> <span class="op">=</span> <span class="ident">O::operator</span>(<span class="kw-2">&amp;</span><span class="ident">x</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">tree</span>[<span class="ident">l</span>]);
-                <span class="ident">l</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-            }
-            <span class="kw">if</span> <span class="ident">r</span><span class="kw-2">&amp;</span><span class="number">1</span> <span class="op">==</span> <span class="number">0</span> {
-                <span class="ident">y</span> <span class="op">=</span> <span class="ident">O::operator</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">tree</span>[<span class="ident">r</span>], <span class="kw-2">&amp;</span><span class="ident">y</span>);
-                <span class="ident">r</span> <span class="op">-</span><span class="op">=</span> <span class="number">1</span>;
-            }
-            <span class="ident">l</span> <span class="op">&gt;</span><span class="op">&gt;</span><span class="op">=</span> <span class="number">1</span>;
-            <span class="ident">r</span> <span class="op">&gt;</span><span class="op">&gt;</span><span class="op">=</span> <span class="number">1</span>;
+        <span class="kw">if </span>O::LAZY {
+            <span class="kw">let </span><span class="kw-2">mut </span>u = <span class="self">self</span>.width() + i;
+            <span class="kw">let </span><span class="kw-2">mut </span>v = <span class="self">self</span>.width() + j-<span class="number">1</span>;
+            u &gt;&gt;= u.trailing_zeros();
+            v &gt;&gt;= v.trailing_ones();
+
+            <span class="self">self</span>.push_path(u);
+            <span class="self">self</span>.push_path(v);
         }
-        <span class="ident">O::operator</span>(<span class="kw-2">&amp;</span><span class="ident">x</span>, <span class="kw-2">&amp;</span><span class="ident">y</span>)
+
+        <span class="kw">let </span>(<span class="kw-2">mut </span>l, <span class="kw-2">mut </span>r) = (<span class="self">self</span>.width() + i, <span class="self">self</span>.width() + j-<span class="number">1</span>);
+        <span class="kw">let </span>(<span class="kw-2">mut </span>x, <span class="kw-2">mut </span>y) = (O::operator_identity(), O::operator_identity());
+        <span class="kw">while </span>l &lt;= r {
+            <span class="kw">if </span>l<span class="kw-2">&amp;</span><span class="number">1 </span>== <span class="number">1 </span>{
+                x = O::operator(<span class="kw-2">&amp;</span>x, <span class="kw-2">&amp;</span><span class="self">self</span>.tree[l].<span class="number">0</span>);
+                l += <span class="number">1</span>;
+            }
+            <span class="kw">if </span>r<span class="kw-2">&amp;</span><span class="number">1 </span>== <span class="number">0 </span>{
+                y = O::operator(<span class="kw-2">&amp;</span><span class="self">self</span>.tree[r].<span class="number">0</span>, <span class="kw-2">&amp;</span>y);
+                r -= <span class="number">1</span>;
+            }
+            l &gt;&gt;= <span class="number">1</span>;
+            r &gt;&gt;= <span class="number">1</span>;
+        }
+        O::operator(<span class="kw-2">&amp;</span>x, <span class="kw-2">&amp;</span>y)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span>, <span class="ident">O</span>: <span class="ident">MonoidOps</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">SegTree</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span>, <span class="ident">O</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Default</span> <span class="op">+</span> <span class="ident">Debug</span>,
-    <span class="ident">U</span>: <span class="ident">Default</span> <span class="op">+</span> <span class="ident">Debug</span>
+<span class="kw">impl</span>&lt;T, U, O: MonoidOps&lt;T, U&gt;&gt; Debug <span class="kw">for </span>SegTree&lt;T, U, O&gt;
+<span class="kw">where
+    </span>T: Default + Debug,
+    U: Default + Debug
 {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Formatter</span>) -&gt; <span class="ident">fmt::Result</span>
+    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>Formatter) -&gt; fmt::Result
     {
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="self">self</span>.<span class="ident">height</span>() {
-            <span class="kw">let</span> (<span class="ident">u</span>, <span class="ident">v</span>) <span class="op">=</span> (<span class="number">1</span><span class="op">&lt;</span><span class="op">&lt;</span><span class="ident">i</span>, <span class="number">2</span><span class="op">&lt;</span><span class="op">&lt;</span><span class="ident">i</span>);
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..<span class="self">self</span>.height() {
+            <span class="kw">let </span>(u, v) = (<span class="number">1</span>&lt;&lt;i, <span class="number">2</span>&lt;&lt;i);
+            <span class="kw">let </span>(row, pending): (Vec&lt;<span class="kw">_</span>&gt;, Vec&lt;<span class="kw">_</span>&gt;) = <span class="self">self</span>.tree[u..v].iter().map(|(x, a)| (x, a)).unzip();
 
-            <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;\n{:?}&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">tree</span>[<span class="ident">u</span>..<span class="ident">v</span>])<span class="question-mark">?</span>;
-            <span class="kw">if</span> <span class="ident">O::LAZY</span> <span class="op">&amp;&amp;</span> <span class="ident">i</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">height</span>() <span class="op">-</span> <span class="number">1</span> {
-                <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;\n{:?}&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">pending</span>[<span class="ident">u</span>..<span class="ident">v</span>])<span class="question-mark">?</span>;
+            <span class="macro">write!</span>(f, <span class="string">&quot;\n{:?}&quot;</span>, row)<span class="question-mark">?</span>;
+            <span class="kw">if </span>O::LAZY &amp;&amp; i &lt; <span class="self">self</span>.height() - <span class="number">1 </span>{
+                <span class="macro">write!</span>(f, <span class="string">&quot;\n{:?}&quot;</span>, pending)<span class="question-mark">?</span>;
             }
         }
         <span class="prelude-val">Ok</span>(())
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="rithmic" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0-nightly (12cd71f4d 2022-06-01)" ></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="rithmic" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (17cbdfd07 2022-09-13)" ></div></body></html>

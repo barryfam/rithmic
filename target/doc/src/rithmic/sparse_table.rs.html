@@ -1,11 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `rithmic/src/sparse_table.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>sparse_table.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><script defer src="../../main.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script>
-    <noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../rithmic/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"></h2>
-    </nav>
-    <nav class="sidebar"><a class="sidebar-logo" href="../../rithmic/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../rithmic/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
-                                <a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div>
-                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `rithmic/src/sparse_table.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>sparse_table.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../rithmic/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../rithmic/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../rithmic/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -84,87 +77,84 @@
 <span id="77">77</span>
 <span id="78">78</span>
 <span id="79">79</span>
-<span id="80">80</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">IntBitOps</span>, <span class="ident">Rangelike</span>};
+</pre><pre class="rust"><code><span class="kw">use crate</span>::{IntBitOps, Rangelike};
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SparseTable</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="ident">len</span>: <span class="ident">usize</span>,
-    <span class="ident">table</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-    <span class="ident">operator</span>: <span class="kw">fn</span>(<span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="kw-2">&amp;</span><span class="ident">T</span>) -&gt; <span class="ident">T</span>
+<span class="attribute">#[derive(Clone)]
+</span><span class="kw">pub struct </span>SparseTable&lt;T&gt; {
+    len: usize,
+    table: Vec&lt;Vec&lt;T&gt;&gt;,
+    operator: <span class="kw">fn</span>(<span class="kw-2">&amp;</span>T, <span class="kw-2">&amp;</span>T) -&gt; T
 }
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">SparseTable</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">v</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">operator</span>: <span class="kw">fn</span>(<span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="kw-2">&amp;</span><span class="ident">T</span>) -&gt; <span class="ident">T</span>) -&gt; <span class="self">Self</span>
-    {
-        <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident">v</span>.<span class="ident">len</span>();
-        <span class="kw">let</span> <span class="ident">h</span> <span class="op">=</span> <span class="ident">len</span>.<span class="ident">saturating_sub</span>(<span class="number">1</span>).<span class="ident">bit_length</span>() <span class="kw">as</span> <span class="ident">usize</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">table</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::with_capacity</span>(<span class="ident">h</span>);
+<span class="kw">impl</span>&lt;T&gt; SparseTable&lt;T&gt; {
+    <span class="kw">pub fn </span>from(v: Vec&lt;T&gt;, operator: <span class="kw">fn</span>(<span class="kw-2">&amp;</span>T, <span class="kw-2">&amp;</span>T) -&gt; T) -&gt; <span class="self">Self
+    </span>{
+        <span class="kw">let </span>len = v.len();
+        <span class="kw">let </span>h = len.saturating_sub(<span class="number">1</span>).bit_length() <span class="kw">as </span>usize;
+        <span class="kw">let </span><span class="kw-2">mut </span>table = Vec::&lt;Vec&lt;T&gt;&gt;::with_capacity(h);
 
-        <span class="ident">table</span>.<span class="ident">push</span>(<span class="ident">v</span>);
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">1</span>..<span class="ident">h</span> {
-            <span class="kw">let</span> <span class="ident">rw</span> <span class="op">=</span> <span class="ident">len</span><span class="op">+</span><span class="number">1</span> <span class="op">-</span> (<span class="number">1</span><span class="op">&lt;</span><span class="op">&lt;</span><span class="ident">i</span>);
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">r</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::with_capacity</span>(<span class="ident">rw</span>);
-            <span class="kw">for</span> <span class="ident">j</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">rw</span> {
-                <span class="ident">r</span>.<span class="ident">push</span>(<span class="ident">operator</span>(<span class="kw-2">&amp;</span><span class="ident">table</span>[<span class="ident">i</span><span class="op">-</span><span class="number">1</span>][<span class="ident">j</span>], <span class="kw-2">&amp;</span><span class="ident">table</span>[<span class="ident">i</span><span class="op">-</span><span class="number">1</span>][<span class="ident">j</span> <span class="op">+</span> (<span class="number">1</span><span class="op">&lt;</span><span class="op">&lt;</span>(<span class="ident">i</span><span class="op">-</span><span class="number">1</span>))]));
+        table.push(v);
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">1</span>..h {
+            <span class="kw">let </span>rw = len+<span class="number">1 </span>- (<span class="number">1</span>&lt;&lt;i);
+            <span class="kw">let </span><span class="kw-2">mut </span>r = Vec::&lt;T&gt;::with_capacity(rw);
+            <span class="kw">for </span>j <span class="kw">in </span><span class="number">0</span>..rw {
+                r.push(operator(<span class="kw-2">&amp;</span>table[i-<span class="number">1</span>][j], <span class="kw-2">&amp;</span>table[i-<span class="number">1</span>][j + (<span class="number">1</span>&lt;&lt;(i-<span class="number">1</span>))]));
             }
-            <span class="ident">table</span>.<span class="ident">push</span>(<span class="ident">r</span>);
+            table.push(r);
         }
 
-        <span class="self">Self</span>{<span class="ident">len</span>, <span class="ident">table</span>, <span class="ident">operator</span>}
+        <span class="self">Self</span>{len, table, operator}
     }
 
-    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::len_without_is_empty</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">len</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">usize</span> {
-        <span class="self">self</span>.<span class="ident">len</span>
+    <span class="attribute">#[allow(clippy::len_without_is_empty)]
+    </span><span class="kw">pub fn </span>len(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize {
+        <span class="self">self</span>.len
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">query</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">range</span>: <span class="kw">impl</span> <span class="ident">Rangelike</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>) -&gt; <span class="ident">T</span>
+    <span class="kw">pub fn </span>query(<span class="kw-2">&amp;</span><span class="self">self</span>, range: <span class="kw">impl </span>Rangelike&lt;usize&gt;) -&gt; T
     {
-        <span class="kw">let</span> <span class="ident">range</span> <span class="op">=</span> <span class="ident">range</span>.<span class="ident">clamp</span>(<span class="number">0</span>..<span class="self">self</span>.<span class="ident">len</span>).<span class="ident">expect</span>(<span class="string">&quot;Query out of range&quot;</span>);
-        <span class="kw">let</span> (<span class="ident">i</span>, <span class="ident">j</span>) <span class="op">=</span> (<span class="ident">range</span>.<span class="ident">start</span>, <span class="ident">range</span>.<span class="ident">end</span>);
-        <span class="macro">assert!</span>(<span class="ident">i</span> <span class="op">&lt;</span> <span class="ident">j</span>, <span class="string">&quot;Empty query range&quot;</span>);
+        <span class="kw">let </span>(i, j) = range.clamp(<span class="number">0</span>..<span class="self">self</span>.len).expect(<span class="string">&quot;query out of range&quot;</span>);
+        <span class="macro">assert!</span>(i &lt; j, <span class="string">&quot;empty query range&quot;</span>);
 
-        <span class="kw">let</span> <span class="ident">row</span> <span class="op">=</span> (<span class="ident">j</span><span class="op">-</span><span class="ident">i</span><span class="op">-</span><span class="number">1</span>).<span class="ident">bit_length</span>().<span class="ident">saturating_sub</span>(<span class="number">1</span>) <span class="kw">as</span> <span class="ident">usize</span>;
-        (<span class="self">self</span>.<span class="ident">operator</span>)(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">table</span>[<span class="ident">row</span>][<span class="ident">i</span>], <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">table</span>[<span class="ident">row</span>][<span class="ident">j</span> <span class="op">-</span> (<span class="number">1</span><span class="op">&lt;</span><span class="op">&lt;</span><span class="ident">row</span>)])
+        <span class="kw">let </span>row = (j-i-<span class="number">1</span>).bit_length().saturating_sub(<span class="number">1</span>) <span class="kw">as </span>usize;
+        (<span class="self">self</span>.operator)(<span class="kw-2">&amp;</span><span class="self">self</span>.table[row][i], <span class="kw-2">&amp;</span><span class="self">self</span>.table[row][j - (<span class="number">1</span>&lt;&lt;row)])
     }
 }
 
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
-<span class="kw">mod</span> <span class="ident">tests</span> {
-    <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
+<span class="attribute">#[cfg(test)]
+</span><span class="kw">mod </span>tests {
+    <span class="kw">use super</span>::<span class="kw-2">*</span>;
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_rmq</span>() {
-        <span class="kw">let</span> <span class="ident">v</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="number">3</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">9</span>];
-        <span class="kw">let</span> <span class="ident">rmq</span> <span class="op">=</span> <span class="ident">SparseTable::from</span>(<span class="ident">v</span>, <span class="op">|</span><span class="kw-2">&amp;</span><span class="ident">a</span>, <span class="kw-2">&amp;</span><span class="ident">b</span><span class="op">|</span> <span class="ident">a</span>.<span class="ident">max</span>(<span class="ident">b</span>));
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_rmq() {
+        <span class="kw">let </span>v = <span class="macro">vec!</span>[<span class="number">3</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">9</span>];
+        <span class="kw">let </span>rmq = SparseTable::from(v, |<span class="kw-2">&amp;</span>a, <span class="kw-2">&amp;</span>b| a.max(b));
 
-        <span class="macro">assert_eq!</span>(<span class="ident">rmq</span>.<span class="ident">query</span>(..), <span class="number">9</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">rmq</span>.<span class="ident">query</span>(..<span class="number">3</span>), <span class="number">4</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">rmq</span>.<span class="ident">query</span>(<span class="number">3</span>..), <span class="number">9</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">rmq</span>.<span class="ident">query</span>(<span class="number">1</span>..<span class="number">4</span>), <span class="number">4</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">rmq</span>.<span class="ident">query</span>(<span class="number">1</span>..<span class="op">=</span><span class="number">4</span>), <span class="number">5</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">rmq</span>.<span class="ident">query</span>(<span class="number">1</span>..<span class="op">=</span><span class="number">1</span>), <span class="number">1</span>);
+        <span class="macro">assert_eq!</span>(rmq.query(..), <span class="number">9</span>);
+        <span class="macro">assert_eq!</span>(rmq.query(..<span class="number">3</span>), <span class="number">4</span>);
+        <span class="macro">assert_eq!</span>(rmq.query(<span class="number">3</span>..), <span class="number">9</span>);
+        <span class="macro">assert_eq!</span>(rmq.query(<span class="number">1</span>..<span class="number">4</span>), <span class="number">4</span>);
+        <span class="macro">assert_eq!</span>(rmq.query(<span class="number">1</span>..=<span class="number">4</span>), <span class="number">5</span>);
+        <span class="macro">assert_eq!</span>(rmq.query(<span class="number">1</span>..=<span class="number">1</span>), <span class="number">1</span>);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_edge_cases</span>()
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_edge_cases()
     {
-        <span class="kw">let</span> <span class="ident">rmq</span> <span class="op">=</span> <span class="ident">SparseTable::from</span>(<span class="ident">Vec</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span><span class="ident">::new</span>(), <span class="op">|</span><span class="kw-2">&amp;</span><span class="ident">a</span>, <span class="kw-2">&amp;</span><span class="ident">b</span><span class="op">|</span> <span class="ident">a</span>.<span class="ident">max</span>(<span class="ident">b</span>));
-        <span class="macro">assert_eq!</span>(<span class="ident">rmq</span>.<span class="ident">len</span>(), <span class="number">0</span>);
+        <span class="kw">let </span>rmq = SparseTable::from(Vec::&lt;i32&gt;::new(), |<span class="kw-2">&amp;</span>a, <span class="kw-2">&amp;</span>b| a.max(b));
+        <span class="macro">assert_eq!</span>(rmq.len(), <span class="number">0</span>);
 
-        <span class="kw">let</span> <span class="ident">rmq</span> <span class="op">=</span> <span class="ident">SparseTable::from</span>(<span class="macro">vec!</span>[<span class="number">13</span>], <span class="op">|</span><span class="kw-2">&amp;</span><span class="ident">a</span>, <span class="kw-2">&amp;</span><span class="ident">b</span><span class="op">|</span> <span class="ident">a</span>.<span class="ident">max</span>(<span class="ident">b</span>));
-        <span class="macro">assert_eq!</span>(<span class="ident">rmq</span>.<span class="ident">query</span>(..), <span class="number">13</span>);
+        <span class="kw">let </span>rmq = SparseTable::from(<span class="macro">vec!</span>[<span class="number">13</span>], |<span class="kw-2">&amp;</span>a, <span class="kw-2">&amp;</span>b| a.max(b));
+        <span class="macro">assert_eq!</span>(rmq.query(..), <span class="number">13</span>);
 
-        <span class="kw">let</span> <span class="ident">rmq</span> <span class="op">=</span> <span class="ident">SparseTable::from</span>(<span class="macro">vec!</span>[<span class="number">13</span>, <span class="number">5</span>], <span class="op">|</span><span class="kw-2">&amp;</span><span class="ident">a</span>, <span class="kw-2">&amp;</span><span class="ident">b</span><span class="op">|</span> <span class="ident">a</span>.<span class="ident">max</span>(<span class="ident">b</span>));
-        <span class="macro">assert_eq!</span>(<span class="ident">rmq</span>.<span class="ident">query</span>(..), <span class="number">13</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">rmq</span>.<span class="ident">query</span>(<span class="number">1</span>..), <span class="number">5</span>);
+        <span class="kw">let </span>rmq = SparseTable::from(<span class="macro">vec!</span>[<span class="number">13</span>, <span class="number">5</span>], |<span class="kw-2">&amp;</span>a, <span class="kw-2">&amp;</span>b| a.max(b));
+        <span class="macro">assert_eq!</span>(rmq.query(..), <span class="number">13</span>);
+        <span class="macro">assert_eq!</span>(rmq.query(<span class="number">1</span>..), <span class="number">5</span>);
 
-        <span class="kw">let</span> <span class="ident">rmq</span> <span class="op">=</span> <span class="ident">SparseTable::from</span>(<span class="macro">vec!</span>[<span class="number">5</span>, <span class="number">13</span>], <span class="op">|</span><span class="kw-2">&amp;</span><span class="ident">a</span>, <span class="kw-2">&amp;</span><span class="ident">b</span><span class="op">|</span> <span class="ident">a</span>.<span class="ident">max</span>(<span class="ident">b</span>));
-        <span class="macro">assert_eq!</span>(<span class="ident">rmq</span>.<span class="ident">query</span>(..), <span class="number">13</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">rmq</span>.<span class="ident">query</span>(..<span class="number">1</span>), <span class="number">5</span>);
+        <span class="kw">let </span>rmq = SparseTable::from(<span class="macro">vec!</span>[<span class="number">5</span>, <span class="number">13</span>], |<span class="kw-2">&amp;</span>a, <span class="kw-2">&amp;</span>b| a.max(b));
+        <span class="macro">assert_eq!</span>(rmq.query(..), <span class="number">13</span>);
+        <span class="macro">assert_eq!</span>(rmq.query(..<span class="number">1</span>), <span class="number">5</span>);
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="rithmic" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0-nightly (12cd71f4d 2022-06-01)" ></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="rithmic" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (17cbdfd07 2022-09-13)" ></div></body></html>

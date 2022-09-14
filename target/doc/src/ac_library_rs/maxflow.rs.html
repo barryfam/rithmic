@@ -1,11 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/bcfam/.cargo/git/checkouts/ac-library-rs-d342211755004e20/d2b35ac/src/maxflow.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>maxflow.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><script defer src="../../main.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script>
-    <noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../ac_library_rs/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"></h2>
-    </nav>
-    <nav class="sidebar"><a class="sidebar-logo" href="../../ac_library_rs/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../ac_library_rs/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
-                                <a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div>
-                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/bcfam/.cargo/git/checkouts/ac-library-rs-d342211755004e20/d2b35ac/src/maxflow.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>maxflow.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../ac_library_rs/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../ac_library_rs/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../ac_library_rs/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -339,279 +332,279 @@
 <span id="332">332</span>
 <span id="333">333</span>
 <span id="334">334</span>
-</pre><pre class="rust"><code><span class="attribute">#![<span class="ident">allow</span>(<span class="ident">dead_code</span>)]</span>
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::internal_queue::SimpleQueue</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::internal_type_traits::Integral</span>;
-<span class="kw">use</span> <span class="ident">std::cmp::min</span>;
-<span class="kw">use</span> <span class="ident">std::iter</span>;
+</pre><pre class="rust"><code><span class="attribute">#![allow(dead_code)]
+</span><span class="kw">use </span><span class="kw">crate</span>::internal_queue::SimpleQueue;
+<span class="kw">use </span><span class="kw">crate</span>::internal_type_traits::Integral;
+<span class="kw">use </span>std::cmp::min;
+<span class="kw">use </span>std::iter;
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">Cap</span><span class="op">&gt;</span> <span class="ident">MfGraph</span><span class="op">&lt;</span><span class="ident">Cap</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">Cap</span>: <span class="ident">Integral</span>,
+<span class="kw">impl</span>&lt;Cap&gt; MfGraph&lt;Cap&gt;
+<span class="kw">where
+    </span>Cap: Integral,
 {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">n</span>: <span class="ident">usize</span>) -&gt; <span class="ident">MfGraph</span><span class="op">&lt;</span><span class="ident">Cap</span><span class="op">&gt;</span> {
-        <span class="ident">MfGraph</span> {
-            <span class="ident">_n</span>: <span class="ident">n</span>,
-            <span class="ident">pos</span>: <span class="ident">Vec::new</span>(),
-            <span class="ident">g</span>: <span class="ident">iter::repeat_with</span>(<span class="ident">Vec::new</span>).<span class="ident">take</span>(<span class="ident">n</span>).<span class="ident">collect</span>(),
+    <span class="kw">pub fn </span>new(n: usize) -&gt; MfGraph&lt;Cap&gt; {
+        MfGraph {
+            _n: n,
+            pos: Vec::new(),
+            g: iter::repeat_with(Vec::new).take(n).collect(),
         }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_edge</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">from</span>: <span class="ident">usize</span>, <span class="ident">to</span>: <span class="ident">usize</span>, <span class="ident">cap</span>: <span class="ident">Cap</span>) -&gt; <span class="ident">usize</span> {
-        <span class="macro">assert!</span>(<span class="ident">from</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">_n</span>);
-        <span class="macro">assert!</span>(<span class="ident">to</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">_n</span>);
-        <span class="macro">assert!</span>(<span class="ident">Cap::zero</span>() <span class="op">&lt;</span><span class="op">=</span> <span class="ident">cap</span>);
-        <span class="kw">let</span> <span class="ident">m</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">pos</span>.<span class="ident">len</span>();
-        <span class="self">self</span>.<span class="ident">pos</span>.<span class="ident">push</span>((<span class="ident">from</span>, <span class="self">self</span>.<span class="ident">g</span>[<span class="ident">from</span>].<span class="ident">len</span>()));
-        <span class="kw">let</span> <span class="ident">rev</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">g</span>[<span class="ident">to</span>].<span class="ident">len</span>() <span class="op">+</span> <span class="kw">if</span> <span class="ident">from</span> <span class="op">==</span> <span class="ident">to</span> { <span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> };
-        <span class="self">self</span>.<span class="ident">g</span>[<span class="ident">from</span>].<span class="ident">push</span>(<span class="ident">_Edge</span> { <span class="ident">to</span>, <span class="ident">rev</span>, <span class="ident">cap</span> });
-        <span class="kw">let</span> <span class="ident">rev</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">g</span>[<span class="ident">from</span>].<span class="ident">len</span>() <span class="op">-</span> <span class="number">1</span>;
-        <span class="self">self</span>.<span class="ident">g</span>[<span class="ident">to</span>].<span class="ident">push</span>(<span class="ident">_Edge</span> {
-            <span class="ident">to</span>: <span class="ident">from</span>,
-            <span class="ident">rev</span>,
-            <span class="ident">cap</span>: <span class="ident">Cap::zero</span>(),
+    <span class="kw">pub fn </span>add_edge(<span class="kw-2">&amp;mut </span><span class="self">self</span>, from: usize, to: usize, cap: Cap) -&gt; usize {
+        <span class="macro">assert!</span>(from &lt; <span class="self">self</span>._n);
+        <span class="macro">assert!</span>(to &lt; <span class="self">self</span>._n);
+        <span class="macro">assert!</span>(Cap::zero() &lt;= cap);
+        <span class="kw">let </span>m = <span class="self">self</span>.pos.len();
+        <span class="self">self</span>.pos.push((from, <span class="self">self</span>.g[from].len()));
+        <span class="kw">let </span>rev = <span class="self">self</span>.g[to].len() + <span class="kw">if </span>from == to { <span class="number">1 </span>} <span class="kw">else </span>{ <span class="number">0 </span>};
+        <span class="self">self</span>.g[from].push(_Edge { to, rev, cap });
+        <span class="kw">let </span>rev = <span class="self">self</span>.g[from].len() - <span class="number">1</span>;
+        <span class="self">self</span>.g[to].push(_Edge {
+            to: from,
+            rev,
+            cap: Cap::zero(),
         });
-        <span class="ident">m</span>
+        m
     }
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Edge</span><span class="op">&lt;</span><span class="ident">Cap</span>: <span class="ident">Integral</span><span class="op">&gt;</span> {
-    <span class="kw">pub</span> <span class="ident">from</span>: <span class="ident">usize</span>,
-    <span class="kw">pub</span> <span class="ident">to</span>: <span class="ident">usize</span>,
-    <span class="kw">pub</span> <span class="ident">cap</span>: <span class="ident">Cap</span>,
-    <span class="kw">pub</span> <span class="ident">flow</span>: <span class="ident">Cap</span>,
+<span class="attribute">#[derive(Debug, PartialEq, Eq)]
+</span><span class="kw">pub struct </span>Edge&lt;Cap: Integral&gt; {
+    <span class="kw">pub </span>from: usize,
+    <span class="kw">pub </span>to: usize,
+    <span class="kw">pub </span>cap: Cap,
+    <span class="kw">pub </span>flow: Cap,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">Cap</span><span class="op">&gt;</span> <span class="ident">MfGraph</span><span class="op">&lt;</span><span class="ident">Cap</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">Cap</span>: <span class="ident">Integral</span>,
+<span class="kw">impl</span>&lt;Cap&gt; MfGraph&lt;Cap&gt;
+<span class="kw">where
+    </span>Cap: Integral,
 {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_edge</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">i</span>: <span class="ident">usize</span>) -&gt; <span class="ident">Edge</span><span class="op">&lt;</span><span class="ident">Cap</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">m</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">pos</span>.<span class="ident">len</span>();
-        <span class="macro">assert!</span>(<span class="ident">i</span> <span class="op">&lt;</span> <span class="ident">m</span>);
-        <span class="kw">let</span> <span class="ident">_e</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">g</span>[<span class="self">self</span>.<span class="ident">pos</span>[<span class="ident">i</span>].<span class="number">0</span>][<span class="self">self</span>.<span class="ident">pos</span>[<span class="ident">i</span>].<span class="number">1</span>];
-        <span class="kw">let</span> <span class="ident">_re</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">g</span>[<span class="ident">_e</span>.<span class="ident">to</span>][<span class="ident">_e</span>.<span class="ident">rev</span>];
-        <span class="ident">Edge</span> {
-            <span class="ident">from</span>: <span class="self">self</span>.<span class="ident">pos</span>[<span class="ident">i</span>].<span class="number">0</span>,
-            <span class="ident">to</span>: <span class="ident">_e</span>.<span class="ident">to</span>,
-            <span class="ident">cap</span>: <span class="ident">_e</span>.<span class="ident">cap</span> <span class="op">+</span> <span class="ident">_re</span>.<span class="ident">cap</span>,
-            <span class="ident">flow</span>: <span class="ident">_re</span>.<span class="ident">cap</span>,
+    <span class="kw">pub fn </span>get_edge(<span class="kw-2">&amp;</span><span class="self">self</span>, i: usize) -&gt; Edge&lt;Cap&gt; {
+        <span class="kw">let </span>m = <span class="self">self</span>.pos.len();
+        <span class="macro">assert!</span>(i &lt; m);
+        <span class="kw">let </span>_e = <span class="kw-2">&amp;</span><span class="self">self</span>.g[<span class="self">self</span>.pos[i].<span class="number">0</span>][<span class="self">self</span>.pos[i].<span class="number">1</span>];
+        <span class="kw">let </span>_re = <span class="kw-2">&amp;</span><span class="self">self</span>.g[_e.to][_e.rev];
+        Edge {
+            from: <span class="self">self</span>.pos[i].<span class="number">0</span>,
+            to: _e.to,
+            cap: _e.cap + _re.cap,
+            flow: _re.cap,
         }
     }
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">edges</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Edge</span><span class="op">&lt;</span><span class="ident">Cap</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">m</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">pos</span>.<span class="ident">len</span>();
-        (<span class="number">0</span>..<span class="ident">m</span>).<span class="ident">map</span>(<span class="op">|</span><span class="ident">i</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">get_edge</span>(<span class="ident">i</span>)).<span class="ident">collect</span>()
+    <span class="kw">pub fn </span>edges(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Vec&lt;Edge&lt;Cap&gt;&gt; {
+        <span class="kw">let </span>m = <span class="self">self</span>.pos.len();
+        (<span class="number">0</span>..m).map(|i| <span class="self">self</span>.get_edge(i)).collect()
     }
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">change_edge</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">i</span>: <span class="ident">usize</span>, <span class="ident">new_cap</span>: <span class="ident">Cap</span>, <span class="ident">new_flow</span>: <span class="ident">Cap</span>) {
-        <span class="kw">let</span> <span class="ident">m</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">pos</span>.<span class="ident">len</span>();
-        <span class="macro">assert!</span>(<span class="ident">i</span> <span class="op">&lt;</span> <span class="ident">m</span>);
-        <span class="macro">assert!</span>(<span class="ident">Cap::zero</span>() <span class="op">&lt;</span><span class="op">=</span> <span class="ident">new_flow</span> <span class="op">&amp;&amp;</span> <span class="ident">new_flow</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">new_cap</span>);
-        <span class="kw">let</span> (<span class="ident">to</span>, <span class="ident">rev</span>) <span class="op">=</span> {
-            <span class="kw">let</span> <span class="ident">_e</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">g</span>[<span class="self">self</span>.<span class="ident">pos</span>[<span class="ident">i</span>].<span class="number">0</span>][<span class="self">self</span>.<span class="ident">pos</span>[<span class="ident">i</span>].<span class="number">1</span>];
-            <span class="ident">_e</span>.<span class="ident">cap</span> <span class="op">=</span> <span class="ident">new_cap</span> <span class="op">-</span> <span class="ident">new_flow</span>;
-            (<span class="ident">_e</span>.<span class="ident">to</span>, <span class="ident">_e</span>.<span class="ident">rev</span>)
+    <span class="kw">pub fn </span>change_edge(<span class="kw-2">&amp;mut </span><span class="self">self</span>, i: usize, new_cap: Cap, new_flow: Cap) {
+        <span class="kw">let </span>m = <span class="self">self</span>.pos.len();
+        <span class="macro">assert!</span>(i &lt; m);
+        <span class="macro">assert!</span>(Cap::zero() &lt;= new_flow &amp;&amp; new_flow &lt;= new_cap);
+        <span class="kw">let </span>(to, rev) = {
+            <span class="kw">let </span>_e = <span class="kw-2">&amp;mut </span><span class="self">self</span>.g[<span class="self">self</span>.pos[i].<span class="number">0</span>][<span class="self">self</span>.pos[i].<span class="number">1</span>];
+            _e.cap = new_cap - new_flow;
+            (_e.to, _e.rev)
         };
-        <span class="kw">let</span> <span class="ident">_re</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">g</span>[<span class="ident">to</span>][<span class="ident">rev</span>];
-        <span class="ident">_re</span>.<span class="ident">cap</span> <span class="op">=</span> <span class="ident">new_flow</span>;
+        <span class="kw">let </span>_re = <span class="kw-2">&amp;mut </span><span class="self">self</span>.g[to][rev];
+        _re.cap = new_flow;
     }
 
-    <span class="doccomment">/// `s != t` must hold, otherwise it panics.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">flow</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">s</span>: <span class="ident">usize</span>, <span class="ident">t</span>: <span class="ident">usize</span>) -&gt; <span class="ident">Cap</span> {
-        <span class="self">self</span>.<span class="ident">flow_with_capacity</span>(<span class="ident">s</span>, <span class="ident">t</span>, <span class="ident">Cap::max_value</span>())
+    <span class="doccomment">/// `s != t` must hold, otherwise it panics.
+    </span><span class="kw">pub fn </span>flow(<span class="kw-2">&amp;mut </span><span class="self">self</span>, s: usize, t: usize) -&gt; Cap {
+        <span class="self">self</span>.flow_with_capacity(s, t, Cap::max_value())
     }
-    <span class="doccomment">/// # Parameters</span>
-    <span class="doccomment">/// * `s != t` must hold, otherwise it panics.</span>
-    <span class="doccomment">/// * `flow_limit &gt;= 0`</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">flow_with_capacity</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">s</span>: <span class="ident">usize</span>, <span class="ident">t</span>: <span class="ident">usize</span>, <span class="ident">flow_limit</span>: <span class="ident">Cap</span>) -&gt; <span class="ident">Cap</span> {
-        <span class="kw">let</span> <span class="ident">n_</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">_n</span>;
-        <span class="macro">assert!</span>(<span class="ident">s</span> <span class="op">&lt;</span> <span class="ident">n_</span>);
-        <span class="macro">assert!</span>(<span class="ident">t</span> <span class="op">&lt;</span> <span class="ident">n_</span>);
-        <span class="comment">// By the definition of max flow in appendix.html, this function should return 0</span>
-        <span class="comment">// when the same vertices are provided.  On the other hand, it is reasonable to</span>
-        <span class="comment">// return infinity-like value too, which is what the original implementation</span>
-        <span class="comment">// (and this implementation without the following assertion) does.</span>
-        <span class="comment">// Since either return value is confusing, we&#39;d rather deny the parameters</span>
-        <span class="comment">// of the two same vertices.</span>
-        <span class="comment">// For more details, see https://github.com/rust-lang-ja/ac-library-rs/pull/24#discussion_r485343451</span>
-        <span class="comment">// and https://github.com/atcoder/ac-library/issues/5 .</span>
-        <span class="macro">assert_ne!</span>(<span class="ident">s</span>, <span class="ident">t</span>);
-        <span class="comment">// Additional constraint</span>
-        <span class="macro">assert!</span>(<span class="ident">Cap::zero</span>() <span class="op">&lt;</span><span class="op">=</span> <span class="ident">flow_limit</span>);
+    <span class="doccomment">/// # Parameters
+    /// * `s != t` must hold, otherwise it panics.
+    /// * `flow_limit &gt;= 0`
+    </span><span class="kw">pub fn </span>flow_with_capacity(<span class="kw-2">&amp;mut </span><span class="self">self</span>, s: usize, t: usize, flow_limit: Cap) -&gt; Cap {
+        <span class="kw">let </span>n_ = <span class="self">self</span>._n;
+        <span class="macro">assert!</span>(s &lt; n_);
+        <span class="macro">assert!</span>(t &lt; n_);
+        <span class="comment">// By the definition of max flow in appendix.html, this function should return 0
+        // when the same vertices are provided.  On the other hand, it is reasonable to
+        // return infinity-like value too, which is what the original implementation
+        // (and this implementation without the following assertion) does.
+        // Since either return value is confusing, we&#39;d rather deny the parameters
+        // of the two same vertices.
+        // For more details, see https://github.com/rust-lang-ja/ac-library-rs/pull/24#discussion_r485343451
+        // and https://github.com/atcoder/ac-library/issues/5 .
+        </span><span class="macro">assert_ne!</span>(s, t);
+        <span class="comment">// Additional constraint
+        </span><span class="macro">assert!</span>(Cap::zero() &lt;= flow_limit);
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">calc</span> <span class="op">=</span> <span class="ident">FlowCalculator</span> {
-            <span class="ident">graph</span>: <span class="self">self</span>,
-            <span class="ident">s</span>,
-            <span class="ident">t</span>,
-            <span class="ident">flow_limit</span>,
-            <span class="ident">level</span>: <span class="macro">vec!</span>[<span class="number">0</span>; <span class="ident">n_</span>],
-            <span class="ident">iter</span>: <span class="macro">vec!</span>[<span class="number">0</span>; <span class="ident">n_</span>],
-            <span class="ident">que</span>: <span class="ident">SimpleQueue::default</span>(),
+        <span class="kw">let </span><span class="kw-2">mut </span>calc = FlowCalculator {
+            graph: <span class="self">self</span>,
+            s,
+            t,
+            flow_limit,
+            level: <span class="macro">vec!</span>[<span class="number">0</span>; n_],
+            iter: <span class="macro">vec!</span>[<span class="number">0</span>; n_],
+            que: SimpleQueue::default(),
         };
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">flow</span> <span class="op">=</span> <span class="ident">Cap::zero</span>();
-        <span class="kw">while</span> <span class="ident">flow</span> <span class="op">&lt;</span> <span class="ident">flow_limit</span> {
-            <span class="ident">calc</span>.<span class="ident">bfs</span>();
-            <span class="kw">if</span> <span class="ident">calc</span>.<span class="ident">level</span>[<span class="ident">t</span>] <span class="op">==</span> <span class="op">-</span><span class="number">1</span> {
+        <span class="kw">let </span><span class="kw-2">mut </span>flow = Cap::zero();
+        <span class="kw">while </span>flow &lt; flow_limit {
+            calc.bfs();
+            <span class="kw">if </span>calc.level[t] == -<span class="number">1 </span>{
                 <span class="kw">break</span>;
             }
-            <span class="ident">calc</span>.<span class="ident">iter</span>.<span class="ident">iter_mut</span>().<span class="ident">for_each</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="kw-2">*</span><span class="ident">e</span> <span class="op">=</span> <span class="number">0</span>);
-            <span class="kw">while</span> <span class="ident">flow</span> <span class="op">&lt;</span> <span class="ident">flow_limit</span> {
-                <span class="kw">let</span> <span class="ident">f</span> <span class="op">=</span> <span class="ident">calc</span>.<span class="ident">dfs</span>(<span class="ident">t</span>, <span class="ident">flow_limit</span> <span class="op">-</span> <span class="ident">flow</span>);
-                <span class="kw">if</span> <span class="ident">f</span> <span class="op">==</span> <span class="ident">Cap::zero</span>() {
+            calc.iter.iter_mut().for_each(|e| <span class="kw-2">*</span>e = <span class="number">0</span>);
+            <span class="kw">while </span>flow &lt; flow_limit {
+                <span class="kw">let </span>f = calc.dfs(t, flow_limit - flow);
+                <span class="kw">if </span>f == Cap::zero() {
                     <span class="kw">break</span>;
                 }
-                <span class="ident">flow</span> <span class="op">+</span><span class="op">=</span> <span class="ident">f</span>;
+                flow += f;
             }
         }
-        <span class="ident">flow</span>
+        flow
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">min_cut</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">s</span>: <span class="ident">usize</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">bool</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">visited</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="bool-val">false</span>; <span class="self">self</span>.<span class="ident">_n</span>];
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">que</span> <span class="op">=</span> <span class="ident">SimpleQueue::default</span>();
-        <span class="ident">que</span>.<span class="ident">push</span>(<span class="ident">s</span>);
-        <span class="kw">while</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="ident">p</span>) <span class="op">=</span> <span class="ident">que</span>.<span class="ident">pop</span>() {
-            <span class="ident">visited</span>[<span class="ident">p</span>] <span class="op">=</span> <span class="bool-val">true</span>;
-            <span class="kw">for</span> <span class="ident">e</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">g</span>[<span class="ident">p</span>] {
-                <span class="kw">if</span> <span class="ident">e</span>.<span class="ident">cap</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Cap::zero</span>() <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">visited</span>[<span class="ident">e</span>.<span class="ident">to</span>] {
-                    <span class="ident">visited</span>[<span class="ident">e</span>.<span class="ident">to</span>] <span class="op">=</span> <span class="bool-val">true</span>;
-                    <span class="ident">que</span>.<span class="ident">push</span>(<span class="ident">e</span>.<span class="ident">to</span>);
+    <span class="kw">pub fn </span>min_cut(<span class="kw-2">&amp;</span><span class="self">self</span>, s: usize) -&gt; Vec&lt;bool&gt; {
+        <span class="kw">let </span><span class="kw-2">mut </span>visited = <span class="macro">vec!</span>[<span class="bool-val">false</span>; <span class="self">self</span>._n];
+        <span class="kw">let </span><span class="kw-2">mut </span>que = SimpleQueue::default();
+        que.push(s);
+        <span class="kw">while let </span><span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span>p) = que.pop() {
+            visited[p] = <span class="bool-val">true</span>;
+            <span class="kw">for </span>e <span class="kw">in </span><span class="kw-2">&amp;</span><span class="self">self</span>.g[p] {
+                <span class="kw">if </span>e.cap != Cap::zero() &amp;&amp; !visited[e.to] {
+                    visited[e.to] = <span class="bool-val">true</span>;
+                    que.push(e.to);
                 }
             }
         }
-        <span class="ident">visited</span>
+        visited
     }
 }
 
-<span class="kw">struct</span> <span class="ident">FlowCalculator</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">Cap</span><span class="op">&gt;</span> {
-    <span class="ident">graph</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">MfGraph</span><span class="op">&lt;</span><span class="ident">Cap</span><span class="op">&gt;</span>,
-    <span class="ident">s</span>: <span class="ident">usize</span>,
-    <span class="ident">t</span>: <span class="ident">usize</span>,
-    <span class="ident">flow_limit</span>: <span class="ident">Cap</span>,
-    <span class="ident">level</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>,
-    <span class="ident">iter</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>,
-    <span class="ident">que</span>: <span class="ident">SimpleQueue</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>,
+<span class="kw">struct </span>FlowCalculator&lt;<span class="lifetime">&#39;a</span>, Cap&gt; {
+    graph: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="kw-2">mut </span>MfGraph&lt;Cap&gt;,
+    s: usize,
+    t: usize,
+    flow_limit: Cap,
+    level: Vec&lt;i32&gt;,
+    iter: Vec&lt;usize&gt;,
+    que: SimpleQueue&lt;usize&gt;,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">Cap</span><span class="op">&gt;</span> <span class="ident">FlowCalculator</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span>, <span class="ident">Cap</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">Cap</span>: <span class="ident">Integral</span>,
+<span class="kw">impl</span>&lt;Cap&gt; FlowCalculator&lt;<span class="lifetime">&#39;_</span>, Cap&gt;
+<span class="kw">where
+    </span>Cap: Integral,
 {
-    <span class="kw">fn</span> <span class="ident">bfs</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
-        <span class="self">self</span>.<span class="ident">level</span>.<span class="ident">iter_mut</span>().<span class="ident">for_each</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="kw-2">*</span><span class="ident">e</span> <span class="op">=</span> <span class="op">-</span><span class="number">1</span>);
-        <span class="self">self</span>.<span class="ident">level</span>[<span class="self">self</span>.<span class="ident">s</span>] <span class="op">=</span> <span class="number">0</span>;
-        <span class="self">self</span>.<span class="ident">que</span>.<span class="ident">clear</span>();
-        <span class="self">self</span>.<span class="ident">que</span>.<span class="ident">push</span>(<span class="self">self</span>.<span class="ident">s</span>);
-        <span class="kw">while</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">que</span>.<span class="ident">empty</span>() {
-            <span class="kw">let</span> <span class="ident">v</span> <span class="op">=</span> <span class="kw-2">*</span><span class="self">self</span>.<span class="ident">que</span>.<span class="ident">front</span>().<span class="ident">unwrap</span>();
-            <span class="self">self</span>.<span class="ident">que</span>.<span class="ident">pop</span>();
-            <span class="kw">for</span> <span class="ident">e</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">graph</span>.<span class="ident">g</span>[<span class="ident">v</span>] {
-                <span class="kw">if</span> <span class="ident">e</span>.<span class="ident">cap</span> <span class="op">==</span> <span class="ident">Cap::zero</span>() <span class="op">|</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">level</span>[<span class="ident">e</span>.<span class="ident">to</span>] <span class="op">&gt;</span><span class="op">=</span> <span class="number">0</span> {
+    <span class="kw">fn </span>bfs(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
+        <span class="self">self</span>.level.iter_mut().for_each(|e| <span class="kw-2">*</span>e = -<span class="number">1</span>);
+        <span class="self">self</span>.level[<span class="self">self</span>.s] = <span class="number">0</span>;
+        <span class="self">self</span>.que.clear();
+        <span class="self">self</span>.que.push(<span class="self">self</span>.s);
+        <span class="kw">while </span>!<span class="self">self</span>.que.empty() {
+            <span class="kw">let </span>v = <span class="kw-2">*</span><span class="self">self</span>.que.front().unwrap();
+            <span class="self">self</span>.que.pop();
+            <span class="kw">for </span>e <span class="kw">in </span><span class="kw-2">&amp;</span><span class="self">self</span>.graph.g[v] {
+                <span class="kw">if </span>e.cap == Cap::zero() || <span class="self">self</span>.level[e.to] &gt;= <span class="number">0 </span>{
                     <span class="kw">continue</span>;
                 }
-                <span class="self">self</span>.<span class="ident">level</span>[<span class="ident">e</span>.<span class="ident">to</span>] <span class="op">=</span> <span class="self">self</span>.<span class="ident">level</span>[<span class="ident">v</span>] <span class="op">+</span> <span class="number">1</span>;
-                <span class="kw">if</span> <span class="ident">e</span>.<span class="ident">to</span> <span class="op">==</span> <span class="self">self</span>.<span class="ident">t</span> {
+                <span class="self">self</span>.level[e.to] = <span class="self">self</span>.level[v] + <span class="number">1</span>;
+                <span class="kw">if </span>e.to == <span class="self">self</span>.t {
                     <span class="kw">return</span>;
                 }
-                <span class="self">self</span>.<span class="ident">que</span>.<span class="ident">push</span>(<span class="ident">e</span>.<span class="ident">to</span>);
+                <span class="self">self</span>.que.push(e.to);
             }
         }
     }
-    <span class="kw">fn</span> <span class="ident">dfs</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">v</span>: <span class="ident">usize</span>, <span class="ident">up</span>: <span class="ident">Cap</span>) -&gt; <span class="ident">Cap</span> {
-        <span class="kw">if</span> <span class="ident">v</span> <span class="op">==</span> <span class="self">self</span>.<span class="ident">s</span> {
-            <span class="kw">return</span> <span class="ident">up</span>;
+    <span class="kw">fn </span>dfs(<span class="kw-2">&amp;mut </span><span class="self">self</span>, v: usize, up: Cap) -&gt; Cap {
+        <span class="kw">if </span>v == <span class="self">self</span>.s {
+            <span class="kw">return </span>up;
         }
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">res</span> <span class="op">=</span> <span class="ident">Cap::zero</span>();
-        <span class="kw">let</span> <span class="ident">level_v</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">level</span>[<span class="ident">v</span>];
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="self">self</span>.<span class="ident">iter</span>[<span class="ident">v</span>]..<span class="self">self</span>.<span class="ident">graph</span>.<span class="ident">g</span>[<span class="ident">v</span>].<span class="ident">len</span>() {
-            <span class="self">self</span>.<span class="ident">iter</span>[<span class="ident">v</span>] <span class="op">=</span> <span class="ident">i</span>;
-            <span class="kw">let</span> <span class="kw-2">&amp;</span><span class="ident">_Edge</span> {
-                <span class="ident">to</span>: <span class="ident">e_to</span>,
-                <span class="ident">rev</span>: <span class="ident">e_rev</span>,
+        <span class="kw">let </span><span class="kw-2">mut </span>res = Cap::zero();
+        <span class="kw">let </span>level_v = <span class="self">self</span>.level[v];
+        <span class="kw">for </span>i <span class="kw">in </span><span class="self">self</span>.iter[v]..<span class="self">self</span>.graph.g[v].len() {
+            <span class="self">self</span>.iter[v] = i;
+            <span class="kw">let </span><span class="kw-2">&amp;</span>_Edge {
+                to: e_to,
+                rev: e_rev,
                 ..
-            } <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">graph</span>.<span class="ident">g</span>[<span class="ident">v</span>][<span class="ident">i</span>];
-            <span class="kw">if</span> <span class="ident">level_v</span> <span class="op">&lt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">level</span>[<span class="ident">e_to</span>] <span class="op">|</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">graph</span>.<span class="ident">g</span>[<span class="ident">e_to</span>][<span class="ident">e_rev</span>].<span class="ident">cap</span> <span class="op">==</span> <span class="ident">Cap::zero</span>() {
+            } = <span class="kw-2">&amp;</span><span class="self">self</span>.graph.g[v][i];
+            <span class="kw">if </span>level_v &lt;= <span class="self">self</span>.level[e_to] || <span class="self">self</span>.graph.g[e_to][e_rev].cap == Cap::zero() {
                 <span class="kw">continue</span>;
             }
-            <span class="kw">let</span> <span class="ident">d</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">dfs</span>(<span class="ident">e_to</span>, <span class="ident">min</span>(<span class="ident">up</span> <span class="op">-</span> <span class="ident">res</span>, <span class="self">self</span>.<span class="ident">graph</span>.<span class="ident">g</span>[<span class="ident">e_to</span>][<span class="ident">e_rev</span>].<span class="ident">cap</span>));
-            <span class="kw">if</span> <span class="ident">d</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">Cap::zero</span>() {
+            <span class="kw">let </span>d = <span class="self">self</span>.dfs(e_to, min(up - res, <span class="self">self</span>.graph.g[e_to][e_rev].cap));
+            <span class="kw">if </span>d &lt;= Cap::zero() {
                 <span class="kw">continue</span>;
             }
-            <span class="self">self</span>.<span class="ident">graph</span>.<span class="ident">g</span>[<span class="ident">v</span>][<span class="ident">i</span>].<span class="ident">cap</span> <span class="op">+</span><span class="op">=</span> <span class="ident">d</span>;
-            <span class="self">self</span>.<span class="ident">graph</span>.<span class="ident">g</span>[<span class="ident">e_to</span>][<span class="ident">e_rev</span>].<span class="ident">cap</span> <span class="op">-</span><span class="op">=</span> <span class="ident">d</span>;
-            <span class="ident">res</span> <span class="op">+</span><span class="op">=</span> <span class="ident">d</span>;
-            <span class="kw">if</span> <span class="ident">res</span> <span class="op">==</span> <span class="ident">up</span> {
-                <span class="kw">return</span> <span class="ident">res</span>;
+            <span class="self">self</span>.graph.g[v][i].cap += d;
+            <span class="self">self</span>.graph.g[e_to][e_rev].cap -= d;
+            res += d;
+            <span class="kw">if </span>res == up {
+                <span class="kw">return </span>res;
             }
         }
-        <span class="self">self</span>.<span class="ident">iter</span>[<span class="ident">v</span>] <span class="op">=</span> <span class="self">self</span>.<span class="ident">graph</span>.<span class="ident">g</span>[<span class="ident">v</span>].<span class="ident">len</span>();
-        <span class="ident">res</span>
+        <span class="self">self</span>.iter[v] = <span class="self">self</span>.graph.g[v].len();
+        res
     }
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Default</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">MfGraph</span><span class="op">&lt;</span><span class="ident">Cap</span><span class="op">&gt;</span> {
-    <span class="ident">_n</span>: <span class="ident">usize</span>,
-    <span class="ident">pos</span>: <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">usize</span>, <span class="ident">usize</span>)<span class="op">&gt;</span>,
-    <span class="ident">g</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">_Edge</span><span class="op">&lt;</span><span class="ident">Cap</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+<span class="attribute">#[derive(Default)]
+</span><span class="kw">pub struct </span>MfGraph&lt;Cap&gt; {
+    _n: usize,
+    pos: Vec&lt;(usize, usize)&gt;,
+    g: Vec&lt;Vec&lt;_Edge&lt;Cap&gt;&gt;&gt;,
 }
 
-<span class="kw">struct</span> <span class="ident">_Edge</span><span class="op">&lt;</span><span class="ident">Cap</span><span class="op">&gt;</span> {
-    <span class="ident">to</span>: <span class="ident">usize</span>,
-    <span class="ident">rev</span>: <span class="ident">usize</span>,
-    <span class="ident">cap</span>: <span class="ident">Cap</span>,
+<span class="kw">struct </span>_Edge&lt;Cap&gt; {
+    to: usize,
+    rev: usize,
+    cap: Cap,
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
-<span class="kw">mod</span> <span class="ident">test</span> {
-    <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">Edge</span>, <span class="ident">MfGraph</span>};
+<span class="attribute">#[cfg(test)]
+</span><span class="kw">mod </span>test {
+    <span class="kw">use crate</span>::{Edge, MfGraph};
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_max_flow_wikipedia</span>() {
-        <span class="comment">// From https://commons.wikimedia.org/wiki/File:Min_cut.png</span>
-        <span class="comment">// Under CC BY-SA 3.0 https://creativecommons.org/licenses/by-sa/3.0/deed.en</span>
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">graph</span> <span class="op">=</span> <span class="ident">MfGraph::new</span>(<span class="number">6</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">graph</span>.<span class="ident">add_edge</span>(<span class="number">0</span>, <span class="number">1</span>, <span class="number">3</span>), <span class="number">0</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">graph</span>.<span class="ident">add_edge</span>(<span class="number">0</span>, <span class="number">2</span>, <span class="number">3</span>), <span class="number">1</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">graph</span>.<span class="ident">add_edge</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>), <span class="number">2</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">graph</span>.<span class="ident">add_edge</span>(<span class="number">1</span>, <span class="number">3</span>, <span class="number">3</span>), <span class="number">3</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">graph</span>.<span class="ident">add_edge</span>(<span class="number">2</span>, <span class="number">4</span>, <span class="number">2</span>), <span class="number">4</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">graph</span>.<span class="ident">add_edge</span>(<span class="number">3</span>, <span class="number">4</span>, <span class="number">4</span>), <span class="number">5</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">graph</span>.<span class="ident">add_edge</span>(<span class="number">3</span>, <span class="number">5</span>, <span class="number">2</span>), <span class="number">6</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">graph</span>.<span class="ident">add_edge</span>(<span class="number">4</span>, <span class="number">5</span>, <span class="number">3</span>), <span class="number">7</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_max_flow_wikipedia() {
+        <span class="comment">// From https://commons.wikimedia.org/wiki/File:Min_cut.png
+        // Under CC BY-SA 3.0 https://creativecommons.org/licenses/by-sa/3.0/deed.en
+        </span><span class="kw">let </span><span class="kw-2">mut </span>graph = MfGraph::new(<span class="number">6</span>);
+        <span class="macro">assert_eq!</span>(graph.add_edge(<span class="number">0</span>, <span class="number">1</span>, <span class="number">3</span>), <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(graph.add_edge(<span class="number">0</span>, <span class="number">2</span>, <span class="number">3</span>), <span class="number">1</span>);
+        <span class="macro">assert_eq!</span>(graph.add_edge(<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>), <span class="number">2</span>);
+        <span class="macro">assert_eq!</span>(graph.add_edge(<span class="number">1</span>, <span class="number">3</span>, <span class="number">3</span>), <span class="number">3</span>);
+        <span class="macro">assert_eq!</span>(graph.add_edge(<span class="number">2</span>, <span class="number">4</span>, <span class="number">2</span>), <span class="number">4</span>);
+        <span class="macro">assert_eq!</span>(graph.add_edge(<span class="number">3</span>, <span class="number">4</span>, <span class="number">4</span>), <span class="number">5</span>);
+        <span class="macro">assert_eq!</span>(graph.add_edge(<span class="number">3</span>, <span class="number">5</span>, <span class="number">2</span>), <span class="number">6</span>);
+        <span class="macro">assert_eq!</span>(graph.add_edge(<span class="number">4</span>, <span class="number">5</span>, <span class="number">3</span>), <span class="number">7</span>);
 
-        <span class="macro">assert_eq!</span>(<span class="ident">graph</span>.<span class="ident">flow</span>(<span class="number">0</span>, <span class="number">5</span>), <span class="number">5</span>);
+        <span class="macro">assert_eq!</span>(graph.flow(<span class="number">0</span>, <span class="number">5</span>), <span class="number">5</span>);
 
-        <span class="kw">let</span> <span class="ident">edges</span> <span class="op">=</span> <span class="ident">graph</span>.<span class="ident">edges</span>();
+        <span class="kw">let </span>edges = graph.edges();
         {
-            <span class="attribute">#[<span class="ident">rustfmt::skip</span>]</span>
-            <span class="macro">assert_eq!</span>(
-                <span class="ident">edges</span>,
+            <span class="attribute">#[rustfmt::skip]
+            </span><span class="macro">assert_eq!</span>(
+                edges,
                 <span class="macro">vec!</span>[
-                    <span class="ident">Edge</span> { <span class="ident">from</span>: <span class="number">0</span>, <span class="ident">to</span>: <span class="number">1</span>, <span class="ident">cap</span>: <span class="number">3</span>, <span class="ident">flow</span>: <span class="number">3</span> },
-                    <span class="ident">Edge</span> { <span class="ident">from</span>: <span class="number">0</span>, <span class="ident">to</span>: <span class="number">2</span>, <span class="ident">cap</span>: <span class="number">3</span>, <span class="ident">flow</span>: <span class="number">2</span> },
-                    <span class="ident">Edge</span> { <span class="ident">from</span>: <span class="number">1</span>, <span class="ident">to</span>: <span class="number">2</span>, <span class="ident">cap</span>: <span class="number">2</span>, <span class="ident">flow</span>: <span class="number">0</span> },
-                    <span class="ident">Edge</span> { <span class="ident">from</span>: <span class="number">1</span>, <span class="ident">to</span>: <span class="number">3</span>, <span class="ident">cap</span>: <span class="number">3</span>, <span class="ident">flow</span>: <span class="number">3</span> },
-                    <span class="ident">Edge</span> { <span class="ident">from</span>: <span class="number">2</span>, <span class="ident">to</span>: <span class="number">4</span>, <span class="ident">cap</span>: <span class="number">2</span>, <span class="ident">flow</span>: <span class="number">2</span> },
-                    <span class="ident">Edge</span> { <span class="ident">from</span>: <span class="number">3</span>, <span class="ident">to</span>: <span class="number">4</span>, <span class="ident">cap</span>: <span class="number">4</span>, <span class="ident">flow</span>: <span class="number">1</span> },
-                    <span class="ident">Edge</span> { <span class="ident">from</span>: <span class="number">3</span>, <span class="ident">to</span>: <span class="number">5</span>, <span class="ident">cap</span>: <span class="number">2</span>, <span class="ident">flow</span>: <span class="number">2</span> },
-                    <span class="ident">Edge</span> { <span class="ident">from</span>: <span class="number">4</span>, <span class="ident">to</span>: <span class="number">5</span>, <span class="ident">cap</span>: <span class="number">3</span>, <span class="ident">flow</span>: <span class="number">3</span> },
+                    Edge { from: <span class="number">0</span>, to: <span class="number">1</span>, cap: <span class="number">3</span>, flow: <span class="number">3 </span>},
+                    Edge { from: <span class="number">0</span>, to: <span class="number">2</span>, cap: <span class="number">3</span>, flow: <span class="number">2 </span>},
+                    Edge { from: <span class="number">1</span>, to: <span class="number">2</span>, cap: <span class="number">2</span>, flow: <span class="number">0 </span>},
+                    Edge { from: <span class="number">1</span>, to: <span class="number">3</span>, cap: <span class="number">3</span>, flow: <span class="number">3 </span>},
+                    Edge { from: <span class="number">2</span>, to: <span class="number">4</span>, cap: <span class="number">2</span>, flow: <span class="number">2 </span>},
+                    Edge { from: <span class="number">3</span>, to: <span class="number">4</span>, cap: <span class="number">4</span>, flow: <span class="number">1 </span>},
+                    Edge { from: <span class="number">3</span>, to: <span class="number">5</span>, cap: <span class="number">2</span>, flow: <span class="number">2 </span>},
+                    Edge { from: <span class="number">4</span>, to: <span class="number">5</span>, cap: <span class="number">3</span>, flow: <span class="number">3 </span>},
                 ]
             );
         }
         <span class="macro">assert_eq!</span>(
-            <span class="ident">graph</span>.<span class="ident">min_cut</span>(<span class="number">0</span>),
+            graph.min_cut(<span class="number">0</span>),
             <span class="macro">vec!</span>[<span class="bool-val">true</span>, <span class="bool-val">false</span>, <span class="bool-val">true</span>, <span class="bool-val">false</span>, <span class="bool-val">false</span>, <span class="bool-val">false</span>]
         );
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_max_flow_wikipedia_multiple_edges</span>() {
-        <span class="comment">// From https://commons.wikimedia.org/wiki/File:Min_cut.png</span>
-        <span class="comment">// Under CC BY-SA 3.0 https://creativecommons.org/licenses/by-sa/3.0/deed.en</span>
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">graph</span> <span class="op">=</span> <span class="ident">MfGraph::new</span>(<span class="number">6</span>);
-        <span class="kw">for</span> <span class="kw-2">&amp;</span>(<span class="ident">u</span>, <span class="ident">v</span>, <span class="ident">c</span>) <span class="kw">in</span> <span class="kw-2">&amp;</span>[
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_max_flow_wikipedia_multiple_edges() {
+        <span class="comment">// From https://commons.wikimedia.org/wiki/File:Min_cut.png
+        // Under CC BY-SA 3.0 https://creativecommons.org/licenses/by-sa/3.0/deed.en
+        </span><span class="kw">let </span><span class="kw-2">mut </span>graph = MfGraph::new(<span class="number">6</span>);
+        <span class="kw">for </span><span class="kw-2">&amp;</span>(u, v, c) <span class="kw">in </span><span class="kw-2">&amp;</span>[
             (<span class="number">0</span>, <span class="number">1</span>, <span class="number">3</span>),
             (<span class="number">0</span>, <span class="number">2</span>, <span class="number">3</span>),
             (<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>),
@@ -621,58 +614,57 @@
             (<span class="number">3</span>, <span class="number">5</span>, <span class="number">2</span>),
             (<span class="number">4</span>, <span class="number">5</span>, <span class="number">3</span>),
         ] {
-            <span class="kw">for</span> <span class="kw">_</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">c</span> {
-                <span class="ident">graph</span>.<span class="ident">add_edge</span>(<span class="ident">u</span>, <span class="ident">v</span>, <span class="number">1</span>);
+            <span class="kw">for _ in </span><span class="number">0</span>..c {
+                graph.add_edge(u, v, <span class="number">1</span>);
             }
         }
 
-        <span class="macro">assert_eq!</span>(<span class="ident">graph</span>.<span class="ident">flow</span>(<span class="number">0</span>, <span class="number">5</span>), <span class="number">5</span>);
+        <span class="macro">assert_eq!</span>(graph.flow(<span class="number">0</span>, <span class="number">5</span>), <span class="number">5</span>);
         <span class="macro">assert_eq!</span>(
-            <span class="ident">graph</span>.<span class="ident">min_cut</span>(<span class="number">0</span>),
+            graph.min_cut(<span class="number">0</span>),
             <span class="macro">vec!</span>[<span class="bool-val">true</span>, <span class="bool-val">false</span>, <span class="bool-val">true</span>, <span class="bool-val">false</span>, <span class="bool-val">false</span>, <span class="bool-val">false</span>]
         );
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::many_single_char_names</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">test_max_flow_misawa</span>() {
-        <span class="comment">// Originally by @MiSawa</span>
-        <span class="comment">// From https://gist.github.com/MiSawa/47b1d99c372daffb6891662db1a2b686</span>
-        <span class="kw">let</span> <span class="ident">n</span> <span class="op">=</span> <span class="number">100</span>;
+    <span class="attribute">#[test]
+    #[allow(clippy::many_single_char_names)]
+    </span><span class="kw">fn </span>test_max_flow_misawa() {
+        <span class="comment">// Originally by @MiSawa
+        // From https://gist.github.com/MiSawa/47b1d99c372daffb6891662db1a2b686
+        </span><span class="kw">let </span>n = <span class="number">100</span>;
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">graph</span> <span class="op">=</span> <span class="ident">MfGraph::new</span>((<span class="ident">n</span> <span class="op">+</span> <span class="number">1</span>) <span class="op">*</span> <span class="number">2</span> <span class="op">+</span> <span class="number">5</span>);
-        <span class="kw">let</span> (<span class="ident">s</span>, <span class="ident">a</span>, <span class="ident">b</span>, <span class="ident">c</span>, <span class="ident">t</span>) <span class="op">=</span> (<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>);
-        <span class="ident">graph</span>.<span class="ident">add_edge</span>(<span class="ident">s</span>, <span class="ident">a</span>, <span class="number">1</span>);
-        <span class="ident">graph</span>.<span class="ident">add_edge</span>(<span class="ident">s</span>, <span class="ident">b</span>, <span class="number">2</span>);
-        <span class="ident">graph</span>.<span class="ident">add_edge</span>(<span class="ident">b</span>, <span class="ident">a</span>, <span class="number">2</span>);
-        <span class="ident">graph</span>.<span class="ident">add_edge</span>(<span class="ident">c</span>, <span class="ident">t</span>, <span class="number">2</span>);
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">n</span> {
-            <span class="kw">let</span> <span class="ident">i</span> <span class="op">=</span> <span class="number">2</span> <span class="op">*</span> <span class="ident">i</span> <span class="op">+</span> <span class="number">5</span>;
-            <span class="kw">for</span> <span class="ident">j</span> <span class="kw">in</span> <span class="number">0</span>..<span class="number">2</span> {
-                <span class="kw">for</span> <span class="ident">k</span> <span class="kw">in</span> <span class="number">2</span>..<span class="number">4</span> {
-                    <span class="ident">graph</span>.<span class="ident">add_edge</span>(<span class="ident">i</span> <span class="op">+</span> <span class="ident">j</span>, <span class="ident">i</span> <span class="op">+</span> <span class="ident">k</span>, <span class="number">3</span>);
+        <span class="kw">let </span><span class="kw-2">mut </span>graph = MfGraph::new((n + <span class="number">1</span>) * <span class="number">2 </span>+ <span class="number">5</span>);
+        <span class="kw">let </span>(s, a, b, c, t) = (<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>);
+        graph.add_edge(s, a, <span class="number">1</span>);
+        graph.add_edge(s, b, <span class="number">2</span>);
+        graph.add_edge(b, a, <span class="number">2</span>);
+        graph.add_edge(c, t, <span class="number">2</span>);
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..n {
+            <span class="kw">let </span>i = <span class="number">2 </span>* i + <span class="number">5</span>;
+            <span class="kw">for </span>j <span class="kw">in </span><span class="number">0</span>..<span class="number">2 </span>{
+                <span class="kw">for </span>k <span class="kw">in </span><span class="number">2</span>..<span class="number">4 </span>{
+                    graph.add_edge(i + j, i + k, <span class="number">3</span>);
                 }
             }
         }
-        <span class="kw">for</span> <span class="ident">j</span> <span class="kw">in</span> <span class="number">0</span>..<span class="number">2</span> {
-            <span class="ident">graph</span>.<span class="ident">add_edge</span>(<span class="ident">a</span>, <span class="number">5</span> <span class="op">+</span> <span class="ident">j</span>, <span class="number">3</span>);
-            <span class="ident">graph</span>.<span class="ident">add_edge</span>(<span class="number">2</span> <span class="op">*</span> <span class="ident">n</span> <span class="op">+</span> <span class="number">5</span> <span class="op">+</span> <span class="ident">j</span>, <span class="ident">c</span>, <span class="number">3</span>);
+        <span class="kw">for </span>j <span class="kw">in </span><span class="number">0</span>..<span class="number">2 </span>{
+            graph.add_edge(a, <span class="number">5 </span>+ j, <span class="number">3</span>);
+            graph.add_edge(<span class="number">2 </span>* n + <span class="number">5 </span>+ j, c, <span class="number">3</span>);
         }
 
-        <span class="macro">assert_eq!</span>(<span class="ident">graph</span>.<span class="ident">flow</span>(<span class="ident">s</span>, <span class="ident">t</span>), <span class="number">2</span>);
+        <span class="macro">assert_eq!</span>(graph.flow(s, t), <span class="number">2</span>);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_dont_repeat_same_phase</span>() {
-        <span class="kw">let</span> <span class="ident">n</span> <span class="op">=</span> <span class="number">100_000</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">graph</span> <span class="op">=</span> <span class="ident">MfGraph::new</span>(<span class="number">3</span>);
-        <span class="ident">graph</span>.<span class="ident">add_edge</span>(<span class="number">0</span>, <span class="number">1</span>, <span class="ident">n</span>);
-        <span class="kw">for</span> <span class="kw">_</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">n</span> {
-            <span class="ident">graph</span>.<span class="ident">add_edge</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_dont_repeat_same_phase() {
+        <span class="kw">let </span>n = <span class="number">100_000</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>graph = MfGraph::new(<span class="number">3</span>);
+        graph.add_edge(<span class="number">0</span>, <span class="number">1</span>, n);
+        <span class="kw">for _ in </span><span class="number">0</span>..n {
+            graph.add_edge(<span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>);
         }
-        <span class="macro">assert_eq!</span>(<span class="ident">graph</span>.<span class="ident">flow</span>(<span class="number">0</span>, <span class="number">2</span>), <span class="ident">n</span>);
+        <span class="macro">assert_eq!</span>(graph.flow(<span class="number">0</span>, <span class="number">2</span>), n);
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="ac_library_rs" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0-nightly (12cd71f4d 2022-06-01)" ></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="ac_library_rs" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (17cbdfd07 2022-09-13)" ></div></body></html>

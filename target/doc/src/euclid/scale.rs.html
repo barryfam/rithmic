@@ -1,11 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/bcfam/.cargo/registry/src/github.com-1ecc6299db9ec823/euclid-0.22.7/src/scale.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>scale.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><script defer src="../../main.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script>
-    <noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../euclid/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"></h2>
-    </nav>
-    <nav class="sidebar"><a class="sidebar-logo" href="../../euclid/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../euclid/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
-                                <a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div>
-                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/bcfam/.cargo/registry/src/github.com-1ecc6299db9ec823/euclid-0.22.7/src/scale.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>scale.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../euclid/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../euclid/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../euclid/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -433,434 +426,433 @@
 <span id="426">426</span>
 <span id="427">427</span>
 <span id="428">428</span>
-</pre><pre class="rust"><code><span class="comment">// Copyright 2014 The Servo Project Developers. See the COPYRIGHT</span>
-<span class="comment">// file at the top-level directory of this distribution.</span>
-<span class="comment">//</span>
-<span class="comment">// Licensed under the Apache License, Version 2.0 &lt;LICENSE-APACHE or</span>
-<span class="comment">// http://www.apache.org/licenses/LICENSE-2.0&gt; or the MIT license</span>
-<span class="comment">// &lt;LICENSE-MIT or http://opensource.org/licenses/MIT&gt;, at your</span>
-<span class="comment">// option. This file may not be copied, modified, or distributed</span>
-<span class="comment">// except according to those terms.</span>
-<span class="doccomment">//! A type-checked scaling factor between units.</span>
+</pre><pre class="rust"><code><span class="comment">// Copyright 2014 The Servo Project Developers. See the COPYRIGHT
+// file at the top-level directory of this distribution.
+//
+// Licensed under the Apache License, Version 2.0 &lt;LICENSE-APACHE or
+// http://www.apache.org/licenses/LICENSE-2.0&gt; or the MIT license
+// &lt;LICENSE-MIT or http://opensource.org/licenses/MIT&gt;, at your
+// option. This file may not be copied, modified, or distributed
+// except according to those terms.
+</span><span class="doccomment">//! A type-checked scaling factor between units.
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::num::One</span>;
+</span><span class="kw">use </span><span class="kw">crate</span>::num::One;
 
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">Point2D</span>, <span class="ident">Point3D</span>, <span class="ident">Rect</span>, <span class="ident">Size2D</span>, <span class="ident">Vector2D</span>, <span class="ident">Box2D</span>, <span class="ident">Box3D</span>};
-<span class="kw">use</span> <span class="ident">core::cmp::Ordering</span>;
-<span class="kw">use</span> <span class="ident">core::fmt</span>;
-<span class="kw">use</span> <span class="ident">core::hash</span>::{<span class="ident">Hash</span>, <span class="ident">Hasher</span>};
-<span class="kw">use</span> <span class="ident">core::marker::PhantomData</span>;
-<span class="kw">use</span> <span class="ident">core::ops</span>::{<span class="ident">Add</span>, <span class="ident">Div</span>, <span class="ident">Mul</span>, <span class="ident">Sub</span>};
-<span class="kw">use</span> <span class="ident">num_traits::NumCast</span>;
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;serde&quot;</span>)]</span>
-<span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>};
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;bytemuck&quot;</span>)]</span>
-<span class="kw">use</span> <span class="ident">bytemuck</span>::{<span class="ident">Zeroable</span>, <span class="ident">Pod</span>};
+<span class="kw">use crate</span>::{Point2D, Point3D, Rect, Size2D, Vector2D, Box2D, Box3D};
+<span class="kw">use </span>core::cmp::Ordering;
+<span class="kw">use </span>core::fmt;
+<span class="kw">use </span>core::hash::{Hash, Hasher};
+<span class="kw">use </span>core::marker::PhantomData;
+<span class="kw">use </span>core::ops::{Add, Div, Mul, Sub};
+<span class="kw">use </span>num_traits::NumCast;
+<span class="attribute">#[cfg(feature = <span class="string">&quot;serde&quot;</span>)]
+</span><span class="kw">use </span>serde::{Deserialize, Serialize};
+<span class="attribute">#[cfg(feature = <span class="string">&quot;bytemuck&quot;</span>)]
+</span><span class="kw">use </span>bytemuck::{Zeroable, Pod};
 
-<span class="doccomment">/// A scaling factor between two different units of measurement.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// This is effectively a type-safe float, intended to be used in combination with other types like</span>
-<span class="doccomment">/// `length::Length` to enforce conversion between systems of measurement at compile time.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// `Src` and `Dst` represent the units before and after multiplying a value by a `Scale`. They</span>
-<span class="doccomment">/// may be types without values, such as empty enums.  For example:</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// ```rust</span>
-<span class="doccomment">/// use euclid::Scale;</span>
-<span class="doccomment">/// use euclid::Length;</span>
-<span class="doccomment">/// enum Mm {};</span>
-<span class="doccomment">/// enum Inch {};</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// let mm_per_inch: Scale&lt;f32, Inch, Mm&gt; = Scale::new(25.4);</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// let one_foot: Length&lt;f32, Inch&gt; = Length::new(12.0);</span>
-<span class="doccomment">/// let one_foot_in_mm: Length&lt;f32, Mm&gt; = one_foot * mm_per_inch;</span>
-<span class="doccomment">/// ```</span>
-<span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
-<span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;serde&quot;</span>, <span class="ident">derive</span>(<span class="ident">Serialize</span>, <span class="ident">Deserialize</span>))]</span>
-<span class="attribute">#[<span class="ident">cfg_attr</span>(
-    <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;serde&quot;</span>,
-    <span class="ident">serde</span>(<span class="ident">bound</span>(
-        <span class="ident">serialize</span> <span class="op">=</span> <span class="string">&quot;T: serde::Serialize&quot;</span>,
-        <span class="ident">deserialize</span> <span class="op">=</span> <span class="string">&quot;T: serde::Deserialize&lt;&#39;de&gt;&quot;</span>
-    ))
-)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span>(<span class="kw">pub</span> <span class="ident">T</span>, <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span> <span class="kw">pub</span> <span class="ident">PhantomData</span><span class="op">&lt;</span>(<span class="ident">Src</span>, <span class="ident">Dst</span>)<span class="op">&gt;</span>);
+<span class="doccomment">/// A scaling factor between two different units of measurement.
+///
+/// This is effectively a type-safe float, intended to be used in combination with other types like
+/// `length::Length` to enforce conversion between systems of measurement at compile time.
+///
+/// `Src` and `Dst` represent the units before and after multiplying a value by a `Scale`. They
+/// may be types without values, such as empty enums.  For example:
+///
+/// ```rust
+/// use euclid::Scale;
+/// use euclid::Length;
+/// enum Mm {};
+/// enum Inch {};
+///
+/// let mm_per_inch: Scale&lt;f32, Inch, Mm&gt; = Scale::new(25.4);
+///
+/// let one_foot: Length&lt;f32, Inch&gt; = Length::new(12.0);
+/// let one_foot_in_mm: Length&lt;f32, Mm&gt; = one_foot * mm_per_inch;
+/// ```
+</span><span class="attribute">#[repr(C)]
+#[cfg_attr(feature = <span class="string">&quot;serde&quot;</span>, derive(Serialize, Deserialize))]
+#[cfg_attr(
+    feature = <span class="string">&quot;serde&quot;</span>,
+    serde(bound(
+        serialize = <span class="string">&quot;T: serde::Serialize&quot;</span>,
+        deserialize = <span class="string">&quot;T: serde::Deserialize&lt;&#39;de&gt;&quot;
+    </span>))
+)]
+</span><span class="kw">pub struct </span>Scale&lt;T, Src, Dst&gt;(<span class="kw">pub </span>T, <span class="attribute">#[doc(hidden)] </span><span class="kw">pub </span>PhantomData&lt;(Src, Dst)&gt;);
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">x</span>: <span class="ident">T</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">Scale</span>(<span class="ident">x</span>, <span class="ident">PhantomData</span>)
+<span class="kw">impl</span>&lt;T, Src, Dst&gt; Scale&lt;T, Src, Dst&gt; {
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub const fn </span>new(x: T) -&gt; <span class="self">Self </span>{
+        Scale(x, PhantomData)
     }
 
-    <span class="doccomment">/// Creates an identity scale (1.0).</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">identity</span>() -&gt; <span class="self">Self</span>
-    <span class="kw">where</span>
-        <span class="ident">T</span>: <span class="ident">One</span>
+    <span class="doccomment">/// Creates an identity scale (1.0).
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>identity() -&gt; <span class="self">Self
+    </span><span class="kw">where
+        </span>T: One
     {
-        <span class="ident">Scale::new</span>(<span class="ident">T::one</span>())
+        Scale::new(T::one())
     }
 
-    <span class="doccomment">/// Returns the given point transformed by this scale.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Example</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// use euclid::{Scale, point2};</span>
-    <span class="doccomment">/// enum Mm {};</span>
-    <span class="doccomment">/// enum Cm {};</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// let to_mm: Scale&lt;i32, Cm, Mm&gt; = Scale::new(10);</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// assert_eq!(to_mm.transform_point(point2(42, -42)), point2(420, -420));</span>
-    <span class="doccomment">/// ```</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">transform_point</span>(<span class="self">self</span>, <span class="ident">point</span>: <span class="ident">Point2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span><span class="op">&gt;</span>) -&gt; <span class="ident">Point2D</span><span class="op">&lt;</span><span class="ident">T::Output</span>, <span class="ident">Dst</span><span class="op">&gt;</span>
-    <span class="kw">where</span>
-        <span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Mul</span>,
+    <span class="doccomment">/// Returns the given point transformed by this scale.
+    ///
+    /// # Example
+    ///
+    /// ```rust
+    /// use euclid::{Scale, point2};
+    /// enum Mm {};
+    /// enum Cm {};
+    ///
+    /// let to_mm: Scale&lt;i32, Cm, Mm&gt; = Scale::new(10);
+    ///
+    /// assert_eq!(to_mm.transform_point(point2(42, -42)), point2(420, -420));
+    /// ```
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>transform_point(<span class="self">self</span>, point: Point2D&lt;T, Src&gt;) -&gt; Point2D&lt;T::Output, Dst&gt;
+    <span class="kw">where
+        </span>T: Copy + Mul,
     {
-        <span class="ident">Point2D::new</span>(<span class="ident">point</span>.<span class="ident">x</span> <span class="op">*</span> <span class="self">self</span>.<span class="number">0</span>, <span class="ident">point</span>.<span class="ident">y</span> <span class="op">*</span> <span class="self">self</span>.<span class="number">0</span>)
+        Point2D::new(point.x * <span class="self">self</span>.<span class="number">0</span>, point.y * <span class="self">self</span>.<span class="number">0</span>)
     }
 
-    <span class="doccomment">/// Returns the given point transformed by this scale.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">transform_point3d</span>(<span class="self">self</span>, <span class="ident">point</span>: <span class="ident">Point3D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span><span class="op">&gt;</span>) -&gt; <span class="ident">Point3D</span><span class="op">&lt;</span><span class="ident">T::Output</span>, <span class="ident">Dst</span><span class="op">&gt;</span>
-    <span class="kw">where</span>
-        <span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Mul</span>,
+    <span class="doccomment">/// Returns the given point transformed by this scale.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>transform_point3d(<span class="self">self</span>, point: Point3D&lt;T, Src&gt;) -&gt; Point3D&lt;T::Output, Dst&gt;
+    <span class="kw">where
+        </span>T: Copy + Mul,
     {
-        <span class="ident">Point3D::new</span>(<span class="ident">point</span>.<span class="ident">x</span> <span class="op">*</span> <span class="self">self</span>.<span class="number">0</span>, <span class="ident">point</span>.<span class="ident">y</span> <span class="op">*</span> <span class="self">self</span>.<span class="number">0</span>, <span class="ident">point</span>.<span class="ident">z</span> <span class="op">*</span> <span class="self">self</span>.<span class="number">0</span>)
+        Point3D::new(point.x * <span class="self">self</span>.<span class="number">0</span>, point.y * <span class="self">self</span>.<span class="number">0</span>, point.z * <span class="self">self</span>.<span class="number">0</span>)
     }
 
-    <span class="doccomment">/// Returns the given vector transformed by this scale.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Example</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// use euclid::{Scale, vec2};</span>
-    <span class="doccomment">/// enum Mm {};</span>
-    <span class="doccomment">/// enum Cm {};</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// let to_mm: Scale&lt;i32, Cm, Mm&gt; = Scale::new(10);</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// assert_eq!(to_mm.transform_vector(vec2(42, -42)), vec2(420, -420));</span>
-    <span class="doccomment">/// ```</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">transform_vector</span>(<span class="self">self</span>, <span class="ident">vec</span>: <span class="ident">Vector2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span><span class="op">&gt;</span>) -&gt; <span class="ident">Vector2D</span><span class="op">&lt;</span><span class="ident">T::Output</span>, <span class="ident">Dst</span><span class="op">&gt;</span>
-    <span class="kw">where</span>
-        <span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Mul</span>,
+    <span class="doccomment">/// Returns the given vector transformed by this scale.
+    ///
+    /// # Example
+    ///
+    /// ```rust
+    /// use euclid::{Scale, vec2};
+    /// enum Mm {};
+    /// enum Cm {};
+    ///
+    /// let to_mm: Scale&lt;i32, Cm, Mm&gt; = Scale::new(10);
+    ///
+    /// assert_eq!(to_mm.transform_vector(vec2(42, -42)), vec2(420, -420));
+    /// ```
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>transform_vector(<span class="self">self</span>, vec: Vector2D&lt;T, Src&gt;) -&gt; Vector2D&lt;T::Output, Dst&gt;
+    <span class="kw">where
+        </span>T: Copy + Mul,
     {
-        <span class="ident">Vector2D::new</span>(<span class="ident">vec</span>.<span class="ident">x</span> <span class="op">*</span> <span class="self">self</span>.<span class="number">0</span>, <span class="ident">vec</span>.<span class="ident">y</span> <span class="op">*</span> <span class="self">self</span>.<span class="number">0</span>)
+        Vector2D::new(vec.x * <span class="self">self</span>.<span class="number">0</span>, vec.y * <span class="self">self</span>.<span class="number">0</span>)
     }
 
-    <span class="doccomment">/// Returns the given vector transformed by this scale.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Example</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// use euclid::{Scale, size2};</span>
-    <span class="doccomment">/// enum Mm {};</span>
-    <span class="doccomment">/// enum Cm {};</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// let to_mm: Scale&lt;i32, Cm, Mm&gt; = Scale::new(10);</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// assert_eq!(to_mm.transform_size(size2(42, -42)), size2(420, -420));</span>
-    <span class="doccomment">/// ```</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">transform_size</span>(<span class="self">self</span>, <span class="ident">size</span>: <span class="ident">Size2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span><span class="op">&gt;</span>) -&gt; <span class="ident">Size2D</span><span class="op">&lt;</span><span class="ident">T::Output</span>, <span class="ident">Dst</span><span class="op">&gt;</span>
-    <span class="kw">where</span>
-        <span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Mul</span>,
+    <span class="doccomment">/// Returns the given vector transformed by this scale.
+    ///
+    /// # Example
+    ///
+    /// ```rust
+    /// use euclid::{Scale, size2};
+    /// enum Mm {};
+    /// enum Cm {};
+    ///
+    /// let to_mm: Scale&lt;i32, Cm, Mm&gt; = Scale::new(10);
+    ///
+    /// assert_eq!(to_mm.transform_size(size2(42, -42)), size2(420, -420));
+    /// ```
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>transform_size(<span class="self">self</span>, size: Size2D&lt;T, Src&gt;) -&gt; Size2D&lt;T::Output, Dst&gt;
+    <span class="kw">where
+        </span>T: Copy + Mul,
     {
-        <span class="ident">Size2D::new</span>(<span class="ident">size</span>.<span class="ident">width</span> <span class="op">*</span> <span class="self">self</span>.<span class="number">0</span>, <span class="ident">size</span>.<span class="ident">height</span> <span class="op">*</span> <span class="self">self</span>.<span class="number">0</span>)
+        Size2D::new(size.width * <span class="self">self</span>.<span class="number">0</span>, size.height * <span class="self">self</span>.<span class="number">0</span>)
     }
 
-    <span class="doccomment">/// Returns the given rect transformed by this scale.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Example</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// use euclid::{Scale, rect};</span>
-    <span class="doccomment">/// enum Mm {};</span>
-    <span class="doccomment">/// enum Cm {};</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// let to_mm: Scale&lt;i32, Cm, Mm&gt; = Scale::new(10);</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// assert_eq!(to_mm.transform_rect(&amp;rect(1, 2, 42, -42)), rect(10, 20, 420, -420));</span>
-    <span class="doccomment">/// ```</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">transform_rect</span>(<span class="self">self</span>, <span class="ident">rect</span>: <span class="kw-2">&amp;</span><span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span><span class="op">&gt;</span>) -&gt; <span class="ident">Rect</span><span class="op">&lt;</span><span class="ident">T::Output</span>, <span class="ident">Dst</span><span class="op">&gt;</span>
-    <span class="kw">where</span>
-        <span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Mul</span>,
+    <span class="doccomment">/// Returns the given rect transformed by this scale.
+    ///
+    /// # Example
+    ///
+    /// ```rust
+    /// use euclid::{Scale, rect};
+    /// enum Mm {};
+    /// enum Cm {};
+    ///
+    /// let to_mm: Scale&lt;i32, Cm, Mm&gt; = Scale::new(10);
+    ///
+    /// assert_eq!(to_mm.transform_rect(&amp;rect(1, 2, 42, -42)), rect(10, 20, 420, -420));
+    /// ```
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>transform_rect(<span class="self">self</span>, rect: <span class="kw-2">&amp;</span>Rect&lt;T, Src&gt;) -&gt; Rect&lt;T::Output, Dst&gt;
+    <span class="kw">where
+        </span>T: Copy + Mul,
     {
-        <span class="ident">Rect::new</span>(
-            <span class="self">self</span>.<span class="ident">transform_point</span>(<span class="ident">rect</span>.<span class="ident">origin</span>),
-            <span class="self">self</span>.<span class="ident">transform_size</span>(<span class="ident">rect</span>.<span class="ident">size</span>),
+        Rect::new(
+            <span class="self">self</span>.transform_point(rect.origin),
+            <span class="self">self</span>.transform_size(rect.size),
         )
     }
 
-    <span class="doccomment">/// Returns the given box transformed by this scale.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">transform_box2d</span>(<span class="self">self</span>, <span class="ident">b</span>: <span class="kw-2">&amp;</span><span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span><span class="op">&gt;</span>) -&gt; <span class="ident">Box2D</span><span class="op">&lt;</span><span class="ident">T::Output</span>, <span class="ident">Dst</span><span class="op">&gt;</span>
-    <span class="kw">where</span>
-        <span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Mul</span>,
+    <span class="doccomment">/// Returns the given box transformed by this scale.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>transform_box2d(<span class="self">self</span>, b: <span class="kw-2">&amp;</span>Box2D&lt;T, Src&gt;) -&gt; Box2D&lt;T::Output, Dst&gt;
+    <span class="kw">where
+        </span>T: Copy + Mul,
     {
-        <span class="ident">Box2D</span> {
-            <span class="ident">min</span>: <span class="self">self</span>.<span class="ident">transform_point</span>(<span class="ident">b</span>.<span class="ident">min</span>),
-            <span class="ident">max</span>: <span class="self">self</span>.<span class="ident">transform_point</span>(<span class="ident">b</span>.<span class="ident">max</span>),
+        Box2D {
+            min: <span class="self">self</span>.transform_point(b.min),
+            max: <span class="self">self</span>.transform_point(b.max),
         }
     }
 
-    <span class="doccomment">/// Returns the given box transformed by this scale.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">transform_box3d</span>(<span class="self">self</span>, <span class="ident">b</span>: <span class="kw-2">&amp;</span><span class="ident">Box3D</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span><span class="op">&gt;</span>) -&gt; <span class="ident">Box3D</span><span class="op">&lt;</span><span class="ident">T::Output</span>, <span class="ident">Dst</span><span class="op">&gt;</span>
-    <span class="kw">where</span>
-        <span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Mul</span>,
+    <span class="doccomment">/// Returns the given box transformed by this scale.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>transform_box3d(<span class="self">self</span>, b: <span class="kw-2">&amp;</span>Box3D&lt;T, Src&gt;) -&gt; Box3D&lt;T::Output, Dst&gt;
+    <span class="kw">where
+        </span>T: Copy + Mul,
     {
-        <span class="ident">Box3D</span> {
-            <span class="ident">min</span>: <span class="self">self</span>.<span class="ident">transform_point3d</span>(<span class="ident">b</span>.<span class="ident">min</span>),
-            <span class="ident">max</span>: <span class="self">self</span>.<span class="ident">transform_point3d</span>(<span class="ident">b</span>.<span class="ident">max</span>),
+        Box3D {
+            min: <span class="self">self</span>.transform_point3d(b.min),
+            max: <span class="self">self</span>.transform_point3d(b.max),
         }
     }
 
-    <span class="doccomment">/// Returns `true` if this scale has no effect.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Example</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// use euclid::Scale;</span>
-    <span class="doccomment">/// use euclid::num::One;</span>
-    <span class="doccomment">/// enum Mm {};</span>
-    <span class="doccomment">/// enum Cm {};</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// let cm_per_mm: Scale&lt;f32, Mm, Cm&gt; = Scale::new(0.1);</span>
-    <span class="doccomment">/// let mm_per_mm: Scale&lt;f32, Mm, Mm&gt; = Scale::new(1.0);</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// assert_eq!(cm_per_mm.is_identity(), false);</span>
-    <span class="doccomment">/// assert_eq!(mm_per_mm.is_identity(), true);</span>
-    <span class="doccomment">/// assert_eq!(mm_per_mm, Scale::one());</span>
-    <span class="doccomment">/// ```</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_identity</span>(<span class="self">self</span>) -&gt; <span class="ident">bool</span>
-    <span class="kw">where</span>
-        <span class="ident">T</span>: <span class="ident">PartialEq</span> <span class="op">+</span> <span class="ident">One</span>,
+    <span class="doccomment">/// Returns `true` if this scale has no effect.
+    ///
+    /// # Example
+    ///
+    /// ```rust
+    /// use euclid::Scale;
+    /// use euclid::num::One;
+    /// enum Mm {};
+    /// enum Cm {};
+    ///
+    /// let cm_per_mm: Scale&lt;f32, Mm, Cm&gt; = Scale::new(0.1);
+    /// let mm_per_mm: Scale&lt;f32, Mm, Mm&gt; = Scale::new(1.0);
+    ///
+    /// assert_eq!(cm_per_mm.is_identity(), false);
+    /// assert_eq!(mm_per_mm.is_identity(), true);
+    /// assert_eq!(mm_per_mm, Scale::one());
+    /// ```
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>is_identity(<span class="self">self</span>) -&gt; bool
+    <span class="kw">where
+        </span>T: PartialEq + One,
     {
-        <span class="self">self</span>.<span class="number">0</span> <span class="op">==</span> <span class="ident">T::one</span>()
+        <span class="self">self</span>.<span class="number">0 </span>== T::one()
     }
 
-    <span class="doccomment">/// Returns the underlying scalar scale factor.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get</span>(<span class="self">self</span>) -&gt; <span class="ident">T</span> {
-        <span class="self">self</span>.<span class="number">0</span>
-    }
+    <span class="doccomment">/// Returns the underlying scalar scale factor.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>get(<span class="self">self</span>) -&gt; T {
+        <span class="self">self</span>.<span class="number">0
+    </span>}
 
-    <span class="doccomment">/// The inverse Scale (1.0 / self).</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Example</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// use euclid::Scale;</span>
-    <span class="doccomment">/// enum Mm {};</span>
-    <span class="doccomment">/// enum Cm {};</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// let cm_per_mm: Scale&lt;f32, Cm, Mm&gt; = Scale::new(0.1);</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// assert_eq!(cm_per_mm.inverse(), Scale::new(10.0));</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">inverse</span>(<span class="self">self</span>) -&gt; <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T::Output</span>, <span class="ident">Dst</span>, <span class="ident">Src</span><span class="op">&gt;</span>
-    <span class="kw">where</span>
-        <span class="ident">T</span>: <span class="ident">One</span> <span class="op">+</span> <span class="ident">Div</span>,
+    <span class="doccomment">/// The inverse Scale (1.0 / self).
+    ///
+    /// # Example
+    ///
+    /// ```rust
+    /// use euclid::Scale;
+    /// enum Mm {};
+    /// enum Cm {};
+    ///
+    /// let cm_per_mm: Scale&lt;f32, Cm, Mm&gt; = Scale::new(0.1);
+    ///
+    /// assert_eq!(cm_per_mm.inverse(), Scale::new(10.0));
+    /// ```
+    </span><span class="kw">pub fn </span>inverse(<span class="self">self</span>) -&gt; Scale&lt;T::Output, Dst, Src&gt;
+    <span class="kw">where
+        </span>T: One + Div,
     {
-        <span class="kw">let</span> <span class="ident">one</span>: <span class="ident">T</span> <span class="op">=</span> <span class="ident">One::one</span>();
-        <span class="ident">Scale::new</span>(<span class="ident">one</span> <span class="op">/</span> <span class="self">self</span>.<span class="number">0</span>)
+        <span class="kw">let </span>one: T = One::one();
+        Scale::new(one / <span class="self">self</span>.<span class="number">0</span>)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">NumCast</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Cast from one numeric representation to another, preserving the units.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Panics</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// If the source value cannot be represented by the target type `NewT`, then</span>
-    <span class="doccomment">/// method panics. Use `try_cast` if that must be case.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Example</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// use euclid::Scale;</span>
-    <span class="doccomment">/// enum Mm {};</span>
-    <span class="doccomment">/// enum Cm {};</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// let to_mm: Scale&lt;i32, Cm, Mm&gt; = Scale::new(10);</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// assert_eq!(to_mm.cast::&lt;f32&gt;(), Scale::new(10.0));</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// That conversion will panic, because `i32` not enough to store such big numbers:</span>
-    <span class="doccomment">/// ```rust,should_panic</span>
-    <span class="doccomment">/// use euclid::Scale;</span>
-    <span class="doccomment">/// enum Mm {};// millimeter = 10^-2 meters</span>
-    <span class="doccomment">/// enum Em {};// exameter   = 10^18 meters</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// // Panics</span>
-    <span class="doccomment">/// let to_em: Scale&lt;i32, Mm, Em&gt; = Scale::new(10e20).cast();</span>
-    <span class="doccomment">/// ```</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">cast</span><span class="op">&lt;</span><span class="ident">NewT</span>: <span class="ident">NumCast</span><span class="op">&gt;</span>(<span class="self">self</span>) -&gt; <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">NewT</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">try_cast</span>().<span class="ident">unwrap</span>()
+<span class="kw">impl</span>&lt;T: NumCast, Src, Dst&gt; Scale&lt;T, Src, Dst&gt; {
+    <span class="doccomment">/// Cast from one numeric representation to another, preserving the units.
+    ///
+    /// # Panics
+    ///
+    /// If the source value cannot be represented by the target type `NewT`, then
+    /// method panics. Use `try_cast` if that must be case.
+    ///
+    /// # Example
+    ///
+    /// ```rust
+    /// use euclid::Scale;
+    /// enum Mm {};
+    /// enum Cm {};
+    ///
+    /// let to_mm: Scale&lt;i32, Cm, Mm&gt; = Scale::new(10);
+    ///
+    /// assert_eq!(to_mm.cast::&lt;f32&gt;(), Scale::new(10.0));
+    /// ```
+    /// That conversion will panic, because `i32` not enough to store such big numbers:
+    /// ```rust,should_panic
+    /// use euclid::Scale;
+    /// enum Mm {};// millimeter = 10^-2 meters
+    /// enum Em {};// exameter   = 10^18 meters
+    ///
+    /// // Panics
+    /// let to_em: Scale&lt;i32, Mm, Em&gt; = Scale::new(10e20).cast();
+    /// ```
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>cast&lt;NewT: NumCast&gt;(<span class="self">self</span>) -&gt; Scale&lt;NewT, Src, Dst&gt; {
+        <span class="self">self</span>.try_cast().unwrap()
     }
 
-    <span class="doccomment">/// Fallible cast from one numeric representation to another, preserving the units.</span>
-    <span class="doccomment">/// If the source value cannot be represented by the target type `NewT`, then `None`</span>
-    <span class="doccomment">/// is returned.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Example</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// use euclid::Scale;</span>
-    <span class="doccomment">/// enum Mm {};</span>
-    <span class="doccomment">/// enum Cm {};</span>
-    <span class="doccomment">/// enum Em {};// Exameter = 10^18 meters</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// let to_mm: Scale&lt;i32, Cm, Mm&gt; = Scale::new(10);</span>
-    <span class="doccomment">/// let to_em: Scale&lt;f32, Mm, Em&gt; = Scale::new(10e20);</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// assert_eq!(to_mm.try_cast::&lt;f32&gt;(), Some(Scale::new(10.0)));</span>
-    <span class="doccomment">/// // Integer to small to store that number</span>
-    <span class="doccomment">/// assert_eq!(to_em.try_cast::&lt;i32&gt;(), None);</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">try_cast</span><span class="op">&lt;</span><span class="ident">NewT</span>: <span class="ident">NumCast</span><span class="op">&gt;</span>(<span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">NewT</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="ident">NumCast::from</span>(<span class="self">self</span>.<span class="number">0</span>).<span class="ident">map</span>(<span class="ident">Scale::new</span>)
-    }
-}
-
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;bytemuck&quot;</span>)]</span>
-<span class="kw">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Zeroable</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">Zeroable</span> <span class="kw">for</span> <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {}
-
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;bytemuck&quot;</span>)]</span>
-<span class="kw">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Pod</span>, <span class="ident">Src</span>: <span class="lifetime">&#39;static</span>, <span class="ident">Dst</span>: <span class="lifetime">&#39;static</span><span class="op">&gt;</span> <span class="ident">Pod</span> <span class="kw">for</span> <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {}
-
-<span class="comment">// scale0 * scale1</span>
-<span class="comment">// (A,B) * (B,C) = (A,C)</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Mul</span>, <span class="ident">A</span>, <span class="ident">B</span>, <span class="ident">C</span><span class="op">&gt;</span> <span class="ident">Mul</span><span class="op">&lt;</span><span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">B</span>, <span class="ident">C</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">A</span>, <span class="ident">B</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T::Output</span>, <span class="ident">A</span>, <span class="ident">C</span><span class="op">&gt;</span>;
-
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">mul</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">B</span>, <span class="ident">C</span><span class="op">&gt;</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
-        <span class="ident">Scale::new</span>(<span class="self">self</span>.<span class="number">0</span> <span class="op">*</span> <span class="ident">other</span>.<span class="number">0</span>)
+    <span class="doccomment">/// Fallible cast from one numeric representation to another, preserving the units.
+    /// If the source value cannot be represented by the target type `NewT`, then `None`
+    /// is returned.
+    ///
+    /// # Example
+    ///
+    /// ```rust
+    /// use euclid::Scale;
+    /// enum Mm {};
+    /// enum Cm {};
+    /// enum Em {};// Exameter = 10^18 meters
+    ///
+    /// let to_mm: Scale&lt;i32, Cm, Mm&gt; = Scale::new(10);
+    /// let to_em: Scale&lt;f32, Mm, Em&gt; = Scale::new(10e20);
+    ///
+    /// assert_eq!(to_mm.try_cast::&lt;f32&gt;(), Some(Scale::new(10.0)));
+    /// // Integer to small to store that number
+    /// assert_eq!(to_em.try_cast::&lt;i32&gt;(), None);
+    /// ```
+    </span><span class="kw">pub fn </span>try_cast&lt;NewT: NumCast&gt;(<span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;Scale&lt;NewT, Src, Dst&gt;&gt; {
+        NumCast::from(<span class="self">self</span>.<span class="number">0</span>).map(Scale::new)
     }
 }
 
-<span class="comment">// scale0 + scale1</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Add</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">Add</span> <span class="kw">for</span> <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T::Output</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span>;
+<span class="attribute">#[cfg(feature = <span class="string">&quot;bytemuck&quot;</span>)]
+</span><span class="kw">unsafe impl</span>&lt;T: Zeroable, Src, Dst&gt; Zeroable <span class="kw">for </span>Scale&lt;T, Src, Dst&gt; {}
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">add</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
-        <span class="ident">Scale::new</span>(<span class="self">self</span>.<span class="number">0</span> <span class="op">+</span> <span class="ident">other</span>.<span class="number">0</span>)
+<span class="attribute">#[cfg(feature = <span class="string">&quot;bytemuck&quot;</span>)]
+</span><span class="kw">unsafe impl</span>&lt;T: Pod, Src: <span class="lifetime">&#39;static</span>, Dst: <span class="lifetime">&#39;static</span>&gt; Pod <span class="kw">for </span>Scale&lt;T, Src, Dst&gt; {}
+
+<span class="comment">// scale0 * scale1
+// (A,B) * (B,C) = (A,C)
+</span><span class="kw">impl</span>&lt;T: Mul, A, B, C&gt; Mul&lt;Scale&lt;T, B, C&gt;&gt; <span class="kw">for </span>Scale&lt;T, A, B&gt; {
+    <span class="kw">type </span>Output = Scale&lt;T::Output, A, C&gt;;
+
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>mul(<span class="self">self</span>, other: Scale&lt;T, B, C&gt;) -&gt; <span class="self">Self</span>::Output {
+        Scale::new(<span class="self">self</span>.<span class="number">0 </span>* other.<span class="number">0</span>)
     }
 }
 
-<span class="comment">// scale0 - scale1</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Sub</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">Sub</span> <span class="kw">for</span> <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T::Output</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span>;
+<span class="comment">// scale0 + scale1
+</span><span class="kw">impl</span>&lt;T: Add, Src, Dst&gt; Add <span class="kw">for </span>Scale&lt;T, Src, Dst&gt; {
+    <span class="kw">type </span>Output = Scale&lt;T::Output, Src, Dst&gt;;
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">sub</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
-        <span class="ident">Scale::new</span>(<span class="self">self</span>.<span class="number">0</span> <span class="op">-</span> <span class="ident">other</span>.<span class="number">0</span>)
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>add(<span class="self">self</span>, other: Scale&lt;T, Src, Dst&gt;) -&gt; <span class="self">Self</span>::Output {
+        Scale::new(<span class="self">self</span>.<span class="number">0 </span>+ other.<span class="number">0</span>)
     }
 }
 
-<span class="comment">// FIXME: Switch to `derive(PartialEq, Clone)` after this Rust issue is fixed:</span>
-<span class="comment">// https://github.com/rust-lang/rust/issues/26925</span>
+<span class="comment">// scale0 - scale1
+</span><span class="kw">impl</span>&lt;T: Sub, Src, Dst&gt; Sub <span class="kw">for </span>Scale&lt;T, Src, Dst&gt; {
+    <span class="kw">type </span>Output = Scale&lt;T::Output, Src, Dst&gt;;
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">PartialEq</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">PartialEq</span> <span class="kw">for</span> <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">eq</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="number">0</span> <span class="op">==</span> <span class="ident">other</span>.<span class="number">0</span>
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>sub(<span class="self">self</span>, other: Scale&lt;T, Src, Dst&gt;) -&gt; <span class="self">Self</span>::Output {
+        Scale::new(<span class="self">self</span>.<span class="number">0 </span>- other.<span class="number">0</span>)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Eq</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">Eq</span> <span class="kw">for</span> <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {}
+<span class="comment">// FIXME: Switch to `derive(PartialEq, Clone)` after this Rust issue is fixed:
+// https://github.com/rust-lang/rust/issues/26925
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">PartialOrd</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">PartialOrd</span> <span class="kw">for</span> <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">partial_cmp</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Ordering</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="number">0</span>.<span class="ident">partial_cmp</span>(<span class="kw-2">&amp;</span><span class="ident">other</span>.<span class="number">0</span>)
+</span><span class="kw">impl</span>&lt;T: PartialEq, Src, Dst&gt; PartialEq <span class="kw">for </span>Scale&lt;T, Src, Dst&gt; {
+    <span class="kw">fn </span>eq(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span>Scale&lt;T, Src, Dst&gt;) -&gt; bool {
+        <span class="self">self</span>.<span class="number">0 </span>== other.<span class="number">0
+    </span>}
+}
+
+<span class="kw">impl</span>&lt;T: Eq, Src, Dst&gt; Eq <span class="kw">for </span>Scale&lt;T, Src, Dst&gt; {}
+
+<span class="kw">impl</span>&lt;T: PartialOrd, Src, Dst&gt; PartialOrd <span class="kw">for </span>Scale&lt;T, Src, Dst&gt; {
+    <span class="kw">fn </span>partial_cmp(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;Ordering&gt; {
+        <span class="self">self</span>.<span class="number">0</span>.partial_cmp(<span class="kw-2">&amp;</span>other.<span class="number">0</span>)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Ord</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">Ord</span> <span class="kw">for</span> <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="ident">Ordering</span> {
-        <span class="self">self</span>.<span class="number">0</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="ident">other</span>.<span class="number">0</span>)
+<span class="kw">impl</span>&lt;T: Ord, Src, Dst&gt; Ord <span class="kw">for </span>Scale&lt;T, Src, Dst&gt; {
+    <span class="kw">fn </span>cmp(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; Ordering {
+        <span class="self">self</span>.<span class="number">0</span>.cmp(<span class="kw-2">&amp;</span>other.<span class="number">0</span>)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Clone</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">Clone</span> <span class="kw">for</span> <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {
-        <span class="ident">Scale::new</span>(<span class="self">self</span>.<span class="number">0</span>.<span class="ident">clone</span>())
+<span class="kw">impl</span>&lt;T: Clone, Src, Dst&gt; Clone <span class="kw">for </span>Scale&lt;T, Src, Dst&gt; {
+    <span class="kw">fn </span>clone(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Scale&lt;T, Src, Dst&gt; {
+        Scale::new(<span class="self">self</span>.<span class="number">0</span>.clone())
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Copy</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">Copy</span> <span class="kw">for</span> <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {}
+<span class="kw">impl</span>&lt;T: Copy, Src, Dst&gt; Copy <span class="kw">for </span>Scale&lt;T, Src, Dst&gt; {}
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">fmt::Debug</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">fmt::Debug</span> <span class="kw">for</span> <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">fmt::Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
-        <span class="self">self</span>.<span class="number">0</span>.<span class="ident">fmt</span>(<span class="ident">f</span>)
+<span class="kw">impl</span>&lt;T: fmt::Debug, Src, Dst&gt; fmt::Debug <span class="kw">for </span>Scale&lt;T, Src, Dst&gt; {
+    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>fmt::Formatter) -&gt; fmt::Result {
+        <span class="self">self</span>.<span class="number">0</span>.fmt(f)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Default</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::new</span>(<span class="ident">T::default</span>())
+<span class="kw">impl</span>&lt;T: Default, Src, Dst&gt; Default <span class="kw">for </span>Scale&lt;T, Src, Dst&gt; {
+    <span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::new(T::default())
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Hash</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">Hash</span> <span class="kw">for</span> <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">hash</span><span class="op">&lt;</span><span class="ident">H</span>: <span class="ident">Hasher</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">state</span>: <span class="kw-2">&amp;mut</span> <span class="ident">H</span>) {
-        <span class="self">self</span>.<span class="number">0</span>.<span class="ident">hash</span>(<span class="ident">state</span>)
+<span class="kw">impl</span>&lt;T: Hash, Src, Dst&gt; Hash <span class="kw">for </span>Scale&lt;T, Src, Dst&gt; {
+    <span class="kw">fn </span>hash&lt;H: Hasher&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, state: <span class="kw-2">&amp;mut </span>H) {
+        <span class="self">self</span>.<span class="number">0</span>.hash(state)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">One</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> <span class="ident">One</span> <span class="kw">for</span> <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">one</span>() -&gt; <span class="self">Self</span> {
-        <span class="ident">Scale::new</span>(<span class="ident">T::one</span>())
+<span class="kw">impl</span>&lt;T: One, Src, Dst&gt; One <span class="kw">for </span>Scale&lt;T, Src, Dst&gt; {
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>one() -&gt; <span class="self">Self </span>{
+        Scale::new(T::one())
     }
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
-<span class="kw">mod</span> <span class="ident">tests</span> {
-    <span class="kw">use</span> <span class="ident"><span class="kw">super</span>::Scale</span>;
+<span class="attribute">#[cfg(test)]
+</span><span class="kw">mod </span>tests {
+    <span class="kw">use </span><span class="kw">super</span>::Scale;
 
-    <span class="kw">enum</span> <span class="ident">Inch</span> {}
-    <span class="kw">enum</span> <span class="ident">Cm</span> {}
-    <span class="kw">enum</span> <span class="ident">Mm</span> {}
+    <span class="kw">enum </span>Inch {}
+    <span class="kw">enum </span>Cm {}
+    <span class="kw">enum </span>Mm {}
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_scale</span>() {
-        <span class="kw">let</span> <span class="ident">mm_per_inch</span>: <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">f32</span>, <span class="ident">Inch</span>, <span class="ident">Mm</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Scale::new</span>(<span class="number">25.4</span>);
-        <span class="kw">let</span> <span class="ident">cm_per_mm</span>: <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">f32</span>, <span class="ident">Mm</span>, <span class="ident">Cm</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Scale::new</span>(<span class="number">0.1</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_scale() {
+        <span class="kw">let </span>mm_per_inch: Scale&lt;f32, Inch, Mm&gt; = Scale::new(<span class="number">25.4</span>);
+        <span class="kw">let </span>cm_per_mm: Scale&lt;f32, Mm, Cm&gt; = Scale::new(<span class="number">0.1</span>);
 
-        <span class="kw">let</span> <span class="ident">mm_per_cm</span>: <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">f32</span>, <span class="ident">Cm</span>, <span class="ident">Mm</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">cm_per_mm</span>.<span class="ident">inverse</span>();
-        <span class="macro">assert_eq!</span>(<span class="ident">mm_per_cm</span>.<span class="ident">get</span>(), <span class="number">10.0</span>);
+        <span class="kw">let </span>mm_per_cm: Scale&lt;f32, Cm, Mm&gt; = cm_per_mm.inverse();
+        <span class="macro">assert_eq!</span>(mm_per_cm.get(), <span class="number">10.0</span>);
 
-        <span class="kw">let</span> <span class="ident">one</span>: <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">f32</span>, <span class="ident">Mm</span>, <span class="ident">Mm</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">cm_per_mm</span> <span class="op">*</span> <span class="ident">mm_per_cm</span>;
-        <span class="macro">assert_eq!</span>(<span class="ident">one</span>.<span class="ident">get</span>(), <span class="number">1.0</span>);
+        <span class="kw">let </span>one: Scale&lt;f32, Mm, Mm&gt; = cm_per_mm * mm_per_cm;
+        <span class="macro">assert_eq!</span>(one.get(), <span class="number">1.0</span>);
 
-        <span class="kw">let</span> <span class="ident">one</span>: <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">f32</span>, <span class="ident">Cm</span>, <span class="ident">Cm</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">mm_per_cm</span> <span class="op">*</span> <span class="ident">cm_per_mm</span>;
-        <span class="macro">assert_eq!</span>(<span class="ident">one</span>.<span class="ident">get</span>(), <span class="number">1.0</span>);
+        <span class="kw">let </span>one: Scale&lt;f32, Cm, Cm&gt; = mm_per_cm * cm_per_mm;
+        <span class="macro">assert_eq!</span>(one.get(), <span class="number">1.0</span>);
 
-        <span class="kw">let</span> <span class="ident">cm_per_inch</span>: <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">f32</span>, <span class="ident">Inch</span>, <span class="ident">Cm</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">mm_per_inch</span> <span class="op">*</span> <span class="ident">cm_per_mm</span>;
-        <span class="comment">//  mm     cm     cm</span>
-        <span class="comment">// ---- x ---- = ----</span>
-        <span class="comment">// inch    mm    inch</span>
-        <span class="macro">assert_eq!</span>(<span class="ident">cm_per_inch</span>, <span class="ident">Scale::new</span>(<span class="number">2.54</span>));
+        <span class="kw">let </span>cm_per_inch: Scale&lt;f32, Inch, Cm&gt; = mm_per_inch * cm_per_mm;
+        <span class="comment">//  mm     cm     cm
+        // ---- x ---- = ----
+        // inch    mm    inch
+        </span><span class="macro">assert_eq!</span>(cm_per_inch, Scale::new(<span class="number">2.54</span>));
 
-        <span class="kw">let</span> <span class="ident">a</span>: <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">isize</span>, <span class="ident">Inch</span>, <span class="ident">Inch</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Scale::new</span>(<span class="number">2</span>);
-        <span class="kw">let</span> <span class="ident">b</span>: <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">isize</span>, <span class="ident">Inch</span>, <span class="ident">Inch</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Scale::new</span>(<span class="number">3</span>);
-        <span class="macro">assert_ne!</span>(<span class="ident">a</span>, <span class="ident">b</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">a</span>, <span class="ident">a</span>.<span class="ident">clone</span>());
-        <span class="macro">assert_eq!</span>(<span class="ident">a</span>.<span class="ident">clone</span>() <span class="op">+</span> <span class="ident">b</span>.<span class="ident">clone</span>(), <span class="ident">Scale::new</span>(<span class="number">5</span>));
-        <span class="macro">assert_eq!</span>(<span class="ident">a</span> <span class="op">-</span> <span class="ident">b</span>, <span class="ident">Scale::new</span>(<span class="op">-</span><span class="number">1</span>));
+        <span class="kw">let </span>a: Scale&lt;isize, Inch, Inch&gt; = Scale::new(<span class="number">2</span>);
+        <span class="kw">let </span>b: Scale&lt;isize, Inch, Inch&gt; = Scale::new(<span class="number">3</span>);
+        <span class="macro">assert_ne!</span>(a, b);
+        <span class="macro">assert_eq!</span>(a, a.clone());
+        <span class="macro">assert_eq!</span>(a.clone() + b.clone(), Scale::new(<span class="number">5</span>));
+        <span class="macro">assert_eq!</span>(a - b, Scale::new(-<span class="number">1</span>));
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="euclid" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0-nightly (12cd71f4d 2022-06-01)" ></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="euclid" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (17cbdfd07 2022-09-13)" ></div></body></html>

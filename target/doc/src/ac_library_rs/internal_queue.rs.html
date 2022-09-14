@@ -1,11 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/bcfam/.cargo/git/checkouts/ac-library-rs-d342211755004e20/d2b35ac/src/internal_queue.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>internal_queue.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><script defer src="../../main.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script>
-    <noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../ac_library_rs/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"></h2>
-    </nav>
-    <nav class="sidebar"><a class="sidebar-logo" href="../../ac_library_rs/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../ac_library_rs/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
-                                <a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div>
-                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/bcfam/.cargo/git/checkouts/ac-library-rs-d342211755004e20/d2b35ac/src/internal_queue.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>internal_queue.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../ac_library_rs/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../ac_library_rs/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../ac_library_rs/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -109,110 +102,109 @@
 <span id="102">102</span>
 <span id="103">103</span>
 <span id="104">104</span>
-</pre><pre class="rust"><code><span class="attribute">#![<span class="ident">allow</span>(<span class="ident">dead_code</span>)]</span>
+</pre><pre class="rust"><code><span class="attribute">#![allow(dead_code)]
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Default</span>)]</span>
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct</span> <span class="ident">SimpleQueue</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="ident">payload</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
-    <span class="ident">pos</span>: <span class="ident">usize</span>,
+#[derive(Default)]
+</span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct </span>SimpleQueue&lt;T&gt; {
+    payload: Vec&lt;T&gt;,
+    pos: usize,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">SimpleQueue</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">reserve</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">n</span>: <span class="ident">usize</span>) {
-        <span class="kw">if</span> <span class="ident">n</span> <span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">payload</span>.<span class="ident">len</span>() {
-            <span class="self">self</span>.<span class="ident">payload</span>.<span class="ident">reserve</span>(<span class="ident">n</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">payload</span>.<span class="ident">len</span>());
+<span class="kw">impl</span>&lt;T&gt; SimpleQueue&lt;T&gt; {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>reserve(<span class="kw-2">&amp;mut </span><span class="self">self</span>, n: usize) {
+        <span class="kw">if </span>n &gt; <span class="self">self</span>.payload.len() {
+            <span class="self">self</span>.payload.reserve(n - <span class="self">self</span>.payload.len());
         }
     }
 
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">size</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">usize</span> {
-        <span class="self">self</span>.<span class="ident">payload</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="self">self</span>.<span class="ident">pos</span>
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>size(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize {
+        <span class="self">self</span>.payload.len() - <span class="self">self</span>.pos
     }
 
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">empty</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">pos</span> <span class="op">==</span> <span class="self">self</span>.<span class="ident">payload</span>.<span class="ident">len</span>()
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>empty(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="self">self</span>.pos == <span class="self">self</span>.payload.len()
     }
 
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">push</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">t</span>: <span class="ident">T</span>) {
-        <span class="self">self</span>.<span class="ident">payload</span>.<span class="ident">push</span>(<span class="ident">t</span>);
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>push(<span class="kw-2">&amp;mut </span><span class="self">self</span>, t: T) {
+        <span class="self">self</span>.payload.push(t);
     }
 
-    <span class="comment">// Do we need mutable version?</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">front</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">T</span><span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">pos</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">payload</span>.<span class="ident">len</span>() {
-            <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">payload</span>[<span class="self">self</span>.<span class="ident">pos</span>])
-        } <span class="kw">else</span> {
-            <span class="prelude-val">None</span>
-        }
+    <span class="comment">// Do we need mutable version?
+    </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>front(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>T&gt; {
+        <span class="kw">if </span><span class="self">self</span>.pos &lt; <span class="self">self</span>.payload.len() {
+            <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.payload[<span class="self">self</span>.pos])
+        } <span class="kw">else </span>{
+            <span class="prelude-val">None
+        </span>}
     }
 
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">clear</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
-        <span class="self">self</span>.<span class="ident">payload</span>.<span class="ident">clear</span>();
-        <span class="self">self</span>.<span class="ident">pos</span> <span class="op">=</span> <span class="number">0</span>;
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>clear(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
+        <span class="self">self</span>.payload.clear();
+        <span class="self">self</span>.pos = <span class="number">0</span>;
     }
 
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">pop</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">T</span><span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">pos</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">payload</span>.<span class="ident">len</span>() {
-            <span class="self">self</span>.<span class="ident">pos</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-            <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">payload</span>[<span class="self">self</span>.<span class="ident">pos</span> <span class="op">-</span> <span class="number">1</span>])
-        } <span class="kw">else</span> {
-            <span class="prelude-val">None</span>
-        }
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>pop(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>T&gt; {
+        <span class="kw">if </span><span class="self">self</span>.pos &lt; <span class="self">self</span>.payload.len() {
+            <span class="self">self</span>.pos += <span class="number">1</span>;
+            <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.payload[<span class="self">self</span>.pos - <span class="number">1</span>])
+        } <span class="kw">else </span>{
+            <span class="prelude-val">None
+        </span>}
     }
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
-<span class="kw">mod</span> <span class="ident">test</span> {
-    <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::internal_queue::SimpleQueue</span>;
+<span class="attribute">#[cfg(test)]
+</span><span class="kw">mod </span>test {
+    <span class="kw">use </span><span class="kw">crate</span>::internal_queue::SimpleQueue;
 
-    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::cognitive_complexity</span>)]</span>
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_simple_queue</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">queue</span> <span class="op">=</span> <span class="ident">SimpleQueue::default</span>();
+    <span class="attribute">#[allow(clippy::cognitive_complexity)]
+    #[test]
+    </span><span class="kw">fn </span>test_simple_queue() {
+        <span class="kw">let </span><span class="kw-2">mut </span>queue = SimpleQueue::default();
 
-        <span class="macro">assert_eq!</span>(<span class="ident">queue</span>.<span class="ident">size</span>(), <span class="number">0</span>);
-        <span class="macro">assert!</span>(<span class="ident">queue</span>.<span class="ident">empty</span>());
-        <span class="macro">assert!</span>(<span class="ident">queue</span>.<span class="ident">front</span>().<span class="ident">is_none</span>());
-        <span class="macro">assert!</span>(<span class="ident">queue</span>.<span class="ident">pop</span>().<span class="ident">is_none</span>());
+        <span class="macro">assert_eq!</span>(queue.size(), <span class="number">0</span>);
+        <span class="macro">assert!</span>(queue.empty());
+        <span class="macro">assert!</span>(queue.front().is_none());
+        <span class="macro">assert!</span>(queue.pop().is_none());
 
-        <span class="ident">queue</span>.<span class="ident">push</span>(<span class="number">123</span>);
+        queue.push(<span class="number">123</span>);
 
-        <span class="macro">assert_eq!</span>(<span class="ident">queue</span>.<span class="ident">size</span>(), <span class="number">1</span>);
-        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">queue</span>.<span class="ident">empty</span>());
-        <span class="macro">assert_eq!</span>(<span class="ident">queue</span>.<span class="ident">front</span>(), <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="number">123</span>));
+        <span class="macro">assert_eq!</span>(queue.size(), <span class="number">1</span>);
+        <span class="macro">assert!</span>(!queue.empty());
+        <span class="macro">assert_eq!</span>(queue.front(), <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="number">123</span>));
 
-        <span class="ident">queue</span>.<span class="ident">push</span>(<span class="number">456</span>);
+        queue.push(<span class="number">456</span>);
 
-        <span class="macro">assert_eq!</span>(<span class="ident">queue</span>.<span class="ident">size</span>(), <span class="number">2</span>);
-        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">queue</span>.<span class="ident">empty</span>());
-        <span class="macro">assert_eq!</span>(<span class="ident">queue</span>.<span class="ident">front</span>(), <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="number">123</span>));
+        <span class="macro">assert_eq!</span>(queue.size(), <span class="number">2</span>);
+        <span class="macro">assert!</span>(!queue.empty());
+        <span class="macro">assert_eq!</span>(queue.front(), <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="number">123</span>));
 
-        <span class="macro">assert_eq!</span>(<span class="ident">queue</span>.<span class="ident">pop</span>(), <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="number">123</span>));
-        <span class="macro">assert_eq!</span>(<span class="ident">queue</span>.<span class="ident">size</span>(), <span class="number">1</span>);
-        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">queue</span>.<span class="ident">empty</span>());
-        <span class="macro">assert_eq!</span>(<span class="ident">queue</span>.<span class="ident">front</span>(), <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="number">456</span>));
+        <span class="macro">assert_eq!</span>(queue.pop(), <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="number">123</span>));
+        <span class="macro">assert_eq!</span>(queue.size(), <span class="number">1</span>);
+        <span class="macro">assert!</span>(!queue.empty());
+        <span class="macro">assert_eq!</span>(queue.front(), <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="number">456</span>));
 
-        <span class="ident">queue</span>.<span class="ident">push</span>(<span class="number">789</span>);
-        <span class="ident">queue</span>.<span class="ident">push</span>(<span class="number">789</span>);
-        <span class="ident">queue</span>.<span class="ident">push</span>(<span class="number">456</span>);
-        <span class="ident">queue</span>.<span class="ident">push</span>(<span class="number">456</span>);
+        queue.push(<span class="number">789</span>);
+        queue.push(<span class="number">789</span>);
+        queue.push(<span class="number">456</span>);
+        queue.push(<span class="number">456</span>);
 
-        <span class="macro">assert_eq!</span>(<span class="ident">queue</span>.<span class="ident">size</span>(), <span class="number">5</span>);
-        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">queue</span>.<span class="ident">empty</span>());
-        <span class="macro">assert_eq!</span>(<span class="ident">queue</span>.<span class="ident">front</span>(), <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="number">456</span>));
+        <span class="macro">assert_eq!</span>(queue.size(), <span class="number">5</span>);
+        <span class="macro">assert!</span>(!queue.empty());
+        <span class="macro">assert_eq!</span>(queue.front(), <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="number">456</span>));
 
-        <span class="macro">assert_eq!</span>(<span class="ident">queue</span>.<span class="ident">pop</span>(), <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="number">456</span>));
-        <span class="macro">assert_eq!</span>(<span class="ident">queue</span>.<span class="ident">size</span>(), <span class="number">4</span>);
-        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">queue</span>.<span class="ident">empty</span>());
-        <span class="macro">assert_eq!</span>(<span class="ident">queue</span>.<span class="ident">front</span>(), <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="number">789</span>));
+        <span class="macro">assert_eq!</span>(queue.pop(), <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="number">456</span>));
+        <span class="macro">assert_eq!</span>(queue.size(), <span class="number">4</span>);
+        <span class="macro">assert!</span>(!queue.empty());
+        <span class="macro">assert_eq!</span>(queue.front(), <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="number">789</span>));
 
-        <span class="ident">queue</span>.<span class="ident">clear</span>();
+        queue.clear();
 
-        <span class="macro">assert_eq!</span>(<span class="ident">queue</span>.<span class="ident">size</span>(), <span class="number">0</span>);
-        <span class="macro">assert!</span>(<span class="ident">queue</span>.<span class="ident">empty</span>());
-        <span class="macro">assert!</span>(<span class="ident">queue</span>.<span class="ident">front</span>().<span class="ident">is_none</span>());
-        <span class="macro">assert!</span>(<span class="ident">queue</span>.<span class="ident">pop</span>().<span class="ident">is_none</span>());
+        <span class="macro">assert_eq!</span>(queue.size(), <span class="number">0</span>);
+        <span class="macro">assert!</span>(queue.empty());
+        <span class="macro">assert!</span>(queue.front().is_none());
+        <span class="macro">assert!</span>(queue.pop().is_none());
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="ac_library_rs" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0-nightly (12cd71f4d 2022-06-01)" ></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="ac_library_rs" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (17cbdfd07 2022-09-13)" ></div></body></html>

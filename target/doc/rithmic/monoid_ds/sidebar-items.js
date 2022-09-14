@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["SegTree",""],["Sum",""]],"trait":[["MonoidOps",""]]});
+window.SIDEBAR_ITEMS = {"mod":[["monoid_ops",""]],"struct":[["NdFenwick",""],["SegTree",""]]};

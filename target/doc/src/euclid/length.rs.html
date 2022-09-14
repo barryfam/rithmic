@@ -1,11 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/bcfam/.cargo/registry/src/github.com-1ecc6299db9ec823/euclid-0.22.7/src/length.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>length.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><script defer src="../../main.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script>
-    <noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../euclid/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"></h2>
-    </nav>
-    <nav class="sidebar"><a class="sidebar-logo" href="../../euclid/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../euclid/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
-                                <a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div>
-                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/bcfam/.cargo/registry/src/github.com-1ecc6299db9ec823/euclid-0.22.7/src/length.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>length.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../euclid/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../euclid/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../euclid/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -614,615 +607,614 @@
 <span id="607">607</span>
 <span id="608">608</span>
 <span id="609">609</span>
-</pre><pre class="rust"><code><span class="comment">// Copyright 2014 The Servo Project Developers. See the COPYRIGHT</span>
-<span class="comment">// file at the top-level directory of this distribution.</span>
-<span class="comment">//</span>
-<span class="comment">// Licensed under the Apache License, Version 2.0 &lt;LICENSE-APACHE or</span>
-<span class="comment">// http://www.apache.org/licenses/LICENSE-2.0&gt; or the MIT license</span>
-<span class="comment">// &lt;LICENSE-MIT or http://opensource.org/licenses/MIT&gt;, at your</span>
-<span class="comment">// option. This file may not be copied, modified, or distributed</span>
-<span class="comment">// except according to those terms.</span>
-<span class="doccomment">//! A one-dimensional length, tagged with its units.</span>
+</pre><pre class="rust"><code><span class="comment">// Copyright 2014 The Servo Project Developers. See the COPYRIGHT
+// file at the top-level directory of this distribution.
+//
+// Licensed under the Apache License, Version 2.0 &lt;LICENSE-APACHE or
+// http://www.apache.org/licenses/LICENSE-2.0&gt; or the MIT license
+// &lt;LICENSE-MIT or http://opensource.org/licenses/MIT&gt;, at your
+// option. This file may not be copied, modified, or distributed
+// except according to those terms.
+</span><span class="doccomment">//! A one-dimensional length, tagged with its units.
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::approxeq::ApproxEq</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::num::Zero</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::scale::Scale</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::approxord</span>::{<span class="ident">max</span>, <span class="ident">min</span>};
+</span><span class="kw">use </span><span class="kw">crate</span>::approxeq::ApproxEq;
+<span class="kw">use </span><span class="kw">crate</span>::num::Zero;
+<span class="kw">use </span><span class="kw">crate</span>::scale::Scale;
+<span class="kw">use </span><span class="kw">crate</span>::approxord::{max, min};
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::num::One</span>;
-<span class="kw">use</span> <span class="ident">core::cmp::Ordering</span>;
-<span class="kw">use</span> <span class="ident">core::fmt</span>;
-<span class="kw">use</span> <span class="ident">core::hash</span>::{<span class="ident">Hash</span>, <span class="ident">Hasher</span>};
-<span class="kw">use</span> <span class="ident">core::iter::Sum</span>;
-<span class="kw">use</span> <span class="ident">core::marker::PhantomData</span>;
-<span class="kw">use</span> <span class="ident">core::ops</span>::{<span class="ident">Add</span>, <span class="ident">Div</span>, <span class="ident">Mul</span>, <span class="ident">Neg</span>, <span class="ident">Sub</span>};
-<span class="kw">use</span> <span class="ident">core::ops</span>::{<span class="ident">AddAssign</span>, <span class="ident">DivAssign</span>, <span class="ident">MulAssign</span>, <span class="ident">SubAssign</span>};
-<span class="kw">use</span> <span class="ident">num_traits</span>::{<span class="ident">NumCast</span>, <span class="ident">Saturating</span>};
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;serde&quot;</span>)]</span>
-<span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Deserialize</span>, <span class="ident">Deserializer</span>, <span class="ident">Serialize</span>, <span class="ident">Serializer</span>};
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;bytemuck&quot;</span>)]</span>
-<span class="kw">use</span> <span class="ident">bytemuck</span>::{<span class="ident">Zeroable</span>, <span class="ident">Pod</span>};
+<span class="kw">use </span><span class="kw">crate</span>::num::One;
+<span class="kw">use </span>core::cmp::Ordering;
+<span class="kw">use </span>core::fmt;
+<span class="kw">use </span>core::hash::{Hash, Hasher};
+<span class="kw">use </span>core::iter::Sum;
+<span class="kw">use </span>core::marker::PhantomData;
+<span class="kw">use </span>core::ops::{Add, Div, Mul, Neg, Sub};
+<span class="kw">use </span>core::ops::{AddAssign, DivAssign, MulAssign, SubAssign};
+<span class="kw">use </span>num_traits::{NumCast, Saturating};
+<span class="attribute">#[cfg(feature = <span class="string">&quot;serde&quot;</span>)]
+</span><span class="kw">use </span>serde::{Deserialize, Deserializer, Serialize, Serializer};
+<span class="attribute">#[cfg(feature = <span class="string">&quot;bytemuck&quot;</span>)]
+</span><span class="kw">use </span>bytemuck::{Zeroable, Pod};
 
-<span class="doccomment">/// A one-dimensional distance, with value represented by `T` and unit of measurement `Unit`.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// `T` can be any numeric type, for example a primitive type like `u64` or `f32`.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// `Unit` is not used in the representation of a `Length` value. It is used only at compile time</span>
-<span class="doccomment">/// to ensure that a `Length` stored with one unit is converted explicitly before being used in an</span>
-<span class="doccomment">/// expression that requires a different unit.  It may be a type without values, such as an empty</span>
-<span class="doccomment">/// enum.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// You can multiply a `Length` by a `scale::Scale` to convert it from one unit to</span>
-<span class="doccomment">/// another. See the [`Scale`] docs for an example.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// [`Scale`]: struct.Scale.html</span>
-<span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Unit</span><span class="op">&gt;</span>(<span class="kw">pub</span> <span class="ident">T</span>, <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span> <span class="kw">pub</span> <span class="ident">PhantomData</span><span class="op">&lt;</span><span class="ident">Unit</span><span class="op">&gt;</span>);
+<span class="doccomment">/// A one-dimensional distance, with value represented by `T` and unit of measurement `Unit`.
+///
+/// `T` can be any numeric type, for example a primitive type like `u64` or `f32`.
+///
+/// `Unit` is not used in the representation of a `Length` value. It is used only at compile time
+/// to ensure that a `Length` stored with one unit is converted explicitly before being used in an
+/// expression that requires a different unit.  It may be a type without values, such as an empty
+/// enum.
+///
+/// You can multiply a `Length` by a `scale::Scale` to convert it from one unit to
+/// another. See the [`Scale`] docs for an example.
+///
+/// [`Scale`]: struct.Scale.html
+</span><span class="attribute">#[repr(C)]
+</span><span class="kw">pub struct </span>Length&lt;T, Unit&gt;(<span class="kw">pub </span>T, <span class="attribute">#[doc(hidden)] </span><span class="kw">pub </span>PhantomData&lt;Unit&gt;);
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Clone</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Clone</span> <span class="kw">for</span> <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">Length</span>(<span class="self">self</span>.<span class="number">0</span>.<span class="ident">clone</span>(), <span class="ident">PhantomData</span>)
+<span class="kw">impl</span>&lt;T: Clone, U&gt; Clone <span class="kw">for </span>Length&lt;T, U&gt; {
+    <span class="kw">fn </span>clone(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        Length(<span class="self">self</span>.<span class="number">0</span>.clone(), PhantomData)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Copy</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Copy</span> <span class="kw">for</span> <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {}
+<span class="kw">impl</span>&lt;T: Copy, U&gt; Copy <span class="kw">for </span>Length&lt;T, U&gt; {}
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;serde&quot;</span>)]</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span>, <span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Deserialize</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Deserialize</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span><span class="op">&gt;</span>,
+<span class="attribute">#[cfg(feature = <span class="string">&quot;serde&quot;</span>)]
+</span><span class="kw">impl</span>&lt;<span class="lifetime">&#39;de</span>, T, U&gt; Deserialize&lt;<span class="lifetime">&#39;de</span>&gt; <span class="kw">for </span>Length&lt;T, U&gt;
+<span class="kw">where
+    </span>T: Deserialize&lt;<span class="lifetime">&#39;de</span>&gt;,
 {
-    <span class="kw">fn</span> <span class="ident">deserialize</span><span class="op">&lt;</span><span class="ident">D</span><span class="op">&gt;</span>(<span class="ident">deserializer</span>: <span class="ident">D</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">D::Error</span><span class="op">&gt;</span>
-    <span class="kw">where</span>
-        <span class="ident">D</span>: <span class="ident">Deserializer</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span><span class="op">&gt;</span>,
+    <span class="kw">fn </span>deserialize&lt;D&gt;(deserializer: D) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, D::Error&gt;
+    <span class="kw">where
+        </span>D: Deserializer&lt;<span class="lifetime">&#39;de</span>&gt;,
     {
-        <span class="prelude-val">Ok</span>(<span class="ident">Length</span>(<span class="ident">Deserialize::deserialize</span>(<span class="ident">deserializer</span>)<span class="question-mark">?</span>, <span class="ident">PhantomData</span>))
+        <span class="prelude-val">Ok</span>(Length(Deserialize::deserialize(deserializer)<span class="question-mark">?</span>, PhantomData))
     }
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;serde&quot;</span>)]</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Serialize</span> <span class="kw">for</span> <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Serialize</span>,
+<span class="attribute">#[cfg(feature = <span class="string">&quot;serde&quot;</span>)]
+</span><span class="kw">impl</span>&lt;T, U&gt; Serialize <span class="kw">for </span>Length&lt;T, U&gt;
+<span class="kw">where
+    </span>T: Serialize,
 {
-    <span class="kw">fn</span> <span class="ident">serialize</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">serializer</span>: <span class="ident">S</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">S::Ok</span>, <span class="ident">S::Error</span><span class="op">&gt;</span>
-    <span class="kw">where</span>
-        <span class="ident">S</span>: <span class="ident">Serializer</span>,
+    <span class="kw">fn </span>serialize&lt;S&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, serializer: S) -&gt; <span class="prelude-ty">Result</span>&lt;S::Ok, S::Error&gt;
+    <span class="kw">where
+        </span>S: Serializer,
     {
-        <span class="self">self</span>.<span class="number">0</span>.<span class="ident">serialize</span>(<span class="ident">serializer</span>)
+        <span class="self">self</span>.<span class="number">0</span>.serialize(serializer)
     }
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;bytemuck&quot;</span>)]</span>
-<span class="kw">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Zeroable</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Zeroable</span> <span class="kw">for</span> <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {}
+<span class="attribute">#[cfg(feature = <span class="string">&quot;bytemuck&quot;</span>)]
+</span><span class="kw">unsafe impl</span>&lt;T: Zeroable, U&gt; Zeroable <span class="kw">for </span>Length&lt;T, U&gt; {}
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;bytemuck&quot;</span>)]</span>
-<span class="kw">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Pod</span>, <span class="ident">U</span>: <span class="lifetime">&#39;static</span><span class="op">&gt;</span> <span class="ident">Pod</span> <span class="kw">for</span> <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {}
+<span class="attribute">#[cfg(feature = <span class="string">&quot;bytemuck&quot;</span>)]
+</span><span class="kw">unsafe impl</span>&lt;T: Pod, U: <span class="lifetime">&#39;static</span>&gt; Pod <span class="kw">for </span>Length&lt;T, U&gt; {}
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Associate a value with a unit of measure.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">x</span>: <span class="ident">T</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">Length</span>(<span class="ident">x</span>, <span class="ident">PhantomData</span>)
+<span class="kw">impl</span>&lt;T, U&gt; Length&lt;T, U&gt; {
+    <span class="doccomment">/// Associate a value with a unit of measure.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub const fn </span>new(x: T) -&gt; <span class="self">Self </span>{
+        Length(x, PhantomData)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Clone</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Unpack the underlying value from the wrapper.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get</span>(<span class="self">self</span>) -&gt; <span class="ident">T</span> {
-        <span class="self">self</span>.<span class="number">0</span>
+<span class="kw">impl</span>&lt;T: Clone, U&gt; Length&lt;T, U&gt; {
+    <span class="doccomment">/// Unpack the underlying value from the wrapper.
+    </span><span class="kw">pub fn </span>get(<span class="self">self</span>) -&gt; T {
+        <span class="self">self</span>.<span class="number">0
+    </span>}
+
+    <span class="doccomment">/// Cast the unit
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>cast_unit&lt;V&gt;(<span class="self">self</span>) -&gt; Length&lt;T, V&gt; {
+        Length::new(<span class="self">self</span>.<span class="number">0</span>)
     }
 
-    <span class="doccomment">/// Cast the unit</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">cast_unit</span><span class="op">&lt;</span><span class="ident">V</span><span class="op">&gt;</span>(<span class="self">self</span>) -&gt; <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">V</span><span class="op">&gt;</span> {
-        <span class="ident">Length::new</span>(<span class="self">self</span>.<span class="number">0</span>)
-    }
-
-    <span class="doccomment">/// Linearly interpolate between this length and another length.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Example</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// use euclid::default::Length;</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// let from = Length::new(0.0);</span>
-    <span class="doccomment">/// let to = Length::new(8.0);</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// assert_eq!(from.lerp(to, -1.0), Length::new(-8.0));</span>
-    <span class="doccomment">/// assert_eq!(from.lerp(to,  0.0), Length::new( 0.0));</span>
-    <span class="doccomment">/// assert_eq!(from.lerp(to,  0.5), Length::new( 4.0));</span>
-    <span class="doccomment">/// assert_eq!(from.lerp(to,  1.0), Length::new( 8.0));</span>
-    <span class="doccomment">/// assert_eq!(from.lerp(to,  2.0), Length::new(16.0));</span>
-    <span class="doccomment">/// ```</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">lerp</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="self">Self</span>, <span class="ident">t</span>: <span class="ident">T</span>) -&gt; <span class="self">Self</span>
-    <span class="kw">where</span>
-        <span class="ident">T</span>: <span class="ident">One</span> <span class="op">+</span> <span class="ident">Sub</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Mul</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Add</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span>,
+    <span class="doccomment">/// Linearly interpolate between this length and another length.
+    ///
+    /// # Example
+    ///
+    /// ```rust
+    /// use euclid::default::Length;
+    ///
+    /// let from = Length::new(0.0);
+    /// let to = Length::new(8.0);
+    ///
+    /// assert_eq!(from.lerp(to, -1.0), Length::new(-8.0));
+    /// assert_eq!(from.lerp(to,  0.0), Length::new( 0.0));
+    /// assert_eq!(from.lerp(to,  0.5), Length::new( 4.0));
+    /// assert_eq!(from.lerp(to,  1.0), Length::new( 8.0));
+    /// assert_eq!(from.lerp(to,  2.0), Length::new(16.0));
+    /// ```
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>lerp(<span class="self">self</span>, other: <span class="self">Self</span>, t: T) -&gt; <span class="self">Self
+    </span><span class="kw">where
+        </span>T: One + Sub&lt;Output = T&gt; + Mul&lt;Output = T&gt; + Add&lt;Output = T&gt;,
     {
-        <span class="kw">let</span> <span class="ident">one_t</span> <span class="op">=</span> <span class="ident">T::one</span>() <span class="op">-</span> <span class="ident">t</span>.<span class="ident">clone</span>();
-        <span class="ident">Length::new</span>(<span class="ident">one_t</span> <span class="op">*</span> <span class="self">self</span>.<span class="number">0</span>.<span class="ident">clone</span>() <span class="op">+</span> <span class="ident">t</span> <span class="op">*</span> <span class="ident">other</span>.<span class="number">0</span>)
+        <span class="kw">let </span>one_t = T::one() - t.clone();
+        Length::new(one_t * <span class="self">self</span>.<span class="number">0</span>.clone() + t * other.<span class="number">0</span>)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">PartialOrd</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Returns minimum between this length and another length.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">min</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="self">Self</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">min</span>(<span class="self">self</span>, <span class="ident">other</span>)
+<span class="kw">impl</span>&lt;T: PartialOrd, U&gt; Length&lt;T, U&gt; {
+    <span class="doccomment">/// Returns minimum between this length and another length.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>min(<span class="self">self</span>, other: <span class="self">Self</span>) -&gt; <span class="self">Self </span>{
+        min(<span class="self">self</span>, other)
     }
 
-    <span class="doccomment">/// Returns maximum between this length and another length.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">max</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="self">Self</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">max</span>(<span class="self">self</span>, <span class="ident">other</span>)
-    }
-}
-
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">NumCast</span> <span class="op">+</span> <span class="ident">Clone</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Cast from one numeric representation to another, preserving the units.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">cast</span><span class="op">&lt;</span><span class="ident">NewT</span>: <span class="ident">NumCast</span><span class="op">&gt;</span>(<span class="self">self</span>) -&gt; <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">NewT</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">try_cast</span>().<span class="ident">unwrap</span>()
-    }
-
-    <span class="doccomment">/// Fallible cast from one numeric representation to another, preserving the units.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">try_cast</span><span class="op">&lt;</span><span class="ident">NewT</span>: <span class="ident">NumCast</span><span class="op">&gt;</span>(<span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Length</span><span class="op">&lt;</span><span class="ident">NewT</span>, <span class="ident">U</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="ident">NumCast::from</span>(<span class="self">self</span>.<span class="number">0</span>).<span class="ident">map</span>(<span class="ident">Length::new</span>)
+    <span class="doccomment">/// Returns maximum between this length and another length.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>max(<span class="self">self</span>, other: <span class="self">Self</span>) -&gt; <span class="self">Self </span>{
+        max(<span class="self">self</span>, other)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">fmt::Debug</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">fmt::Debug</span> <span class="kw">for</span> <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">fmt::Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
-        <span class="self">self</span>.<span class="number">0</span>.<span class="ident">fmt</span>(<span class="ident">f</span>)
+<span class="kw">impl</span>&lt;T: NumCast + Clone, U&gt; Length&lt;T, U&gt; {
+    <span class="doccomment">/// Cast from one numeric representation to another, preserving the units.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>cast&lt;NewT: NumCast&gt;(<span class="self">self</span>) -&gt; Length&lt;NewT, U&gt; {
+        <span class="self">self</span>.try_cast().unwrap()
+    }
+
+    <span class="doccomment">/// Fallible cast from one numeric representation to another, preserving the units.
+    </span><span class="kw">pub fn </span>try_cast&lt;NewT: NumCast&gt;(<span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;Length&lt;NewT, U&gt;&gt; {
+        NumCast::from(<span class="self">self</span>.<span class="number">0</span>).map(Length::new)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Default</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> {
-        <span class="ident">Length::new</span>(<span class="ident">Default::default</span>())
+<span class="kw">impl</span>&lt;T: fmt::Debug, U&gt; fmt::Debug <span class="kw">for </span>Length&lt;T, U&gt; {
+    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>fmt::Formatter) -&gt; fmt::Result {
+        <span class="self">self</span>.<span class="number">0</span>.fmt(f)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Hash</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Hash</span> <span class="kw">for</span> <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">hash</span><span class="op">&lt;</span><span class="ident">H</span>: <span class="ident">Hasher</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">h</span>: <span class="kw-2">&amp;mut</span> <span class="ident">H</span>) {
-        <span class="self">self</span>.<span class="number">0</span>.<span class="ident">hash</span>(<span class="ident">h</span>);
+<span class="kw">impl</span>&lt;T: Default, U&gt; Default <span class="kw">for </span>Length&lt;T, U&gt; {
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
+        Length::new(Default::default())
     }
 }
 
-<span class="comment">// length + length</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Add</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Add</span> <span class="kw">for</span> <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">T::Output</span>, <span class="ident">U</span><span class="op">&gt;</span>;
-
-    <span class="kw">fn</span> <span class="ident">add</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="self">Self</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
-        <span class="ident">Length::new</span>(<span class="self">self</span>.<span class="number">0</span> <span class="op">+</span> <span class="ident">other</span>.<span class="number">0</span>)
+<span class="kw">impl</span>&lt;T: Hash, U&gt; Hash <span class="kw">for </span>Length&lt;T, U&gt; {
+    <span class="kw">fn </span>hash&lt;H: Hasher&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, h: <span class="kw-2">&amp;mut </span>H) {
+        <span class="self">self</span>.<span class="number">0</span>.hash(h);
     }
 }
 
-<span class="comment">// length + &amp;length</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Add</span> <span class="op">+</span> <span class="ident">Copy</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Add</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="self">Self</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">T::Output</span>, <span class="ident">U</span><span class="op">&gt;</span>;
+<span class="comment">// length + length
+</span><span class="kw">impl</span>&lt;T: Add, U&gt; Add <span class="kw">for </span>Length&lt;T, U&gt; {
+    <span class="kw">type </span>Output = Length&lt;T::Output, U&gt;;
 
-    <span class="kw">fn</span> <span class="ident">add</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
-        <span class="ident">Length::new</span>(<span class="self">self</span>.<span class="number">0</span> <span class="op">+</span> <span class="ident">other</span>.<span class="number">0</span>)
+    <span class="kw">fn </span>add(<span class="self">self</span>, other: <span class="self">Self</span>) -&gt; <span class="self">Self</span>::Output {
+        Length::new(<span class="self">self</span>.<span class="number">0 </span>+ other.<span class="number">0</span>)
     }
 }
 
-<span class="comment">// length_iter.copied().sum()</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Add</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Zero</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Sum</span> <span class="kw">for</span> <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">sum</span><span class="op">&lt;</span><span class="ident">I</span>: <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span><span class="op">=</span><span class="self">Self</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">iter</span>: <span class="ident">I</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">iter</span>.<span class="ident">fold</span>(<span class="ident"><span class="self">Self</span>::zero</span>(), <span class="ident">Add::add</span>)
+<span class="comment">// length + &amp;length
+</span><span class="kw">impl</span>&lt;T: Add + Copy, U&gt; Add&lt;<span class="kw-2">&amp;</span><span class="self">Self</span>&gt; <span class="kw">for </span>Length&lt;T, U&gt; {
+    <span class="kw">type </span>Output = Length&lt;T::Output, U&gt;;
+
+    <span class="kw">fn </span>add(<span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="self">Self</span>::Output {
+        Length::new(<span class="self">self</span>.<span class="number">0 </span>+ other.<span class="number">0</span>)
     }
 }
 
-<span class="comment">// length_iter.sum()</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>: <span class="lifetime">&#39;a</span> <span class="op">+</span> <span class="ident">Add</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Zero</span>, <span class="ident">U</span>: <span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Sum</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="self">Self</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">sum</span><span class="op">&lt;</span><span class="ident">I</span>: <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span><span class="op">=</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="self">Self</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">iter</span>: <span class="ident">I</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">iter</span>.<span class="ident">fold</span>(<span class="ident"><span class="self">Self</span>::zero</span>(), <span class="ident">Add::add</span>)
+<span class="comment">// length_iter.copied().sum()
+</span><span class="kw">impl</span>&lt;T: Add&lt;Output = T&gt; + Zero, U&gt; Sum <span class="kw">for </span>Length&lt;T, U&gt; {
+    <span class="kw">fn </span>sum&lt;I: Iterator&lt;Item=<span class="self">Self</span>&gt;&gt;(iter: I) -&gt; <span class="self">Self </span>{
+        iter.fold(<span class="self">Self</span>::zero(), Add::add)
     }
 }
 
-<span class="comment">// length += length</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">AddAssign</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">AddAssign</span> <span class="kw">for</span> <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">add_assign</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="self">Self</span>) {
-        <span class="self">self</span>.<span class="number">0</span> <span class="op">+</span><span class="op">=</span> <span class="ident">other</span>.<span class="number">0</span>;
+<span class="comment">// length_iter.sum()
+</span><span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, T: <span class="lifetime">&#39;a </span>+ Add&lt;Output = T&gt; + Copy + Zero, U: <span class="lifetime">&#39;a</span>&gt; Sum&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="self">Self</span>&gt; <span class="kw">for </span>Length&lt;T, U&gt; {
+    <span class="kw">fn </span>sum&lt;I: Iterator&lt;Item=<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="self">Self</span>&gt;&gt;(iter: I) -&gt; <span class="self">Self </span>{
+        iter.fold(<span class="self">Self</span>::zero(), Add::add)
     }
 }
 
-<span class="comment">// length - length</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Sub</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Sub</span> <span class="kw">for</span> <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">T::Output</span>, <span class="ident">U</span><span class="op">&gt;</span>;
-
-    <span class="kw">fn</span> <span class="ident">sub</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
-        <span class="ident">Length::new</span>(<span class="self">self</span>.<span class="number">0</span> <span class="op">-</span> <span class="ident">other</span>.<span class="number">0</span>)
+<span class="comment">// length += length
+</span><span class="kw">impl</span>&lt;T: AddAssign, U&gt; AddAssign <span class="kw">for </span>Length&lt;T, U&gt; {
+    <span class="kw">fn </span>add_assign(<span class="kw-2">&amp;mut </span><span class="self">self</span>, other: <span class="self">Self</span>) {
+        <span class="self">self</span>.<span class="number">0 </span>+= other.<span class="number">0</span>;
     }
 }
 
-<span class="comment">// length -= length</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">SubAssign</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">SubAssign</span> <span class="kw">for</span> <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">sub_assign</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="self">Self</span>) {
-        <span class="self">self</span>.<span class="number">0</span> <span class="op">-</span><span class="op">=</span> <span class="ident">other</span>.<span class="number">0</span>;
+<span class="comment">// length - length
+</span><span class="kw">impl</span>&lt;T: Sub, U&gt; Sub <span class="kw">for </span>Length&lt;T, U&gt; {
+    <span class="kw">type </span>Output = Length&lt;T::Output, U&gt;;
+
+    <span class="kw">fn </span>sub(<span class="self">self</span>, other: Length&lt;T, U&gt;) -&gt; <span class="self">Self</span>::Output {
+        Length::new(<span class="self">self</span>.<span class="number">0 </span>- other.<span class="number">0</span>)
     }
 }
 
-<span class="comment">// Saturating length + length and length - length.</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Saturating</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Saturating</span> <span class="kw">for</span> <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">saturating_add</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="self">Self</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">Length::new</span>(<span class="self">self</span>.<span class="number">0</span>.<span class="ident">saturating_add</span>(<span class="ident">other</span>.<span class="number">0</span>))
-    }
-
-    <span class="kw">fn</span> <span class="ident">saturating_sub</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="self">Self</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">Length::new</span>(<span class="self">self</span>.<span class="number">0</span>.<span class="ident">saturating_sub</span>(<span class="ident">other</span>.<span class="number">0</span>))
+<span class="comment">// length -= length
+</span><span class="kw">impl</span>&lt;T: SubAssign, U&gt; SubAssign <span class="kw">for </span>Length&lt;T, U&gt; {
+    <span class="kw">fn </span>sub_assign(<span class="kw-2">&amp;mut </span><span class="self">self</span>, other: <span class="self">Self</span>) {
+        <span class="self">self</span>.<span class="number">0 </span>-= other.<span class="number">0</span>;
     }
 }
 
-<span class="comment">// length / length</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">Src</span>, <span class="ident">Dst</span>, <span class="ident">T</span>: <span class="ident">Div</span><span class="op">&gt;</span> <span class="ident">Div</span><span class="op">&lt;</span><span class="ident">Length</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T::Output</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span>;
+<span class="comment">// Saturating length + length and length - length.
+</span><span class="kw">impl</span>&lt;T: Saturating, U&gt; Saturating <span class="kw">for </span>Length&lt;T, U&gt; {
+    <span class="kw">fn </span>saturating_add(<span class="self">self</span>, other: <span class="self">Self</span>) -&gt; <span class="self">Self </span>{
+        Length::new(<span class="self">self</span>.<span class="number">0</span>.saturating_add(other.<span class="number">0</span>))
+    }
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">div</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span><span class="op">&gt;</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
-        <span class="ident">Scale::new</span>(<span class="self">self</span>.<span class="number">0</span> <span class="op">/</span> <span class="ident">other</span>.<span class="number">0</span>)
+    <span class="kw">fn </span>saturating_sub(<span class="self">self</span>, other: <span class="self">Self</span>) -&gt; <span class="self">Self </span>{
+        Length::new(<span class="self">self</span>.<span class="number">0</span>.saturating_sub(other.<span class="number">0</span>))
     }
 }
 
-<span class="comment">// length * scalar</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Mul</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Mul</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">T::Output</span>, <span class="ident">U</span><span class="op">&gt;</span>;
+<span class="comment">// length / length
+</span><span class="kw">impl</span>&lt;Src, Dst, T: Div&gt; Div&lt;Length&lt;T, Src&gt;&gt; <span class="kw">for </span>Length&lt;T, Dst&gt; {
+    <span class="kw">type </span>Output = Scale&lt;T::Output, Src, Dst&gt;;
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">mul</span>(<span class="self">self</span>, <span class="ident">scale</span>: <span class="ident">T</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
-        <span class="ident">Length::new</span>(<span class="self">self</span>.<span class="number">0</span> <span class="op">*</span> <span class="ident">scale</span>)
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>div(<span class="self">self</span>, other: Length&lt;T, Src&gt;) -&gt; <span class="self">Self</span>::Output {
+        Scale::new(<span class="self">self</span>.<span class="number">0 </span>/ other.<span class="number">0</span>)
     }
 }
 
-<span class="comment">// length *= scalar</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Mul</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">MulAssign</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">mul_assign</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">scale</span>: <span class="ident">T</span>) {
-        <span class="kw-2">*</span><span class="self">self</span> <span class="op">=</span> <span class="kw-2">*</span><span class="self">self</span> <span class="op">*</span> <span class="ident">scale</span>
+<span class="comment">// length * scalar
+</span><span class="kw">impl</span>&lt;T: Mul, U&gt; Mul&lt;T&gt; <span class="kw">for </span>Length&lt;T, U&gt; {
+    <span class="kw">type </span>Output = Length&lt;T::Output, U&gt;;
+
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>mul(<span class="self">self</span>, scale: T) -&gt; <span class="self">Self</span>::Output {
+        Length::new(<span class="self">self</span>.<span class="number">0 </span>* scale)
     }
 }
 
-<span class="comment">// length / scalar</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Div</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Div</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">T::Output</span>, <span class="ident">U</span><span class="op">&gt;</span>;
-
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">div</span>(<span class="self">self</span>, <span class="ident">scale</span>: <span class="ident">T</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
-        <span class="ident">Length::new</span>(<span class="self">self</span>.<span class="number">0</span> <span class="op">/</span> <span class="ident">scale</span>)
+<span class="comment">// length *= scalar
+</span><span class="kw">impl</span>&lt;T: Copy + Mul&lt;T, Output = T&gt;, U&gt; MulAssign&lt;T&gt; <span class="kw">for </span>Length&lt;T, U&gt; {
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>mul_assign(<span class="kw-2">&amp;mut </span><span class="self">self</span>, scale: T) {
+        <span class="kw-2">*</span><span class="self">self </span>= <span class="kw-2">*</span><span class="self">self </span>* scale
     }
 }
 
-<span class="comment">// length /= scalar</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Div</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">DivAssign</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">div_assign</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">scale</span>: <span class="ident">T</span>) {
-        <span class="kw-2">*</span><span class="self">self</span> <span class="op">=</span> <span class="kw-2">*</span><span class="self">self</span> <span class="op">/</span> <span class="ident">scale</span>
+<span class="comment">// length / scalar
+</span><span class="kw">impl</span>&lt;T: Div, U&gt; Div&lt;T&gt; <span class="kw">for </span>Length&lt;T, U&gt; {
+    <span class="kw">type </span>Output = Length&lt;T::Output, U&gt;;
+
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>div(<span class="self">self</span>, scale: T) -&gt; <span class="self">Self</span>::Output {
+        Length::new(<span class="self">self</span>.<span class="number">0 </span>/ scale)
     }
 }
 
-<span class="comment">// length * scaleFactor</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">Src</span>, <span class="ident">Dst</span>, <span class="ident">T</span>: <span class="ident">Mul</span><span class="op">&gt;</span> <span class="ident">Mul</span><span class="op">&lt;</span><span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">T::Output</span>, <span class="ident">Dst</span><span class="op">&gt;</span>;
-
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">mul</span>(<span class="self">self</span>, <span class="ident">scale</span>: <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
-        <span class="ident">Length::new</span>(<span class="self">self</span>.<span class="number">0</span> <span class="op">*</span> <span class="ident">scale</span>.<span class="number">0</span>)
+<span class="comment">// length /= scalar
+</span><span class="kw">impl</span>&lt;T: Copy + Div&lt;T, Output = T&gt;, U&gt; DivAssign&lt;T&gt; <span class="kw">for </span>Length&lt;T, U&gt; {
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>div_assign(<span class="kw-2">&amp;mut </span><span class="self">self</span>, scale: T) {
+        <span class="kw-2">*</span><span class="self">self </span>= <span class="kw-2">*</span><span class="self">self </span>/ scale
     }
 }
 
-<span class="comment">// length / scaleFactor</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">Src</span>, <span class="ident">Dst</span>, <span class="ident">T</span>: <span class="ident">Div</span><span class="op">&gt;</span> <span class="ident">Div</span><span class="op">&lt;</span><span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Dst</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">T::Output</span>, <span class="ident">Src</span><span class="op">&gt;</span>;
+<span class="comment">// length * scaleFactor
+</span><span class="kw">impl</span>&lt;Src, Dst, T: Mul&gt; Mul&lt;Scale&lt;T, Src, Dst&gt;&gt; <span class="kw">for </span>Length&lt;T, Src&gt; {
+    <span class="kw">type </span>Output = Length&lt;T::Output, Dst&gt;;
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">div</span>(<span class="self">self</span>, <span class="ident">scale</span>: <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Src</span>, <span class="ident">Dst</span><span class="op">&gt;</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
-        <span class="ident">Length::new</span>(<span class="self">self</span>.<span class="number">0</span> <span class="op">/</span> <span class="ident">scale</span>.<span class="number">0</span>)
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>mul(<span class="self">self</span>, scale: Scale&lt;T, Src, Dst&gt;) -&gt; <span class="self">Self</span>::Output {
+        Length::new(<span class="self">self</span>.<span class="number">0 </span>* scale.<span class="number">0</span>)
     }
 }
 
-<span class="comment">// -length</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">U</span>, <span class="ident">T</span>: <span class="ident">Neg</span><span class="op">&gt;</span> <span class="ident">Neg</span> <span class="kw">for</span> <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">T::Output</span>, <span class="ident">U</span><span class="op">&gt;</span>;
+<span class="comment">// length / scaleFactor
+</span><span class="kw">impl</span>&lt;Src, Dst, T: Div&gt; Div&lt;Scale&lt;T, Src, Dst&gt;&gt; <span class="kw">for </span>Length&lt;T, Dst&gt; {
+    <span class="kw">type </span>Output = Length&lt;T::Output, Src&gt;;
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">neg</span>(<span class="self">self</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
-        <span class="ident">Length::new</span>(<span class="op">-</span><span class="self">self</span>.<span class="number">0</span>)
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>div(<span class="self">self</span>, scale: Scale&lt;T, Src, Dst&gt;) -&gt; <span class="self">Self</span>::Output {
+        Length::new(<span class="self">self</span>.<span class="number">0 </span>/ scale.<span class="number">0</span>)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">PartialEq</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">PartialEq</span> <span class="kw">for</span> <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">eq</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="number">0</span>.<span class="ident">eq</span>(<span class="kw-2">&amp;</span><span class="ident">other</span>.<span class="number">0</span>)
+<span class="comment">// -length
+</span><span class="kw">impl</span>&lt;U, T: Neg&gt; Neg <span class="kw">for </span>Length&lt;T, U&gt; {
+    <span class="kw">type </span>Output = Length&lt;T::Output, U&gt;;
+
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>neg(<span class="self">self</span>) -&gt; <span class="self">Self</span>::Output {
+        Length::new(-<span class="self">self</span>.<span class="number">0</span>)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">PartialOrd</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">PartialOrd</span> <span class="kw">for</span> <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">partial_cmp</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Ordering</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="number">0</span>.<span class="ident">partial_cmp</span>(<span class="kw-2">&amp;</span><span class="ident">other</span>.<span class="number">0</span>)
+<span class="kw">impl</span>&lt;T: PartialEq, U&gt; PartialEq <span class="kw">for </span>Length&lt;T, U&gt; {
+    <span class="kw">fn </span>eq(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; bool {
+        <span class="self">self</span>.<span class="number">0</span>.eq(<span class="kw-2">&amp;</span>other.<span class="number">0</span>)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Eq</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Eq</span> <span class="kw">for</span> <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {}
-
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Ord</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Ord</span> <span class="kw">for</span> <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="ident">Ordering</span> {
-        <span class="self">self</span>.<span class="number">0</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="ident">other</span>.<span class="number">0</span>)
+<span class="kw">impl</span>&lt;T: PartialOrd, U&gt; PartialOrd <span class="kw">for </span>Length&lt;T, U&gt; {
+    <span class="kw">fn </span>partial_cmp(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;Ordering&gt; {
+        <span class="self">self</span>.<span class="number">0</span>.partial_cmp(<span class="kw-2">&amp;</span>other.<span class="number">0</span>)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Zero</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Zero</span> <span class="kw">for</span> <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">zero</span>() -&gt; <span class="self">Self</span> {
-        <span class="ident">Length::new</span>(<span class="ident">Zero::zero</span>())
+<span class="kw">impl</span>&lt;T: Eq, U&gt; Eq <span class="kw">for </span>Length&lt;T, U&gt; {}
+
+<span class="kw">impl</span>&lt;T: Ord, U&gt; Ord <span class="kw">for </span>Length&lt;T, U&gt; {
+    <span class="kw">fn </span>cmp(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; Ordering {
+        <span class="self">self</span>.<span class="number">0</span>.cmp(<span class="kw-2">&amp;</span>other.<span class="number">0</span>)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">U</span>, <span class="ident">T</span>: <span class="ident">ApproxEq</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">ApproxEq</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">approx_epsilon</span>() -&gt; <span class="ident">T</span> {
-        <span class="ident">T::approx_epsilon</span>()
-    }
-
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">approx_eq_eps</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="ident">Length</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>, <span class="ident">approx_epsilon</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="number">0</span>.<span class="ident">approx_eq_eps</span>(<span class="kw-2">&amp;</span><span class="ident">other</span>.<span class="number">0</span>, <span class="ident">approx_epsilon</span>)
+<span class="kw">impl</span>&lt;T: Zero, U&gt; Zero <span class="kw">for </span>Length&lt;T, U&gt; {
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>zero() -&gt; <span class="self">Self </span>{
+        Length::new(Zero::zero())
     }
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
-<span class="kw">mod</span> <span class="ident">tests</span> {
-    <span class="kw">use</span> <span class="ident"><span class="kw">super</span>::Length</span>;
-    <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::num::Zero</span>;
+<span class="kw">impl</span>&lt;U, T: ApproxEq&lt;T&gt;&gt; ApproxEq&lt;T&gt; <span class="kw">for </span>Length&lt;T, U&gt; {
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>approx_epsilon() -&gt; T {
+        T::approx_epsilon()
+    }
 
-    <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::scale::Scale</span>;
-    <span class="kw">use</span> <span class="ident">core::f32::INFINITY</span>;
-    <span class="kw">use</span> <span class="ident">num_traits::Saturating</span>;
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>approx_eq_eps(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span>Length&lt;T, U&gt;, approx_epsilon: <span class="kw-2">&amp;</span>T) -&gt; bool {
+        <span class="self">self</span>.<span class="number">0</span>.approx_eq_eps(<span class="kw-2">&amp;</span>other.<span class="number">0</span>, approx_epsilon)
+    }
+}
 
-    <span class="kw">enum</span> <span class="ident">Inch</span> {}
-    <span class="kw">enum</span> <span class="ident">Mm</span> {}
-    <span class="kw">enum</span> <span class="ident">Cm</span> {}
-    <span class="kw">enum</span> <span class="ident">Second</span> {}
+<span class="attribute">#[cfg(test)]
+</span><span class="kw">mod </span>tests {
+    <span class="kw">use </span><span class="kw">super</span>::Length;
+    <span class="kw">use </span><span class="kw">crate</span>::num::Zero;
 
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;serde&quot;</span>)]</span>
-    <span class="kw">mod</span> <span class="ident">serde</span> {
-        <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
+    <span class="kw">use </span><span class="kw">crate</span>::scale::Scale;
+    <span class="kw">use </span>core::f32::INFINITY;
+    <span class="kw">use </span>num_traits::Saturating;
 
-        <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">serde_test</span>;
-        <span class="kw">use</span> <span class="ident"><span class="self">self</span>::serde_test::assert_tokens</span>;
-        <span class="kw">use</span> <span class="ident"><span class="self">self</span>::serde_test::Token</span>;
+    <span class="kw">enum </span>Inch {}
+    <span class="kw">enum </span>Mm {}
+    <span class="kw">enum </span>Cm {}
+    <span class="kw">enum </span>Second {}
 
-        <span class="attribute">#[<span class="ident">test</span>]</span>
-        <span class="kw">fn</span> <span class="ident">test_length_serde</span>() {
-            <span class="kw">let</span> <span class="ident">one_cm</span>: <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">f32</span>, <span class="ident">Mm</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Length::new</span>(<span class="number">10.0</span>);
+    <span class="attribute">#[cfg(feature = <span class="string">&quot;serde&quot;</span>)]
+    </span><span class="kw">mod </span>serde {
+        <span class="kw">use super</span>::<span class="kw-2">*</span>;
 
-            <span class="ident">assert_tokens</span>(<span class="kw-2">&amp;</span><span class="ident">one_cm</span>, <span class="kw-2">&amp;</span>[<span class="ident">Token::F32</span>(<span class="number">10.0</span>)]);
+        <span class="kw">extern crate </span>serde_test;
+        <span class="kw">use </span><span class="self">self</span>::serde_test::assert_tokens;
+        <span class="kw">use </span><span class="self">self</span>::serde_test::Token;
+
+        <span class="attribute">#[test]
+        </span><span class="kw">fn </span>test_length_serde() {
+            <span class="kw">let </span>one_cm: Length&lt;f32, Mm&gt; = Length::new(<span class="number">10.0</span>);
+
+            assert_tokens(<span class="kw-2">&amp;</span>one_cm, <span class="kw-2">&amp;</span>[Token::F32(<span class="number">10.0</span>)]);
         }
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_clone</span>() {
-        <span class="comment">// A cloned Length is a separate length with the state matching the</span>
-        <span class="comment">// original Length at the point it was cloned.</span>
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">variable_length</span>: <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">f32</span>, <span class="ident">Inch</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Length::new</span>(<span class="number">12.0</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_clone() {
+        <span class="comment">// A cloned Length is a separate length with the state matching the
+        // original Length at the point it was cloned.
+        </span><span class="kw">let </span><span class="kw-2">mut </span>variable_length: Length&lt;f32, Inch&gt; = Length::new(<span class="number">12.0</span>);
 
-        <span class="kw">let</span> <span class="ident">one_foot</span> <span class="op">=</span> <span class="ident">variable_length</span>.<span class="ident">clone</span>();
-        <span class="ident">variable_length</span>.<span class="number">0</span> <span class="op">=</span> <span class="number">24.0</span>;
+        <span class="kw">let </span>one_foot = variable_length.clone();
+        variable_length.<span class="number">0 </span>= <span class="number">24.0</span>;
 
-        <span class="macro">assert_eq!</span>(<span class="ident">one_foot</span>.<span class="ident">get</span>(), <span class="number">12.0</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">variable_length</span>.<span class="ident">get</span>(), <span class="number">24.0</span>);
+        <span class="macro">assert_eq!</span>(one_foot.get(), <span class="number">12.0</span>);
+        <span class="macro">assert_eq!</span>(variable_length.get(), <span class="number">24.0</span>);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_add</span>() {
-        <span class="kw">let</span> <span class="ident">length1</span>: <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">u8</span>, <span class="ident">Mm</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Length::new</span>(<span class="number">250</span>);
-        <span class="kw">let</span> <span class="ident">length2</span>: <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">u8</span>, <span class="ident">Mm</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Length::new</span>(<span class="number">5</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_add() {
+        <span class="kw">let </span>length1: Length&lt;u8, Mm&gt; = Length::new(<span class="number">250</span>);
+        <span class="kw">let </span>length2: Length&lt;u8, Mm&gt; = Length::new(<span class="number">5</span>);
 
-        <span class="macro">assert_eq!</span>((<span class="ident">length1</span> <span class="op">+</span> <span class="ident">length2</span>).<span class="ident">get</span>(), <span class="number">255</span>);
-        <span class="macro">assert_eq!</span>((<span class="ident">length1</span> <span class="op">+</span> <span class="kw-2">&amp;</span><span class="ident">length2</span>).<span class="ident">get</span>(), <span class="number">255</span>);
+        <span class="macro">assert_eq!</span>((length1 + length2).get(), <span class="number">255</span>);
+        <span class="macro">assert_eq!</span>((length1 + <span class="kw-2">&amp;</span>length2).get(), <span class="number">255</span>);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_sum</span>() {
-        <span class="kw">type</span> <span class="ident">L</span> <span class="op">=</span> <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">f32</span>, <span class="ident">Mm</span><span class="op">&gt;</span>;
-        <span class="kw">let</span> <span class="ident">lengths</span> <span class="op">=</span> [<span class="ident">L::new</span>(<span class="number">1.0</span>), <span class="ident">L::new</span>(<span class="number">2.0</span>), <span class="ident">L::new</span>(<span class="number">3.0</span>)];
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_sum() {
+        <span class="kw">type </span>L = Length&lt;f32, Mm&gt;;
+        <span class="kw">let </span>lengths = [L::new(<span class="number">1.0</span>), L::new(<span class="number">2.0</span>), L::new(<span class="number">3.0</span>)];
 
-        <span class="macro">assert_eq!</span>(<span class="ident">lengths</span>.<span class="ident">iter</span>().<span class="ident">sum</span>::<span class="op">&lt;</span><span class="ident">L</span><span class="op">&gt;</span>(), <span class="ident">L::new</span>(<span class="number">6.0</span>));
+        <span class="macro">assert_eq!</span>(lengths.iter().sum::&lt;L&gt;(), L::new(<span class="number">6.0</span>));
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_addassign</span>() {
-        <span class="kw">let</span> <span class="ident">one_cm</span>: <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">f32</span>, <span class="ident">Mm</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Length::new</span>(<span class="number">10.0</span>);
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">measurement</span>: <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">f32</span>, <span class="ident">Mm</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Length::new</span>(<span class="number">5.0</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_addassign() {
+        <span class="kw">let </span>one_cm: Length&lt;f32, Mm&gt; = Length::new(<span class="number">10.0</span>);
+        <span class="kw">let </span><span class="kw-2">mut </span>measurement: Length&lt;f32, Mm&gt; = Length::new(<span class="number">5.0</span>);
 
-        <span class="ident">measurement</span> <span class="op">+</span><span class="op">=</span> <span class="ident">one_cm</span>;
+        measurement += one_cm;
 
-        <span class="macro">assert_eq!</span>(<span class="ident">measurement</span>.<span class="ident">get</span>(), <span class="number">15.0</span>);
+        <span class="macro">assert_eq!</span>(measurement.get(), <span class="number">15.0</span>);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_sub</span>() {
-        <span class="kw">let</span> <span class="ident">length1</span>: <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">u8</span>, <span class="ident">Mm</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Length::new</span>(<span class="number">250</span>);
-        <span class="kw">let</span> <span class="ident">length2</span>: <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">u8</span>, <span class="ident">Mm</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Length::new</span>(<span class="number">5</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_sub() {
+        <span class="kw">let </span>length1: Length&lt;u8, Mm&gt; = Length::new(<span class="number">250</span>);
+        <span class="kw">let </span>length2: Length&lt;u8, Mm&gt; = Length::new(<span class="number">5</span>);
 
-        <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">length1</span> <span class="op">-</span> <span class="ident">length2</span>;
+        <span class="kw">let </span>result = length1 - length2;
 
-        <span class="macro">assert_eq!</span>(<span class="ident">result</span>.<span class="ident">get</span>(), <span class="number">245</span>);
+        <span class="macro">assert_eq!</span>(result.get(), <span class="number">245</span>);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_subassign</span>() {
-        <span class="kw">let</span> <span class="ident">one_cm</span>: <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">f32</span>, <span class="ident">Mm</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Length::new</span>(<span class="number">10.0</span>);
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">measurement</span>: <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">f32</span>, <span class="ident">Mm</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Length::new</span>(<span class="number">5.0</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_subassign() {
+        <span class="kw">let </span>one_cm: Length&lt;f32, Mm&gt; = Length::new(<span class="number">10.0</span>);
+        <span class="kw">let </span><span class="kw-2">mut </span>measurement: Length&lt;f32, Mm&gt; = Length::new(<span class="number">5.0</span>);
 
-        <span class="ident">measurement</span> <span class="op">-</span><span class="op">=</span> <span class="ident">one_cm</span>;
+        measurement -= one_cm;
 
-        <span class="macro">assert_eq!</span>(<span class="ident">measurement</span>.<span class="ident">get</span>(), <span class="op">-</span><span class="number">5.0</span>);
+        <span class="macro">assert_eq!</span>(measurement.get(), -<span class="number">5.0</span>);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_saturating_add</span>() {
-        <span class="kw">let</span> <span class="ident">length1</span>: <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">u8</span>, <span class="ident">Mm</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Length::new</span>(<span class="number">250</span>);
-        <span class="kw">let</span> <span class="ident">length2</span>: <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">u8</span>, <span class="ident">Mm</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Length::new</span>(<span class="number">6</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_saturating_add() {
+        <span class="kw">let </span>length1: Length&lt;u8, Mm&gt; = Length::new(<span class="number">250</span>);
+        <span class="kw">let </span>length2: Length&lt;u8, Mm&gt; = Length::new(<span class="number">6</span>);
 
-        <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">length1</span>.<span class="ident">saturating_add</span>(<span class="ident">length2</span>);
+        <span class="kw">let </span>result = length1.saturating_add(length2);
 
-        <span class="macro">assert_eq!</span>(<span class="ident">result</span>.<span class="ident">get</span>(), <span class="number">255</span>);
+        <span class="macro">assert_eq!</span>(result.get(), <span class="number">255</span>);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_saturating_sub</span>() {
-        <span class="kw">let</span> <span class="ident">length1</span>: <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">u8</span>, <span class="ident">Mm</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Length::new</span>(<span class="number">5</span>);
-        <span class="kw">let</span> <span class="ident">length2</span>: <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">u8</span>, <span class="ident">Mm</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Length::new</span>(<span class="number">10</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_saturating_sub() {
+        <span class="kw">let </span>length1: Length&lt;u8, Mm&gt; = Length::new(<span class="number">5</span>);
+        <span class="kw">let </span>length2: Length&lt;u8, Mm&gt; = Length::new(<span class="number">10</span>);
 
-        <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">length1</span>.<span class="ident">saturating_sub</span>(<span class="ident">length2</span>);
+        <span class="kw">let </span>result = length1.saturating_sub(length2);
 
-        <span class="macro">assert_eq!</span>(<span class="ident">result</span>.<span class="ident">get</span>(), <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(result.get(), <span class="number">0</span>);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_division_by_length</span>() {
-        <span class="comment">// Division results in a Scale from denominator units</span>
-        <span class="comment">// to numerator units.</span>
-        <span class="kw">let</span> <span class="ident">length</span>: <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">f32</span>, <span class="ident">Cm</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Length::new</span>(<span class="number">5.0</span>);
-        <span class="kw">let</span> <span class="ident">duration</span>: <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">f32</span>, <span class="ident">Second</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Length::new</span>(<span class="number">10.0</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_division_by_length() {
+        <span class="comment">// Division results in a Scale from denominator units
+        // to numerator units.
+        </span><span class="kw">let </span>length: Length&lt;f32, Cm&gt; = Length::new(<span class="number">5.0</span>);
+        <span class="kw">let </span>duration: Length&lt;f32, Second&gt; = Length::new(<span class="number">10.0</span>);
 
-        <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">length</span> <span class="op">/</span> <span class="ident">duration</span>;
+        <span class="kw">let </span>result = length / duration;
 
-        <span class="kw">let</span> <span class="ident">expected</span>: <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">f32</span>, <span class="ident">Second</span>, <span class="ident">Cm</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Scale::new</span>(<span class="number">0.5</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">result</span>, <span class="ident">expected</span>);
+        <span class="kw">let </span>expected: Scale&lt;f32, Second, Cm&gt; = Scale::new(<span class="number">0.5</span>);
+        <span class="macro">assert_eq!</span>(result, expected);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_multiplication</span>() {
-        <span class="kw">let</span> <span class="ident">length_mm</span>: <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">f32</span>, <span class="ident">Mm</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Length::new</span>(<span class="number">10.0</span>);
-        <span class="kw">let</span> <span class="ident">cm_per_mm</span>: <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">f32</span>, <span class="ident">Mm</span>, <span class="ident">Cm</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Scale::new</span>(<span class="number">0.1</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_multiplication() {
+        <span class="kw">let </span>length_mm: Length&lt;f32, Mm&gt; = Length::new(<span class="number">10.0</span>);
+        <span class="kw">let </span>cm_per_mm: Scale&lt;f32, Mm, Cm&gt; = Scale::new(<span class="number">0.1</span>);
 
-        <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">length_mm</span> <span class="op">*</span> <span class="ident">cm_per_mm</span>;
+        <span class="kw">let </span>result = length_mm * cm_per_mm;
 
-        <span class="kw">let</span> <span class="ident">expected</span>: <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">f32</span>, <span class="ident">Cm</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Length::new</span>(<span class="number">1.0</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">result</span>, <span class="ident">expected</span>);
+        <span class="kw">let </span>expected: Length&lt;f32, Cm&gt; = Length::new(<span class="number">1.0</span>);
+        <span class="macro">assert_eq!</span>(result, expected);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_multiplication_with_scalar</span>() {
-        <span class="kw">let</span> <span class="ident">length_mm</span>: <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">f32</span>, <span class="ident">Mm</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Length::new</span>(<span class="number">10.0</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_multiplication_with_scalar() {
+        <span class="kw">let </span>length_mm: Length&lt;f32, Mm&gt; = Length::new(<span class="number">10.0</span>);
 
-        <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">length_mm</span> <span class="op">*</span> <span class="number">2.0</span>;
+        <span class="kw">let </span>result = length_mm * <span class="number">2.0</span>;
 
-        <span class="kw">let</span> <span class="ident">expected</span>: <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">f32</span>, <span class="ident">Mm</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Length::new</span>(<span class="number">20.0</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">result</span>, <span class="ident">expected</span>);
+        <span class="kw">let </span>expected: Length&lt;f32, Mm&gt; = Length::new(<span class="number">20.0</span>);
+        <span class="macro">assert_eq!</span>(result, expected);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_multiplication_assignment</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">length</span>: <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">f32</span>, <span class="ident">Mm</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Length::new</span>(<span class="number">10.0</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_multiplication_assignment() {
+        <span class="kw">let </span><span class="kw-2">mut </span>length: Length&lt;f32, Mm&gt; = Length::new(<span class="number">10.0</span>);
 
-        <span class="ident">length</span> <span class="kw-2">*</span><span class="op">=</span> <span class="number">2.0</span>;
+        length <span class="kw-2">*</span>= <span class="number">2.0</span>;
 
-        <span class="kw">let</span> <span class="ident">expected</span>: <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">f32</span>, <span class="ident">Mm</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Length::new</span>(<span class="number">20.0</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">length</span>, <span class="ident">expected</span>);
+        <span class="kw">let </span>expected: Length&lt;f32, Mm&gt; = Length::new(<span class="number">20.0</span>);
+        <span class="macro">assert_eq!</span>(length, expected);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_division_by_scalefactor</span>() {
-        <span class="kw">let</span> <span class="ident">length</span>: <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">f32</span>, <span class="ident">Cm</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Length::new</span>(<span class="number">5.0</span>);
-        <span class="kw">let</span> <span class="ident">cm_per_second</span>: <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">f32</span>, <span class="ident">Second</span>, <span class="ident">Cm</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Scale::new</span>(<span class="number">10.0</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_division_by_scalefactor() {
+        <span class="kw">let </span>length: Length&lt;f32, Cm&gt; = Length::new(<span class="number">5.0</span>);
+        <span class="kw">let </span>cm_per_second: Scale&lt;f32, Second, Cm&gt; = Scale::new(<span class="number">10.0</span>);
 
-        <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">length</span> <span class="op">/</span> <span class="ident">cm_per_second</span>;
+        <span class="kw">let </span>result = length / cm_per_second;
 
-        <span class="kw">let</span> <span class="ident">expected</span>: <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">f32</span>, <span class="ident">Second</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Length::new</span>(<span class="number">0.5</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">result</span>, <span class="ident">expected</span>);
+        <span class="kw">let </span>expected: Length&lt;f32, Second&gt; = Length::new(<span class="number">0.5</span>);
+        <span class="macro">assert_eq!</span>(result, expected);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_division_by_scalar</span>() {
-        <span class="kw">let</span> <span class="ident">length</span>: <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">f32</span>, <span class="ident">Cm</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Length::new</span>(<span class="number">5.0</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_division_by_scalar() {
+        <span class="kw">let </span>length: Length&lt;f32, Cm&gt; = Length::new(<span class="number">5.0</span>);
 
-        <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">length</span> <span class="op">/</span> <span class="number">2.0</span>;
+        <span class="kw">let </span>result = length / <span class="number">2.0</span>;
 
-        <span class="kw">let</span> <span class="ident">expected</span>: <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">f32</span>, <span class="ident">Cm</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Length::new</span>(<span class="number">2.5</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">result</span>, <span class="ident">expected</span>);
+        <span class="kw">let </span>expected: Length&lt;f32, Cm&gt; = Length::new(<span class="number">2.5</span>);
+        <span class="macro">assert_eq!</span>(result, expected);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_division_assignment</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">length</span>: <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">f32</span>, <span class="ident">Mm</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Length::new</span>(<span class="number">10.0</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_division_assignment() {
+        <span class="kw">let </span><span class="kw-2">mut </span>length: Length&lt;f32, Mm&gt; = Length::new(<span class="number">10.0</span>);
 
-        <span class="ident">length</span> <span class="op">/</span><span class="op">=</span> <span class="number">2.0</span>;
+        length /= <span class="number">2.0</span>;
 
-        <span class="kw">let</span> <span class="ident">expected</span>: <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">f32</span>, <span class="ident">Mm</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Length::new</span>(<span class="number">5.0</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">length</span>, <span class="ident">expected</span>);
+        <span class="kw">let </span>expected: Length&lt;f32, Mm&gt; = Length::new(<span class="number">5.0</span>);
+        <span class="macro">assert_eq!</span>(length, expected);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_negation</span>() {
-        <span class="kw">let</span> <span class="ident">length</span>: <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">f32</span>, <span class="ident">Cm</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Length::new</span>(<span class="number">5.0</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_negation() {
+        <span class="kw">let </span>length: Length&lt;f32, Cm&gt; = Length::new(<span class="number">5.0</span>);
 
-        <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="op">-</span><span class="ident">length</span>;
+        <span class="kw">let </span>result = -length;
 
-        <span class="kw">let</span> <span class="ident">expected</span>: <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">f32</span>, <span class="ident">Cm</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Length::new</span>(<span class="op">-</span><span class="number">5.0</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">result</span>, <span class="ident">expected</span>);
+        <span class="kw">let </span>expected: Length&lt;f32, Cm&gt; = Length::new(-<span class="number">5.0</span>);
+        <span class="macro">assert_eq!</span>(result, expected);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_cast</span>() {
-        <span class="kw">let</span> <span class="ident">length_as_i32</span>: <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">Cm</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Length::new</span>(<span class="number">5</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_cast() {
+        <span class="kw">let </span>length_as_i32: Length&lt;i32, Cm&gt; = Length::new(<span class="number">5</span>);
 
-        <span class="kw">let</span> <span class="ident">result</span>: <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">f32</span>, <span class="ident">Cm</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">length_as_i32</span>.<span class="ident">cast</span>();
+        <span class="kw">let </span>result: Length&lt;f32, Cm&gt; = length_as_i32.cast();
 
-        <span class="kw">let</span> <span class="ident">length_as_f32</span>: <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">f32</span>, <span class="ident">Cm</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Length::new</span>(<span class="number">5.0</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">result</span>, <span class="ident">length_as_f32</span>);
+        <span class="kw">let </span>length_as_f32: Length&lt;f32, Cm&gt; = Length::new(<span class="number">5.0</span>);
+        <span class="macro">assert_eq!</span>(result, length_as_f32);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_equality</span>() {
-        <span class="kw">let</span> <span class="ident">length_5_point_0</span>: <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">f32</span>, <span class="ident">Cm</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Length::new</span>(<span class="number">5.0</span>);
-        <span class="kw">let</span> <span class="ident">length_5_point_1</span>: <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">f32</span>, <span class="ident">Cm</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Length::new</span>(<span class="number">5.1</span>);
-        <span class="kw">let</span> <span class="ident">length_0_point_1</span>: <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">f32</span>, <span class="ident">Cm</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Length::new</span>(<span class="number">0.1</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_equality() {
+        <span class="kw">let </span>length_5_point_0: Length&lt;f32, Cm&gt; = Length::new(<span class="number">5.0</span>);
+        <span class="kw">let </span>length_5_point_1: Length&lt;f32, Cm&gt; = Length::new(<span class="number">5.1</span>);
+        <span class="kw">let </span>length_0_point_1: Length&lt;f32, Cm&gt; = Length::new(<span class="number">0.1</span>);
 
-        <span class="macro">assert!</span>(<span class="ident">length_5_point_0</span> <span class="op">==</span> <span class="ident">length_5_point_1</span> <span class="op">-</span> <span class="ident">length_0_point_1</span>);
-        <span class="macro">assert!</span>(<span class="ident">length_5_point_0</span> <span class="op">!</span><span class="op">=</span> <span class="ident">length_5_point_1</span>);
+        <span class="macro">assert!</span>(length_5_point_0 == length_5_point_1 - length_0_point_1);
+        <span class="macro">assert!</span>(length_5_point_0 != length_5_point_1);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_order</span>() {
-        <span class="kw">let</span> <span class="ident">length_5_point_0</span>: <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">f32</span>, <span class="ident">Cm</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Length::new</span>(<span class="number">5.0</span>);
-        <span class="kw">let</span> <span class="ident">length_5_point_1</span>: <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">f32</span>, <span class="ident">Cm</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Length::new</span>(<span class="number">5.1</span>);
-        <span class="kw">let</span> <span class="ident">length_0_point_1</span>: <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">f32</span>, <span class="ident">Cm</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Length::new</span>(<span class="number">0.1</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_order() {
+        <span class="kw">let </span>length_5_point_0: Length&lt;f32, Cm&gt; = Length::new(<span class="number">5.0</span>);
+        <span class="kw">let </span>length_5_point_1: Length&lt;f32, Cm&gt; = Length::new(<span class="number">5.1</span>);
+        <span class="kw">let </span>length_0_point_1: Length&lt;f32, Cm&gt; = Length::new(<span class="number">0.1</span>);
 
-        <span class="macro">assert!</span>(<span class="ident">length_5_point_0</span> <span class="op">&lt;</span> <span class="ident">length_5_point_1</span>);
-        <span class="macro">assert!</span>(<span class="ident">length_5_point_0</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">length_5_point_1</span>);
-        <span class="macro">assert!</span>(<span class="ident">length_5_point_0</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">length_5_point_1</span> <span class="op">-</span> <span class="ident">length_0_point_1</span>);
-        <span class="macro">assert!</span>(<span class="ident">length_5_point_1</span> <span class="op">&gt;</span> <span class="ident">length_5_point_0</span>);
-        <span class="macro">assert!</span>(<span class="ident">length_5_point_1</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">length_5_point_0</span>);
-        <span class="macro">assert!</span>(<span class="ident">length_5_point_0</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">length_5_point_1</span> <span class="op">-</span> <span class="ident">length_0_point_1</span>);
+        <span class="macro">assert!</span>(length_5_point_0 &lt; length_5_point_1);
+        <span class="macro">assert!</span>(length_5_point_0 &lt;= length_5_point_1);
+        <span class="macro">assert!</span>(length_5_point_0 &lt;= length_5_point_1 - length_0_point_1);
+        <span class="macro">assert!</span>(length_5_point_1 &gt; length_5_point_0);
+        <span class="macro">assert!</span>(length_5_point_1 &gt;= length_5_point_0);
+        <span class="macro">assert!</span>(length_5_point_0 &gt;= length_5_point_1 - length_0_point_1);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_zero_add</span>() {
-        <span class="kw">type</span> <span class="ident">LengthCm</span> <span class="op">=</span> <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">f32</span>, <span class="ident">Cm</span><span class="op">&gt;</span>;
-        <span class="kw">let</span> <span class="ident">length</span>: <span class="ident">LengthCm</span> <span class="op">=</span> <span class="ident">Length::new</span>(<span class="number">5.0</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_zero_add() {
+        <span class="kw">type </span>LengthCm = Length&lt;f32, Cm&gt;;
+        <span class="kw">let </span>length: LengthCm = Length::new(<span class="number">5.0</span>);
 
-        <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">length</span> <span class="op">-</span> <span class="ident">LengthCm::zero</span>();
+        <span class="kw">let </span>result = length - LengthCm::zero();
 
-        <span class="macro">assert_eq!</span>(<span class="ident">result</span>, <span class="ident">length</span>);
+        <span class="macro">assert_eq!</span>(result, length);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_zero_division</span>() {
-        <span class="kw">type</span> <span class="ident">LengthCm</span> <span class="op">=</span> <span class="ident">Length</span><span class="op">&lt;</span><span class="ident">f32</span>, <span class="ident">Cm</span><span class="op">&gt;</span>;
-        <span class="kw">let</span> <span class="ident">length</span>: <span class="ident">LengthCm</span> <span class="op">=</span> <span class="ident">Length::new</span>(<span class="number">5.0</span>);
-        <span class="kw">let</span> <span class="ident">length_zero</span>: <span class="ident">LengthCm</span> <span class="op">=</span> <span class="ident">Length::zero</span>();
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_zero_division() {
+        <span class="kw">type </span>LengthCm = Length&lt;f32, Cm&gt;;
+        <span class="kw">let </span>length: LengthCm = Length::new(<span class="number">5.0</span>);
+        <span class="kw">let </span>length_zero: LengthCm = Length::zero();
 
-        <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">length</span> <span class="op">/</span> <span class="ident">length_zero</span>;
+        <span class="kw">let </span>result = length / length_zero;
 
-        <span class="kw">let</span> <span class="ident">expected</span>: <span class="ident">Scale</span><span class="op">&lt;</span><span class="ident">f32</span>, <span class="ident">Cm</span>, <span class="ident">Cm</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Scale::new</span>(<span class="ident">INFINITY</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">result</span>, <span class="ident">expected</span>);
+        <span class="kw">let </span>expected: Scale&lt;f32, Cm, Cm&gt; = Scale::new(INFINITY);
+        <span class="macro">assert_eq!</span>(result, expected);
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="euclid" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0-nightly (12cd71f4d 2022-06-01)" ></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="euclid" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (17cbdfd07 2022-09-13)" ></div></body></html>

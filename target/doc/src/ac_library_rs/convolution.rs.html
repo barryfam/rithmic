@@ -1,11 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/bcfam/.cargo/git/checkouts/ac-library-rs-d342211755004e20/d2b35ac/src/convolution.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>convolution.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><script defer src="../../main.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script>
-    <noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../ac_library_rs/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"></h2>
-    </nav>
-    <nav class="sidebar"><a class="sidebar-logo" href="../../ac_library_rs/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../ac_library_rs/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
-                                <a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div>
-                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/bcfam/.cargo/git/checkouts/ac-library-rs-d342211755004e20/d2b35ac/src/convolution.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>convolution.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../ac_library_rs/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../ac_library_rs/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../ac_library_rs/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -482,483 +475,482 @@
 <span id="475">475</span>
 <span id="476">476</span>
 <span id="477">477</span>
-</pre><pre class="rust"><code><span class="macro">macro_rules!</span> <span class="ident">modulus</span> {
-    ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>:<span class="ident">ident</span>),<span class="kw-2">*</span>) =&gt; {
+</pre><pre class="rust"><code><span class="macro">macro_rules! </span>modulus {
+    ($(<span class="macro-nonterminal">$name</span>:ident),<span class="kw-2">*</span>) =&gt; {
         $(
-            <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Eq</span>, <span class="ident">PartialEq</span>)]</span>
-            <span class="kw">enum</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span> {}
+            <span class="attribute">#[derive(Copy, Clone, Eq, PartialEq)]
+            </span><span class="kw">enum </span><span class="macro-nonterminal">$name </span>{}
 
-            <span class="kw">impl</span> <span class="ident">Modulus</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span> {
-                <span class="kw">const</span> <span class="ident">VALUE</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span> <span class="kw">as</span> <span class="kw">_</span>;
-                <span class="kw">const</span> <span class="ident">HINT_VALUE_IS_PRIME</span>: <span class="ident">bool</span> <span class="op">=</span> <span class="bool-val">true</span>;
+            <span class="kw">impl </span>Modulus <span class="kw">for </span><span class="macro-nonterminal">$name </span>{
+                <span class="kw">const </span>VALUE: u32 = <span class="macro-nonterminal">$name </span><span class="kw">as _</span>;
+                <span class="kw">const </span>HINT_VALUE_IS_PRIME: bool = <span class="bool-val">true</span>;
 
-                <span class="kw">fn</span> <span class="ident">butterfly_cache</span>() -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">::std::thread::LocalKey</span><span class="op">&lt;</span><span class="ident">::std::cell::RefCell</span><span class="op">&lt;</span><span class="ident">::std::option::Option</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">crate::modint::ButterflyCache</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-                    <span class="macro">thread_local!</span> {
-                        <span class="kw">static</span> <span class="ident">BUTTERFLY_CACHE</span>: <span class="ident">::std::cell::RefCell</span><span class="op">&lt;</span><span class="ident">::std::option::Option</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">crate::modint::ButterflyCache</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">::std::default::Default::default</span>();
+                <span class="kw">fn </span>butterfly_cache() -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>::std::thread::LocalKey&lt;::std::cell::RefCell&lt;::std::option::Option&lt;<span class="macro-nonterminal">$crate::modint::ButterflyCache</span>&lt;<span class="self">Self</span>&gt;&gt;&gt;&gt; {
+                    <span class="macro">thread_local! </span>{
+                        <span class="kw">static </span>BUTTERFLY_CACHE: ::std::cell::RefCell&lt;::std::option::Option&lt;<span class="macro-nonterminal">$crate::modint::ButterflyCache</span>&lt;<span class="macro-nonterminal">$name</span>&gt;&gt;&gt; = ::std::default::Default::default();
                     }
-                    <span class="kw-2">&amp;</span><span class="ident">BUTTERFLY_CACHE</span>
+                    <span class="kw-2">&amp;</span>BUTTERFLY_CACHE
                 }
             }
-        )<span class="op">*</span>
+        )*
     };
 }
 
-<span class="kw">use</span> <span class="kw">crate</span>::{
-    <span class="ident">internal_bit</span>, <span class="ident">internal_math</span>,
-    <span class="ident">modint</span>::{<span class="ident">ButterflyCache</span>, <span class="ident">Modulus</span>, <span class="ident">RemEuclidU32</span>, <span class="ident">StaticModInt</span>},
+<span class="kw">use crate</span>::{
+    internal_bit, internal_math,
+    modint::{ButterflyCache, Modulus, RemEuclidU32, StaticModInt},
 };
-<span class="kw">use</span> <span class="ident">std</span>::{
-    <span class="ident">cmp</span>,
-    <span class="ident">convert</span>::{<span class="ident">TryFrom</span>, <span class="ident">TryInto</span> <span class="kw">as</span> <span class="kw">_</span>},
-    <span class="ident">fmt</span>,
+<span class="kw">use </span>std::{
+    cmp,
+    convert::{TryFrom, TryInto <span class="kw">as _</span>},
+    fmt,
 };
 
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::many_single_char_names</span>)]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">convolution</span><span class="op">&lt;</span><span class="ident">M</span><span class="op">&gt;</span>(<span class="ident">a</span>: <span class="kw-2">&amp;</span>[<span class="ident">StaticModInt</span><span class="op">&lt;</span><span class="ident">M</span><span class="op">&gt;</span>], <span class="ident">b</span>: <span class="kw-2">&amp;</span>[<span class="ident">StaticModInt</span><span class="op">&lt;</span><span class="ident">M</span><span class="op">&gt;</span>]) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">StaticModInt</span><span class="op">&lt;</span><span class="ident">M</span><span class="op">&gt;</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">M</span>: <span class="ident">Modulus</span>,
+<span class="attribute">#[allow(clippy::many_single_char_names)]
+</span><span class="kw">pub fn </span>convolution&lt;M&gt;(a: <span class="kw-2">&amp;</span>[StaticModInt&lt;M&gt;], b: <span class="kw-2">&amp;</span>[StaticModInt&lt;M&gt;]) -&gt; Vec&lt;StaticModInt&lt;M&gt;&gt;
+<span class="kw">where
+    </span>M: Modulus,
 {
-    <span class="kw">if</span> <span class="ident">a</span>.<span class="ident">is_empty</span>() <span class="op">|</span><span class="op">|</span> <span class="ident">b</span>.<span class="ident">is_empty</span>() {
-        <span class="kw">return</span> <span class="macro">vec!</span>[];
+    <span class="kw">if </span>a.is_empty() || b.is_empty() {
+        <span class="kw">return </span><span class="macro">vec!</span>[];
     }
-    <span class="kw">let</span> (<span class="ident">n</span>, <span class="ident">m</span>) <span class="op">=</span> (<span class="ident">a</span>.<span class="ident">len</span>(), <span class="ident">b</span>.<span class="ident">len</span>());
+    <span class="kw">let </span>(n, m) = (a.len(), b.len());
 
-    <span class="kw">if</span> <span class="ident">cmp::min</span>(<span class="ident">n</span>, <span class="ident">m</span>) <span class="op">&lt;</span><span class="op">=</span> <span class="number">60</span> {
-        <span class="kw">let</span> (<span class="ident">n</span>, <span class="ident">m</span>, <span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=</span> <span class="kw">if</span> <span class="ident">n</span> <span class="op">&lt;</span> <span class="ident">m</span> { (<span class="ident">m</span>, <span class="ident">n</span>, <span class="ident">b</span>, <span class="ident">a</span>) } <span class="kw">else</span> { (<span class="ident">n</span>, <span class="ident">m</span>, <span class="ident">a</span>, <span class="ident">b</span>) };
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ans</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="ident">StaticModInt::new</span>(<span class="number">0</span>); <span class="ident">n</span> <span class="op">+</span> <span class="ident">m</span> <span class="op">-</span> <span class="number">1</span>];
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">n</span> {
-            <span class="kw">for</span> <span class="ident">j</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">m</span> {
-                <span class="ident">ans</span>[<span class="ident">i</span> <span class="op">+</span> <span class="ident">j</span>] <span class="op">+</span><span class="op">=</span> <span class="ident">a</span>[<span class="ident">i</span>] <span class="op">*</span> <span class="ident">b</span>[<span class="ident">j</span>];
+    <span class="kw">if </span>cmp::min(n, m) &lt;= <span class="number">60 </span>{
+        <span class="kw">let </span>(n, m, a, b) = <span class="kw">if </span>n &lt; m { (m, n, b, a) } <span class="kw">else </span>{ (n, m, a, b) };
+        <span class="kw">let </span><span class="kw-2">mut </span>ans = <span class="macro">vec!</span>[StaticModInt::new(<span class="number">0</span>); n + m - <span class="number">1</span>];
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..n {
+            <span class="kw">for </span>j <span class="kw">in </span><span class="number">0</span>..m {
+                ans[i + j] += a[i] * b[j];
             }
         }
-        <span class="kw">return</span> <span class="ident">ans</span>;
+        <span class="kw">return </span>ans;
     }
 
-    <span class="kw">let</span> (<span class="kw-2">mut</span> <span class="ident">a</span>, <span class="kw-2">mut</span> <span class="ident">b</span>) <span class="op">=</span> (<span class="ident">a</span>.<span class="ident">to_owned</span>(), <span class="ident">b</span>.<span class="ident">to_owned</span>());
-    <span class="kw">let</span> <span class="ident">z</span> <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="ident">internal_bit::ceil_pow2</span>((<span class="ident">n</span> <span class="op">+</span> <span class="ident">m</span> <span class="op">-</span> <span class="number">1</span>) <span class="kw">as</span> <span class="kw">_</span>);
-    <span class="ident">a</span>.<span class="ident">resize</span>(<span class="ident">z</span>, <span class="ident">StaticModInt::raw</span>(<span class="number">0</span>));
-    <span class="ident">butterfly</span>(<span class="kw-2">&amp;mut</span> <span class="ident">a</span>);
-    <span class="ident">b</span>.<span class="ident">resize</span>(<span class="ident">z</span>, <span class="ident">StaticModInt::raw</span>(<span class="number">0</span>));
-    <span class="ident">butterfly</span>(<span class="kw-2">&amp;mut</span> <span class="ident">b</span>);
-    <span class="kw">for</span> (<span class="ident">a</span>, <span class="ident">b</span>) <span class="kw">in</span> <span class="ident">a</span>.<span class="ident">iter_mut</span>().<span class="ident">zip</span>(<span class="kw-2">&amp;</span><span class="ident">b</span>) {
-        <span class="kw-2">*</span><span class="ident">a</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">b</span>;
+    <span class="kw">let </span>(<span class="kw-2">mut </span>a, <span class="kw-2">mut </span>b) = (a.to_owned(), b.to_owned());
+    <span class="kw">let </span>z = <span class="number">1 </span>&lt;&lt; internal_bit::ceil_pow2((n + m - <span class="number">1</span>) <span class="kw">as _</span>);
+    a.resize(z, StaticModInt::raw(<span class="number">0</span>));
+    butterfly(<span class="kw-2">&amp;mut </span>a);
+    b.resize(z, StaticModInt::raw(<span class="number">0</span>));
+    butterfly(<span class="kw-2">&amp;mut </span>b);
+    <span class="kw">for </span>(a, b) <span class="kw">in </span>a.iter_mut().zip(<span class="kw-2">&amp;</span>b) {
+        <span class="kw-2">*</span>a <span class="kw-2">*</span>= b;
     }
-    <span class="ident">butterfly_inv</span>(<span class="kw-2">&amp;mut</span> <span class="ident">a</span>);
-    <span class="ident">a</span>.<span class="ident">resize</span>(<span class="ident">n</span> <span class="op">+</span> <span class="ident">m</span> <span class="op">-</span> <span class="number">1</span>, <span class="ident">StaticModInt::raw</span>(<span class="number">0</span>));
-    <span class="kw">let</span> <span class="ident">iz</span> <span class="op">=</span> <span class="ident">StaticModInt::new</span>(<span class="ident">z</span>).<span class="ident">inv</span>();
-    <span class="kw">for</span> <span class="ident">a</span> <span class="kw">in</span> <span class="kw-2">&amp;mut</span> <span class="ident">a</span> {
-        <span class="kw-2">*</span><span class="ident">a</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">iz</span>;
+    butterfly_inv(<span class="kw-2">&amp;mut </span>a);
+    a.resize(n + m - <span class="number">1</span>, StaticModInt::raw(<span class="number">0</span>));
+    <span class="kw">let </span>iz = StaticModInt::new(z).inv();
+    <span class="kw">for </span>a <span class="kw">in </span><span class="kw-2">&amp;mut </span>a {
+        <span class="kw-2">*</span>a <span class="kw-2">*</span>= iz;
     }
-    <span class="ident">a</span>
+    a
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">convolution_raw</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">M</span><span class="op">&gt;</span>(<span class="ident">a</span>: <span class="kw-2">&amp;</span>[<span class="ident">T</span>], <span class="ident">b</span>: <span class="kw-2">&amp;</span>[<span class="ident">T</span>]) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">RemEuclidU32</span> <span class="op">+</span> <span class="ident">TryFrom</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Clone</span>,
-    <span class="ident">T::Error</span>: <span class="ident">fmt::Debug</span>,
-    <span class="ident">M</span>: <span class="ident">Modulus</span>,
+<span class="kw">pub fn </span>convolution_raw&lt;T, M&gt;(a: <span class="kw-2">&amp;</span>[T], b: <span class="kw-2">&amp;</span>[T]) -&gt; Vec&lt;T&gt;
+<span class="kw">where
+    </span>T: RemEuclidU32 + TryFrom&lt;u32&gt; + Clone,
+    T::Error: fmt::Debug,
+    M: Modulus,
 {
-    <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="ident">a</span>.<span class="ident">iter</span>().<span class="ident">cloned</span>().<span class="ident">map</span>(<span class="ident">Into::into</span>).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
-    <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">iter</span>().<span class="ident">cloned</span>().<span class="ident">map</span>(<span class="ident">Into::into</span>).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
-    <span class="ident">convolution</span>::<span class="op">&lt;</span><span class="ident">M</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="ident">a</span>, <span class="kw-2">&amp;</span><span class="ident">b</span>)
-        .<span class="ident">into_iter</span>()
-        .<span class="ident">map</span>(<span class="op">|</span><span class="ident">z</span><span class="op">|</span> {
-            <span class="ident">z</span>.<span class="ident">val</span>()
-                .<span class="ident">try_into</span>()
-                .<span class="ident">expect</span>(<span class="string">&quot;the numeric type is smaller than the modulus&quot;</span>)
+    <span class="kw">let </span>a = a.iter().cloned().map(Into::into).collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;();
+    <span class="kw">let </span>b = b.iter().cloned().map(Into::into).collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;();
+    convolution::&lt;M&gt;(<span class="kw-2">&amp;</span>a, <span class="kw-2">&amp;</span>b)
+        .into_iter()
+        .map(|z| {
+            z.val()
+                .try_into()
+                .expect(<span class="string">&quot;the numeric type is smaller than the modulus&quot;</span>)
         })
-        .<span class="ident">collect</span>()
+        .collect()
 }
 
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::many_single_char_names</span>)]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">convolution_i64</span>(<span class="ident">a</span>: <span class="kw-2">&amp;</span>[<span class="ident">i64</span>], <span class="ident">b</span>: <span class="kw-2">&amp;</span>[<span class="ident">i64</span>]) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">i64</span><span class="op">&gt;</span> {
-    <span class="kw">const</span> <span class="ident">M1</span>: <span class="ident">u64</span> <span class="op">=</span> <span class="number">754_974_721</span>; <span class="comment">// 2^24</span>
-    <span class="kw">const</span> <span class="ident">M2</span>: <span class="ident">u64</span> <span class="op">=</span> <span class="number">167_772_161</span>; <span class="comment">// 2^25</span>
-    <span class="kw">const</span> <span class="ident">M3</span>: <span class="ident">u64</span> <span class="op">=</span> <span class="number">469_762_049</span>; <span class="comment">// 2^26</span>
-    <span class="kw">const</span> <span class="ident">M2M3</span>: <span class="ident">u64</span> <span class="op">=</span> <span class="ident">M2</span> <span class="op">*</span> <span class="ident">M3</span>;
-    <span class="kw">const</span> <span class="ident">M1M3</span>: <span class="ident">u64</span> <span class="op">=</span> <span class="ident">M1</span> <span class="op">*</span> <span class="ident">M3</span>;
-    <span class="kw">const</span> <span class="ident">M1M2</span>: <span class="ident">u64</span> <span class="op">=</span> <span class="ident">M1</span> <span class="op">*</span> <span class="ident">M2</span>;
-    <span class="kw">const</span> <span class="ident">M1M2M3</span>: <span class="ident">u64</span> <span class="op">=</span> <span class="ident">M1M2</span>.<span class="ident">wrapping_mul</span>(<span class="ident">M3</span>);
+<span class="attribute">#[allow(clippy::many_single_char_names)]
+</span><span class="kw">pub fn </span>convolution_i64(a: <span class="kw-2">&amp;</span>[i64], b: <span class="kw-2">&amp;</span>[i64]) -&gt; Vec&lt;i64&gt; {
+    <span class="kw">const </span>M1: u64 = <span class="number">754_974_721</span>; <span class="comment">// 2^24
+    </span><span class="kw">const </span>M2: u64 = <span class="number">167_772_161</span>; <span class="comment">// 2^25
+    </span><span class="kw">const </span>M3: u64 = <span class="number">469_762_049</span>; <span class="comment">// 2^26
+    </span><span class="kw">const </span>M2M3: u64 = M2 * M3;
+    <span class="kw">const </span>M1M3: u64 = M1 * M3;
+    <span class="kw">const </span>M1M2: u64 = M1 * M2;
+    <span class="kw">const </span>M1M2M3: u64 = M1M2.wrapping_mul(M3);
 
-    <span class="macro">modulus!</span>(<span class="ident">M1</span>, <span class="ident">M2</span>, <span class="ident">M3</span>);
+    <span class="macro">modulus!</span>(M1, M2, M3);
 
-    <span class="kw">if</span> <span class="ident">a</span>.<span class="ident">is_empty</span>() <span class="op">|</span><span class="op">|</span> <span class="ident">b</span>.<span class="ident">is_empty</span>() {
-        <span class="kw">return</span> <span class="macro">vec!</span>[];
+    <span class="kw">if </span>a.is_empty() || b.is_empty() {
+        <span class="kw">return </span><span class="macro">vec!</span>[];
     }
 
-    <span class="kw">let</span> (<span class="kw">_</span>, <span class="ident">i1</span>) <span class="op">=</span> <span class="ident">internal_math::inv_gcd</span>(<span class="ident">M2M3</span> <span class="kw">as</span> <span class="kw">_</span>, <span class="ident">M1</span> <span class="kw">as</span> <span class="kw">_</span>);
-    <span class="kw">let</span> (<span class="kw">_</span>, <span class="ident">i2</span>) <span class="op">=</span> <span class="ident">internal_math::inv_gcd</span>(<span class="ident">M1M3</span> <span class="kw">as</span> <span class="kw">_</span>, <span class="ident">M2</span> <span class="kw">as</span> <span class="kw">_</span>);
-    <span class="kw">let</span> (<span class="kw">_</span>, <span class="ident">i3</span>) <span class="op">=</span> <span class="ident">internal_math::inv_gcd</span>(<span class="ident">M1M2</span> <span class="kw">as</span> <span class="kw">_</span>, <span class="ident">M3</span> <span class="kw">as</span> <span class="kw">_</span>);
+    <span class="kw">let </span>(<span class="kw">_</span>, i1) = internal_math::inv_gcd(M2M3 <span class="kw">as _</span>, M1 <span class="kw">as _</span>);
+    <span class="kw">let </span>(<span class="kw">_</span>, i2) = internal_math::inv_gcd(M1M3 <span class="kw">as _</span>, M2 <span class="kw">as _</span>);
+    <span class="kw">let </span>(<span class="kw">_</span>, i3) = internal_math::inv_gcd(M1M2 <span class="kw">as _</span>, M3 <span class="kw">as _</span>);
 
-    <span class="kw">let</span> <span class="ident">c1</span> <span class="op">=</span> <span class="ident">convolution_raw</span>::<span class="op">&lt;</span><span class="ident">i64</span>, <span class="ident">M1</span><span class="op">&gt;</span>(<span class="ident">a</span>, <span class="ident">b</span>);
-    <span class="kw">let</span> <span class="ident">c2</span> <span class="op">=</span> <span class="ident">convolution_raw</span>::<span class="op">&lt;</span><span class="ident">i64</span>, <span class="ident">M2</span><span class="op">&gt;</span>(<span class="ident">a</span>, <span class="ident">b</span>);
-    <span class="kw">let</span> <span class="ident">c3</span> <span class="op">=</span> <span class="ident">convolution_raw</span>::<span class="op">&lt;</span><span class="ident">i64</span>, <span class="ident">M3</span><span class="op">&gt;</span>(<span class="ident">a</span>, <span class="ident">b</span>);
+    <span class="kw">let </span>c1 = convolution_raw::&lt;i64, M1&gt;(a, b);
+    <span class="kw">let </span>c2 = convolution_raw::&lt;i64, M2&gt;(a, b);
+    <span class="kw">let </span>c3 = convolution_raw::&lt;i64, M3&gt;(a, b);
 
-    <span class="ident">c1</span>.<span class="ident">into_iter</span>()
-        .<span class="ident">zip</span>(<span class="ident">c2</span>)
-        .<span class="ident">zip</span>(<span class="ident">c3</span>)
-        .<span class="ident">map</span>(<span class="op">|</span>((<span class="ident">c1</span>, <span class="ident">c2</span>), <span class="ident">c3</span>)<span class="op">|</span> {
-            <span class="kw">const</span> <span class="ident">OFFSET</span>: <span class="kw-2">&amp;</span>[<span class="ident">u64</span>] <span class="op">=</span> <span class="kw-2">&amp;</span>[<span class="number">0</span>, <span class="number">0</span>, <span class="ident">M1M2M3</span>, <span class="number">2</span> <span class="op">*</span> <span class="ident">M1M2M3</span>, <span class="number">3</span> <span class="op">*</span> <span class="ident">M1M2M3</span>];
+    c1.into_iter()
+        .zip(c2)
+        .zip(c3)
+        .map(|((c1, c2), c3)| {
+            <span class="kw">const </span>OFFSET: <span class="kw-2">&amp;</span>[u64] = <span class="kw-2">&amp;</span>[<span class="number">0</span>, <span class="number">0</span>, M1M2M3, <span class="number">2 </span>* M1M2M3, <span class="number">3 </span>* M1M2M3];
 
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">x</span> <span class="op">=</span> [(<span class="ident">c1</span>, <span class="ident">i1</span>, <span class="ident">M1</span>, <span class="ident">M2M3</span>), (<span class="ident">c2</span>, <span class="ident">i2</span>, <span class="ident">M2</span>, <span class="ident">M1M3</span>), (<span class="ident">c3</span>, <span class="ident">i3</span>, <span class="ident">M3</span>, <span class="ident">M1M2</span>)]
-                .<span class="ident">iter</span>()
-                .<span class="ident">map</span>(<span class="op">|</span><span class="kw-2">&amp;</span>(<span class="ident">c</span>, <span class="ident">i</span>, <span class="ident">m1</span>, <span class="ident">m2</span>)<span class="op">|</span> <span class="ident">c</span>.<span class="ident">wrapping_mul</span>(<span class="ident">i</span>).<span class="ident">rem_euclid</span>(<span class="ident">m1</span> <span class="kw">as</span> <span class="kw">_</span>).<span class="ident">wrapping_mul</span>(<span class="ident">m2</span> <span class="kw">as</span> <span class="kw">_</span>))
-                .<span class="ident">fold</span>(<span class="number">0</span>, <span class="ident">i64::wrapping_add</span>);
+            <span class="kw">let </span><span class="kw-2">mut </span>x = [(c1, i1, M1, M2M3), (c2, i2, M2, M1M3), (c3, i3, M3, M1M2)]
+                .iter()
+                .map(|<span class="kw-2">&amp;</span>(c, i, m1, m2)| c.wrapping_mul(i).rem_euclid(m1 <span class="kw">as _</span>).wrapping_mul(m2 <span class="kw">as _</span>))
+                .fold(<span class="number">0</span>, i64::wrapping_add);
 
-            <span class="comment">// B = 2^63, -B &lt;= x, r(real value) &lt; B</span>
-            <span class="comment">// (x, x - M, x - 2M, or x - 3M) = r (mod 2B)</span>
-            <span class="comment">// r = c1[i] (mod MOD1)</span>
-            <span class="comment">// focus on MOD1</span>
-            <span class="comment">// r = x, x - M&#39;, x - 2M&#39;, x - 3M&#39; (M&#39; = M % 2^64) (mod 2B)</span>
-            <span class="comment">// r = x,</span>
-            <span class="comment">//     x - M&#39; + (0 or 2B),</span>
-            <span class="comment">//     x - 2M&#39; + (0, 2B or 4B),</span>
-            <span class="comment">//     x - 3M&#39; + (0, 2B, 4B or 6B) (without mod!)</span>
-            <span class="comment">// (r - x) = 0, (0)</span>
-            <span class="comment">//           - M&#39; + (0 or 2B), (1)</span>
-            <span class="comment">//           -2M&#39; + (0 or 2B or 4B), (2)</span>
-            <span class="comment">//           -3M&#39; + (0 or 2B or 4B or 6B) (3) (mod MOD1)</span>
-            <span class="comment">// we checked that</span>
-            <span class="comment">//   ((1) mod MOD1) mod 5 = 2</span>
-            <span class="comment">//   ((2) mod MOD1) mod 5 = 3</span>
-            <span class="comment">//   ((3) mod MOD1) mod 5 = 4</span>
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">diff</span> <span class="op">=</span> <span class="ident">c1</span> <span class="op">-</span> <span class="ident">internal_math::safe_mod</span>(<span class="ident">x</span>, <span class="ident">M1</span> <span class="kw">as</span> <span class="kw">_</span>);
-            <span class="kw">if</span> <span class="ident">diff</span> <span class="op">&lt;</span> <span class="number">0</span> {
-                <span class="ident">diff</span> <span class="op">+</span><span class="op">=</span> <span class="ident">M1</span> <span class="kw">as</span> <span class="ident">i64</span>;
+            <span class="comment">// B = 2^63, -B &lt;= x, r(real value) &lt; B
+            // (x, x - M, x - 2M, or x - 3M) = r (mod 2B)
+            // r = c1[i] (mod MOD1)
+            // focus on MOD1
+            // r = x, x - M&#39;, x - 2M&#39;, x - 3M&#39; (M&#39; = M % 2^64) (mod 2B)
+            // r = x,
+            //     x - M&#39; + (0 or 2B),
+            //     x - 2M&#39; + (0, 2B or 4B),
+            //     x - 3M&#39; + (0, 2B, 4B or 6B) (without mod!)
+            // (r - x) = 0, (0)
+            //           - M&#39; + (0 or 2B), (1)
+            //           -2M&#39; + (0 or 2B or 4B), (2)
+            //           -3M&#39; + (0 or 2B or 4B or 6B) (3) (mod MOD1)
+            // we checked that
+            //   ((1) mod MOD1) mod 5 = 2
+            //   ((2) mod MOD1) mod 5 = 3
+            //   ((3) mod MOD1) mod 5 = 4
+            </span><span class="kw">let </span><span class="kw-2">mut </span>diff = c1 - internal_math::safe_mod(x, M1 <span class="kw">as _</span>);
+            <span class="kw">if </span>diff &lt; <span class="number">0 </span>{
+                diff += M1 <span class="kw">as </span>i64;
             }
-            <span class="ident">x</span> <span class="op">=</span> <span class="ident">x</span>.<span class="ident">wrapping_sub</span>(<span class="ident">OFFSET</span>[<span class="ident">diff</span>.<span class="ident">rem_euclid</span>(<span class="number">5</span>) <span class="kw">as</span> <span class="ident">usize</span>] <span class="kw">as</span> <span class="kw">_</span>);
-            <span class="ident">x</span>
+            x = x.wrapping_sub(OFFSET[diff.rem_euclid(<span class="number">5</span>) <span class="kw">as </span>usize] <span class="kw">as _</span>);
+            x
         })
-        .<span class="ident">collect</span>()
+        .collect()
 }
 
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::many_single_char_names</span>)]</span>
-<span class="kw">fn</span> <span class="ident">butterfly</span><span class="op">&lt;</span><span class="ident">M</span>: <span class="ident">Modulus</span><span class="op">&gt;</span>(<span class="ident">a</span>: <span class="kw-2">&amp;mut</span> [<span class="ident">StaticModInt</span><span class="op">&lt;</span><span class="ident">M</span><span class="op">&gt;</span>]) {
-    <span class="kw">let</span> <span class="ident">n</span> <span class="op">=</span> <span class="ident">a</span>.<span class="ident">len</span>();
-    <span class="kw">let</span> <span class="ident">h</span> <span class="op">=</span> <span class="ident">internal_bit::ceil_pow2</span>(<span class="ident">n</span> <span class="kw">as</span> <span class="ident">u32</span>);
+<span class="attribute">#[allow(clippy::many_single_char_names)]
+</span><span class="kw">fn </span>butterfly&lt;M: Modulus&gt;(a: <span class="kw-2">&amp;mut </span>[StaticModInt&lt;M&gt;]) {
+    <span class="kw">let </span>n = a.len();
+    <span class="kw">let </span>h = internal_bit::ceil_pow2(n <span class="kw">as </span>u32);
 
-    <span class="ident">M::butterfly_cache</span>().<span class="ident">with</span>(<span class="op">|</span><span class="ident">cache</span><span class="op">|</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">cache</span> <span class="op">=</span> <span class="ident">cache</span>.<span class="ident">borrow_mut</span>();
-        <span class="kw">let</span> <span class="ident">ButterflyCache</span> { <span class="ident">sum_e</span>, .. } <span class="op">=</span> <span class="ident">cache</span>.<span class="ident">get_or_insert_with</span>(<span class="ident">prepare</span>);
-        <span class="kw">for</span> <span class="ident">ph</span> <span class="kw">in</span> <span class="number">1</span>..<span class="op">=</span><span class="ident">h</span> {
-            <span class="kw">let</span> <span class="ident">w</span> <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> (<span class="ident">ph</span> <span class="op">-</span> <span class="number">1</span>);
-            <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> (<span class="ident">h</span> <span class="op">-</span> <span class="ident">ph</span>);
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">now</span> <span class="op">=</span> <span class="ident">StaticModInt</span>::<span class="op">&lt;</span><span class="ident">M</span><span class="op">&gt;</span><span class="ident">::new</span>(<span class="number">1</span>);
-            <span class="kw">for</span> <span class="ident">s</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">w</span> {
-                <span class="kw">let</span> <span class="ident">offset</span> <span class="op">=</span> <span class="ident">s</span> <span class="op">&lt;</span><span class="op">&lt;</span> (<span class="ident">h</span> <span class="op">-</span> <span class="ident">ph</span> <span class="op">+</span> <span class="number">1</span>);
-                <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">p</span> {
-                    <span class="kw">let</span> <span class="ident">l</span> <span class="op">=</span> <span class="ident">a</span>[<span class="ident">i</span> <span class="op">+</span> <span class="ident">offset</span>];
-                    <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="ident">a</span>[<span class="ident">i</span> <span class="op">+</span> <span class="ident">offset</span> <span class="op">+</span> <span class="ident">p</span>] <span class="op">*</span> <span class="ident">now</span>;
-                    <span class="ident">a</span>[<span class="ident">i</span> <span class="op">+</span> <span class="ident">offset</span>] <span class="op">=</span> <span class="ident">l</span> <span class="op">+</span> <span class="ident">r</span>;
-                    <span class="ident">a</span>[<span class="ident">i</span> <span class="op">+</span> <span class="ident">offset</span> <span class="op">+</span> <span class="ident">p</span>] <span class="op">=</span> <span class="ident">l</span> <span class="op">-</span> <span class="ident">r</span>;
+    M::butterfly_cache().with(|cache| {
+        <span class="kw">let </span><span class="kw-2">mut </span>cache = cache.borrow_mut();
+        <span class="kw">let </span>ButterflyCache { sum_e, .. } = cache.get_or_insert_with(prepare);
+        <span class="kw">for </span>ph <span class="kw">in </span><span class="number">1</span>..=h {
+            <span class="kw">let </span>w = <span class="number">1 </span>&lt;&lt; (ph - <span class="number">1</span>);
+            <span class="kw">let </span>p = <span class="number">1 </span>&lt;&lt; (h - ph);
+            <span class="kw">let </span><span class="kw-2">mut </span>now = StaticModInt::&lt;M&gt;::new(<span class="number">1</span>);
+            <span class="kw">for </span>s <span class="kw">in </span><span class="number">0</span>..w {
+                <span class="kw">let </span>offset = s &lt;&lt; (h - ph + <span class="number">1</span>);
+                <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..p {
+                    <span class="kw">let </span>l = a[i + offset];
+                    <span class="kw">let </span>r = a[i + offset + p] * now;
+                    a[i + offset] = l + r;
+                    a[i + offset + p] = l - r;
                 }
-                <span class="ident">now</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">sum_e</span>[(<span class="op">!</span><span class="ident">s</span>).<span class="ident">trailing_zeros</span>() <span class="kw">as</span> <span class="ident">usize</span>];
+                now <span class="kw-2">*</span>= sum_e[(!s).trailing_zeros() <span class="kw">as </span>usize];
             }
         }
     });
 }
 
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::many_single_char_names</span>)]</span>
-<span class="kw">fn</span> <span class="ident">butterfly_inv</span><span class="op">&lt;</span><span class="ident">M</span>: <span class="ident">Modulus</span><span class="op">&gt;</span>(<span class="ident">a</span>: <span class="kw-2">&amp;mut</span> [<span class="ident">StaticModInt</span><span class="op">&lt;</span><span class="ident">M</span><span class="op">&gt;</span>]) {
-    <span class="kw">let</span> <span class="ident">n</span> <span class="op">=</span> <span class="ident">a</span>.<span class="ident">len</span>();
-    <span class="kw">let</span> <span class="ident">h</span> <span class="op">=</span> <span class="ident">internal_bit::ceil_pow2</span>(<span class="ident">n</span> <span class="kw">as</span> <span class="ident">u32</span>);
+<span class="attribute">#[allow(clippy::many_single_char_names)]
+</span><span class="kw">fn </span>butterfly_inv&lt;M: Modulus&gt;(a: <span class="kw-2">&amp;mut </span>[StaticModInt&lt;M&gt;]) {
+    <span class="kw">let </span>n = a.len();
+    <span class="kw">let </span>h = internal_bit::ceil_pow2(n <span class="kw">as </span>u32);
 
-    <span class="ident">M::butterfly_cache</span>().<span class="ident">with</span>(<span class="op">|</span><span class="ident">cache</span><span class="op">|</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">cache</span> <span class="op">=</span> <span class="ident">cache</span>.<span class="ident">borrow_mut</span>();
-        <span class="kw">let</span> <span class="ident">ButterflyCache</span> { <span class="ident">sum_ie</span>, .. } <span class="op">=</span> <span class="ident">cache</span>.<span class="ident">get_or_insert_with</span>(<span class="ident">prepare</span>);
-        <span class="kw">for</span> <span class="ident">ph</span> <span class="kw">in</span> (<span class="number">1</span>..<span class="op">=</span><span class="ident">h</span>).<span class="ident">rev</span>() {
-            <span class="kw">let</span> <span class="ident">w</span> <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> (<span class="ident">ph</span> <span class="op">-</span> <span class="number">1</span>);
-            <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> (<span class="ident">h</span> <span class="op">-</span> <span class="ident">ph</span>);
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">inow</span> <span class="op">=</span> <span class="ident">StaticModInt</span>::<span class="op">&lt;</span><span class="ident">M</span><span class="op">&gt;</span><span class="ident">::new</span>(<span class="number">1</span>);
-            <span class="kw">for</span> <span class="ident">s</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">w</span> {
-                <span class="kw">let</span> <span class="ident">offset</span> <span class="op">=</span> <span class="ident">s</span> <span class="op">&lt;</span><span class="op">&lt;</span> (<span class="ident">h</span> <span class="op">-</span> <span class="ident">ph</span> <span class="op">+</span> <span class="number">1</span>);
-                <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">p</span> {
-                    <span class="kw">let</span> <span class="ident">l</span> <span class="op">=</span> <span class="ident">a</span>[<span class="ident">i</span> <span class="op">+</span> <span class="ident">offset</span>];
-                    <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="ident">a</span>[<span class="ident">i</span> <span class="op">+</span> <span class="ident">offset</span> <span class="op">+</span> <span class="ident">p</span>];
-                    <span class="ident">a</span>[<span class="ident">i</span> <span class="op">+</span> <span class="ident">offset</span>] <span class="op">=</span> <span class="ident">l</span> <span class="op">+</span> <span class="ident">r</span>;
-                    <span class="ident">a</span>[<span class="ident">i</span> <span class="op">+</span> <span class="ident">offset</span> <span class="op">+</span> <span class="ident">p</span>] <span class="op">=</span> <span class="ident">StaticModInt::new</span>(<span class="ident">M::VALUE</span> <span class="op">+</span> <span class="ident">l</span>.<span class="ident">val</span>() <span class="op">-</span> <span class="ident">r</span>.<span class="ident">val</span>()) <span class="op">*</span> <span class="ident">inow</span>;
+    M::butterfly_cache().with(|cache| {
+        <span class="kw">let </span><span class="kw-2">mut </span>cache = cache.borrow_mut();
+        <span class="kw">let </span>ButterflyCache { sum_ie, .. } = cache.get_or_insert_with(prepare);
+        <span class="kw">for </span>ph <span class="kw">in </span>(<span class="number">1</span>..=h).rev() {
+            <span class="kw">let </span>w = <span class="number">1 </span>&lt;&lt; (ph - <span class="number">1</span>);
+            <span class="kw">let </span>p = <span class="number">1 </span>&lt;&lt; (h - ph);
+            <span class="kw">let </span><span class="kw-2">mut </span>inow = StaticModInt::&lt;M&gt;::new(<span class="number">1</span>);
+            <span class="kw">for </span>s <span class="kw">in </span><span class="number">0</span>..w {
+                <span class="kw">let </span>offset = s &lt;&lt; (h - ph + <span class="number">1</span>);
+                <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..p {
+                    <span class="kw">let </span>l = a[i + offset];
+                    <span class="kw">let </span>r = a[i + offset + p];
+                    a[i + offset] = l + r;
+                    a[i + offset + p] = StaticModInt::new(M::VALUE + l.val() - r.val()) * inow;
                 }
-                <span class="ident">inow</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">sum_ie</span>[(<span class="op">!</span><span class="ident">s</span>).<span class="ident">trailing_zeros</span>() <span class="kw">as</span> <span class="ident">usize</span>];
+                inow <span class="kw-2">*</span>= sum_ie[(!s).trailing_zeros() <span class="kw">as </span>usize];
             }
         }
     });
 }
 
-<span class="kw">fn</span> <span class="ident">prepare</span><span class="op">&lt;</span><span class="ident">M</span>: <span class="ident">Modulus</span><span class="op">&gt;</span>() -&gt; <span class="ident">ButterflyCache</span><span class="op">&lt;</span><span class="ident">M</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">g</span> <span class="op">=</span> <span class="ident">StaticModInt</span>::<span class="op">&lt;</span><span class="ident">M</span><span class="op">&gt;</span><span class="ident">::raw</span>(<span class="ident">internal_math::primitive_root</span>(<span class="ident">M::VALUE</span> <span class="kw">as</span> <span class="ident">i32</span>) <span class="kw">as</span> <span class="ident">u32</span>);
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">es</span> <span class="op">=</span> [<span class="ident">StaticModInt</span>::<span class="op">&lt;</span><span class="ident">M</span><span class="op">&gt;</span><span class="ident">::raw</span>(<span class="number">0</span>); <span class="number">30</span>]; <span class="comment">// es[i]^(2^(2+i)) == 1</span>
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ies</span> <span class="op">=</span> [<span class="ident">StaticModInt</span>::<span class="op">&lt;</span><span class="ident">M</span><span class="op">&gt;</span><span class="ident">::raw</span>(<span class="number">0</span>); <span class="number">30</span>];
-    <span class="kw">let</span> <span class="ident">cnt2</span> <span class="op">=</span> (<span class="ident">M::VALUE</span> <span class="op">-</span> <span class="number">1</span>).<span class="ident">trailing_zeros</span>() <span class="kw">as</span> <span class="ident">usize</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">e</span> <span class="op">=</span> <span class="ident">g</span>.<span class="ident">pow</span>(((<span class="ident">M::VALUE</span> <span class="op">-</span> <span class="number">1</span>) <span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">cnt2</span>).<span class="ident">into</span>());
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ie</span> <span class="op">=</span> <span class="ident">e</span>.<span class="ident">inv</span>();
-    <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> (<span class="number">2</span>..<span class="op">=</span><span class="ident">cnt2</span>).<span class="ident">rev</span>() {
-        <span class="ident">es</span>[<span class="ident">i</span> <span class="op">-</span> <span class="number">2</span>] <span class="op">=</span> <span class="ident">e</span>;
-        <span class="ident">ies</span>[<span class="ident">i</span> <span class="op">-</span> <span class="number">2</span>] <span class="op">=</span> <span class="ident">ie</span>;
-        <span class="ident">e</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">e</span>;
-        <span class="ident">ie</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">ie</span>;
+<span class="kw">fn </span>prepare&lt;M: Modulus&gt;() -&gt; ButterflyCache&lt;M&gt; {
+    <span class="kw">let </span>g = StaticModInt::&lt;M&gt;::raw(internal_math::primitive_root(M::VALUE <span class="kw">as </span>i32) <span class="kw">as </span>u32);
+    <span class="kw">let </span><span class="kw-2">mut </span>es = [StaticModInt::&lt;M&gt;::raw(<span class="number">0</span>); <span class="number">30</span>]; <span class="comment">// es[i]^(2^(2+i)) == 1
+    </span><span class="kw">let </span><span class="kw-2">mut </span>ies = [StaticModInt::&lt;M&gt;::raw(<span class="number">0</span>); <span class="number">30</span>];
+    <span class="kw">let </span>cnt2 = (M::VALUE - <span class="number">1</span>).trailing_zeros() <span class="kw">as </span>usize;
+    <span class="kw">let </span><span class="kw-2">mut </span>e = g.pow(((M::VALUE - <span class="number">1</span>) &gt;&gt; cnt2).into());
+    <span class="kw">let </span><span class="kw-2">mut </span>ie = e.inv();
+    <span class="kw">for </span>i <span class="kw">in </span>(<span class="number">2</span>..=cnt2).rev() {
+        es[i - <span class="number">2</span>] = e;
+        ies[i - <span class="number">2</span>] = ie;
+        e <span class="kw-2">*</span>= e;
+        ie <span class="kw-2">*</span>= ie;
     }
-    <span class="kw">let</span> <span class="ident">sum_e</span> <span class="op">=</span> <span class="ident">es</span>
-        .<span class="ident">iter</span>()
-        .<span class="ident">scan</span>(<span class="ident">StaticModInt::new</span>(<span class="number">1</span>), <span class="op">|</span><span class="ident">acc</span>, <span class="ident">e</span><span class="op">|</span> {
-            <span class="kw-2">*</span><span class="ident">acc</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">e</span>;
-            <span class="prelude-val">Some</span>(<span class="kw-2">*</span><span class="ident">acc</span>)
+    <span class="kw">let </span>sum_e = es
+        .iter()
+        .scan(StaticModInt::new(<span class="number">1</span>), |acc, e| {
+            <span class="kw-2">*</span>acc <span class="kw-2">*</span>= e;
+            <span class="prelude-val">Some</span>(<span class="kw-2">*</span>acc)
         })
-        .<span class="ident">collect</span>();
-    <span class="kw">let</span> <span class="ident">sum_ie</span> <span class="op">=</span> <span class="ident">ies</span>
-        .<span class="ident">iter</span>()
-        .<span class="ident">scan</span>(<span class="ident">StaticModInt::new</span>(<span class="number">1</span>), <span class="op">|</span><span class="ident">acc</span>, <span class="ident">ie</span><span class="op">|</span> {
-            <span class="kw-2">*</span><span class="ident">acc</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">ie</span>;
-            <span class="prelude-val">Some</span>(<span class="kw-2">*</span><span class="ident">acc</span>)
+        .collect();
+    <span class="kw">let </span>sum_ie = ies
+        .iter()
+        .scan(StaticModInt::new(<span class="number">1</span>), |acc, ie| {
+            <span class="kw-2">*</span>acc <span class="kw-2">*</span>= ie;
+            <span class="prelude-val">Some</span>(<span class="kw-2">*</span>acc)
         })
-        .<span class="ident">collect</span>();
-    <span class="ident">ButterflyCache</span> { <span class="ident">sum_e</span>, <span class="ident">sum_ie</span> }
+        .collect();
+    ButterflyCache { sum_e, sum_ie }
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
-<span class="kw">mod</span> <span class="ident">tests</span> {
-    <span class="kw">use</span> <span class="kw">crate</span>::{
-        <span class="ident">modint</span>::{<span class="ident">Mod998244353</span>, <span class="ident">Modulus</span>, <span class="ident">StaticModInt</span>},
-        <span class="ident">RemEuclidU32</span>,
+<span class="attribute">#[cfg(test)]
+</span><span class="kw">mod </span>tests {
+    <span class="kw">use crate</span>::{
+        modint::{Mod998244353, Modulus, StaticModInt},
+        RemEuclidU32,
     };
-    <span class="kw">use</span> <span class="ident">rand</span>::{<span class="ident">rngs::ThreadRng</span>, <span class="ident">Rng</span> <span class="kw">as</span> <span class="kw">_</span>};
-    <span class="kw">use</span> <span class="ident">std</span>::{
-        <span class="ident">convert</span>::{<span class="ident">TryFrom</span>, <span class="ident">TryInto</span> <span class="kw">as</span> <span class="kw">_</span>},
-        <span class="ident">fmt</span>,
+    <span class="kw">use </span>rand::{rngs::ThreadRng, Rng <span class="kw">as _</span>};
+    <span class="kw">use </span>std::{
+        convert::{TryFrom, TryInto <span class="kw">as _</span>},
+        fmt,
     };
 
-    <span class="comment">//https://github.com/atcoder/ac-library/blob/8250de484ae0ab597391db58040a602e0dc1a419/test/unittest/convolution_test.cpp#L51-L71</span>
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">empty</span>() {
-        <span class="macro">assert!</span>(<span class="ident"><span class="kw">super</span>::convolution_raw</span>::<span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">Mod998244353</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span>[], <span class="kw-2">&amp;</span>[]).<span class="ident">is_empty</span>());
-        <span class="macro">assert!</span>(<span class="ident"><span class="kw">super</span>::convolution_raw</span>::<span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">Mod998244353</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span>[], <span class="kw-2">&amp;</span>[<span class="number">1</span>, <span class="number">2</span>]).<span class="ident">is_empty</span>());
-        <span class="macro">assert!</span>(<span class="ident"><span class="kw">super</span>::convolution_raw</span>::<span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">Mod998244353</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span>[<span class="number">1</span>, <span class="number">2</span>], <span class="kw-2">&amp;</span>[]).<span class="ident">is_empty</span>());
-        <span class="macro">assert!</span>(<span class="ident"><span class="kw">super</span>::convolution_raw</span>::<span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">Mod998244353</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span>[<span class="number">1</span>], <span class="kw-2">&amp;</span>[]).<span class="ident">is_empty</span>());
-        <span class="macro">assert!</span>(<span class="ident"><span class="kw">super</span>::convolution_raw</span>::<span class="op">&lt;</span><span class="ident">i64</span>, <span class="ident">Mod998244353</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span>[], <span class="kw-2">&amp;</span>[]).<span class="ident">is_empty</span>());
-        <span class="macro">assert!</span>(<span class="ident"><span class="kw">super</span>::convolution_raw</span>::<span class="op">&lt;</span><span class="ident">i64</span>, <span class="ident">Mod998244353</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span>[], <span class="kw-2">&amp;</span>[<span class="number">1</span>, <span class="number">2</span>]).<span class="ident">is_empty</span>());
-        <span class="macro">assert!</span>(<span class="ident"><span class="kw">super</span>::convolution</span>::<span class="op">&lt;</span><span class="ident">Mod998244353</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span>[], <span class="kw-2">&amp;</span>[]).<span class="ident">is_empty</span>());
-        <span class="macro">assert!</span>(<span class="ident"><span class="kw">super</span>::convolution</span>::<span class="op">&lt;</span><span class="ident">Mod998244353</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span>[], <span class="kw-2">&amp;</span>[<span class="number">1</span>.<span class="ident">into</span>(), <span class="number">2</span>.<span class="ident">into</span>()]).<span class="ident">is_empty</span>());
+    <span class="comment">//https://github.com/atcoder/ac-library/blob/8250de484ae0ab597391db58040a602e0dc1a419/test/unittest/convolution_test.cpp#L51-L71
+    </span><span class="attribute">#[test]
+    </span><span class="kw">fn </span>empty() {
+        <span class="macro">assert!</span>(<span class="kw">super</span>::convolution_raw::&lt;i32, Mod998244353&gt;(<span class="kw-2">&amp;</span>[], <span class="kw-2">&amp;</span>[]).is_empty());
+        <span class="macro">assert!</span>(<span class="kw">super</span>::convolution_raw::&lt;i32, Mod998244353&gt;(<span class="kw-2">&amp;</span>[], <span class="kw-2">&amp;</span>[<span class="number">1</span>, <span class="number">2</span>]).is_empty());
+        <span class="macro">assert!</span>(<span class="kw">super</span>::convolution_raw::&lt;i32, Mod998244353&gt;(<span class="kw-2">&amp;</span>[<span class="number">1</span>, <span class="number">2</span>], <span class="kw-2">&amp;</span>[]).is_empty());
+        <span class="macro">assert!</span>(<span class="kw">super</span>::convolution_raw::&lt;i32, Mod998244353&gt;(<span class="kw-2">&amp;</span>[<span class="number">1</span>], <span class="kw-2">&amp;</span>[]).is_empty());
+        <span class="macro">assert!</span>(<span class="kw">super</span>::convolution_raw::&lt;i64, Mod998244353&gt;(<span class="kw-2">&amp;</span>[], <span class="kw-2">&amp;</span>[]).is_empty());
+        <span class="macro">assert!</span>(<span class="kw">super</span>::convolution_raw::&lt;i64, Mod998244353&gt;(<span class="kw-2">&amp;</span>[], <span class="kw-2">&amp;</span>[<span class="number">1</span>, <span class="number">2</span>]).is_empty());
+        <span class="macro">assert!</span>(<span class="kw">super</span>::convolution::&lt;Mod998244353&gt;(<span class="kw-2">&amp;</span>[], <span class="kw-2">&amp;</span>[]).is_empty());
+        <span class="macro">assert!</span>(<span class="kw">super</span>::convolution::&lt;Mod998244353&gt;(<span class="kw-2">&amp;</span>[], <span class="kw-2">&amp;</span>[<span class="number">1</span>.into(), <span class="number">2</span>.into()]).is_empty());
     }
 
-    <span class="comment">// https://github.com/atcoder/ac-library/blob/8250de484ae0ab597391db58040a602e0dc1a419/test/unittest/convolution_test.cpp#L73-L85</span>
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">mid</span>() {
-        <span class="kw">const</span> <span class="ident">N</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">1234</span>;
-        <span class="kw">const</span> <span class="ident">M</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">2345</span>;
+    <span class="comment">// https://github.com/atcoder/ac-library/blob/8250de484ae0ab597391db58040a602e0dc1a419/test/unittest/convolution_test.cpp#L73-L85
+    </span><span class="attribute">#[test]
+    </span><span class="kw">fn </span>mid() {
+        <span class="kw">const </span>N: usize = <span class="number">1234</span>;
+        <span class="kw">const </span>M: usize = <span class="number">2345</span>;
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rng</span> <span class="op">=</span> <span class="ident">rand::thread_rng</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">gen_values</span> <span class="op">=</span> <span class="op">|</span><span class="ident">n</span><span class="op">|</span> <span class="ident">gen_values</span>::<span class="op">&lt;</span><span class="ident">Mod998244353</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="ident">rng</span>, <span class="ident">n</span>);
-        <span class="kw">let</span> (<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=</span> (<span class="ident">gen_values</span>(<span class="ident">N</span>), <span class="ident">gen_values</span>(<span class="ident">M</span>));
-        <span class="macro">assert_eq!</span>(<span class="ident">conv_naive</span>(<span class="kw-2">&amp;</span><span class="ident">a</span>, <span class="kw-2">&amp;</span><span class="ident">b</span>), <span class="ident"><span class="kw">super</span>::convolution</span>(<span class="kw-2">&amp;</span><span class="ident">a</span>, <span class="kw-2">&amp;</span><span class="ident">b</span>));
+        <span class="kw">let </span><span class="kw-2">mut </span>rng = rand::thread_rng();
+        <span class="kw">let </span><span class="kw-2">mut </span>gen_values = |n| gen_values::&lt;Mod998244353&gt;(<span class="kw-2">&amp;mut </span>rng, n);
+        <span class="kw">let </span>(a, b) = (gen_values(N), gen_values(M));
+        <span class="macro">assert_eq!</span>(conv_naive(<span class="kw-2">&amp;</span>a, <span class="kw-2">&amp;</span>b), <span class="kw">super</span>::convolution(<span class="kw-2">&amp;</span>a, <span class="kw-2">&amp;</span>b));
     }
 
-    <span class="comment">// https://github.com/atcoder/ac-library/blob/8250de484ae0ab597391db58040a602e0dc1a419/test/unittest/convolution_test.cpp#L87-L118</span>
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">simple_s_mod</span>() {
-        <span class="kw">const</span> <span class="ident">M1</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">998_244_353</span>;
-        <span class="kw">const</span> <span class="ident">M2</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">924_844_033</span>;
+    <span class="comment">// https://github.com/atcoder/ac-library/blob/8250de484ae0ab597391db58040a602e0dc1a419/test/unittest/convolution_test.cpp#L87-L118
+    </span><span class="attribute">#[test]
+    </span><span class="kw">fn </span>simple_s_mod() {
+        <span class="kw">const </span>M1: u32 = <span class="number">998_244_353</span>;
+        <span class="kw">const </span>M2: u32 = <span class="number">924_844_033</span>;
 
-        <span class="macro">modulus!</span>(<span class="ident">M1</span>, <span class="ident">M2</span>);
+        <span class="macro">modulus!</span>(M1, M2);
 
-        <span class="kw">fn</span> <span class="ident">test</span><span class="op">&lt;</span><span class="ident">M</span>: <span class="ident">Modulus</span><span class="op">&gt;</span>(<span class="ident">rng</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ThreadRng</span>) {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">gen_values</span> <span class="op">=</span> <span class="op">|</span><span class="ident">n</span><span class="op">|</span> <span class="ident">gen_values</span>::<span class="op">&lt;</span><span class="ident">Mod998244353</span><span class="op">&gt;</span>(<span class="ident">rng</span>, <span class="ident">n</span>);
-            <span class="kw">for</span> (<span class="ident">n</span>, <span class="ident">m</span>) <span class="kw">in</span> (<span class="number">1</span>..<span class="number">20</span>).<span class="ident">flat_map</span>(<span class="op">|</span><span class="ident">i</span><span class="op">|</span> (<span class="number">1</span>..<span class="number">20</span>).<span class="ident">map</span>(<span class="kw">move</span> <span class="op">|</span><span class="ident">j</span><span class="op">|</span> (<span class="ident">i</span>, <span class="ident">j</span>))) {
-                <span class="kw">let</span> (<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=</span> (<span class="ident">gen_values</span>(<span class="ident">n</span>), <span class="ident">gen_values</span>(<span class="ident">m</span>));
-                <span class="macro">assert_eq!</span>(<span class="ident">conv_naive</span>(<span class="kw-2">&amp;</span><span class="ident">a</span>, <span class="kw-2">&amp;</span><span class="ident">b</span>), <span class="ident"><span class="kw">super</span>::convolution</span>(<span class="kw-2">&amp;</span><span class="ident">a</span>, <span class="kw-2">&amp;</span><span class="ident">b</span>));
+        <span class="kw">fn </span>test&lt;M: Modulus&gt;(rng: <span class="kw-2">&amp;mut </span>ThreadRng) {
+            <span class="kw">let </span><span class="kw-2">mut </span>gen_values = |n| gen_values::&lt;Mod998244353&gt;(rng, n);
+            <span class="kw">for </span>(n, m) <span class="kw">in </span>(<span class="number">1</span>..<span class="number">20</span>).flat_map(|i| (<span class="number">1</span>..<span class="number">20</span>).map(<span class="kw">move </span>|j| (i, j))) {
+                <span class="kw">let </span>(a, b) = (gen_values(n), gen_values(m));
+                <span class="macro">assert_eq!</span>(conv_naive(<span class="kw-2">&amp;</span>a, <span class="kw-2">&amp;</span>b), <span class="kw">super</span>::convolution(<span class="kw-2">&amp;</span>a, <span class="kw-2">&amp;</span>b));
             }
         }
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rng</span> <span class="op">=</span> <span class="ident">rand::thread_rng</span>();
-        <span class="ident">test</span>::<span class="op">&lt;</span><span class="ident">M1</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="ident">rng</span>);
-        <span class="ident">test</span>::<span class="op">&lt;</span><span class="ident">M2</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="ident">rng</span>);
+        <span class="kw">let </span><span class="kw-2">mut </span>rng = rand::thread_rng();
+        test::&lt;M1&gt;(<span class="kw-2">&amp;mut </span>rng);
+        test::&lt;M2&gt;(<span class="kw-2">&amp;mut </span>rng);
     }
 
-    <span class="comment">// https://github.com/atcoder/ac-library/blob/8250de484ae0ab597391db58040a602e0dc1a419/test/unittest/convolution_test.cpp#L120-L150</span>
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">simple_int</span>() {
-        <span class="ident">simple_raw</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>();
+    <span class="comment">// https://github.com/atcoder/ac-library/blob/8250de484ae0ab597391db58040a602e0dc1a419/test/unittest/convolution_test.cpp#L120-L150
+    </span><span class="attribute">#[test]
+    </span><span class="kw">fn </span>simple_int() {
+        simple_raw::&lt;i32&gt;();
     }
 
-    <span class="comment">// https://github.com/atcoder/ac-library/blob/8250de484ae0ab597391db58040a602e0dc1a419/test/unittest/convolution_test.cpp#L152-L182</span>
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">simple_uint</span>() {
-        <span class="ident">simple_raw</span>::<span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>();
+    <span class="comment">// https://github.com/atcoder/ac-library/blob/8250de484ae0ab597391db58040a602e0dc1a419/test/unittest/convolution_test.cpp#L152-L182
+    </span><span class="attribute">#[test]
+    </span><span class="kw">fn </span>simple_uint() {
+        simple_raw::&lt;u32&gt;();
     }
 
-    <span class="comment">// https://github.com/atcoder/ac-library/blob/8250de484ae0ab597391db58040a602e0dc1a419/test/unittest/convolution_test.cpp#L184-L214</span>
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">simple_ll</span>() {
-        <span class="ident">simple_raw</span>::<span class="op">&lt;</span><span class="ident">i64</span><span class="op">&gt;</span>();
+    <span class="comment">// https://github.com/atcoder/ac-library/blob/8250de484ae0ab597391db58040a602e0dc1a419/test/unittest/convolution_test.cpp#L184-L214
+    </span><span class="attribute">#[test]
+    </span><span class="kw">fn </span>simple_ll() {
+        simple_raw::&lt;i64&gt;();
     }
 
-    <span class="comment">// https://github.com/atcoder/ac-library/blob/8250de484ae0ab597391db58040a602e0dc1a419/test/unittest/convolution_test.cpp#L216-L246</span>
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">simple_ull</span>() {
-        <span class="ident">simple_raw</span>::<span class="op">&lt;</span><span class="ident">u64</span><span class="op">&gt;</span>();
+    <span class="comment">// https://github.com/atcoder/ac-library/blob/8250de484ae0ab597391db58040a602e0dc1a419/test/unittest/convolution_test.cpp#L216-L246
+    </span><span class="attribute">#[test]
+    </span><span class="kw">fn </span>simple_ull() {
+        simple_raw::&lt;u64&gt;();
     }
 
-    <span class="comment">// https://github.com/atcoder/ac-library/blob/8250de484ae0ab597391db58040a602e0dc1a419/test/unittest/convolution_test.cpp#L249-L279</span>
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">simple_int128</span>() {
-        <span class="ident">simple_raw</span>::<span class="op">&lt;</span><span class="ident">i128</span><span class="op">&gt;</span>();
+    <span class="comment">// https://github.com/atcoder/ac-library/blob/8250de484ae0ab597391db58040a602e0dc1a419/test/unittest/convolution_test.cpp#L249-L279
+    </span><span class="attribute">#[test]
+    </span><span class="kw">fn </span>simple_int128() {
+        simple_raw::&lt;i128&gt;();
     }
 
-    <span class="comment">// https://github.com/atcoder/ac-library/blob/8250de484ae0ab597391db58040a602e0dc1a419/test/unittest/convolution_test.cpp#L281-L311</span>
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">simple_uint128</span>() {
-        <span class="ident">simple_raw</span>::<span class="op">&lt;</span><span class="ident">u128</span><span class="op">&gt;</span>();
+    <span class="comment">// https://github.com/atcoder/ac-library/blob/8250de484ae0ab597391db58040a602e0dc1a419/test/unittest/convolution_test.cpp#L281-L311
+    </span><span class="attribute">#[test]
+    </span><span class="kw">fn </span>simple_uint128() {
+        simple_raw::&lt;u128&gt;();
     }
 
-    <span class="kw">fn</span> <span class="ident">simple_raw</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>()
-    <span class="kw">where</span>
-        <span class="ident">T</span>: <span class="ident">TryFrom</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">RemEuclidU32</span>,
-        <span class="ident">T::Error</span>: <span class="ident">fmt::Debug</span>,
+    <span class="kw">fn </span>simple_raw&lt;T&gt;()
+    <span class="kw">where
+        </span>T: TryFrom&lt;u32&gt; + Copy + RemEuclidU32,
+        T::Error: fmt::Debug,
     {
-        <span class="kw">const</span> <span class="ident">M1</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">998_244_353</span>;
-        <span class="kw">const</span> <span class="ident">M2</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">924_844_033</span>;
+        <span class="kw">const </span>M1: u32 = <span class="number">998_244_353</span>;
+        <span class="kw">const </span>M2: u32 = <span class="number">924_844_033</span>;
 
-        <span class="macro">modulus!</span>(<span class="ident">M1</span>, <span class="ident">M2</span>);
+        <span class="macro">modulus!</span>(M1, M2);
 
-        <span class="kw">fn</span> <span class="ident">test</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">M</span><span class="op">&gt;</span>(<span class="ident">rng</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ThreadRng</span>)
-        <span class="kw">where</span>
-            <span class="ident">T</span>: <span class="ident">TryFrom</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">RemEuclidU32</span>,
-            <span class="ident">T::Error</span>: <span class="ident">fmt::Debug</span>,
-            <span class="ident">M</span>: <span class="ident">Modulus</span>,
+        <span class="kw">fn </span>test&lt;T, M&gt;(rng: <span class="kw-2">&amp;mut </span>ThreadRng)
+        <span class="kw">where
+            </span>T: TryFrom&lt;u32&gt; + Copy + RemEuclidU32,
+            T::Error: fmt::Debug,
+            M: Modulus,
         {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">gen_raw_values</span> <span class="op">=</span> <span class="op">|</span><span class="ident">n</span><span class="op">|</span> <span class="ident">gen_raw_values</span>::<span class="op">&lt;</span><span class="ident">u32</span>, <span class="ident">Mod998244353</span><span class="op">&gt;</span>(<span class="ident">rng</span>, <span class="ident">n</span>);
-            <span class="kw">for</span> (<span class="ident">n</span>, <span class="ident">m</span>) <span class="kw">in</span> (<span class="number">1</span>..<span class="number">20</span>).<span class="ident">flat_map</span>(<span class="op">|</span><span class="ident">i</span><span class="op">|</span> (<span class="number">1</span>..<span class="number">20</span>).<span class="ident">map</span>(<span class="kw">move</span> <span class="op">|</span><span class="ident">j</span><span class="op">|</span> (<span class="ident">i</span>, <span class="ident">j</span>))) {
-                <span class="kw">let</span> (<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=</span> (<span class="ident">gen_raw_values</span>(<span class="ident">n</span>), <span class="ident">gen_raw_values</span>(<span class="ident">m</span>));
+            <span class="kw">let </span><span class="kw-2">mut </span>gen_raw_values = |n| gen_raw_values::&lt;u32, Mod998244353&gt;(rng, n);
+            <span class="kw">for </span>(n, m) <span class="kw">in </span>(<span class="number">1</span>..<span class="number">20</span>).flat_map(|i| (<span class="number">1</span>..<span class="number">20</span>).map(<span class="kw">move </span>|j| (i, j))) {
+                <span class="kw">let </span>(a, b) = (gen_raw_values(n), gen_raw_values(m));
                 <span class="macro">assert_eq!</span>(
-                    <span class="ident">conv_raw_naive</span>::<span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">M</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="ident">a</span>, <span class="kw-2">&amp;</span><span class="ident">b</span>),
-                    <span class="ident"><span class="kw">super</span>::convolution_raw</span>::<span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">M</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="ident">a</span>, <span class="kw-2">&amp;</span><span class="ident">b</span>),
+                    conv_raw_naive::&lt;<span class="kw">_</span>, M&gt;(<span class="kw-2">&amp;</span>a, <span class="kw-2">&amp;</span>b),
+                    <span class="kw">super</span>::convolution_raw::&lt;<span class="kw">_</span>, M&gt;(<span class="kw-2">&amp;</span>a, <span class="kw-2">&amp;</span>b),
                 );
             }
         }
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rng</span> <span class="op">=</span> <span class="ident">rand::thread_rng</span>();
-        <span class="ident">test</span>::<span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">M1</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="ident">rng</span>);
-        <span class="ident">test</span>::<span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">M2</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="ident">rng</span>);
+        <span class="kw">let </span><span class="kw-2">mut </span>rng = rand::thread_rng();
+        test::&lt;T, M1&gt;(<span class="kw-2">&amp;mut </span>rng);
+        test::&lt;T, M2&gt;(<span class="kw-2">&amp;mut </span>rng);
     }
 
-    <span class="comment">// https://github.com/atcoder/ac-library/blob/8250de484ae0ab597391db58040a602e0dc1a419/test/unittest/convolution_test.cpp#L315-L329</span>
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">conv_ll</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rng</span> <span class="op">=</span> <span class="ident">rand::thread_rng</span>();
-        <span class="kw">for</span> (<span class="ident">n</span>, <span class="ident">m</span>) <span class="kw">in</span> (<span class="number">1</span>..<span class="number">20</span>).<span class="ident">flat_map</span>(<span class="op">|</span><span class="ident">i</span><span class="op">|</span> (<span class="number">1</span>..<span class="number">20</span>).<span class="ident">map</span>(<span class="kw">move</span> <span class="op">|</span><span class="ident">j</span><span class="op">|</span> (<span class="ident">i</span>, <span class="ident">j</span>))) {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">gen</span> <span class="op">=</span>
-                <span class="op">|</span><span class="ident">n</span>: <span class="ident">usize</span><span class="op">|</span> -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span> { (<span class="number">0</span>..<span class="ident">n</span>).<span class="ident">map</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">rng</span>.<span class="ident">gen_range</span>(<span class="op">-</span><span class="number">500_000</span>, <span class="number">500_000</span>)).<span class="ident">collect</span>() };
-            <span class="kw">let</span> (<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=</span> (<span class="ident">gen</span>(<span class="ident">n</span>), <span class="ident">gen</span>(<span class="ident">m</span>));
-            <span class="macro">assert_eq!</span>(<span class="ident">conv_i64_naive</span>(<span class="kw-2">&amp;</span><span class="ident">a</span>, <span class="kw-2">&amp;</span><span class="ident">b</span>), <span class="ident"><span class="kw">super</span>::convolution_i64</span>(<span class="kw-2">&amp;</span><span class="ident">a</span>, <span class="kw-2">&amp;</span><span class="ident">b</span>));
+    <span class="comment">// https://github.com/atcoder/ac-library/blob/8250de484ae0ab597391db58040a602e0dc1a419/test/unittest/convolution_test.cpp#L315-L329
+    </span><span class="attribute">#[test]
+    </span><span class="kw">fn </span>conv_ll() {
+        <span class="kw">let </span><span class="kw-2">mut </span>rng = rand::thread_rng();
+        <span class="kw">for </span>(n, m) <span class="kw">in </span>(<span class="number">1</span>..<span class="number">20</span>).flat_map(|i| (<span class="number">1</span>..<span class="number">20</span>).map(<span class="kw">move </span>|j| (i, j))) {
+            <span class="kw">let </span><span class="kw-2">mut </span>gen =
+                |n: usize| -&gt; Vec&lt;<span class="kw">_</span>&gt; { (<span class="number">0</span>..n).map(|<span class="kw">_</span>| rng.gen_range(-<span class="number">500_000</span>, <span class="number">500_000</span>)).collect() };
+            <span class="kw">let </span>(a, b) = (gen(n), gen(m));
+            <span class="macro">assert_eq!</span>(conv_i64_naive(<span class="kw-2">&amp;</span>a, <span class="kw-2">&amp;</span>b), <span class="kw">super</span>::convolution_i64(<span class="kw-2">&amp;</span>a, <span class="kw-2">&amp;</span>b));
         }
     }
 
-    <span class="comment">// https://github.com/atcoder/ac-library/blob/8250de484ae0ab597391db58040a602e0dc1a419/test/unittest/convolution_test.cpp#L331-L356</span>
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">conv_ll_bound</span>() {
-        <span class="kw">const</span> <span class="ident">M1</span>: <span class="ident">u64</span> <span class="op">=</span> <span class="number">754_974_721</span>; <span class="comment">// 2^24</span>
-        <span class="kw">const</span> <span class="ident">M2</span>: <span class="ident">u64</span> <span class="op">=</span> <span class="number">167_772_161</span>; <span class="comment">// 2^25</span>
-        <span class="kw">const</span> <span class="ident">M3</span>: <span class="ident">u64</span> <span class="op">=</span> <span class="number">469_762_049</span>; <span class="comment">// 2^26</span>
-        <span class="kw">const</span> <span class="ident">M2M3</span>: <span class="ident">u64</span> <span class="op">=</span> <span class="ident">M2</span> <span class="op">*</span> <span class="ident">M3</span>;
-        <span class="kw">const</span> <span class="ident">M1M3</span>: <span class="ident">u64</span> <span class="op">=</span> <span class="ident">M1</span> <span class="op">*</span> <span class="ident">M3</span>;
-        <span class="kw">const</span> <span class="ident">M1M2</span>: <span class="ident">u64</span> <span class="op">=</span> <span class="ident">M1</span> <span class="op">*</span> <span class="ident">M2</span>;
+    <span class="comment">// https://github.com/atcoder/ac-library/blob/8250de484ae0ab597391db58040a602e0dc1a419/test/unittest/convolution_test.cpp#L331-L356
+    </span><span class="attribute">#[test]
+    </span><span class="kw">fn </span>conv_ll_bound() {
+        <span class="kw">const </span>M1: u64 = <span class="number">754_974_721</span>; <span class="comment">// 2^24
+        </span><span class="kw">const </span>M2: u64 = <span class="number">167_772_161</span>; <span class="comment">// 2^25
+        </span><span class="kw">const </span>M3: u64 = <span class="number">469_762_049</span>; <span class="comment">// 2^26
+        </span><span class="kw">const </span>M2M3: u64 = M2 * M3;
+        <span class="kw">const </span>M1M3: u64 = M1 * M3;
+        <span class="kw">const </span>M1M2: u64 = M1 * M2;
 
-        <span class="macro">modulus!</span>(<span class="ident">M1</span>, <span class="ident">M2</span>, <span class="ident">M3</span>);
+        <span class="macro">modulus!</span>(M1, M2, M3);
 
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="op">-</span><span class="number">1000</span>..<span class="op">=</span><span class="number">1000</span> {
-            <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="number">0u64</span>.<span class="ident">wrapping_sub</span>(<span class="ident">M1M2</span> <span class="op">+</span> <span class="ident">M1M3</span> <span class="op">+</span> <span class="ident">M2M3</span>) <span class="kw">as</span> <span class="ident">i64</span> <span class="op">+</span> <span class="ident">i</span>];
-            <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="number">1</span>];
-            <span class="macro">assert_eq!</span>(<span class="ident">a</span>, <span class="ident"><span class="kw">super</span>::convolution_i64</span>(<span class="kw-2">&amp;</span><span class="ident">a</span>, <span class="kw-2">&amp;</span><span class="ident">b</span>));
+        <span class="kw">for </span>i <span class="kw">in </span>-<span class="number">1000</span>..=<span class="number">1000 </span>{
+            <span class="kw">let </span>a = <span class="macro">vec!</span>[<span class="number">0u64</span>.wrapping_sub(M1M2 + M1M3 + M2M3) <span class="kw">as </span>i64 + i];
+            <span class="kw">let </span>b = <span class="macro">vec!</span>[<span class="number">1</span>];
+            <span class="macro">assert_eq!</span>(a, <span class="kw">super</span>::convolution_i64(<span class="kw-2">&amp;</span>a, <span class="kw-2">&amp;</span>b));
         }
 
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="number">1000</span> {
-            <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="ident">i64::min_value</span>() <span class="op">+</span> <span class="ident">i</span>];
-            <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="number">1</span>];
-            <span class="macro">assert_eq!</span>(<span class="ident">a</span>, <span class="ident"><span class="kw">super</span>::convolution_i64</span>(<span class="kw-2">&amp;</span><span class="ident">a</span>, <span class="kw-2">&amp;</span><span class="ident">b</span>));
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..<span class="number">1000 </span>{
+            <span class="kw">let </span>a = <span class="macro">vec!</span>[i64::min_value() + i];
+            <span class="kw">let </span>b = <span class="macro">vec!</span>[<span class="number">1</span>];
+            <span class="macro">assert_eq!</span>(a, <span class="kw">super</span>::convolution_i64(<span class="kw-2">&amp;</span>a, <span class="kw-2">&amp;</span>b));
         }
 
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="number">1000</span> {
-            <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="ident">i64::max_value</span>() <span class="op">-</span> <span class="ident">i</span>];
-            <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="number">1</span>];
-            <span class="macro">assert_eq!</span>(<span class="ident">a</span>, <span class="ident"><span class="kw">super</span>::convolution_i64</span>(<span class="kw-2">&amp;</span><span class="ident">a</span>, <span class="kw-2">&amp;</span><span class="ident">b</span>));
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..<span class="number">1000 </span>{
+            <span class="kw">let </span>a = <span class="macro">vec!</span>[i64::max_value() - i];
+            <span class="kw">let </span>b = <span class="macro">vec!</span>[<span class="number">1</span>];
+            <span class="macro">assert_eq!</span>(a, <span class="kw">super</span>::convolution_i64(<span class="kw-2">&amp;</span>a, <span class="kw-2">&amp;</span>b));
         }
     }
 
-    <span class="comment">// https://github.com/atcoder/ac-library/blob/8250de484ae0ab597391db58040a602e0dc1a419/test/unittest/convolution_test.cpp#L358-L371</span>
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">conv_641</span>() {
-        <span class="kw">const</span> <span class="ident">M</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">641</span>;
-        <span class="macro">modulus!</span>(<span class="ident">M</span>);
+    <span class="comment">// https://github.com/atcoder/ac-library/blob/8250de484ae0ab597391db58040a602e0dc1a419/test/unittest/convolution_test.cpp#L358-L371
+    </span><span class="attribute">#[test]
+    </span><span class="kw">fn </span>conv_641() {
+        <span class="kw">const </span>M: u32 = <span class="number">641</span>;
+        <span class="macro">modulus!</span>(M);
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rng</span> <span class="op">=</span> <span class="ident">rand::thread_rng</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">gen_values</span> <span class="op">=</span> <span class="op">|</span><span class="ident">n</span><span class="op">|</span> <span class="ident">gen_values</span>::<span class="op">&lt;</span><span class="ident">M</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="ident">rng</span>, <span class="ident">n</span>);
-        <span class="kw">let</span> (<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=</span> (<span class="ident">gen_values</span>(<span class="number">64</span>), <span class="ident">gen_values</span>(<span class="number">65</span>));
-        <span class="macro">assert_eq!</span>(<span class="ident">conv_naive</span>(<span class="kw-2">&amp;</span><span class="ident">a</span>, <span class="kw-2">&amp;</span><span class="ident">b</span>), <span class="ident"><span class="kw">super</span>::convolution</span>(<span class="kw-2">&amp;</span><span class="ident">a</span>, <span class="kw-2">&amp;</span><span class="ident">b</span>));
+        <span class="kw">let </span><span class="kw-2">mut </span>rng = rand::thread_rng();
+        <span class="kw">let </span><span class="kw-2">mut </span>gen_values = |n| gen_values::&lt;M&gt;(<span class="kw-2">&amp;mut </span>rng, n);
+        <span class="kw">let </span>(a, b) = (gen_values(<span class="number">64</span>), gen_values(<span class="number">65</span>));
+        <span class="macro">assert_eq!</span>(conv_naive(<span class="kw-2">&amp;</span>a, <span class="kw-2">&amp;</span>b), <span class="kw">super</span>::convolution(<span class="kw-2">&amp;</span>a, <span class="kw-2">&amp;</span>b));
     }
 
-    <span class="comment">// https://github.com/atcoder/ac-library/blob/8250de484ae0ab597391db58040a602e0dc1a419/test/unittest/convolution_test.cpp#L373-L386</span>
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">conv_18433</span>() {
-        <span class="kw">const</span> <span class="ident">M</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">18433</span>;
-        <span class="macro">modulus!</span>(<span class="ident">M</span>);
+    <span class="comment">// https://github.com/atcoder/ac-library/blob/8250de484ae0ab597391db58040a602e0dc1a419/test/unittest/convolution_test.cpp#L373-L386
+    </span><span class="attribute">#[test]
+    </span><span class="kw">fn </span>conv_18433() {
+        <span class="kw">const </span>M: u32 = <span class="number">18433</span>;
+        <span class="macro">modulus!</span>(M);
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rng</span> <span class="op">=</span> <span class="ident">rand::thread_rng</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">gen_values</span> <span class="op">=</span> <span class="op">|</span><span class="ident">n</span><span class="op">|</span> <span class="ident">gen_values</span>::<span class="op">&lt;</span><span class="ident">M</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="ident">rng</span>, <span class="ident">n</span>);
-        <span class="kw">let</span> (<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=</span> (<span class="ident">gen_values</span>(<span class="number">1024</span>), <span class="ident">gen_values</span>(<span class="number">1025</span>));
-        <span class="macro">assert_eq!</span>(<span class="ident">conv_naive</span>(<span class="kw-2">&amp;</span><span class="ident">a</span>, <span class="kw-2">&amp;</span><span class="ident">b</span>), <span class="ident"><span class="kw">super</span>::convolution</span>(<span class="kw-2">&amp;</span><span class="ident">a</span>, <span class="kw-2">&amp;</span><span class="ident">b</span>));
+        <span class="kw">let </span><span class="kw-2">mut </span>rng = rand::thread_rng();
+        <span class="kw">let </span><span class="kw-2">mut </span>gen_values = |n| gen_values::&lt;M&gt;(<span class="kw-2">&amp;mut </span>rng, n);
+        <span class="kw">let </span>(a, b) = (gen_values(<span class="number">1024</span>), gen_values(<span class="number">1025</span>));
+        <span class="macro">assert_eq!</span>(conv_naive(<span class="kw-2">&amp;</span>a, <span class="kw-2">&amp;</span>b), <span class="kw">super</span>::convolution(<span class="kw-2">&amp;</span>a, <span class="kw-2">&amp;</span>b));
     }
 
-    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::many_single_char_names</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">conv_naive</span><span class="op">&lt;</span><span class="ident">M</span>: <span class="ident">Modulus</span><span class="op">&gt;</span>(
-        <span class="ident">a</span>: <span class="kw-2">&amp;</span>[<span class="ident">StaticModInt</span><span class="op">&lt;</span><span class="ident">M</span><span class="op">&gt;</span>],
-        <span class="ident">b</span>: <span class="kw-2">&amp;</span>[<span class="ident">StaticModInt</span><span class="op">&lt;</span><span class="ident">M</span><span class="op">&gt;</span>],
-    ) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">StaticModInt</span><span class="op">&lt;</span><span class="ident">M</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> (<span class="ident">n</span>, <span class="ident">m</span>) <span class="op">=</span> (<span class="ident">a</span>.<span class="ident">len</span>(), <span class="ident">b</span>.<span class="ident">len</span>());
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">c</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="ident">StaticModInt::raw</span>(<span class="number">0</span>); <span class="ident">n</span> <span class="op">+</span> <span class="ident">m</span> <span class="op">-</span> <span class="number">1</span>];
-        <span class="kw">for</span> (<span class="ident">i</span>, <span class="ident">j</span>) <span class="kw">in</span> (<span class="number">0</span>..<span class="ident">n</span>).<span class="ident">flat_map</span>(<span class="op">|</span><span class="ident">i</span><span class="op">|</span> (<span class="number">0</span>..<span class="ident">m</span>).<span class="ident">map</span>(<span class="kw">move</span> <span class="op">|</span><span class="ident">j</span><span class="op">|</span> (<span class="ident">i</span>, <span class="ident">j</span>))) {
-            <span class="ident">c</span>[<span class="ident">i</span> <span class="op">+</span> <span class="ident">j</span>] <span class="op">+</span><span class="op">=</span> <span class="ident">a</span>[<span class="ident">i</span>] <span class="op">*</span> <span class="ident">b</span>[<span class="ident">j</span>];
+    <span class="attribute">#[allow(clippy::many_single_char_names)]
+    </span><span class="kw">fn </span>conv_naive&lt;M: Modulus&gt;(
+        a: <span class="kw-2">&amp;</span>[StaticModInt&lt;M&gt;],
+        b: <span class="kw-2">&amp;</span>[StaticModInt&lt;M&gt;],
+    ) -&gt; Vec&lt;StaticModInt&lt;M&gt;&gt; {
+        <span class="kw">let </span>(n, m) = (a.len(), b.len());
+        <span class="kw">let </span><span class="kw-2">mut </span>c = <span class="macro">vec!</span>[StaticModInt::raw(<span class="number">0</span>); n + m - <span class="number">1</span>];
+        <span class="kw">for </span>(i, j) <span class="kw">in </span>(<span class="number">0</span>..n).flat_map(|i| (<span class="number">0</span>..m).map(<span class="kw">move </span>|j| (i, j))) {
+            c[i + j] += a[i] * b[j];
         }
-        <span class="ident">c</span>
+        c
     }
 
-    <span class="kw">fn</span> <span class="ident">conv_raw_naive</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">M</span><span class="op">&gt;</span>(<span class="ident">a</span>: <span class="kw-2">&amp;</span>[<span class="ident">T</span>], <span class="ident">b</span>: <span class="kw-2">&amp;</span>[<span class="ident">T</span>]) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>
-    <span class="kw">where</span>
-        <span class="ident">T</span>: <span class="ident">TryFrom</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">RemEuclidU32</span>,
-        <span class="ident">T::Error</span>: <span class="ident">fmt::Debug</span>,
-        <span class="ident">M</span>: <span class="ident">Modulus</span>,
+    <span class="kw">fn </span>conv_raw_naive&lt;T, M&gt;(a: <span class="kw-2">&amp;</span>[T], b: <span class="kw-2">&amp;</span>[T]) -&gt; Vec&lt;T&gt;
+    <span class="kw">where
+        </span>T: TryFrom&lt;u32&gt; + Copy + RemEuclidU32,
+        T::Error: fmt::Debug,
+        M: Modulus,
     {
-        <span class="ident">conv_naive</span>::<span class="op">&lt;</span><span class="ident">M</span><span class="op">&gt;</span>(
-            <span class="kw-2">&amp;</span><span class="ident">a</span>.<span class="ident">iter</span>().<span class="ident">copied</span>().<span class="ident">map</span>(<span class="ident">Into::into</span>).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>(),
-            <span class="kw-2">&amp;</span><span class="ident">b</span>.<span class="ident">iter</span>().<span class="ident">copied</span>().<span class="ident">map</span>(<span class="ident">Into::into</span>).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>(),
+        conv_naive::&lt;M&gt;(
+            <span class="kw-2">&amp;</span>a.iter().copied().map(Into::into).collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;(),
+            <span class="kw-2">&amp;</span>b.iter().copied().map(Into::into).collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;(),
         )
-        .<span class="ident">into_iter</span>()
-        .<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">val</span>().<span class="ident">try_into</span>().<span class="ident">unwrap</span>())
-        .<span class="ident">collect</span>()
+        .into_iter()
+        .map(|x| x.val().try_into().unwrap())
+        .collect()
     }
 
-    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::many_single_char_names</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">conv_i64_naive</span>(<span class="ident">a</span>: <span class="kw-2">&amp;</span>[<span class="ident">i64</span>], <span class="ident">b</span>: <span class="kw-2">&amp;</span>[<span class="ident">i64</span>]) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">i64</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> (<span class="ident">n</span>, <span class="ident">m</span>) <span class="op">=</span> (<span class="ident">a</span>.<span class="ident">len</span>(), <span class="ident">b</span>.<span class="ident">len</span>());
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">c</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="number">0</span>; <span class="ident">n</span> <span class="op">+</span> <span class="ident">m</span> <span class="op">-</span> <span class="number">1</span>];
-        <span class="kw">for</span> (<span class="ident">i</span>, <span class="ident">j</span>) <span class="kw">in</span> (<span class="number">0</span>..<span class="ident">n</span>).<span class="ident">flat_map</span>(<span class="op">|</span><span class="ident">i</span><span class="op">|</span> (<span class="number">0</span>..<span class="ident">m</span>).<span class="ident">map</span>(<span class="kw">move</span> <span class="op">|</span><span class="ident">j</span><span class="op">|</span> (<span class="ident">i</span>, <span class="ident">j</span>))) {
-            <span class="ident">c</span>[<span class="ident">i</span> <span class="op">+</span> <span class="ident">j</span>] <span class="op">+</span><span class="op">=</span> <span class="ident">a</span>[<span class="ident">i</span>] <span class="op">*</span> <span class="ident">b</span>[<span class="ident">j</span>];
+    <span class="attribute">#[allow(clippy::many_single_char_names)]
+    </span><span class="kw">fn </span>conv_i64_naive(a: <span class="kw-2">&amp;</span>[i64], b: <span class="kw-2">&amp;</span>[i64]) -&gt; Vec&lt;i64&gt; {
+        <span class="kw">let </span>(n, m) = (a.len(), b.len());
+        <span class="kw">let </span><span class="kw-2">mut </span>c = <span class="macro">vec!</span>[<span class="number">0</span>; n + m - <span class="number">1</span>];
+        <span class="kw">for </span>(i, j) <span class="kw">in </span>(<span class="number">0</span>..n).flat_map(|i| (<span class="number">0</span>..m).map(<span class="kw">move </span>|j| (i, j))) {
+            c[i + j] += a[i] * b[j];
         }
-        <span class="ident">c</span>
+        c
     }
 
-    <span class="kw">fn</span> <span class="ident">gen_values</span><span class="op">&lt;</span><span class="ident">M</span>: <span class="ident">Modulus</span><span class="op">&gt;</span>(<span class="ident">rng</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ThreadRng</span>, <span class="ident">n</span>: <span class="ident">usize</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">StaticModInt</span><span class="op">&lt;</span><span class="ident">M</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        (<span class="number">0</span>..<span class="ident">n</span>).<span class="ident">map</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">rng</span>.<span class="ident">gen_range</span>(<span class="number">0</span>, <span class="ident">M::VALUE</span>).<span class="ident">into</span>()).<span class="ident">collect</span>()
+    <span class="kw">fn </span>gen_values&lt;M: Modulus&gt;(rng: <span class="kw-2">&amp;mut </span>ThreadRng, n: usize) -&gt; Vec&lt;StaticModInt&lt;M&gt;&gt; {
+        (<span class="number">0</span>..n).map(|<span class="kw">_</span>| rng.gen_range(<span class="number">0</span>, M::VALUE).into()).collect()
     }
 
-    <span class="kw">fn</span> <span class="ident">gen_raw_values</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">M</span><span class="op">&gt;</span>(<span class="ident">rng</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ThreadRng</span>, <span class="ident">n</span>: <span class="ident">usize</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>
-    <span class="kw">where</span>
-        <span class="ident">T</span>: <span class="ident">TryFrom</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>,
-        <span class="ident">T::Error</span>: <span class="ident">fmt::Debug</span>,
-        <span class="ident">M</span>: <span class="ident">Modulus</span>,
+    <span class="kw">fn </span>gen_raw_values&lt;T, M&gt;(rng: <span class="kw-2">&amp;mut </span>ThreadRng, n: usize) -&gt; Vec&lt;T&gt;
+    <span class="kw">where
+        </span>T: TryFrom&lt;u32&gt;,
+        T::Error: fmt::Debug,
+        M: Modulus,
     {
-        (<span class="number">0</span>..<span class="ident">n</span>)
-            .<span class="ident">map</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">rng</span>.<span class="ident">gen_range</span>(<span class="number">0</span>, <span class="ident">M::VALUE</span>).<span class="ident">try_into</span>().<span class="ident">unwrap</span>())
-            .<span class="ident">collect</span>()
+        (<span class="number">0</span>..n)
+            .map(|<span class="kw">_</span>| rng.gen_range(<span class="number">0</span>, M::VALUE).try_into().unwrap())
+            .collect()
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="ac_library_rs" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0-nightly (12cd71f4d 2022-06-01)" ></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="ac_library_rs" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (17cbdfd07 2022-09-13)" ></div></body></html>

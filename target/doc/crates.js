@@ -1,1 +1,1 @@
-window.ALL_CRATES = ["ac_library_rs","euclid","primal","rithmic"];
+window.ALL_CRATES = ["ac_library_rs","euclid","primal","rithmic","rithmic_impl"];

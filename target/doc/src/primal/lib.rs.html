@@ -1,11 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/bcfam/.cargo/registry/src/github.com-1ecc6299db9ec823/primal-0.3.0/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><script defer src="../../main.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script>
-    <noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../primal/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"></h2>
-    </nav>
-    <nav class="sidebar"><a class="sidebar-logo" href="../../primal/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../primal/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
-                                <a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div>
-                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/bcfam/.cargo/registry/src/github.com-1ecc6299db9ec823/primal-0.3.1/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../primal/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../primal/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../primal/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -262,263 +255,262 @@
 <span id="255">255</span>
 <span id="256">256</span>
 <span id="257">257</span>
-</pre><pre class="rust"><code><span class="doccomment">//! `primal` puts raw power into prime numbers.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! This crates includes</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! - optimised prime sieves</span>
-<span class="doccomment">//! - checking for primality</span>
-<span class="doccomment">//! - enumerating primes</span>
-<span class="doccomment">//! - factorising numbers</span>
-<span class="doccomment">//! - estimating upper and lower bounds for π(*n*) (the number of primes</span>
-<span class="doccomment">//!   below *n*) and *p&lt;sub&gt;k&lt;/sub&gt;* (the &lt;i&gt;k&lt;/i&gt;th prime)</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! This uses a state-of-the-art cache-friendly Sieve of Eratosthenes</span>
-<span class="doccomment">//! to enumerate the primes up to some fixed bound (in a memory</span>
-<span class="doccomment">//! efficient manner), and then allows this cached information to be</span>
-<span class="doccomment">//! used for things like enumerating and counting primes.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! `primal` takes around 2.8 seconds and less than 3MB of RAM to</span>
-<span class="doccomment">//! count the exact number of primes below 10&lt;sup&gt;10&lt;/sup&gt; (455052511)</span>
-<span class="doccomment">//! on my laptop (i7-3517U).</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! [*Source*](http://github.com/huonw/primal)</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! # Using this library</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! Just add the following to your [`Cargo.toml`](http://crates.io/):</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ```toml</span>
-<span class="doccomment">//! [dependencies]</span>
-<span class="doccomment">//! primal = &quot;0.2&quot;</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! # Examples</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ## &quot;Indexing&quot; Primes</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! Let&#39;s find the 10001st prime. The easiest way is to enumerate the</span>
-<span class="doccomment">//! primes, and find the 10001st:</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ```rust</span>
-<span class="doccomment">//! // (.nth is zero indexed.)</span>
-<span class="doccomment">//! let p = primal::Primes::all().nth(10001 - 1).unwrap();</span>
-<span class="doccomment">//! println!(&quot;The 10001st prime is {}&quot;, p); // 104743</span>
-<span class="doccomment">//! # assert_eq!(p, 104743);</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! This takes around 400 microseconds on my computer, which seems</span>
-<span class="doccomment">//! nice and quick, but, `Primes` is flexible at the cost of</span>
-<span class="doccomment">//! performance: we can make it faster. The `StreamingSieve` type</span>
-<span class="doccomment">//! offers a specialised `nth_prime` function:</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ```rust</span>
-<span class="doccomment">//! let p = primal::StreamingSieve::nth_prime(10001);</span>
-<span class="doccomment">//! println!(&quot;The 10001st prime is {}&quot;, p); // 104743</span>
-<span class="doccomment">//! # assert_eq!(p, 104743);</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! This runs in only 10 microseconds! `StreamingSieve` is extremely</span>
-<span class="doccomment">//! efficient and uses very little memory. It is the best way to solve</span>
-<span class="doccomment">//! this task with `primal`.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! Since that was so easy, let&#39;s now make the problem bigger and</span>
-<span class="doccomment">//! harder: find the sum of the 100,000th, 200,000th, 300,000th, ...,</span>
-<span class="doccomment">//! 10,000,000th primes (100 in total).</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! We could call `StreamingSieve::nth_prime` repeatedly:</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ```rust,no_run</span>
-<span class="doccomment">//! // the primes we want to find</span>
-<span class="doccomment">//! let ns = (1..100 + 1).map(|x| x * 100_000).collect::&lt;Vec&lt;_&gt;&gt;();</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! // search and sum them up</span>
-<span class="doccomment">//! let sum = ns.iter()</span>
-<span class="doccomment">//!             .map(|n| primal::StreamingSieve::nth_prime(*n))</span>
-<span class="doccomment">//!             .fold(0, |a, b| a + b);</span>
-<span class="doccomment">//! println!(&quot;the sum is {}&quot;, sum);</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! This takes around 1.6s seconds to print `the sum is 8795091674`;</span>
-<span class="doccomment">//! not so speedy. Each call to `nth_prime` is individually fast (400</span>
-<span class="doccomment">//! microseconds for 100,000 to 40 milliseconds for 10,000,000) but</span>
-<span class="doccomment">//! they add up to something bad. Every one is starting from the start</span>
-<span class="doccomment">//! and redoing work that previous calls have done... wouldn&#39;t it be</span>
-<span class="doccomment">//! nice if we could just do the computation for 10,000,000 and reuse</span>
-<span class="doccomment">//! that for the smaller ones?</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! The `Sieve` type is a wrapper around `StreamingSieve` that</span>
-<span class="doccomment">//! caches information, allowing repeated queries to be answered</span>
-<span class="doccomment">//! efficiently.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! There&#39;s one hitch: `Sieve` requires a limit to know how far to</span>
-<span class="doccomment">//! sieve: we need some way to find an upper bound to be guaranteed to</span>
-<span class="doccomment">//! be at least as large as all our primes. We could guess that, say,</span>
-<span class="doccomment">//! 10&lt;sup&gt;10&lt;/sup&gt; will be large enough and use that, but that&#39;s a</span>
-<span class="doccomment">//! huge overestimate (spoilers: the 10,000,000th prime is around</span>
-<span class="doccomment">//! 2&amp;times;10&lt;sup&gt;8&lt;/sup&gt;). We could also try filtering with</span>
-<span class="doccomment">//! exponentially larger upper bounds until we find one that works</span>
-<span class="doccomment">//! (e.g. doubling each time), or, we could just take a shortcut and</span>
-<span class="doccomment">//! use deeper mathematics via</span>
-<span class="doccomment">//! [`estimate_nth_prime`](fn.estimate_nth_prime.html).</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ```rust</span>
-<span class="doccomment">//! // the primes we want to find</span>
-<span class="doccomment">//! let ns = (1..100 + 1).map(|x| x * 100_000).collect::&lt;Vec&lt;_&gt;&gt;();</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! // find our upper bound</span>
-<span class="doccomment">//! let (_lo, hi) = primal::estimate_nth_prime(10_000_000);</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! // find the primes up to this upper bound</span>
-<span class="doccomment">//! let sieve = primal::Sieve::new(hi as usize);</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! // now we can efficiently sum them up</span>
-<span class="doccomment">//! let sum = ns.iter()</span>
-<span class="doccomment">//!             .map(|n| sieve.nth_prime(*n))</span>
-<span class="doccomment">//!             .fold(0, |a, b| a + b);</span>
-<span class="doccomment">//! println!(&quot;the sum is {}&quot;, sum);</span>
-<span class="doccomment">//! # assert_eq!(sum, 8795091674);</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! This takes around 40 milliseconds, and gives the same output: much</span>
-<span class="doccomment">//! better!</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! (By the way, the version using 10&lt;sup&gt;10&lt;/sup&gt; as the bound</span>
-<span class="doccomment">//! instead of the more accurate estimate still only takes ~3</span>
-<span class="doccomment">//! seconds.)</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ## Counting Primes</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! Another problem: count the number of primes below 1 million. This</span>
-<span class="doccomment">//! is evaluating the [prime-counting function</span>
-<span class="doccomment">//! π](https://en.wikipedia.org/wiki/Prime-counting_function),</span>
-<span class="doccomment">//! i.e. π(10&lt;sup&gt;6&lt;/sup&gt;).</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! As above, there&#39;s a few ways to attack this: the iterator, and the</span>
-<span class="doccomment">//! sieves.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ```rust</span>
-<span class="doccomment">//! const LIMIT: usize = 1_000_000;</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! // iterator</span>
-<span class="doccomment">//! let count = primal::Primes::all().take_while(|p| *p &lt; LIMIT).count();</span>
-<span class="doccomment">//! println!(&quot;there are {} primes below 1 million&quot;, count); // 78498</span>
-<span class="doccomment">//! # assert_eq!(count, 78498);</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! // sieves</span>
-<span class="doccomment">//! let sieve = primal::Sieve::new(LIMIT);</span>
-<span class="doccomment">//! let count = sieve.prime_pi(LIMIT);</span>
-<span class="doccomment">//! println!(&quot;there are {} primes below 1 million&quot;, count);</span>
-<span class="doccomment">//! # assert_eq!(count, 78498);</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! let count = primal::StreamingSieve::prime_pi(LIMIT);</span>
-<span class="doccomment">//! println!(&quot;there are {} primes below 1 million&quot;, count);</span>
-<span class="doccomment">//! # assert_eq!(count, 78498);</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! `StreamingSieve` is fastest (380 microseconds) followed by `Sieve`</span>
-<span class="doccomment">//! (400) with `Primes` bringing up the rear at 1300 microseconds. Of</span>
-<span class="doccomment">//! course, repeated queries will be faster with `Sieve` than with</span>
-<span class="doccomment">//! `StreamingSieve`, but that flexibility comes at the cost of extra</span>
-<span class="doccomment">//! memory use.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! If an approximation is all that is required, `estimate_prime_pi`</span>
-<span class="doccomment">//! provides close upper and lower bounds:</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ```rust</span>
-<span class="doccomment">//! let (lo, hi) = primal::estimate_prime_pi(1_000_000);</span>
-<span class="doccomment">//! println!(&quot;there are between {} and {} primes below 1 million&quot;, lo, hi);</span>
-<span class="doccomment">//! // 78380, 78573</span>
-<span class="doccomment">//! # assert_eq!(lo, 78380);</span>
-<span class="doccomment">//! # assert_eq!(hi, 78573);</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ## Searching Primes</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! Now for something where `Primes` might be useful: find the first</span>
-<span class="doccomment">//! prime where the binary expansion (not including trailing zeros)</span>
-<span class="doccomment">//! ends like `00..001` with at least 27 zeros. This condition is</span>
-<span class="doccomment">//! checked by:</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ```rust</span>
-<span class="doccomment">//! fn check(p: usize) -&gt; bool {</span>
-<span class="doccomment">//!     p &gt; 1 &amp;&amp; (p / 2).trailing_zeros() &gt;= 27</span>
-<span class="doccomment">//! }</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! I have no idea how large the prime might be: I know it&#39;s</span>
-<span class="doccomment">//! guaranteed to be at *least* 2&lt;sup&gt;27 + 1&lt;/sup&gt; + 1, but not an</span>
-<span class="doccomment">//! upper limit.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! The `Primes` iterator works perfectly for this:</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ```rust</span>
-<span class="doccomment">//! # fn check(p: usize) -&gt; bool {  p &gt; 1 &amp;&amp; (p / 2).trailing_zeros() &gt;= 5 } // 27 is too slow</span>
-<span class="doccomment">//! let p = primal::Primes::all().find(|p| check(*p)).unwrap();</span>
-<span class="doccomment">//! println!(&quot;the prime is {}&quot;, p);</span>
-<span class="doccomment">//! # assert_eq!(p, 193);</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! It takes about 3.1 seconds for my computer to spit out 3,221,225,473.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! Using a sieve is a little trickier: one approach is to start with</span>
-<span class="doccomment">//! some estimated upper bound (like double the absolute lower bound),</span>
-<span class="doccomment">//! look for a valid prime. If one isn&#39;t found, double the upper bound</span>
-<span class="doccomment">//! and start again. The `primes_from` method allows for saving a</span>
-<span class="doccomment">//! little bit of work: we can start iterating from an arbitrary point</span>
-<span class="doccomment">//! in the sequence, such as the lower bound.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ```rust</span>
-<span class="doccomment">//! # fn check(p: usize) -&gt; bool {  p &gt; 1 &amp;&amp; (p / 2).trailing_zeros() &gt;= 5 } // 27 is too slow</span>
-<span class="doccomment">//! let p;</span>
-<span class="doccomment">//! let mut lower_bound = 1 &lt;&lt; (27 + 1);</span>
-<span class="doccomment">//! # let mut lower_bound = 1 &lt;&lt; (5 + 1);</span>
-<span class="doccomment">//! loop {</span>
-<span class="doccomment">//!     // our upper bound is double the lower bound</span>
-<span class="doccomment">//!     let sieve = primal::Sieve::new(lower_bound * 2);</span>
-<span class="doccomment">//!     if let Some(p_) = sieve.primes_from(lower_bound).find(|p| check(*p)) {</span>
-<span class="doccomment">//!         p = p_;</span>
-<span class="doccomment">//!         break</span>
-<span class="doccomment">//!     }</span>
-<span class="doccomment">//!     lower_bound *= 2;</span>
-<span class="doccomment">//! }</span>
-<span class="doccomment">//! println!(&quot;the prime is {}&quot;, p);</span>
-<span class="doccomment">//! # assert_eq!(p, 193);</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! This takes around 3.5 seconds to print the same number. Slower</span>
-<span class="doccomment">//! than the iterator!</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! I was just using this silly condition as an example of something</span>
-<span class="doccomment">//! that doesn&#39;t have an obvious upper bound, rather than a problem</span>
-<span class="doccomment">//! that is hard to do fast. There&#39;s a much faster way to tackle it,</span>
-<span class="doccomment">//! by inverting the problem: construct numbers that satisfy `check`,</span>
-<span class="doccomment">//! and check the primality of those.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! The numbers that satisfy `check` are `k * (1 &lt;&lt; (27 + 1)) + 1` for</span>
-<span class="doccomment">//! `k &gt;= 1`, so the only hard bit is testing primality. Fortunately,</span>
-<span class="doccomment">//! `primal` offers the `is_prime` function which is an efficient way</span>
-<span class="doccomment">//! to do primality tests, even of very large numbers.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ```rust</span>
-<span class="doccomment">//! let mut p = 0;</span>
-<span class="doccomment">//! for k in 1.. {</span>
-<span class="doccomment">//!     p = k * (1 &lt;&lt; (27 + 1)) + 1;</span>
-<span class="doccomment">//!     if primal::is_prime(p) { break }</span>
-<span class="doccomment">//! }</span>
-<span class="doccomment">//! println!(&quot;the prime is {}&quot;, p);</span>
-<span class="doccomment">//! # assert_eq!(p, 3_221_225_473);</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! This takes 6 &lt;em&gt;micro&lt;/em&gt;seconds: more than 500,000&amp;times;</span>
-<span class="doccomment">//! faster than the iterator!</span>
+</pre><pre class="rust"><code><span class="doccomment">//! `primal` puts raw power into prime numbers.
+//!
+//! This crates includes
+//!
+//! - optimised prime sieves
+//! - checking for primality
+//! - enumerating primes
+//! - factorising numbers
+//! - estimating upper and lower bounds for π(*n*) (the number of primes
+//!   below *n*) and *p&lt;sub&gt;k&lt;/sub&gt;* (the &lt;i&gt;k&lt;/i&gt;th prime)
+//!
+//! This uses a state-of-the-art cache-friendly Sieve of Eratosthenes
+//! to enumerate the primes up to some fixed bound (in a memory
+//! efficient manner), and then allows this cached information to be
+//! used for things like enumerating and counting primes.
+//!
+//! `primal` takes around 2.8 seconds and less than 3MB of RAM to
+//! count the exact number of primes below 10&lt;sup&gt;10&lt;/sup&gt; (455052511)
+//! on my laptop (i7-3517U).
+//!
+//! [*Source*](http://github.com/huonw/primal)
+//!
+//! # Using this library
+//!
+//! Just add the following to your [`Cargo.toml`](http://crates.io/):
+//!
+//! ```toml
+//! [dependencies]
+//! primal = &quot;0.2&quot;
+//! ```
+//!
+//! # Examples
+//!
+//! ## &quot;Indexing&quot; Primes
+//!
+//! Let&#39;s find the 10001st prime. The easiest way is to enumerate the
+//! primes, and find the 10001st:
+//!
+//! ```rust
+//! // (.nth is zero indexed.)
+//! let p = primal::Primes::all().nth(10001 - 1).unwrap();
+//! println!(&quot;The 10001st prime is {}&quot;, p); // 104743
+//! # assert_eq!(p, 104743);
+//! ```
+//!
+//! This takes around 400 microseconds on my computer, which seems
+//! nice and quick, but, `Primes` is flexible at the cost of
+//! performance: we can make it faster. The `StreamingSieve` type
+//! offers a specialised `nth_prime` function:
+//!
+//! ```rust
+//! let p = primal::StreamingSieve::nth_prime(10001);
+//! println!(&quot;The 10001st prime is {}&quot;, p); // 104743
+//! # assert_eq!(p, 104743);
+//! ```
+//!
+//! This runs in only 10 microseconds! `StreamingSieve` is extremely
+//! efficient and uses very little memory. It is the best way to solve
+//! this task with `primal`.
+//!
+//! Since that was so easy, let&#39;s now make the problem bigger and
+//! harder: find the sum of the 100,000th, 200,000th, 300,000th, ...,
+//! 10,000,000th primes (100 in total).
+//!
+//! We could call `StreamingSieve::nth_prime` repeatedly:
+//!
+//! ```rust,no_run
+//! // the primes we want to find
+//! let ns = (1..100 + 1).map(|x| x * 100_000).collect::&lt;Vec&lt;_&gt;&gt;();
+//!
+//! // search and sum them up
+//! let sum = ns.iter()
+//!             .map(|n| primal::StreamingSieve::nth_prime(*n))
+//!             .fold(0, |a, b| a + b);
+//! println!(&quot;the sum is {}&quot;, sum);
+//! ```
+//!
+//! This takes around 1.6s seconds to print `the sum is 8795091674`;
+//! not so speedy. Each call to `nth_prime` is individually fast (400
+//! microseconds for 100,000 to 40 milliseconds for 10,000,000) but
+//! they add up to something bad. Every one is starting from the start
+//! and redoing work that previous calls have done... wouldn&#39;t it be
+//! nice if we could just do the computation for 10,000,000 and reuse
+//! that for the smaller ones?
+//!
+//! The `Sieve` type is a wrapper around `StreamingSieve` that
+//! caches information, allowing repeated queries to be answered
+//! efficiently.
+//!
+//! There&#39;s one hitch: `Sieve` requires a limit to know how far to
+//! sieve: we need some way to find an upper bound to be guaranteed to
+//! be at least as large as all our primes. We could guess that, say,
+//! 10&lt;sup&gt;10&lt;/sup&gt; will be large enough and use that, but that&#39;s a
+//! huge overestimate (spoilers: the 10,000,000th prime is around
+//! 2&amp;times;10&lt;sup&gt;8&lt;/sup&gt;). We could also try filtering with
+//! exponentially larger upper bounds until we find one that works
+//! (e.g. doubling each time), or, we could just take a shortcut and
+//! use deeper mathematics via
+//! [`estimate_nth_prime`](fn.estimate_nth_prime.html).
+//!
+//! ```rust
+//! // the primes we want to find
+//! let ns = (1..100 + 1).map(|x| x * 100_000).collect::&lt;Vec&lt;_&gt;&gt;();
+//!
+//! // find our upper bound
+//! let (_lo, hi) = primal::estimate_nth_prime(10_000_000);
+//!
+//! // find the primes up to this upper bound
+//! let sieve = primal::Sieve::new(hi as usize);
+//!
+//! // now we can efficiently sum them up
+//! let sum = ns.iter()
+//!             .map(|n| sieve.nth_prime(*n))
+//!             .fold(0, |a, b| a + b);
+//! println!(&quot;the sum is {}&quot;, sum);
+//! # assert_eq!(sum, 8795091674);
+//! ```
+//!
+//! This takes around 40 milliseconds, and gives the same output: much
+//! better!
+//!
+//! (By the way, the version using 10&lt;sup&gt;10&lt;/sup&gt; as the bound
+//! instead of the more accurate estimate still only takes ~3
+//! seconds.)
+//!
+//! ## Counting Primes
+//!
+//! Another problem: count the number of primes below 1 million. This
+//! is evaluating the [prime-counting function
+//! π](https://en.wikipedia.org/wiki/Prime-counting_function),
+//! i.e. π(10&lt;sup&gt;6&lt;/sup&gt;).
+//!
+//! As above, there&#39;s a few ways to attack this: the iterator, and the
+//! sieves.
+//!
+//! ```rust
+//! const LIMIT: usize = 1_000_000;
+//!
+//! // iterator
+//! let count = primal::Primes::all().take_while(|p| *p &lt; LIMIT).count();
+//! println!(&quot;there are {} primes below 1 million&quot;, count); // 78498
+//! # assert_eq!(count, 78498);
+//!
+//! // sieves
+//! let sieve = primal::Sieve::new(LIMIT);
+//! let count = sieve.prime_pi(LIMIT);
+//! println!(&quot;there are {} primes below 1 million&quot;, count);
+//! # assert_eq!(count, 78498);
+//!
+//! let count = primal::StreamingSieve::prime_pi(LIMIT);
+//! println!(&quot;there are {} primes below 1 million&quot;, count);
+//! # assert_eq!(count, 78498);
+//! ```
+//!
+//! `StreamingSieve` is fastest (380 microseconds) followed by `Sieve`
+//! (400) with `Primes` bringing up the rear at 1300 microseconds. Of
+//! course, repeated queries will be faster with `Sieve` than with
+//! `StreamingSieve`, but that flexibility comes at the cost of extra
+//! memory use.
+//!
+//! If an approximation is all that is required, `estimate_prime_pi`
+//! provides close upper and lower bounds:
+//!
+//! ```rust
+//! let (lo, hi) = primal::estimate_prime_pi(1_000_000);
+//! println!(&quot;there are between {} and {} primes below 1 million&quot;, lo, hi);
+//! // 78380, 78573
+//! # assert_eq!(lo, 78380);
+//! # assert_eq!(hi, 78573);
+//! ```
+//!
+//! ## Searching Primes
+//!
+//! Now for something where `Primes` might be useful: find the first
+//! prime where the binary expansion (not including trailing zeros)
+//! ends like `00..001` with at least 27 zeros. This condition is
+//! checked by:
+//!
+//! ```rust
+//! fn check(p: usize) -&gt; bool {
+//!     p &gt; 1 &amp;&amp; (p / 2).trailing_zeros() &gt;= 27
+//! }
+//! ```
+//!
+//! I have no idea how large the prime might be: I know it&#39;s
+//! guaranteed to be at *least* 2&lt;sup&gt;27 + 1&lt;/sup&gt; + 1, but not an
+//! upper limit.
+//!
+//! The `Primes` iterator works perfectly for this:
+//!
+//! ```rust
+//! # fn check(p: usize) -&gt; bool {  p &gt; 1 &amp;&amp; (p / 2).trailing_zeros() &gt;= 5 } // 27 is too slow
+//! let p = primal::Primes::all().find(|p| check(*p)).unwrap();
+//! println!(&quot;the prime is {}&quot;, p);
+//! # assert_eq!(p, 193);
+//! ```
+//!
+//! It takes about 3.1 seconds for my computer to spit out 3,221,225,473.
+//!
+//! Using a sieve is a little trickier: one approach is to start with
+//! some estimated upper bound (like double the absolute lower bound),
+//! look for a valid prime. If one isn&#39;t found, double the upper bound
+//! and start again. The `primes_from` method allows for saving a
+//! little bit of work: we can start iterating from an arbitrary point
+//! in the sequence, such as the lower bound.
+//!
+//! ```rust
+//! # fn check(p: usize) -&gt; bool {  p &gt; 1 &amp;&amp; (p / 2).trailing_zeros() &gt;= 5 } // 27 is too slow
+//! let p;
+//! let mut lower_bound = 1 &lt;&lt; (27 + 1);
+//! # let mut lower_bound = 1 &lt;&lt; (5 + 1);
+//! loop {
+//!     // our upper bound is double the lower bound
+//!     let sieve = primal::Sieve::new(lower_bound * 2);
+//!     if let Some(p_) = sieve.primes_from(lower_bound).find(|p| check(*p)) {
+//!         p = p_;
+//!         break
+//!     }
+//!     lower_bound *= 2;
+//! }
+//! println!(&quot;the prime is {}&quot;, p);
+//! # assert_eq!(p, 193);
+//! ```
+//!
+//! This takes around 3.5 seconds to print the same number. Slower
+//! than the iterator!
+//!
+//! I was just using this silly condition as an example of something
+//! that doesn&#39;t have an obvious upper bound, rather than a problem
+//! that is hard to do fast. There&#39;s a much faster way to tackle it,
+//! by inverting the problem: construct numbers that satisfy `check`,
+//! and check the primality of those.
+//!
+//! The numbers that satisfy `check` are `k * (1 &lt;&lt; (27 + 1)) + 1` for
+//! `k &gt;= 1`, so the only hard bit is testing primality. Fortunately,
+//! `primal` offers the `is_prime` function which is an efficient way
+//! to do primality tests, even of very large numbers.
+//!
+//! ```rust
+//! let mut p = 0;
+//! for k in 1.. {
+//!     p = k * (1 &lt;&lt; (27 + 1)) + 1;
+//!     if primal::is_prime(p) { break }
+//! }
+//! println!(&quot;the prime is {}&quot;, p);
+//! # assert_eq!(p, 3_221_225_473);
+//! ```
+//!
+//! This takes 6 &lt;em&gt;micro&lt;/em&gt;seconds: more than 500,000&amp;times;
+//! faster than the iterator!
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">primal_estimate::prime_pi</span> <span class="kw">as</span> <span class="ident">estimate_prime_pi</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">primal_estimate::nth_prime</span> <span class="kw">as</span> <span class="ident">estimate_nth_prime</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">primal_check::miller_rabin</span> <span class="kw">as</span> <span class="ident">is_prime</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">primal_check</span>::{<span class="ident">as_perfect_power</span>, <span class="ident">as_prime_power</span>};
+</span><span class="kw">pub use </span>primal_estimate::prime_pi <span class="kw">as </span>estimate_prime_pi;
+<span class="kw">pub use </span>primal_estimate::nth_prime <span class="kw">as </span>estimate_nth_prime;
+<span class="kw">pub use </span>primal_check::miller_rabin <span class="kw">as </span>is_prime;
+<span class="kw">pub use </span>primal_check::{as_perfect_power, as_prime_power};
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">primal_sieve</span>::{<span class="ident">StreamingSieve</span>, <span class="ident">Sieve</span>, <span class="ident">SievePrimes</span>, <span class="ident">Primes</span>};
+<span class="kw">pub use </span>primal_sieve::{StreamingSieve, Sieve, SievePrimes, Primes};
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="primal" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0-nightly (12cd71f4d 2022-06-01)" ></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="primal" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (17cbdfd07 2022-09-13)" ></div></body></html>

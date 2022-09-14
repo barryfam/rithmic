@@ -1,1 +1,1 @@
-initSidebarItems({"trait":[["ApproxEq","Trait for testing approximate equality"]]});
+window.SIDEBAR_ITEMS = {"trait":[["ApproxEq","Trait for testing approximate equality"]]};
