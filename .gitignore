@@ -13,6 +13,9 @@
 !/rithmic/tests/*/in/*.txt
 !/rithmic/tests/*/out/*.txt
 
+!/rithmic-impl/
+!/rithmic-impl/**/
+
 !/target/
 /target/*
 !/target/doc/
