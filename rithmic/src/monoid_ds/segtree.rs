@@ -17,20 +17,25 @@ where
     phantom: PhantomData<O>,
 }
 
-impl<T, U, O: MonoidOps<T, U>> From<Vec<T>> for SegTree<T, U, O>
+impl<T, U, O: MonoidOps<T, U>, I> From<I> for SegTree<T, U, O>
 where
     T: Default,
-    U: Default
+    U: Default,
+    I: IntoIterator<Item=T>,
+    I::IntoIter: ExactSizeIterator,
 {
-    fn from(vec: Vec<T>) -> Self
+    /// Construct from any type that can be iterated over and has known size. If the size is unknown, use [`SegTree::from_iter`]
+    fn from(iter: I) -> Self
     {
-        let len = vec.len();
+        let iter = iter.into_iter();
+        let len = iter.len();
         let p2 = len.next_power_of_two();
 
         let mut tree = Vec::with_capacity(p2 * 2);
         tree.resize_with(p2, Default::default);
-        tree.extend(vec.into_iter().zip(iter::repeat_with(O::update_identity)));
+        tree.extend(iter.zip(iter::repeat_with(O::update_identity)));
         tree.resize_with(p2 * 2, || (O::operator_identity(), O::update_identity()));
+
         for u in (1..p2).rev() {
             tree[u] = (
                 O::operator(&tree[u<<1].0, &tree[u<<1|1].0),
@@ -47,6 +52,7 @@ where
     T: Default,
     U: Default
 {
+    /// Construct from an iterator of unknown size. If the size is known, [`SegTree::from`] is preferred
     fn from_iter<I: IntoIterator<Item=T>>(iter: I) -> Self {
         Self::from(iter.into_iter().collect::<Vec<T>>())
     }
@@ -59,9 +65,7 @@ where
 {
     pub fn new(len: usize) -> Self
     {
-        let mut vec = Vec::with_capacity(len);
-        vec.resize_with(len, O::operator_identity);
-        Self::from(vec)
+        Self::from((0..len).map(|_| O::operator_identity()))
     }
 
     #[allow(clippy::len_without_is_empty)]
