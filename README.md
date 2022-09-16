@@ -44,7 +44,7 @@ Optional `#![forbid(unsafe_code)]`
 ### Data Structures
 - [Tensor](https://barryfam.io/rithmic/doc/rithmic/struct.NdVec.html) ("*n*-dimensional vector") ⚙️
 - [Boolean/bit vector](https://barryfam.io/rithmic/doc/rithmic/struct.BVec.html)
-- [Meldable heap](https://barryfam.io/rithmic/doc/rithmic/type.MeldHeap.html)
+- [Meldable heap](https://barryfam.io/rithmic/doc/rithmic/meld_heap/type.MeldHeap.html)
 - [Generic augmented treap](https://barryfam.io/rithmic/doc/rithmic/aug_treap/struct.AugTreap.html) ⚙️
     - [Generic order-statistic treap](https://barryfam.io/rithmic/doc/rithmic/aug_treap/order_treap/struct.OrderTreap.html) ⚙️
         - [`List`](https://barryfam.io/rithmic/doc/rithmic/aug_treap/order_treap/struct.List.html), a sequence with *O*(log *n*) insert/delete ⚙️
