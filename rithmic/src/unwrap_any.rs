@@ -1,5 +1,7 @@
 /**
-Unwrap a [`Result<T, T>`](Result), ignoring the `Ok`/`Err` status. Primarily for use with [`slice::binary_search`], to use the index regardless of whether the value is found or not
+Unwrap a [`Result<T, T>`](Result), ignoring the `Ok`/`Err` status
+
+Primarily for use with [`slice::binary_search`], to use the index regardless of whether the value is found or not
 
 # Examples
 ```

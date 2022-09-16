@@ -49,7 +49,7 @@ pub mod graph;
     mod int_bitops;
     mod inversions;
     mod ipc;
-    mod meld_heap;
+pub mod meld_heap;
     mod mo_algorithm;
     mod mod_factorial_table;
 pub mod monoid_ds;
@@ -103,3 +103,8 @@ pub use triangular_n::{triangular_n, triangular_slice, triangular_steps};
 pub use union_find::UnionFind;
 pub use unwrap_any::UnwrapAny;
 pub use xor_basis::{XorBasis128, XorBasis64, XorBasis32, XorBasis16, XorBasis8};
+
+pub mod prelude
+{
+    pub use crate::{List, SortedList, binary_search, BVec, Gameboard, Vector2DMore, imax, imin, IndexCompress, IndexCompressed, Insort, IntBitOps, CountInversions, Ipc, MeldHeap, MeldMinHeap, mo_algorithm, MoStep, FactorialTable, monoid_ops, NdFenwick, SegTree, NdVec, OdometerBE, OdometerLE, OptionMerge, OrdPair, polynomial_add, polynomial_mul, polynomial_div, polynomial_div_exact, lagrange_interpolation, PrefixSums, PrintMethods, Rangelike, Divisors, PairMut, GetSub, SparseTable, ternary_search, triangular_n, triangular_slice, triangular_steps, UnionFind, UnwrapAny, XorBasis128, XorBasis64, XorBasis32, XorBasis16, XorBasis8};
+}

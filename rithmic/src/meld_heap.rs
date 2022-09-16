@@ -35,10 +35,22 @@ fn link<T: Ord>(u: OptNode<T>, v: OptNode<T>, rev: bool) -> OptNode<T> {
     })
 }
 
+#[derive(Clone)]
+pub struct MeldHeapWithDir<T, const REV: bool = false> {
+    root: OptNode<T>,
+    len: usize,
+}
+/// Same as [`MeldHeap`]
+pub type MeldMaxHeap<T> = MeldHeapWithDir<T, false>;
+/// [`MeldHeap`] but in reverse order, popping the minimum element
+pub type MeldMinHeap<T> = MeldHeapWithDir<T, true>;
+
 /**
 A [priority queue](https://en.wikipedia.org/wiki/Priority_queue)
 
 `MeldHeap`'s interface is similar to [`std::collections::BinaryHeap`], but [`MeldHeap::meld`] runs in *O*(log *n*) time versus [`BinaryHeap::append`](`std::collections::BinaryHeap::append)'s *O*(*n*)
+
+# Examples
 ```
 # use rithmic::MeldHeap;
 let q0 = MeldHeap::from_iter([2, 3, 5]);
@@ -49,14 +61,10 @@ assert_eq!(q.pop(), Some(6));
 assert_eq!(q.pop(), Some(5));
 assert_eq!(q.pop(), Some(4));
 ```
+
+# See also
+[`MeldMinHeap`] is the same in reverse order
 */
-#[derive(Clone)]
-pub struct MeldHeapWithDir<T, const REV: bool = false> {
-    root: OptNode<T>,
-    len: usize,
-}
-pub type MeldMaxHeap<T> = MeldHeapWithDir<T, false>;
-pub type MeldMinHeap<T> = MeldHeapWithDir<T, true>;
 pub type MeldHeap<T> = MeldMaxHeap<T>;
 
 impl<T: Ord, const REV: bool> MeldHeapWithDir<T, REV>

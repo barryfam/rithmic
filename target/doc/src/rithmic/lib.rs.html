@@ -103,6 +103,11 @@
 <span id="103">103</span>
 <span id="104">104</span>
 <span id="105">105</span>
+<span id="106">106</span>
+<span id="107">107</span>
+<span id="108">108</span>
+<span id="109">109</span>
+<span id="110">110</span>
 </pre><pre class="rust"><code><span class="attribute">#![doc = <span class="macro">include_str!</span>(<span class="string">&quot;../../README.md&quot;</span>)]
 
 #![cfg_attr(not(feature = <span class="string">&quot;unsafe&quot;</span>), forbid(unsafe_code))]
@@ -154,7 +159,7 @@
     <span class="kw">mod </span>int_bitops;
     <span class="kw">mod </span>inversions;
     <span class="kw">mod </span>ipc;
-    <span class="kw">mod </span>meld_heap;
+<span class="kw">pub mod </span>meld_heap;
     <span class="kw">mod </span>mo_algorithm;
     <span class="kw">mod </span>mod_factorial_table;
 <span class="kw">pub mod </span>monoid_ds;
@@ -208,5 +213,10 @@
 <span class="kw">pub use </span>union_find::UnionFind;
 <span class="kw">pub use </span>unwrap_any::UnwrapAny;
 <span class="kw">pub use </span>xor_basis::{XorBasis128, XorBasis64, XorBasis32, XorBasis16, XorBasis8};
+
+<span class="kw">pub mod </span>prelude
+{
+    <span class="kw">pub use crate</span>::{List, SortedList, binary_search, BVec, Gameboard, Vector2DMore, imax, imin, IndexCompress, IndexCompressed, Insort, IntBitOps, CountInversions, Ipc, MeldHeap, MeldMinHeap, mo_algorithm, MoStep, FactorialTable, monoid_ops, NdFenwick, SegTree, NdVec, OdometerBE, OdometerLE, OptionMerge, OrdPair, polynomial_add, polynomial_mul, polynomial_div, polynomial_div_exact, lagrange_interpolation, PrefixSums, PrintMethods, Rangelike, Divisors, PairMut, GetSub, SparseTable, ternary_search, triangular_n, triangular_slice, triangular_steps, UnionFind, UnwrapAny, XorBasis128, XorBasis64, XorBasis32, XorBasis16, XorBasis8};
+}
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="rithmic" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (17cbdfd07 2022-09-13)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="rithmic" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (cf9ed0dd5 2022-09-15)" ></div></body></html>

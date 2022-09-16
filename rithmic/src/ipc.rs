@@ -4,7 +4,9 @@ use std::process::{Command, Stdio, ChildStdin, ChildStdout, Child};
 use proconio::source::once::OnceSource;
 
 /**
-Inter-process communication via pipes with a spawned child command. The child's stdin & stdout can be accessed via the `tx` and `rx` fields. See also the [`input()`](Ipc::input) and [`input_line()`](Ipc::input_line) convenience methods. The child process is killed (if still alive) when this object is dropped
+Inter-process communication via pipes with a spawned child command
+
+The child's stdin & stdout can be accessed via the `tx` and `rx` fields. See also the [`input()`](Ipc::input) and [`input_line()`](Ipc::input_line) convenience methods. The child process is killed (if still alive) when this object is dropped
 
 # Examples
 ```

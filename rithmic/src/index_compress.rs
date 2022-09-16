@@ -2,7 +2,9 @@ use derive_more::Deref;
 use itertools::Itertools;
 
 /**
-Index compress a sequence of length *n* by mapping every value to its ordered rank. The compressed sequence is therefore guaranteed to have all its elements be integers less than *n*
+Index compress a sequence of length *n* by mapping every value to its ordered rank
+
+The compressed sequence is therefore guaranteed to have all its elements be integers less than *n*
 
 The returned [`IndexCompressed`] implements
 - `Deref<Target=[usize]>` to access the compressed sequence

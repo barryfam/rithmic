@@ -75,13 +75,17 @@
 <span id="75">75</span>
 <span id="76">76</span>
 <span id="77">77</span>
+<span id="78">78</span>
+<span id="79">79</span>
 </pre><pre class="rust"><code><span class="kw">use </span>std::io::{BufReader, BufRead};
 <span class="kw">use </span>std::process::{Command, Stdio, ChildStdin, ChildStdout, Child};
 
 <span class="kw">use </span>proconio::source::once::OnceSource;
 
 <span class="doccomment">/**
-Inter-process communication via pipes with a spawned child command. The child&#39;s stdin &amp; stdout can be accessed via the `tx` and `rx` fields. See also the [`input()`](Ipc::input) and [`input_line()`](Ipc::input_line) convenience methods. The child process is killed (if still alive) when this object is dropped
+Inter-process communication via pipes with a spawned child command
+
+The child&#39;s stdin &amp; stdout can be accessed via the `tx` and `rx` fields. See also the [`input()`](Ipc::input) and [`input_line()`](Ipc::input_line) convenience methods. The child process is killed (if still alive) when this object is dropped
 
 # Examples
 ```
@@ -153,4 +157,4 @@ assert_eq!(x, 34);
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="rithmic" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (17cbdfd07 2022-09-13)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="rithmic" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (cf9ed0dd5 2022-09-15)" ></div></body></html>

@@ -1,20 +1,195 @@
 #[cfg(test)] mod tests;
 
+/// This trait provides methods for working with unsigned integers at the bit level
 pub trait IntBitOps
 where Self: Sized
 {
+    /// Returns the size in bits of this integer's type
+    ///
+    /// # Examples
+    /// ```
+    /// use rithmic::IntBitOps;
+    ///
+    /// assert_eq!(0b_0001_0000_u8.bit_width(), 8);
+    /// ```
     fn bit_width(self) -> u32;
+
+    /// Returns the minimum number of bits needed to represent this integer
+    ///
+    /// # Examples
+    /// ```
+    /// use rithmic::IntBitOps;
+    ///
+    /// assert_eq!(0b_0001_0000_u8.bit_length(), 5);
+    /// ```
     fn bit_length(self) -> u32;
+
+    /// Returns an integer with the lowest `len` bits set
+    ///
+    /// # Examples
+    /// ```
+    /// use rithmic::IntBitOps;
+    ///
+    /// assert_eq!(u8::mask(5), 0b_0001_1111);
+    /// ```
     fn mask(len: u32) -> Self;
+
+    /// Returns `self & mask(len)`
+    ///
+    /// # Examples
+    /// ```
+    /// use rithmic::IntBitOps;
+    ///
+    /// assert_eq!(0b_1101_0011_u8.masked(5), 0b_0001_0011);
+    /// ```
     fn masked(self, len: u32) -> Self;
+
+    /// Returns the least-significant-bit of this integer, isolated
+    ///
+    /// # Examples
+    /// ```
+    /// use rithmic::IntBitOps;
+    ///
+    /// assert_eq!(0b_0111_0100_u8.lsb(), 0b_0000_0100);
+    /// ```
     fn lsb(self) -> Self;
+
+    /// Returns the most-significant-bit of this integer, isolated
+    ///
+    /// # Examples
+    /// ```
+    /// use rithmic::IntBitOps;
+    ///
+    /// assert_eq!(0b_0111_0100_u8.msb(), 0b_0100_0000);
+    /// ```
     fn msb(self) -> Self;
+
+    /// Iterates over each set bit of this integer, isolated, from lowest to highest
+    ///
+    /// # Examples
+    /// ```
+    /// use rithmic::IntBitOps;
+    ///
+    /// let u = 0b_11010_u8.iter_lsb().collect::<Vec<u8>>();
+    ///
+    /// assert_eq!(u, vec![
+    ///     0b00010,
+    ///     0b01000,
+    ///     0b10000,
+    /// ]);
+    /// ```
     fn iter_lsb(self) -> IterLsb<Self>;
+
+    /// Iterates over each set bit of this integer, isolated, from highest to lowest
+    ///
+    /// # Examples
+    /// ```
+    /// use rithmic::IntBitOps;
+    ///
+    /// let u = 0b_11010_u8.iter_msb().collect::<Vec<u8>>();
+    ///
+    /// assert_eq!(u, vec![
+    ///     0b10000,
+    ///     0b01000,
+    ///     0b00010,
+    /// ]);
+    /// ```
     fn iter_msb(self) -> IterMsb<Self>;
+
+    /// Iterates over the index of each set bit of this integer
+    ///
+    /// # Examples
+    /// ```
+    /// use rithmic::IntBitOps;
+    ///
+    /// let u = 0b_11010_u8.iter_ones().collect::<Vec<usize>>();
+    ///
+    /// assert_eq!(u, vec![1, 3, 4]);
+    /// ```
     fn iter_ones(self) -> IterOnes<Self>;
+
+    /// Iterates over every subset of the set bits of this integer
+    ///
+    /// # Examples
+    /// ```
+    /// use rithmic::IntBitOps;
+    ///
+    /// let u = 0b11010_u8.iter_subsets().collect::<Vec<u8>>();
+    ///
+    /// assert_eq!(u, vec![
+    ///     0b00000,
+    ///     0b00010,
+    ///     0b01000,
+    ///     0b01010,
+    ///     0b10000,
+    ///     0b10010,
+    ///     0b11000,
+    ///     0b11010,
+    /// ]);
+    /// ```
     fn iter_subsets(self) -> IterSubsets<Self>;
+
+    /// Let *k* be the number of bits set in this integer; then iterate over every integer with *k*+1 bits set and length not greater than `n`
+    ///
+    /// # Examples
+    /// ```
+    /// use rithmic::IntBitOps;
+    ///
+    /// let u = 0b_0001_1010_u8.iter_add_one(7).collect::<Vec<u8>>();
+    ///
+    /// assert_eq!(u, vec![
+    ///     0b_0001_1011,
+    ///     0b_0001_1110,
+    ///     0b_0011_1010,
+    ///     0b_0101_1010,
+    /// ]);
+    /// ```
     fn iter_add_one(self, n: u32) -> IterAddOne<Self>;
+
+    /// "Gosper's Hack" - Iterate over every integer with exactly `k` set bits and length not greater than `n`
+    ///
+    /// # Examples
+    /// ```
+    /// use rithmic::IntBitOps;
+    ///
+    /// let u = u8::iter_gosper(5, 3).collect::<Vec<u8>>();
+    ///
+    /// assert_eq!(u, vec![
+    ///     0b00111,
+    ///     0b01011,
+    ///     0b01101,
+    ///     0b01110,
+    ///     0b10011,
+    ///     0b10101,
+    ///     0b10110,
+    ///     0b11001,
+    ///     0b11010,
+    ///     0b11100,
+    /// ]);
+    /// ```
     fn iter_gosper(n: u32, k: u32) -> IterGosper<Self>;
+
+    /// "Gosper's Hack" but restricted to subsets of this integer - Iterate over every subset that has exactly `k` bits set
+    ///
+    /// # Examples
+    /// ```
+    /// use rithmic::IntBitOps;
+    ///
+    /// let u = 0b_1101_1010_u8.iter_gosper_subsets(3).collect::<Vec<u8>>();
+    ///
+    /// assert_eq!(u, vec![
+    ///     0b_0001_1010,
+    ///     0b_0100_1010,
+    ///     0b_0101_0010,
+    ///     0b_0101_1000,
+    ///     0b_1000_1010,
+    ///     0b_1001_0010,
+    ///     0b_1001_1000,
+    ///     0b_1100_0010,
+    ///     0b_1100_1000,
+    ///     0b_1101_0000,
+    /// ]);
+    /// ```
     fn iter_gosper_subsets(self, k: u32) -> IterGosperSubsets<Self>;
 }
 

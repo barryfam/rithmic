@@ -1,7 +1,27 @@
 use std::ops::{Range, RangeBounds, RangeFrom, RangeFull, RangeInclusive, RangeTo, RangeToInclusive, Bound};
 
-pub trait Rangelike<T> {
+/**
+This trait is intended to allow function APIs to interchangeably accept integers or any of their [`Range`] variants
+
+2-tuples and 2-arrays are also accepted
+
+# Examples
+```
+# use rithmic::SegTree;
+let mut st = SegTree::<i32>::from([2, 3, 5, 7, 11]);
+
+assert_eq!(st.query(2), 5);
+assert_eq!(st.query(2..=3), 5+7);
+assert_eq!(st.query(2..), 5+7+11);
+assert_eq!(st.query(..), 2+3+5+7+11);
+```
+*/
+pub trait Rangelike<T>
+{
+    /// Convert to `(start_included, end_excluded)` and check the range is a subset of `to`, otherwise return `None`. Unbounded side(s) are substituted with `to.start` or `to.end` respectively.
     fn clamp(&self, to: Range<T>) -> Option<(T, T)>;
+
+    /// Convert to `(start_included, end_excluded)` where each side is `None` if unbounded
     fn canonical(&self) -> (Option<T>, Option<T>);
 }
 
@@ -9,7 +29,6 @@ macro impl_for_rangebounds($int_type: ty, $rangebounds: ty)
 {
     impl Rangelike<$int_type> for $rangebounds
     {
-        /// Convert to `(start_included, end_excluded)` and check the range is a subset of `to`, otherwise return `None`. Unbounded side(s) are substituted with `to.start` or `to.end` respectively.
         #[inline]
         fn clamp(&self, to: Range<$int_type>) -> Option<($int_type, $int_type)>
         {
@@ -21,7 +40,6 @@ macro impl_for_rangebounds($int_type: ty, $rangebounds: ty)
                 .then_some((start, end))
         }
 
-        /// Convert to `(start_included, end_excluded)` where each side is `None` if unbounded
         #[inline]
         fn canonical(&self) -> (Option<$int_type>, Option<$int_type>)
         {

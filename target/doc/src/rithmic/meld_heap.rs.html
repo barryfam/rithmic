@@ -120,6 +120,14 @@
 <span id="120">120</span>
 <span id="121">121</span>
 <span id="122">122</span>
+<span id="123">123</span>
+<span id="124">124</span>
+<span id="125">125</span>
+<span id="126">126</span>
+<span id="127">127</span>
+<span id="128">128</span>
+<span id="129">129</span>
+<span id="130">130</span>
 </pre><pre class="rust"><code><span class="kw">use </span>std::mem;
 
 <span class="kw">use </span><span class="kw">crate</span>::OptionMerge;
@@ -157,10 +165,22 @@
     })
 }
 
+<span class="attribute">#[derive(Clone)]
+</span><span class="kw">pub struct </span>MeldHeapWithDir&lt;T, <span class="kw">const </span>REV: bool = <span class="bool-val">false</span>&gt; {
+    root: OptNode&lt;T&gt;,
+    len: usize,
+}
+<span class="doccomment">/// Same as [`MeldHeap`]
+</span><span class="kw">pub type </span>MeldMaxHeap&lt;T&gt; = MeldHeapWithDir&lt;T, <span class="bool-val">false</span>&gt;;
+<span class="doccomment">/// [`MeldHeap`] but in reverse order, popping the minimum element
+</span><span class="kw">pub type </span>MeldMinHeap&lt;T&gt; = MeldHeapWithDir&lt;T, <span class="bool-val">true</span>&gt;;
+
 <span class="doccomment">/**
 A [priority queue](https://en.wikipedia.org/wiki/Priority_queue)
 
 `MeldHeap`&#39;s interface is similar to [`std::collections::BinaryHeap`], but [`MeldHeap::meld`] runs in *O*(log *n*) time versus [`BinaryHeap::append`](`std::collections::BinaryHeap::append)&#39;s *O*(*n*)
+
+# Examples
 ```
 # use rithmic::MeldHeap;
 let q0 = MeldHeap::from_iter([2, 3, 5]);
@@ -171,15 +191,11 @@ assert_eq!(q.pop(), Some(6));
 assert_eq!(q.pop(), Some(5));
 assert_eq!(q.pop(), Some(4));
 ```
+
+# See also
+[`MeldMinHeap`] is the same in reverse order
 */
-</span><span class="attribute">#[derive(Clone)]
-</span><span class="kw">pub struct </span>MeldHeapWithDir&lt;T, <span class="kw">const </span>REV: bool = <span class="bool-val">false</span>&gt; {
-    root: OptNode&lt;T&gt;,
-    len: usize,
-}
-<span class="kw">pub type </span>MeldMaxHeap&lt;T&gt; = MeldHeapWithDir&lt;T, <span class="bool-val">false</span>&gt;;
-<span class="kw">pub type </span>MeldMinHeap&lt;T&gt; = MeldHeapWithDir&lt;T, <span class="bool-val">true</span>&gt;;
-<span class="kw">pub type </span>MeldHeap&lt;T&gt; = MeldMaxHeap&lt;T&gt;;
+</span><span class="kw">pub type </span>MeldHeap&lt;T&gt; = MeldMaxHeap&lt;T&gt;;
 
 <span class="kw">impl</span>&lt;T: Ord, <span class="kw">const </span>REV: bool&gt; MeldHeapWithDir&lt;T, REV&gt;
 {
@@ -243,4 +259,4 @@ assert_eq!(q.pop(), Some(4));
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="rithmic" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (17cbdfd07 2022-09-13)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="rithmic" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (cf9ed0dd5 2022-09-15)" ></div></body></html>
