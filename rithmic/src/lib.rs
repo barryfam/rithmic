@@ -8,10 +8,9 @@
     decl_macro,
     int_roundings,
     iter_collect_into,
-    is_some_with,
+    is_some_and,
     is_sorted,
     let_chains,
-    let_else,
     rustc_attrs,
 )]
 

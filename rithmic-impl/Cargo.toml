@@ -4,7 +4,7 @@
 name = "rithmic-impl"
 version = "1.0.0-pre"
 edition = "2021"
-rust-version = "1.65"
+rust-version = "1.66"
 authors = ["Barry Fam <contact@barryfam.io>"]
 license = "MIT"
 description = "Odds & ends: Algorithms, data structures, ease-of-use"

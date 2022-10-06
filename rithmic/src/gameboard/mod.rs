@@ -54,7 +54,7 @@ impl Gameboard
 
     /// Check if there is currently a block at `[i, j]`
     pub fn is_blocked(&self, [i, j]: [usize; 2]) -> bool {
-        self.blocked.is_some_and(|b| b[i * self.w + j])
+        self.blocked.as_ref().is_some_and(|b| b[i * self.w + j])
     }
 
     /// Move `dist` squares in a straight line. Blocks along the way are ignored, but a block at the destination, or the destination being out-of-bounds, returns `None`. `dir` must be in `0..4` and indicates direction:

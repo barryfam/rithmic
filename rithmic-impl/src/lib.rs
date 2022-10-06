@@ -4,7 +4,6 @@
     decl_macro,
     extend_one,
     iter_collect_into,
-    let_else,
 )]
 
 #![allow(
