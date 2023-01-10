@@ -1,6 +1,6 @@
 ![Ferris the crab playing the bongos](https://barryfam.io/rithmic/rithmic.png)
 
-[![build](https://img.shields.io/github/workflow/status/barryfam/rithmic/CI/master)](https://github.com/barryfam/rithmic/actions/workflows/ci.yml)
+[![build](https://img.shields.io/github/actions/workflow/status/barryfam/rithmic/ci.yml?branch=master)](https://github.com/barryfam/rithmic/actions/workflows/ci.yml)
 [![coverage](https://img.shields.io/coveralls/github/barryfam/rithmic)](https://coveralls.io/github/barryfam/rithmic)
 [![docs](https://img.shields.io/badge/docs-partial-yellow)](https://barryfam.io/rithmic/doc/rithmic/)
 
