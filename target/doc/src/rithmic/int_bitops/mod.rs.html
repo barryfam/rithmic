@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `rithmic/src/int_bitops/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../rithmic/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../rithmic/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../rithmic/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `rithmic/src/int_bitops/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../rithmic/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -444,7 +444,7 @@
 <span id="444">444</span>
 <span id="445">445</span>
 <span id="446">446</span>
-</pre><pre class="rust"><code><span class="attribute">#[cfg(test)] </span><span class="kw">mod </span>tests;
+</pre><pre class="rust"><code><span class="attr">#[cfg(test)] </span><span class="kw">mod </span>tests;
 
 <span class="doccomment">/// This trait provides methods for working with unsigned integers at the bit level
 </span><span class="kw">pub trait </span>IntBitOps
@@ -639,36 +639,36 @@
     </span><span class="kw">fn </span>iter_gosper_subsets(<span class="self">self</span>, k: u32) -&gt; IterGosperSubsets&lt;<span class="self">Self</span>&gt;;
 }
 
-<span class="attribute">#[derive(Clone, Copy, Debug)]
+<span class="attr">#[derive(Clone, Copy, Debug)]
 </span><span class="kw">pub struct </span>IterLsb&lt;T&gt; {
     remaining: T
 }
 
-<span class="attribute">#[derive(Clone, Copy, Debug)]
+<span class="attr">#[derive(Clone, Copy, Debug)]
 </span><span class="kw">pub struct </span>IterMsb&lt;T&gt; {
     remaining: T
 }
 
-<span class="attribute">#[derive(Clone, Copy, Debug)]
+<span class="attr">#[derive(Clone, Copy, Debug)]
 </span><span class="kw">pub struct </span>IterOnes&lt;T&gt; {
     remaining: T
 }
 
-<span class="attribute">#[derive(Clone, Copy, Debug)]
+<span class="attr">#[derive(Clone, Copy, Debug)]
 </span><span class="kw">pub struct </span>IterSubsets&lt;T&gt; {
     set: T,
     next: T,
     fused: bool,
 }
 
-<span class="attribute">#[derive(Clone, Copy, Debug)]
+<span class="attr">#[derive(Clone, Copy, Debug)]
 </span><span class="kw">pub struct </span>IterAddOne&lt;T&gt; {
     set: T,
     subset: T,
     used: T,
 }
 
-<span class="attribute">#[derive(Clone, Copy, Debug)]
+<span class="attr">#[derive(Clone, Copy, Debug)]
 </span><span class="kw">pub struct </span>IterGosper&lt;T&gt; {
     last: T,
     next: T,
@@ -685,33 +685,33 @@
     {
         <span class="kw">impl </span>IntBitOps <span class="kw">for </span><span class="macro-nonterminal">$</span><span class="kw">type
         </span>{
-            <span class="attribute">#[<span class="macro-nonterminal">inline</span>]
+            <span class="attr">#[<span class="macro-nonterminal">inline</span>]
             </span><span class="kw">fn </span>bit_width(<span class="self">self</span>) -&gt; u32 {
                 <span class="self">Self</span>::BITS
             }
 
-            <span class="attribute">#[inline]
+            <span class="attr">#[inline]
             </span><span class="kw">fn </span>bit_length(<span class="self">self</span>) -&gt; u32 {
                 <span class="self">Self</span>::BITS - <span class="self">self</span>.leading_zeros()
             }
 
-            <span class="attribute">#[inline]
+            <span class="attr">#[inline]
             </span><span class="kw">fn </span>mask(len: u32) -&gt; <span class="self">Self </span>{
                 <span class="kw">if </span>len == <span class="number">0 </span>{ <span class="kw">return </span><span class="number">0 </span>}
                 !<span class="number">0 </span>&gt;&gt; <span class="self">Self</span>::BITS - len
             }
 
-            <span class="attribute">#[inline]
+            <span class="attr">#[inline]
             </span><span class="kw">fn </span>masked(<span class="self">self</span>, len: u32) -&gt; <span class="self">Self </span>{
                 <span class="self">self </span>&amp; <span class="self">Self</span>::mask(len)
             }
 
-            <span class="attribute">#[inline]
+            <span class="attr">#[inline]
             </span><span class="kw">fn </span>lsb(<span class="self">self</span>) -&gt; <span class="self">Self </span>{
                 <span class="self">self </span>&amp; (!<span class="self">self</span>).wrapping_add(<span class="number">1</span>)
             }
 
-            <span class="attribute">#[inline]
+            <span class="attr">#[inline]
             </span><span class="kw">fn </span>msb(<span class="self">self</span>) -&gt; <span class="self">Self </span>{
                 <span class="kw">if </span><span class="self">self </span>== <span class="number">0 </span>{ <span class="kw">return </span><span class="number">0 </span>}
                 <span class="number">1 </span>&lt;&lt; <span class="self">Self</span>::BITS - <span class="number">1 </span>&gt;&gt; <span class="self">self</span>.leading_zeros()
@@ -774,7 +774,7 @@
         <span class="kw">impl </span>Iterator <span class="kw">for </span>IterLsb&lt;<span class="macro-nonterminal">$</span><span class="kw">type</span>&gt; {
             <span class="kw">type </span><span class="macro-nonterminal">Item </span>= <span class="macro-nonterminal">$</span><span class="kw">type</span>;
 
-            <span class="attribute">#[<span class="macro-nonterminal">inline</span>]
+            <span class="attr">#[<span class="macro-nonterminal">inline</span>]
             </span><span class="kw">fn </span>next(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>::Item&gt;
             {
                 <span class="kw">let </span>r = <span class="self">self</span>.remaining;
@@ -789,7 +789,7 @@
         <span class="kw">impl </span>Iterator <span class="kw">for </span>IterMsb&lt;<span class="macro-nonterminal">$</span><span class="kw">type</span>&gt; {
             <span class="kw">type </span><span class="macro-nonterminal">Item </span>= <span class="macro-nonterminal">$</span><span class="kw">type</span>;
 
-            <span class="attribute">#[<span class="macro-nonterminal">inline</span>]
+            <span class="attr">#[<span class="macro-nonterminal">inline</span>]
             </span><span class="kw">fn </span>next(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>::Item&gt;
             {
                 <span class="kw">let </span>r = <span class="self">self</span>.remaining;
@@ -804,7 +804,7 @@
         <span class="kw">impl </span>Iterator <span class="kw">for </span>IterOnes&lt;<span class="macro-nonterminal">$</span><span class="kw">type</span>&gt; {
             <span class="kw">type </span><span class="macro-nonterminal">Item </span>= usize;
 
-            <span class="attribute">#[inline]
+            <span class="attr">#[inline]
             </span><span class="kw">fn </span>next(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>::Item&gt;
             {
                 <span class="kw">let </span>r = <span class="self">self</span>.remaining;
@@ -819,7 +819,7 @@
         <span class="kw">impl </span>Iterator <span class="kw">for </span>IterSubsets&lt;<span class="macro-nonterminal">$</span><span class="kw">type</span>&gt; {
             <span class="kw">type </span><span class="macro-nonterminal">Item </span>= <span class="macro-nonterminal">$</span><span class="kw">type</span>;
 
-            <span class="attribute">#[<span class="macro-nonterminal">inline</span>]
+            <span class="attr">#[<span class="macro-nonterminal">inline</span>]
             </span><span class="kw">fn </span>next(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>::Item&gt;
             {
                 <span class="kw">let </span><span class="self">Self</span>{set: s, next: u, fused} = <span class="kw-2">*</span><span class="self">self</span>;
@@ -834,7 +834,7 @@
         <span class="kw">impl </span>Iterator <span class="kw">for </span>IterAddOne&lt;<span class="macro-nonterminal">$</span><span class="kw">type</span>&gt; {
             <span class="kw">type </span><span class="macro-nonterminal">Item </span>= <span class="macro-nonterminal">$</span><span class="kw">type</span>;
 
-            <span class="attribute">#[<span class="macro-nonterminal">inline</span>]
+            <span class="attr">#[<span class="macro-nonterminal">inline</span>]
             </span><span class="kw">fn </span>next(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>::Item&gt;
             {
                 <span class="kw">let </span><span class="self">Self</span>{set: s, subset: u, used: v} = <span class="kw-2">*</span><span class="self">self</span>;
@@ -849,7 +849,7 @@
         <span class="kw">impl </span>Iterator <span class="kw">for </span>IterGosper&lt;<span class="macro-nonterminal">$</span><span class="kw">type</span>&gt; {
             <span class="kw">type </span><span class="macro-nonterminal">Item </span>= <span class="macro-nonterminal">$</span><span class="kw">type</span>;
 
-            <span class="attribute">#[<span class="macro-nonterminal">inline</span>]
+            <span class="attr">#[<span class="macro-nonterminal">inline</span>]
             </span><span class="kw">fn </span>next(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>::Item&gt;
             {
                 <span class="kw">let </span><span class="self">Self</span>{last, next: u, fused} = <span class="kw-2">*</span><span class="self">self</span>;
@@ -868,7 +868,7 @@
         <span class="kw">impl </span>Iterator <span class="kw">for </span>IterGosperSubsets&lt;<span class="macro-nonterminal">$</span><span class="kw">type</span>&gt; {
             <span class="kw">type </span><span class="macro-nonterminal">Item </span>= <span class="macro-nonterminal">$</span><span class="kw">type</span>;
 
-            <span class="attribute">#[<span class="macro-nonterminal">inline</span>]
+            <span class="attr">#[<span class="macro-nonterminal">inline</span>]
             </span><span class="kw">fn </span>next(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>::Item&gt;
             {
                 <span class="kw">let </span>g = <span class="self">self</span>.gosper.next()<span class="question-mark">?</span>;
@@ -891,4 +891,4 @@
 
 <span class="macro">impl_bitops!</span>(<span class="macro-nonterminal">usize</span>, u128, u64, u32, u16, u8);
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="rithmic" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.66.0-nightly (c97d02cdb 2022-10-05)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="rithmic" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.67.0-nightly (215e3cd21 2022-11-03)" ></div></body></html>

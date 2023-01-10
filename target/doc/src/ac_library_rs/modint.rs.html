@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/bcfam/.cargo/git/checkouts/ac-library-rs-d342211755004e20/d2b35ac/src/modint.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>modint.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../ac_library_rs/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../ac_library_rs/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../ac_library_rs/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/bcfam/.cargo/git/checkouts/ac-library-rs-d342211755004e20/d2b35ac/src/modint.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>modint.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../ac_library_rs/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -1244,7 +1244,7 @@
 ///
 /// println!(&quot;{}&quot;, a + b); // `1`
 /// ```
-</span><span class="attribute">#[derive(Copy, Clone, Eq, PartialEq)]
+</span><span class="attr">#[derive(Copy, Clone, Eq, PartialEq)]
 #[repr(transparent)]
 </span><span class="kw">pub struct </span>StaticModInt&lt;M&gt; {
     val: u32,
@@ -1265,7 +1265,7 @@
     /// ```
     ///
     /// [`&lt;M as Modulus&gt;::VALUE`]: ../trait.Modulus.html#associatedconstant.VALUE
-    </span><span class="attribute">#[inline(always)]
+    </span><span class="attr">#[inline(always)]
     </span><span class="kw">pub fn </span>modulus() -&gt; u32 {
         M::VALUE
     }
@@ -1277,7 +1277,7 @@
     /// Corresponds to the constructor of `atcoder::static_modint` in the original ACL.
     ///
     /// [any primitive integer]:  ../trait.RemEuclidU32.html
-    </span><span class="attribute">#[inline]
+    </span><span class="attr">#[inline]
     </span><span class="kw">pub fn </span>new&lt;T: RemEuclidU32&gt;(val: T) -&gt; <span class="self">Self </span>{
         <span class="self">Self</span>::raw(val.rem_euclid_u32(M::VALUE))
     }
@@ -1293,7 +1293,7 @@
     /// See [`ModIntBase::raw`] for more more details.
     ///
     /// [`ModIntBase::raw`]: ./trait.ModIntBase.html#tymethod.raw
-    </span><span class="attribute">#[inline]
+    </span><span class="attr">#[inline]
     </span><span class="kw">pub fn </span>raw(val: u32) -&gt; <span class="self">Self </span>{
         <span class="self">Self </span>{
             val,
@@ -1304,7 +1304,7 @@
     <span class="doccomment">/// Retruns the representative.
     ///
     /// Corresponds to `atcoder::static_modint::val` in the original ACL.
-    </span><span class="attribute">#[inline]
+    </span><span class="attr">#[inline]
     </span><span class="kw">pub fn </span>val(<span class="self">self</span>) -&gt; u32 {
         <span class="self">self</span>.val
     }
@@ -1312,7 +1312,7 @@
     <span class="doccomment">/// Returns `self` to the power of `n`.
     ///
     /// Corresponds to `atcoder::static_modint::pow` in the original ACL.
-    </span><span class="attribute">#[inline]
+    </span><span class="attr">#[inline]
     </span><span class="kw">pub fn </span>pow(<span class="self">self</span>, n: u64) -&gt; <span class="self">Self </span>{
         &lt;<span class="self">Self </span><span class="kw">as </span>ModIntBase&gt;::pow(<span class="self">self</span>, n)
     }
@@ -1324,7 +1324,7 @@
     /// # Panics
     ///
     /// Panics if the multiplicative inverse does not exist.
-    </span><span class="attribute">#[inline]
+    </span><span class="attr">#[inline]
     </span><span class="kw">pub fn </span>inv(<span class="self">self</span>) -&gt; <span class="self">Self </span>{
         <span class="kw">if </span>M::HINT_VALUE_IS_PRIME {
             <span class="kw">if </span><span class="self">self</span>.val() == <span class="number">0 </span>{
@@ -1345,22 +1345,22 @@
 <span class="doccomment">/// These methods are implemented for the struct.
 /// You don&#39;t need to `use` `ModIntBase` to call methods of `StaticModInt`.
 </span><span class="kw">impl</span>&lt;M: Modulus&gt; ModIntBase <span class="kw">for </span>StaticModInt&lt;M&gt; {
-    <span class="attribute">#[inline(always)]
+    <span class="attr">#[inline(always)]
     </span><span class="kw">fn </span>modulus() -&gt; u32 {
         <span class="self">Self</span>::modulus()
     }
 
-    <span class="attribute">#[inline]
+    <span class="attr">#[inline]
     </span><span class="kw">fn </span>raw(val: u32) -&gt; <span class="self">Self </span>{
         <span class="self">Self</span>::raw(val)
     }
 
-    <span class="attribute">#[inline]
+    <span class="attr">#[inline]
     </span><span class="kw">fn </span>val(<span class="self">self</span>) -&gt; u32 {
         <span class="self">self</span>.val()
     }
 
-    <span class="attribute">#[inline]
+    <span class="attr">#[inline]
     </span><span class="kw">fn </span>inv(<span class="self">self</span>) -&gt; <span class="self">Self </span>{
         <span class="self">self</span>.inv()
     }
@@ -1410,7 +1410,7 @@
 }
 
 <span class="doccomment">/// Represents _1000000007_.
-</span><span class="attribute">#[derive(Copy, Clone, Ord, PartialOrd, Eq, PartialEq, Hash, Debug)]
+</span><span class="attr">#[derive(Copy, Clone, Ord, PartialOrd, Eq, PartialEq, Hash, Debug)]
 </span><span class="kw">pub enum </span>Mod1000000007 {}
 
 <span class="kw">impl </span>Modulus <span class="kw">for </span>Mod1000000007 {
@@ -1426,7 +1426,7 @@
 }
 
 <span class="doccomment">/// Represents _998244353_.
-</span><span class="attribute">#[derive(Copy, Clone, Ord, PartialOrd, Eq, PartialEq, Hash, Debug)]
+</span><span class="attr">#[derive(Copy, Clone, Ord, PartialOrd, Eq, PartialEq, Hash, Debug)]
 </span><span class="kw">pub enum </span>Mod998244353 {}
 
 <span class="kw">impl </span>Modulus <span class="kw">for </span>Mod998244353 {
@@ -1470,7 +1470,7 @@
 ///
 /// println!(&quot;{}&quot;, a * b); // `2`
 /// ```
-</span><span class="attribute">#[derive(Copy, Clone, Eq, PartialEq)]
+</span><span class="attr">#[derive(Copy, Clone, Eq, PartialEq)]
 #[repr(transparent)]
 </span><span class="kw">pub struct </span>DynamicModInt&lt;I&gt; {
     val: u32,
@@ -1489,7 +1489,7 @@
     ///
     /// assert_eq!(998_244_353, Mint::modulus()); // default modulus
     /// ```
-    </span><span class="attribute">#[inline]
+    </span><span class="attr">#[inline]
     </span><span class="kw">pub fn </span>modulus() -&gt; u32 {
         I::companion_barrett().umod()
     }
@@ -1510,7 +1510,7 @@
     /// Mint::set_modulus(7);
     /// assert_eq!(7, Mint::modulus());
     /// ```
-    </span><span class="attribute">#[inline]
+    </span><span class="attr">#[inline]
     </span><span class="kw">pub fn </span>set_modulus(modulus: u32) {
         <span class="kw">if </span>modulus == <span class="number">0 </span>{
             <span class="macro">panic!</span>(<span class="string">&quot;the modulus must not be 0&quot;</span>);
@@ -1525,7 +1525,7 @@
     /// Corresponds to the constructor of `atcoder::dynamic_modint` in the original ACL.
     ///
     /// [any primitive integer]:  ../trait.RemEuclidU32.html
-    </span><span class="attribute">#[inline]
+    </span><span class="attr">#[inline]
     </span><span class="kw">pub fn </span>new&lt;T: RemEuclidU32&gt;(val: T) -&gt; <span class="self">Self </span>{
         &lt;<span class="self">Self </span><span class="kw">as </span>ModIntBase&gt;::new(val)
     }
@@ -1541,7 +1541,7 @@
     /// See [`ModIntBase::raw`] for more more details.
     ///
     /// [`ModIntBase::raw`]: ./trait.ModIntBase.html#tymethod.raw
-    </span><span class="attribute">#[inline]
+    </span><span class="attr">#[inline]
     </span><span class="kw">pub fn </span>raw(val: u32) -&gt; <span class="self">Self </span>{
         <span class="self">Self </span>{
             val,
@@ -1552,7 +1552,7 @@
     <span class="doccomment">/// Retruns the representative.
     ///
     /// Corresponds to `atcoder::static_modint::val` in the original ACL.
-    </span><span class="attribute">#[inline]
+    </span><span class="attr">#[inline]
     </span><span class="kw">pub fn </span>val(<span class="self">self</span>) -&gt; u32 {
         <span class="self">self</span>.val
     }
@@ -1560,7 +1560,7 @@
     <span class="doccomment">/// Returns `self` to the power of `n`.
     ///
     /// Corresponds to `atcoder::dynamic_modint::pow` in the original ACL.
-    </span><span class="attribute">#[inline]
+    </span><span class="attr">#[inline]
     </span><span class="kw">pub fn </span>pow(<span class="self">self</span>, n: u64) -&gt; <span class="self">Self </span>{
         &lt;<span class="self">Self </span><span class="kw">as </span>ModIntBase&gt;::pow(<span class="self">self</span>, n)
     }
@@ -1572,7 +1572,7 @@
     /// # Panics
     ///
     /// Panics if the multiplicative inverse does not exist.
-    </span><span class="attribute">#[inline]
+    </span><span class="attr">#[inline]
     </span><span class="kw">pub fn </span>inv(<span class="self">self</span>) -&gt; <span class="self">Self </span>{
         <span class="self">Self</span>::inv_for_non_prime_modulus(<span class="self">self</span>)
     }
@@ -1581,22 +1581,22 @@
 <span class="doccomment">/// These methods are implemented for the struct.
 /// You don&#39;t need to `use` `ModIntBase` to call methods of `DynamicModInt`.
 </span><span class="kw">impl</span>&lt;I: Id&gt; ModIntBase <span class="kw">for </span>DynamicModInt&lt;I&gt; {
-    <span class="attribute">#[inline]
+    <span class="attr">#[inline]
     </span><span class="kw">fn </span>modulus() -&gt; u32 {
         <span class="self">Self</span>::modulus()
     }
 
-    <span class="attribute">#[inline]
+    <span class="attr">#[inline]
     </span><span class="kw">fn </span>raw(val: u32) -&gt; <span class="self">Self </span>{
         <span class="self">Self</span>::raw(val)
     }
 
-    <span class="attribute">#[inline]
+    <span class="attr">#[inline]
     </span><span class="kw">fn </span>val(<span class="self">self</span>) -&gt; u32 {
         <span class="self">self</span>.val()
     }
 
-    <span class="attribute">#[inline]
+    <span class="attr">#[inline]
     </span><span class="kw">fn </span>inv(<span class="self">self</span>) -&gt; <span class="self">Self </span>{
         <span class="self">self</span>.inv()
     }
@@ -1606,7 +1606,7 @@
     <span class="kw">fn </span>companion_barrett() -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>Barrett;
 }
 
-<span class="attribute">#[derive(Copy, Clone, Ord, PartialOrd, Eq, PartialEq, Hash, Debug)]
+<span class="attr">#[derive(Copy, Clone, Ord, PartialOrd, Eq, PartialEq, Hash, Debug)]
 </span><span class="kw">pub enum </span>DefaultId {}
 
 <span class="kw">impl </span>Id <span class="kw">for </span>DefaultId {
@@ -1624,7 +1624,7 @@
 
 <span class="kw">impl </span>Barrett {
     <span class="doccomment">/// Creates a new `Barrett`.
-    </span><span class="attribute">#[inline]
+    </span><span class="attr">#[inline]
     </span><span class="kw">pub const fn </span>new(m: u32) -&gt; <span class="self">Self </span>{
         <span class="self">Self </span>{
             m: AtomicU32::new(m),
@@ -1632,24 +1632,24 @@
         }
     }
 
-    <span class="attribute">#[inline]
+    <span class="attr">#[inline]
     </span><span class="kw">const fn </span>default() -&gt; <span class="self">Self </span>{
         <span class="self">Self</span>::new(<span class="number">998_244_353</span>)
     }
 
-    <span class="attribute">#[inline]
+    <span class="attr">#[inline]
     </span><span class="kw">fn </span>update(<span class="kw-2">&amp;</span><span class="self">self</span>, m: u32) {
         <span class="kw">let </span>im = (-<span class="number">1i64 </span><span class="kw">as </span>u64 / m <span class="kw">as </span>u64).wrapping_add(<span class="number">1</span>);
         <span class="self">self</span>.m.store(m, atomic::Ordering::SeqCst);
         <span class="self">self</span>.im.store(im, atomic::Ordering::SeqCst);
     }
 
-    <span class="attribute">#[inline]
+    <span class="attr">#[inline]
     </span><span class="kw">fn </span>umod(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; u32 {
         <span class="self">self</span>.m.load(atomic::Ordering::SeqCst)
     }
 
-    <span class="attribute">#[inline]
+    <span class="attr">#[inline]
     </span><span class="kw">fn </span>mul(<span class="kw-2">&amp;</span><span class="self">self</span>, a: u32, b: u32) -&gt; u32 {
         <span class="kw">let </span>m = <span class="self">self</span>.m.load(atomic::Ordering::SeqCst);
         <span class="kw">let </span>im = <span class="self">self</span>.im.load(atomic::Ordering::SeqCst);
@@ -1658,7 +1658,7 @@
 }
 
 <span class="kw">impl </span>Default <span class="kw">for </span>Barrett {
-    <span class="attribute">#[inline]
+    <span class="attr">#[inline]
     </span><span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
         <span class="self">Self</span>::default()
     }
@@ -1812,7 +1812,7 @@
     /// ```
     ///
     /// [any primitive integer]:  ../trait.RemEuclidU32.html
-    </span><span class="attribute">#[inline]
+    </span><span class="attr">#[inline]
     </span><span class="kw">fn </span>new&lt;T: RemEuclidU32&gt;(val: T) -&gt; <span class="self">Self </span>{
         <span class="self">Self</span>::raw(val.rem_euclid_u32(<span class="self">Self</span>::modulus()))
     }
@@ -1830,7 +1830,7 @@
     ///     let _: Z = Z::new(2).pow(3);
     /// }
     /// ```
-    </span><span class="attribute">#[inline]
+    </span><span class="attr">#[inline]
     </span><span class="kw">fn </span>pow(<span class="self">self</span>, <span class="kw-2">mut </span>n: u64) -&gt; <span class="self">Self </span>{
         <span class="kw">let </span><span class="kw-2">mut </span>x = <span class="self">self</span>;
         <span class="kw">let </span><span class="kw-2">mut </span>r = <span class="self">Self</span>::raw(<span class="number">1</span>);
@@ -1855,7 +1855,7 @@
     ($(<span class="macro-nonterminal">$ty</span>:tt),<span class="kw-2">*</span>) =&gt; {
         $(
             <span class="kw">impl </span>RemEuclidU32 <span class="kw">for </span><span class="macro-nonterminal">$ty </span>{
-                <span class="attribute">#[inline]
+                <span class="attr">#[inline]
                 </span><span class="kw">fn </span>rem_euclid_u32(<span class="self">self</span>, modulus: u32) -&gt; u32 {
                     (<span class="self">self </span><span class="kw">as </span>i64).rem_euclid(i64::from(modulus)) <span class="kw">as _
                 </span>}
@@ -1867,7 +1867,7 @@
 <span class="macro">impl_rem_euclid_u32_for_small_signed!</span>(i8, i16, i32, i64, isize);
 
 <span class="kw">impl </span>RemEuclidU32 <span class="kw">for </span>i128 {
-    <span class="attribute">#[inline]
+    <span class="attr">#[inline]
     </span><span class="kw">fn </span>rem_euclid_u32(<span class="self">self</span>, modulus: u32) -&gt; u32 {
         <span class="self">self</span>.rem_euclid(i128::from(modulus)) <span class="kw">as _
     </span>}
@@ -1877,7 +1877,7 @@
     ($(<span class="macro-nonterminal">$ty</span>:tt),<span class="kw-2">*</span>) =&gt; {
         $(
             <span class="kw">impl </span>RemEuclidU32 <span class="kw">for </span><span class="macro-nonterminal">$ty </span>{
-                <span class="attribute">#[inline]
+                <span class="attr">#[inline]
                 </span><span class="kw">fn </span>rem_euclid_u32(<span class="self">self</span>, modulus: u32) -&gt; u32 {
                     <span class="self">self </span><span class="kw">as </span>u32 % modulus
                 }
@@ -1890,7 +1890,7 @@
     ($(<span class="macro-nonterminal">$ty</span>:tt),<span class="kw-2">*</span>) =&gt; {
         $(
             <span class="kw">impl </span>RemEuclidU32 <span class="kw">for </span><span class="macro-nonterminal">$ty </span>{
-                <span class="attribute">#[inline]
+                <span class="attr">#[inline]
                 </span><span class="kw">fn </span>rem_euclid_u32(<span class="self">self</span>, modulus: u32) -&gt; u32 {
                     (<span class="self">self </span>% (modulus <span class="kw">as </span><span class="macro-nonterminal">$ty</span>)) <span class="kw">as _
                 </span>}
@@ -1902,14 +1902,14 @@
 <span class="macro">impl_rem_euclid_u32_for_small_unsigned!</span>(u8, u16, u32);
 <span class="macro">impl_rem_euclid_u32_for_large_unsigned!</span>(u64, u128);
 
-<span class="attribute">#[cfg(target_pointer_width = <span class="string">&quot;32&quot;</span>)]
+<span class="attr">#[cfg(target_pointer_width = <span class="string">&quot;32&quot;</span>)]
 </span><span class="macro">impl_rem_euclid_u32_for_small_unsigned!</span>(usize);
 
-<span class="attribute">#[cfg(target_pointer_width = <span class="string">&quot;64&quot;</span>)]
+<span class="attr">#[cfg(target_pointer_width = <span class="string">&quot;64&quot;</span>)]
 </span><span class="macro">impl_rem_euclid_u32_for_large_unsigned!</span>(usize);
 
 <span class="kw">trait </span>InternalImplementations: ModIntBase {
-    <span class="attribute">#[inline]
+    <span class="attr">#[inline]
     </span><span class="kw">fn </span>inv_for_non_prime_modulus(this: <span class="self">Self</span>) -&gt; <span class="self">Self </span>{
         <span class="kw">let </span>(gcd, x) = internal_math::inv_gcd(this.val().into(), <span class="self">Self</span>::modulus().into());
         <span class="kw">if </span>gcd != <span class="number">1 </span>{
@@ -1918,39 +1918,39 @@
         <span class="self">Self</span>::new(x)
     }
 
-    <span class="attribute">#[inline]
+    <span class="attr">#[inline]
     </span><span class="kw">fn </span>default_impl() -&gt; <span class="self">Self </span>{
         <span class="self">Self</span>::raw(<span class="number">0</span>)
     }
 
-    <span class="attribute">#[inline]
+    <span class="attr">#[inline]
     </span><span class="kw">fn </span>from_str_impl(s: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, Infallible&gt; {
         <span class="prelude-val">Ok</span>(s.parse::&lt;i64&gt;()
             .map(<span class="self">Self</span>::new)
             .unwrap_or_else(|<span class="kw">_</span>| <span class="macro">todo!</span>(<span class="string">&quot;parsing as an arbitrary precision integer?&quot;</span>)))
     }
 
-    <span class="attribute">#[inline]
+    <span class="attr">#[inline]
     </span><span class="kw">fn </span>hash_impl(this: <span class="kw-2">&amp;</span><span class="self">Self</span>, state: <span class="kw-2">&amp;mut </span><span class="kw">impl </span>Hasher) {
         this.val().hash(state)
     }
 
-    <span class="attribute">#[inline]
+    <span class="attr">#[inline]
     </span><span class="kw">fn </span>display_impl(this: <span class="kw-2">&amp;</span><span class="self">Self</span>, f: <span class="kw-2">&amp;mut </span>fmt::Formatter) -&gt; fmt::Result {
         fmt::Display::fmt(<span class="kw-2">&amp;</span>this.val(), f)
     }
 
-    <span class="attribute">#[inline]
+    <span class="attr">#[inline]
     </span><span class="kw">fn </span>debug_impl(this: <span class="kw-2">&amp;</span><span class="self">Self</span>, f: <span class="kw-2">&amp;mut </span>fmt::Formatter) -&gt; fmt::Result {
         fmt::Debug::fmt(<span class="kw-2">&amp;</span>this.val(), f)
     }
 
-    <span class="attribute">#[inline]
+    <span class="attr">#[inline]
     </span><span class="kw">fn </span>neg_impl(this: <span class="self">Self</span>) -&gt; <span class="self">Self </span>{
         <span class="self">Self</span>::sub_impl(<span class="self">Self</span>::raw(<span class="number">0</span>), this)
     }
 
-    <span class="attribute">#[inline]
+    <span class="attr">#[inline]
     </span><span class="kw">fn </span>add_impl(lhs: <span class="self">Self</span>, rhs: <span class="self">Self</span>) -&gt; <span class="self">Self </span>{
         <span class="kw">let </span>modulus = <span class="self">Self</span>::modulus();
         <span class="kw">let </span><span class="kw-2">mut </span>val = lhs.val() + rhs.val();
@@ -1960,7 +1960,7 @@
         <span class="self">Self</span>::raw(val)
     }
 
-    <span class="attribute">#[inline]
+    <span class="attr">#[inline]
     </span><span class="kw">fn </span>sub_impl(lhs: <span class="self">Self</span>, rhs: <span class="self">Self</span>) -&gt; <span class="self">Self </span>{
         <span class="kw">let </span>modulus = <span class="self">Self</span>::modulus();
         <span class="kw">let </span><span class="kw-2">mut </span>val = lhs.val().wrapping_sub(rhs.val());
@@ -1972,21 +1972,21 @@
 
     <span class="kw">fn </span>mul_impl(lhs: <span class="self">Self</span>, rhs: <span class="self">Self</span>) -&gt; <span class="self">Self</span>;
 
-    <span class="attribute">#[inline]
+    <span class="attr">#[inline]
     </span><span class="kw">fn </span>div_impl(lhs: <span class="self">Self</span>, rhs: <span class="self">Self</span>) -&gt; <span class="self">Self </span>{
         <span class="self">Self</span>::mul_impl(lhs, rhs.inv())
     }
 }
 
 <span class="kw">impl</span>&lt;M: Modulus&gt; InternalImplementations <span class="kw">for </span>StaticModInt&lt;M&gt; {
-    <span class="attribute">#[inline]
+    <span class="attr">#[inline]
     </span><span class="kw">fn </span>mul_impl(lhs: <span class="self">Self</span>, rhs: <span class="self">Self</span>) -&gt; <span class="self">Self </span>{
         <span class="self">Self</span>::raw((u64::from(lhs.val()) * u64::from(rhs.val()) % u64::from(M::VALUE)) <span class="kw">as </span>u32)
     }
 }
 
 <span class="kw">impl</span>&lt;I: Id&gt; InternalImplementations <span class="kw">for </span>DynamicModInt&lt;I&gt; {
-    <span class="attribute">#[inline]
+    <span class="attr">#[inline]
     </span><span class="kw">fn </span>mul_impl(lhs: <span class="self">Self</span>, rhs: <span class="self">Self</span>) -&gt; <span class="self">Self </span>{
         <span class="self">Self</span>::raw(I::companion_barrett().mul(lhs.val, rhs.val))
     }
@@ -1996,7 +1996,7 @@
     () =&gt; {};
     (<span class="kw">impl </span>&lt;<span class="macro-nonterminal">$generic_param</span>:ident : <span class="macro-nonterminal">$generic_param_bound</span>:tt&gt; <span class="kw">_ for </span><span class="macro-nonterminal">$self</span>:ty; $(<span class="macro-nonterminal">$rest</span>:tt)<span class="kw-2">*</span>) =&gt; {
         <span class="kw">impl </span>&lt;<span class="macro-nonterminal">$generic_param</span>: <span class="macro-nonterminal">$generic_param_bound</span>&gt; Default <span class="kw">for </span><span class="macro-nonterminal">$self </span>{
-            <span class="attribute">#[inline]
+            <span class="attr">#[inline]
             </span><span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
                 <span class="self">Self</span>::default_impl()
             }
@@ -2005,36 +2005,36 @@
         <span class="kw">impl </span>&lt;<span class="macro-nonterminal">$generic_param</span>: <span class="macro-nonterminal">$generic_param_bound</span>&gt; FromStr <span class="kw">for </span><span class="macro-nonterminal">$self </span>{
             <span class="kw">type </span><span class="prelude-val">Err </span>= Infallible;
 
-            <span class="attribute">#[inline]
+            <span class="attr">#[inline]
             </span><span class="kw">fn </span>from_str(s: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, Infallible&gt; {
                 <span class="self">Self</span>::from_str_impl(s)
             }
         }
 
         <span class="kw">impl</span>&lt;<span class="macro-nonterminal">$generic_param</span>: <span class="macro-nonterminal">$generic_param_bound</span>, V: RemEuclidU32&gt; From&lt;V&gt; <span class="kw">for </span><span class="macro-nonterminal">$self </span>{
-            <span class="attribute">#[inline]
+            <span class="attr">#[inline]
             </span><span class="kw">fn </span>from(from: V) -&gt; <span class="self">Self </span>{
                 <span class="self">Self</span>::new(from)
             }
         }
 
-        <span class="attribute">#[allow(clippy::derive_hash_xor_eq)]
+        <span class="attr">#[allow(clippy::derive_hash_xor_eq)]
         </span><span class="kw">impl</span>&lt;<span class="macro-nonterminal">$generic_param</span>: <span class="macro-nonterminal">$generic_param_bound</span>&gt; Hash <span class="kw">for </span><span class="macro-nonterminal">$self </span>{
-            <span class="attribute">#[inline]
+            <span class="attr">#[inline]
             </span><span class="kw">fn </span>hash&lt;H: Hasher&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, state: <span class="kw-2">&amp;mut </span>H) {
                 <span class="self">Self</span>::hash_impl(<span class="self">self</span>, state)
             }
         }
 
         <span class="kw">impl</span>&lt;<span class="macro-nonterminal">$generic_param</span>: <span class="macro-nonterminal">$generic_param_bound</span>&gt; fmt::Display <span class="kw">for </span><span class="macro-nonterminal">$self </span>{
-            <span class="attribute">#[inline]
+            <span class="attr">#[inline]
             </span><span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>fmt::Formatter&lt;<span class="lifetime">&#39;_</span>&gt;) -&gt; fmt::Result {
                 <span class="self">Self</span>::display_impl(<span class="self">self</span>, f)
             }
         }
 
         <span class="kw">impl</span>&lt;<span class="macro-nonterminal">$generic_param</span>: <span class="macro-nonterminal">$generic_param_bound</span>&gt; fmt::Debug <span class="kw">for </span><span class="macro-nonterminal">$self </span>{
-            <span class="attribute">#[inline]
+            <span class="attr">#[inline]
             </span><span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>fmt::Formatter&lt;<span class="lifetime">&#39;_</span>&gt;) -&gt; fmt::Result {
                 <span class="self">Self</span>::debug_impl(<span class="self">self</span>, f)
             }
@@ -2043,7 +2043,7 @@
         <span class="kw">impl</span>&lt;<span class="macro-nonterminal">$generic_param</span>: <span class="macro-nonterminal">$generic_param_bound</span>&gt; Neg <span class="kw">for </span><span class="macro-nonterminal">$self </span>{
             <span class="kw">type </span>Output = <span class="macro-nonterminal">$self</span>;
 
-            <span class="attribute">#[inline]
+            <span class="attr">#[inline]
             </span><span class="kw">fn </span>neg(<span class="self">self</span>) -&gt; <span class="macro-nonterminal">$self </span>{
                 <span class="self">Self</span>::neg_impl(<span class="self">self</span>)
             }
@@ -2052,7 +2052,7 @@
         <span class="kw">impl</span>&lt;<span class="macro-nonterminal">$generic_param</span>: <span class="macro-nonterminal">$generic_param_bound</span>&gt; Neg <span class="kw">for </span><span class="kw-2">&amp;</span><span class="lifetime">&#39;_ </span><span class="macro-nonterminal">$self </span>{
             <span class="kw">type </span>Output = <span class="macro-nonterminal">$self</span>;
 
-            <span class="attribute">#[inline]
+            <span class="attr">#[inline]
             </span><span class="kw">fn </span>neg(<span class="self">self</span>) -&gt; <span class="macro-nonterminal">$self </span>{
                 &lt;<span class="macro-nonterminal">$self</span>&gt;::neg_impl(<span class="kw-2">*</span><span class="self">self</span>)
             }
@@ -2073,7 +2073,7 @@
         <span class="kw">impl </span>&lt;$(<span class="macro-nonterminal">$generic_param</span>: <span class="macro-nonterminal">$generic_param_bound</span>),<span class="kw-2">*</span>&gt; Add&lt;<span class="macro-nonterminal">$rhs_ty</span>&gt; <span class="kw">for </span><span class="macro-nonterminal">$lhs_ty </span>{
             <span class="kw">type </span>Output = <span class="macro-nonterminal">$output</span>;
 
-            <span class="attribute">#[inline]
+            <span class="attr">#[inline]
             </span><span class="kw">fn </span>add(<span class="self">self</span>, rhs: <span class="macro-nonterminal">$rhs_ty</span>) -&gt; <span class="macro-nonterminal">$output </span>{
                 &lt;<span class="macro-nonterminal">$output</span>&gt;::add_impl(apply(<span class="macro-nonterminal">$lhs_body</span>, <span class="self">self</span>), apply(<span class="macro-nonterminal">$rhs_body</span>, rhs))
             }
@@ -2082,7 +2082,7 @@
         <span class="kw">impl </span>&lt;$(<span class="macro-nonterminal">$generic_param</span>: <span class="macro-nonterminal">$generic_param_bound</span>),<span class="kw-2">*</span>&gt; Sub&lt;<span class="macro-nonterminal">$rhs_ty</span>&gt; <span class="kw">for </span><span class="macro-nonterminal">$lhs_ty </span>{
             <span class="kw">type </span>Output = <span class="macro-nonterminal">$output</span>;
 
-            <span class="attribute">#[inline]
+            <span class="attr">#[inline]
             </span><span class="kw">fn </span>sub(<span class="self">self</span>, rhs: <span class="macro-nonterminal">$rhs_ty</span>) -&gt; <span class="macro-nonterminal">$output </span>{
                 &lt;<span class="macro-nonterminal">$output</span>&gt;::sub_impl(apply(<span class="macro-nonterminal">$lhs_body</span>, <span class="self">self</span>), apply(<span class="macro-nonterminal">$rhs_body</span>, rhs))
             }
@@ -2091,7 +2091,7 @@
         <span class="kw">impl </span>&lt;$(<span class="macro-nonterminal">$generic_param</span>: <span class="macro-nonterminal">$generic_param_bound</span>),<span class="kw-2">*</span>&gt; Mul&lt;<span class="macro-nonterminal">$rhs_ty</span>&gt; <span class="kw">for </span><span class="macro-nonterminal">$lhs_ty </span>{
             <span class="kw">type </span>Output = <span class="macro-nonterminal">$output</span>;
 
-            <span class="attribute">#[inline]
+            <span class="attr">#[inline]
             </span><span class="kw">fn </span>mul(<span class="self">self</span>, rhs: <span class="macro-nonterminal">$rhs_ty</span>) -&gt; <span class="macro-nonterminal">$output </span>{
                 &lt;<span class="macro-nonterminal">$output</span>&gt;::mul_impl(apply(<span class="macro-nonterminal">$lhs_body</span>, <span class="self">self</span>), apply(<span class="macro-nonterminal">$rhs_body</span>, rhs))
             }
@@ -2100,7 +2100,7 @@
         <span class="kw">impl </span>&lt;$(<span class="macro-nonterminal">$generic_param</span>: <span class="macro-nonterminal">$generic_param_bound</span>),<span class="kw-2">*</span>&gt; Div&lt;<span class="macro-nonterminal">$rhs_ty</span>&gt; <span class="kw">for </span><span class="macro-nonterminal">$lhs_ty </span>{
             <span class="kw">type </span>Output = <span class="macro-nonterminal">$output</span>;
 
-            <span class="attribute">#[inline]
+            <span class="attr">#[inline]
             </span><span class="kw">fn </span>div(<span class="self">self</span>, rhs: <span class="macro-nonterminal">$rhs_ty</span>) -&gt; <span class="macro-nonterminal">$output </span>{
                 &lt;<span class="macro-nonterminal">$output</span>&gt;::div_impl(apply(<span class="macro-nonterminal">$lhs_body</span>, <span class="self">self</span>), apply(<span class="macro-nonterminal">$rhs_body</span>, rhs))
             }
@@ -2114,28 +2114,28 @@
     () =&gt; {};
     (<span class="kw">for</span>&lt;$(<span class="macro-nonterminal">$generic_param</span>:ident : <span class="macro-nonterminal">$generic_param_bound</span>:tt),<span class="kw-2">*</span>&gt; &lt;<span class="macro-nonterminal">$lhs_ty</span>:ty&gt; ~= &lt;<span class="macro-nonterminal">$rhs_ty</span>:ty&gt; { <span class="kw">_ </span>~= { <span class="macro-nonterminal">$rhs_body</span>:expr } } $(<span class="macro-nonterminal">$rest</span>:tt)<span class="kw-2">*</span>) =&gt; {
         <span class="kw">impl </span>&lt;$(<span class="macro-nonterminal">$generic_param</span>: <span class="macro-nonterminal">$generic_param_bound</span>),<span class="kw-2">*</span>&gt; AddAssign&lt;<span class="macro-nonterminal">$rhs_ty</span>&gt; <span class="kw">for </span><span class="macro-nonterminal">$lhs_ty </span>{
-            <span class="attribute">#[inline]
+            <span class="attr">#[inline]
             </span><span class="kw">fn </span>add_assign(<span class="kw-2">&amp;mut </span><span class="self">self</span>, rhs: <span class="macro-nonterminal">$rhs_ty</span>) {
                 <span class="kw-2">*</span><span class="self">self </span>= <span class="kw-2">*</span><span class="self">self </span>+ apply(<span class="macro-nonterminal">$rhs_body</span>, rhs);
             }
         }
 
         <span class="kw">impl </span>&lt;$(<span class="macro-nonterminal">$generic_param</span>: <span class="macro-nonterminal">$generic_param_bound</span>),<span class="kw-2">*</span>&gt; SubAssign&lt;<span class="macro-nonterminal">$rhs_ty</span>&gt; <span class="kw">for </span><span class="macro-nonterminal">$lhs_ty </span>{
-            <span class="attribute">#[inline]
+            <span class="attr">#[inline]
             </span><span class="kw">fn </span>sub_assign(<span class="kw-2">&amp;mut </span><span class="self">self</span>, rhs: <span class="macro-nonterminal">$rhs_ty</span>) {
                 <span class="kw-2">*</span><span class="self">self </span>= <span class="kw-2">*</span><span class="self">self </span>- apply(<span class="macro-nonterminal">$rhs_body</span>, rhs);
             }
         }
 
         <span class="kw">impl </span>&lt;$(<span class="macro-nonterminal">$generic_param</span>: <span class="macro-nonterminal">$generic_param_bound</span>),<span class="kw-2">*</span>&gt; MulAssign&lt;<span class="macro-nonterminal">$rhs_ty</span>&gt; <span class="kw">for </span><span class="macro-nonterminal">$lhs_ty </span>{
-            <span class="attribute">#[inline]
+            <span class="attr">#[inline]
             </span><span class="kw">fn </span>mul_assign(<span class="kw-2">&amp;mut </span><span class="self">self</span>, rhs: <span class="macro-nonterminal">$rhs_ty</span>) {
                 <span class="kw-2">*</span><span class="self">self </span>= <span class="kw-2">*</span><span class="self">self </span>* apply(<span class="macro-nonterminal">$rhs_body</span>, rhs);
             }
         }
 
         <span class="kw">impl </span>&lt;$(<span class="macro-nonterminal">$generic_param</span>: <span class="macro-nonterminal">$generic_param_bound</span>),<span class="kw-2">*</span>&gt; DivAssign&lt;<span class="macro-nonterminal">$rhs_ty</span>&gt; <span class="kw">for </span><span class="macro-nonterminal">$lhs_ty </span>{
-            <span class="attribute">#[inline]
+            <span class="attr">#[inline]
             </span><span class="kw">fn </span>div_assign(<span class="kw-2">&amp;mut </span><span class="self">self</span>, rhs: <span class="macro-nonterminal">$rhs_ty</span>) {
                 <span class="kw-2">*</span><span class="self">self </span>= <span class="kw-2">*</span><span class="self">self </span>/ apply(<span class="macro-nonterminal">$rhs_body</span>, rhs);
             }
@@ -2145,7 +2145,7 @@
     };
 }
 
-<span class="attribute">#[inline]
+<span class="attr">#[inline]
 </span><span class="kw">fn </span>apply&lt;F: FnOnce(X) -&gt; O, X, O&gt;(f: F, x: X) -&gt; O {
     f(x)
 }
@@ -2178,7 +2178,7 @@
     () =&gt; {};
     (<span class="kw">impl</span>&lt;<span class="macro-nonterminal">$generic_param</span>:ident : <span class="macro-nonterminal">$generic_param_bound</span>:tt&gt; <span class="macro-nonterminal">$</span><span class="kw">trait</span>:<span class="macro-nonterminal">ident</span>&lt;<span class="kw">_</span>&gt; <span class="kw">for </span><span class="macro-nonterminal">$self</span>:ty { <span class="kw">fn </span><span class="macro-nonterminal">$method</span>:ident(<span class="kw">_</span>) -&gt; <span class="kw">_ </span>{ <span class="kw">_</span>(<span class="macro-nonterminal">$unit</span>:expr, <span class="macro-nonterminal">$op</span>:expr) } } $(<span class="macro-nonterminal">$rest</span>:tt)<span class="kw-2">*</span>) =&gt; {
         <span class="kw">impl</span>&lt;<span class="macro-nonterminal">$generic_param</span>: <span class="macro-nonterminal">$generic_param_bound</span>&gt; <span class="macro-nonterminal">$</span><span class="kw">trait</span>&lt;<span class="macro-nonterminal">Self</span>&gt; <span class="kw">for </span><span class="macro-nonterminal">$self </span>{
-            <span class="attribute">#[inline]
+            <span class="attr">#[inline]
             </span><span class="kw">fn </span><span class="macro-nonterminal">$method</span>&lt;S&gt;(iter: S) -&gt; <span class="self">Self
             </span><span class="kw">where
                 </span>S: Iterator&lt;Item = <span class="self">Self</span>&gt;,
@@ -2188,7 +2188,7 @@
         }
 
         <span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, <span class="macro-nonterminal">$generic_param</span>: <span class="macro-nonterminal">$generic_param_bound</span>&gt; <span class="macro-nonterminal">$</span><span class="kw">trait</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="macro-nonterminal">Self</span>&gt; <span class="kw">for </span><span class="macro-nonterminal">$self </span>{
-            <span class="attribute">#[inline]
+            <span class="attr">#[inline]
             </span><span class="kw">fn </span><span class="macro-nonterminal">$method</span>&lt;S&gt;(iter: S) -&gt; <span class="self">Self
             </span><span class="kw">where
                 </span>S: Iterator&lt;Item = <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="self">Self</span>&gt;,
@@ -2208,11 +2208,11 @@
     <span class="kw">impl</span>&lt;I: Id     &gt; Product&lt;<span class="kw">_</span>&gt; <span class="kw">for </span>DynamicModInt&lt;I&gt; { <span class="kw">fn </span>product(<span class="kw">_</span>) -&gt; <span class="kw">_ </span>{ <span class="kw">_</span>(<span class="self">Self</span>::raw(<span class="number">1</span>), Mul::mul) } }
 }
 
-<span class="attribute">#[cfg(test)]
+<span class="attr">#[cfg(test)]
 </span><span class="kw">mod </span>tests {
     <span class="kw">use </span><span class="kw">crate</span>::modint::ModInt1000000007;
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>static_modint_new() {
         <span class="macro">assert_eq!</span>(<span class="number">0</span>, ModInt1000000007::new(<span class="number">0u32</span>).val);
         <span class="macro">assert_eq!</span>(<span class="number">1</span>, ModInt1000000007::new(<span class="number">1u32</span>).val);
@@ -2232,7 +2232,7 @@
         <span class="macro">assert_eq!</span>(<span class="number">1_000_000_006</span>, ModInt1000000007::new(-<span class="number">1i64</span>).val);
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>static_modint_add() {
         <span class="kw">fn </span>add(lhs: u32, rhs: u32) -&gt; u32 {
             (ModInt1000000007::new(lhs) + ModInt1000000007::new(rhs)).val
@@ -2242,7 +2242,7 @@
         <span class="macro">assert_eq!</span>(<span class="number">1</span>, add(<span class="number">1_000_000_006</span>, <span class="number">2</span>));
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>static_modint_sub() {
         <span class="kw">fn </span>sub(lhs: u32, rhs: u32) -&gt; u32 {
             (ModInt1000000007::new(lhs) - ModInt1000000007::new(rhs)).val
@@ -2252,7 +2252,7 @@
         <span class="macro">assert_eq!</span>(<span class="number">1_000_000_006</span>, sub(<span class="number">0</span>, <span class="number">1</span>));
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>static_modint_mul() {
         <span class="kw">fn </span>mul(lhs: u32, rhs: u32) -&gt; u32 {
             (ModInt1000000007::new(lhs) * ModInt1000000007::new(rhs)).val
@@ -2263,7 +2263,7 @@
         <span class="macro">assert_eq!</span>(<span class="number">999_999_937</span>, mul(<span class="number">100_000</span>, <span class="number">100_000</span>));
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>static_modint_prime_div() {
         <span class="kw">fn </span>div(lhs: u32, rhs: u32) -&gt; u32 {
             (ModInt1000000007::new(lhs) / ModInt1000000007::new(rhs)).val
@@ -2275,7 +2275,7 @@
         <span class="macro">assert_eq!</span>(<span class="number">23_809_524</span>, div(<span class="number">1</span>, <span class="number">42</span>));
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>static_modint_sum() {
         <span class="kw">fn </span>sum(values: <span class="kw-2">&amp;</span>[i64]) -&gt; ModInt1000000007 {
             values.iter().copied().map(ModInt1000000007::new).sum()
@@ -2284,7 +2284,7 @@
         <span class="macro">assert_eq!</span>(ModInt1000000007::new(-<span class="number">3</span>), sum(<span class="kw-2">&amp;</span>[-<span class="number">1</span>, <span class="number">2</span>, -<span class="number">3</span>, <span class="number">4</span>, -<span class="number">5</span>]));
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>static_modint_product() {
         <span class="kw">fn </span>product(values: <span class="kw-2">&amp;</span>[i64]) -&gt; ModInt1000000007 {
             values.iter().copied().map(ModInt1000000007::new).product()
@@ -2293,7 +2293,7 @@
         <span class="macro">assert_eq!</span>(ModInt1000000007::new(-<span class="number">120</span>), product(<span class="kw-2">&amp;</span>[-<span class="number">1</span>, <span class="number">2</span>, -<span class="number">3</span>, <span class="number">4</span>, -<span class="number">5</span>]));
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>static_modint_binop_coercion() {
         <span class="kw">let </span>f = ModInt1000000007::new;
         <span class="kw">let </span>a = <span class="number">10_293_812_usize</span>;
@@ -2304,7 +2304,7 @@
         <span class="macro">assert_eq!</span>(f(a) / f(b), f(a) / b);
     }
 
-    <span class="attribute">#[test]
+    <span class="attr">#[test]
     </span><span class="kw">fn </span>static_modint_assign_coercion() {
         <span class="kw">let </span>f = ModInt1000000007::new;
         <span class="kw">let </span>a = f(<span class="number">10_293_812_usize</span>);
@@ -2319,4 +2319,4 @@
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="ac_library_rs" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.66.0-nightly (c97d02cdb 2022-10-05)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="ac_library_rs" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.67.0-nightly (215e3cd21 2022-11-03)" ></div></body></html>

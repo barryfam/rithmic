@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `rithmic/src/monoid_ds/fenwick/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../normalize.css"><link rel="stylesheet" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../dark.css" disabled><link rel="stylesheet" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../rithmic/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../rithmic/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../rithmic/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `rithmic/src/monoid_ds/fenwick/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../normalize.css"><link rel="stylesheet" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../dark.css" disabled><link rel="stylesheet" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../../rithmic/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -145,7 +145,7 @@
 <span id="145">145</span>
 </pre><pre class="rust"><code><span class="kw">mod </span>update_build;
 
-<span class="attribute">#[cfg(test)] </span><span class="kw">mod </span>tests;
+<span class="attr">#[cfg(test)] </span><span class="kw">mod </span>tests;
 
 <span class="kw">use </span>std::fmt::{Debug, <span class="self">self</span>};
 <span class="kw">use </span>std::marker::PhantomData;
@@ -155,7 +155,7 @@
 <span class="kw">use crate</span>::{IntBitOps, NdVec, ndvec, Rangelike, OdometerBE};
 <span class="kw">use </span><span class="kw">super</span>::monoid_ops::{MonoidOps, USumQSum};
 
-<span class="attribute">#[derive(Clone)]
+<span class="attr">#[derive(Clone)]
 </span><span class="kw">pub struct </span>NdFenwick&lt;<span class="kw">const </span>D: usize, T: Default, O: MonoidOps&lt;T, T&gt; = USumQSum&gt;
     (NdVec&lt;D, T&gt;, PhantomData&lt;O&gt;);
 
@@ -186,7 +186,7 @@
         <span class="kw">let </span>u0 = end.map(|i| i-<span class="number">1</span>);
         <span class="macro">assert!</span>(<span class="self">self</span>.inbounds(u0), <span class="string">&quot;range larger than shape: {:?}&quot;</span>, end);
 
-        <span class="attribute">#[inline]
+        <span class="attr">#[inline]
         </span><span class="kw">fn </span>query_next(i: usize) -&gt; <span class="prelude-ty">Option</span>&lt;usize&gt; {
             <span class="kw">let </span>i1 = (i &amp; (i+<span class="number">1</span>)).wrapping_sub(<span class="number">1</span>);
             (i1 != !<span class="number">0</span>).then_some(i1)
@@ -195,9 +195,9 @@
         <span class="kw">let </span><span class="kw-2">mut </span>u = u0;
         <span class="kw">let </span><span class="kw-2">mut </span>sum = O::operator_identity();
         <span class="lifetime">&#39;odo</span>: <span class="kw">loop </span>{
-            <span class="attribute">#[cfg(not(feature = <span class="string">&quot;unsafe&quot;</span>))]
+            <span class="attr">#[cfg(not(feature = <span class="string">&quot;unsafe&quot;</span>))]
             </span>{ sum = O::operator(<span class="kw-2">&amp;</span>sum, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="number">0</span>[u]); }
-            <span class="attribute">#[cfg(feature = <span class="string">&quot;unsafe&quot;</span>)]
+            <span class="attr">#[cfg(feature = <span class="string">&quot;unsafe&quot;</span>)]
             </span><span class="comment">// SAFETY: Asserted u0 inbounds. 0 &lt;= u[d] &lt;= u0[d] for all d
             </span><span class="kw">unsafe </span>{ sum = O::operator(<span class="kw-2">&amp;</span>sum, <span class="self">self</span>.<span class="number">0</span>.get_unchecked(u)); }
 
@@ -229,7 +229,7 @@
             <span class="kw">return </span><span class="self">self</span>.prefix(r.map(|(_start, end)| end))
         }
 
-        <span class="attribute">#[derive(Clone, Copy, Debug)]
+        <span class="attr">#[derive(Clone, Copy, Debug)]
         </span><span class="kw">struct </span>IE {
             excl: bool,
             i: usize,
@@ -270,9 +270,9 @@
             }
 
             <span class="kw">let </span>dest = <span class="kw">if </span>!ie { <span class="kw-2">&amp;mut </span>incl } <span class="kw">else </span>{ <span class="kw-2">&amp;mut </span>excl };
-            <span class="attribute">#[cfg(not(feature = <span class="string">&quot;unsafe&quot;</span>))]
+            <span class="attr">#[cfg(not(feature = <span class="string">&quot;unsafe&quot;</span>))]
             </span>{ <span class="kw-2">*</span>dest = O::operator(dest, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="number">0</span>.vec[index]); }
-            <span class="attribute">#[cfg(feature = <span class="string">&quot;unsafe&quot;</span>)]
+            <span class="attr">#[cfg(feature = <span class="string">&quot;unsafe&quot;</span>)]
             </span><span class="comment">// SAFETY: index = sum(i * stride) where each i &lt; shape
             </span><span class="kw">unsafe </span>{ <span class="kw-2">*</span>dest = O::operator(dest, <span class="self">self</span>.<span class="number">0</span>.vec.get_unchecked(index)); }
         }
@@ -289,4 +289,4 @@
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="rithmic" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.66.0-nightly (c97d02cdb 2022-10-05)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="rithmic" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.67.0-nightly (215e3cd21 2022-11-03)" ></div></body></html>

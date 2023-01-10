@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `rithmic/src/bvec/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../rithmic/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../rithmic/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../rithmic/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `rithmic/src/bvec/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../rithmic/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -572,7 +572,7 @@
 <span id="572">572</span>
 <span id="573">573</span>
 <span id="574">574</span>
-</pre><pre class="rust"><code><span class="attribute">#[cfg(test)] </span><span class="kw">mod </span>tests;
+</pre><pre class="rust"><code><span class="attr">#[cfg(test)] </span><span class="kw">mod </span>tests;
 
 <span class="kw">use </span>std::fmt::{<span class="self">self</span>, Debug, Formatter};
 <span class="kw">use </span>std::ops::{BitAnd, BitAndAssign, BitOr, BitOrAssign, BitXor, BitXorAssign, Index, Not, Shl, ShlAssign, Shr, ShrAssign};
@@ -582,11 +582,11 @@
 
 <span class="kw">const </span>U_BITS: usize = usize::BITS <span class="kw">as </span>usize;
 
-<span class="attribute">#[inline]
+<span class="attr">#[inline]
 </span><span class="kw">fn </span>major(index: usize) -&gt; usize {
     index / U_BITS
 }
-<span class="attribute">#[inline]
+<span class="attr">#[inline]
 </span><span class="kw">fn </span>minor(index: usize) -&gt; usize {
     index % U_BITS
 }
@@ -629,7 +629,7 @@ assert_eq!(twins1.iter_ones().collect::&lt;Vec&lt;_&gt;&gt;(), vec![3, 5, 11, 17
 assert_eq!(twins2.iter_ones().collect::&lt;Vec&lt;_&gt;&gt;(), vec![5, 7, 13, 19, 31, 43, 61, 73]);
 ```
 */
-</span><span class="attribute">#[derive(Default, Clone, PartialEq, Eq, Hash)]
+</span><span class="attr">#[derive(Default, Clone, PartialEq, Eq, Hash)]
 </span><span class="kw">pub struct </span>BVec {
     vec: Vec&lt;usize&gt;,
     len: usize,
@@ -660,31 +660,31 @@ assert_eq!(twins2.iter_ones().collect::&lt;Vec&lt;_&gt;&gt;(), vec![5, 7, 13, 19
         bv
     }
 
-    <span class="attribute">#[allow(clippy::len_without_is_empty)]
+    <span class="attr">#[allow(clippy::len_without_is_empty)]
     #[inline]
     </span><span class="kw">pub fn </span>len(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize {
         <span class="self">self</span>.len
     }
 
-    <span class="attribute">#[inline]
+    <span class="attr">#[inline]
     </span><span class="kw">pub fn </span>get(<span class="kw-2">&amp;</span><span class="self">self</span>, index: usize) -&gt; <span class="prelude-ty">Option</span>&lt;bool&gt; {
         <span class="kw">if </span>index &gt;= <span class="self">self</span>.len { <span class="prelude-val">None </span>}
         <span class="kw">else </span>{ <span class="prelude-val">Some</span>(<span class="self">self</span>[index]) }
     }
 
-    <span class="attribute">#[inline]
+    <span class="attr">#[inline]
     </span><span class="kw">pub fn </span>set(<span class="kw-2">&amp;mut </span><span class="self">self</span>, index: usize, b: bool)
     {
         <span class="macro">assert!</span>(index &lt; <span class="self">self</span>.len, <span class="macro">INDEX_RANGE!</span>());
 
-        <span class="attribute">#[cfg(not(feature = <span class="string">&quot;unsafe&quot;</span>))]
+        <span class="attr">#[cfg(not(feature = <span class="string">&quot;unsafe&quot;</span>))]
         </span><span class="kw">if </span>b {
             <span class="self">self</span>.vec[major(index)] |= <span class="number">1 </span>&lt;&lt; minor(index);
         } <span class="kw">else </span>{
             <span class="self">self</span>.vec[major(index)] &amp;= !(<span class="number">1 </span>&lt;&lt; minor(index));
         }
 
-        <span class="attribute">#[cfg(feature = <span class="string">&quot;unsafe&quot;</span>)]
+        <span class="attr">#[cfg(feature = <span class="string">&quot;unsafe&quot;</span>)]
         </span><span class="comment">// SAFETY: Asserted index &lt; self.len. Invariant self.vec.len = self.len.div_ceil(U_BITS)
         </span><span class="kw">unsafe </span>{
             <span class="kw">if </span>b {
@@ -695,19 +695,19 @@ assert_eq!(twins2.iter_ones().collect::&lt;Vec&lt;_&gt;&gt;(), vec![5, 7, 13, 19
         }
     }
 
-    <span class="attribute">#[inline]
+    <span class="attr">#[inline]
     </span><span class="kw">pub fn </span>replace(<span class="kw-2">&amp;mut </span><span class="self">self</span>, index: usize, b: bool) -&gt; bool {
         <span class="kw">let </span>ret = <span class="self">self</span>[index];
         <span class="self">self</span>.set(index, b);
         ret
     }
 
-    <span class="attribute">#[inline]
+    <span class="attr">#[inline]
     </span><span class="kw">pub fn </span>first(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;bool&gt; {
         <span class="self">self</span>.get(<span class="number">0</span>)
     }
 
-    <span class="attribute">#[inline]
+    <span class="attr">#[inline]
     </span><span class="kw">pub fn </span>last(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;bool&gt; {
         <span class="prelude-val">Some</span>(<span class="self">self</span>[<span class="self">self</span>.len.checked_sub(<span class="number">1</span>)<span class="question-mark">?</span>])
     }
@@ -825,7 +825,7 @@ assert_eq!(twins2.iter_ones().collect::&lt;Vec&lt;_&gt;&gt;(), vec![5, 7, 13, 19
         <span class="kw-2">&amp;</span><span class="self">self</span>.vec
     }
 
-    <span class="attribute">#[inline]
+    <span class="attr">#[inline]
     </span><span class="kw">fn </span>top_off(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
         <span class="kw">if </span>minor(<span class="self">self</span>.len) != <span class="number">0 </span>{
             <span class="kw-2">*</span><span class="self">self</span>.vec.last_mut().unwrap() &amp;= (<span class="number">1 </span>&lt;&lt; minor(<span class="self">self</span>.len)) - <span class="number">1</span>;
@@ -850,7 +850,7 @@ assert_eq!(twins2.iter_ones().collect::&lt;Vec&lt;_&gt;&gt;(), vec![5, 7, 13, 19
 <span class="kw">impl</span>&lt;<span class="lifetime">&#39;me</span>, <span class="kw">const </span>P: bool&gt; Iterator <span class="kw">for </span>Iter&lt;<span class="lifetime">&#39;me</span>, P&gt; {
     <span class="kw">type </span>Item = usize;
 
-    <span class="attribute">#[inline]
+    <span class="attr">#[inline]
     </span><span class="kw">fn </span>next(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>::Item&gt;
     {
         <span class="kw">while </span><span class="self">self</span>.sub_iter == <span class="number">0 </span>{
@@ -874,16 +874,16 @@ assert_eq!(twins2.iter_ones().collect::&lt;Vec&lt;_&gt;&gt;(), vec![5, 7, 13, 19
 <span class="kw">impl </span>Index&lt;usize&gt; <span class="kw">for </span>BVec {
     <span class="kw">type </span>Output = bool;
 
-    <span class="attribute">#[inline]
+    <span class="attr">#[inline]
     </span><span class="kw">fn </span>index(<span class="kw-2">&amp;</span><span class="self">self</span>, index: usize) -&gt; <span class="kw-2">&amp;</span><span class="self">Self</span>::Output
     {
         <span class="macro">assert!</span>(index &lt; <span class="self">self</span>.len, <span class="macro">INDEX_RANGE!</span>());
 
         <span class="kw">let </span>u;
-        { <span class="attribute">#![cfg(not(feature = <span class="string">&quot;unsafe&quot;</span>))] </span>u = <span class="self">self</span>.vec[major(index)]; }
+        { <span class="attr">#![cfg(not(feature = <span class="string">&quot;unsafe&quot;</span>))] </span>u = <span class="self">self</span>.vec[major(index)]; }
 
         <span class="comment">// SAFETY: Asserted index &lt; self.len. Invariant self.vec.len = self.len.div_ceil(U_BITS)
-        </span>{ <span class="attribute">#![cfg(feature = <span class="string">&quot;unsafe&quot;</span>)] </span><span class="kw">unsafe </span>{ u = <span class="self">self</span>.vec.get_unchecked(major(index)); }}
+        </span>{ <span class="attr">#![cfg(feature = <span class="string">&quot;unsafe&quot;</span>)] </span><span class="kw">unsafe </span>{ u = <span class="self">self</span>.vec.get_unchecked(major(index)); }}
 
         <span class="kw">match </span>u &gt;&gt; minor(index) <span class="kw-2">&amp;</span><span class="number">1</span>==<span class="number">1 </span>{
             <span class="bool-val">true </span>=&gt; <span class="kw-2">&amp;</span><span class="bool-val">true</span>,
@@ -903,12 +903,12 @@ assert_eq!(twins2.iter_ones().collect::&lt;Vec&lt;_&gt;&gt;(), vec![5, 7, 13, 19
             <span class="self">self</span>.vec.copy_within(offset..v_len, <span class="number">0</span>);
         }
         <span class="kw">else </span>{
-            <span class="attribute">#[cfg(not(feature = <span class="string">&quot;unsafe&quot;</span>))]
+            <span class="attr">#[cfg(not(feature = <span class="string">&quot;unsafe&quot;</span>))]
             </span><span class="kw">for </span>i <span class="kw">in </span>offset..v_len {
                 <span class="self">self</span>.vec[i - offset] = (<span class="self">self</span>.vec[i] &gt;&gt; sr0) + (<span class="self">self</span>.vec.get(i+<span class="number">1</span>).unwrap_or(<span class="kw-2">&amp;</span><span class="number">0</span>) &lt;&lt; sl1);
             }
 
-            <span class="attribute">#[cfg(feature = <span class="string">&quot;unsafe&quot;</span>)]
+            <span class="attr">#[cfg(feature = <span class="string">&quot;unsafe&quot;</span>)]
             </span><span class="comment">// SAFETY: offset &lt;= i &lt; v_len-1
             </span><span class="kw">unsafe </span>{
                 <span class="kw">let </span>u = <span class="self">self</span>.vec.as_mut_ptr();
@@ -954,12 +954,12 @@ assert_eq!(twins2.iter_ones().collect::&lt;Vec&lt;_&gt;&gt;(), vec![5, 7, 13, 19
             <span class="self">self</span>.vec.copy_within(<span class="number">0</span>..(v_len - offset), offset)
         }
         <span class="kw">else </span>{
-            <span class="attribute">#[cfg(not(feature = <span class="string">&quot;unsafe&quot;</span>))]
+            <span class="attr">#[cfg(not(feature = <span class="string">&quot;unsafe&quot;</span>))]
             </span><span class="kw">for </span>i <span class="kw">in </span>(<span class="number">0</span>..(v_len - offset)).rev() {
                 <span class="self">self</span>.vec[i + offset] = (<span class="self">self</span>.vec[i] &lt;&lt; sl0) + <span class="kw">if </span>i &gt; <span class="number">0 </span>{ <span class="self">self</span>.vec[i-<span class="number">1</span>] &gt;&gt; sr1 } <span class="kw">else </span>{ <span class="number">0 </span>};
             }
 
-            <span class="attribute">#[cfg(feature = <span class="string">&quot;unsafe&quot;</span>)]
+            <span class="attr">#[cfg(feature = <span class="string">&quot;unsafe&quot;</span>)]
             </span><span class="comment">// SAFETY: 1 &lt;= i &lt; v_len - offset
             </span><span class="kw">unsafe </span>{
                 <span class="kw">let </span>u = <span class="self">self</span>.vec.as_mut_ptr();
@@ -1016,7 +1016,7 @@ assert_eq!(twins2.iter_ones().collect::&lt;Vec&lt;_&gt;&gt;(), vec![5, 7, 13, 19
         <span class="kw">impl </span><span class="macro-nonterminal">$</span><span class="kw">trait</span>&lt;<span class="macro-nonterminal">BVec</span>&gt; <span class="kw">for </span>BVec {
             <span class="kw">type </span>Output = BVec;
 
-            <span class="attribute">#[inline]
+            <span class="attr">#[inline]
             </span><span class="kw">fn </span><span class="macro-nonterminal">$method</span>(<span class="kw-2">mut </span><span class="self">self</span>, rhs: BVec) -&gt; <span class="self">Self</span>::Output {
                 <span class="self">self </span><span class="macro-nonterminal">$a_op </span>rhs;
                 <span class="self">self
@@ -1026,7 +1026,7 @@ assert_eq!(twins2.iter_ones().collect::&lt;Vec&lt;_&gt;&gt;(), vec![5, 7, 13, 19
         <span class="kw">impl </span><span class="macro-nonterminal">$</span><span class="kw">trait</span>&lt;<span class="kw-2">&amp;</span><span class="macro-nonterminal">BVec</span>&gt; <span class="kw">for </span>BVec {
             <span class="kw">type </span>Output = BVec;
 
-            <span class="attribute">#[inline]
+            <span class="attr">#[inline]
             </span><span class="kw">fn </span><span class="macro-nonterminal">$method</span>(<span class="kw-2">mut </span><span class="self">self</span>, rhs: <span class="kw-2">&amp;</span>BVec) -&gt; <span class="self">Self</span>::Output {
                 <span class="self">self </span><span class="macro-nonterminal">$a_op </span>rhs;
                 <span class="self">self
@@ -1036,7 +1036,7 @@ assert_eq!(twins2.iter_ones().collect::&lt;Vec&lt;_&gt;&gt;(), vec![5, 7, 13, 19
         <span class="kw">impl </span><span class="macro-nonterminal">$</span><span class="kw">trait</span>&lt;<span class="macro-nonterminal">BVec</span>&gt; <span class="kw">for </span><span class="kw-2">&amp;</span>BVec {
             <span class="kw">type </span>Output = BVec;
 
-            <span class="attribute">#[inline]
+            <span class="attr">#[inline]
             </span><span class="kw">fn </span><span class="macro-nonterminal">$method</span>(<span class="self">self</span>, <span class="kw-2">mut </span>rhs: BVec) -&gt; <span class="self">Self</span>::Output {
                 rhs <span class="macro-nonterminal">$a_op </span><span class="self">self</span>;
                 rhs
@@ -1046,12 +1046,12 @@ assert_eq!(twins2.iter_ones().collect::&lt;Vec&lt;_&gt;&gt;(), vec![5, 7, 13, 19
         <span class="kw">impl </span><span class="macro-nonterminal">$</span><span class="kw">trait</span>&lt;<span class="kw-2">&amp;</span><span class="macro-nonterminal">BVec</span>&gt; <span class="kw">for </span><span class="kw-2">&amp;</span>BVec {
             <span class="kw">type </span>Output = BVec;
 
-            <span class="attribute">#[inline]
+            <span class="attr">#[inline]
             </span><span class="kw">fn </span><span class="macro-nonterminal">$method</span>(<span class="self">self</span>, rhs: <span class="kw-2">&amp;</span>BVec) -&gt; <span class="self">Self</span>::Output
             {
                 <span class="macro">assert_eq!</span>(<span class="self">self</span>.len, rhs.len, <span class="macro">UNEQUAL_LEN!</span>());
 
-                <span class="attribute">#[cfg(not(feature = <span class="string">&quot;unsafe&quot;</span>))]
+                <span class="attr">#[cfg(not(feature = <span class="string">&quot;unsafe&quot;</span>))]
                 </span>{
                     <span class="kw">let </span><span class="kw-2">mut </span>vec = Vec::with_capacity(<span class="self">self</span>.vec.len());
                     <span class="kw">let </span><span class="kw-2">mut </span>i = <span class="number">0</span>;
@@ -1062,7 +1062,7 @@ assert_eq!(twins2.iter_ones().collect::&lt;Vec&lt;_&gt;&gt;(), vec![5, 7, 13, 19
                     });
                     BVec { vec, len: <span class="self">self</span>.len }
                 }
-                <span class="attribute">#[cfg(feature = <span class="string">&quot;unsafe&quot;</span>)]
+                <span class="attr">#[cfg(feature = <span class="string">&quot;unsafe&quot;</span>)]
                 </span>{
                     <span class="kw">let </span>n = <span class="self">self</span>.vec.len();
                     <span class="kw">let </span><span class="kw-2">mut </span>vec = Vec::&lt;usize&gt;::with_capacity(n);
@@ -1084,25 +1084,25 @@ assert_eq!(twins2.iter_ones().collect::&lt;Vec&lt;_&gt;&gt;(), vec![5, 7, 13, 19
         }
 
         <span class="kw">impl </span><span class="macro-nonterminal">$a_trait</span>&lt;BVec&gt; <span class="kw">for </span>BVec {
-            <span class="attribute">#[inline]
+            <span class="attr">#[inline]
             </span><span class="kw">fn </span><span class="macro-nonterminal">$a_method</span>(<span class="kw-2">&amp;mut </span><span class="self">self</span>, rhs: BVec) {
                 <span class="self">self</span>.<span class="macro-nonterminal">$a_method</span>(<span class="kw-2">&amp;</span>rhs)
             }
         }
 
         <span class="kw">impl </span><span class="macro-nonterminal">$a_trait</span>&lt;<span class="kw-2">&amp;</span>BVec&gt; <span class="kw">for </span>BVec {
-            <span class="attribute">#[inline]
+            <span class="attr">#[inline]
             </span><span class="kw">fn </span><span class="macro-nonterminal">$a_method</span>(<span class="kw-2">&amp;mut </span><span class="self">self</span>, rhs: <span class="kw-2">&amp;</span>BVec)
             {
                 <span class="macro">assert_eq!</span>(<span class="self">self</span>.len, rhs.len, <span class="macro">UNEQUAL_LEN!</span>());
 
-                <span class="attribute">#[cfg(not(feature = <span class="string">&quot;unsafe&quot;</span>))]
+                <span class="attr">#[cfg(not(feature = <span class="string">&quot;unsafe&quot;</span>))]
                 </span>{
                     <span class="kw">for </span>(u, <span class="kw-2">&amp;</span>v) <span class="kw">in </span><span class="self">self</span>.vec.iter_mut().zip(rhs.vec.iter()) {
                         <span class="kw-2">*</span>u <span class="macro-nonterminal">$a_op </span>v;
                     }
                 }
-                <span class="attribute">#[cfg(feature = <span class="string">&quot;unsafe&quot;</span>)]
+                <span class="attr">#[cfg(feature = <span class="string">&quot;unsafe&quot;</span>)]
                 </span>{
                     <span class="kw">let </span>n = <span class="self">self</span>.vec.len();
                     <span class="kw">let </span>u = <span class="self">self</span>.vec.as_mut_ptr();
@@ -1147,4 +1147,4 @@ assert_eq!(twins2.iter_ones().collect::&lt;Vec&lt;_&gt;&gt;(), vec![5, 7, 13, 19
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="rithmic" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.66.0-nightly (c97d02cdb 2022-10-05)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="rithmic" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.67.0-nightly (215e3cd21 2022-11-03)" ></div></body></html>

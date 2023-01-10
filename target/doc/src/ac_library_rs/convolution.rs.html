@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/bcfam/.cargo/git/checkouts/ac-library-rs-d342211755004e20/d2b35ac/src/convolution.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>convolution.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../ac_library_rs/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../ac_library_rs/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../ac_library_rs/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/bcfam/.cargo/git/checkouts/ac-library-rs-d342211755004e20/d2b35ac/src/convolution.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>convolution.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../ac_library_rs/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -478,7 +478,7 @@
 </pre><pre class="rust"><code><span class="macro">macro_rules! </span>modulus {
     ($(<span class="macro-nonterminal">$name</span>:ident),<span class="kw-2">*</span>) =&gt; {
         $(
-            <span class="attribute">#[derive(Copy, Clone, Eq, PartialEq)]
+            <span class="attr">#[derive(Copy, Clone, Eq, PartialEq)]
             </span><span class="kw">enum </span><span class="macro-nonterminal">$name </span>{}
 
             <span class="kw">impl </span>Modulus <span class="kw">for </span><span class="macro-nonterminal">$name </span>{
@@ -506,7 +506,7 @@
     fmt,
 };
 
-<span class="attribute">#[allow(clippy::many_single_char_names)]
+<span class="attr">#[allow(clippy::many_single_char_names)]
 </span><span class="kw">pub fn </span>convolution&lt;M&gt;(a: <span class="kw-2">&amp;</span>[StaticModInt&lt;M&gt;], b: <span class="kw-2">&amp;</span>[StaticModInt&lt;M&gt;]) -&gt; Vec&lt;StaticModInt&lt;M&gt;&gt;
 <span class="kw">where
     </span>M: Modulus,
@@ -563,7 +563,7 @@
         .collect()
 }
 
-<span class="attribute">#[allow(clippy::many_single_char_names)]
+<span class="attr">#[allow(clippy::many_single_char_names)]
 </span><span class="kw">pub fn </span>convolution_i64(a: <span class="kw-2">&amp;</span>[i64], b: <span class="kw-2">&amp;</span>[i64]) -&gt; Vec&lt;i64&gt; {
     <span class="kw">const </span>M1: u64 = <span class="number">754_974_721</span>; <span class="comment">// 2^24
     </span><span class="kw">const </span>M2: u64 = <span class="number">167_772_161</span>; <span class="comment">// 2^25
@@ -625,7 +625,7 @@
         .collect()
 }
 
-<span class="attribute">#[allow(clippy::many_single_char_names)]
+<span class="attr">#[allow(clippy::many_single_char_names)]
 </span><span class="kw">fn </span>butterfly&lt;M: Modulus&gt;(a: <span class="kw-2">&amp;mut </span>[StaticModInt&lt;M&gt;]) {
     <span class="kw">let </span>n = a.len();
     <span class="kw">let </span>h = internal_bit::ceil_pow2(n <span class="kw">as </span>u32);
@@ -651,7 +651,7 @@
     });
 }
 
-<span class="attribute">#[allow(clippy::many_single_char_names)]
+<span class="attr">#[allow(clippy::many_single_char_names)]
 </span><span class="kw">fn </span>butterfly_inv&lt;M: Modulus&gt;(a: <span class="kw-2">&amp;mut </span>[StaticModInt&lt;M&gt;]) {
     <span class="kw">let </span>n = a.len();
     <span class="kw">let </span>h = internal_bit::ceil_pow2(n <span class="kw">as </span>u32);
@@ -707,7 +707,7 @@
     ButterflyCache { sum_e, sum_ie }
 }
 
-<span class="attribute">#[cfg(test)]
+<span class="attr">#[cfg(test)]
 </span><span class="kw">mod </span>tests {
     <span class="kw">use crate</span>::{
         modint::{Mod998244353, Modulus, StaticModInt},
@@ -720,7 +720,7 @@
     };
 
     <span class="comment">//https://github.com/atcoder/ac-library/blob/8250de484ae0ab597391db58040a602e0dc1a419/test/unittest/convolution_test.cpp#L51-L71
-    </span><span class="attribute">#[test]
+    </span><span class="attr">#[test]
     </span><span class="kw">fn </span>empty() {
         <span class="macro">assert!</span>(<span class="kw">super</span>::convolution_raw::&lt;i32, Mod998244353&gt;(<span class="kw-2">&amp;</span>[], <span class="kw-2">&amp;</span>[]).is_empty());
         <span class="macro">assert!</span>(<span class="kw">super</span>::convolution_raw::&lt;i32, Mod998244353&gt;(<span class="kw-2">&amp;</span>[], <span class="kw-2">&amp;</span>[<span class="number">1</span>, <span class="number">2</span>]).is_empty());
@@ -733,7 +733,7 @@
     }
 
     <span class="comment">// https://github.com/atcoder/ac-library/blob/8250de484ae0ab597391db58040a602e0dc1a419/test/unittest/convolution_test.cpp#L73-L85
-    </span><span class="attribute">#[test]
+    </span><span class="attr">#[test]
     </span><span class="kw">fn </span>mid() {
         <span class="kw">const </span>N: usize = <span class="number">1234</span>;
         <span class="kw">const </span>M: usize = <span class="number">2345</span>;
@@ -745,7 +745,7 @@
     }
 
     <span class="comment">// https://github.com/atcoder/ac-library/blob/8250de484ae0ab597391db58040a602e0dc1a419/test/unittest/convolution_test.cpp#L87-L118
-    </span><span class="attribute">#[test]
+    </span><span class="attr">#[test]
     </span><span class="kw">fn </span>simple_s_mod() {
         <span class="kw">const </span>M1: u32 = <span class="number">998_244_353</span>;
         <span class="kw">const </span>M2: u32 = <span class="number">924_844_033</span>;
@@ -766,37 +766,37 @@
     }
 
     <span class="comment">// https://github.com/atcoder/ac-library/blob/8250de484ae0ab597391db58040a602e0dc1a419/test/unittest/convolution_test.cpp#L120-L150
-    </span><span class="attribute">#[test]
+    </span><span class="attr">#[test]
     </span><span class="kw">fn </span>simple_int() {
         simple_raw::&lt;i32&gt;();
     }
 
     <span class="comment">// https://github.com/atcoder/ac-library/blob/8250de484ae0ab597391db58040a602e0dc1a419/test/unittest/convolution_test.cpp#L152-L182
-    </span><span class="attribute">#[test]
+    </span><span class="attr">#[test]
     </span><span class="kw">fn </span>simple_uint() {
         simple_raw::&lt;u32&gt;();
     }
 
     <span class="comment">// https://github.com/atcoder/ac-library/blob/8250de484ae0ab597391db58040a602e0dc1a419/test/unittest/convolution_test.cpp#L184-L214
-    </span><span class="attribute">#[test]
+    </span><span class="attr">#[test]
     </span><span class="kw">fn </span>simple_ll() {
         simple_raw::&lt;i64&gt;();
     }
 
     <span class="comment">// https://github.com/atcoder/ac-library/blob/8250de484ae0ab597391db58040a602e0dc1a419/test/unittest/convolution_test.cpp#L216-L246
-    </span><span class="attribute">#[test]
+    </span><span class="attr">#[test]
     </span><span class="kw">fn </span>simple_ull() {
         simple_raw::&lt;u64&gt;();
     }
 
     <span class="comment">// https://github.com/atcoder/ac-library/blob/8250de484ae0ab597391db58040a602e0dc1a419/test/unittest/convolution_test.cpp#L249-L279
-    </span><span class="attribute">#[test]
+    </span><span class="attr">#[test]
     </span><span class="kw">fn </span>simple_int128() {
         simple_raw::&lt;i128&gt;();
     }
 
     <span class="comment">// https://github.com/atcoder/ac-library/blob/8250de484ae0ab597391db58040a602e0dc1a419/test/unittest/convolution_test.cpp#L281-L311
-    </span><span class="attribute">#[test]
+    </span><span class="attr">#[test]
     </span><span class="kw">fn </span>simple_uint128() {
         simple_raw::&lt;u128&gt;();
     }
@@ -833,7 +833,7 @@
     }
 
     <span class="comment">// https://github.com/atcoder/ac-library/blob/8250de484ae0ab597391db58040a602e0dc1a419/test/unittest/convolution_test.cpp#L315-L329
-    </span><span class="attribute">#[test]
+    </span><span class="attr">#[test]
     </span><span class="kw">fn </span>conv_ll() {
         <span class="kw">let </span><span class="kw-2">mut </span>rng = rand::thread_rng();
         <span class="kw">for </span>(n, m) <span class="kw">in </span>(<span class="number">1</span>..<span class="number">20</span>).flat_map(|i| (<span class="number">1</span>..<span class="number">20</span>).map(<span class="kw">move </span>|j| (i, j))) {
@@ -845,7 +845,7 @@
     }
 
     <span class="comment">// https://github.com/atcoder/ac-library/blob/8250de484ae0ab597391db58040a602e0dc1a419/test/unittest/convolution_test.cpp#L331-L356
-    </span><span class="attribute">#[test]
+    </span><span class="attr">#[test]
     </span><span class="kw">fn </span>conv_ll_bound() {
         <span class="kw">const </span>M1: u64 = <span class="number">754_974_721</span>; <span class="comment">// 2^24
         </span><span class="kw">const </span>M2: u64 = <span class="number">167_772_161</span>; <span class="comment">// 2^25
@@ -876,7 +876,7 @@
     }
 
     <span class="comment">// https://github.com/atcoder/ac-library/blob/8250de484ae0ab597391db58040a602e0dc1a419/test/unittest/convolution_test.cpp#L358-L371
-    </span><span class="attribute">#[test]
+    </span><span class="attr">#[test]
     </span><span class="kw">fn </span>conv_641() {
         <span class="kw">const </span>M: u32 = <span class="number">641</span>;
         <span class="macro">modulus!</span>(M);
@@ -888,7 +888,7 @@
     }
 
     <span class="comment">// https://github.com/atcoder/ac-library/blob/8250de484ae0ab597391db58040a602e0dc1a419/test/unittest/convolution_test.cpp#L373-L386
-    </span><span class="attribute">#[test]
+    </span><span class="attr">#[test]
     </span><span class="kw">fn </span>conv_18433() {
         <span class="kw">const </span>M: u32 = <span class="number">18433</span>;
         <span class="macro">modulus!</span>(M);
@@ -899,7 +899,7 @@
         <span class="macro">assert_eq!</span>(conv_naive(<span class="kw-2">&amp;</span>a, <span class="kw-2">&amp;</span>b), <span class="kw">super</span>::convolution(<span class="kw-2">&amp;</span>a, <span class="kw-2">&amp;</span>b));
     }
 
-    <span class="attribute">#[allow(clippy::many_single_char_names)]
+    <span class="attr">#[allow(clippy::many_single_char_names)]
     </span><span class="kw">fn </span>conv_naive&lt;M: Modulus&gt;(
         a: <span class="kw-2">&amp;</span>[StaticModInt&lt;M&gt;],
         b: <span class="kw-2">&amp;</span>[StaticModInt&lt;M&gt;],
@@ -927,7 +927,7 @@
         .collect()
     }
 
-    <span class="attribute">#[allow(clippy::many_single_char_names)]
+    <span class="attr">#[allow(clippy::many_single_char_names)]
     </span><span class="kw">fn </span>conv_i64_naive(a: <span class="kw-2">&amp;</span>[i64], b: <span class="kw-2">&amp;</span>[i64]) -&gt; Vec&lt;i64&gt; {
         <span class="kw">let </span>(n, m) = (a.len(), b.len());
         <span class="kw">let </span><span class="kw-2">mut </span>c = <span class="macro">vec!</span>[<span class="number">0</span>; n + m - <span class="number">1</span>];
@@ -953,4 +953,4 @@
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="ac_library_rs" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.66.0-nightly (c97d02cdb 2022-10-05)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="ac_library_rs" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.67.0-nightly (215e3cd21 2022-11-03)" ></div></body></html>
