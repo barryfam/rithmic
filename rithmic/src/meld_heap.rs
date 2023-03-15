@@ -86,7 +86,7 @@ impl<T: Ord, const REV: bool> MeldHeapWithDir<T, REV>
     /// Add an item to the heap
     pub fn push(&mut self, item: T) {
         let r = self.root.take();
-        self.root = link(r, Some(box Node::new(item)), REV);
+        self.root = link(r, Some(Box::new(Node::new(item))), REV);
         self.len += 1;
     }
 

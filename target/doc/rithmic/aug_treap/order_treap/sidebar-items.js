@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"struct":[["List",""],["OrderAugFn",""],["OrderTreap",""],["Range",""],["SortedList",""]]};
+window.SIDEBAR_ITEMS = {"struct":["List","OrderAugFn","OrderTreap","Range","SortedList"]};

@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":[["RsfStep","See `rooted_subtree_fn`"]]};
+window.SIDEBAR_ITEMS = {"enum":["RsfStep"]};

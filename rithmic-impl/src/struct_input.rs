@@ -71,7 +71,7 @@ impl Parse for InputSpec {
                 vec_spec.parse::<Token![;]>()?;
                 vec_spec.parse::<Expr>()?;
             }
-            Ok(InputSpec::Vec(box vec_type))
+            Ok(InputSpec::Vec(Box::new(vec_type)))
         }
         else if input.peek(Paren) {
             let tuple_spec;
@@ -97,7 +97,7 @@ impl Parse for InputSpec {
         }
         else {
             let ty: Type = input.parse()?;
-            Ok(InputSpec::Type(box ty))
+            Ok(InputSpec::Type(Box::new(ty)))
         }
     }
 }

@@ -120,7 +120,7 @@ where T: Default
             let mut index = 0;
             for d in 0..D {
                 let IE { excl, i } = i_lists[d][u[d]];
-                ie ^= excl as bool;
+                ie ^= excl;
                 index += i;
             }
 

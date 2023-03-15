@@ -4,7 +4,6 @@
 
 #![feature(
     array_zip,
-    box_syntax,
     decl_macro,
     int_roundings,
     iter_collect_into,

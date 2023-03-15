@@ -113,9 +113,10 @@ where
     {
         let r = self.root.take();
         let (u, w) = self.split_by(r, |k| *k <= key);
-        let mut v = Some(box Node::new(key, value));
 
+        let mut v = Some(Box::new(Node::new(key, value)));
         v.as_mut().map(|mut v| v.aug = F::f(v));
+
         self.root = self.join3(u, v, w);
     }
 

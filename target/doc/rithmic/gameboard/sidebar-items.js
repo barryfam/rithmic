@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"struct":[["Gameboard","The `Gameboard` `struct` represents a rectangular grid of squares, some of which may be “blocked”, and provides convenience methods for determining what squares can be reached by various movement patterns"]]};
+window.SIDEBAR_ITEMS = {"struct":["Gameboard"]};

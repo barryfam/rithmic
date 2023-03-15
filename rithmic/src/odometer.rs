@@ -80,8 +80,8 @@ impl<const D: usize, const BE: bool> Iterator for sealed::Odometer<D, BE> {
         let next = self.front;
 
         let i_iter: Box<dyn Iterator<Item=usize>> =
-            if !BE { box (0..D) }
-            else { box (0..D).rev() };
+            if !BE { Box::new(0..D) }
+            else { Box::new((0..D).rev()) };
 
         for i in i_iter {
             if self.front[i] < self.radix[i]-1 {
@@ -110,8 +110,8 @@ impl<const D: usize, const BE: bool> DoubleEndedIterator for sealed::Odometer<D,
         let next = self.back;
 
         let i_iter: Box<dyn Iterator<Item=usize>> =
-            if !BE { box (0..D) }
-            else { box (0..D).rev() };
+            if !BE { Box::new(0..D) }
+            else { Box::new((0..D).rev()) };
 
         for i in i_iter {
             if self.back[i] > 0 {

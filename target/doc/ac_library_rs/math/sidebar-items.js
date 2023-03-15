@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"fn":[["crt","Performs CRT (Chinese Remainder Theorem)."],["floor_sum","Returns $\\sum_{i = 0}^{n - 1} \\lfloor \\frac{a \\times i + b}{m} \\rfloor$."],["inv_mod","Returns an integer $y \\in [0, m)$ such that $xy \\equiv 1 \\pmod m$."],["pow_mod","Returns $x^n \\bmod m$."]]};
+window.SIDEBAR_ITEMS = {"fn":["crt","floor_sum","inv_mod","pow_mod"]};

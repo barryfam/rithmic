@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"fn":[["triangular_n","Return the nth triangular number, i.e the sum of `1..=n`, in O(1)"],["triangular_slice","Return the sum of the integers in `range`, in O(1)"],["triangular_steps","Return the sum of the integers in `range`, stepping by `step`, in O(1)"]]};
+window.SIDEBAR_ITEMS = {"fn":["triangular_n","triangular_slice","triangular_steps"]};

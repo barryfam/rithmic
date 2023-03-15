@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"struct":[["SccGraph",""]]};
+window.SIDEBAR_ITEMS = {"struct":["SccGraph"]};

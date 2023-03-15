@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"mod":[["convolution",""],["dsu","A Disjoint set union (DSU) with union by size and path compression."],["fenwicktree",""],["lazysegtree",""],["math","Number-theoretic algorithms."],["maxflow",""],["mincostflow",""],["modint","Structs that treat the modular arithmetic."],["scc",""],["segtree",""],["string",""],["twosat","A 2-SAT Solver."]]};
+window.SIDEBAR_ITEMS = {"mod":["convolution","dsu","fenwicktree","lazysegtree","math","maxflow","mincostflow","modint","scc","segtree","string","twosat"]};

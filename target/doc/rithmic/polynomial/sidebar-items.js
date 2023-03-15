@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"fn":[["lagrange_interpolation","O(n²)"],["polynomial_add","O(n)"],["polynomial_div","O(n²)"],["polynomial_div_exact",""],["polynomial_mul","Note: This runs in O(n²), so DFT convolution in O(n log n) should be used instead when possible"]]};
+window.SIDEBAR_ITEMS = {"fn":["lagrange_interpolation","polynomial_add","polynomial_div","polynomial_div_exact","polynomial_mul"]};

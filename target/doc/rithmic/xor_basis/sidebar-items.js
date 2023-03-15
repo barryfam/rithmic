@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"struct":[["XorBasis128","See `module-level documentation` for more information"],["XorBasis16","See `module-level documentation` for more information"],["XorBasis32","See `module-level documentation` for more information"],["XorBasis64","See `module-level documentation` for more information"],["XorBasis8","See `module-level documentation` for more information"]]};
+window.SIDEBAR_ITEMS = {"struct":["XorBasis128","XorBasis16","XorBasis32","XorBasis64","XorBasis8"]};

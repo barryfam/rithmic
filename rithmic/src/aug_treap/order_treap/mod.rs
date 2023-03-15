@@ -59,11 +59,11 @@ impl<K: Ord, V> OrderTreap<K, V>
     {
         let r = self.0.root.take();
         let (u, w) = self.0.split_by(r, |k| *k <= key);
-        let mut v = Some(box Node::new(key, value));
+
+        let mut v = Some(Box::new(Node::new(key, value)));
+        v.as_mut().map(|mut v| v.aug = OrderAugFn::f(v));
 
         let i = u.as_ref().map_or(0, |u| u.aug);
-
-        v.as_mut().map(|mut v| v.aug = OrderAugFn::f(v));
         self.0.root = self.0.join3(u, v, w);
         i
     }
@@ -72,11 +72,11 @@ impl<K: Ord, V> OrderTreap<K, V>
     {
         let r = self.0.root.take();
         let (u, w) = self.0.split_by(r, |k| *k < key);
-        let mut v = Some(box Node::new(key, value));
+
+        let mut v = Some(Box::new(Node::new(key, value)));
+        v.as_mut().map(|mut v| v.aug = OrderAugFn::f(v));
 
         let i = u.as_ref().map_or(0, |u| u.aug);
-
-        v.as_mut().map(|mut v| v.aug = OrderAugFn::f(v));
         self.0.root = self.0.join3(u, v, w);
         i
     }
@@ -122,7 +122,7 @@ impl<K: Ord, V> OrderTreap<K, V>
                 }
             }
         }
-        panic!("insertion index (is {index}) should be <= len (is {})", self.len())
+        panic!("index ({}) must be < len ({})", index, self.len())
     }
 
     pub fn position<Q>(&mut self, key: &Q) -> Option<usize>

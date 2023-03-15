@@ -1,6 +1,5 @@
 #![feature(
     box_patterns,
-    box_syntax,
     decl_macro,
     extend_one,
     iter_collect_into,
