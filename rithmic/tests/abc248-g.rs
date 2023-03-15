@@ -1,4 +1,4 @@
-#![feature(array_windows, box_patterns, box_syntax, decl_macro, exclusive_range_pattern, half_open_range_patterns, int_log, int_roundings, map_first_last, rustc_attrs)]
+#![feature(array_windows, box_patterns, decl_macro, exclusive_range_pattern, int_roundings, rustc_attrs)]
 #![allow(clippy::collapsible_else_if, clippy::int_plus_one, clippy::needless_range_loop, clippy::nonminimal_bool, clippy::option_map_unit_fn, clippy::reversed_empty_ranges)]
 #![warn(clippy::dbg_macro, clippy::imprecise_flops, clippy::print_stderr)]
 
