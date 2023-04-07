@@ -1,4 +1,4 @@
-mod int_or_float;
+pub mod int_or_float;
 
 #[cfg(test)] mod tests;
 
@@ -33,9 +33,9 @@ assert_ulps_eq!(binary_search(-1e3..=1e3, true , |x| x*x > 2e3).unwrap(), 44.721
 ```
 
 # Notes
-If searching unbounded intervals, `predicate` may be called with very large arguments; be careful of overflow
+If searching unbounded intervals, `predicate` may be called with very large arguments; it must be able to handle these without overflow
 
-As usual for binary search, there must exist some `x` such that all `predicate(l)` for all `l < x` and `predicate(r)` for all `r >= x` are opposite values. Behavior is undefined if this property is not upheld.
+As usual for binary search, there must exist some `x` such that all `predicate(l)` for all `l < x` and `predicate(r)` for all `r >= x` are opposite values. Results will be incorrect if this is not true
 */
 pub fn binary_search<X>(
     domain: impl RangeBounds<X>,

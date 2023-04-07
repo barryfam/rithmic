@@ -9,17 +9,22 @@ use proconio::marker::Usize1;
 use proconio::input;
 use rithmic::SortedList;
 
+use helper::IntoSource;
+
 #[test] fn arc065_e() { main() }
 
 fn main() {
-    for (input, output) in helper::dir_io_pairs("tests/arc065-e") {
+    for (input, output) in helper::dir_io_pairs(
+        Path::new("tests/")
+            .join(Path::new(Path::new(file!()).file_stem().unwrap())
+    )) {
         testcase(input, output);
     }
 }
 
-fn testcase(input: impl AsRef<Path>, output: impl AsRef<Path>) {
+fn testcase(input: impl IntoSource, judge: impl IntoSource) {
     input! {
-        from helper::source_from_path(input),
+        from input.into_source(),
         n: usize, a: Usize1, b: Usize1,
         xy: [(i64, i64); n]
     };
@@ -69,7 +74,7 @@ fn testcase(input: impl AsRef<Path>, output: impl AsRef<Path>) {
     }
 
     input! {
-        from helper::source_from_path(output),
+        from judge.into_source(),
         judge_ans: usize
     };
     assert_eq!(ans, judge_ans);

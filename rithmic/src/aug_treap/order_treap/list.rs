@@ -7,6 +7,7 @@ use crate::Rangelike;
 
 use super::OrderTreap;
 
+#[derive(Clone)]
 pub struct List<T: Ord>(pub OrderTreap<(), T>);
 
 impl<T: Ord> List<T> {

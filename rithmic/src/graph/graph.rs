@@ -28,6 +28,8 @@ pub(super) mod flags {
 }
 pub use flags::*;
 
+use crate::OrdPair;
+
 pub(super) const fn has_flags(u: usize, flags: usize) -> bool {
     u & flags == flags
 }
@@ -58,8 +60,8 @@ where E: Copy
 
     pub fn from_iter(size: usize, iter: impl IntoIterator<Item=(usize, usize, E)>) -> Self {
         let mut g = Self::new(size);
-        for (u, v, w) in iter.into_iter() {
-            g.add_edge(u, v, w);
+        for (u, v, e) in iter.into_iter() {
+            g.add_edge(u, v, e);
         }
         g
     }
@@ -87,6 +89,30 @@ impl<const FLAGS: usize> Graph<(), FLAGS>
             g.add_edge(u, v, ());
         }
         g
+    }
+
+    pub fn map<const DEST_FLAGS: usize>(&self, dest_size: usize, mut f: impl FnMut(usize) -> usize)
+        -> Graph<(), DEST_FLAGS>
+    {
+        let mut edges = vec![];
+        for (u, adj) in self.adj.iter().enumerate() {
+            for &(v, _) in adj {
+                let (mut fu, mut fv) = (f(u), f(v));
+                if fu == fv {
+                    continue
+                }
+                if has_flags(FLAGS, UNDIRECTED) {
+                    (fu, fv) = (fu, fv).ordered();
+                }
+                if fu != NONE && fv != NONE {
+                    edges.push((fu, fv));
+                }
+            }
+        }
+        edges.sort_unstable();
+        edges.dedup();
+
+        Graph::<(), DEST_FLAGS>::from_iter_unweighted(dest_size, edges)
     }
 }
 

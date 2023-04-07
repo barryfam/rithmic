@@ -53,3 +53,44 @@ fn test_expr_dims()
         else { f!(i-1) * 3 }
     }
 }
+
+#[test]
+fn test_clone_static()
+{
+    #[memoize[10]]
+    fn f(x: i32) -> Vec<i32> {
+        vec![x, x*x]
+    }
+
+    assert_eq!(f!(3), vec![3, 9]);
+    assert_eq!(f!(3), vec![3, 9]);
+}
+
+#[test]
+fn test_clone_dynamic()
+{
+    #[memoize(..1)]
+    fn f(x: i32) -> Vec<i32> {
+        vec![x, x*x]
+    }
+
+    assert_eq!(f!(3), vec![3, 9]);
+    assert_eq!(f!(3), vec![3, 9]);
+}
+
+#[test]
+fn test_closure_capture()
+{
+    let h = Box::new(|x: usize| x*1000);
+
+    #[memoize[10]]
+    fn f<H: Fn(usize) -> usize>(y: usize, h: H) -> usize {
+        if y == 0 {
+            7
+        } else {
+            h(y) + f!(y-1)
+        }
+    }
+
+    assert_eq!(f!(7), 28007);
+}

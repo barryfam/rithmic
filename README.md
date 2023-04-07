@@ -14,7 +14,6 @@ Optional `#![forbid(unsafe_code)]`
 - [Ordered pair](https://barryfam.io/rithmic/doc/rithmic/trait.OrdPair.html)
 - [Option merge](https://barryfam.io/rithmic/doc/rithmic/trait.OptionMerge.html)
 - [Result unwrap-any](https://barryfam.io/rithmic/doc/rithmic/trait.UnwrapAny.html)
-- [Slice simultaneous mutable borrow](https://barryfam.io/rithmic/doc/rithmic/trait.PairMut.html)
 - [`Rangelike`](https://barryfam.io/rithmic/doc/rithmic/trait.Rangelike.html), a trait accepting integers and integer ranges
 - [Unsigned integers as bitsets](https://barryfam.io/rithmic/doc/rithmic/trait.IntBitOps.html)
 - [Mixed-radix counter](https://barryfam.io/rithmic/doc/rithmic/type.OdometerLE.html)

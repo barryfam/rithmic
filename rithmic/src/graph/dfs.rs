@@ -56,7 +56,7 @@ where E: Copy
         let n = self.size();
 
         let mut started = Some(BVec::new(n));
-        let mut start_time = Some(vec![NONE; n]);
+        let mut start_time = Some(vec![!0; n]);
         let mut finished = Some(BVec::new(n));
 
         match (has_flags(FLAGS, UNDIRECTED), has_flags(FLAGS, ACYCLIC)) {
@@ -71,23 +71,23 @@ where E: Copy
         while let Some(visit) = stack.pop() {
             let time = dfs.len();
             match visit {
-                Start(p, u, w) =>
+                Start(p, u, e) =>
                 {
                     // DFS Start or Tree Edge
                     if has_flags(FLAGS, FOREST)
                         || started.as_ref().map_or(false, |started| !started[u])
-                        || start_time.as_ref().map_or(false, |start_time| start_time[u] == NONE)
+                        || start_time.as_ref().map_or(false, |start_time| start_time[u] == !0)
                     {
                         started.as_mut().map(|started| started.set(u, true));
                         start_time.as_mut().map(|start_time| start_time[u] = time);
 
-                        dfs.push(DfsStep{kind: TreeNodeStart, p, u, edge: w, depth});
+                        dfs.push(DfsStep{kind: TreeNodeStart, p, u, edge: e, depth});
 
-                        stack.push(Finish(p, u, w));
+                        stack.push(Finish(p, u, e));
 
-                        for &(v, w) in &self.adj[u] {
+                        for &(v, e) in &self.adj[u] {
                             if has_flags(FLAGS, UNDIRECTED) && v == p { continue }
-                            stack.push(Start(u, v, Some(w)));
+                            stack.push(Start(u, v, Some(e)));
                         }
 
                         depth += 1;
@@ -101,7 +101,7 @@ where E: Copy
                     // Back Edge
                     else if finished.as_ref().map_or(false, |finished| !finished[u])
                     {
-                        dfs.push(DfsStep{kind: BackEdge, p, u, edge: w, depth});
+                        dfs.push(DfsStep{kind: BackEdge, p, u, edge: e, depth});
                     }
 
                     // Forward / Cross Edge
@@ -109,10 +109,10 @@ where E: Copy
                     {
                         let start_time = start_time.as_ref().unwrap();
                         if start_time[u] > start_time[p] {
-                            dfs.push(DfsStep{kind: ForwardEdge, p, u, edge: w, depth});
+                            dfs.push(DfsStep{kind: ForwardEdge, p, u, edge: e, depth});
                         }
                         else {
-                            dfs.push(DfsStep{kind: CrossEdge, p, u, edge: w, depth});
+                            dfs.push(DfsStep{kind: CrossEdge, p, u, edge: e, depth});
                         }
                     }
 
@@ -121,11 +121,11 @@ where E: Copy
 
                     else { debug_assert!(false) }
                 }
-                Finish(p, u, w) =>
+                Finish(p, u, e) =>
                 {
                     depth -= 1;
                     finished.as_mut().map(|finished| finished.set(u, true));
-                    dfs.push(DfsStep{kind: TreeNodeFinish, p, u, edge: w, depth})
+                    dfs.push(DfsStep{kind: TreeNodeFinish, p, u, edge: e, depth})
                 }
             }
         }

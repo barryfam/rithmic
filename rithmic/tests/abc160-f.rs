@@ -8,17 +8,22 @@ use proconio::marker::Usize1;
 use rithmic::FactorialTable;
 use rithmic::graph::prelude::*;
 
+use helper::IntoSource;
+
 #[test] fn abc160_f() { main() }
 
 fn main() {
-    for (input, output) in helper::dir_io_pairs("tests/abc160-f") {
+    for (input, output) in helper::dir_io_pairs(
+        Path::new("tests/")
+            .join(Path::new(Path::new(file!()).file_stem().unwrap()))
+    ) {
         testcase(input, output);
     }
 }
 
-fn testcase(input: impl AsRef<Path>, output: impl AsRef<Path>) {
+fn testcase(input: impl IntoSource, judge: impl IntoSource) {
     input! {
-        from helper::source_from_path(input),
+        from input.into_source(),
         n: usize,
         ab: [(Usize1, Usize1); n-1]
     }
@@ -48,7 +53,7 @@ fn testcase(input: impl AsRef<Path>, output: impl AsRef<Path>) {
     let ans: Vec<_> = (0..n).map(|k| rsf[&(NONE, k)].ways).collect();
 
     input! {
-        from helper::source_from_path(output),
+        from judge.into_source(),
         judge_ans: [MInt; n]
     }
     assert_eq!(ans, judge_ans);

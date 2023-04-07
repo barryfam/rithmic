@@ -16,17 +16,22 @@ use proconio::marker::Usize1;
 use proconio::input;
 use rithmic::graph::prelude::*;
 
+use helper::IntoSource;
+
 #[test] fn abc248_g() { main() }
 
 fn main() {
-    for (input, output) in helper::dir_io_pairs("tests/abc248-g") {
+    for (input, output) in helper::dir_io_pairs(
+        Path::new("tests/")
+            .join(Path::new(Path::new(file!()).file_stem().unwrap()))
+    ) {
         testcase(input, output);
     }
 }
 
-fn testcase(input: impl AsRef<Path>, output: impl AsRef<Path>) {
+fn testcase(input: impl IntoSource, judge: impl IntoSource) {
     input! {
-        from helper::source_from_path(input),
+        from input.into_source(),
         n: usize,
         a: [usize; n],
         uv: [(Usize1, Usize1); n-1]
@@ -136,7 +141,7 @@ fn testcase(input: impl AsRef<Path>, output: impl AsRef<Path>) {
 
     let ans = rsf[&(NONE, 0)].score;
     input! {
-        from helper::source_from_path(output),
+        from judge.into_source(),
         judge_ans: MInt
     };
     assert_eq!(ans, judge_ans);

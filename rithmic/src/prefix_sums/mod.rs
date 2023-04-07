@@ -85,12 +85,12 @@ where
     fn prefix_sums(&self) -> Self
     {
         let mut shape1 = self.shape();
-        for n in shape1.iter_mut() { *n += 1; }
+        for n in &mut shape1 { *n += 1; }
 
         let mut ps = Self::new(shape1);
         for i in OdometerBE::new(self.shape()) {
             let mut i1 = i;
-            for ii in i1.iter_mut() { *ii += 1; }
+            for ii in &mut i1 { *ii += 1; }
 
             let mut incl = T::default();
             let mut excl = T::default();
@@ -119,7 +119,7 @@ where
     fn suffix_sums(&self) -> Self
     {
         let mut shape1 = self.shape();
-        for n in shape1.iter_mut() { *n += 1; }
+        for n in &mut shape1 { *n += 1; }
 
         let mut ss = Self::new(shape1);
         for i in OdometerBE::new(self.shape()).rev()

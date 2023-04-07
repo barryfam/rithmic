@@ -57,7 +57,7 @@ impl Gameboard
         self.blocked.as_ref().is_some_and(|b| b[i * self.w + j])
     }
 
-    /// Move `dist` squares in a straight line. Blocks along the way are ignored, but a block at the destination, or the destination being out-of-bounds, returns `None`. `dir` must be in `0..4` and indicates direction:
+    /// Jump `dist` squares in a straight line. Blocks along the way are ignored, but a block at the destination, or the destination being out-of-bounds, returns `None`. `dir` must be in `0..4` and indicates direction:
     ///
     /// 0. Positive `i`
     /// 1. Positive `j`
@@ -76,7 +76,7 @@ impl Gameboard
         .filter(|&v| !self.is_blocked(v))
     }
 
-    /// Move `dist` squares in a 45° diagonal line. Blocks along the way are ignored, but a block at the destination, or the destination being out-of-bounds, returns `None`. `dir` must be in `0..4` and indicates direction:
+    /// Jump `dist` squares in a 45° diagonal line. Blocks along the way are ignored, but a block at the destination, or the destination being out-of-bounds, returns `None`. `dir` must be in `0..4` and indicates direction:
     ///
     /// 0. Positive `i` and `j`
     /// 1. Negative `i`, positive `j`

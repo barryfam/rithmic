@@ -16,16 +16,16 @@ where E: Copy
     /// let g = Tree::line(4);
     ///
     /// assert_eq!(g.dfs_up_tree(0).collect::<Vec<_>>(), vec![
-    ///     (3, (), 2),
-    ///     (2, (), 1),
-    ///     (1, (), 0)
+    ///     (3, 2, ()),
+    ///     (2, 1, ()),
+    ///     (1, 0, ())
     /// ]);
     /// ```
-    pub fn dfs_up_tree(&self, s: usize) -> impl Iterator<Item=(usize, E, usize)> {
+    pub fn dfs_up_tree(&self, s: usize) -> impl Iterator<Item=(usize, usize, E)> {
         self.dfs([s]).into_iter()
             .filter_map( |step|
                 (step.kind == TreeNodeFinish && step.p != NONE)
-                    .then(|| (step.u, step.edge.unwrap(), step.p))
+                    .then(|| (step.u, step.p, step.edge.unwrap()))
             )
     }
 
@@ -60,19 +60,19 @@ where E: Copy
     /// g.add_edge(1, 2, "Privet Drive");
     ///
     /// assert_eq!(g.euler_tour_edges(0).collect::<Vec<_>>(), vec![
-    ///     (0, "Main Street", 1),
-    ///     (1, "Privet Drive", 2),
-    ///     (2, "Privet Drive", 1),
-    ///     (1, "Main Street", 0)
+    ///     (0, 1, "Main Street"),
+    ///     (1, 2, "Privet Drive"),
+    ///     (2, 1, "Privet Drive"),
+    ///     (1, 0, "Main Street")
     /// ]);
     /// ```
-    pub fn euler_tour_edges(&self, s: usize) -> impl Iterator<Item=(usize, E, usize)> {
+    pub fn euler_tour_edges(&self, s: usize) -> impl Iterator<Item=(usize, usize, E)> {
         self.dfs([s]).into_iter()
             .skip(1)
             .map( |step|
                 match step.kind {
-                    TreeNodeStart => (step.p, step.edge.unwrap(), step.u),
-                    TreeNodeFinish => (step.u, step.edge.unwrap(), step.p),
+                    TreeNodeStart => (step.p, step.u, step.edge.unwrap()),
+                    TreeNodeFinish => (step.u, step.p, step.edge.unwrap()),
                     _ => panic!("malformed tree")
                 }
             )

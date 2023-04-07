@@ -1,8 +1,7 @@
 use proc_macro::TokenStream;
 use proc_macro2::TokenStream as TokenStream2;
 use quote::quote;
-use syn::punctuated::Punctuated;
-use syn::{ExprRange, RangeLimits, bracketed, Expr, Token, ExprLit, Lit, parse_macro_input, ItemFn, Ident, ReturnType, FnArg, PatType, token, Type};
+use syn::{ExprRange, RangeLimits, bracketed, Expr, Token, ExprLit, Lit, parse_macro_input, ItemFn, Ident, ReturnType, FnArg, PatType, token, Type, Visibility};
 use syn::parse::{ParseStream, Parse};
 
 enum MemoizeAttr {
@@ -16,15 +15,15 @@ impl Parse for MemoizeAttr {
         macro syntax_err() { return Err(c.error("invalid syntax. example: #[memoize(..2)]")) }
 
         if let Ok(ExprRange {
-            from: None,
+            start: None,
             limits,
-            to,
+            end,
             ..
         }) = input.fork().parse()
         {
             let _: ExprRange = input.parse()?;
 
-            let mut n_args = match to {
+            let mut n_args = match end {
                 None => None,
                 Some(box Expr::Lit(ExprLit{lit: Lit::Int(i), ..})) => Some(i.base10_parse()?),
                 _ => syntax_err!(),
@@ -45,7 +44,7 @@ impl Parse for MemoizeAttr {
             } else {
                 input
             };
-            let dim: Punctuated<Expr, Token![,]> = dim.parse_terminated(Expr::parse)?;
+            let dim = dim.parse_terminated(Expr::parse, Token![,])?;
             let dim = dim.into_iter().collect();
 
             Ok(Self::Static { dim })
@@ -65,19 +64,23 @@ pub fn memoize(attr: TokenStream, item: TokenStream) -> TokenStream
 {
     let attr = parse_macro_input!(attr as MemoizeAttr);
 
-    let mut item = parse_macro_input!(item as ItemFn);
-    let fn_attrs = &item.attrs;
+    let ItemFn {
+        attrs: fn_attrs,
+        vis: Visibility::Inherited,
+        sig: mut fn_sig,
+        block: fn_block,
+    } = parse_macro_input!(item as ItemFn)
+        else { panic!("memoize not supported on public functions") };
 
-    let fn_name = &item.sig.ident;
+    let fn_name = fn_sig.ident.clone();
     let cache_name = Ident::new(&format!("__{}_cache", fn_name), fn_name.span());
     let inner_name = Ident::new(&format!("__{}_inner", fn_name), fn_name.span());
 
-    let fn_args = &mut item.sig.inputs;
+    fn_sig.ident = inner_name.clone();
+    let fn_args = &mut fn_sig.inputs;
 
-    let ReturnType::Type(_, box ret_type) = &item.sig.output
+    let ReturnType::Type(_, box ret_type) = &fn_sig.output
         else { panic!("function must have a return type") };
-
-    let fn_block = &item.block;
 
     let n_args = attr.n_args().unwrap_or_else(|| fn_args.len());
 
@@ -123,14 +126,14 @@ pub fn memoize(attr: TokenStream, item: TokenStream) -> TokenStream
             }
 
             #(#fn_attrs)*
-            fn #inner_name(#fn_args) -> #ret_type
+            #fn_sig
             {
                 let __key = ( #(#memo_arg_names.clone()),* );
                 if let Some(__ret) = #cache_name.get(&__key) { return __ret.clone() }
 
                 let __ret = (|| #fn_block )();
 
-                #cache_name.insert(__key, __ret);
+                #cache_name.insert(__key, __ret.clone());
                 __ret
             }
         }}
@@ -147,14 +150,14 @@ pub fn memoize(attr: TokenStream, item: TokenStream) -> TokenStream
             }
 
             #(#fn_attrs)*
-            fn #inner_name(#fn_args) -> #ret_type
+            #fn_sig
             {
                 let __key = [ #(#memo_arg_names as usize),* ];
-                if let Some(__ret) = #cache_name[__key] { return __ret.clone() }
+                if let Some(ref __ret) = #cache_name[__key] { return __ret.clone() }
 
                 let __ret = (|| #fn_block )();
 
-                #cache_name[__key] = Some(__ret);
+                #cache_name[__key] = Some(__ret.clone());
                 __ret
             }
         }}

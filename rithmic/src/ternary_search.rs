@@ -11,6 +11,7 @@ Ternary search for the maximum point of a function `f()` in the given `domain`
 # use approx::assert_abs_diff_eq;
 # use rithmic::ternary_search;
 let x = ternary_search(0. .. 6., |x| -x.cos());
+
 assert_abs_diff_eq!(x, 3.141593, epsilon = 1e-6);
 ```
 */

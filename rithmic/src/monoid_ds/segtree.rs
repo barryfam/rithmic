@@ -2,7 +2,7 @@ use std::fmt::{self, Debug, Formatter};
 use std::marker::PhantomData;
 use std::{mem, iter};
 
-use crate::{IntBitOps, Rangelike};
+use crate::{IntBitOps, Rangelike, DebugOr};
 
 use super::monoid_ops::{MonoidOps, USumQSum};
 
@@ -237,6 +237,57 @@ where
             r >>= 1;
         }
         O::operator(&x, &y)
+    }
+
+    /// Push all pending updates down to the tree leaves, then check that all nodes are consistent with `operator` on their children
+    ///
+    /// This can help detect incorrect `update_distributive` or `update_composition` functions. Prints debug information to stderr and panics if there are any mismatches. Runs in O(*n*)
+    ///
+    /// If checking after every update/query, it is recommended to call [`self_check_random`](Self::self_check_random) instead, as the act of pushing all updates may hide bugs
+    pub fn self_check(&mut self)
+    where T: PartialEq
+    {
+        for u in 1..self.width() {
+            self.push1(u);
+        }
+
+        for u in (1..self.width()).rev() {
+            if self.tree[u].0 != O::operator(&self.tree[u<<1].0, &self.tree[u<<1|1].0)
+            {
+                eprint!("segment tree self-check failed at u = {u} ({u:#b})\nparent: {}\nleft: {}\nright: {}\n",
+                    self.tree[u].debug_or("<Debug not implemented>"),
+                    self.tree[u<<1].debug_or("<Debug not implemented>"),
+                    self.tree[u<<1|1].debug_or("<Debug not implemented>")
+                );
+                panic!()
+            }
+        }
+    }
+
+    /// Call [`self_check`](Self::self_check) with probability 1 / √*n*
+    ///
+    /// Placing a `self_check_random()` call after each of *q* updates or queries results in O(*q* √*n*) complexity, which is usually adequate for debugging
+    ///
+    /// # Examples
+    /// ```
+    /// # use rithmic::SegTree;
+    /// let mut st = SegTree::<i32>::new(100);
+    /// for i in (0..100).step_by(5) {
+    ///     st.update(i..i+5, &7);
+    ///
+    ///     #[cfg(debug_assertions)]
+    ///     st.self_check_random();
+    /// }
+    /// ```
+    pub fn self_check_random(&mut self)
+    where T: PartialEq
+    {
+        let n = self.len() as f64;
+        let p = 1. / n.sqrt();
+
+        if rand::random::<f64>() <= p {
+            self.self_check();
+        }
     }
 }
 

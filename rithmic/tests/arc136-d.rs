@@ -7,17 +7,22 @@ use std::path::Path;
 use proconio::input;
 use rithmic::NdFenwick;
 
+use helper::IntoSource;
+
 #[test] fn arc136_d() { main() }
 
 fn main() {
-    for (input, output) in helper::dir_io_pairs("tests/arc136-d") {
+    for (input, output) in helper::dir_io_pairs(
+        Path::new("tests/")
+            .join(Path::new(Path::new(file!()).file_stem().unwrap())
+    )) {
         testcase(input, output);
     }
 }
 
-fn testcase(input: impl AsRef<Path>, output: impl AsRef<Path>) {
+fn testcase(input: impl IntoSource, judge: impl IntoSource) {
     input! {
-        from helper::source_from_path(input),
+        from input.into_source(),
         n: usize,
         a: [u32; n]
     };
@@ -39,7 +44,7 @@ fn testcase(input: impl AsRef<Path>, output: impl AsRef<Path>) {
     }
 
     input! {
-        from helper::source_from_path(output),
+        from judge.into_source(),
         judge_ans: u64
     };
     assert_eq!(ans, judge_ans);

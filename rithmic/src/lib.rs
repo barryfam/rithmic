@@ -4,17 +4,22 @@
 
 #![feature(
     array_zip,
+    box_patterns,
+    btree_cursors,
     decl_macro,
     int_roundings,
-    iter_collect_into,
     is_some_and,
     is_sorted,
+    iter_collect_into,
     let_chains,
     rustc_attrs,
+    specialization,
 )]
 
 #![allow(
+    incomplete_features,
     clippy::collapsible_else_if,
+    clippy::collapsible_if,
     clippy::missing_safety_doc,
     clippy::module_inception,
     clippy::needless_range_loop,
@@ -30,14 +35,15 @@
 #![warn(
     clippy::dbg_macro,
     clippy::imprecise_flops,
-    clippy::print_stderr,
 )]
 
 pub use rithmic_impl::*;
 
 pub mod aug_treap;
-    mod binary_search;
+pub mod binary_search;
     mod bvec;
+    mod debug_or;
+    mod disjoint_intervals;
 pub mod gameboard;
     mod geometry;
 pub mod graph;
@@ -47,6 +53,7 @@ pub mod graph;
     mod int_bitops;
     mod inversions;
     mod ipc;
+    mod longest_transitive_subseq;
 pub mod meld_heap;
     mod mo_algorithm;
     mod mod_factorial_table;
@@ -60,7 +67,6 @@ pub mod polynomial;
     mod print_methods;
     mod rangelike;
     mod sieve_divisors;
-    mod slice_pair_mut;
     mod slice_get_sub;
     mod sparse_table;
     mod ternary_search;
@@ -69,9 +75,12 @@ pub mod triangular_n;
     mod unwrap_any;
 pub mod xor_basis;
 
+pub use aug_treap::convex_hull_trick::{ConvexHullMax, ConvexHullMin};
 pub use aug_treap::order_treap::{List, SortedList};
 pub use binary_search::binary_search;
 pub use bvec::BVec;
+pub use debug_or::DebugOr;
+pub use disjoint_intervals::DisjointIntervals;
 pub use gameboard::Gameboard;
 pub use geometry::Vector2DMore;
 pub use imin_imax::{imax, imin};
@@ -80,10 +89,11 @@ pub use insort::Insort;
 pub use int_bitops::IntBitOps;
 pub use inversions::CountInversions;
 pub use ipc::Ipc;
+pub use longest_transitive_subseq::LongestTransitiveSubseq;
 pub use meld_heap::{MeldHeap, MeldMinHeap};
 pub use mo_algorithm::{mo_algorithm, MoStep};
 pub use mod_factorial_table::FactorialTable;
-pub use monoid_ds::{monoid_ops, NdFenwick, SegTree};
+pub use monoid_ds::{monoid_ops::monoid_ops, NdFenwick, SegTree};
 pub use ndvec::NdVec;
 pub use odometer::{OdometerBE, OdometerLE};
 pub use option_merge::OptionMerge;
@@ -93,7 +103,6 @@ pub use prefix_sums::PrefixSums;
 pub use print_methods::PrintMethods;
 pub use rangelike::Rangelike;
 pub use sieve_divisors::Divisors;
-pub use slice_pair_mut::PairMut;
 pub use slice_get_sub::GetSub;
 pub use sparse_table::SparseTable;
 pub use ternary_search::ternary_search;
@@ -104,5 +113,7 @@ pub use xor_basis::{XorBasis128, XorBasis64, XorBasis32, XorBasis16, XorBasis8};
 
 pub mod prelude
 {
-    pub use crate::{List, SortedList, binary_search, BVec, Gameboard, Vector2DMore, imax, imin, IndexCompress, IndexCompressed, Insort, IntBitOps, CountInversions, Ipc, MeldHeap, MeldMinHeap, mo_algorithm, MoStep, FactorialTable, monoid_ops, NdFenwick, SegTree, NdVec, OdometerBE, OdometerLE, OptionMerge, OrdPair, polynomial_add, polynomial_mul, polynomial_div, polynomial_div_exact, lagrange_interpolation, PrefixSums, PrintMethods, Rangelike, Divisors, PairMut, GetSub, SparseTable, ternary_search, triangular_n, triangular_slice, triangular_steps, UnionFind, UnwrapAny, XorBasis128, XorBasis64, XorBasis32, XorBasis16, XorBasis8};
+    pub use rithmic_impl::*;
+
+    pub use crate::{ConvexHullMax, ConvexHullMin, List, SortedList, binary_search, BVec, DebugOr, DisjointIntervals, Gameboard, Vector2DMore, imax, imin, IndexCompress, IndexCompressed, Insort, IntBitOps, CountInversions, LongestTransitiveSubseq, Ipc, MeldHeap, MeldMinHeap, mo_algorithm, MoStep, FactorialTable, monoid_ops, NdFenwick, SegTree, NdVec, OdometerBE, OdometerLE, OptionMerge, OrdPair, polynomial_add, polynomial_mul, polynomial_div, polynomial_div_exact, lagrange_interpolation, PrefixSums, PrintMethods, Rangelike, Divisors, GetSub, SparseTable, ternary_search, triangular_n, triangular_slice, triangular_steps, UnionFind, UnwrapAny, XorBasis128, XorBasis64, XorBasis32, XorBasis16, XorBasis8};
 }

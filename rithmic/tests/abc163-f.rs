@@ -6,17 +6,22 @@ use proconio::input;
 use proconio::marker::Usize1;
 use rithmic::graph::prelude::*;
 
+use helper::IntoSource;
+
 #[test] fn abc163_f() { main() }
 
 fn main() {
-    for (input, output) in helper::dir_io_pairs("tests/abc163-f") {
+    for (input, output) in helper::dir_io_pairs(
+        Path::new("tests/")
+            .join(Path::new(Path::new(file!()).file_stem().unwrap()))
+    ) {
         testcase(input, output);
     }
 }
 
-fn testcase(input: impl AsRef<Path>, output: impl AsRef<Path>) {
+fn testcase(input: impl IntoSource, judge: impl IntoSource) {
     input! {
-        from helper::source_from_path(input),
+        from input.into_source(),
         n: usize,
         c: [Usize1; n],
         ab: [(Usize1, Usize1); n-1]
@@ -54,7 +59,7 @@ fn testcase(input: impl AsRef<Path>, output: impl AsRef<Path>) {
     }
 
     input! {
-        from helper::source_from_path(output),
+        from judge.into_source(),
         judge_ans: [usize; n]
     };
     assert_eq!(ans, judge_ans);

@@ -34,7 +34,7 @@ where Self: Sized
     /// ```
     fn mask(len: u32) -> Self;
 
-    /// Returns `self & mask(len)`
+    /// Returns `self & `[`mask`](Self::mask)`(len)`
     ///
     /// # Examples
     /// ```
@@ -129,7 +129,7 @@ where Self: Sized
     /// ```
     fn iter_subsets(self) -> IterSubsets<Self>;
 
-    /// Let *k* be the number of bits set in this integer; then iterate over every integer with *k*+1 bits set and length not greater than `n`
+    /// Let *k* be the number of bits set in this integer; then iterate over every integer with *k*+1 bits set that is a superset of this one and has length not greater than `n`
     ///
     /// # Examples
     /// ```

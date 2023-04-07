@@ -1,3 +1,4 @@
+pub mod convex_hull_trick;
 pub mod finger;
 pub mod order_treap;
 
@@ -22,7 +23,11 @@ pub struct Node<K, V, A> {
 }
 pub type OptNode<K, V, A> = Option<Box<Node<K, V, A>>>;
 
-impl<K, V, A> Node<K, V, A> {
+impl<K, V, A> Node<K, V, A>
+{
+    /// Create a new node
+    ///
+    /// Note, the augment function is not in scope here and therefore not called; it must be called afterwards to maintain invariants
     pub fn new(key: K, value: V) -> Self
     where A: Default
     {
@@ -272,6 +277,35 @@ where
 
     pub fn iter(&self) -> self::Range<K, V, A> {
         self.range(..)
+    }
+
+    pub fn into_first_last(&self, root: OptNode<K, V, A>) -> (OptNode<K, V, A>, OptNode<K, V, A>)
+    {
+        let Some(mut r) = root else { return (None, None) };
+        let mut left = r.left.take();
+        let mut right = r.right.take();
+
+        if left.is_none() { left = Some(r); }
+        else if right.is_none() { right = Some(r); }
+
+        if right.is_none() {
+            return (left, None)
+        }
+
+        let mut left = left.unwrap();
+        let mut right = right.unwrap();
+
+        while let Some(u) = left.left {
+            left = u;
+        }
+        while let Some(u) = right.right {
+            right = u;
+        }
+
+        left.right = None;
+        right.left = None;
+
+        (Some(left), Some(right))
     }
 }
 

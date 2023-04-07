@@ -15,13 +15,13 @@ impl Parse for AutofillAttr {
         macro syntax_err() { return Err(c.error("invalid syntax. example: #[autofill(2..)]")) }
 
         let ExprRange {
-            from,
+            start,
             limits: RangeLimits::HalfOpen(_),
-            to: None,
+            end: None,
             ..
         } = input.parse()? else { syntax_err!() };
 
-        let n_skip = match from {
+        let n_skip = match start {
             None => 0,
             Some(box Expr::Lit(ExprLit{lit: Lit::Int(i), ..})) => i.base10_parse()?,
             _ => syntax_err!(),

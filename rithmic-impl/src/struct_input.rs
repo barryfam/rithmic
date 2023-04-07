@@ -42,7 +42,7 @@ impl Parse for Item {
 
         let fields;
         braced!(fields in input);
-        let fields = fields.parse_terminated(InputField::parse)?;
+        let fields = fields.parse_terminated(InputField::parse, Token![,])?;
 
         Ok(Self {
             name,
@@ -76,7 +76,7 @@ impl Parse for InputSpec {
         else if input.peek(Paren) {
             let tuple_spec;
             parenthesized!(tuple_spec in input);
-            let tuple_types: Punctuated<InputSpec, Token![,]> = tuple_spec.parse_terminated(InputSpec::parse)?;
+            let tuple_types = tuple_spec.parse_terminated(InputSpec::parse, Token![,])?;
             Ok(InputSpec::Tuple(tuple_types.into_iter().collect()))
         }
         else if input.peek(kw::Usize1) {

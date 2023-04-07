@@ -38,7 +38,7 @@ pub trait OptionMerge {
     /// |`Some(a)`|`b`|`f(a, b)`|
     ///
     /// # Notes
-    /// [`x.map_or(b, |a| f(a, b))`](Option::map_or) is equivalent for `Copy` types
+    /// [`x.map_or(b, |a| f(a, b))`](Option::map_or) is equivalent for [`Copy`] types
     ///
     fn merge_or<F>(self, b: Self::T, f: F) -> Self::T
     where F: FnOnce(Self::T, Self::T) -> Self::T;

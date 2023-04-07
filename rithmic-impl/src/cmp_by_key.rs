@@ -9,7 +9,7 @@ pub fn derive(item: TokenStream) -> TokenStream
 
     fn has_key_attr(field: &Field) -> bool {
         field.attrs.iter().any( |a| {
-            a.path == parse_quote! { key }
+            *a.path() == parse_quote! { key }
         })
     }
 

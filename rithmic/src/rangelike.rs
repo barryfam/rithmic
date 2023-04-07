@@ -3,12 +3,11 @@ use std::ops::{Range, RangeBounds, RangeFrom, RangeFull, RangeInclusive, RangeTo
 /**
 This trait is intended to allow function APIs to interchangeably accept integers or any of their [`Range`] variants
 
-2-tuples and 2-arrays are also accepted
+2-[`tuples`](tuple) and 2-[`arrays`](array) are also accepted
 
 # Examples
 ```
-# use rithmic::SegTree;
-let mut st = SegTree::<i32>::from([2, 3, 5, 7, 11]);
+let mut st = rithmic::SegTree::<i32>::from([2, 3, 5, 7, 11]);
 
 assert_eq!(st.query(2), 5);
 assert_eq!(st.query(2..=3), 5+7);

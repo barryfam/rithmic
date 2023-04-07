@@ -59,7 +59,7 @@ impl<const D: usize, const BE: bool> sealed::Odometer<D, BE> {
     pub fn new(radix: [usize; D]) -> Self
     {
         let mut back = radix;
-        for x in back.iter_mut() { *x = x.saturating_sub(1); }
+        for x in &mut back { *x = x.saturating_sub(1); }
 
         Self {
             front: [0; D],
