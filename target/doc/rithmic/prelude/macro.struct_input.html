@@ -1,0 +1,47 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Given a `::proconio` input specification and a `Name`, define:"><title>struct_input in rithmic::prelude - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-a2c9cd1067f8b328.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-c4dbdcde0fbd8430.css" id="mainThemeStyle"><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="rithmic" data-themes="" data-resource-suffix="" data-rustdoc-version="1.70.0-nightly (171693274 2023-03-14)" data-search-js="search-d1bc581867fd0849.js" data-settings-js="settings-f0c5c39777a9a2f6.js" data-settings-css="settings-0bcba95ff279c1db.css" data-theme-light-css="light-db279b6232be9c13.css" data-theme-dark-css="dark-cf923f49f397b216.css" data-theme-ayu-css="ayu-be46fdc453a55015.css" ></div><script src="../../static.files/storage-9184409068f70b79.js"></script><script defer src="sidebar-items.js"></script><script defer src="../../static.files/main-f5a2577c5297a973.js"></script><noscript><link rel="stylesheet" media="(prefers-color-scheme:light)" href="../../static.files/light-db279b6232be9c13.css"><link rel="stylesheet" media="(prefers-color-scheme:dark)" href="../../static.files/dark-cf923f49f397b216.css"><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc macro"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="logo-container" href="../../rithmic/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><h2></h2></nav><nav class="sidebar"><a class="logo-container" href="../../rithmic/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><div class="sidebar-elems"><h2><a href="index.html">In rithmic::prelude</a></h2></div></nav><main><div class="width-limiter"><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="main-heading"><h1>Macro <a href="../index.html">rithmic</a>::<wbr><a href="index.html">prelude</a>::<wbr><a class="macro" href="#">struct_input</a><button id="copy-path" title="Copy item path to clipboard"><img src="../../static.files/clipboard-7571035ce49a181d.svg" width="19" height="18" alt="Copy item path"></button></h1><span class="out-of-band"><a class="srclink" href="../../src/rithmic_impl/lib.rs.html#258">source</a> · <button id="toggle-all-docs" title="collapse all docs">[<span>&#x2212;</span>]</button></span></div><pre class="rust item-decl"><code>struct_input!() { /* proc-macro */ }</code></pre><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Given a <a href="https://docs.rs/proconio/latest/proconio/"><code>::proconio</code></a> input specification and a <code>Name</code>, define:</p>
+<ul>
+<li>A <code>struct</code> definition called <code>Name</code></li>
+<li>A macro called <code>name_input!</code> that call’s proconio’s <code>input!</code> with the given specification</li>
+<li>A macro called <code>name_destruct!</code> that expands to a destructure of the <code>Name</code> <code>struct</code> and can be used to either construct from free variables, or destructure into free variables (see example below)</li>
+</ul>
+<p><strong>Note:</strong> <code>#![feature(rustc_attrs)]</code> <strong>and</strong> <code>#![feature(decl_macro)]</code> <strong>are required</strong></p>
+<h2 id="examples"><a href="#examples">Examples</a></h2>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attr">#![feature(decl_macro, rustc_attrs)]
+
+</span><span class="kw">use </span>rithmic::struct_input;
+
+<span class="macro">struct_input! </span>{
+    Student {
+        name: String,
+        exams_taken: usize,
+        scores: [u8; exams_taken],
+    }
+}
+
+<span class="comment">// We now have access to:
+// Student
+// student_input!()
+// student_destruct!() which expands to:
+//      Student { name, exams_taken, scores }
+
+// In a real program, this would read `name`, `exams_taken` and `scores` from stdin:
+// student_input!();
+
+</span><span class="macro">assert_eq!</span>(name, <span class="string">&quot;Melissa&quot;</span>);
+<span class="macro">assert_eq!</span>(exams_taken, <span class="number">3</span>);
+<span class="macro">assert_eq!</span>(scores, <span class="macro">vec!</span>[<span class="number">85</span>, <span class="number">99</span>, <span class="number">71</span>]);
+
+<span class="comment">// use _destruct! to construct from free variables
+</span><span class="kw">let </span>x: Student = <span class="macro">student_destruct!</span>();
+
+<span class="macro">assert_eq!</span>(x.name, <span class="string">&quot;Melissa&quot;</span>);
+<span class="macro">assert_eq!</span>(x.exams_taken, <span class="number">3</span>);
+<span class="macro">assert_eq!</span>(x.scores, <span class="macro">vec!</span>[<span class="number">85</span>, <span class="number">99</span>, <span class="number">71</span>]);
+
+<span class="comment">// use _destruct! to destruct to free variables
+</span><span class="kw">let </span><span class="macro">student_destruct!</span>() = x;
+
+<span class="macro">assert_eq!</span>(name, <span class="string">&quot;Melissa&quot;</span>);
+<span class="macro">assert_eq!</span>(exams_taken, <span class="number">3</span>);
+<span class="macro">assert_eq!</span>(scores, <span class="macro">vec!</span>[<span class="number">85</span>, <span class="number">99</span>, <span class="number">71</span>]);</code></pre></div>
+</div></details></section></div></main></body></html>

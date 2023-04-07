@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"mod":["finger","order_treap"],"struct":["AugTreap","Node","Range"],"trait":["AugFn"],"type":["OptNode"]};
+window.SIDEBAR_ITEMS = {"mod":["convex_hull_trick","finger","order_treap"],"struct":["AugTreap","Node","Range"],"trait":["AugFn"],"type":["OptNode"]};

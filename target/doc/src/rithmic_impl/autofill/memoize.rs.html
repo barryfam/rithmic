@@ -163,11 +163,13 @@
 <a href="#163" id="163">163</a>
 <a href="#164" id="164">164</a>
 <a href="#165" id="165">165</a>
+<a href="#166" id="166">166</a>
+<a href="#167" id="167">167</a>
+<a href="#168" id="168">168</a>
 </pre><pre class="rust"><code><span class="kw">use </span>proc_macro::TokenStream;
 <span class="kw">use </span>proc_macro2::TokenStream <span class="kw">as </span>TokenStream2;
 <span class="kw">use </span>quote::quote;
-<span class="kw">use </span>syn::punctuated::Punctuated;
-<span class="kw">use </span>syn::{ExprRange, RangeLimits, bracketed, Expr, Token, ExprLit, Lit, parse_macro_input, ItemFn, Ident, ReturnType, FnArg, PatType, token, Type};
+<span class="kw">use </span>syn::{ExprRange, RangeLimits, bracketed, Expr, Token, ExprLit, Lit, parse_macro_input, ItemFn, Ident, ReturnType, FnArg, PatType, token, Type, Visibility};
 <span class="kw">use </span>syn::parse::{ParseStream, Parse};
 
 <span class="kw">enum </span>MemoizeAttr {
@@ -181,15 +183,15 @@
         <span class="kw">macro </span>syntax_err() { <span class="kw">return </span><span class="prelude-val">Err</span>(c.error(<span class="string">&quot;invalid syntax. example: #[memoize(..2)]&quot;</span>)) }
 
         <span class="kw">if let </span><span class="prelude-val">Ok</span>(ExprRange {
-            from: <span class="prelude-val">None</span>,
+            start: <span class="prelude-val">None</span>,
             limits,
-            to,
+            end,
             ..
         }) = input.fork().parse()
         {
             <span class="kw">let _</span>: ExprRange = input.parse()<span class="question-mark">?</span>;
 
-            <span class="kw">let </span><span class="kw-2">mut </span>n_args = <span class="kw">match </span>to {
+            <span class="kw">let </span><span class="kw-2">mut </span>n_args = <span class="kw">match </span>end {
                 <span class="prelude-val">None </span>=&gt; <span class="prelude-val">None</span>,
                 <span class="prelude-val">Some</span>(<span class="kw">box </span>Expr::Lit(ExprLit{lit: Lit::Int(i), ..})) =&gt; <span class="prelude-val">Some</span>(i.base10_parse()<span class="question-mark">?</span>),
                 <span class="kw">_ </span>=&gt; <span class="macro">syntax_err!</span>(),
@@ -210,7 +212,7 @@
             } <span class="kw">else </span>{
                 input
             };
-            <span class="kw">let </span>dim: Punctuated&lt;Expr, <span class="macro">Token!</span>[,]&gt; = dim.parse_terminated(Expr::parse)<span class="question-mark">?</span>;
+            <span class="kw">let </span>dim = dim.parse_terminated(Expr::parse, <span class="macro">Token!</span>[,])<span class="question-mark">?</span>;
             <span class="kw">let </span>dim = dim.into_iter().collect();
 
             <span class="prelude-val">Ok</span>(<span class="self">Self</span>::Static { dim })
@@ -230,19 +232,23 @@
 {
     <span class="kw">let </span>attr = <span class="macro">parse_macro_input!</span>(attr <span class="kw">as </span>MemoizeAttr);
 
-    <span class="kw">let </span><span class="kw-2">mut </span>item = <span class="macro">parse_macro_input!</span>(item <span class="kw">as </span>ItemFn);
-    <span class="kw">let </span>fn_attrs = <span class="kw-2">&amp;</span>item.attrs;
+    <span class="kw">let </span>ItemFn {
+        attrs: fn_attrs,
+        vis: Visibility::Inherited,
+        sig: <span class="kw-2">mut </span>fn_sig,
+        block: fn_block,
+    } = <span class="macro">parse_macro_input!</span>(item <span class="kw">as </span>ItemFn)
+        <span class="kw">else </span>{ <span class="macro">panic!</span>(<span class="string">&quot;memoize not supported on public functions&quot;</span>) };
 
-    <span class="kw">let </span>fn_name = <span class="kw-2">&amp;</span>item.sig.ident;
+    <span class="kw">let </span>fn_name = fn_sig.ident.clone();
     <span class="kw">let </span>cache_name = Ident::new(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;__{}_cache&quot;</span>, fn_name), fn_name.span());
     <span class="kw">let </span>inner_name = Ident::new(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;__{}_inner&quot;</span>, fn_name), fn_name.span());
 
-    <span class="kw">let </span>fn_args = <span class="kw-2">&amp;mut </span>item.sig.inputs;
+    fn_sig.ident = inner_name.clone();
+    <span class="kw">let </span>fn_args = <span class="kw-2">&amp;mut </span>fn_sig.inputs;
 
-    <span class="kw">let </span>ReturnType::Type(<span class="kw">_</span>, <span class="kw">box </span>ret_type) = <span class="kw-2">&amp;</span>item.sig.output
+    <span class="kw">let </span>ReturnType::Type(<span class="kw">_</span>, <span class="kw">box </span>ret_type) = <span class="kw-2">&amp;</span>fn_sig.output
         <span class="kw">else </span>{ <span class="macro">panic!</span>(<span class="string">&quot;function must have a return type&quot;</span>) };
-
-    <span class="kw">let </span>fn_block = <span class="kw-2">&amp;</span>item.block;
 
     <span class="kw">let </span>n_args = attr.n_args().unwrap_or_else(|| fn_args.len());
 
@@ -288,14 +294,14 @@
             }
 
             #(#fn_attrs)*
-            <span class="kw">fn </span>#inner_name(#fn_args) -&gt; #ret_type
+            #fn_sig
             {
                 <span class="kw">let </span>__key = ( #(#memo_arg_names.clone()),* );
                 <span class="kw">if let </span><span class="prelude-val">Some</span>(__ret) = #cache_name.get(<span class="kw-2">&amp;</span>__key) { <span class="kw">return </span>__ret.clone() }
 
                 <span class="kw">let </span>__ret = (|| #fn_block )();
 
-                #cache_name.insert(__key, __ret);
+                #cache_name.insert(__key, __ret.clone());
                 __ret
             }
         }}
@@ -312,14 +318,14 @@
             }
 
             #(#fn_attrs)*
-            <span class="kw">fn </span>#inner_name(#fn_args) -&gt; #ret_type
+            #fn_sig
             {
                 <span class="kw">let </span>__key = [ #(#memo_arg_names <span class="kw">as </span>usize),* ];
-                <span class="kw">if let </span><span class="prelude-val">Some</span>(__ret) = #cache_name[__key] { <span class="kw">return </span>__ret.clone() }
+                <span class="kw">if let </span><span class="prelude-val">Some</span>(<span class="kw-2">ref </span>__ret) = #cache_name[__key] { <span class="kw">return </span>__ret.clone() }
 
                 <span class="kw">let </span>__ret = (|| #fn_block )();
 
-                #cache_name[__key] = <span class="prelude-val">Some</span>(__ret);
+                #cache_name[__key] = <span class="prelude-val">Some</span>(__ret.clone());
                 __ret
             }
         }}

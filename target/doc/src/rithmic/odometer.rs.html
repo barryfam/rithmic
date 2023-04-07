@@ -203,7 +203,7 @@ assert_eq!(i.next_back(), Some([23, 59, 58]));
     <span class="kw">pub fn </span>new(radix: [usize; D]) -&gt; <span class="self">Self
     </span>{
         <span class="kw">let </span><span class="kw-2">mut </span>back = radix;
-        <span class="kw">for </span>x <span class="kw">in </span>back.iter_mut() { <span class="kw-2">*</span>x = x.saturating_sub(<span class="number">1</span>); }
+        <span class="kw">for </span>x <span class="kw">in </span><span class="kw-2">&amp;mut </span>back { <span class="kw-2">*</span>x = x.saturating_sub(<span class="number">1</span>); }
 
         <span class="self">Self </span>{
             front: [<span class="number">0</span>; D],

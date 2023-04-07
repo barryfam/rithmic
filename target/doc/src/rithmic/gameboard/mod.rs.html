@@ -269,7 +269,7 @@ The `Gameboard` `struct` represents a rectangular grid of squares, some of which
         <span class="self">self</span>.blocked.as_ref().is_some_and(|b| b[i * <span class="self">self</span>.w + j])
     }
 
-    <span class="doccomment">/// Move `dist` squares in a straight line. Blocks along the way are ignored, but a block at the destination, or the destination being out-of-bounds, returns `None`. `dir` must be in `0..4` and indicates direction:
+    <span class="doccomment">/// Jump `dist` squares in a straight line. Blocks along the way are ignored, but a block at the destination, or the destination being out-of-bounds, returns `None`. `dir` must be in `0..4` and indicates direction:
     ///
     /// 0. Positive `i`
     /// 1. Positive `j`
@@ -288,7 +288,7 @@ The `Gameboard` `struct` represents a rectangular grid of squares, some of which
         .filter(|<span class="kw-2">&amp;</span>v| !<span class="self">self</span>.is_blocked(v))
     }
 
-    <span class="doccomment">/// Move `dist` squares in a 45° diagonal line. Blocks along the way are ignored, but a block at the destination, or the destination being out-of-bounds, returns `None`. `dir` must be in `0..4` and indicates direction:
+    <span class="doccomment">/// Jump `dist` squares in a 45° diagonal line. Blocks along the way are ignored, but a block at the destination, or the destination being out-of-bounds, returns `None`. `dir` must be in `0..4` and indicates direction:
     ///
     /// 0. Positive `i` and `j`
     /// 1. Negative `i`, positive `j`

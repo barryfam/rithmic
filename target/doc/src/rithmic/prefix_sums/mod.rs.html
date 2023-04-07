@@ -234,12 +234,12 @@ assert_eq!(ss[3], [ 0,  0,  0, 0]);
     </span><span class="kw">fn </span>prefix_sums(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self
     </span>{
         <span class="kw">let </span><span class="kw-2">mut </span>shape1 = <span class="self">self</span>.shape();
-        <span class="kw">for </span>n <span class="kw">in </span>shape1.iter_mut() { <span class="kw-2">*</span>n += <span class="number">1</span>; }
+        <span class="kw">for </span>n <span class="kw">in </span><span class="kw-2">&amp;mut </span>shape1 { <span class="kw-2">*</span>n += <span class="number">1</span>; }
 
         <span class="kw">let </span><span class="kw-2">mut </span>ps = <span class="self">Self</span>::new(shape1);
         <span class="kw">for </span>i <span class="kw">in </span>OdometerBE::new(<span class="self">self</span>.shape()) {
             <span class="kw">let </span><span class="kw-2">mut </span>i1 = i;
-            <span class="kw">for </span>ii <span class="kw">in </span>i1.iter_mut() { <span class="kw-2">*</span>ii += <span class="number">1</span>; }
+            <span class="kw">for </span>ii <span class="kw">in </span><span class="kw-2">&amp;mut </span>i1 { <span class="kw-2">*</span>ii += <span class="number">1</span>; }
 
             <span class="kw">let </span><span class="kw-2">mut </span>incl = T::default();
             <span class="kw">let </span><span class="kw-2">mut </span>excl = T::default();
@@ -268,7 +268,7 @@ assert_eq!(ss[3], [ 0,  0,  0, 0]);
     </span><span class="kw">fn </span>suffix_sums(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self
     </span>{
         <span class="kw">let </span><span class="kw-2">mut </span>shape1 = <span class="self">self</span>.shape();
-        <span class="kw">for </span>n <span class="kw">in </span>shape1.iter_mut() { <span class="kw-2">*</span>n += <span class="number">1</span>; }
+        <span class="kw">for </span>n <span class="kw">in </span><span class="kw-2">&amp;mut </span>shape1 { <span class="kw-2">*</span>n += <span class="number">1</span>; }
 
         <span class="kw">let </span><span class="kw-2">mut </span>ss = <span class="self">Self</span>::new(shape1);
         <span class="kw">for </span>i <span class="kw">in </span>OdometerBE::new(<span class="self">self</span>.shape()).rev()

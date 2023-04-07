@@ -96,6 +96,7 @@
 <a href="#96" id="96">96</a>
 <a href="#97" id="97">97</a>
 <a href="#98" id="98">98</a>
+<a href="#99" id="99">99</a>
 </pre><pre class="rust"><code><span class="kw">use </span>std::borrow::Borrow;
 <span class="kw">use </span>std::iter::FusedIterator;
 <span class="kw">use </span>std::ops::{Index, RangeBounds};
@@ -106,7 +107,8 @@
 
 <span class="kw">use </span><span class="kw">super</span>::OrderTreap;
 
-<span class="kw">pub struct </span>SortedList&lt;T: Ord&gt;(<span class="kw">pub </span>OrderTreap&lt;T, ()&gt;);
+<span class="attr">#[derive(Clone)]
+</span><span class="kw">pub struct </span>SortedList&lt;T: Ord&gt;(<span class="kw">pub </span>OrderTreap&lt;T, ()&gt;);
 
 <span class="kw">impl</span>&lt;T: Ord&gt; SortedList&lt;T&gt; {
     <span class="kw">pub fn </span>new() -&gt; <span class="self">Self </span>{

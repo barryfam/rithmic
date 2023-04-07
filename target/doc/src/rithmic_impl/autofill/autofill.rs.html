@@ -147,13 +147,13 @@
         <span class="kw">macro </span>syntax_err() { <span class="kw">return </span><span class="prelude-val">Err</span>(c.error(<span class="string">&quot;invalid syntax. example: #[autofill(2..)]&quot;</span>)) }
 
         <span class="kw">let </span>ExprRange {
-            from,
+            start,
             limits: RangeLimits::HalfOpen(<span class="kw">_</span>),
-            to: <span class="prelude-val">None</span>,
+            end: <span class="prelude-val">None</span>,
             ..
         } = input.parse()<span class="question-mark">? </span><span class="kw">else </span>{ <span class="macro">syntax_err!</span>() };
 
-        <span class="kw">let </span>n_skip = <span class="kw">match </span>from {
+        <span class="kw">let </span>n_skip = <span class="kw">match </span>start {
             <span class="prelude-val">None </span>=&gt; <span class="number">0</span>,
             <span class="prelude-val">Some</span>(<span class="kw">box </span>Expr::Lit(ExprLit{lit: Lit::Int(i), ..})) =&gt; i.base10_parse()<span class="question-mark">?</span>,
             <span class="kw">_ </span>=&gt; <span class="macro">syntax_err!</span>(),

@@ -103,7 +103,7 @@
     /// |`Some(a)`|`b`|`f(a, b)`|
     ///
     /// # Notes
-    /// [`x.map_or(b, |a| f(a, b))`](Option::map_or) is equivalent for `Copy` types
+    /// [`x.map_or(b, |a| f(a, b))`](Option::map_or) is equivalent for [`Copy`] types
     ///
     </span><span class="kw">fn </span>merge_or&lt;F&gt;(<span class="self">self</span>, b: <span class="self">Self</span>::T, f: F) -&gt; <span class="self">Self</span>::T
     <span class="kw">where </span>F: FnOnce(<span class="self">Self</span>::T, <span class="self">Self</span>::T) -&gt; <span class="self">Self</span>::T;

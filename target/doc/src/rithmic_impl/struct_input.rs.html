@@ -211,7 +211,7 @@
 
         <span class="kw">let </span>fields;
         <span class="macro">braced!</span>(fields <span class="kw">in </span>input);
-        <span class="kw">let </span>fields = fields.parse_terminated(InputField::parse)<span class="question-mark">?</span>;
+        <span class="kw">let </span>fields = fields.parse_terminated(InputField::parse, <span class="macro">Token!</span>[,])<span class="question-mark">?</span>;
 
         <span class="prelude-val">Ok</span>(<span class="self">Self </span>{
             name,
@@ -245,7 +245,7 @@
         <span class="kw">else if </span>input.peek(Paren) {
             <span class="kw">let </span>tuple_spec;
             <span class="macro">parenthesized!</span>(tuple_spec <span class="kw">in </span>input);
-            <span class="kw">let </span>tuple_types: Punctuated&lt;InputSpec, <span class="macro">Token!</span>[,]&gt; = tuple_spec.parse_terminated(InputSpec::parse)<span class="question-mark">?</span>;
+            <span class="kw">let </span>tuple_types = tuple_spec.parse_terminated(InputSpec::parse, <span class="macro">Token!</span>[,])<span class="question-mark">?</span>;
             <span class="prelude-val">Ok</span>(InputSpec::Tuple(tuple_types.into_iter().collect()))
         }
         <span class="kw">else if </span>input.peek(kw::Usize1) {

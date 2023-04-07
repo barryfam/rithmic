@@ -45,6 +45,7 @@
 <a href="#45" id="45">45</a>
 <a href="#46" id="46">46</a>
 <a href="#47" id="47">47</a>
+<a href="#48" id="48">48</a>
 </pre><pre class="rust"><code><span class="kw">use </span>std::ops::Range;
 
 <span class="doccomment">/**
@@ -58,6 +59,7 @@ Ternary search for the maximum point of a function `f()` in the given `domain`
 # use approx::assert_abs_diff_eq;
 # use rithmic::ternary_search;
 let x = ternary_search(0. .. 6., |x| -x.cos());
+
 assert_abs_diff_eq!(x, 3.141593, epsilon = 1e-6);
 ```
 */

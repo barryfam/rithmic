@@ -480,7 +480,7 @@
     /// ```
     </span><span class="kw">fn </span>mask(len: u32) -&gt; <span class="self">Self</span>;
 
-    <span class="doccomment">/// Returns `self &amp; mask(len)`
+    <span class="doccomment">/// Returns `self &amp; `[`mask`](Self::mask)`(len)`
     ///
     /// # Examples
     /// ```
@@ -575,7 +575,7 @@
     /// ```
     </span><span class="kw">fn </span>iter_subsets(<span class="self">self</span>) -&gt; IterSubsets&lt;<span class="self">Self</span>&gt;;
 
-    <span class="doccomment">/// Let *k* be the number of bits set in this integer; then iterate over every integer with *k*+1 bits set and length not greater than `n`
+    <span class="doccomment">/// Let *k* be the number of bits set in this integer; then iterate over every integer with *k*+1 bits set that is a superset of this one and has length not greater than `n`
     ///
     /// # Examples
     /// ```

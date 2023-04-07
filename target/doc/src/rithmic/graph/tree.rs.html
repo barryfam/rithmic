@@ -147,16 +147,16 @@
     /// let g = Tree::line(4);
     ///
     /// assert_eq!(g.dfs_up_tree(0).collect::&lt;Vec&lt;_&gt;&gt;(), vec![
-    ///     (3, (), 2),
-    ///     (2, (), 1),
-    ///     (1, (), 0)
+    ///     (3, 2, ()),
+    ///     (2, 1, ()),
+    ///     (1, 0, ())
     /// ]);
     /// ```
-    </span><span class="kw">pub fn </span>dfs_up_tree(<span class="kw-2">&amp;</span><span class="self">self</span>, s: usize) -&gt; <span class="kw">impl </span>Iterator&lt;Item=(usize, E, usize)&gt; {
+    </span><span class="kw">pub fn </span>dfs_up_tree(<span class="kw-2">&amp;</span><span class="self">self</span>, s: usize) -&gt; <span class="kw">impl </span>Iterator&lt;Item=(usize, usize, E)&gt; {
         <span class="self">self</span>.dfs([s]).into_iter()
             .filter_map( |step|
                 (step.kind == TreeNodeFinish &amp;&amp; step.p != NONE)
-                    .then(|| (step.u, step.edge.unwrap(), step.p))
+                    .then(|| (step.u, step.p, step.edge.unwrap()))
             )
     }
 
@@ -191,19 +191,19 @@
     /// g.add_edge(1, 2, &quot;Privet Drive&quot;);
     ///
     /// assert_eq!(g.euler_tour_edges(0).collect::&lt;Vec&lt;_&gt;&gt;(), vec![
-    ///     (0, &quot;Main Street&quot;, 1),
-    ///     (1, &quot;Privet Drive&quot;, 2),
-    ///     (2, &quot;Privet Drive&quot;, 1),
-    ///     (1, &quot;Main Street&quot;, 0)
+    ///     (0, 1, &quot;Main Street&quot;),
+    ///     (1, 2, &quot;Privet Drive&quot;),
+    ///     (2, 1, &quot;Privet Drive&quot;),
+    ///     (1, 0, &quot;Main Street&quot;)
     /// ]);
     /// ```
-    </span><span class="kw">pub fn </span>euler_tour_edges(<span class="kw-2">&amp;</span><span class="self">self</span>, s: usize) -&gt; <span class="kw">impl </span>Iterator&lt;Item=(usize, E, usize)&gt; {
+    </span><span class="kw">pub fn </span>euler_tour_edges(<span class="kw-2">&amp;</span><span class="self">self</span>, s: usize) -&gt; <span class="kw">impl </span>Iterator&lt;Item=(usize, usize, E)&gt; {
         <span class="self">self</span>.dfs([s]).into_iter()
             .skip(<span class="number">1</span>)
             .map( |step|
                 <span class="kw">match </span>step.kind {
-                    TreeNodeStart =&gt; (step.p, step.edge.unwrap(), step.u),
-                    TreeNodeFinish =&gt; (step.u, step.edge.unwrap(), step.p),
+                    TreeNodeStart =&gt; (step.p, step.u, step.edge.unwrap()),
+                    TreeNodeFinish =&gt; (step.u, step.p, step.edge.unwrap()),
                     <span class="kw">_ </span>=&gt; <span class="macro">panic!</span>(<span class="string">&quot;malformed tree&quot;</span>)
                 }
             )

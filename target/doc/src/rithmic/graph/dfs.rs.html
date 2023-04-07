@@ -191,7 +191,7 @@
         </span><span class="kw">let </span>n = <span class="self">self</span>.size();
 
         <span class="kw">let </span><span class="kw-2">mut </span>started = <span class="prelude-val">Some</span>(BVec::new(n));
-        <span class="kw">let </span><span class="kw-2">mut </span>start_time = <span class="prelude-val">Some</span>(<span class="macro">vec!</span>[NONE; n]);
+        <span class="kw">let </span><span class="kw-2">mut </span>start_time = <span class="prelude-val">Some</span>(<span class="macro">vec!</span>[!<span class="number">0</span>; n]);
         <span class="kw">let </span><span class="kw-2">mut </span>finished = <span class="prelude-val">Some</span>(BVec::new(n));
 
         <span class="kw">match </span>(has_flags(FLAGS, UNDIRECTED), has_flags(FLAGS, ACYCLIC)) {
@@ -206,23 +206,23 @@
         <span class="kw">while let </span><span class="prelude-val">Some</span>(visit) = stack.pop() {
             <span class="kw">let </span>time = dfs.len();
             <span class="kw">match </span>visit {
-                Start(p, u, w) =&gt;
+                Start(p, u, e) =&gt;
                 {
                     <span class="comment">// DFS Start or Tree Edge
                     </span><span class="kw">if </span>has_flags(FLAGS, FOREST)
                         || started.as_ref().map_or(<span class="bool-val">false</span>, |started| !started[u])
-                        || start_time.as_ref().map_or(<span class="bool-val">false</span>, |start_time| start_time[u] == NONE)
+                        || start_time.as_ref().map_or(<span class="bool-val">false</span>, |start_time| start_time[u] == !<span class="number">0</span>)
                     {
                         started.as_mut().map(|started| started.set(u, <span class="bool-val">true</span>));
                         start_time.as_mut().map(|start_time| start_time[u] = time);
 
-                        dfs.push(DfsStep{kind: TreeNodeStart, p, u, edge: w, depth});
+                        dfs.push(DfsStep{kind: TreeNodeStart, p, u, edge: e, depth});
 
-                        stack.push(Finish(p, u, w));
+                        stack.push(Finish(p, u, e));
 
-                        <span class="kw">for </span><span class="kw-2">&amp;</span>(v, w) <span class="kw">in </span><span class="kw-2">&amp;</span><span class="self">self</span>.adj[u] {
+                        <span class="kw">for </span><span class="kw-2">&amp;</span>(v, e) <span class="kw">in </span><span class="kw-2">&amp;</span><span class="self">self</span>.adj[u] {
                             <span class="kw">if </span>has_flags(FLAGS, UNDIRECTED) &amp;&amp; v == p { <span class="kw">continue </span>}
-                            stack.push(Start(u, v, <span class="prelude-val">Some</span>(w)));
+                            stack.push(Start(u, v, <span class="prelude-val">Some</span>(e)));
                         }
 
                         depth += <span class="number">1</span>;
@@ -236,7 +236,7 @@
                     <span class="comment">// Back Edge
                     </span><span class="kw">else if </span>finished.as_ref().map_or(<span class="bool-val">false</span>, |finished| !finished[u])
                     {
-                        dfs.push(DfsStep{kind: BackEdge, p, u, edge: w, depth});
+                        dfs.push(DfsStep{kind: BackEdge, p, u, edge: e, depth});
                     }
 
                     <span class="comment">// Forward / Cross Edge
@@ -244,10 +244,10 @@
                     {
                         <span class="kw">let </span>start_time = start_time.as_ref().unwrap();
                         <span class="kw">if </span>start_time[u] &gt; start_time[p] {
-                            dfs.push(DfsStep{kind: ForwardEdge, p, u, edge: w, depth});
+                            dfs.push(DfsStep{kind: ForwardEdge, p, u, edge: e, depth});
                         }
                         <span class="kw">else </span>{
-                            dfs.push(DfsStep{kind: CrossEdge, p, u, edge: w, depth});
+                            dfs.push(DfsStep{kind: CrossEdge, p, u, edge: e, depth});
                         }
                     }
 
@@ -256,11 +256,11 @@
 
                     <span class="kw">else </span>{ <span class="macro">debug_assert!</span>(<span class="bool-val">false</span>) }
                 }
-                Finish(p, u, w) =&gt;
+                Finish(p, u, e) =&gt;
                 {
                     depth -= <span class="number">1</span>;
                     finished.as_mut().map(|finished| finished.set(u, <span class="bool-val">true</span>));
-                    dfs.push(DfsStep{kind: TreeNodeFinish, p, u, edge: w, depth})
+                    dfs.push(DfsStep{kind: TreeNodeFinish, p, u, edge: e, depth})
                 }
             }
         }

@@ -147,6 +147,32 @@
 <a href="#147" id="147">147</a>
 <a href="#148" id="148">148</a>
 <a href="#149" id="149">149</a>
+<a href="#150" id="150">150</a>
+<a href="#151" id="151">151</a>
+<a href="#152" id="152">152</a>
+<a href="#153" id="153">153</a>
+<a href="#154" id="154">154</a>
+<a href="#155" id="155">155</a>
+<a href="#156" id="156">156</a>
+<a href="#157" id="157">157</a>
+<a href="#158" id="158">158</a>
+<a href="#159" id="159">159</a>
+<a href="#160" id="160">160</a>
+<a href="#161" id="161">161</a>
+<a href="#162" id="162">162</a>
+<a href="#163" id="163">163</a>
+<a href="#164" id="164">164</a>
+<a href="#165" id="165">165</a>
+<a href="#166" id="166">166</a>
+<a href="#167" id="167">167</a>
+<a href="#168" id="168">168</a>
+<a href="#169" id="169">169</a>
+<a href="#170" id="170">170</a>
+<a href="#171" id="171">171</a>
+<a href="#172" id="172">172</a>
+<a href="#173" id="173">173</a>
+<a href="#174" id="174">174</a>
+<a href="#175" id="175">175</a>
 </pre><pre class="rust"><code><span class="kw">pub const </span>NONE: usize = !<span class="number">0</span>;
 
 <span class="attr">#[derive(Clone, Debug)]
@@ -176,6 +202,8 @@
     <span class="kw">pub type </span>Tree&lt;E&gt; = Graph&lt;E, TREE&gt;;
 }
 <span class="kw">pub use </span>flags::<span class="kw-2">*</span>;
+
+<span class="kw">use </span><span class="kw">crate</span>::OrdPair;
 
 <span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">const fn </span>has_flags(u: usize, flags: usize) -&gt; bool {
     u &amp; flags == flags
@@ -207,8 +235,8 @@
 
     <span class="kw">pub fn </span>from_iter(size: usize, iter: <span class="kw">impl </span>IntoIterator&lt;Item=(usize, usize, E)&gt;) -&gt; <span class="self">Self </span>{
         <span class="kw">let </span><span class="kw-2">mut </span>g = <span class="self">Self</span>::new(size);
-        <span class="kw">for </span>(u, v, w) <span class="kw">in </span>iter.into_iter() {
-            g.add_edge(u, v, w);
+        <span class="kw">for </span>(u, v, e) <span class="kw">in </span>iter.into_iter() {
+            g.add_edge(u, v, e);
         }
         g
     }
@@ -236,6 +264,30 @@
             g.add_edge(u, v, ());
         }
         g
+    }
+
+    <span class="kw">pub fn </span>map&lt;<span class="kw">const </span>DEST_FLAGS: usize&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, dest_size: usize, <span class="kw-2">mut </span>f: <span class="kw">impl </span>FnMut(usize) -&gt; usize)
+        -&gt; Graph&lt;(), DEST_FLAGS&gt;
+    {
+        <span class="kw">let </span><span class="kw-2">mut </span>edges = <span class="macro">vec!</span>[];
+        <span class="kw">for </span>(u, adj) <span class="kw">in </span><span class="self">self</span>.adj.iter().enumerate() {
+            <span class="kw">for </span><span class="kw-2">&amp;</span>(v, <span class="kw">_</span>) <span class="kw">in </span>adj {
+                <span class="kw">let </span>(<span class="kw-2">mut </span>fu, <span class="kw-2">mut </span>fv) = (f(u), f(v));
+                <span class="kw">if </span>fu == fv {
+                    <span class="kw">continue
+                </span>}
+                <span class="kw">if </span>has_flags(FLAGS, UNDIRECTED) {
+                    (fu, fv) = (fu, fv).ordered();
+                }
+                <span class="kw">if </span>fu != NONE &amp;&amp; fv != NONE {
+                    edges.push((fu, fv));
+                }
+            }
+        }
+        edges.sort_unstable();
+        edges.dedup();
+
+        Graph::&lt;(), DEST_FLAGS&gt;::from_iter_unweighted(dest_size, edges)
     }
 }
 

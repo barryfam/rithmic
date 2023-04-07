@@ -118,18 +118,16 @@
 <a href="#118" id="118">118</a>
 <a href="#119" id="119">119</a>
 <a href="#120" id="120">120</a>
-<a href="#121" id="121">121</a>
 </pre><pre class="rust"><code><span class="kw">use </span>std::ops::{Range, RangeBounds, RangeFrom, RangeFull, RangeInclusive, RangeTo, RangeToInclusive, Bound};
 
 <span class="doccomment">/**
 This trait is intended to allow function APIs to interchangeably accept integers or any of their [`Range`] variants
 
-2-tuples and 2-arrays are also accepted
+2-[`tuples`](tuple) and 2-[`arrays`](array) are also accepted
 
 # Examples
 ```
-# use rithmic::SegTree;
-let mut st = SegTree::&lt;i32&gt;::from([2, 3, 5, 7, 11]);
+let mut st = rithmic::SegTree::&lt;i32&gt;::from([2, 3, 5, 7, 11]);
 
 assert_eq!(st.query(2), 5);
 assert_eq!(st.query(2..=3), 5+7);

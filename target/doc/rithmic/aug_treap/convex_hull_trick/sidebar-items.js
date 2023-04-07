@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["int_float_or_ratio"],"struct":["ConvexHullTrick"],"type":["ConvexHullMax","ConvexHullMin"]};

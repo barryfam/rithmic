@@ -106,7 +106,7 @@
 
     <span class="kw">fn </span>has_key_attr(field: <span class="kw-2">&amp;</span>Field) -&gt; bool {
         field.attrs.iter().any( |a| {
-            a.path == <span class="macro">parse_quote! </span>{ key }
+            <span class="kw-2">*</span>a.path() == <span class="macro">parse_quote! </span>{ key }
         })
     }
 

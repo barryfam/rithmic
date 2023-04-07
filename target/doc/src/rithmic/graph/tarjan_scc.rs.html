@@ -53,7 +53,37 @@
 <a href="#53" id="53">53</a>
 <a href="#54" id="54">54</a>
 <a href="#55" id="55">55</a>
-</pre><pre class="rust"><code><span class="kw">use </span><span class="kw">crate</span>::imin;
+<a href="#56" id="56">56</a>
+<a href="#57" id="57">57</a>
+<a href="#58" id="58">58</a>
+<a href="#59" id="59">59</a>
+<a href="#60" id="60">60</a>
+<a href="#61" id="61">61</a>
+<a href="#62" id="62">62</a>
+<a href="#63" id="63">63</a>
+<a href="#64" id="64">64</a>
+<a href="#65" id="65">65</a>
+<a href="#66" id="66">66</a>
+<a href="#67" id="67">67</a>
+<a href="#68" id="68">68</a>
+<a href="#69" id="69">69</a>
+<a href="#70" id="70">70</a>
+<a href="#71" id="71">71</a>
+<a href="#72" id="72">72</a>
+<a href="#73" id="73">73</a>
+<a href="#74" id="74">74</a>
+<a href="#75" id="75">75</a>
+<a href="#76" id="76">76</a>
+<a href="#77" id="77">77</a>
+<a href="#78" id="78">78</a>
+<a href="#79" id="79">79</a>
+<a href="#80" id="80">80</a>
+<a href="#81" id="81">81</a>
+<a href="#82" id="82">82</a>
+<a href="#83" id="83">83</a>
+</pre><pre class="rust"><code><span class="kw">use </span>derive_more::Deref;
+
+<span class="kw">use crate</span>::{imin, BVec};
 
 <span class="kw">use super</span>::<span class="kw-2">*</span>;
 <span class="kw">use </span><span class="kw">super</span>::dfs::DfsStepKind::<span class="kw-2">*</span>;
@@ -61,16 +91,18 @@
 <span class="kw">impl</span>&lt;E, <span class="kw">const </span>FLAGS: usize&gt; Graph&lt;E, FLAGS&gt;
 <span class="kw">where </span>E: Copy
 {
-    <span class="kw">pub fn </span>tarjan_scc(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Vec&lt;Vec&lt;usize&gt;&gt;
+    <span class="kw">pub fn </span>tarjan_scc(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; SCCs
     {
-        <span class="kw">let </span><span class="kw-2">mut </span>scc = <span class="macro">vec!</span>[];
-
         <span class="kw">let </span>n = <span class="self">self</span>.size();
+
+        <span class="kw">let </span><span class="kw-2">mut </span>sccs = <span class="macro">vec!</span>[];
+        <span class="kw">let </span><span class="kw-2">mut </span>map = <span class="macro">vec!</span>[<span class="number">0</span>; n];
 
         <span class="kw">let </span><span class="kw-2">mut </span>t: usize = <span class="number">0</span>;
         <span class="kw">let </span><span class="kw-2">mut </span>preorder = <span class="macro">vec!</span>[<span class="number">0</span>; n];
         <span class="kw">let </span><span class="kw-2">mut </span>lowlink = <span class="macro">vec!</span>[<span class="number">0</span>; n];
         <span class="kw">let </span><span class="kw-2">mut </span>stack = <span class="macro">vec!</span>[];
+        <span class="kw">let </span><span class="kw-2">mut </span>in_stack = BVec::new(n);
 
         <span class="kw">for </span>st <span class="kw">in </span><span class="self">self</span>.dfs(<span class="number">0</span>..n) {
             <span class="kw">let </span>(p, u) = (st.p, st.u);
@@ -80,32 +112,56 @@
                     lowlink[u] = t;
                     t += <span class="number">1</span>;
                     stack.push(u);
+                    in_stack.set(u, <span class="bool-val">true</span>);
                 }
                 BackEdge =&gt; {
                     <span class="macro">imin!</span>(lowlink[p], preorder[u]);
                 }
+                CrossEdge =&gt; {
+                    <span class="kw">if </span>in_stack[u] {
+                        <span class="macro">imin!</span>(lowlink[p], lowlink[u]);
+                    }
+                }
+                ForwardEdge =&gt; {}
                 TreeNodeFinish =&gt; {
-                    <span class="kw">if </span>p != NONE &amp;&amp; preorder[u] != lowlink[u] {
+                    <span class="kw">if </span>preorder[u] != lowlink[u] {
                         <span class="macro">imin!</span>(lowlink[p], lowlink[u]);
                     }
                     <span class="kw">else </span>{
                         <span class="kw">let </span><span class="kw-2">mut </span>cmpnt = <span class="macro">vec!</span>[];
+                        <span class="kw">let </span>ci = sccs.len();
                         <span class="kw">loop </span>{
                             <span class="kw">let </span>v = stack.pop().unwrap();
+                            in_stack.set(v, <span class="bool-val">false</span>);
                             cmpnt.push(v);
+                            map[v] = ci;
                             <span class="kw">if </span>v == u {
                                 <span class="kw">break
                             </span>}
                         }
-                        scc.push(cmpnt);
+                        sccs.push(cmpnt);
                     }
                 }
-                <span class="kw">_ </span>=&gt; {}
             }
         }
 
-        scc.reverse();
-        scc
+        sccs.reverse();
+        <span class="kw">for </span>ci <span class="kw">in </span><span class="kw-2">&amp;mut </span>map { <span class="kw-2">*</span>ci = sccs.len()-<span class="number">1 </span>- <span class="kw-2">*</span>ci }
+
+        SCCs { sccs, map }
+    }
+}
+
+<span class="attr">#[derive(Default, Clone, Deref, Debug)]
+</span><span class="kw">pub struct </span>SCCs {
+    <span class="attr">#[deref] </span>sccs: Vec&lt;Vec&lt;usize&gt;&gt;,
+    map: Vec&lt;usize&gt;,
+}
+
+<span class="kw">impl </span>SCCs {
+    <span class="attr">#[inline]
+    </span><span class="kw">pub fn </span>map(<span class="kw-2">&amp;</span><span class="self">self</span>, u: usize) -&gt; usize {
+        <span class="self">self</span>.map[u]
     }
 }
 </code></pre></div>

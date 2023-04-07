@@ -106,23 +106,41 @@
 <a href="#106" id="106">106</a>
 <a href="#107" id="107">107</a>
 <a href="#108" id="108">108</a>
+<a href="#109" id="109">109</a>
+<a href="#110" id="110">110</a>
+<a href="#111" id="111">111</a>
+<a href="#112" id="112">112</a>
+<a href="#113" id="113">113</a>
+<a href="#114" id="114">114</a>
+<a href="#115" id="115">115</a>
+<a href="#116" id="116">116</a>
+<a href="#117" id="117">117</a>
+<a href="#118" id="118">118</a>
+<a href="#119" id="119">119</a>
+<a href="#120" id="120">120</a>
+<a href="#121" id="121">121</a>
 </pre><pre class="rust"><code><span class="attr">#![doc = <span class="macro">include_str!</span>(<span class="string">&quot;../../README.md&quot;</span>)]
 
 #![cfg_attr(not(feature = <span class="string">&quot;unsafe&quot;</span>), forbid(unsafe_code))]
 
 #![feature(
     array_zip,
+    box_patterns,
+    btree_cursors,
     decl_macro,
     int_roundings,
-    iter_collect_into,
     is_some_and,
     is_sorted,
+    iter_collect_into,
     let_chains,
     rustc_attrs,
+    specialization,
 )]
 
 #![allow(
+    incomplete_features,
     clippy::collapsible_else_if,
+    clippy::collapsible_if,
     clippy::missing_safety_doc,
     clippy::module_inception,
     clippy::needless_range_loop,
@@ -138,14 +156,15 @@
 #![warn(
     clippy::dbg_macro,
     clippy::imprecise_flops,
-    clippy::print_stderr,
 )]
 
 </span><span class="kw">pub use </span>rithmic_impl::<span class="kw-2">*</span>;
 
 <span class="kw">pub mod </span>aug_treap;
-    <span class="kw">mod </span>binary_search;
+<span class="kw">pub mod </span>binary_search;
     <span class="kw">mod </span>bvec;
+    <span class="kw">mod </span>debug_or;
+    <span class="kw">mod </span>disjoint_intervals;
 <span class="kw">pub mod </span>gameboard;
     <span class="kw">mod </span>geometry;
 <span class="kw">pub mod </span>graph;
@@ -155,6 +174,7 @@
     <span class="kw">mod </span>int_bitops;
     <span class="kw">mod </span>inversions;
     <span class="kw">mod </span>ipc;
+    <span class="kw">mod </span>longest_transitive_subseq;
 <span class="kw">pub mod </span>meld_heap;
     <span class="kw">mod </span>mo_algorithm;
     <span class="kw">mod </span>mod_factorial_table;
@@ -168,18 +188,21 @@
     <span class="kw">mod </span>print_methods;
     <span class="kw">mod </span>rangelike;
     <span class="kw">mod </span>sieve_divisors;
-    <span class="kw">mod </span>slice_pair_mut;
     <span class="kw">mod </span>slice_get_sub;
     <span class="kw">mod </span>sparse_table;
     <span class="kw">mod </span>ternary_search;
 <span class="kw">pub mod </span>triangular_n;
     <span class="kw">mod </span>union_find;
     <span class="kw">mod </span>unwrap_any;
+    <span class="kw">mod </span>waterline;
 <span class="kw">pub mod </span>xor_basis;
 
+<span class="kw">pub use </span>aug_treap::convex_hull_trick::{ConvexHullMax, ConvexHullMin};
 <span class="kw">pub use </span>aug_treap::order_treap::{List, SortedList};
 <span class="kw">pub use </span>binary_search::binary_search;
 <span class="kw">pub use </span>bvec::BVec;
+<span class="kw">pub use </span>debug_or::DebugOr;
+<span class="kw">pub use </span>disjoint_intervals::DisjointIntervals;
 <span class="kw">pub use </span>gameboard::Gameboard;
 <span class="kw">pub use </span>geometry::Vector2DMore;
 <span class="kw">pub use </span>imin_imax::{imax, imin};
@@ -188,10 +211,11 @@
 <span class="kw">pub use </span>int_bitops::IntBitOps;
 <span class="kw">pub use </span>inversions::CountInversions;
 <span class="kw">pub use </span>ipc::Ipc;
+<span class="kw">pub use </span>longest_transitive_subseq::LongestTransitiveSubseq;
 <span class="kw">pub use </span>meld_heap::{MeldHeap, MeldMinHeap};
 <span class="kw">pub use </span>mo_algorithm::{mo_algorithm, MoStep};
 <span class="kw">pub use </span>mod_factorial_table::FactorialTable;
-<span class="kw">pub use </span>monoid_ds::{monoid_ops, NdFenwick, SegTree};
+<span class="kw">pub use </span>monoid_ds::{monoid_ops::monoid_ops, NdFenwick, SegTree};
 <span class="kw">pub use </span>ndvec::NdVec;
 <span class="kw">pub use </span>odometer::{OdometerBE, OdometerLE};
 <span class="kw">pub use </span>option_merge::OptionMerge;
@@ -201,18 +225,20 @@
 <span class="kw">pub use </span>print_methods::PrintMethods;
 <span class="kw">pub use </span>rangelike::Rangelike;
 <span class="kw">pub use </span>sieve_divisors::Divisors;
-<span class="kw">pub use </span>slice_pair_mut::PairMut;
 <span class="kw">pub use </span>slice_get_sub::GetSub;
 <span class="kw">pub use </span>sparse_table::SparseTable;
 <span class="kw">pub use </span>ternary_search::ternary_search;
 <span class="kw">pub use </span>triangular_n::{triangular_n, triangular_slice, triangular_steps};
 <span class="kw">pub use </span>union_find::UnionFind;
 <span class="kw">pub use </span>unwrap_any::UnwrapAny;
+<span class="kw">pub use </span>waterline::<span class="kw-2">*</span>;
 <span class="kw">pub use </span>xor_basis::{XorBasis128, XorBasis64, XorBasis32, XorBasis16, XorBasis8};
 
 <span class="kw">pub mod </span>prelude
 {
-    <span class="kw">pub use crate</span>::{List, SortedList, binary_search, BVec, Gameboard, Vector2DMore, imax, imin, IndexCompress, IndexCompressed, Insort, IntBitOps, CountInversions, Ipc, MeldHeap, MeldMinHeap, mo_algorithm, MoStep, FactorialTable, monoid_ops, NdFenwick, SegTree, NdVec, OdometerBE, OdometerLE, OptionMerge, OrdPair, polynomial_add, polynomial_mul, polynomial_div, polynomial_div_exact, lagrange_interpolation, PrefixSums, PrintMethods, Rangelike, Divisors, PairMut, GetSub, SparseTable, ternary_search, triangular_n, triangular_slice, triangular_steps, UnionFind, UnwrapAny, XorBasis128, XorBasis64, XorBasis32, XorBasis16, XorBasis8};
+    <span class="kw">pub use </span>rithmic_impl::<span class="kw-2">*</span>;
+
+    <span class="kw">pub use crate</span>::{ConvexHullMax, ConvexHullMin, List, SortedList, binary_search, BVec, DebugOr, DisjointIntervals, Gameboard, Vector2DMore, imax, imin, IndexCompress, IndexCompressed, Insort, IntBitOps, CountInversions, LongestTransitiveSubseq, Ipc, MeldHeap, MeldMinHeap, mo_algorithm, MoStep, FactorialTable, monoid_ops, NdFenwick, SegTree, NdVec, OdometerBE, OdometerLE, OptionMerge, OrdPair, polynomial_add, polynomial_mul, polynomial_div, polynomial_div_exact, lagrange_interpolation, PrefixSums, PrintMethods, Rangelike, Divisors, GetSub, SparseTable, ternary_search, triangular_n, triangular_slice, triangular_steps, UnionFind, UnwrapAny, XorBasis128, XorBasis64, XorBasis32, XorBasis16, XorBasis8};
 }
 </code></pre></div>
 </section></main></body></html>

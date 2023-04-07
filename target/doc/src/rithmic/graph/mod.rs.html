@@ -20,26 +20,16 @@
 <a href="#20" id="20">20</a>
 <a href="#21" id="21">21</a>
 <a href="#22" id="22">22</a>
-<a href="#23" id="23">23</a>
-<a href="#24" id="24">24</a>
-<a href="#25" id="25">25</a>
-<a href="#26" id="26">26</a>
-<a href="#27" id="27">27</a>
-<a href="#28" id="28">28</a>
 </pre><pre class="rust"><code><span class="kw">mod </span>graph;
 <span class="kw">pub use </span>graph::<span class="kw-2">*</span>;
 
 <span class="kw">pub mod </span>dfs;
-    <span class="kw">mod </span>bfs;
-    <span class="kw">mod </span>dijkstra;
     <span class="kw">mod </span>floyd_warshall;
-    <span class="kw">mod </span>path_from_pred;
+    <span class="kw">mod </span>pathing;
     <span class="kw">mod </span>lca;
     <span class="kw">mod </span>tarjan_scc;
     <span class="kw">mod </span>tree;
 <span class="kw">pub mod </span>rooted_subtree_fn;
-
-<span class="kw">pub use </span>path_from_pred::path_from_pred;
 
 <span class="kw">pub mod </span>prelude {
     <span class="kw">pub use </span><span class="kw">super</span>::Graph;
@@ -49,8 +39,6 @@
     <span class="kw">pub use </span><span class="kw">super</span>::dfs::DfsStepKind::<span class="kw-2">*</span>;
 
     <span class="kw">pub use </span><span class="kw">super</span>::rooted_subtree_fn::RsfStep;
-
-    <span class="kw">pub use </span><span class="kw">super</span>::path_from_pred;
 
     <span class="kw">pub use </span><span class="kw">super</span>::NONE;
 }
