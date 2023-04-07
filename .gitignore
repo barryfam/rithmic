@@ -12,6 +12,7 @@
 !/rithmic/**/
 !/rithmic/tests/*/in/*.txt
 !/rithmic/tests/*/out/*.txt
+!/rithmic/tests/usaco/*.zip
 
 !/rithmic-impl/
 !/rithmic-impl/**/
