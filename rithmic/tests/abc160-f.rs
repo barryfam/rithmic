@@ -2,7 +2,7 @@ mod helper;
 
 use std::path::Path;
 
-use ac_library_rs::ModInt1000000007 as MInt;
+use ac_library::ModInt1000000007 as MInt;
 use proconio::input;
 use proconio::marker::Usize1;
 use rithmic::FactorialTable;

@@ -1,6 +1,6 @@
 use std::{iter::Product, ops::{Div, Index, Mul}};
 
-use ac_library_rs::{ModInt, Modulus, StaticModInt};
+use ac_library::{ModInt, Modulus, StaticModInt};
 
 pub trait Integer: Copy + Mul<Output = Self> + Div<Output = Self> + Product {
     fn new(x: usize) -> Self;
@@ -139,7 +139,7 @@ impl<T> Index<usize> for FactorialTable<T>
 
 #[cfg(test)]
 mod tests {
-    use ac_library_rs::ModInt1000000007;
+    use ac_library::ModInt1000000007;
 
     use super::*;
 

@@ -57,7 +57,7 @@ Optional `#![forbid(unsafe_code)]`
 ### Math
 - [Triangular numbers](https://barryfam.io/rithmic/doc/rithmic/triangular_n/index.html)
 - [All divisors of an integer](https://barryfam.io/rithmic/doc/rithmic/trait.Divisors.html#tymethod.divisors) using [`::primal::Sieve`](https://docs.rs/primal/latest/primal/struct.Sieve.html)
-- [Factorials mod *n*](https://barryfam.io/rithmic/doc/rithmic/struct.FactorialTable.html) using [`::ac_library_rs::modint`](https://barryfam.io/rithmic/doc/ac_library_rs/modint/index.html) ⚙️
+- [Factorials mod *n*](https://barryfam.io/rithmic/doc/rithmic/struct.FactorialTable.html) using [`::ac_library::modint`](https://barryfam.io/rithmic/doc/ac_library/modint/index.html) ⚙️
 - [Polynomial arithmetic](https://barryfam.io/rithmic/doc/rithmic/polynomial/index.html) ⚙️
     - [Lagrange interpolation](https://barryfam.io/rithmic/doc/rithmic/polynomial/fn.lagrange_interpolation.html) ⚙️
 - [A few extra methods](https://barryfam.io/rithmic/doc/rithmic/trait.Vector2DMore.html) for [`::euclid::Vector2D`](https://docs.rs/euclid/latest/euclid/struct.Vector2D.html) ⚙️

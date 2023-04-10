@@ -8,7 +8,7 @@ use std::collections::BTreeMap;
 use std::iter;
 use std::path::Path;
 
-use ac_library_rs::ModInt998244353 as MInt;
+use ac_library::ModInt998244353 as MInt;
 use derive_more::{Add, AddAssign};
 use itertools::{Itertools, EitherOrBoth};
 use num::Integer;
