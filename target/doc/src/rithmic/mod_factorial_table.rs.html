@@ -184,7 +184,7 @@
 <a href="#184" id="184">184</a>
 </pre><pre class="rust"><code><span class="kw">use </span>std::{iter::Product, ops::{Div, Index, Mul}};
 
-<span class="kw">use </span>ac_library_rs::{ModInt, Modulus, StaticModInt};
+<span class="kw">use </span>ac_library::{ModInt, Modulus, StaticModInt};
 
 <span class="kw">pub trait </span>Integer: Copy + Mul&lt;Output = <span class="self">Self</span>&gt; + Div&lt;Output = <span class="self">Self</span>&gt; + Product {
     <span class="kw">fn </span>new(x: usize) -&gt; <span class="self">Self</span>;
@@ -323,7 +323,7 @@
 
 <span class="attr">#[cfg(test)]
 </span><span class="kw">mod </span>tests {
-    <span class="kw">use </span>ac_library_rs::ModInt1000000007;
+    <span class="kw">use </span>ac_library::ModInt1000000007;
 
     <span class="kw">use super</span>::<span class="kw-2">*</span>;
 
