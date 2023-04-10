@@ -16,6 +16,7 @@ pub trait MonoidOps<T: Default, U: Default>
     fn update_composition(a: &U, b: &U) -> U { unimplemented!() }
 }
 
+#[derive(Default, Clone, Copy)]
 pub struct USumQSum;
 impl<T> MonoidOps<T, T> for USumQSum
 where
