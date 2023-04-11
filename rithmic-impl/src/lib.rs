@@ -204,7 +204,7 @@ pub fn opaque(attr: TokenStream, item: TokenStream) -> TokenStream {
 Given a [`::proconio`](https://docs.rs/proconio/latest/proconio/) input specification and a `Name`, define:
 
 - A `struct` definition called `Name`
-- A macro called `name_input!` that call's proconio's `input!` with the given specification
+- A macro called `name_input!` that calls proconio's `input!` with the given specification
 - A macro called `name_destruct!` that expands to a destructure of the `Name` `struct` and can be used to either construct from free variables, or destructure into free variables (see example below)
 
 **Note:** `#![feature(rustc_attrs)]` **and** `#![feature(decl_macro)]` **are required**
