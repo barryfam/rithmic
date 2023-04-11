@@ -1,0 +1,22 @@
+name: Broken Link Check
+
+on:
+  push:
+  pull_request:
+  schedule: [cron: '0 0 * * *']
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  linkChecker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Link Checker
+        uses: lycheeverse/lychee-action@v1.6.1
+        with:
+          fail: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
