@@ -27,7 +27,7 @@ Optional `#![forbid(unsafe_code)]`
 - `#[transparent]`, `#[semitransparent]`, `#[opaque]` [Modify declarative macro hygiene](https://www.barryfam.io/rithmic/doc/rithmic/attr.transparent.html)
 
 ### Algorithms
-- [Binary search](https://barryfam.io/rithmic/doc/rithmic/fn.binary_search.html)
+- [Binary search](https://barryfam.io/rithmic/doc/rithmic/binary_search/fn.binary_search.html)
 - [Ternary search](https://barryfam.io/rithmic/doc/rithmic/fn.ternary_search.html)
 - [Index compression](https://barryfam.io/rithmic/doc/rithmic/trait.IndexCompress.html)
 - [Prefix sums](https://barryfam.io/rithmic/doc/rithmic/trait.PrefixSums.html)
