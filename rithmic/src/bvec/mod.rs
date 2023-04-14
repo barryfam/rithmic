@@ -344,7 +344,7 @@ impl ShrAssign<usize> for BVec {
                         ((*u.add(i+1)) << (sl1));
                 }
                 if v_len > 0 {
-                    (*u.add(v_len-1) = (*u.add(v_len-1)) >> sr0);
+                    (*u.add(v_len-1 - offset) = (*u.add(v_len-1)) >> sr0);
                 }
             }
         }
@@ -395,7 +395,7 @@ impl ShlAssign<usize> for BVec {
                         ((*u.add(i-1)) >> sr1);
                 }
                 if v_len - offset > 0 {
-                    *u = (*u) << sl0;
+                    *u.add(offset) = (*u) << sl0;
                 }
             }
         }

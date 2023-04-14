@@ -176,13 +176,16 @@ where T: IntFloatOrRatio
 
         // exactly 1 intersecting segment; we must determine if it is left or right side
         if v2.is_none() && let Some(ref v0_) = v0 {
-            if MAX ^ (v0_.key.slope < new_line.slope) {
+            if   MAX && (v0_.key.slope >= new_line.slope) ||
+                !MAX && (v0_.key.slope <= new_line.slope)
+            {
                 (v0, v2) = (None, v0);
             }
         }
 
-        if let Some(mut v0_) = v0
-            && MAX ^ (v0_.key.slope > new_line.slope)
+        if let Some(mut v0_) = v0 &&
+            ( MAX && (v0_.key.slope < new_line.slope) ||
+             !MAX && (v0_.key.slope > new_line.slope) )
         {
             let x0 = v0_.key.crossover(&new_line);
             v0_.key.end = x0;
@@ -195,8 +198,9 @@ where T: IntFloatOrRatio
             v0 = None;
         }
 
-        if let Some(mut v2_) = v2
-            && MAX ^ (v2_.key.slope < new_line.slope)
+        if let Some(mut v2_) = v2 &&
+            ( MAX && (v2_.key.slope > new_line.slope) ||
+             !MAX && (v2_.key.slope < new_line.slope) )
         {
             let x1 = new_line.crossover(&v2_.key);
             imin!(new_line.end, x1);
