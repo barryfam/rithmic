@@ -4,7 +4,6 @@
 
 #![feature(
     array_zip,
-    box_patterns,
     btree_cursors,
     decl_macro,
     int_roundings,
@@ -39,6 +38,7 @@
 
 pub use rithmic_impl::*;
 
+    mod aho_corasick;
 pub mod aug_treap;
 pub mod binary_search;
     mod bvec;
@@ -73,8 +73,10 @@ pub mod polynomial;
 pub mod triangular_n;
     mod union_find;
     mod unwrap_any;
+    mod waterline;
 pub mod xor_basis;
 
+pub use aho_corasick::AhoCorasick;
 pub use aug_treap::convex_hull_trick::{ConvexHullMax, ConvexHullMin};
 pub use aug_treap::order_treap::{List, SortedList};
 pub use binary_search::binary_search;
@@ -109,11 +111,12 @@ pub use ternary_search::ternary_search;
 pub use triangular_n::{triangular_n, triangular_slice, triangular_steps};
 pub use union_find::UnionFind;
 pub use unwrap_any::UnwrapAny;
+pub use waterline::Waterline;
 pub use xor_basis::{XorBasis128, XorBasis64, XorBasis32, XorBasis16, XorBasis8};
 
 pub mod prelude
 {
     pub use rithmic_impl::*;
 
-    pub use crate::{ConvexHullMax, ConvexHullMin, List, SortedList, binary_search, BVec, DebugOr, DisjointIntervals, Gameboard, Vector2DMore, imax, imin, IndexCompress, IndexCompressed, Insort, IntBitOps, CountInversions, LongestTransitiveSubseq, Ipc, MeldHeap, MeldMinHeap, mo_algorithm, MoStep, FactorialTable, monoid_ops, NdFenwick, SegTree, NdVec, OdometerBE, OdometerLE, OptionMerge, OrdPair, polynomial_add, polynomial_mul, polynomial_div, polynomial_div_exact, lagrange_interpolation, PrefixSums, PrintMethods, Rangelike, Divisors, GetSub, SparseTable, ternary_search, triangular_n, triangular_slice, triangular_steps, UnionFind, UnwrapAny, XorBasis128, XorBasis64, XorBasis32, XorBasis16, XorBasis8};
+    pub use crate::{AhoCorasick, ConvexHullMax, ConvexHullMin, List, SortedList, binary_search, BVec, DebugOr, DisjointIntervals, Gameboard, Vector2DMore, imax, imin, IndexCompress, IndexCompressed, Insort, IntBitOps, CountInversions, LongestTransitiveSubseq, Ipc, MeldHeap, MeldMinHeap, mo_algorithm, MoStep, FactorialTable, monoid_ops, NdFenwick, SegTree, NdVec, OdometerBE, OdometerLE, OptionMerge, OrdPair, polynomial_add, polynomial_mul, polynomial_div, polynomial_div_exact, lagrange_interpolation, PrefixSums, PrintMethods, Rangelike, Divisors, GetSub, SparseTable, ternary_search, triangular_n, triangular_slice, triangular_steps, UnionFind, UnwrapAny, Waterline, XorBasis128, XorBasis64, XorBasis32, XorBasis16, XorBasis8};
 }
