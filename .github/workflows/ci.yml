@@ -20,10 +20,14 @@ jobs:
         toolchain: nightly
         components: llvm-tools-preview
         override: true
+    - uses: taiki-e/install-action@cargo-hack
     - uses: taiki-e/install-action@cargo-llvm-cov
 
     - name: Build & run tests
-      run: cargo llvm-cov --workspace --doctests --lcov --output-path=lcov.info
+      run: |
+        cargo llvm-cov clean --workspace
+        cargo hack llvm-cov --each-feature --workspace --doctests --no-report
+        cargo llvm-cov report --lcov --output-path=lcov.info
 
     - uses: coverallsapp/github-action@master
       with:
