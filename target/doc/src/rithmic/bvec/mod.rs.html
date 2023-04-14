@@ -918,7 +918,7 @@ assert_eq!(twins2.iter_ones().collect::&lt;Vec&lt;_&gt;&gt;(), vec![5, 7, 13, 19
                         ((<span class="kw-2">*</span>u.add(i+<span class="number">1</span>)) &lt;&lt; (sl1));
                 }
                 <span class="kw">if </span>v_len &gt; <span class="number">0 </span>{
-                    (<span class="kw-2">*</span>u.add(v_len-<span class="number">1</span>) = (<span class="kw-2">*</span>u.add(v_len-<span class="number">1</span>)) &gt;&gt; sr0);
+                    (<span class="kw-2">*</span>u.add(v_len-<span class="number">1 </span>- offset) = (<span class="kw-2">*</span>u.add(v_len-<span class="number">1</span>)) &gt;&gt; sr0);
                 }
             }
         }
@@ -969,7 +969,7 @@ assert_eq!(twins2.iter_ones().collect::&lt;Vec&lt;_&gt;&gt;(), vec![5, 7, 13, 19
                         ((<span class="kw-2">*</span>u.add(i-<span class="number">1</span>)) &gt;&gt; sr1);
                 }
                 <span class="kw">if </span>v_len - offset &gt; <span class="number">0 </span>{
-                    <span class="kw-2">*</span>u = (<span class="kw-2">*</span>u) &lt;&lt; sl0;
+                    <span class="kw-2">*</span>u.add(offset) = (<span class="kw-2">*</span>u) &lt;&lt; sl0;
                 }
             }
         }

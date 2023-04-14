@@ -117,13 +117,15 @@
 <a href="#117" id="117">117</a>
 <a href="#118" id="118">118</a>
 <a href="#119" id="119">119</a>
+<a href="#120" id="120">120</a>
+<a href="#121" id="121">121</a>
+<a href="#122" id="122">122</a>
 </pre><pre class="rust"><code><span class="attr">#![doc = <span class="macro">include_str!</span>(<span class="string">&quot;../../README.md&quot;</span>)]
 
 #![cfg_attr(not(feature = <span class="string">&quot;unsafe&quot;</span>), forbid(unsafe_code))]
 
 #![feature(
     array_zip,
-    box_patterns,
     btree_cursors,
     decl_macro,
     int_roundings,
@@ -158,6 +160,7 @@
 
 </span><span class="kw">pub use </span>rithmic_impl::<span class="kw-2">*</span>;
 
+    <span class="kw">mod </span>aho_corasick;
 <span class="kw">pub mod </span>aug_treap;
 <span class="kw">pub mod </span>binary_search;
     <span class="kw">mod </span>bvec;
@@ -192,8 +195,10 @@
 <span class="kw">pub mod </span>triangular_n;
     <span class="kw">mod </span>union_find;
     <span class="kw">mod </span>unwrap_any;
+    <span class="kw">mod </span>waterline;
 <span class="kw">pub mod </span>xor_basis;
 
+<span class="kw">pub use </span>aho_corasick::AhoCorasick;
 <span class="kw">pub use </span>aug_treap::convex_hull_trick::{ConvexHullMax, ConvexHullMin};
 <span class="kw">pub use </span>aug_treap::order_treap::{List, SortedList};
 <span class="kw">pub use </span>binary_search::binary_search;
@@ -228,13 +233,14 @@
 <span class="kw">pub use </span>triangular_n::{triangular_n, triangular_slice, triangular_steps};
 <span class="kw">pub use </span>union_find::UnionFind;
 <span class="kw">pub use </span>unwrap_any::UnwrapAny;
+<span class="kw">pub use </span>waterline::Waterline;
 <span class="kw">pub use </span>xor_basis::{XorBasis128, XorBasis64, XorBasis32, XorBasis16, XorBasis8};
 
 <span class="kw">pub mod </span>prelude
 {
     <span class="kw">pub use </span>rithmic_impl::<span class="kw-2">*</span>;
 
-    <span class="kw">pub use crate</span>::{ConvexHullMax, ConvexHullMin, List, SortedList, binary_search, BVec, DebugOr, DisjointIntervals, Gameboard, Vector2DMore, imax, imin, IndexCompress, IndexCompressed, Insort, IntBitOps, CountInversions, LongestTransitiveSubseq, Ipc, MeldHeap, MeldMinHeap, mo_algorithm, MoStep, FactorialTable, monoid_ops, NdFenwick, SegTree, NdVec, OdometerBE, OdometerLE, OptionMerge, OrdPair, polynomial_add, polynomial_mul, polynomial_div, polynomial_div_exact, lagrange_interpolation, PrefixSums, PrintMethods, Rangelike, Divisors, GetSub, SparseTable, ternary_search, triangular_n, triangular_slice, triangular_steps, UnionFind, UnwrapAny, XorBasis128, XorBasis64, XorBasis32, XorBasis16, XorBasis8};
+    <span class="kw">pub use crate</span>::{AhoCorasick, ConvexHullMax, ConvexHullMin, List, SortedList, binary_search, BVec, DebugOr, DisjointIntervals, Gameboard, Vector2DMore, imax, imin, IndexCompress, IndexCompressed, Insort, IntBitOps, CountInversions, LongestTransitiveSubseq, Ipc, MeldHeap, MeldMinHeap, mo_algorithm, MoStep, FactorialTable, monoid_ops, NdFenwick, SegTree, NdVec, OdometerBE, OdometerLE, OptionMerge, OrdPair, polynomial_add, polynomial_mul, polynomial_div, polynomial_div_exact, lagrange_interpolation, PrefixSums, PrintMethods, Rangelike, Divisors, GetSub, SparseTable, ternary_search, triangular_n, triangular_slice, triangular_steps, UnionFind, UnwrapAny, Waterline, XorBasis128, XorBasis64, XorBasis32, XorBasis16, XorBasis8};
 }
 </code></pre></div>
 </section></main></body></html>

@@ -256,6 +256,10 @@
 <a href="#256" id="256">256</a>
 <a href="#257" id="257">257</a>
 <a href="#258" id="258">258</a>
+<a href="#259" id="259">259</a>
+<a href="#260" id="260">260</a>
+<a href="#261" id="261">261</a>
+<a href="#262" id="262">262</a>
 </pre><pre class="rust"><code><span class="kw">pub mod </span>int_float_or_ratio;
 
 <span class="attr">#[cfg(test)] </span><span class="kw">mod </span>tests;
@@ -434,13 +438,16 @@
 
         <span class="comment">// exactly 1 intersecting segment; we must determine if it is left or right side
         </span><span class="kw">if </span>v2.is_none() &amp;&amp; <span class="kw">let </span><span class="prelude-val">Some</span>(<span class="kw-2">ref </span>v0_) = v0 {
-            <span class="kw">if </span>MAX ^ (v0_.key.slope &lt; new_line.slope) {
+            <span class="kw">if   </span>MAX &amp;&amp; (v0_.key.slope &gt;= new_line.slope) ||
+                !MAX &amp;&amp; (v0_.key.slope &lt;= new_line.slope)
+            {
                 (v0, v2) = (<span class="prelude-val">None</span>, v0);
             }
         }
 
-        <span class="kw">if let </span><span class="prelude-val">Some</span>(<span class="kw-2">mut </span>v0_) = v0
-            &amp;&amp; MAX ^ (v0_.key.slope &gt; new_line.slope)
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(<span class="kw-2">mut </span>v0_) = v0 &amp;&amp;
+            ( MAX &amp;&amp; (v0_.key.slope &lt; new_line.slope) ||
+             !MAX &amp;&amp; (v0_.key.slope &gt; new_line.slope) )
         {
             <span class="kw">let </span>x0 = v0_.key.crossover(<span class="kw-2">&amp;</span>new_line);
             v0_.key.end = x0;
@@ -453,8 +460,9 @@
             v0 = <span class="prelude-val">None</span>;
         }
 
-        <span class="kw">if let </span><span class="prelude-val">Some</span>(<span class="kw-2">mut </span>v2_) = v2
-            &amp;&amp; MAX ^ (v2_.key.slope &lt; new_line.slope)
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(<span class="kw-2">mut </span>v2_) = v2 &amp;&amp;
+            ( MAX &amp;&amp; (v2_.key.slope &gt; new_line.slope) ||
+             !MAX &amp;&amp; (v2_.key.slope &lt; new_line.slope) )
         {
             <span class="kw">let </span>x1 = new_line.crossover(<span class="kw-2">&amp;</span>v2_.key);
             <span class="macro">imin!</span>(new_line.end, x1);
