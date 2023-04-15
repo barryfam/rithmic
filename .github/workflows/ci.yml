@@ -25,9 +25,8 @@ jobs:
 
     - name: Build & run tests
       run: |
-        cargo llvm-cov clean --workspace
-        cargo hack llvm-cov --each-feature --workspace --doctests --no-report
-        cargo llvm-cov report --lcov --output-path=lcov.info
+        cargo hack test --each-feature --workspace
+        cargo llvm-cov --workspace --doctests --lcov --output-path=lcov.info
 
     - uses: coverallsapp/github-action@master
       with:
