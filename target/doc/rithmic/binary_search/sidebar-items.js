@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"fn":["binary_search"],"mod":["int_or_float"]};
+window.SIDEBAR_ITEMS = {"fn":["binary_search","par_binary_search"],"mod":["int_or_float"]};

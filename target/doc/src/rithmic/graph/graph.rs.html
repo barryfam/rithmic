@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `rithmic/src/graph/graph.rs`."><title>graph.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-a2c9cd1067f8b328.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-c4dbdcde0fbd8430.css" id="mainThemeStyle"><div id="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="rithmic" data-themes="" data-resource-suffix="" data-rustdoc-version="1.70.0-nightly (171693274 2023-03-14)" data-search-js="search-d1bc581867fd0849.js" data-settings-js="settings-f0c5c39777a9a2f6.js" data-settings-css="settings-0bcba95ff279c1db.css" data-theme-light-css="light-db279b6232be9c13.css" data-theme-dark-css="dark-cf923f49f397b216.css" data-theme-ayu-css="ayu-be46fdc453a55015.css" ></div><script src="../../../static.files/storage-9184409068f70b79.js"></script><script defer src="../../../static.files/source-script-1b95b7cca98b26e5.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-f5a2577c5297a973.js"></script><noscript><link rel="stylesheet" media="(prefers-color-scheme:light)" href="../../../static.files/light-db279b6232be9c13.css"><link rel="stylesheet" media="(prefers-color-scheme:dark)" href="../../../static.files/dark-cf923f49f397b216.css"><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><a class="sub-logo-container" href="../../../rithmic/index.html"><img class="rust-logo" src="../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `rithmic/src/graph/graph.rs`."><title>graph.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-a2c9cd1067f8b328.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-f3501f0f5ae15dfb.css" id="mainThemeStyle"><div id="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="rithmic" data-themes="" data-resource-suffix="" data-rustdoc-version="1.71.0-nightly (8b4b20836 2023-05-22)" data-search-js="search-4926e5fc22a5646a.js" data-settings-js="settings-de11bff964e9d4e5.js" data-settings-css="settings-6f6ffb5395b17c6e.css" data-theme-light-css="light-0f8c037637f9eb3e.css" data-theme-dark-css="dark-1097f8e92a01e3cf.css" data-theme-ayu-css="ayu-614652228113ac93.css" ></div><script src="../../../static.files/storage-62ce34ea385b278a.js"></script><script defer src="../../../static.files/source-script-11255107d0a65077.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-f0540c1d82cde29b.js"></script><noscript><link rel="stylesheet" media="(prefers-color-scheme:light)" href="../../../static.files/light-0f8c037637f9eb3e.css"><link rel="stylesheet" media="(prefers-color-scheme:dark)" href="../../../static.files/dark-1097f8e92a01e3cf.css"><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><a class="sub-logo-container" href="../../../rithmic/index.html"><img class="rust-logo" src="../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -173,7 +173,25 @@
 <a href="#173" id="173">173</a>
 <a href="#174" id="174">174</a>
 <a href="#175" id="175">175</a>
-</pre><pre class="rust"><code><span class="kw">pub const </span>NONE: usize = !<span class="number">0</span>;
+<a href="#176" id="176">176</a>
+<a href="#177" id="177">177</a>
+<a href="#178" id="178">178</a>
+<a href="#179" id="179">179</a>
+<a href="#180" id="180">180</a>
+<a href="#181" id="181">181</a>
+<a href="#182" id="182">182</a>
+<a href="#183" id="183">183</a>
+<a href="#184" id="184">184</a>
+<a href="#185" id="185">185</a>
+<a href="#186" id="186">186</a>
+<a href="#187" id="187">187</a>
+<a href="#188" id="188">188</a>
+<a href="#189" id="189">189</a>
+<a href="#190" id="190">190</a>
+<a href="#191" id="191">191</a>
+</pre></div><pre class="rust"><code><span class="kw">use </span><span class="kw">crate</span>::OrdPair;
+
+<span class="kw">pub const </span>NONE: usize = !<span class="number">0</span>;
 
 <span class="attr">#[derive(Clone, Debug)]
 </span><span class="kw">pub struct </span>Graph&lt;E, <span class="kw">const </span>FLAGS: usize&gt;
@@ -188,22 +206,25 @@
     <span class="kw">pub const </span>ACYCLIC:    usize = <span class="number">0b0100</span>;
     <span class="kw">pub const </span>CONNECTED:  usize = <span class="number">0b1000</span>;
 
+    <span class="kw">pub const </span>DIR_GRAPH:        usize = <span class="number">0</span>;
+    <span class="kw">pub const </span>UNDIR_GRAPH:      usize = UNDIRECTED;
+    <span class="kw">pub const </span>SIMP_DIR_GRAPH:   usize = SIMPLE;
+    <span class="kw">pub const </span>SIMP_UNDIR_GRAPH: usize = SIMPLE | UNDIRECTED;
+
+    <span class="kw">pub const </span>DAG:    usize = ACYCLIC;
     <span class="kw">pub const </span>FOREST: usize = SIMPLE | UNDIRECTED | ACYCLIC;
     <span class="kw">pub const </span>TREE:   usize = FOREST | CONNECTED;
 
     <span class="kw">use </span><span class="kw">super</span>::Graph;
-    <span class="kw">pub type </span>DirGraph&lt;E&gt; = Graph&lt;E, <span class="number">0</span>&gt;;
-    <span class="kw">pub type </span>UndirGraph&lt;E&gt; = Graph&lt;E, UNDIRECTED&gt;;
-    <span class="kw">pub type </span>SimpDirGraph&lt;E&gt; = Graph&lt;E, SIMPLE&gt;;
-    <span class="kw">const </span>SU: usize = SIMPLE | UNDIRECTED;
-    <span class="kw">pub type </span>SimpUndirGraph&lt;E&gt; = Graph&lt;E, SU&gt;;
-    <span class="kw">pub type </span>Dag&lt;E&gt; = Graph&lt;E, ACYCLIC&gt;;
-    <span class="kw">pub type </span>Forest&lt;E&gt; = Graph&lt;E, FOREST&gt;;
-    <span class="kw">pub type </span>Tree&lt;E&gt; = Graph&lt;E, TREE&gt;;
+    <span class="kw">pub type </span>DirGraph&lt;E&gt;       = Graph&lt;E, DIR_GRAPH&gt;;
+    <span class="kw">pub type </span>UndirGraph&lt;E&gt;     = Graph&lt;E, UNDIR_GRAPH&gt;;
+    <span class="kw">pub type </span>SimpDirGraph&lt;E&gt;   = Graph&lt;E, SIMP_DIR_GRAPH&gt;;
+    <span class="kw">pub type </span>SimpUndirGraph&lt;E&gt; = Graph&lt;E, SIMP_UNDIR_GRAPH&gt;;
+    <span class="kw">pub type </span>Dag&lt;E&gt;            = Graph&lt;E, DAG&gt;;
+    <span class="kw">pub type </span>Forest&lt;E&gt;         = Graph&lt;E, FOREST&gt;;
+    <span class="kw">pub type </span>Tree&lt;E&gt;           = Graph&lt;E, TREE&gt;;
 }
 <span class="kw">pub use </span>flags::<span class="kw-2">*</span>;
-
-<span class="kw">use </span><span class="kw">crate</span>::OrdPair;
 
 <span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">const fn </span>has_flags(u: usize, flags: usize) -&gt; bool {
     u &amp; flags == flags
@@ -245,6 +266,16 @@
         <span class="self">self</span>.adj.len()
     }
 
+    <span class="kw">pub fn </span>all_edges(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw">impl </span>Iterator&lt;Item=(usize, usize, E)&gt; + <span class="lifetime">&#39;_
+    </span>{
+        (<span class="number">0</span>..<span class="self">self</span>.size()).map( |u|
+            <span class="self">self</span>.adj[u].iter().map(<span class="kw">move </span>|<span class="kw-2">&amp;</span>(v, e)|
+                (u, v, e)
+            ))
+            .flatten()
+            .filter(|(u, v, _e)| !has_flags(FLAGS, UNDIRECTED) || u &lt;= v)
+    }
+
     <span class="kw">pub fn </span>rev(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
         <span class="kw">let </span><span class="kw-2">mut </span>rev = <span class="self">Self</span>::new(<span class="self">self</span>.size());
         <span class="kw">for </span>(u, adj) <span class="kw">in </span><span class="self">self</span>.adj.iter().enumerate() {
@@ -267,7 +298,7 @@
     }
 
     <span class="kw">pub fn </span>map&lt;<span class="kw">const </span>DEST_FLAGS: usize&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, dest_size: usize, <span class="kw-2">mut </span>f: <span class="kw">impl </span>FnMut(usize) -&gt; usize)
-        -&gt; Graph&lt;(), DEST_FLAGS&gt;
+        -&gt; Graph&lt;(), {DEST_FLAGS | SIMPLE}&gt;
     {
         <span class="kw">let </span><span class="kw-2">mut </span>edges = <span class="macro">vec!</span>[];
         <span class="kw">for </span>(u, adj) <span class="kw">in </span><span class="self">self</span>.adj.iter().enumerate() {
@@ -276,7 +307,7 @@
                 <span class="kw">if </span>fu == fv {
                     <span class="kw">continue
                 </span>}
-                <span class="kw">if </span>has_flags(FLAGS, UNDIRECTED) {
+                <span class="kw">if </span>has_flags(DEST_FLAGS, UNDIRECTED) {
                     (fu, fv) = (fu, fv).ordered();
                 }
                 <span class="kw">if </span>fu != NONE &amp;&amp; fv != NONE {
@@ -287,9 +318,10 @@
         edges.sort_unstable();
         edges.dedup();
 
-        Graph::&lt;(), DEST_FLAGS&gt;::from_iter_unweighted(dest_size, edges)
+        Graph::from_iter_unweighted(dest_size, edges)
     }
 }
+
 
 
 <span class="attr">#[cfg(test)]
@@ -348,5 +380,4 @@
         <span class="macro">assert_eq!</span>(dfs.len(), <span class="number">3</span><span class="kw-2">*</span><span class="number">2 </span>+ <span class="number">1</span>);
     }
 }
-</code></pre></div>
-</section></main></body></html>
+</code></pre></div></section></main></body></html>

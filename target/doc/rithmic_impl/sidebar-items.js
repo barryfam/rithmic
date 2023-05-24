@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"attr":["autofill","memoize","opaque","semitransparent","transparent"],"derive":["CmpByKey"],"macro":["struct_input"]};
+window.SIDEBAR_ITEMS = {"attr":["autofill","memoize","opaque","semitransparent","transparent"],"derive":["CmpByKey","CmpFromOrd"],"macro":["struct_input"]};
