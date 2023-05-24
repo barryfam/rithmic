@@ -172,7 +172,7 @@
                 <span class="macro">assert!</span>(N &gt;= <span class="number">1</span>);
 
                 <span class="kw">let </span>n: <span class="self">Self </span>= N.try_into().unwrap();
-                <span class="macro">assert!</span>(n.checked_mul(n).unwrap().checked_mul(<span class="number">2</span>).is_some(),
+                <span class="macro">assert!</span>(n.checked_mul(n).and_then(|x| x.checked_mul(<span class="number">2</span>)).is_some(),
                     <span class="string">&quot;integer type must be able to contain 2*N^2 without overflow (N={})&quot;</span>, N);
 
                 <span class="kw">let </span>(a, b) = (l, r).ordered();

@@ -48,7 +48,7 @@ macro impl_for_int {
                 assert!(N >= 1);
 
                 let n: Self = N.try_into().unwrap();
-                assert!(n.checked_mul(n).unwrap().checked_mul(2).is_some(),
+                assert!(n.checked_mul(n).and_then(|x| x.checked_mul(2)).is_some(),
                     "integer type must be able to contain 2*N^2 without overflow (N={})", N);
 
                 let (a, b) = (l, r).ordered();
