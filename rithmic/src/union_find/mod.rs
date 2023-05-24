@@ -41,7 +41,7 @@ pub struct UnionFind(Vec<isize>);
 impl UnionFind {
     /// Construct a new [`UnionFind`] with `n` initially disconnected elements
     pub fn new(n: usize) -> Self {
-        assert!(n <= isize::MAX as usize);
+        assert!(n <= isize::MAX as usize, "n too large: n={}, max={}", n, isize::MAX);
         Self(vec![-1; n])
     }
 

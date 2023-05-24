@@ -192,7 +192,7 @@ where T: IntFloatOrRatio
             imax!(new_line.start, x0);
 
             v0 = (v0_.key.start < v0_.key.end).then_some(v0_);
-            v0.as_mut().map(|mut v0| v0.aug = ChtAugFn::<T>::f(v0));
+            v0.as_mut().map(|v0| v0.aug = ChtAugFn::<T>::f(v0));
         }
         else {
             v0 = None;
@@ -207,14 +207,14 @@ where T: IntFloatOrRatio
             v2_.key.start = x1;
 
             v2 = (v2_.key.start < v2_.key.end).then_some(v2_);
-            v2.as_mut().map(|mut v2| v2.aug = ChtAugFn::<T>::f(v2));
+            v2.as_mut().map(|v2| v2.aug = ChtAugFn::<T>::f(v2));
         }
         else {
             v2 = None;
         }
 
         let mut v1 = (new_line.start < new_line.end).then(|| Box::new(Node::new(new_line, ())));
-        v1.as_mut().map(|mut v1| v1.aug = ChtAugFn::<T>::f(v1));
+        v1.as_mut().map(|v1| v1.aug = ChtAugFn::<T>::f(v1));
 
         let v = self.inner.join3(v0, v1, v2);
         let r = self.inner.join3(u, v, w);

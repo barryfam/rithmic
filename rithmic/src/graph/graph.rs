@@ -1,3 +1,5 @@
+use crate::OrdPair;
+
 pub const NONE: usize = !0;
 
 #[derive(Clone, Debug)]
@@ -13,22 +15,25 @@ pub(super) mod flags {
     pub const ACYCLIC:    usize = 0b0100;
     pub const CONNECTED:  usize = 0b1000;
 
+    pub const DIR_GRAPH:        usize = 0;
+    pub const UNDIR_GRAPH:      usize = UNDIRECTED;
+    pub const SIMP_DIR_GRAPH:   usize = SIMPLE;
+    pub const SIMP_UNDIR_GRAPH: usize = SIMPLE | UNDIRECTED;
+
+    pub const DAG:    usize = ACYCLIC;
     pub const FOREST: usize = SIMPLE | UNDIRECTED | ACYCLIC;
     pub const TREE:   usize = FOREST | CONNECTED;
 
     use super::Graph;
-    pub type DirGraph<E> = Graph<E, 0>;
-    pub type UndirGraph<E> = Graph<E, UNDIRECTED>;
-    pub type SimpDirGraph<E> = Graph<E, SIMPLE>;
-    const SU: usize = SIMPLE | UNDIRECTED;
-    pub type SimpUndirGraph<E> = Graph<E, SU>;
-    pub type Dag<E> = Graph<E, ACYCLIC>;
-    pub type Forest<E> = Graph<E, FOREST>;
-    pub type Tree<E> = Graph<E, TREE>;
+    pub type DirGraph<E>       = Graph<E, DIR_GRAPH>;
+    pub type UndirGraph<E>     = Graph<E, UNDIR_GRAPH>;
+    pub type SimpDirGraph<E>   = Graph<E, SIMP_DIR_GRAPH>;
+    pub type SimpUndirGraph<E> = Graph<E, SIMP_UNDIR_GRAPH>;
+    pub type Dag<E>            = Graph<E, DAG>;
+    pub type Forest<E>         = Graph<E, FOREST>;
+    pub type Tree<E>           = Graph<E, TREE>;
 }
 pub use flags::*;
-
-use crate::OrdPair;
 
 pub(super) const fn has_flags(u: usize, flags: usize) -> bool {
     u & flags == flags
@@ -70,6 +75,16 @@ where E: Copy
         self.adj.len()
     }
 
+    pub fn all_edges(&self) -> impl Iterator<Item=(usize, usize, E)> + '_
+    {
+        (0..self.size()).map( |u|
+            self.adj[u].iter().map(move |&(v, e)|
+                (u, v, e)
+            ))
+            .flatten()
+            .filter(|(u, v, _e)| !has_flags(FLAGS, UNDIRECTED) || u <= v)
+    }
+
     pub fn rev(&self) -> Self {
         let mut rev = Self::new(self.size());
         for (u, adj) in self.adj.iter().enumerate() {
@@ -92,7 +107,7 @@ impl<const FLAGS: usize> Graph<(), FLAGS>
     }
 
     pub fn map<const DEST_FLAGS: usize>(&self, dest_size: usize, mut f: impl FnMut(usize) -> usize)
-        -> Graph<(), DEST_FLAGS>
+        -> Graph<(), {DEST_FLAGS | SIMPLE}>
     {
         let mut edges = vec![];
         for (u, adj) in self.adj.iter().enumerate() {
@@ -101,7 +116,7 @@ impl<const FLAGS: usize> Graph<(), FLAGS>
                 if fu == fv {
                     continue
                 }
-                if has_flags(FLAGS, UNDIRECTED) {
+                if has_flags(DEST_FLAGS, UNDIRECTED) {
                     (fu, fv) = (fu, fv).ordered();
                 }
                 if fu != NONE && fv != NONE {
@@ -112,9 +127,10 @@ impl<const FLAGS: usize> Graph<(), FLAGS>
         edges.sort_unstable();
         edges.dedup();
 
-        Graph::<(), DEST_FLAGS>::from_iter_unweighted(dest_size, edges)
+        Graph::from_iter_unweighted(dest_size, edges)
     }
 }
+
 
 
 #[cfg(test)]

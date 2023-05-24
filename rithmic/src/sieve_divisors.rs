@@ -21,8 +21,8 @@ pub trait Divisors {
 impl Divisors for Sieve {
     /// See [`Divisors::divisors`]
     fn divisors(&self, n: usize) -> Vec<usize> {
-        if n == 0 { return vec![]; }
-        if n == 1 { return vec![1]; }
+        if n == 0 { return vec![] }
+        if n == 1 { return vec![1] }
 
         self.factor(n).expect("factorization failed; sieve limit must be at least sqrt(n)").into_iter()
             .map(|(f, p)| {

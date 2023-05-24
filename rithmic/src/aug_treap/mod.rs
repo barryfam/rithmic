@@ -120,7 +120,7 @@ where
         let (u, w) = self.split_by(r, |k| *k <= key);
 
         let mut v = Some(Box::new(Node::new(key, value)));
-        v.as_mut().map(|mut v| v.aug = F::f(v));
+        v.as_mut().map(|v| v.aug = F::f(v));
 
         self.root = self.join3(u, v, w);
     }

@@ -17,6 +17,7 @@ extern crate proc_macro;
 
 mod autofill;
 mod cmp_by_key;
+mod cmp_from_ord;
 mod struct_input;
 mod transparency;
 
@@ -52,6 +53,13 @@ assert!(a[1] < a[2]);
 #[proc_macro_derive(CmpByKey, attributes(key))]
 pub fn derive_cmp_by_key(item: TokenStream) -> TokenStream {
     cmp_by_key::derive(item)
+}
+
+
+
+#[proc_macro_derive(CmpFromOrd)]
+pub fn derive_cmp_from_ord(item: TokenStream) -> TokenStream {
+    cmp_from_ord::derive(item)
 }
 
 

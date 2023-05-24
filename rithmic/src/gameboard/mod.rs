@@ -22,7 +22,7 @@ impl Gameboard
     }
 
     /// Create a new [`Gameboard`] from a [`Vec<Vec<T>>`](std::vec::Vec). Any `blocked[i][j] == block` means `[i, j]` is blocked; any other values are ignored
-    pub fn from_vec_vec<T: PartialEq>(blocked: Vec<Vec<T>>, block: T) -> Self {
+    pub fn from_vec_vec<T: PartialEq>(blocked: &Vec<Vec<T>>, block: T) -> Self {
         let h = blocked.len();
         let w = blocked[0].len();
         let mut b = BVec::new(h*w);

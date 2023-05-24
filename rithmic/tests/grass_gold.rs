@@ -11,7 +11,7 @@ use proconio::input;
 use helper::IntoSource;
 use proconio::marker::Usize1;
 use rithmic::OptionMerge;
-use rithmic::graph::{SimpDirGraph, SIMPLE, ACYCLIC};
+use rithmic::graph::{SimpDirGraph, DAG};
 
 #[test] fn usaco_grass_gold() { main() }
 
@@ -33,8 +33,7 @@ fn testcase(input: impl IntoSource, judge: impl IntoSource) {
 
     let g = SimpDirGraph::from_iter_unweighted(n, xy.iter().copied());
     let sccs = g.tarjan_scc();
-    const SA: usize = SIMPLE | ACYCLIC;
-    let g1 = g.map::<SA>(sccs.len(), |u| sccs.map(u));
+    let g1 = g.map::<DAG>(sccs.len(), |u| sccs.map(u));
     let h1 = g1.rev();
 
     let s1 = sccs.map(0);

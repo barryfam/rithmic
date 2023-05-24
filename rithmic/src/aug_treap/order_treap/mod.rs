@@ -61,7 +61,7 @@ impl<K: Ord, V> OrderTreap<K, V>
         let (u, w) = self.0.split_by(r, |k| *k <= key);
 
         let mut v = Some(Box::new(Node::new(key, value)));
-        v.as_mut().map(|mut v| v.aug = OrderAugFn::f(v));
+        v.as_mut().map(|v| v.aug = OrderAugFn::f(v));
 
         let i = u.as_ref().map_or(0, |u| u.aug);
         self.0.root = self.0.join3(u, v, w);
@@ -74,7 +74,7 @@ impl<K: Ord, V> OrderTreap<K, V>
         let (u, w) = self.0.split_by(r, |k| *k < key);
 
         let mut v = Some(Box::new(Node::new(key, value)));
-        v.as_mut().map(|mut v| v.aug = OrderAugFn::f(v));
+        v.as_mut().map(|v| v.aug = OrderAugFn::f(v));
 
         let i = u.as_ref().map_or(0, |u| u.aug);
         self.0.root = self.0.join3(u, v, w);

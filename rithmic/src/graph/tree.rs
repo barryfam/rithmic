@@ -13,7 +13,7 @@ where E: Copy
     /// # Examples
     /// ```
     /// # use rithmic::graph::Tree;
-    /// let g = Tree::line(4);
+    /// let g = Tree::line(4);  // 0-1-2-3
     ///
     /// assert_eq!(g.dfs_up_tree(0).collect::<Vec<_>>(), vec![
     ///     (3, 2, ()),
@@ -34,9 +34,14 @@ where E: Copy
     /// # Examples
     /// ```
     /// # use rithmic::graph::Tree;
-    /// let g = Tree::line(4);
+    /// let g = Tree::line(4);  // 0-1-2-3
+    /// let tour = g.euler_tour(0).collect::<Vec<_>>();
+    /// assert_eq!(tour, vec![0, 1, 2, 3, 2, 1, 0]);
     ///
-    /// assert_eq!(g.euler_tour(0).collect::<Vec<_>>(), vec![0, 1, 2, 3, 2, 1, 0]);
+    /// let g = Tree::star(3);  // 1-0-2
+    /// let tour = g.euler_tour(0).collect::<Vec<_>>();
+    /// assert!(tour == vec![0, 1, 0, 2, 0]
+    ///      || tour == vec![0, 2, 0, 1, 0]);
     /// ```
     pub fn euler_tour(&self, s: usize) -> impl Iterator<Item=usize> {
         self.dfs([s]).into_iter()

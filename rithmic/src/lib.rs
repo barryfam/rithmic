@@ -6,8 +6,9 @@
     array_zip,
     btree_cursors,
     decl_macro,
+    generic_arg_infer,
+    generic_const_exprs,
     int_roundings,
-    is_some_and,
     is_sorted,
     iter_collect_into,
     let_chains,
@@ -79,7 +80,7 @@ pub mod xor_basis;
 pub use aho_corasick::AhoCorasick;
 pub use aug_treap::convex_hull_trick::{ConvexHullMax, ConvexHullMin};
 pub use aug_treap::order_treap::{List, SortedList};
-pub use binary_search::binary_search;
+pub use binary_search::{binary_search, par_binary_search};
 pub use bvec::BVec;
 pub use debug_or::DebugOr;
 pub use disjoint_intervals::DisjointIntervals;
@@ -118,5 +119,5 @@ pub mod prelude
 {
     pub use rithmic_impl::*;
 
-    pub use crate::{AhoCorasick, ConvexHullMax, ConvexHullMin, List, SortedList, binary_search, BVec, DebugOr, DisjointIntervals, Gameboard, Vector2DMore, imax, imin, IndexCompress, IndexCompressed, Insort, IntBitOps, CountInversions, LongestTransitiveSubseq, Ipc, MeldHeap, MeldMinHeap, mo_algorithm, MoStep, FactorialTable, monoid_ops, NdFenwick, SegTree, NdVec, OdometerBE, OdometerLE, OptionMerge, OrdPair, polynomial_add, polynomial_mul, polynomial_div, polynomial_div_exact, lagrange_interpolation, PrefixSums, PrintMethods, Rangelike, Divisors, GetSub, SparseTable, ternary_search, triangular_n, triangular_slice, triangular_steps, UnionFind, UnwrapAny, Waterline, XorBasis128, XorBasis64, XorBasis32, XorBasis16, XorBasis8};
+    pub use crate::{AhoCorasick, ConvexHullMax, ConvexHullMin, List, SortedList, binary_search, par_binary_search, BVec, DebugOr, DisjointIntervals, Gameboard, Vector2DMore, imax, imin, IndexCompress, IndexCompressed, Insort, IntBitOps, CountInversions, LongestTransitiveSubseq, Ipc, MeldHeap, MeldMinHeap, mo_algorithm, MoStep, FactorialTable, monoid_ops, NdFenwick, SegTree, NdVec, OdometerBE, OdometerLE, OptionMerge, OrdPair, polynomial_add, polynomial_mul, polynomial_div, polynomial_div_exact, lagrange_interpolation, PrefixSums, PrintMethods, Rangelike, Divisors, GetSub, SparseTable, ternary_search, triangular_n, triangular_slice, triangular_steps, UnionFind, UnwrapAny, Waterline, XorBasis128, XorBasis64, XorBasis32, XorBasis16, XorBasis8};
 }

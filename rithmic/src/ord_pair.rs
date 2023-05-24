@@ -16,7 +16,7 @@ pub trait OrdPair {
     fn ordered(self) -> Self;
 }
 
-impl<T: Ord> OrdPair for (T, T) {
+impl<T: PartialOrd> OrdPair for (T, T) {
     #[inline]
     fn ordered(self) -> (T, T) {
         if self.0 <= self.1 {
@@ -27,7 +27,7 @@ impl<T: Ord> OrdPair for (T, T) {
     }
 }
 
-impl<T: Ord> OrdPair for [T; 2] {
+impl<T: PartialOrd> OrdPair for [T; 2] {
     #[inline]
     fn ordered(mut self) -> [T; 2] {
         if self[0] > self[1] {

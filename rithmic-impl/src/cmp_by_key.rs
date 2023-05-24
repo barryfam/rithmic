@@ -50,7 +50,7 @@ pub fn derive(item: TokenStream) -> TokenStream
             #[inline]
             fn eq(&self, other: &Self) -> bool {
                 #(
-                    if self.#keys.ne(&other.#keys) { return false; }
+                    if self.#keys.ne(&other.#keys) { return false }
                 )*
                 return true
             }
