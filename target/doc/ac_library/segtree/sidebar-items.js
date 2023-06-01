@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"struct":["Additive","Max","Min","Multiplicative","Segtree"],"trait":["Monoid"]};
+window.SIDEBAR_ITEMS = {"struct":["Additive","BitwiseAnd","BitwiseOr","BitwiseXor","Max","Min","Multiplicative","Segtree"],"trait":["Monoid"]};
