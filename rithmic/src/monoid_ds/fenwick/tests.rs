@@ -1,3 +1,5 @@
+use std::array;
+
 use itertools::Itertools;
 use rand::distributions::Uniform;
 use rand::prelude::*;
@@ -52,7 +54,7 @@ fn test_3d() {
 
         let upper = index.map(|i| i+1);
         let lower = index.map(|i| Uniform::from(0..=i).sample(&mut thread_rng()));
-        let range = lower.zip(upper);
+        let range = array::from_fn(|i| (lower[i], upper[i]));
 
         a[index] += value;
         b.update(index, value);

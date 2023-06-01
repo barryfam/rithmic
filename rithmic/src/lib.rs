@@ -3,7 +3,6 @@
 #![cfg_attr(not(feature = "unsafe"), forbid(unsafe_code))]
 
 #![feature(
-    array_zip,
     btree_cursors,
     decl_macro,
     generic_arg_infer,
