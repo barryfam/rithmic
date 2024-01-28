@@ -21,40 +21,38 @@ where
 
         let mut cursor = self.0.upper_bound_mut(Bound::Excluded(&interval.0));
         let mut split = None;
-        if let Some((end, v0)) = cursor.value_mut() && &interval.0 < end
+        if let Some((_, (end0, v0))) = cursor.peek_prev() && interval.0 < *end0
         {
             let mut end_swap = interval.0.clone();
-            mem::swap(end, &mut end_swap);
+            mem::swap(end0, &mut end_swap);
             if interval.1 < end_swap {
                 split = Some((end_swap, v0.clone()));
             }
         }
 
-        cursor.move_next();
-        while let Some((start, (end, _))) = cursor.key_value_mut() && start < &interval.1
+        while let Some((start1, (end1, _))) = cursor.peek_next() && start1 < &interval.1
         {
-            if *end <= interval.1 {
-                cursor.remove_current();
+            if *end1 <= interval.1 {
+                cursor.remove_next();
             }
             else {
-                let (_, kv0) = cursor.remove_current().unwrap();
-                cursor.insert_before(interval.1.clone(), kv0);
-                cursor.move_prev();
+                let (_, kv1) = cursor.remove_next().unwrap();
+                cursor.insert_after(interval.1.clone(), kv1).unwrap();
                 break
             }
         }
 
         if let Some(split) = split {
-            cursor.insert_before(interval.1.clone(), split);
-            cursor.move_prev();
+            cursor.insert_after(interval.1.clone(), split).unwrap();
         }
-        cursor.insert_before(interval.0, (interval.1, value));
+
+        cursor.insert_after(interval.0, (interval.1, value)).unwrap();
     }
 
     pub fn query<Q: Ord>(&self, point: &Q) -> Option<&V>
     where K: Borrow<Q>
     {
-        let (end, value) = self.0.upper_bound(Bound::Included(point)).value()?;
+        let (end, value) = self.0.upper_bound(Bound::Included(point)).peek_prev()?.1;
         (point <= end.borrow()).then_some(value)
     }
 
